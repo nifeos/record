@@ -1,7 +1,7 @@
 # Boolean predicates: the worklist
 
 *An appendix to [`design/naming.md`](../naming.md), which is the rule, and a companion to
-[boolean-predicates.md](boolean-predicates.md), which argues it. This file is the census the pass
+[functions-that-answer-yes-or-no.md](functions-that-answer-yes-or-no.md), which argues it. This file is the census the pass
 took on 2026-09-24 and what became of each name. It is a dated record: the counts are from that
 day's tree, and a later reader should expect them to drift. The file's stem is a provisional name; naming is an architect's.*
 
@@ -55,10 +55,10 @@ names they were written with, per the rename procedure.
 | `instruction_backend_available` | `kernel/src/user/entropy_service.rs` | private | 7 | `is_instruction_backend_available` | kernel follow-up | three per-architecture copies |
 | `crash_disk_present` | `kernel/src/user/fs_service.rs` | pub | 6 | `is_crash_disk_present` | kernel follow-up |  |
 | `doorbell_ready` | `kernel/src/virtio.rs` | private | 11 | `is_doorbell_ready` | kernel follow-up |  |
-| `known`, `plausible` | `crates/clock_protocol` | pub | 23 | `is_known`, `is_plausible` | crates follow-up | the std overlay's clock calls `state::is_known` too |
-| `authenticated` | `crates/credential_protocol` | pub | 19 | `is_authenticated` | crates follow-up | falsification patch prose moves |
-| `writable`, `valid_name` | `crates/filesystem_protocol` | pub | 18 | `is_writable`, `is_valid_name` | crates follow-up | consumers in two other workspaces (redoxfs_server, tools/redoxfs_host) |
-| `recognized` | `crates/environment_protocol` | private | 4 | `is_recognized` | crates follow-up |  |
+| `known`, `plausible` | `crates/clock_contract` | pub | 23 | `is_known`, `is_plausible` | crates follow-up | the std overlay's clock calls `state::is_known` too |
+| `authenticated` | `crates/credential_contract` | pub | 19 | `is_authenticated` | crates follow-up | falsification patch prose moves |
+| `writable`, `valid_name` | `crates/filesystem_contract` | pub | 18 | `is_writable`, `is_valid_name` | crates follow-up | consumers in two other workspaces (redoxfs_server, tools/redoxfs_host) |
+| `recognized` | `crates/environment_contract` | private | 4 | `is_recognized` | crates follow-up |  |
 | `in_region` | `crates/dma_validator` | pub | 24 | `is_in_region` | crates follow-up | four patches move; the harness `in_region_is_sound` keeps its name |
 | `deasserted`, `clock_enabled` | `crates/jh7110_clock_and_reset` | pub | 21 | `is_deasserted`, `is_clock_enabled` | crates follow-up |  |
 | `clocks_running` | `crates/jh7110_clock_and_reset` | pub | 8 | `has_clocks_running` | crates follow-up | plural subject: Rust has no `are_` |
@@ -71,7 +71,7 @@ names they were written with, per the rename procedure.
 | `armed_hint` | `crates/memory_corruption_canary_gate` | pub | 8 | `is_armed_hint` | crates follow-up |  |
 | `owned` | `crates/non_volatile_memory_express` | pub | 13 | `is_owned` | crates follow-up |  |
 | `in_half` | `crates/paging (trait `PageFormat`)` | trait | 52 | `is_in_half` | crates follow-up | an in-tree trait, so every impl moves; seven patches move |
-| `delivered` | `crates/thread_wake_handshake` | pub | 8 | `is_delivered` | crates follow-up | `entropy_protocol::delivered` returns `Option` and keeps its name |
+| `delivered` | `crates/thread_wake_handshake` | pub | 8 | `is_delivered` | crates follow-up | `entropy_contract::delivered` returns `Option` and keeps its name |
 | `quoted`, `spent`, `from_root`, `interruptible`, `open` | `crates/grant_plan` | pub | 39 | `is_quoted`, `is_spent`, `is_from_root`, `is_interruptible`, `is_open` | crates follow-up |  |
 | `ok` | `crates/swish (`Status`)` | pub | 6 | `is_ok` | crates follow-up | matches `Result::is_ok` |
 | `refused`, `complete` | `crates/ps, crates/pmap` | pub | 46 | `is_refused`, `is_complete` | crates follow-up |  |
@@ -147,7 +147,7 @@ them needs a marker to be found again: `git grep -wiE '[a-z_]*(rx|tx)[a-z_]*'` i
 ## Fits as written
 
 A finite verb or a quantifier already says "this is a question" (see
-[boolean-predicates.md](boolean-predicates.md#why-a-verb-phrase-is-allowed)). The 57, by name:
+[functions-that-answer-yes-or-no.md](functions-that-answer-yes-or-no.md#why-a-verb-phrase-is-allowed)). The 57, by name:
 
 `allows` (twice), `survey_includes`, `denies_all`, `carries_len`, `takes_name`, `mutates`, `fits`
 (twice), `is`, `matches_with`, `opens_with_a_literal_dot`, `overlaps` (twice), `overlaps_ram`.
