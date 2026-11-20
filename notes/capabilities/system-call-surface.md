@@ -1,13 +1,13 @@
-# Milestone 7d: the syscall surface, and refusing to be a deputy
+# Milestone 7d: the system call surface, and refusing to be a deputy
 
 *Name: provisional. After the parent's own heading.*
 
 An appendix to [`notes/capabilities.md`](../capabilities.md). It is the record of milestone 7d (user mode: EL0, capabilities, the ELF loader, and IPC), when the decision (§10) became code.
 
 The decision (§10) is now code. Three things landed: an ABI that is one artifact, a capability
-table, and a syscall dispatcher whose most important function is the one that says *no*.
+table, and a system call dispatcher whose most important function is the one that says *no*.
 
-## 7d landed three calls; the surface is five today <!--count:syscalls-->
+## 7d landed three calls; the surface is five today <!--count:system-calls-->
 
 What 7d shipped, and the numbers in this section are 7d's rather than today's:
 
@@ -18,12 +18,12 @@ What 7d shipped, and the numbers in this section are 7d's rather than today's:
 ```
 
 No `open`. No `read`. No `write`. No `fork`. A process acts on the things it was handed, and
-`invoke` is how. `exit` and `yield` are plain syscalls rather than methods on a TCB capability,
+`invoke` is how. `exit` and `yield` are plain system calls rather than methods on a TCB capability,
 because *a capability is authority over something else* and you do not need to be granted the
 right to stop running.
 
-This is DECISIONS §4 rule 3 ("the syscall surface stays narrow and explicit, a boundary not a
-habit") meeting §10, and §10 is what makes three enough. A monolithic kernel needs a syscall per
+This is DECISIONS §4 rule 3 ("the system call surface stays narrow and explicit, a boundary not a
+habit") meeting §10, and §10 is what makes three enough. A monolithic kernel needs a system call per
 verb because the verb is where the authority check lives. Here the authority is the capability,
 and there is one verb: invoke it.
 
@@ -38,7 +38,7 @@ else. `notes/abi.md` is the current contract and has the full table.
 ## The ABI is a crate, not a convention
 
 `crates/abi` is a `no_std` crate that both the kernel and every user program depend on. The
-syscall numbers, the register layout, the method constants, the error codes: one definition. If
+system call numbers, the register layout, the method constants, the error codes: one definition. If
 it changes, both sides fail to compile. A boundary that can drift silently is not a boundary, and
 two files that "agree" by having been edited to match are exactly that.
 
@@ -113,7 +113,7 @@ Not re-implemented in software and hoped to agree with the silicon. Asked of the
 ```
 
 One instruction does the stage-1 walk with EL0's permissions and reports the same "no" the
-hardware would have given the user program itself. So `syscall::user_slice` asks, for every page
+hardware would have given the user program itself. So `system_call::user_slice` asks, for every page
 the range touches:
 
 > **Could EL0 have read this itself?** If not, then neither may we, on its behalf.

@@ -5,16 +5,16 @@ decided: 2026-10-10
 ratified_by: calef
 ---
 
-# 276. The thread syscalls as built: the process object, `BIND`, futexes, the thread pointer and `SYSCALL_EXIT_THREAD`
+# 276. The thread system calls as built: the process object, `BIND`, futexes, the thread pointer and `SYSTEM_CALL_EXIT_THREAD`
 
 *Section number provisional until the merge queue lands it; 270 was the highest on `main` and 271
 to 275 were in open pull requests when this was written. Recorded on 2026-10-11 (UTC) by
-maintainer/thread-syscalls-and-bind-decision, from the code merged by pull request #1892 as
+maintainer/thread-system-calls-and-bind-decision, from the code merged by pull request #1892 as
 `ddd38f0b0`.*
 
 §10 (process model: capability-based, microkernel) requires every new method's semantics to be
 written here and not only in code. Milestone 812 (`std::thread::spawn` runs real threads in one
-address space) added one object type, one rights bit, one syscall number and five methods or
+address space) added one object type, one rights bit, one system call number and five methods or
 method forms. §269 (how threads share a process) holds the seven fork rulings that shaped them;
 this section holds calef's four further rulings on #1892 and what the merged kernel does. Every
 claim below was read from `kernel/` and `crates/` at `ddd38f0b0`.
@@ -36,7 +36,7 @@ at the time given.
    address, which needs a seventh word riscv64 does not have (§19 (architectural parity is a tenet)).
 3. **Ending one thread (17:38 UTC).** calef: *"I don't like the less obvious part. It looks like
    peers aren't passing flags. If they were the same cost, which would you pick?"* At equal cost the
-   maintainer picked a separate call, and calef chose it: a new, capability-free syscall number. This
+   maintainer picked a separate call, and calef chose it: a new, capability-free system call number. This
    is the ruling on the new number that `AGENTS.md` treats as a design fork. Refused: a flag in
    `SYS_EXIT`'s second word, and a method on the thread's own capability (ending yourself needs no
    capability).
@@ -51,7 +51,7 @@ primitives or whole subsystems). At 22:48 UTC he answered *"On rg, option a."*:
 
 ## The surface, method by method
 
-Registers: the syscall number is in `x8`, `a7` or `rax`; the arguments are `x0` to `x5`, `a0` to
+Registers: the system call number is in `x8`, `a7` or `rax`; the arguments are `x0` to `x5`, `a0` to
 `a5`, or `rdi`, `rsi`, `rdx`, `r10`, `r8`, `r9`
 (`kernel/src/arch/x86_64/exceptions.rs`, `TrapFrame::arg`). An `invoke` puts the capability slot
 and the method in the first two and three data words in the next three. A negative result is an
@@ -60,7 +60,7 @@ and the method in the first two and three data words in the next three. A negati
 ### `RETYPE_OBJECT` of `object_type::PROCESS` (6): making a process
 
 `invoke(region, RETYPE_OBJECT, PROCESS, space_slot, floor)` -> slot, method 2. The ruling of
-2026-11-11 (UTC) spelled out its name and the module's, `object_type`. `kernel/src/syscall/retype.rs`, `kernel/src/sched/process.rs`
+2026-11-11 (UTC) spelled out its name and the module's, `object_type`. `kernel/src/system_call/retype.rs`, `kernel/src/sched/process.rs`
 (`create_process_from`).
 
 - Needs `WRITE` on the region (`NotPermitted`) and `WRITE` on the address-space capability in
@@ -85,7 +85,7 @@ caveat §114 (`ENUMERATE` extends to the address-space object) recorded for `ENU
 ### `ThreadControlBlock::CONFIGURE` (0): joining a process
 
 `invoke(tcb, CONFIGURE, entry, user_sp, slot)`, sixth register `thread_pointer` -> the thread's
-current-CPU page address. `kernel/src/syscall/thread_control_block.rs`,
+current-CPU page address. `kernel/src/system_call/thread_control_block.rs`,
 `kernel/src/sched/configure.rs`.
 
 Needs `WRITE` on the TCB capability. The object in `slot` chooses the form:
@@ -161,7 +161,7 @@ A user write is not part of the contract. `notes/thread-pointer.md` is the scope
 ### `AddressSpace::WAIT` (3) and `WAKE` (4): futexes
 
 `invoke(space, WAIT, va, flags, expected)` -> `0` woken, `1` the word did not hold `expected`.
-`invoke(space, WAKE, va, flags, count)` -> how many were woken. `kernel/src/syscall.rs`
+`invoke(space, WAKE, va, flags, count)` -> how many were woken. `kernel/src/system_call.rs`
 (`address_space_futex`), `kernel/src/sched/futex.rs`.
 
 - `flags` must be exactly `abi::futex::PRIVATE | SIZE_U32` (futex2's bit layout). A shared futex or
@@ -183,13 +183,13 @@ It behaves the same on all three architectures; the only per-architecture part i
 walk (`arch::mmu::translate_user`). No timeout yet, and the walk does not hold the space's own lock;
 both are in `notes/futex.md`'s `BUGS`.
 
-### `SYSCALL_EXIT_THREAD` (4): ending one thread
+### `SYSTEM_CALL_EXIT_THREAD` (4): ending one thread
 
-`exit_thread(word)`, a bare syscall that needs no capability and never returns; the ruling of
-2026-11-11 (UTC) spelled out the names of syscalls 0 and 4. `crates/abi`,
-`kernel/src/syscall.rs`, `kernel/src/sched.rs` (`exit_thread`).
+`exit_thread(word)`, a bare system call that needs no capability and never returns; the ruling of
+2026-11-11 (UTC) spelled out the names of system calls 0 and 4. `crates/abi`,
+`kernel/src/system_call.rs`, `kernel/src/sched.rs` (`exit_thread`).
 
-- Ends the calling thread only. `SYSCALL_EXIT` (0) keeps meaning "end my process"; no flag was added
+- Ends the calling thread only. `SYSTEM_CALL_EXIT` (0) keeps meaning "end my process"; no flag was added
   to it. A thread that is its own process ends that process either way.
 - If `word` is nonzero, the kernel stores zero to the 32-bit word at `word` in the caller's space
   with `Release` ordering and wakes every futex waiter on it (Linux's `CLONE_CHILD_CLEARTID`,
@@ -205,12 +205,12 @@ both are in `notes/futex.md`'s `BUGS`.
 
 `invoke(process, DESTROY, _, _, _)` -> 0. Needs `WRITE` (`NotPermitted`); `Gone` if the name no longer
 resolves. The supervisor's kill of §269 fork 5. A caller that is itself a member ends with the
-process by `SYSCALL_EXIT` and does not return. The space is released at once if no member remains; the
+process by `SYSTEM_CALL_EXIT` and does not return. The space is released at once if no member remains; the
 page stays the region's until the region is destroyed, and an ended process answers `Gone` to a join.
 
 ## How a process ends, and how its blocked members are reaped
 
-A process ends on a member's `SYSCALL_EXIT` or fault, its last running member's `SYSCALL_EXIT_THREAD`,
+A process ends on a member's `SYSTEM_CALL_EXIT` or fault, its last running member's `SYSTEM_CALL_EXIT_THREAD`,
 `DESTROY`, its region's destruction, or its last member leaving the thread table
 (`kernel/src/sched/process.rs`, `end`, `depart`, `leave`, `reap_region`). The last keeps revocation
 sound: the sweeps reach tables through threads, so a table with no member is never joined again.

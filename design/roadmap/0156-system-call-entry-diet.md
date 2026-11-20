@@ -3,7 +3,7 @@ status: BUILT
 raised: 2026-08-23
 built: 2026-08-23
 ---
-# 156. `syscall_entry`'s measured size is every method combined; extract the rest and ratchet both ways
+# 156. `system_call_entry`'s measured size is every method combined; extract the rest and ratchet both ways
 
 Built 2026-08-23. Minted 2026-08-23, found while fixing milestone 126's `pmap` (`abi::aspace::LIST`
 tripped `script/fastpath-footprint`'s 5% bound, +6.7% on riscv64). Extracting `LIST` alone into an
@@ -27,7 +27,7 @@ already required one to justify growth.
 **A correction found during landing, not during the lane's own work**. The lane's final merge of
 `origin/main` (its own recorded commit) silently dropped `abi::aspace::LIST`'s match arm and its
 `aspace_list` function during conflict resolution. That made its own `--save` measurement
-(`syscall_entry` 1988 riscv64 / 3444 aarch64) look better than reality -- both numbers were measured
+(`system_call_entry` 1988 riscv64 / 3444 aarch64) look better than reality -- both numbers were measured
 on a build missing a real, shipped feature. Restoring `aspace_list` during a later merge brought the
 true, feature-complete numbers to 2210 / 3480. Still a genuine 24% (riscv64) and 16.5% (aarch64)
 reduction from `main`'s actual pre-156 baseline (2914 / 4168), just not as large as the invalid
@@ -50,7 +50,7 @@ A shrink never fails and never blocks. `--save` re-records the baseline, but not
 to run it after an improvement. A real gain (this milestone's own extraction work, worth
 hundreds of bytes) can land and sit unclaimed as slack in the recorded baseline indefinitely --
 exactly the "somebody remembers" failure mode AGENTS.md's ladder names as rung zero. Worse than
-cosmetic: a stale-loose baseline silently widens the tripwire's real tolerance. If `syscall_entry`
+cosmetic: a stale-loose baseline silently widens the tripwire's real tolerance. If `system_call_entry`
 shrinks 20% and nobody re-saves, a later regression of +15% against the *current* code is actually
 +15% against a number 20% too generous, and the gate still says "within bound."
 
@@ -61,7 +61,7 @@ so the baseline never drifts stale by more than one tolerance band in either dir
 
 ## The finding
 
-`kernel/src/syscall::invoke` -- the giant `match cap.object { ... match method { ... } }` handling
+`kernel/src/system_call::invoke` -- the giant `match cap.object { ... match method { ... } }` handling
 every capability method this kernel has -- has **no separate symbol in the compiled binary**.
 Checked directly: `llvm-objdump` on `target/riscv64imac-unknown-none-elf/release/kernel` finds no
 `invoke` symbol at all, only `dispatch`, at roughly 663 instructions (~3 KiB). The compiler folds
@@ -69,7 +69,7 @@ Checked directly: `llvm-objdump` on `target/riscv64imac-unknown-none-elf/release
 either `#[inline(never)]`.
 
 `script/fastpath-footprint` measures `dispatch` **flat, with no closure** (its own header comment:
-"a syscall traverses one path through the decoder, but the decoder's own bytes are on every syscall,
+"a system call traverses one path through the decoder, but the decoder's own bytes are on every system call,
 and its other arms are not on this path at all" -- the intent already states the property this
 milestone restores). Because `invoke` is inlined, every method arm's compiled bytes count against
 that flat measurement today, hot or not. `Untyped::SPLIT`/`DESTROY`/`RETYPE_OBJ` (133 source lines),
@@ -84,7 +84,7 @@ IPC fastpath" the whole time, individually below threshold, collectively real.
 
 ## What this milestone does, part one: the extraction
 
-Apply the extraction already proven on `LIST` (`kernel/src/syscall.rs`'s `aspace_list`, milestone
+Apply the extraction already proven on `LIST` (`kernel/src/system_call.rs`'s `aspace_list`, milestone
 126) to every other administrative method arm still inlined in `invoke`: pull the body into its own
 `#[inline(never)] fn`, called from the match arm, leaving only the arm's rights check and the call
 site in `invoke` itself. Candidates, by source-line weight (measured 2026-08-23, before milestone
@@ -120,7 +120,7 @@ needed; the flag already does the right thing once something calls it.
 
 Per arm extracted: `script/fastpath-footprint` before and after, on both `aarch64` and `riscv64`,
 confirming the number drops and nothing else regresses. `script/lint` and the full `script/test`
-suite after all extractions, since this touches the kernel's syscall boundary. **Do not `--save` a
+suite after all extractions, since this touches the kernel's system call boundary. **Do not `--save` a
 new baseline until every planned extraction is done and measured together** -- saving mid-milestone
 would bake in a smaller-but-still-inflated number and hide how much headroom the full extraction
 actually recovers. Once the symmetric check is in place and every extraction is measured, the final
@@ -137,7 +137,7 @@ un-padded build actually has before picking a number narrower than what the data
 
 ## Prior art
 
-None needed outside this tree: `LIST`'s own fix (milestone 126, `kernel/src/syscall.rs`'s
+None needed outside this tree: `LIST`'s own fix (milestone 126, `kernel/src/system_call.rs`'s
 `aspace_list`) is the pattern, already proven to work and already reviewed.
 
 ## Follow-on
@@ -151,7 +151,7 @@ None needed outside this tree: `LIST`'s own fix (milestone 126, `kernel/src/sysc
 - **Refused.** A shrink-side tolerance narrower than growth's 5%. The symmetric check reuses the
   same band, because nothing has measured the un-padded build's run-to-run variance and a number
   tighter than the data supports produces a gate that nags rather than one that measures.
-- **Recorded.** `design/roadmap/0156-syscall-entry-diet.md` records the correction found during
+- **Recorded.** `design/roadmap/0156-system-call-entry-diet.md` records the correction found during
   landing: a lane's own merge silently dropped `abi::aspace::LIST`'s match arm during conflict
   resolution, so its `--save` measurement was taken on a build missing a shipped feature and looked
   better than reality. The corrected numbers are in `bench/fastpath-aarch64.txt` and its riscv64

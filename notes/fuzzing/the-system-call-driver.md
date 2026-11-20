@@ -1,12 +1,12 @@
-# Fuzzing: the seeded syscall driver
+# Fuzzing: the seeded system call driver
 
 *Name: provisional, minted 2026-10-24 (UTC) by comments/929-system_tests-06. calef names files. Each
 stem here is named for its content, and calef names files.*
 
 An appendix to [`notes/fuzzing.md`](../fuzzing.md) for
-`system_tests/src/user/syscall_fuzzer_tests.rs`, the driver milestone 752 (a seeded syscall driver
+`system_tests/src/user/system_call_fuzzer_tests.rs`, the driver milestone 752 (a seeded system call driver
 with a shadow model) built. Its roadmap block,
-[`design/roadmap/0752-a-seeded-syscall-driver-with-a-shadow-model.md`](../../design/roadmap/0752-a-seeded-syscall-driver-with-a-shadow-model.md),
+[`design/roadmap/0752-a-seeded-system-call-driver-with-a-shadow-model.md`](../../design/roadmap/0752-a-seeded-system-call-driver-with-a-shadow-model.md),
 holds what it reaches, its measured cost, the replay table of its six falsifications and the weekly
 sweep. This file holds the oracle's design and the long account of each entry in the module's
 `BUGS`.
@@ -31,7 +31,7 @@ seed, the step, the call and a one-line replay.
 
 ## Kernel threads, not an EL0 program
 
-The actors are kernel threads with ordinary capability tables, entering through `syscall::invoke`
+The actors are kernel threads with ordinary capability tables, entering through `system_call::invoke`
 as `reap_tests` and `notification_tests` do. The oracle needs to know which side of a rendezvous
 parked first. Only the kernel can say that without guessing at timing, and the driver asks it
 through `sched::thread_death_disposition`. The trap entry's register marshaling is not exercised
@@ -51,9 +51,9 @@ at seed 19, step 63, inside the suite's range. Revocation in flight went red onl
 
 ## The BUGS, in full
 
-- `SYSCALL_CAPABILITY_DELETE` is driven through `sched::delete_current_capability`, not `syscall::dispatch`.
-  `TrapFrame` has no setter for the syscall number, so a kernel thread cannot build a frame
-  `dispatch` would read as `SYSCALL_CAPABILITY_DELETE`. `dispatch`'s arm is that one call and `Ok(0)`.
+- `SYSTEM_CALL_CAPABILITY_DELETE` is driven through `sched::delete_current_capability`, not `system_call::dispatch`.
+  `TrapFrame` has no setter for the system call number, so a kernel thread cannot build a frame
+  `dispatch` would read as `SYSTEM_CALL_CAPABILITY_DELETE`. `dispatch`'s arm is that one call and `Ok(0)`.
 - Not generated: `REAP`, `SURVEY`, `MemoryRegion`, `AddressSpace`, `ThreadControlBlock`,
   `Timer`, `Interrupt`, `PageFrame::MAP` and `SLICE`, a bound notification, and death messages. No
   actor

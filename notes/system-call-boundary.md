@@ -1,8 +1,8 @@
-# The syscall boundary: five calls, one decoder, and where each method's code sits
+# The system call boundary: five calls, one decoder, and where each method's code sits
 
-*Name: provisional, minted 2026-10-23 (UTC) by comments/929-kernel-syscall-selftest.*
+*Name: provisional, minted 2026-10-23 (UTC) by comments/929-kernel-system-call-selftest.*
 
-`kernel/src/syscall.rs` and its children under `kernel/src/syscall/` are the whole of what a user
+`kernel/src/system_call.rs` and its children under `kernel/src/system_call/` are the whole of what a user
 program can ask the kernel for. This note carries the design those files' doc comments link to. The
 semantics of each method are recorded in `design/decisions/`, and the wire contract is in
 `crates/abi`.
@@ -20,13 +20,13 @@ semantics of each method are recorded in `design/decisions/`, and the wire contr
 All but one are authority over the caller itself, and the last is everything else. That property
 matters more than the count. There is no `open`, `read`, `write` or `fork`: a process can only act
 on things it was handed. DECISIONS §4 (kernel shape)
-keeps the surface narrow, "a boundary, not a habit". §8 (process model / syscall ABI: deferred to a
+keeps the surface narrow, "a boundary, not a habit". §8 (process model / system call ABI: deferred to a
 hard decision point) deferred the choice, and §10 (process model: capability-based, microkernel)
 made it.
 
 No pointer crosses the boundary. Every argument is a scalar in a register: a capability slot, a
 method, an address, a word. So the kernel follows no user pointer and there is no confused deputy.
-`mmu::user_can_read` is kept for the first syscall that takes a user pointer.
+`mmu::user_can_read` is kept for the first system call that takes a user pointer.
 
 `invoke` looks the slot up in the calling thread's own table, which lives in kernel memory. That
 lookup is the security mechanism. An empty slot answers `NoSuchSlot`, meaning there is nothing
@@ -34,36 +34,36 @@ there, which is different from a refusal.
 
 ## Where each method's code sits, and why
 
-`script/fastpath-footprint` bounds the bytes an IPC round trip fetches. Its `syscall_entry` half sums
-a flat list of symbols, `syscall::dispatch` among them, with no call closure. So the placement of
+`script/fastpath-footprint` bounds the bytes an IPC round trip fetches. Its `system_call_entry` half sums
+a flat list of symbols, `system_call::dispatch` among them, with no call closure. So the placement of
 every method body is a measurement decision, and there are three placements.
 
 - `dispatch` is `#[inline(never)]`, so the gate can name it. An inlining flip moves bytes into
-  or out of a flat sum while the code a syscall fetches stays identical. Milestone 220 (this kernel
+  or out of a flat sum while the code a system call fetches stays identical. Milestone 220 (this kernel
   drives no clock or reset controller, and the first real device will need one) added a dependency.
   LLVM then folded the dispatcher's 1,160 bytes into the aarch64 exception handler, and the gate
   read a 35% shrink. Milestone 368 (`script/fastpath-footprint`'s entry set is flat, so an inlining flip
   can move 12% into it) records the pattern. The attribute also stands on its own: the dispatcher is
-  a large match run once per syscall, not worth copying into a handler that also serves faults.
+  a large match run once per system call, not worth copying into a handler that also serves faults.
 - The round trip's arms are `#[inline(always)]`: `SEND`, `RECEIVE`, `SEND_CAPABILITY`, `RECEIVE_CAPABILITY`,
   `CALL` and `SURVEY` in `rendezvous.rs`. The release profile
   builds the kernel in several codegen units without LTO. A child module can land in another unit
   than its parent, where a plain private function is not inlined at all. The round trip would pay a
-  call, and its bytes would leave `syscall_entry` under a symbol the gate does not count. `SURVEY`
+  call, and its bytes would leave `system_call_entry` under a symbol the gate does not count. `SURVEY`
   is not on the round trip, and stays inline because it was inline before the arms moved out.
 - The `MemoryRegion` decoder arm is `#[inline(always)]` too, for a different reason. It is decoder
-  code, and its rights checks are counted inside `syscall_entry`. Out of line, it would leave the
-  measured set and read as a shrink nothing on the syscall path earned. Its method bodies are out
+  code, and its rights checks are counted inside `system_call_entry`. Out of line, it would leave the
+  measured set and read as a shrink nothing on the system call path earned. Its method bodies are out
   of line like the rest.
 - Every other method is `#[inline(never)]`, out of line, the rule of milestone 156
-  (`syscall_entry`'s measured size is every method combined; extract the rest and ratchet both
+  (`system_call_entry`'s measured size is every method combined; extract the rest and ratchet both
   ways). None of them is a step of the round trip, so each costs the entry one call. `PortRange`'s
   `REVOKE` is also `#[cold]`, because the bound counts the non-cold calls reachable from the
   dispatcher, and cold keeps it and `revoke_port_range_from_others` out of that closure.
 
 What folding one administrative method into the decoder cost, measured:
 
-| method | what it did to `syscall_entry` |
+| method | what it did to `system_call_entry` |
 |---|---|
 | `MemoryRegion::USAGE` | 5.6% larger on riscv64 and 8.8% on `x86_64`, over the 5% bound |
 | `Reply::REPLY_CAPABILITY` | 144 bytes (8.6%) more on `x86_64`, for a method only the network stack uses |
@@ -137,7 +137,7 @@ one rollback.
   told `OutOfMemory` or `BadPointer` never has to ask how much landed. A half-mapped shared surface
   is a peer reading pixels that are not there.
 
-`kernel/src/syscall/proofs.rs` proves both halves of the guard. The second harness models the two
+`kernel/src/system_call/proofs.rs` proves both halves of the guard. The second harness models the two
 call sites' control flow, which is a caller's code rather than a function, so no harness can call
 it instead. Milestone 213 (a harness that re-implements the code instead of calling it proves
 nothing about the code) checked the model against both call sites on 2026-09-02. Nothing re-checks

@@ -1,12 +1,12 @@
-# The null syscall under the full mix, on four Apple cores
+# The null system call under the full mix, on four Apple cores
 
 *Name: ratified 2026-10-18 (calef, convention-rulings Rule 3).*
 
-*An appendix of [the null-syscall note](null-syscall-under-load.md), measured 2026-10-05 (UTC) on
-patagonia by `lane/null-syscall-hvf`. Patagonia is an Apple M3: four performance cores, four
+*An appendix of [the null-system-call note](null-system-call-under-load.md), measured 2026-10-05 (UTC) on
+patagonia by `lane/null-system-call-hvf`. Patagonia is an Apple M3: four performance cores, four
 efficiency cores.*
 
-[The off-radon appendix](null-syscall-off-radon.md) found `null_syscall` flat on four real cores.
+[The off-radon appendix](null-system-call-off-radon.md) found `null_system_call` flat on four real cores.
 That was with milestone 761 (capability lookup off the global lock) in, and with the spawn job
 stubbed, because the full mix failed under HVF. #1663 (`lane/hvf-spawn-destroy-gone`) traced that
 failure to a miscompiled `yield_now` in userspace. With its fix the full mix completes. So nobody
@@ -14,9 +14,9 @@ has yet measured, on real cores, the arrangement radon ran: every job kind, spaw
 
 ## The questions, written before any run
 
-The excess is the earlier notes' quantity. Take `null_syscall`'s per-job ticks at N tasks. Subtract
+The excess is the earlier notes' quantity. Take `null_system_call`'s per-job ticks at N tasks. Subtract
 its one-task figure scaled by `compute`'s growth between the same points. Divide by 64 traps.
-`compute` makes no syscalls, so its growth is what preemption and the host charge a job by its
+`compute` makes no system calls, so its growth is what preemption and the host charge a job by its
 length. The excess is what is charged per trap.
 
 "Rises" means two things hold. The median excess at four tasks is above 0.05 ticks a trap, under
@@ -25,8 +25,8 @@ half the 0.11 the lock ablation showed here. And the four-task median is above e
 
 | Question | Condition | Reading |
 |---|---|---|
-| Q1. Does `null_syscall` rise from one task to four, spawning included? | A: the full mix | Flat: the rise radon saw is gone on real cores, and radon owes only its size. Rises: the stub hid something spawning brings |
-| Q2. If it rises, is the cost in the kernel or outside it? | B: A with `--lock-wait`. C: task 0 runs the full mix; tasks 1 to 3 run only `compute`, long enough to outlast it | C flat, A rising: the other cores' kernel work causes it. B then says how much is a lock (excess equal to wait). C rising like A: load with no syscalls causes it, so it is the host or the hardware, not the kernel |
+| Q1. Does `null_system_call` rise from one task to four, spawning included? | A: the full mix | Flat: the rise radon saw is gone on real cores, and radon owes only its size. Rises: the stub hid something spawning brings |
+| Q2. If it rises, is the cost in the kernel or outside it? | B: A with `--lock-wait`. C: task 0 runs the full mix; tasks 1 to 3 run only `compute`, long enough to outlast it | C flat, A rising: the other cores' kernel work causes it. B then says how much is a lock (excess equal to wait). C rising like A: load with no system calls causes it, so it is the host or the hardware, not the kernel |
 | Q3. Does it scale with loaded cores? | A at 1, 2, 3 and 4 tasks | Growing with each core: queueing on something shared. A step at two: line traffic or interrupts. Only at four: the host is out of performance cores |
 
 Patagonia has four performance cores, and QEMU's own threads want one. That is why Q3's last reading
@@ -49,8 +49,8 @@ planned.
 - E, `PerCpu` on its own line. Added after A showed a small residual that D did not.
   `#[repr(align(128))]` on aarch64; 128 bytes is Apple's line, and the block stays 128 bytes.
 
-Every scratch diff is in [the patch file](null-syscall-hvf-full-mix.scratch.patch). Conditions were
-interleaved boot by boot. Raw rows are in the `null-syscall-hvf-full-mix.*.csv` files beside this
+Every scratch diff is in [the patch file](null-system-call-hvf-full-mix.scratch.patch). Conditions were
+interleaved boot by boot. Raw rows are in the `null-system-call-hvf-full-mix.*.csv` files beside this
 note, one per condition. Twenty-three boots overlapped another lane's x86_64 QEMU. Their rows carry
 `foreign_qemu=1`, and the tables below leave them out.
 
@@ -75,7 +75,7 @@ against E.
 
 B's lock instrument found `current_cap` contended on 0.012% of 476,000 lookups at four tasks, a
 wait of 0.0001 ticks a call. `IPC_TABLES` is still the most contended lock in the mix: 63,000
-contended acquisitions over 21 subruns, by IPC and scheduling. The null syscall no longer takes it.
+contended acquisitions over 21 subruns, by IPC and scheduling. The null system call no longer takes it.
 
 ## What it answers
 
@@ -85,10 +85,10 @@ trap, about 1.7 ns on a 33 ns trap. That is under the 0.05 written above, and th
 But the interval excludes zero, and D, without spawning, reads 0.002. Radon's original excess was
 1.4 ticks of a 10 MHz clock, 140 ns a trap. Putting the lock back (P) costs 35 ns here.
 
-**Q2: inside the kernel, and it is not a lock.** C is flat: three cores busy in syscall-free code do
+**Q2: inside the kernel, and it is not a lock.** C is flat: three cores busy in system-call-free code do
 not slow task 0's traps. B finds no wait on the lookup. E removes the residual: with each core's
 block on its own 128-byte line the excess is -0.010 [-0.019, -0.006], against 0.042 in the A boots
-interleaved with it. That is the false sharing [the parent note's BUGS](null-syscall-under-load.md#bugs)
+interleaved with it. That is the false sharing [the parent note's BUGS](null-system-call-under-load.md#bugs)
 predicted and left unmeasured. Spawning is what brings it. Which remotely written field does it
 (the parent note names the inbox and the steal slot) is not measured. B's build puts `PERCPU` at a different offset (0 mod 64 rather than 24),
 which fits its showing no residual.
@@ -98,7 +98,7 @@ That is one more remote writer per added core. P shows what queueing on a lock l
 machine: 0.27, 0.48, 0.85. The host running out of performance cores, Q3's third reading, does not
 appear. C and D are flat at four tasks.
 
-**The raw rise is a different thing.** A's `null_syscall` rises 17% from one task to four, and
+**The raw rise is a different thing.** A's `null_system_call` rises 17% from one task to four, and
 `compute` rises 12% with it. That part is charged by job length, so it is not a per-crossing cost.
 It also comes with spawning (D's `compute` is flat), and it survives E.
 
@@ -111,7 +111,7 @@ the guest, and the M3's line is 128 bytes where radon's U74 has 64. Radon's `PER
 same, and the fix the parent note proposed (`align(64)`) would not be enough on Apple silicon.
 
 The earlier lane's finding stands and now has spawning in it. Without the global lock the null
-syscall's growth under load is a cache line, about 5% of a trap at four tasks on this machine.
+system call's growth under load is a cache line, about 5% of a trap at four tasks on this machine.
 
 ## What risk 4's line should say
 
@@ -120,12 +120,12 @@ color is calef's. This lane would leave it AMBER until radon sizes 761, and prop
 after the one ending "half explained and half open":
 
 > 2026-10-05 (UTC): on four Apple cores under HVF, with 761 in and the full mix running (spawning
-> included, after #1663), the null syscall's per-trap growth from one busy core to four is 1.7 ns
+> included, after #1663), the null system call's per-trap growth from one busy core to four is 1.7 ns
 > on a 33 ns trap, against 35 ns with the global lock put back. The remainder is false sharing
 > between per-core blocks, not a lock: aligning each core's block to its own 128-byte line removes
-> it, and three cores busy in syscall-free code do not cause it. Nothing measured here is a cost
+> it, and three cores busy in system-call-free code do not cause it. Nothing measured here is a cost
 > the capability model forces; radon owes the size
-> (notes/job-mix/null-syscall-hvf-full-mix.md).
+> (notes/job-mix/null-system-call-hvf-full-mix.md).
 
 ## Milestone 766, from committed code
 
@@ -137,11 +137,11 @@ boot and a bootstrap 95% interval. Three builds:
   line) branched from.
 - aligned: base plus 766 (`41c1fc525`).
 - shifted: base with the blocks forced to 24 mod 128 by a scratch wrapper (the last hunk of
-  [the patch file](null-syscall-hvf-full-mix.scratch.patch)). That is A's layout, added as a
+  [the patch file](null-system-call-hvf-full-mix.scratch.patch)). That is A's layout, added as a
   positive control once base read flat.
 
 Two boots overlapped another lane's x86_64 QEMU and are left out (`foreign_qemu=1`). Raw rows are
-in the `null-syscall-hvf-full-mix.766-*.csv` files.
+in the `null-system-call-hvf-full-mix.766-*.csv` files.
 
 | Build | boots | excess at 2 | at 3 | at 4 | at 4, minus base |
 |---|---|---|---|---|---|
@@ -162,7 +162,7 @@ and +0.040 over base at two, three and four tasks, against A's 0.009, 0.021 and 
 value here is that the next unrelated static cannot put it back. Before it, a few bytes of shift
 elsewhere in `.data` was the difference between none and 1.7 ns a trap at four cores.
 
-The whole curve sits about 0.05 lower than the first batches (base's one-task `null_syscall` is
+The whole curve sits about 0.05 lower than the first batches (base's one-task `null_system_call` is
 52.9 ticks against A's 50.7). Nothing here explains that shift, and it moves every build alike;
 only differences within this batch are read.
 
@@ -172,9 +172,9 @@ only differences within this batch are read.
   differ. A's four-task excess read 0.024 in its first twenty boots and 0.066 in the next twenty,
   where throughput also fell from 10.1 to 6.8 million jobs a minute. Ten of those forty boots
   overlapped a foreign QEMU and are left out. D did not move between batches.
-- C is not the same load minus syscalls. In C task 0's spawned children wait for busy cores, so
+- C is not the same load minus system_calls. In C task 0's spawned children wait for busy cores, so
   at two and three tasks its spawn job takes 108,000 to 167,000 ticks against A's 2,700. And the
-  other cores do no kernel work at all. C tests syscall-free load, not A's load minus its syscalls.
+  other cores do no kernel work at all. C tests system-call-free load, not A's load minus its system_calls.
 - The spawn job is about twenty times slower at one task than on radon. 59,000 ticks a job at
   24 MHz (2.5 ms) against radon's 1,172 at 10 MHz (117 us). It falls to 2,700 at four tasks. That
   makes one-task throughput here meaningless. This lane first guessed that a child placed on a busy

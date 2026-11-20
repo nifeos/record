@@ -7,7 +7,7 @@ machine_requirements: none
 specific_machine: none
 needs_person: yes
 ---
-# The remaining kernel-object method and syscall names are spelled out
+# The remaining kernel-object method and system call names are spelled out
 
 Raised by lane/record-open-follow-ups. Pull request #3483 (`RETYPE_OBJ` becomes `RETYPE_OBJECT`) listed these thirteen names in its "What I need from you" section and held them for the architect.
 
@@ -17,7 +17,7 @@ Name: ratified 2026-11-11 (UTC). The architect ruled each of the thirteen spelli
 
 ## The problem
 
-design/naming.md says a name this tree authors spells its words out. The ruling of 2026-11-11 (UTC) found `MemoryRegion::RETYPE_OBJ` in breach. It became `RETYPE_OBJECT` and kept method number 2, so no encoding and no `ABI_VERSION` changed. The audit that followed read every method of the kernel objects and found thirteen more names with the same fault. Each was a two-way door before the first release, and each touches the syscall surface, so each was the architect's call.
+design/naming.md says a name this tree authors spells its words out. The ruling of 2026-11-11 (UTC) found `MemoryRegion::RETYPE_OBJ` in breach. It became `RETYPE_OBJECT` and kept method number 2, so no encoding and no `ABI_VERSION` changed. The audit that followed read every method of the kernel objects and found thirteen more names with the same fault. Each was a two-way door before the first release, and each touches the system call surface, so each was the architect's call.
 
 ## The work
 
@@ -32,7 +32,7 @@ The architect ruled all thirteen on 2026-11-11 (UTC). Each rename reaches every 
 | 5 | `address_space::MAP_RW` | `MAP_READ_WRITE` |
 | 6 | `interrupt::ACK` | `ACKNOWLEDGE` |
 | 7 | `fault::FAULT_EP_SLOT` | `FAULT_RENDEZVOUS_SLOT`; the ABI docs that called the supervision object an endpoint say rendezvous |
-| 8 to 12 | `SYS_EXIT`, `SYS_YIELD`, `SYS_INVOKE`, `SYS_CAPABILITY_DELETE`, `SYS_EXIT_THREAD` | `SYSCALL_EXIT`, `SYSCALL_YIELD`, `SYSCALL_INVOKE`, `SYSCALL_CAPABILITY_DELETE`, `SYSCALL_EXIT_THREAD` |
+| 8 to 12 | `SYS_EXIT`, `SYS_YIELD`, `SYS_INVOKE`, `SYS_CAPABILITY_DELETE`, `SYS_EXIT_THREAD` | `SYSTEM_CALL_EXIT`, `SYSTEM_CALL_YIELD`, `SYSTEM_CALL_INVOKE`, `SYSTEM_CALL_CAPABILITY_DELETE`, `SYSTEM_CALL_EXIT_THREAD` |
 | 13 | `run_end_va` | `run_end_virtual_address` |
 
 What remains:

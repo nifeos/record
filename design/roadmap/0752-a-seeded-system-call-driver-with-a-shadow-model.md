@@ -8,7 +8,7 @@ machine_requirements: none
 specific_machine: none
 needs_person: no
 ---
-# 752. A seeded syscall driver with a shadow model
+# 752. A seeded system call driver with a shadow model
 
 Part (b) of the proposal `fuzz-the-surface-a-confined-process-can-reach` (#1592), ruled yes by calef
 on 2026-10-04 (UTC). The number 752 is provisional (749 to 751 are held by open pull requests) and
@@ -17,9 +17,9 @@ the integrator's once #1592 lands. *(Title and slug are drafts.)*
 
 ## What is built
 
-`system_tests/src/user/syscall_fuzzer_tests.rs`, one test,
-`seeded_syscalls_agree_with_the_shadow_model`. From a seed, seven kernel threads issue random
-capability operations through `syscall::invoke`, the function the trap handler calls for
+`system_tests/src/user/system_call_fuzzer_tests.rs`, one test,
+`seeded_system_calls_agree_with_the_shadow_model`. From a seed, seven kernel threads issue random
+capability operations through `system_call::invoke`, the function the trap handler calls for
 `SYS_INVOKE`. The conductor predicts every answer, every wake, where every parked thread is parked,
 and every slot of every capability table, and fails on the first difference with the seed, the step,
 the call and a one-line replay. The seventh thread is the witness: it holds nothing, everything it
@@ -37,7 +37,7 @@ helper needs a TCB and an address space each. What is not exercised is the trap 
 marshaling, which every EL0 test already crosses. At equal cost the choice would be the same,
 because the ordering knowledge is what makes the oracle exact.
 
-Names are provisional: the module, the test, and `NIFE_SYSCALL_FUZZ_SEEDS`.
+Names are provisional: the module, the test, and `NIFE_SYSTEM_CALL_FUZZ_SEEDS`.
 
 ## Measured, 2026-10-04 (UTC), QEMU on a developer machine
 
@@ -86,7 +86,7 @@ and seed 180 became the corpus. The weekly sweep is what finds the next one.
 
 ## The weekly sweep
 
-`.github/workflows/falsifications.yml`, job `syscall-fuzz`, on milestone 616 (constrained hardware
+`.github/workflows/falsifications.yml`, job `system-call-fuzz`, on milestone 616 (constrained hardware
 fuzzing for the boot path)'s cadence. It starts at the ISO week times a million, runs seeds until
 60 s of guest time have passed (under the 90 s per-test budget), and prints the range it covered.
 At the aarch64 rate above that is about 6,000 seeds a week. A finding is a red scheduled run, never
@@ -104,7 +104,7 @@ and the model pins today's behavior, so the test is green and any change is seen
 It is exploitable today. A std program, including an unvouched one, is spawned holding its own
 memory region with `WRITE` in slot 0 (`StdLayout::new` in `crates/system_initializer/src/std_layout.rs`, its
 caps). `MemoryRegion::RETYPE` checks only `WRITE` and returns a frame with `Rights::ALL`
-(`kernel/src/syscall.rs`, `memory_region_retype`), so the program holds a `GRANT` capability it can
+(`kernel/src/system_call.rs`, `memory_region_retype`), so the program holds a `GRANT` capability it can
 `SEND_CAP` again and again. Its stdout is a rendezvous that a plain-`RECEIVE` server drains. Every
 delegation that finds that server already parked costs it one of its 32 slots, and none of these
 servers reads `x1`, so none is ever freed. Native programs given `--mem` are in the same position;
@@ -164,7 +164,7 @@ The seven questions:
    to 6,166 (+60), x86_64 8,227 to 8,339 (+112, +1.4%). `ipc_send_receive` moved 4 B or less, and all
    are inside the 5% band. `script/bench` (aarch64, TCG and icount): `call_reply` 1,072,267 to 1,072,517 ticks over
    1,000 iterations (+0.02%), `ipc_rtt` 1,046 to 1,061 ticks per iteration (+1.4%), `ipc_rtt_el0`
-   +0.1%, `null_syscall` unchanged. The sender-first `CALL` arm (answer the stranded caller `Gone`) was
+   +0.1%, `null_system_call` unchanged. The sender-first `CALL` arm (answer the stranded caller `Gone`) was
    not in the measured patch and adds a branch off the fastpath.
 6. Reversibility. A change to what `RECEIVE`, `SEND_CAP` and `CALL` return: §10 (the
    capability-based microkernel process model)'s surface. Nobody has acted on today's behavior (the
@@ -210,7 +210,7 @@ a second rung. When (A) lands, the driver's model changes in the two receiver-fi
 
 ## Index row
 
-A seeded driver issues random capability operations through the real syscall layer and predicts
+A seeded driver issues random capability operations through the real system call layer and predicts
 every answer and every capability table from a shadow model, so a confinement defect that crashes
 nothing still fails. BUILT: runs on all three ISAs, red under all six recorded kernel
 falsifications, and found that a capability reaches a plain `RECEIVE` on one arrival order only.
