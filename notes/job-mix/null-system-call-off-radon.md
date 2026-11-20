@@ -1,7 +1,7 @@
-# The null syscall off radon, 2026-10-05
+# The null system call off radon, 2026-10-05
 
-*An appendix of [the null-syscall note](null-syscall-under-load.md), measured by
-`lane/null-syscall-under-load` on patagonia with no board. The file name is provisional (see the README).*
+*An appendix of [the null-system-call note](null-system-call-under-load.md), measured by
+`lane/null-system-call-under-load` on patagonia with no board. The file name is provisional (see the README).*
 
 Milestone 761 (capability lookup off the global lock) reached `main` inside #1617 (the 64-slot table) before #1630 itself landed. So
 `main` at `d0ca36c5b` already looks up capabilities off `IPC_TABLES`. Eight interleaved TCG runs
@@ -16,7 +16,7 @@ Drafted before any run, as `main` against #1630. Once 761 turned out to be on `m
 reworded for the ablation, and Q1's second clause (the excess should match the measured wait) was
 added after the runs. Say so rather than let the table look more prior than it was.
 
-The excess is this note's usual quantity: `null_syscall`'s growth from one task to N, minus the
+The excess is this note's usual quantity: `null_system_call`'s growth from one task to N, minus the
 growth `compute` shows between the same points (its share of preemption and interrupts), divided
 by 64 traps. Only the excess is read here, never a tick.
 
@@ -31,7 +31,7 @@ by 64 traps. Only the excess is read here, never a tick.
 `script/job-mix --arch riscv64 --smp 4 --release`, eight runs a side interleaved, host load about
 2. Medians, range in brackets, ticks of the 10 MHz timer per 64-trap job.
 
-| `null_syscall` | 1 task | 2 | 3 | 4 |
+| `null_system_call` | 1 task | 2 | 3 | 4 |
 |---|---|---|---|---|
 | ablation (lookup under `IPC_TABLES`) | 684 [646-692] | 949 [922-976] | 1,041 [1,005-1,048] | 1,170 [1,140-1,184] |
 | `main` (lookup under the thread's own lock) | 678 [641-688] | 868 [837-889] | 936 [923-971] | 1,000 [996-1,029] |
@@ -53,7 +53,7 @@ note's cross-check](hvf-cross-check-2026-09-19.md)
 said it could not. The full mix could not run there when these were taken, so these runs stub the
 spawn job on both sides; [`spawn-job-miscompiled-yield.md`](spawn-job-miscompiled-yield.md) fixed that afterwards. Six runs a side, ticks of the 24 MHz counter per 64-trap job:
 
-| `null_syscall` | 1 task | 2 | 3 | 4 |
+| `null_system_call` | 1 task | 2 | 3 | 4 |
 |---|---|---|---|---|
 | ablation | 54 [52-56] | 56 [54-57] | 54 [53-57] | 61 [59-64] |
 | `main` | 48 [47-52] | 47 [46-48] | 46 [46-47] | 47 [46-47] |
@@ -68,7 +68,7 @@ Not apples to apples with radon, and the size is not the point. macOS schedules 
 cross-core wakeup leaves the guest, and the mix's throughput does not scale under HVF at all
 (`jpm_median` 8.8 to 9.4 million at every point), so `IPC_TABLES` is far quieter here than on
 radon's 41%. What HVF adds is real caches and real atomics: on them, with the lock out of the
-path, the cheapest syscall does not slow down as cores get busy.
+path, the cheapest system call does not slow down as cores get busy.
 
 ## What this answers
 
@@ -80,10 +80,10 @@ share survives there, which is radon's next evening.
 ## The payloads for that evening
 
 `main` is what ships, so two payloads from `d0ca36c5b` (761, the 64-slot table) stand beside
-761's own. Same bench rules, thresholds and one-task guard as [the note's](null-syscall-under-load.md#the-radon-run-that-decides-it):
+761's own. Same bench rules, thresholds and one-task guard as [the note's](null-system-call-under-load.md#the-radon-run-that-decides-it):
 
 ```sh
-cd <worktree root>/null-syscall-under-load
+cd <worktree root>/null-system-call-under-load
 script/board-netboot --root target/board-main             # boots 1 to 3
 script/board-netboot --root target/board-main-lock-wait   # boots 4 and 5
 ```

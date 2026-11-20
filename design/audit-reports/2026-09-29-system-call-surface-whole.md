@@ -1,4 +1,4 @@
-# Security audit, 2026-09-29: the syscall surface as a whole, read as a confined process trying to widen
+# Security audit, 2026-09-29: the system call surface as a whole, read as a confined process trying to widen
 
 **Kind:** security. **Lens:** the `invoke` surface entire, every object type and method, read from
 inside a confined process that holds only what its spawner endowed. The two object types, the
@@ -12,11 +12,11 @@ risks this read confirmed are both recorded ones, and both are stated where a re
 
 ## Why this lens
 
-The 2026-09-24 audit named two lenses it had not taken: the syscall surface as a whole, and the
+The 2026-09-24 audit named two lenses it had not taken: the system call surface as a whole, and the
 supply chain, the cryptography graph's code. Measured from that audit's landing commit
 (`1007edb1`, 2026-09-24) to this one: 748 commits, 1,704 files, +103,176 and -25,422 lines
 outside `notes/project-metrics`. `crates/abi/src/lib.rs` took +294 against 15 removed and
-`kernel/src/syscall.rs` +429 against 20: two new object types (`NOTIFICATION`, `TIMER`), a new
+`kernel/src/system_call.rs` +429 against 20: two new object types (`NOTIFICATION`, `TIMER`), a new
 `rendezvous` method (`BADGE`), and a kernel-written wake tag (`BOUND`), the largest move this
 surface has made since the audit mechanism began. The cryptography graph did not move at all: none
 of the nine new external packages is a crypto crate, and `deny.toml` is untouched. So the surface
@@ -41,9 +41,9 @@ window.
 
 ## What was read, and what came back clean
 
-The dispatcher's every arm (`invoke` in `kernel/src/syscall.rs`) with its right: `WRITE` to signal, arm
+The dispatcher's every arm (`invoke` in `kernel/src/system_call.rs`) with its right: `WRITE` to signal, arm
 and bind; `READ` to wait and poll; `GRANT` to badge and revoke; `ENUMERATE` to survey. `BIND`
-additionally demands `WRITE` on the thread it names (the `BIND` arm of `notification_invoke` in `kernel/src/syscall/object_methods.rs`), and `Timer::ARM`
+additionally demands `WRITE` on the thread it names (the `BIND` arm of `notification_invoke` in `kernel/src/system_call/object_methods.rs`), and `Timer::ARM`
 demands `WRITE` on the notification capability in the caller's own table (the `ARM` arm of `timer_invoke` in the same file), so
 arming is signaling later under the same authority.
 
@@ -60,7 +60,7 @@ linked and undelivered" under one hold of `IPC_TABLES` (`bound_receiver` in `ker
 fills and serves in the same hold (`deliver_bound` in the same file); the state machine beneath is Kani-proved,
 its invariant that a non-zero word and a queued waiter never coexist. The interrupt-endpoint
 refusal (milestone 603 (an interrupt's endpoint refuses every send)) marks the rendezvous before
-the route publishes (`bind_irq`, since renamed `bind_interrupt`, in `kernel/src/sched/interrupt_route.rs`), and no syscall reaches `bind_irq`.
+the route publishes (`bind_irq`, since renamed `bind_interrupt`, in `kernel/src/sched/interrupt_route.rs`), and no system call reaches `bind_irq`.
 
 The designation half of milestone 205 (how a foreign program is told what to do) clamps in code,
 not prose. The shell's asked rights are intersected with the manifest's declared grant
@@ -123,7 +123,7 @@ is the documentation audit's finding 3, and it is fixed there.
 - The cryptography graph's code, the other untaken lens. It did not move in this window, and the
   supply-chain audit that reads `ring` and `rsa` still wants its own lane.
 - The userspace programs of milestone 600 (the graphical terminal stack is built in userspace) and
-  the TCO watchdog (kernel `arch/x86_64/tco.rs`): neither is syscall surface, and neither mints
+  the TCO watchdog (kernel `arch/x86_64/tco.rs`): neither is system call surface, and neither mints
   authority a confined process can reach.
 - The FP register file, the port revoke and the DMA validator: the 2026-09-24 audit's territory,
   unmoved by this window.
@@ -132,7 +132,7 @@ is the documentation audit's finding 3, and it is fixed there.
 ## Method, so the negatives can be judged
 
 The window was measured with `git diff --numstat` per directory from `1007edb1`. The surface was
-read from `crates/abi` outward into `kernel/src/syscall.rs` and `kernel/src/sched.rs`, with the
+read from `crates/abi` outward into `kernel/src/system_call.rs` and `kernel/src/sched.rs`, with the
 mailbox writes enumerated at every assignment site rather than trusted from doc comments. The
 designation clamp, the manifest decoder and the TOML consumer were read at their sites. `script/
 verify` was not run; the notification state machine's proofs replay in CI.

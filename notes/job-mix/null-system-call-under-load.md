@@ -1,9 +1,9 @@
-# Why the null syscall slowed when more cores were busy
+# Why the null system call slowed when more cores were busy
 
 *Name: ratified 2026-10-18 (calef, convention-rulings Rule 3).*
 
 *Fatal risk 4's open finding from [the 2026-10-04 radon evening](radon-2026-10-04.md), measured on
-2026-10-04 (UTC) by the `lane/null-syscall-contention` lane. The cause and the fix were found under
+2026-10-04 (UTC) by the `lane/null-system-call-contention` lane. The cause and the fix were found under
 QEMU's TCG, which models no cache and no real inter-processor interrupt; radon then ran the fix the
 same night, and [its result](#what-radon-said) is PARTIAL by the thresholds written before it.
 2026-10-05 (UTC): [the rest was the lock](#is-the-rest-the-lock-measured-2026-10-05-off-radon), and
@@ -12,27 +12,27 @@ from 48 ticks to 10.*
 
 ## The question
 
-On radon the job mix's `null_syscall` job (64 traps that each bounce off an empty capability slot)
+On radon the job mix's `null_system_call` job (64 traps that each bounce off an empty capability slot)
 cost 108 ticks at one task and 202 at four, while `compute` grew 6%. Past four it grew only 17% more
-by 32 tasks. Why does the cheapest syscall nearly double when more cores are busy?
+by 32 tasks. Why does the cheapest system call nearly double when more cores are busy?
 
 `per_job` is self-timed wall clock, so a task descheduled mid-job charges the wait to that job. But
 anything that arrives at a uniform rate in time (a timer tick, an IPI, a remote TLB fence) lands on a
-job in proportion to its length, so it charges `null_syscall` the same percentage it charges
+job in proportion to its length, so it charges `null_system_call` the same percentage it charges
 `compute`. The 6% is that baseline, and the excess, about 1.4 ticks (0.35 us) per trap, has to be
 paid per trap.
 
-## What a null syscall touches that another core also writes
+## What a null system call touches that another core also writes
 
 Read on all three architectures, from trap entry to return:
 
 | What | Shared with other cores? |
 |---|---|
-| `arch::exceptions::SVC_COUNT.fetch_add` | Yes, one line every syscall on every core wrote. Read by the system tests, and by a riscv64 tour line that printed 0 on every captured boot |
+| `arch::exceptions::SVC_COUNT.fetch_add` | Yes, one line every system call on every core wrote. Read by the system tests, and by a riscv64 tour line that printed 0 on every captured boot |
 | `IPC_TABLES.lock()` in `sched::current_cap` | Yes, the kernel's one global lock, taken by every IPC, every `schedule()` and every capability operation |
 | `cpu::current()`, `held_rank` | Per core. But `PERCPU` is aligned to 8, at offset 16 mod 64 on riscv64 and 24 on aarch64, so neighboring cores' blocks share a line (not fixed; see BUGS) |
 
-The trap entry and exit assembly touch nothing shared, and a syscall never reschedules on its way
+The trap entry and exit assembly touch nothing shared, and a system call never reschedules on its way
 out (only an interrupt asks for `preempt_if_needed`). So the candidates were one shared counter and
 one global lock.
 
@@ -41,7 +41,7 @@ one global lock.
 riscv64, `script/job-mix --arch riscv64 --smp 4 --release`, ticks of the 10 MHz timer. One run per
 row unless stated; two runs of the first row agreed within 2.5%.
 
-| Kernel | `null_syscall` 1 / 4 tasks | `compute` 1 / 4 tasks |
+| Kernel | `null_system_call` 1 / 4 tasks | `compute` 1 / 4 tasks |
 |---|---|---|
 | `main` (two runs) | 638 / 1,250 and 654 / 1,253 | 314 / 412 and 323 / 416 |
 | `SVC_COUNT` increment removed | 657 / 1,203 | 328 / 428 |
@@ -73,7 +73,7 @@ unmaps, and each one discharges its TLB obligation on every other hart. On riscv
 remote fence, which interrupts every hart and waits for all of them; on x86_64 an NMI round.
 All of it ran with the global lock held and interrupts masked. A thread exiting anywhere stalled every
 IPC and every capability lookup on every core. The shape fits the radon finding. At one task nothing
-else exits while the `null_syscall` job runs. At four, other tasks' `spawn` jobs reap children
+else exits while the `null_system_call` job runs. At four, other tasks' `spawn` jobs reap children
 throughout. Past four, the number of cores that can be waiting stops growing.
 
 `START` had the mirror image: it built the new thread's stack (six pages mapped) under the same lock,
@@ -118,7 +118,7 @@ each a few ticks a hold, roughly evenly. That is the contention
 (capability tables off the global lock) is the next step, not this one.
 
 What TCG could not say about this fix, and the procedure radon ran it by, are in
-[the first radon run](null-syscall-first-radon-run.md).
+[the first radon run](null-system-call-first-radon-run.md).
 
 ## What radon said
 
@@ -131,8 +131,8 @@ before the fix:
 
 | | 1 task | 4 tasks | 32 tasks | growth 1 to 4 |
 |---|---|---|---|---|
-| `null_syscall`, before | 108 | 202 (195 to 207) | 236 | 94 |
-| `null_syscall`, after | 99, 99, 99 | 147, 146, 147 | 171, 170, 170 | 48 |
+| `null_system_call`, before | 108 | 202 (195 to 207) | 236 | 94 |
+| `null_system_call`, after | 99, 99, 99 | 147, 146, 147 | 171, 170, 170 | 48 |
 | `compute`, after | 2,409 | 2,547 to 2,552 | 2,898 to 2,917 | 5.8% |
 
 **The fix removed about half the excess, so the reading is the middle row: PARTIAL.** At four
@@ -148,7 +148,7 @@ to 901,122 (+11.0%). One task moved 0.6%, so the gain is the multi-core part. Th
 
 ### Where the rest is, from boots 4 and 5
 
-**The instrumented kernel is slower** (`null_syscall` 118 at one task and 342 to 345 at four;
+**The instrumented kernel is slower** (`null_system_call` 118 at one task and 342 to 345 at four;
 `jpm_median` 662,475 to 667,670 at four), so its ticks are not comparable with the boots above.
 That is the cost the module warned of: the clock is read only on the contended path, and at four
 tasks that path is taken 41% of the time. Its counts are what to read.
@@ -187,21 +187,21 @@ Boots 1 to 3 of the kernel that ships, read against 99 and 147 from `bench/radon
 boots 4 and 5 with `lock_wait`, read for `site=current_cap` and `rank=60 name=ipc_tables` at four
 tasks. What each outcome means, written 2026-10-04 (UTC) before any boot:
 
-| Boots 1 to 3, `null_syscall` at 4 tasks | Reading |
+| Boots 1 to 3, `null_system_call` at 4 tasks | Reading |
 |---|---|
 | 115 or below | it worked: the remainder is about `compute`'s preemption share (about 6 ticks) over 99. Risk 4's per-crossing cost under load is explained |
 | 116 to 135 | partial: the lock was part of the rest. Boots 4 and 5 say whether `current_cap` still waits (it should not) and what the IPC rows still cost the cores |
 | 136 or above | the lock was not radon's remaining cause. If boots 4 and 5 show `current_cap` contention near zero and the job did not move, suspect the line traffic no counter sees (BUGS, `PERCPU`) |
 
 One guard on the single-task cost, since a lock path dearer when uncontended would hide inside the
-four-task number. **`null_syscall` at 1 task above 101** (99 today, plus 2%) is a regression to
+four-task number. **`null_system_call` at 1 task above 101** (99 today, plus 2%) is a regression to
 explain before any row above is claimed.
 
 ## Is the rest the lock? Measured 2026-10-05 off radon
 
 Milestone 761 reached `main` inside #1617 before #1630 landed, so this compares `main` with an
 ablation that puts `IPC_TABLES` back around the lookup and changes nothing else.
-[The appendix](null-syscall-off-radon.md) has the questions and both tables.
+[The appendix](null-system-call-off-radon.md) has the questions and both tables.
 
 - TCG, riscv64, eight runs a side. At four tasks the job read 1,170 with the lock and 1,000
   without, ranges apart. The lock's excess grew with each contender, and 1.6 ticks a trap remain
@@ -246,16 +246,16 @@ itself ... half explained and half open") with:
 > The rest was the same lock on every capability lookup, which milestone 761 removed, and false
 > sharing between cores' per-core blocks, which milestone 766 (each core's PerCpu on its own cache
 > line) removed. On radon (2026-10-05) the
-> null syscall's growth from one task to four fell from 48 ticks to 10, half of it the preemption
+> null system call's growth from one task to four fell from 48 ticks to 10, half of it the preemption
 > every job pays; undoing 766 alone puts back 7.5. One caveat travels with every single-crossing
 > number on radon: moving the kernel's text by a few bytes, with no code change, moves the null
-> syscall by up to 8 ticks (7%), so builds are compared on growth, not level
-> (notes/job-mix/null-syscall-under-load.md).
+> system call by up to 8 ticks (7%), so builds are compared on growth, not level
+> (notes/job-mix/null-system-call-under-load.md).
 
 ## BUGS
 
 - The fix is sized on one machine, radon, with four harts, over five boots of one evening. The
-  three plain boots agreed to within one tick at every `null_syscall` point and 0.64% on
+  three plain boots agreed to within one tick at every `null_system_call` point and 0.64% on
   `jpm_median` at four tasks, so the size is a number, but it is radon's.
 - ~~**`PERCPU` straddles cache lines.**~~ Fixed by milestone 766, which aligns each block to 128
   bytes. On radon the straddling layout cost 7.5 ticks of growth a job
@@ -265,9 +265,9 @@ itself ... half explained and half open") with:
   layout control. Proposed: `design/roadmap/0796-pin-the-hot-trap-paths-placement.md`.
 - ~~**aarch64's job mix wedges under TCG on `main`.**~~ Closed 2026-10-05: a miscompiled yield,
   not a multicore hang ([`spawn-job-miscompiled-yield.md`](spawn-job-miscompiled-yield.md)).
-- **`script/fastpath-footprint` leaves `exception_body` out of aarch64's `syscall_entry`**, though
-  every aarch64 syscall runs it (riscv64's list has `riscv_trap_body`). Moving the counter from that
-  symbol into `syscall::dispatch` once read as 44 bytes of growth when it was 20.
+- **`script/fastpath-footprint` leaves `exception_body` out of aarch64's `system_call_entry`**, though
+  every aarch64 system call runs it (riscv64's list has `riscv_trap_body`). Moving the counter from that
+  symbol into `system_call::dispatch` once read as 44 bytes of growth when it was 20.
 
 ## Proposed work
 

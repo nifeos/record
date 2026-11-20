@@ -1,12 +1,12 @@
 # The first radon run of the reaper fix
 
-*An appendix of [the null-syscall note](null-syscall-under-load.md), moved out of it unchanged on
+*An appendix of [the null-system-call note](null-system-call-under-load.md), moved out of it unchanged on
 2026-10-05 (UTC) to keep the note under §212 (a prose budget)'s cap. Written 2026-10-04 by
-`lane/null-syscall-contention`. The file name is provisional (see the README).*
+`lane/null-system-call-contention`. The file name is provisional (see the README).*
 
 ## What TCG cannot say, plainly
 
-- **The `null_syscall` job itself shrank less than its lock wait did under TCG.** After the fix it
+- **The `null_system_call` job itself shrank less than its lock wait did under TCG.** After the fix it
   read 671 / 1,125 ticks at one and four tasks: the growth fell from about 600 to about 450, where
   the wait alone fell by about 440 ticks a job. Under TCG a remote fence stops every vCPU whether or
   not anyone holds a lock, and TCG's own costs rise with busy vCPUs, so the rest is not evidence about
@@ -23,7 +23,7 @@
 Two payloads, built from this branch's tip, so no build happens at the bench:
 
 ```sh
-cd <worktree root>/null-syscall-contention
+cd <worktree root>/null-system-call-contention
 script/board-netboot --root target/board-fix          # boots 1 to 3: the kernel that ships
 script/board-netboot --root target/board-lock-wait    # boots 4 and 5: the same plus lock_wait
 ```
@@ -32,7 +32,7 @@ Power-cycle radon's own outlet for each boot, and capture each boot with step 2 
 [`notes/job-mix.md`](../job-mix.md)'s procedure. Never another outlet, never a USB hub. Steps 3 and 5
 apply unchanged. Then read, in this order:
 
-1. `null_syscall`'s `per_job` at 1 and 4 tasks on boots 1 to 3, against 108 and 202 from 2026-10-04
+1. `null_system_call`'s `per_job` at 1 and 4 tasks on boots 1 to 3, against 108 and 202 from 2026-10-04
    (every boot then read 195 to 207 at four).
 2. On boots 4 and 5, `job-mix-lock: ... site=current_cap`: `wait_ticks / calls` at 4 tasks, in ticks
    per trap, against the job's per-trap growth `(per_job(4) - per_job(1)) / 64`.

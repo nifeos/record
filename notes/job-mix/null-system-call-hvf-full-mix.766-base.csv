@@ -1,4 +1,4 @@
-batch,boot_utc,foreign_qemu,load1,tasks,compute_jobs,compute_ticks,null_syscall_jobs,null_syscall_ticks,spawn_jobs,spawn_ticks,jpm_median,exit
+batch,boot_utc,foreign_qemu,load1,tasks,compute_jobs,compute_ticks,null_system_call_jobs,null_system_call_ticks,spawn_jobs,spawn_ticks,jpm_median,exit
 1,2026-10-05T14:35:23Z,0,7.10,1,336,222512,336,17214,336,16675412,189266,0
 1,2026-10-05T14:35:23Z,0,7.10,2,672,452300,672,34199,672,3783781,1912053,0
 1,2026-10-05T14:35:23Z,0,7.10,3,1008,709934,1008,53826,1008,3691464,7671795,0
