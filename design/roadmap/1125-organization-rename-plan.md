@@ -68,8 +68,9 @@ in [the census appendix](1125-organization-rename-plan/census.md).
 | stale | 1,401 | slugs in prose, such as `nifeos/nife#123`, which still resolve but would name a former organization |
 | stays | 594 | 146 DNS names, 220 uses of the project word, 1 home path, 227 lines of history and former names |
 
-nife holds 4,445 of the lines and the record 3,558. Each of the 31 crate repositories and crate-workflows-test has 17 to 33
-lines, of which 10 to 17 break: nine caller `uses:` lines, CODEOWNERS and `deny.toml`. The App,
+nife holds 4,445 of the lines and the record 3,558. Each of the 31 crate repositories and
+crate-workflows-test has 17 to 33 lines, of which 10 to 17 break: the caller `uses:` lines (nine in
+most, 8 to 15 in all), CODEOWNERS, and in most of them `deny.toml`. The App,
 runner, fuzz host and workspace references that live outside these repositories appear in a
 spec the maintainers keep off-tree.
 
@@ -95,7 +96,7 @@ two-way door. The list after the steps holds what only calef can do.
    call it by `uses:`, which stops at step 2, so it lands first. A release tag follows the template's
    own release rule, and the callers pin the new commit. Effort: S.
 5. The 31 crate repositories and crate-workflows-test, one draft each. Each draft rewrites
-   the nine caller `uses:` lines, CODEOWNERS, `deny.toml`, git dependencies and links. Their CI is
+   the caller `uses:` lines, CODEOWNERS, `deny.toml`, git dependencies and links. Their CI is
    dead from step 2 until each one lands, and nothing else depends on them landing in a particular
    order. Effort: S in all, since each is the same change.
 6. fuzz-host ([nifeos/fuzz-host#25](https://github.com/nifeos/fuzz-host/pull/25)). Its token
