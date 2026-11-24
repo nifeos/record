@@ -22,12 +22,16 @@ unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_PREFIX GIT_COMMON_DIR GIT_OBJECT_
 
 fail() {
 	echo "$me: $1" >&2
-	[ -f "$tmp/calls.log" ] && sed 's/^/  gh /' "$tmp/calls.log" >&2
+	[ -n "${tmp:-}" ] && [ -f "$tmp/calls.log" ] && sed 's/^/  gh /' "$tmp/calls.log" >&2
 	exit 1
 }
 
 [ -f helpers/trunk-health.sh ] && [ -f helpers/repeat_issue.py ] ||
 	fail "nife's helpers/trunk-health.sh and helpers/repeat_issue.py are not linked in; run under script/lint, or make the overlay with python3 helpers/nife_tree.py overlay ."
+
+# A nife older than the flags reads `--repeat` as its watching form and never returns, so ask first.
+grep -q -e '--repo)' helpers/trunk-health.sh ||
+	fail "the linked helpers/trunk-health.sh has no --repo; basalt's nife pin predates nifeos/nife#4072"
 
 # The wiring the workflow itself must carry: both halves told the repository.
 wf=.github/workflows/repeat-watch.yml
