@@ -37,7 +37,7 @@ cd "$(dirname "$0")/.."
 
 SECTIONS="claim_copy replay_line conflict_markers todo_markers roadmap reviews decisions journeys
 four_digits citations citations_ratchet citations_moved fatal_risks script_docs counted_claims
-naming_conventions naming_rules audits_selftest audits environment_names tracked_ignored
+naming_conventions naming_rules audits_selftest audits repeat_watch environment_names tracked_ignored
 markdown_links prose_ratchet removed_index module_block_ratchet comment_block_ratchet parent_index
 house_style history line_citations outsider_pass exception_markers em_dashes spelling"
 
@@ -252,6 +252,12 @@ section_audits() {
     echo "==> the audit index"
     # lint-scope: record
     script/audits --check
+}
+
+section_repeat_watch() {
+    echo "==> the repeat watch asks this repository about its own scheduled workflows"
+    # lint-scope: record
+    helpers/repeat-watch-selftest.sh
 }
 
 section_environment_names() {

@@ -1,0 +1,100 @@
+name: repeat watch
+
+# **Does a scheduled workflow here keep failing the same way?** Asked weekly, of the record's own
+# scheduled workflows, and answered with one issue per workflow that does.
+#
+# `audit-cadence` is red on purpose whenever an audit is due, so red alone says nothing: a run that
+# fails on setup sits in the Actions tab looking exactly like the correct reds beside it. The repeat
+# half of nife's helpers/trunk-health.sh reads that difference out of GitHub's run history. It takes
+# the last six scheduled runs of each scheduled workflow, groups the failed ones by the final line of
+# the failing step, and prints a REPEAT row for a workflow whose largest group holds three or more.
+# nife's helpers/repeat_issue.py turns each REPEAT row into one issue, `scheduled failure repeats:
+# <name>`, and edits it when the line drifts. The thresholds and the reasons for them are in those
+# two files' headers; this workflow only runs them for this repository.
+#
+# **The code is nife's, at the commit basalt's main pins**, linked into this checkout by
+# helpers/nife_tree.py, the same overlay script/lint and audit-cadence make. Both are told the
+# repository with `--repo`, so the runs read and the issues filed are this repository's. The repeat
+# half lists only the workflows git tracks, so nife's workflows, which the overlay links in beside
+# the record's, are never asked about. helpers/repeat-watch-selftest.sh proves that wiring in
+# script/lint.
+#
+# **The close is the audit lane's**, as in nife: an audit-cadence repeat issue closes when the
+# audit's report pull request says `Closes #N` naming it, which audit-cadence's step summary says.
+# Nothing here closes an issue.
+#
+# BUGS
+#
+#   - **Weekly, so a repeat is seen late.** Three same-line failures of a weekly workflow take three
+#     weeks to exist at all, and this reads them on the Monday after. That is the threshold's lag,
+#     not this schedule's: a daily read of a weekly history would report the same row seven times.
+#   - **It watches itself and nothing watches it.** This workflow is scheduled, so its own repeated
+#     failure is a row on the next pass that gets as far as filing, and a pass that never gets that
+#     far reports nothing. Red in the Actions tab is the only signal then.
+#   - **The issue body is written for audit-cadence.** nife's repeat_issue.py has one body, which
+#     says the repeat is usually the audit being due and that the audit lane's report closes it. For
+#     audit-cadence, the record's only other scheduled workflow, that is right; for this workflow's
+#     own repeat it is wrong, and the issue is closed by hand once the cause is fixed. The body also
+#     names nife's paths unqualified (`helpers/trunk-health.sh`), which here means nife's file at
+#     basalt's pin, the record's convention for a path that names code.
+#
+# Name: provisional, minted 2026-11-24 (UTC) by lane/repeat-watch for #6. `repeat` for the row it
+# acts on, `watch` for a job that reports and never resolves.
+
+on:
+  schedule:
+    # 10:00 UTC Mondays, two hours after audit-cadence's 08:00 run, so the week's audit run is in
+    # the history this reads.
+    - cron: "0 10 * * 1"
+  workflow_dispatch:
+
+# `actions: read` for the run lists and the failing logs, `issues: write` to open and edit the
+# repeat issues. repeat_issue.py reads issues with the same token, which needs the issues
+# permission to see any: GitHub's search answers a token without it with no issues and exit 0.
+permissions:
+  contents: read
+  actions: read
+  issues: write
+
+concurrency:
+  group: repeat-watch
+  cancel-in-progress: false
+
+jobs:
+  repeat:
+    name: does a scheduled failure repeat
+    runs-on: ubuntu-26.04-arm
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        id: checkout_first_1
+        timeout-minutes: 2
+        continue-on-error: true  # outcome: re-raised
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        timeout-minutes: 3
+        if: steps.checkout_first_1.outcome != 'success'
+
+      - name: Link nife's tree at basalt's pin
+        run: python3 helpers/nife_tree.py overlay .
+
+      # A `cannot ask` row fails the job: the pass did not look at every workflow, so the absence of
+      # a REPEAT row is not health. Weekly, a red run for a rate limit costs one red run, and
+      # failing is louder than a warning nobody opens.
+      - name: Read the repeat rows
+        run: |
+          out=$(helpers/trunk-health.sh --repeat --repo "$GITHUB_REPOSITORY")
+          printf '%s\n' "$out" | tee -a "$GITHUB_STEP_SUMMARY"
+          printf '%s\n' "$out" | grep ' REPEAT: ' > repeat-rows.txt || true
+          case "$out" in
+          *"cannot ask"*)
+            echo "::error::the repeat check could not ask GitHub about every scheduled workflow"
+            exit 1
+            ;;
+          esac
+
+      - name: One issue per repeating workflow
+        if: always() && hashFiles('repeat-rows.txt') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 helpers/repeat_issue.py sync --repo "$GITHUB_REPOSITORY" < repeat-rows.txt
