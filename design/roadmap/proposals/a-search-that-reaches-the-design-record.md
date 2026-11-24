@@ -36,5 +36,5 @@ decisions.
 - A host test in each repository searches for one word and checks which page leads. Here the
   word picks out a decision; in nife it picks out a crate header.
 
-Milestone 1018 (the design record moves to `nifeos/record` and is published as a website) publishes the record as a website, which may carry its own search. If that comes
+Milestone 1018 (the design record moves to `nifeos/record`) publishes the record as a website, which may carry its own search. If that comes
 first, the second item points there and the first goes away.
