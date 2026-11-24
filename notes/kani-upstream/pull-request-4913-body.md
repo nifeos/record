@@ -2,7 +2,7 @@
 
 This PR adds an unstable `--target <TRIPLE>` option, so Kani can verify a crate for a target other than the host, and adds `riscv64gc-unknown-linux-gnu` as a target Kani has a machine model for.
 
-Towards #2402. It covers the part of that issue that needs no new machine-model work: 64-bit little-endian targets. The 16-bit and big-endian cases asked for there are left for later (see "Not in this PR").
+Towards [#2402](https://github.com/model-checking/kani/issues/2402). It covers the part of that issue that needs no new machine-model work: 64-bit little-endian targets. The 16-bit and big-endian cases asked for there are left for later (see "Not in this PR").
 
 ### Why
 
@@ -24,11 +24,11 @@ CBMC does not care which machine it runs on; the machine model is data Kani writ
 
 ### Something I noticed and did not change
 
-`link_goto_binary` compiles `kani_lib.c` with `goto-cc`, which configures itself for the host. After linking, the `__CPROVER_architecture_*` symbols are the host's rather than the ones Kani wrote. With `--target riscv64gc-unknown-linux-gnu` on an Apple Silicon Mac, `architecture_arch` is `"riscv64"` in the `.symtab.out` and `"arm64"` in the linked `.out`, and `char_is_unsigned` goes from 1 to 0. The same thing happens without `--target`: on macOS the aarch64 model's `char_is_unsigned = true` is replaced by goto-cc's 0. For Rust code this looks harmless, because the goto program spells out its own widths and signedness, and for the targets `check_target` accepts, pointer width and endianness match every supported host. It is the #2086 problem (`goto-cc` needing `-m32`) in general form, though. `goto-cc`'s `-march` table has no riscv64 entry, so it cannot be fixed from Kani's side alone. I'm happy to open an issue for it.
+`link_goto_binary` compiles `kani_lib.c` with `goto-cc`, which configures itself for the host. After linking, the `__CPROVER_architecture_*` symbols are the host's rather than the ones Kani wrote. With `--target riscv64gc-unknown-linux-gnu` on an Apple Silicon Mac, `architecture_arch` is `"riscv64"` in the `.symtab.out` and `"arm64"` in the linked `.out`, and `char_is_unsigned` goes from 1 to 0. The same thing happens without `--target`: on macOS the aarch64 model's `char_is_unsigned = true` is replaced by goto-cc's 0. For Rust code this looks harmless, because the goto program spells out its own widths and signedness, and for the targets `check_target` accepts, pointer width and endianness match every supported host. It is the [#2086](https://github.com/model-checking/kani/issues/2086) problem (`goto-cc` needing `-m32`) in general form, though. `goto-cc`'s `-march` table has no riscv64 entry, so it cannot be fixed from Kani's side alone. I'm happy to open an issue for it.
 
 ### Not in this PR
 
-- 32-bit targets (`goto-cc -m32`, plus the 64-bit assumptions @celinval mentioned in #2086), 16-bit `usize`, and big-endian targets, all of which #2402 asks for.
+- 32-bit targets (`goto-cc -m32`, plus the 64-bit assumptions @celinval mentioned in [#2086](https://github.com/model-checking/kani/issues/2086)), 16-bit `usize`, and big-endian targets, all of which [#2402](https://github.com/model-checking/kani/issues/2402) asks for.
 - Non-host libraries in release bundles and in `cargo kani setup`.
 - A dedicated `-Z` feature name. This uses `-Z unstable-options`, like other experimental options. If you would prefer a named feature, or an RFC first, I'll do that.
 

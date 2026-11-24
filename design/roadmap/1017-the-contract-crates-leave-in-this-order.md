@@ -151,7 +151,7 @@ Two checks move with each crate. nife's diff check, which fails a moved magic wi
 constant (milestone 956's step 4), joins the crate template. The template's `cargo-semver-checks`
 compares against the last published release, but these crates stay unpublished while nife pins them
 by `rev` (§305 (git dependencies on `nifeos/*` only, pinned to a landed commit)), so it never fires.
-`jh7110_entropy`'s pull request #5 renamed five public constants and drew no hold. The fix is to
+`jh7110_entropy`'s pull request [#5](https://github.com/nifeos/jh7110_entropy/pull/5) renamed five public constants and drew no hold. The fix is to
 compare against the commit whose manifest last changed version (`--baseline-rev`). Inside nife,
 `cargo-semver-checks` stays refused.
 
@@ -188,7 +188,7 @@ contract and a consumer to land together it needs four things:
 
 ## How a breaking change lands across two repositories
 
-A real one took 53 minutes (`jh7110_entropy` pull request #5, then nife pull request #2979). The
+A real one took 53 minutes (`jh7110_entropy` pull request [#5](https://github.com/nifeos/jh7110_entropy/pull/5), then nife pull request #2979). The
 [landing appendix](1017-the-contract-crates-leave-in-this-order/landing.md) works that case, then the
 contract case for `block_roster_contract` in four steps. The page is single-version, so the three pins move
 in one basalt pull request. A message contract serves N and N-1, so its steps may ship in separate

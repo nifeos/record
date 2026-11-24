@@ -16,7 +16,7 @@ both ISAs. The tenet makes that the standing rule rather than a happy outcome:
 Parity is a gate, not an aspiration. A kernel capability ships on every supported
 architecture, proven by the same test suite, or the gap is recorded in a scope note with what
 is missing, what it proves, and the plan, the way riscv-parity-scope.md did it. An
-architecture is a new `arch/` directory (rule #1), never a fork of the feature matrix. Where a
+architecture is a new `arch/` directory (rule `#1`), never a fork of the feature matrix. Where a
 capability is genuinely asymmetric (a board has no device to prove it on), the record says so
 loudly. The false parity-C blocker showed what a quiet gap costs.
 
@@ -26,7 +26,7 @@ portable HAL, proven on a second architecture) always named it as the reach past
 section makes it a commitment rather than a mention. What x86_64 will stress, known now: a different
 boot world (UEFI/ACPI, not device tree; no OpenSBI/PSCI analog) and the APIC instead of GIC/PLIC. It
 will also stress a third page-table format behind the `paging` seam (which two IOMMUs are about to
-prove out anyway), and TSO memory ordering. With TSO, rule #4's weak-first discipline finally pays
+prove out anyway), and TSO memory ordering. With TSO, rule `#4`'s weak-first discipline finally pays
 out in the other direction: code proven on weak machines is correct on TSO, and nothing about x86
 development could have said the reverse. The PCIe transport (§18) is already x86's native bus. The
 ECAM bridge on both `virt` boards is the same `pci-host-ecam-generic` shape x86 machines present

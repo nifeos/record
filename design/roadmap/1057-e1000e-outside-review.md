@@ -10,7 +10,7 @@ needs_person: yes
 # 1057. `e1000e`: the outside review's findings land before its first release
 
 Raised by the lane `milestone/1057-e1000e-outside-review`. A reviewer with no prior exposure to
-this project read `nifeos/e1000e` at commit `8ac75a6` (`main`, after its pull request #2), against
+this project read `nifeos/e1000e` at commit `8ac75a6` (`main`, after its pull request [#2](https://github.com/nifeos/e1000e/pull/2)), against
 [the review package](../../notes/crate-reviews/e1000e.md). This block proposes work and changes
 nothing in that repository. Every item below is work for a lane there. The 180 names the review
 package ratifies, and the decisions it records, stay closed here. Milestone 815 (`e1000e`: proven
@@ -96,7 +96,7 @@ writes the date on that line. Two-way. S, plus the hour of the reader.
 #### P0-4. No tag, so the semver gate has no baseline
 
 `git tag` is empty, so the `semver` job of the template compares against nothing. The review
-package placed the tag on the move commit. Since then pull request #2 of the repository renamed
+package placed the tag on the move commit. Since then pull request [#2](https://github.com/nifeos/e1000e/pull/2) of the repository renamed
 public register constants, so a baseline there would report those renames as breaks against the
 first release.
 

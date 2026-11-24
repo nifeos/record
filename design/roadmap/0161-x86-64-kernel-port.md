@@ -45,7 +45,7 @@ plus RISC-V alone, and nothing tracked the x86_64 half. This milestone is that t
 x86_64 is the hard proof that the HAL abstraction is real rather than an accident of two similar
 RISC ISAs. It is CISC with strong TSO ordering, GDT/TSS, ACPI and PCI instead of a device tree, port
 I/O, the `system_call` + `swapgs` trampoline, and INIT-SIPI-SIPI instead of PSCI/SBI. Code proven
-correct on a weak machine is correct on TSO, which is rule #4's weak-first bet paying out. Also the
+correct on a weak machine is correct on TSO, which is rule `#4`'s weak-first bet paying out. Also the
 reach: x86_64 is what most machines are.
 
 Nothing gated it. It started under QEMU TCG, the way RISC-V's port did, and did not wait for
@@ -193,7 +193,7 @@ arch-contract names that did not stretch to a third architecture were renamed `a
   one DRHD, no interrupt remapping, global-granularity invalidation only, `RWBF` never exercised, and
   only the first Fault Recording Register decoded.
 - **Done.** SMP failure (1), fixed 2026-09-19, was a counting bug in `cpu_start`, not a core failing to
-  start; `kernel/src/arch/x86_64/ap_boot.rs`'s `BUGS` #1 has the evidence.
+  start; `kernel/src/arch/x86_64/ap_boot.rs`'s `BUGS` `#1` has the evidence.
 - **Milestone 316.** SMP failure (3) was fixed in
   [milestone 316 (which core booted)](0316-x86-smp-two-cores.md) on 2026-09-17: `boot.s` stamps
   `BOOT_CPU_ID` once and `boot_cpu_id` reads it. Re-verified against this tree on 2026-09-19.

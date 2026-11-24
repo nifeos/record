@@ -120,7 +120,7 @@ calef ruled the names on 2026-10-17 (UTC):
 | The required checks: `check / fmt`, `check / clippy`, `check / tests`, `check / coverage`, `check / standalone`, `check / supply-chain`, `proofs / kani`, `proofs / falsify` and `hold / architect hold` | *"Per your suggestion"* |
 
 The `crates-io` environment keeps its name. Template release `v6` (`d5ad709`, nifeos/crate-workflows
-#9) carries the check names, and the canary's `main` ruleset requires all nine. The team
+[#9](https://github.com/nifeos/crate-workflows/pull/9)) carries the check names, and the canary's `main` ruleset requires all nine. The team
 `crate-maintainers` exists. No `Name:` block in nife carries these names, so `script/names` has
 nothing to ratify.
 
@@ -138,7 +138,7 @@ answered *"B"* to this option for how the first publish happens:
 He declined publishing v1 by hand. The `release` workflow decides by the crate's
 presence on crates.io, never by the secret's: an existing crate publishes through trusted
 publishing only, with no fallback to the token. A missing secret on an absent crate fails naming
-it. Built in nifeos/crate-workflows #8 and released in `v6`. The secret is
+it. Built in nifeos/crate-workflows [#8](https://github.com/nifeos/crate-workflows/pull/8) and released in `v6`. The secret is
 `CRATES_IO_FIRST_PUBLISH_TOKEN`, a provisional name.
 
 A first publish waits on its soak (milestone 818 (`jh7110_entropy`: proven JH7110 TRNG logic, released on its own) is the pilot).
@@ -207,7 +207,7 @@ roadmap or merge queue; each row applies that test.
 Taken, not written: GitHub's reusable workflows, `rust-lang/crates-io-auth-action` (RFC 3691),
 Dependabot, `cargo-semver-checks` and `taiki-e/install-action`. Kani is the exception to taking an action: the template installs it with
 `cargo install` at the version in `.kani-version`, so the Actions allowlist names no Kani action. A
-weekly template job proposes the version bump as one pull request (crate-workflows #5). Prior art for
+weekly template job proposes the version bump as one pull request (crate-workflows [#5](https://github.com/nifeos/crate-workflows/pull/5)). Prior art for
 the shape: rust-embedded's and RustCrypto's shared workflows, read for structure rather than
 copied. The workflows themselves are written, since none publishes a falsification job.
 

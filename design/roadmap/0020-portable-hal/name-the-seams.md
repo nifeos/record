@@ -32,7 +32,7 @@ Deliverable, with where each item stands.
    *Overtaken: `paging` holds the split itself, a `PageFormat` seam (`page_format.rs`) with
    `aarch64.rs`, `sv39.rs` and `x86_64.rs` behind it.*
 
-Deferred to arch #2 (RISC-V): the generic-level-walk / per-arch-codec interface, a
+Deferred to arch `#2` (RISC-V): the generic-level-walk / per-arch-codec interface, a
 device-discovery abstraction, and any HAL trait. Each needs the second implementation to avoid
 encoding aarch64's accidents as "generic." The codec interface is the `PageFormat` seam above; the
 device-discovery seam is milestone 176 (the x86_64 discovery seam's wide half).

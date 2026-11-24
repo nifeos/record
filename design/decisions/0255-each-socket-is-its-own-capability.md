@@ -131,7 +131,7 @@ its six sockets spends twelve slots. The stack spends one slot per socket for th
 ## Prior art
 
 - seL4 lets a reply carry capabilities, gated on the `Grant` right of the endpoint capability the
-  server received on (seL4 reference manual; seL4 PRs #874 and #945 tightened the MCS variant).
+  server received on (seL4 reference manual; seL4 PRs [#874](https://github.com/seL4/seL4/pull/874) and [#945](https://github.com/seL4/seL4/pull/945) tightened the MCS variant).
   Read for this section.
 - Fuchsia's `zx_channel_call` reads its reply as `zx_channel_read` does, handles included. Read for
   this section. A socket there is a `zx_socket` handle passed over a channel. (Recalled.)

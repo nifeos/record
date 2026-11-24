@@ -10,7 +10,7 @@ Appendix to [784. Reuse what the tree wrote](../0784-reuse-what-the-tree-wrote.m
 build host shared with other lanes, with the pinned nightly of that date, and added no dependency.
 [dtoolkit-probe.sh](dtoolkit-probe.sh) generates every probe outside the tree, and its mode names
 the section it feeds. [The reports](dtoolkit-upstream-reports.md) hold the three bugs this page
-sent upstream, filed as google/dtoolkit#101, #102 and #103.
+sent upstream, filed as google/dtoolkit#101, [#102](https://github.com/google/dtoolkit/issues/102) and [#103](https://github.com/google/dtoolkit/issues/103).
 
 ## What a candidate has to do here
 
@@ -199,7 +199,7 @@ Read from crates.io and GitHub on 2026-10-25.
 
 - Releases: eight since the first, on 2025-12-15, the latest 0.4.1 on 2026-09-25. 0.2.0,
   0.3.0 and 0.4.0 each broke the API. `main` holds four more breaking changes, among them the removal
-  of the `Node` trait's generic associated types (#85) and of `ToCellInt` (#87). The adapter builds
+  of the `Node` trait's generic associated types ([#85](https://github.com/google/dtoolkit/pull/85)) and of `ToCellInt` ([#87](https://github.com/google/dtoolkit/pull/87)). The adapter builds
   against 0.4.0 and 0.4.1, and fails with 5 errors on 0.2.0 and 0.2.1, 4 on 0.3.0 and 2 on `main`
   (`dtoolkit-probe.sh churn`).
 - People: two crates.io owners, Mateusz Maćkowski and Andrew Walbran, both at Google. Of 94 pull
@@ -232,15 +232,15 @@ add ten crates and two proc macros to a kernel graph that holds four and no proc
 breaks its API every minor release. §46 (thin primitives or whole subsystems; we write everything
 in between) rule 3 keeps the kernel's parser ours regardless, so none of this argues for a switch; it
 says what to send. Three bug reports, filed ([the reports](dtoolkit-upstream-reports.md)): the
-name-length refusal (#101, closed upstream by #104), the quadratic walk (#102, open) and `Display`'s
-panic (#103, open). A contribution for the quadratic walk is open as google/dtoolkit#108, which adds
+name-length refusal ([#101](https://github.com/google/dtoolkit/issues/101), closed upstream by [#104](https://github.com/google/dtoolkit/pull/104)), the quadratic walk ([#102](https://github.com/google/dtoolkit/issues/102), open) and `Display`'s
+panic ([#103](https://github.com/google/dtoolkit/issues/103), open). A contribution for the quadratic walk is open as google/dtoolkit#108, which adds
 `Fdt::events`. Then the four harnesses above, which hold on its code, the hostile corpus as fuzz
 seeds, and a CI job for its fuzz target.
 
 ## The decision
 
 nife keeps its own `device_tree_blob` crate for now, and nothing is retired. The comparison above is
-revisited after google/dtoolkit#102 and #103 are resolved. If `dtoolkit` adopts the work and covers
+revisited after google/dtoolkit#102 and [#103](https://github.com/google/dtoolkit/issues/103) are resolved. If `dtoolkit` adopts the work and covers
 nife's needs (long property names read, a linear walk, no panic in `Display`, an API that holds
 still), retiring `device_tree_blob` in favor of `dtoolkit` becomes an architect's call under §46.
 Even then the policy stays ours, about 300 lines. This page proposes no retirement.

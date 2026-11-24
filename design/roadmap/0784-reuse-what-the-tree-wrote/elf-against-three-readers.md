@@ -97,7 +97,7 @@ Real images never reach the edges. These cases do (`elf-probe.sh edge`):
 | duplicate | refused | refused by our policy | refused by our policy | refused by our policy |
 
 Three of these matter for a manifest. cole14's iterator ends a walk at the first malformed note and
-reports nothing; that is its open issue #53, which its author says needs a breaking change. With
+reports nothing; that is its open issue [#53](https://github.com/cole14/rust-elf/issues/53), which its author says needs a breaking change. With
 `p_align` 1 it pads by 1, not 4 as binutils and LLVM do, and hands back the wrong descriptor.
 `goblin` bounds a walk only by where each note starts, so a note may read past its segment. It
 also drops the owner's last byte without checking that it is a NUL. Only `object` refuses every
@@ -124,7 +124,7 @@ counted rather than ending the run.
 The union of the four final corpora, 2,306 inputs, then ran once through every target: no failure.
 Overflow is in the panic column, since the build traps it. Coverage counts differ because the
 surfaces differ; ours is small because the crate is. Twenty minutes is a smoke test, not a campaign.
-It finds the shallow bugs and says nothing about deep ones. `goblin`'s open #120 was not replayed,
+It finds the shallow bugs and says nothing about deep ones. `goblin`'s open [#120](https://github.com/m4b/goblin/issues/120) was not replayed,
 because its inputs are an attachment on the issue.
 
 ## Proofs
@@ -195,7 +195,7 @@ Their own fuzzing, read from each repository on 2026-10-22:
 - cole14 `elf` has five cargo-fuzz targets (common, notes, stream, symbol table, symbol versions),
   and CI runs each for 60 seconds on every push and pull request.
 - `goblin` has cargo-fuzz and AFL targets; CI builds them and runs none. Its oldest open ELF crash
-  report (#120, out-of-memory on malformed ELF, 2019) is still open. The newest DoS report (#542,
+  report ([#120](https://github.com/m4b/goblin/issues/120), out-of-memory on malformed ELF, 2019) is still open. The newest DoS report ([#542](https://github.com/m4b/goblin/issues/542),
   2026-08) is Mach-O, not ELF.
 - `object` has no fuzz targets and is not in OSS-Fuzz. `gimli`, its sibling, is, and its targets
   do not reach `object`.

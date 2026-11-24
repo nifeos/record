@@ -19,7 +19,7 @@ verify and does not recommend for production**, which is worth knowing before tr
 standard to match.
 
 **seL4's own community has proposed exactly option 2 and has not landed it.** RFC-16, *"New
-capability for the PMU"*, Krishnan Winter, proposed 2024-02-02, is `seL4/rfcs` PR #22, still open,
+capability for the PMU"*, Krishnan Winter, proposed 2024-02-02, is `seL4/rfcs` PR [#22](https://github.com/seL4/rfcs/pull/22), still open,
 file `src/proposed/0160-pmu.md`. Read in full 2026-09-02. It says:
 
 > Present profiling support uses the PMU through an ad-hoc interface that is designed for debugging

@@ -132,9 +132,9 @@ only on silicon") is a claim about this column, and the `silicon-only` column is
 | D5 | 2026-08-14 (loom's date; first seen earlier) | not recorded | not recorded | race | unknown | before 2026-08-14 | [`scheduler.md`](scheduler.md), the steal edge of the switch-out window |
 | D6 | 2026-08-14 | riscv64 | silicon (radon, boot 8) | retracted | n/a | retracted 2026-08-15 | [`visionfive2.md`](visionfive2.md), fifth bench stop |
 | D7 | 2026-08-18 | riscv64 | qemu-tcg, 1 of 45 loaded runs, two cores | race | no | 2026-08-18, pull request #316 | [`object-revocation.md`](object-revocation.md), the double free |
-| D8 | 2026-08-26 | x86_64 | qemu-tcg (10 of 10) | race | no | 2026-08-26 | `arch::x86_64::ap_boot`'s `BUGS` #2 (the TLB shootdown) |
-| D9 | 2026-08-26 | x86_64 | qemu-tcg (about half of runs) | multicore | no | 2026-09-18, milestone 316 | `arch::x86_64::ap_boot`'s `BUGS` #3 (which core booted) |
-| D10 | 2026-08-26 | x86_64 | qemu-tcg (26 of 40 at `-smp 4`) | race | no | 2026-09-19, milestone 161 | `arch::x86_64::ap_boot`'s `BUGS` #1 (the lost check-in) |
+| D8 | 2026-08-26 | x86_64 | qemu-tcg (10 of 10) | race | no | 2026-08-26 | `arch::x86_64::ap_boot`'s `BUGS` `#2` (the TLB shootdown) |
+| D9 | 2026-08-26 | x86_64 | qemu-tcg (about half of runs) | multicore | no | 2026-09-18, milestone 316 | `arch::x86_64::ap_boot`'s `BUGS` `#3` (which core booted) |
+| D10 | 2026-08-26 | x86_64 | qemu-tcg (26 of 40 at `-smp 4`) | race | no | 2026-09-19, milestone 161 | `arch::x86_64::ap_boot`'s `BUGS` `#1` (the lost check-in) |
 | D11 | 2026-09-02 | riscv64, and a loaded host | qemu-tcg | instrument | no | 2026-09-02, milestone 221 | [`soak.md`](soak.md), "Two bugs this mechanism had" (both) |
 | D12 | 2026-09-17 | x86_64 | audit (milestone 313), then qemu-tcg (7 of 12) | race | no | 2026-09-23, milestone 315 | `sched::delete_port_range_capabilities_impl`, the per-core port revoke |
 | D13 | 2026-09-19 | aarch64, riscv64 | hvf, 5 of 9 recorded full runs; qemu-tcg, the CPU matrix twice in about 9,000 boots | race | no | 2026-10-12, milestone 514 | [`hvf-leg.md`](hvf-leg.md), `a_std_program_serves_a_granted_listening_port` |

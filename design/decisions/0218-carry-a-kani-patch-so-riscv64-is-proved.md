@@ -45,7 +45,7 @@ one-hunk chore and a fork's history starts to earn its keep.
 
 From the proposal's options, each with its reason:
 
-- Upstream only, and wait. Lost on time, not merit: #2402 has been open since 2023-04-23 with
+- Upstream only, and wait. Lost on time, not merit: [#2402](https://github.com/model-checking/kani/issues/2402) has been open since 2023-04-23 with
   nobody objecting and nobody sending a pull request, so riscv64 would stay unproved for an unknown
   time.
 - A native riscv64 host (`radon` or the Scaleway RV1). It needs the same compiler patch anyway,

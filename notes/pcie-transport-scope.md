@@ -128,7 +128,7 @@ subsystem, not a tweak.
 ## Relation to other work
 
 - Parity C completes as a consequence of P1-P4 (a virtio disk on riscv, over PCIe).
-- DMA isolation (task #12, SMMU/IOMMU). The software confinement here is the stand-in for an
+- DMA isolation (task `#12`, SMMU/IOMMU). The software confinement here is the stand-in for an
   IOMMU. A real PCIe IOMMU (or the RISC-V IOMMU) would sit in front of Bus-Master DMA and is the
   hardware version of the same guarantee; the enumeration and BAR work here is a prerequisite for
   ever driving one.

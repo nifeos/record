@@ -113,10 +113,10 @@ Read, not recalled:
 
 - model-checking/kani#2402, "Command-line flag to change model target or environment", is open since
   2023-04-23. A zerocopy maintainer added two use cases. Nobody has objected or sent a pull request.
-- #2886 (a custom build target) was closed as its duplicate.
-- #2086 (32-bit armv7) hit a CBMC crash. A Kani contributor traced it to `goto-cc` needing `-m32`,
+- [#2886](https://github.com/model-checking/kani/issues/2886) (a custom build target) was closed as its duplicate.
+- [#2086](https://github.com/model-checking/kani/issues/2086) (32-bit armv7) hit a CBMC crash. A Kani contributor traced it to `goto-cc` needing `-m32`,
   and the fix worked.
-- #2197 asks Kani's docs to warn that other hosts lack machine models.
+- [#2197](https://github.com/model-checking/kani/issues/2197) asks Kani's docs to warn that other hosts lack machine models.
 - A flag behind `-Z unstable-options` is not the "one way door" Kani's RFC process covers.
 
 So the demand is on record and nothing says no; review latency is unknown. An upstream-quality
@@ -189,11 +189,11 @@ today. It is also what turns option (a)'s compile reach into proof reach.
    format-patch` form, which is the tree's precedent for fixes it carries until upstream releases
    them (the two redoxfs patches). A new job, `prove-kernel-riscv64`, builds the patched Kani from
    source on the `ubuntu-24.04-arm` runner, cached on the patch's hash, and runs `script/verify
-   --only kernel`. The same diff, reworked into a `-Z` flag, goes upstream against #2402. The carried
+   --only kernel`. The same diff, reworked into a `-Z` flag, goes upstream against [#2402](https://github.com/model-checking/kani/issues/2402). The carried
    patch leaves when a Kani release contains it. Cost: the patch as measured, and a CI job whose cold
    time is unmeasured (patagonia built Kani in about 4 minutes, before toolchain download). Then a
    rebase at each Kani release (one hunk at 0.68.0), and 2 to 4 lane-days for the upstream version.
-2. Upstream only, and wait. No carried patch. Cost is the upstream work alone. Risk: #2402 has sat
+2. Upstream only, and wait. No carried patch. Cost is the upstream work alone. Risk: [#2402](https://github.com/model-checking/kani/issues/2402) has sat
    for three years, so riscv64 stays unproved for an unknown time.
 3. A native riscv64 host. Refused: it needs option 1's compiler patch anyway, plus a
    from-source CBMC, Linux on a board whose job is running nife, and a self-hosted runner for
@@ -221,12 +221,12 @@ first riscv64 `kani::stub` harnesses need. aarch64 and x86_64 follow the same pa
    form, submit it, drop it when the pin passes a release with the fix. And milestone 304 (`cargo kani
    -p kernel` only ever compiled one architecture) answered the x86_64 gap with a second CI row, which
    is the shape of `prove-kernel-riscv64`.
-3. Prior art outside the tree. Kani and CBMC source at their pinned tags, and #2402, #2886, #2086,
-   #2197 and #1304, all read through `gh` for this proposal. The GitHub hosted-runner architectures
+3. Prior art outside the tree. Kani and CBMC source at their pinned tags, and [#2402](https://github.com/model-checking/kani/issues/2402), [#2886](https://github.com/model-checking/kani/issues/2886), [#2086](https://github.com/model-checking/kani/issues/2086),
+   [#2197](https://github.com/model-checking/kani/issues/2197) and [#1304](https://github.com/model-checking/kani/issues/1304), all read through `gh` for this proposal. The GitHub hosted-runner architectures
    are recalled.
 4. Is the premise true? The question's premise, that riscv64 support needs a riscv64 host, is not.
    CBMC is host-independent, and a patched Kani on an aarch64 Mac proved riscv64 code. #1276's
-   reading of #2086 as ending in a crash is also incomplete: the crash had a one-flag fix.
+   reading of [#2086](https://github.com/model-checking/kani/issues/2086) as ending in a crash is also incomplete: the crash had a one-flag fix.
 5. Cost. Patch size, build time, memory, rebase fit and the kernel run are measured above. Kani's
    upstream-quality rework and CI cold time are estimates, marked.
 6. Reversibility. A carried patch and one CI job come out cleanly, and nobody downstream acts on

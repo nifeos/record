@@ -12,9 +12,9 @@ needs_person: yes
 
 Raised by the lane `milestone/1059-block-roster-contract-outside-review`. A reviewer with no prior
 exposure to this project read the crate's repository at `436d4ce`, the `main` after its pull
-request #1. The reviewer read it against [the review package](../../notes/crate-reviews/block-roster-contract.md)
+request [#1](https://github.com/nifeos/block_roster_contract/pull/1). The reviewer read it against [the review package](../../notes/crate-reviews/block-roster-contract.md)
 for `block_roster_contract`.
-Pull request #2 of the repository then renamed the crate to `block_roster_contract` (`47ac5a9`,
+Pull request [#2](https://github.com/nifeos/block_roster_contract/pull/2) of the repository then renamed the crate to `block_roster_contract` (`47ac5a9`,
 now `main`), and this block cites files and symbols at that commit. This block proposes work and
 changes nothing in that repository. Every item below is work for a lane there.
 
@@ -280,7 +280,7 @@ None. The publishing hold stands.
 - **Done.** P0-1 to P0-2, P1-1 to P1-8 and every P2 item but P2-2 landed in
   `nifeos/block_roster_contract`; the finding status above names the pull request of each. nife #3568 moved
   the two call sites.
-- **Done.** The rename of `capacity_of` to `entry_capacity` is `nifeos/block_roster_contract` #20,
+- **Done.** The rename of `capacity_of` to `entry_capacity` is `nifeos/block_roster_contract` [#20](https://github.com/nifeos/block_roster_contract/pull/20),
   merged. Read from the repository through the GitHub API.
 - **Recorded.** A tag for the rename waits until nife needs a newer pin or a release is near
   (decision 6, ruled 2026-11-19). `v0.1.0-pre.2` is the last tag, and the repository's tags list

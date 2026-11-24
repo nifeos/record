@@ -91,7 +91,7 @@ A separate axis is the verified configuration. K:CAVEATS.md (its AArch64 section
 | NXP FRDM i.MX 8M Plus (contrast) | i.MX 8M Plus, `imx8mp-evk` | builds only | `no_hw_test`, "no board in the machine queue"; platform added in 13.0.0 |
 | TI AM62, AM69 | AM62x, J784S4 | none | |
 | Qualcomm X Elite, QCS6490, IQ-9075/IQ-8275 | Hamoa, Kodiak, Lemans/Monaco | none | the only Qualcomm platform, `apq8064`, is AArch32 only |
-| Jetson Orin Nano, AGX Orin | Tegra234 | none | open PR #1135 "NVIDIA Jetson Orin support" |
+| Jetson Orin Nano, AGX Orin | Tegra234 | none | open PR [#1135](https://github.com/seL4/seL4/pull/1135) "NVIDIA Jetson Orin support" |
 | Jetson AGX Thor | Tegra264 | none | |
 | DGX Spark and GB10 boxes | GB10 | none | |
 | Ampere Altra systems | Altra | none | no ACPI-based Arm server platform in `src/plat` |

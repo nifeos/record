@@ -162,7 +162,7 @@ on its first run found two real warnings in code nothing had ever linted.
   saying so until someone runs `script/soak`. A twenty-second leg per architecture would close it
   and was judged too expensive for a gate every lane runs.
 - `--arch x86_64` soaks one core unless told otherwise, because that runner defaults to one and
-  its SMP bring-up has two open bugs (`arch::x86_64::ap_boot`'s BUGS #1 and #3). Its `crossings=0`
+  its SMP bring-up has two open bugs (`arch::x86_64::ap_boot`'s BUGS `#1` and `#3`). Its `crossings=0`
   says so out loud, and a single-core soak is not a multicore soak.
 
 ## Handoff

@@ -190,7 +190,7 @@ Ruled 2026-11-19 (UTC): option A. nife waits for a `dtoolkit` release that carri
 bar. Until then `device_tree_blob` boots every nife machine. An earlier ruling of 2026-11-11 (UTC)
 has nife contribute five gaps to Google's `dtoolkit` and switch once a release ships them; the
 switch is its own ruling. Upstream merged [#108](https://github.com/google/dtoolkit/pull/108). As
-of 2026-11-19, #111 and #112 are open with changes requested; the answers went up on 2026-11-16
+of 2026-11-19, [#111](https://github.com/google/dtoolkit/pull/111) and [#112](https://github.com/google/dtoolkit/pull/112) are open with changes requested; the answers went up on 2026-11-16
 and 2026-11-17, and both wait on the upstream maintainer. Release 0.5.0 (2026-11-03), the latest,
 carries neither.
 

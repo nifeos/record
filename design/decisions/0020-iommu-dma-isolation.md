@@ -23,7 +23,7 @@ identity map (IOVA == PA) over exactly the frames a device may reach, and nothin
 VMSAv8-64 domain on aarch64 and an Sv39 domain on riscv. This is the page-table format seam (§17)
 paying off a second time. Proven once, it now backs both process isolation and device isolation.
 
-**Two arch drivers, structural twins**, under `arch/` per rule #1
+**Two arch drivers, structural twins**, under `arch/` per rule `#1`
 (kernel/src/arch/{aarch64,riscv64}/iommu.rs). Each owns its register file and the in-memory
 structures the hardware is driven by:
 

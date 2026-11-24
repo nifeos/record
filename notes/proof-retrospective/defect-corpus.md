@@ -50,7 +50,7 @@ passage whole.
 That paragraph is the model for how this project should talk about its proofs, and it was written
 before this retrospective existed.
 
-The seqlock defect (#6) is the corpus's one unambiguous green for a formal method, and the method
+The seqlock defect (`#6`) is the corpus's one unambiguous green for a formal method, and the method
 is loom rather than Kani. The writer claimed the sequence with a compare-exchange and then wrote the
 data with nothing ordering the claim ahead of them. Three of four harnesses failed on the first run.
 The instructive part is the table of fixes that do not work. `Acquire`, `AcqRel` and `SeqCst` on the

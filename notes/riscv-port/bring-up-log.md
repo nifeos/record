@@ -27,7 +27,7 @@ An appendix to [notes/riscv-port.md](../riscv-port.md), moved there on 2026-10-1
    register. Proven by a boot self-test: an `ebreak` is caught, `sepc` stepped past it, and `sret`
    returns. First cut is S-mode traps on the current stack; the `sscratch` stack switch for U-mode
    traps arrives with the user path.
-4. MMU (Sv39): done on the kernel side. It took the paging-format work (leak #2) and the
+4. MMU (Sv39): done on the kernel side. It took the paging-format work (leak `#2`) and the
    higher-half boot transition (calef chose high-half, DECISIONS §17 (the second architecture); proven by the banner's live code
    address `0xffffffc0_8020_xxxx`). It also took the fine-grained W^X kernel tables (`mmu::init` via `Mapper<_, _,
    Sv39>`, replacing the coarse RWX boot table, `satp` switched live with the console surviving), and
@@ -136,7 +136,7 @@ An appendix to [notes/riscv-port.md](../riscv-port.md), moved there on 2026-10-1
    Then `arch::irq` was extracted with two working consumers behind it (the GIC and the PLIC), and
    `drivers::gic` was gated to aarch64. Every portable caller (`sched::place_on`, `smp`,
    `user::spawn_elf_child_builder`, `main::interrupts_init`, the `Irq` ACK) now names `arch::irq`, not a
-   controller. The only code still naming `drivers::gic` is aarch64 arch code (rule #1 lets arch name
+   controller. The only code still naming `drivers::gic` is aarch64 arch code (rule `#1` lets arch name
    its own driver) and the `cfg(test)` aarch64 IRQ tests. That was the last HAL leak. A new ISA is
    a new `arch/` directory, not a diff across the kernel, with zero exceptions in portable non-test
    code.

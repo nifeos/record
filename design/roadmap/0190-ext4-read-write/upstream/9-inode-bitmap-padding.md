@@ -9,7 +9,7 @@ patch beside this file.
 
 - Repository and branch: `rcore-os/tgoskits`, `dev`.
 - Base commit: `6e80b940d46167a59a795e158bb17a7eb28333af` ("feat(ivc): add fragmented Message V1
-  full-duplex transport (#2068)").
+  full-duplex transport ([#2068](https://github.com/rcore-os/tgoskits/pull/2068))").
 - The change: [`9-inode-bitmap-padding.patch`](9-inode-bitmap-padding.patch), one commit,
   `git format-patch` output against that base. It changes `fs/rsext4/src/ext4/alloc.rs` only.
 

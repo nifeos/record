@@ -27,7 +27,7 @@ are in this file's history (`git log -p` on it).
 ## What the measurements show
 
 1. An Apple Silicon host run does not move `long_double_width`: Kani's aarch64 model uses 64 off
-   Linux (#2757), and 128 is nife's riscv64 model. Only `char_is_unsigned` changes on this Mac, as
+   Linux ([#2757](https://github.com/model-checking/kani/pull/2757)), and 128 is nife's riscv64 model. Only `char_is_unsigned` changes on this Mac, as
    calef's [#4913](https://github.com/model-checking/kani/pull/4913) comment said.
 2. macOS is not the only host that differs. x86_64 macOS matches Kani's model (by proxy, below);
    aarch64 Linux does not (`wchar_t_is_unsigned`: `goto-cc` 0, Kani 1).
@@ -166,10 +166,10 @@ architecture, then on OS for two fields of aarch64 only (before this patch): `lo
 x86_64 has no OS split and needs none. `check_target` accepts exactly four hosts:
 `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`, `x86_64-apple-*`, `arm64-apple-*`.
 
-Prior discussion, read: in #1167 (Apple M1 support,
+Prior discussion, read: in [#1167](https://github.com/model-checking/kani/issues/1167) (Apple M1 support,
 https://github.com/model-checking/kani/issues/1167) diagprov measured aarch64 Linux on
 2022-07-20, AGSaidi cited AAPCS64 for unsigned `char`, and diagprov found `wchar_t` signed on an M1.
-Nobody measured `char` on the M1, and the `wchar_t` split is what landed. #2757
+Nobody measured `char` on the M1, and the `wchar_t` split is what landed. [#2757](https://github.com/model-checking/kani/pull/2757)
 (https://github.com/model-checking/kani/pull/2757, aarch64 Linux support) added the `long double`
 split. Searches of issues and pull requests for `char_is_unsigned`, `long_double_width`,
 `kani_lib.c`, "machine model macos" and "signed char apple" found nothing else on this.
@@ -235,7 +235,7 @@ Title: Keep Kani's machine model through the link, and make it right for Apple a
 > arm64 ABI makes `char` signed: Apple clang 21 leaves `__CHAR_UNSIGNED__` undefined for `-arch
 > arm64`, Rust's `c_char` is `i8` on `aarch64-apple-darwin`, and CBMC's own configuration for
 > `macos`/`arm64` says signed. The model already splits `long_double_width` and
-> `wchar_t_is_unsigned` on the OS for this reason (#2757, #1167), so this splits `char` the same
+> `wchar_t_is_unsigned` on the OS for this reason ([#2757](https://github.com/model-checking/kani/pull/2757), [#1167](https://github.com/model-checking/kani/issues/1167)), so this splits `char` the same
 > way. It belongs here because the overwrite above hid the model's value: without the link change
 > the line changes nothing, and without the line the link change would move Apple Silicon runs onto
 > the wrong `char`. With both, every host checks against the right value.

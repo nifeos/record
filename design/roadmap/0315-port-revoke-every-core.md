@@ -103,7 +103,7 @@ been verified by hand and gated by nothing.
 ## BUGS
 
 - Three cores and above are still opt-in and still unmeasured on silicon. The flip is to 2, not
-  to 4 like the other two runners. `ap_boot`'s `BUGS` #1 was closed on QEMU TCG in 2026-09-19 and
+  to 4 like the other two runners. `ap_boot`'s `BUGS` `#1` was closed on QEMU TCG in 2026-09-19 and
   xenon has never been asked to bring all four cores online. The line to read there is
   `smp: N core(s) online`.
 - **Every number here is QEMU TCG on one host**, and on an aarch64 host QEMU runs an x86_64 guest

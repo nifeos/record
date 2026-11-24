@@ -41,22 +41,22 @@ which SBI extensions firmware implements.
 
 1. **`sbi_pmu_num_counters`** (FID `#0`). How many logical counters this hart has, hardware and
    firmware together.
-2. **`sbi_pmu_counter_config_matching`** (FID #2) over that whole set, for event
+2. **`sbi_pmu_counter_config_matching`** (FID `#2`) over that whole set, for event
    `SBI_PMU_HW_CPU_CYCLES` (type 0, code 1), with `CLEAR_VALUE` and `AUTO_START`. This is the call
    that matters: it means *find me a counter that can count this and start it*, so the kernel never
    has to know a platform's event-to-counter mapping. `SKIP_MATCH` is deliberately not passed,
    because it would tell firmware to hand back the first counter in the set without checking it can
    count the event, which is the one thing being asked for.
-3. **`sbi_pmu_counter_get_info`** (FID #1) on whichever counter came back. Its packed word says
+3. **`sbi_pmu_counter_get_info`** (FID `#1`) on whichever counter came back. Its packed word says
    hardware or firmware, and for hardware which CSR reads it.
-4. **`sbi_pmu_counter_stop`** (FID #4), which is never called on the happy path.
+4. **`sbi_pmu_counter_stop`** (FID `#4`), which is never called on the happy path.
 
 Then one thing the specification does not ask for: **the counter is read twice across a short timed
 spin and refused if it has not moved.** See "a counter that does not count" below.
 
 The read is then one instruction. That is the whole point of step 3 and the reason the interface is
 worth this much ceremony: an `ecall` inside a cycle measurement measures the `ecall`. A
-*firmware* counter would have to be read through FID #5, one `ecall` per read, so this module
+*firmware* counter would have to be read through FID `#5`, one `ecall` per read, so this module
 refuses those rather than reporting a number whose cost dominates whatever it was timing.
 
 `counter_info`'s layout has one trap in it and the decoder is host-tested against it

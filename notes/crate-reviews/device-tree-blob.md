@@ -216,7 +216,7 @@ Ruled 2026-11-19 (UTC): nife waits for a `dtoolkit` release that carries
 [google/dtoolkit #111](https://github.com/google/dtoolkit/pull/111) and
 [#112](https://github.com/google/dtoolkit/pull/112), then rules the switch against the dependency
 bar as a decision of its own. Both are open with changes requested, and release 0.5.0 of
-2026-11-03 carries neither. Upstream merged #108. This lane files nothing upstream. Until the
+2026-11-03 carries neither. Upstream merged [#108](https://github.com/google/dtoolkit/pull/108). This lane files nothing upstream. Until the
 switch, `device_tree_blob` boots every nife machine, so the move does not wait. If the switch
 comes first, P0-1, P1-5 and the README half of P2-9 lapse, and the kernel keeps the fixes either way.
 The comparison is

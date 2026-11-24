@@ -11,7 +11,7 @@ patch beside this file.
 
 - Repository: `rcore-os/tgoskits`, branch `dev`, package `fs/rsext4` (0.9.2).
 - Base commit: `0353572d1e2cca79e25a2805deeff4521449a5c1` ("fix(x86_vlapic): stop the APIC timer
-  without yielding in the vCPU entry window (#2819)"), the head of `dev` at filing. The patch beside this file dates from the earlier base
+  without yielding in the vCPU entry window ([#2819](https://github.com/rcore-os/tgoskits/pull/2819))"), the head of `dev` at filing. The patch beside this file dates from the earlier base
   `6e80b940d` and applies to this one unchanged.
 - The change: [5a-crc32c-safety-arguments.patch](5a-crc32c-safety-arguments.patch), one commit,
   `git format-patch` output. It applies with `git am` on the base commit.

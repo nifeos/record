@@ -23,7 +23,7 @@ Read through `gh` on 2026-10-03 (UTC):
 | [#4913](https://github.com/model-checking/kani/pull/4913) | open, **draft**, `MERGEABLE`, head `2d0a623`, 20 files, +411 −36, base Kani `main` at `1640445da` (current) |
 | review | tautschnig, 2026-09-30: five inline comments. calef answered all five on 2026-10-03, and each is in code at `2d0a623` |
 | upstream CI | never ran. Six workflows (Kani CI, Format Check, Cargo Deny, Benchmarks, Release Bundle, Std Verification) are `action_required` at `2d0a623`: a first-time contributor's runs wait for a maintainer to approve them. Only `Auto Label` and `Kani Extra` (`pull_request_target`) ran. So the regression matrix that runs `target_riscv64` has not run anywhere but patagonia |
-| #2402 | open, last activity 2024-10-02, two comments. The comment drafted in [issue-2402-comment.md](issue-2402-comment.md) is not posted; [#4913](https://github.com/model-checking/kani/pull/4913)'s "Towards #2402" puts a cross-reference in its timeline either way |
+| [#2402](https://github.com/model-checking/kani/issues/2402) | open, last activity 2024-10-02, two comments. The comment drafted in [issue-2402-comment.md](issue-2402-comment.md) is not posted; [#4913](https://github.com/model-checking/kani/pull/4913)'s "Towards [#2402](https://github.com/model-checking/kani/issues/2402)" puts a cross-reference in its timeline either way |
 | follow-up | the `kani_lib.c` link-order pull request promised on [#4913](https://github.com/model-checking/kani/pull/4913): drafted in [kani-lib-link-order.md](kani-lib-link-order.md), not opened |
 
 ## Tested here, at `2d0a623`
@@ -123,7 +123,7 @@ Every claim below rests on memory, inference, or a measurement this lane did not
       `cbmc-6.11.0`.
 - [ ] Apply the patch or not. If not, findings 5 and 7 and the `long double` sentence go to review
       as they are; none blocks correctness.
-- [ ] Post the #2402 comment, or let the cross-reference stand. The comment describes [#4913](https://github.com/model-checking/kani/pull/4913) as it is
+- [ ] Post the [#2402](https://github.com/model-checking/kani/issues/2402) comment, or let the cross-reference stand. The comment describes [#4913](https://github.com/model-checking/kani/pull/4913) as it is
       now, except that it says "64-bit little-endian targets" and Kani accepts only riscv64gc Linux
       beyond the old hosts.
 

@@ -7,7 +7,7 @@ ratified_by: calef
 
 # 17. The second architecture: RISC-V, and the page-table format trait
 
-The port to RISC-V (rv64, QEMU `virt`) is the first real test of rule #1 ("all architecture-specific
+The port to RISC-V (rv64, QEMU `virt`) is the first real test of rule `#1` ("all architecture-specific
 code lives under `arch/`"), an assumption held on faith since milestone 1 (boot to Rust on QEMU).
 RISC-V over x86_64 because it is clean-different rather than legacy-different. It exercises the HAL
 abstraction (a different trap, paging, interrupt, and firmware model) without the real-mode / GDT /
@@ -85,5 +85,5 @@ exercised controllers rather than guessed ahead of one.
 The RISC-V port is complete. Every primitive that defines the kernel runs on both aarch64 and
 RISC-V from one portable core. Those primitives are boot, the MMU, traps, the timer, the scheduler,
 preemption, U-mode user programs, capability invocation, userspace-built processes, and device
-interrupts serviced by an unprivileged userspace driver. Rule #1 held: the second ISA was a new
+interrupts serviced by an unprivileged userspace driver. Rule `#1` held: the second ISA was a new
 `arch/` directory, not a diff across the kernel, with no exceptions left in portable non-test code.

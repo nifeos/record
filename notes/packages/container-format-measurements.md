@@ -125,7 +125,7 @@ All 18, by zstd level:
 | repository | github.com/KillingSpark/zstd-rs: last push 2026-10-16, 11 open issues, 30 contributors, not archived |
 | dependencies with default features off | none (`twox-hash` arrives only with the `hash` feature, which verifies the frame checksum) |
 | source | 12,642 lines; 40 lines containing `unsafe` outside its `tests/` directory |
-| hardening | its 2026-10-11 release asserts that a block cannot decode to more than the frame allows; a further fix of the same kind (#128, 2026-10-16, a per-block limit on literals) is on its main branch and not in any release |
+| hardening | its 2026-10-11 release asserts that a block cannot decode to more than the frame allows; a further fix of the same kind ([#128](https://github.com/KillingSpark/zstd-rs/pull/128), 2026-10-16, a per-block limit on literals) is on its main branch and not in any release |
 | checked here | decoded all 54 compressed files in this note back to their exact bytes; ripgrep's 3 MB tar in 10.5 ms on the development Mac |
 
 The C library's Rust binding (`zstd`, libzstd under BSD-3-Clause) was not built: it needs a C
