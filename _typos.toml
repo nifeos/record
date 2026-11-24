@@ -1,0 +1,193 @@
+# Spell checking for the prose, one of the gates of milestone 68 (code-quality gates). The documentation is a deliverable here, not a
+# by-product, so a typo in a decision or a note is a defect in the thing being shipped.
+#
+# The honest result of turning it on, because it argues against overselling this gate: of 213
+# findings outside vendor/, exactly ONE was a real misspelling (`livecycle` for `lifecycle`, in a
+# kernel doc comment). Two more were test names wanting an apostrophe they could not have and were
+# renamed. Everything else was hardware mnemonics, deliberate prose, or a word the checker had split.
+#
+# That is still worth keeping, but as a RATCHET rather than a discovery: the tree was already clean,
+# and the value is that the next `hlep` typed into a note fails a gate instead of shipping. A gate
+# whose first run finds one bug is a gate that was never going to find many, and saying so here is
+# cheaper than someone re-deriving it in six months.
+#
+# Run by script/lint. See notes/scripts.md.
+
+[files]
+# The vendored engine is kept byte-identical to its pin (vendor/README.md), so its typos are not
+# ours to fix and a gate that reports them is a gate that gets ignored. Same for patches, which are
+# diffs against upstream text, and for lockfiles, which are generated.
+# Board transcripts are added for a third reason, and it is the one that generalises: `bench/**/*.log`
+# is a verbatim capture of what a machine sent down a serial line, not prose anybody wrote, so there
+# is no author to correct and nothing to ratchet. Spell-checking it is the same category error as
+# spell-checking a lockfile. It became a gate failure rather than a theoretical point on 2026-09-16,
+# when `script/board-console` wrote a truncated `evice` into a job-mix transcript (its own defect,
+# recorded in nifeos/record:notes/bench-runbook.md's BUGS); the alternative was editing a transcript to please a
+# checker, which would make it no longer a transcript.
+# The terminal replay harness's expected screens join them for the same reason:
+# `crates/video_terminal/recordings/**/*.expected.txt` is a verbatim capture of what a program
+# painted on a screen on a date, not prose anybody wrote, so there is no author to correct and
+# nothing to ratchet (milestone 705 (the graphical terminal runs full-screen programs)'s step 0a).
+extend-exclude = ["vendor/", "patches/", "*.lock", "target/", "bench/**/*.log", "crates/video_terminal/recordings/**/*.expected.txt"]
+
+# The allowlist is almost entirely HARDWARE, and that is the honest characterization rather than an
+# excuse: a spell checker aimed at an operating system meets register mnemonics constantly, and they
+# are chosen by specification authors who were not optimizing for English. Each entry below is a
+# real name in a real document, not a word we decided to spell unusually.
+[default]
+# A hex digest prefix is not a word. `typos` skips a full sha256 but splits a 12-digit prefix, which
+# is how the bench READMEs and run sheets name a payload, and on 2026-10-05 it read
+# `abd3f8487dc2` (radon's main payload) as a misspelled "abd". Twelve or more hex digits is a digest:
+# no English word is spelled from a to f alone at that length.
+extend-ignore-re = ["\\b[0-9a-f]{12,}\\b"]
+
+[default.extend-words]
+# Eduard Suess's 1909 name for the Earth's nickel-iron core, Ni plus Fe, and the name this OS takes
+# under milestone 120 (the rename). `typos` reports it as a misspelling of "knife" and is not wrong to: the whole
+# argument for the name is that its accidental reading is `knife`, which is sharp, single-purpose and
+# a held tool with no authority of its own. That is the same coin as this entry. Recorded here rather
+# than argued with, and worth knowing before the rename lands: every contributor's spell-checker will
+# reach the same conclusion about all 1,001 renamed occurrences until it is told otherwise.
+# calef's own spelling, quoted verbatim in nifeos/record:design/roadmap/0710-firefox-port.md (2026-10-03). A
+# ruling is recorded as spoken, so the quotation is not corrected to please the checker.
+targetting = "targetting"
+# calef's reply of 2026-10-17, quoted verbatim in nifeos/record:design/decisions/0305 and marked (sic) there.
+Agrred = "Agrred"
+nife = "nife"
+Nife = "Nife"
+NIFE = "NIFE"
+# Intel's `RFCTL.EXTEN` (extended receive descriptors), the bit the `e1000e` driver clears so the NIC
+# writes the legacy format; Linux's `defines.h` spells it `E1000_RFCTL_EXTEN` (milestone 494 (a
+# driver for the network card a PC actually has)).
+EXTEN = "EXTEN"
+# `HCR_EL2.TGE`, Trap General Exceptions (Arm ARM), the bit nifeos/record:notes/arm-plan-under-hvf.md measures
+# HVF ignoring; `tge` names the probe that does it.
+TGE = "TGE"
+tge = "tge"
+# RISC-V supervisor registers (the privileged spec). `sie` is Supervisor Interrupt Enable, and at 76
+# occurrences it is the single loudest false positive in the tree.
+sie = "sie"
+SIE = "SIE"
+# `sip.STIP`, the Supervisor Timer Interrupt Pending bit, which `arch::timer::is_tick_pending` reads
+# on riscv64. The checker offers "STOP" and "STRIP".
+STIP = "STIP"
+# 16550 UART registers: Transmitter Holding Register, and its Empty flag.
+THR = "THR"
+THRE = "THRE"
+# ELF's relocation-with-addend record (`Elf64_Rela`) and its dynamic tags `DT_RELA`, `DT_RELASZ`,
+# which `xtask/src/portable_executable.rs` reads to convert the riscv64 loader to PE/COFF.
+rela = "rela"
+Rela = "Rela"
+# The JH7110 pin controller's output-enable and output words, `JH7110_SYS_DOEN` and `JH7110_SYS_DOUT`
+# in Linux's `pinctrl-starfive-jh7110-sys.c`, which crates/jh7110_pci_express carries as aliases.
+DOEN = "DOEN"
+DOUT = "DOUT"
+RELA = "RELA"
+# The aarch64 Scalable Matrix Extension, named beside SVE in `CPACR_EL1`'s `SMEN` field, which
+# the FP module of milestone 447 (a thread's vector registers are its own) records as vector
+# state it deliberately does not save. Two letters of a
+# real extension name; the checker offers "SOME" and "SAME".
+SME = "SME"
+# The aarch64 page-descriptor field, spelled `AttrIndx` in the ARM ARM.
+Indx = "Indx"
+# Virtual Address Space, abbreviated in code and comments throughout the paging notes.
+vas = "vas"
+Vas = "Vas"
+VAS = "VAS"
+# "AB-BA deadlock", the standard name for the lock-ordering failure §-many discusses.
+BA = "BA"
+# IST, the x86_64 interrupt stack table (kernel/src/arch/x86_64/ist.rs).
+ist = "ist"
+# The `mis-` prefix, hyphenated: "mis-reported", "mis-citation". The checker sees the fragment.
+mis = "mis"
+
+# The four below are all one failure mode: the checker splits a word and then reports the fragment.
+# Worth listing individually rather than loosening the checker, because each is a different way it
+# happens and a future one will look like these.
+#
+# `**I**nner` -- markdown bold inside a word, in the mmu.rs table that spells out `tlbi vaae1is`.
+nner = "nner"
+# `CLOSEs` -- a verbed constant, "Drop CLOSEs the handle".
+CLOS = "CLOS"
+# `"helXY"` -- a deliberately truncated string in a video_terminal wrapping test.
+hel = "hel"
+# `reclaim_frees_a_started_then_exited_childs_regions` -- a test NAME, cited by that name in
+# sched.rs, user.rs and three notes. Grammatically it wants an apostrophe it cannot have; renaming
+# it would churn five files to satisfy a spell checker, which is the tail wagging the dog.
+childs = "childs"
+
+# `rustls`' own trait and method names for the record layer: `MessageEncrypter`,
+# `MessageDecrypter`, and the `encrypter()`/`decrypter()` methods that build them. The checker
+# prefers "-or" and is not wrong about English; it is wrong about whose API this is.
+# `cryptography_provider` implements these traits, so the spelling is fixed by upstream at every
+# mention, and this tree's own types beside them take the same spelling deliberately, because a
+# file where the trait and its implementor differ by one letter reads as a typo.
+Encrypter = "Encrypter"
+Decrypter = "Decrypter"
+encrypter = "encrypter"
+decrypter = "decrypter"
+
+# VT-d's Capability Register field `ND` (Number of Domains supported, Intel VT-d 4.1 section
+# 11.4.2), which the driver reads to size its domain ids (milestone 594 (every VT-d unit
+# translates its own devices)).
+ND = "ND"
+
+# The DesignWare Mobile Storage Host Controller's databook names (milestone 53 (the board's own
+# peripherals: network and storage on real silicon)): `RTO` is its response-timeout interrupt bit,
+# kept beside `DRTO` and `HTO` under the databook's spelling, and `synopsys` is the vendor as the
+# Linux binding files spell it (`synopsys-dw-mshc-common.yaml`).
+RTO = "RTO"
+synopsys = "synopsys"
+
+# `-DFAULT=TRUE`: CMake's `-D` on sel4bench's `FAULT` option, in the seL4 Foundation's published
+# build command, which bench/xenon-sel4bench/build.sh and its note quote verbatim (milestone 127
+# (the seL4 machine)).
+DFAULT = "DFAULT"
+
+[default.extend-identifiers]
+# Deliberate capitalisation inside prose, where the case is the emphasis: "Address Space
+# IDentifier". Same list as clippy.toml's doc-valid-idents, for the same reason.
+IDentifier = "IDentifier"
+# Valid variant spellings, not errors. British/American and -able/-eable splits are style, and this
+# tree already chose; a checker should not relitigate that.
+Writeable = "Writeable"
+# tock_registers' read-modify-write trait (milestone 139 (drive the unsafe count down) round 5, input.rs's IMSC register): the
+# checker splits the camelCase compound into "Read" + "Writeable" and only the bare word was
+# allowlisted before, so the compound slipped through until this driver needed `.modify()`.
+ReadWriteable = "ReadWriteable"
+requeueing = "requeueing"
+unparseable = "unparseable"
+# Proper nouns: a chip vendor and a Rust TUI crate.
+Synopsys = "Synopsys"
+ratatui = "ratatui"
+# A crates.io package name (the DEFLATE bindings), cited throughout the probe results of milestone 64 (enough std to run somebody else's crate).
+# The checker splits the trailing digit off and reports `flate` as a misspelling of `flat`.
+flate2 = "flate2"
+# The e2fsprogs command that writes an ext4 filesystem, named in the Linux comparison of milestone 38 (filesystem throughput).
+# Same split as `flate2`, one character earlier: the checker takes `mke` and offers `make`.
+mke2fs = "mke2fs"
+# The environment variable naming mke2fs's configuration file, which the corpus script of milestone
+# 190 (ext4, read and write) sets. The same split as `mke2fs`, upper case.
+MKE2FS_CONFIG = "MKE2FS_CONFIG"
+# A misspelling ON PURPOSE, and the one entry here that would be a bug to "fix": grant_plan's parser
+# test feeds `parse(b"hlep")` to prove an unknown word becomes a Run command rather than a builtin.
+# Correcting it would delete the test's subject.
+hlep = "hlep"
+# Deliberate wordplay in a `globally_unique_identifier_partition_table` test comment: "it is just
+# what everybody does, and here are two everybodies".
+everybodies = "everybodies"
+# ACPI Namespace Device Declaration, one of the DMAR's remapping-structure type codes named beside
+# RMRR/ATSR/RHSA/SATC in acpi.rs's `DmarEntry::Other` doc. The checker reads it as "AND" plus a
+# stray D.
+ANDD = "ANDD"
+# A misspelling in somebody else's document, quoted verbatim (milestone 168 (a multi-tasking workload benchmark)). Warton's 2005 thesis
+# abstract writes "single stack architecure", and nifeos/record:notes/job-mix.md quotes the sentence because the
+# strength of that claim differs from the retrospective's summary of it, which is the whole point of
+# the quotation. Correcting a source inside quotation marks would be worse than the typo.
+architecure = "architecure"
+# Two verified-kernel projects named in nifeos/record:notes/redleaf.md's comparison of proof-to-code ratios.
+# `CertiKOS` (Yale, Coq) splits into "Certi" + "KOS" and the checker offers "Certificate"/"Certify";
+# `SeKVM` (Columbia, Coq) is the verified KVM core cited beside it. Both are proper nouns in the
+# literature, spelled by their authors, and both appear inside or beside quoted material.
+CertiKOS = "CertiKOS"
+SeKVM = "SeKVM"
