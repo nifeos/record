@@ -1,0 +1,21 @@
+# The removed-files index: files taken out of the tree on purpose, so a reader can find them in git.
+# One row per file: the path it had, the date it was removed (UTC), the last commit that held it
+# (read it back with `git show <sha>:<path>`), and the reason. A row names a path that is absent
+# and a sha that exists; helpers/removed_index.py checks both in script/lint. A removed roadmap
+# block keeps its number retired: the same script refuses a new block that takes it.
+# measure: 1
+path	removed	last_commit	reason
+design/roadmap/0879-the-kernels-file-service-wiring-is-split-along-its-seams.md	2026-10-31	944d88ecfd34edcf07dd3e1e61b29ce307f1613c	BUILT and uncited
+design/roadmap/0880-the-x86-64-mmu-file-is-split-along-its-seams.md	2026-10-31	944d88ecfd34edcf07dd3e1e61b29ce307f1613c	BUILT and uncited
+design/roadmap/0881-the-kernel-benchmark-file-is-split-along-its-seams.md	2026-10-31	944d88ecfd34edcf07dd3e1e61b29ce307f1613c	BUILT and uncited
+design/roadmap/0901-the-ten-longest-notes-become-a-page-and-its-appendices.md	2026-10-31	944d88ecfd34edcf07dd3e1e61b29ce307f1613c	BUILT and uncited
+design/roadmap/0904-the-rest-of-the-prose-budget-backlog-is-paid-down.md	2026-10-31	944d88ecfd34edcf07dd3e1e61b29ce307f1613c	BUILT and uncited
+design/roadmap/0921-rmle-is-packaged-in-basalt.md	2026-10-31	2ec9201fdd81d8b57684abc61237bd032657d88c	the block packaged rmle in basalt; the rmle text editor program was removed on the architect's ruling of 2026-10-31 (UTC)
+design/naming/2026-11-03-rulings.md	2026-11-05	f6bafbd31db32f0ced63f789903b299c25443ec3	naming rules grouped by date or kind; each rule is stated once in the topic file design/naming/README.md indexes
+design/naming/spelled-out-rulings.md	2026-11-05	f6bafbd31db32f0ced63f789903b299c25443ec3	naming rules grouped by date or kind; each rule is stated once in the topic file design/naming/README.md indexes
+design/naming/vocabulary-rulings.md	2026-11-05	f6bafbd31db32f0ced63f789903b299c25443ec3	naming rules grouped by date or kind; each rule is stated once in the topic file design/naming/README.md indexes
+design/naming/command-line-rulings.md	2026-11-05	f6bafbd31db32f0ced63f789903b299c25443ec3	naming rules grouped by date or kind; each rule is stated once in the topic file design/naming/README.md indexes
+design/naming/precedents-set-by-example.md	2026-11-05	f6bafbd31db32f0ced63f789903b299c25443ec3	naming rules grouped by date or kind; each rule is stated once in the topic file design/naming/README.md indexes
+design/naming/functions-that-answer-yes-or-no-worklist.md	2026-11-05	f6bafbd31db32f0ced63f789903b299c25443ec3	the census of a finished pass; each open name carries its own provisional marker, and the rule is in design/naming/functions-that-answer-yes-or-no.md
+design/naming/capability-spelling-worklist.md	2026-11-05	f6bafbd31db32f0ced63f789903b299c25443ec3	the worklist of a finished sweep (the cap count is 0); the rule is in design/naming/acronyms-and-abbreviations.md
+design/naming/what-milestone-63-left-alone.md	2026-11-05	f6bafbd31db32f0ced63f789903b299c25443ec3	its live entries moved to design/naming.md and design/naming/command-line-names.md BUGS
