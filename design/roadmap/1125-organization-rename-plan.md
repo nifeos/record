@@ -145,6 +145,7 @@ From step 2 to the end of step 9, these stop working.
 | the queue sweep's idle check | `gh repo list nifeos` | nife's tooling draft |
 | the draft board, `gh search prs --owner nifeos --draft` | search follows no redirect | the instructions that name it, steps 7 and 9 |
 | code owner review requests in the crate repositories | an unknown team | step 5 |
+| the owned runners, if the off-tree change before step 1 did not happen | they register and admit jobs by organization name | the off-tree spec's after-rename step |
 
 Expected length: one working day, if a lane rebuilds the drafts the day before and merges each as
 soon as its checks pass. nife's nine drafts are the long part, because each one is a queue
@@ -155,8 +156,9 @@ run. That is an estimate from queue run times, not a measurement.
 nife's merge queue takes nothing between steps 1 and 9 except the nine rename drafts, the tooling
 draft first. Each draft's lint runs the tooling draft's code, so before that draft lands a later
 one fails its citations and tied-path checks. Heavy gates run on `merge_group` on the owned runners.
-Nobody has measured whether those runners keep their registration through the rename, and the
-off-tree spec checks it before step 1. If they lose it, the queue runs on hosted runners or waits
+Their admission check and their registration name the organization, so the rename would stop
+them. The off-tree spec changes both before step 1, and checks after step 2 that the runners
+register under the new name. If they lose it, the queue runs on hosted runners or waits
 until someone registers them again.
 
 ## Rollback
