@@ -66,7 +66,7 @@ for S-mode on QEMU
   passed to `plic::claim`/`complete`/`disable` from the external-interrupt handler). A source targets
   exactly one hart, so the hart that takes it is the hart it is enabled on, and the mask/complete land
   on the right context. The PLIC driver stays mechanism-only: it is told the context, it does not read
-  the hartid (rule `#2`, DECISIONS §4).
+  the hartid (rule `#2`, DECISIONS §4 (kernel shape)).
 - The enable bits are serialized; nothing else in the driver is. The sentence two bullets up, "the
   threshold and enable registers are global PLIC MMIO," is exactly what makes this necessary, and the
   assembly audit ([arch-audit.md](../arch-audit.md), finding 3) is where it was caught. One enable
