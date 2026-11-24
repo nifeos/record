@@ -165,7 +165,7 @@ days, 93.6% to 92.6%, in a window that included 77 new tests. One crate accounte
 `crates/machine_discovery`, 22 survivors to 77.
 
 This block then said they did not accumulate, that they arrived in one pull request,
-[#927](https://github.com/partsfoundry/nife/pull/927) (merge `aa6a50b`, milestone 319, 2026-09-17), in
+[#927](https://github.com/partsfoundry/nife/pull/927) (merge `aa6a50b`, milestone 319 (the crate that parses firmware had no proofs), 2026-09-17), in
 the firmware-parsing code that milestone added, and sat unnoticed for two days.
 Four of them did. The other 73 were there before it.
 
