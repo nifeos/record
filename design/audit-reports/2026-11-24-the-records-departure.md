@@ -160,12 +160,13 @@ external packages in nife's tree at basalt's pin. Its step 4 said `SECURITY.md` 
 audit's diff, but `SECURITY.md` is nife's, so that work goes in a nife pull request that the
 report's waits on. Both sentences say so now, in this pull request. Severity low.
 
-### 12. ACCEPTED: `SECURITY.md`'s audit count lags the index
+### 12. ACCEPTED: `SECURITY.md`'s audit count fails nife's lint when the pin moves
 
-nife's `SECURITY.md` carries the number of security audits on the record, and nife's lint reads it
-from this index at basalt's pin. The count lags each security audit until basalt's pin moves past
-the commit that landed it. That is the pin doing its job: nife's text agrees with the record it is
-built against. It stays.
+nife's `SECURITY.md` carries the number of security audits on the record, and nife's lint checks
+it against this index at basalt's pin. When the pin moves past a commit that adds a security audit,
+every nife pull request fails lint until one lane updates the number. That happened this week, when
+the pin took in the graphical drivers' audit. It stays: the count is never wrong on `main` without
+a red check saying so, and the fix is one line.
 
 ## What was deliberately not examined
 
