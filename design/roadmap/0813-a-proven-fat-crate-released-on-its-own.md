@@ -99,7 +99,7 @@ subsystems) has nife write the crates Kani proves, because a model checker needs
 restructure. Proofs are the point. And the main-line candidate, rust-fatfs, has not released since
 `fatfs` 0.3.6 (2023-01-17); that release writes subdirectories `fsck_msdos` rejects, the fix landed
 upstream on 2024-10-23 unreleased, and a release request has been open since 2023 (rafalh/rust-fatfs
-#81).
+[#81](https://github.com/rafalh/rust-fatfs/issues/81)).
 
 `fatfs` and `embedded-sdmmc` were measured against this block on 2026-10-22 (UTC), Kani included,
 in [784's FAT appendix](0784-reuse-what-the-tree-wrote/fat-crates-measured.md). calef's #2580

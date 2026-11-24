@@ -153,7 +153,7 @@ outside `arch/`, with the real `cfg`s and the real `crate::arch`. Cost, estimate
 tree maintains through every Kani toolchain bump, which DECISIONS §46 (thin primitives or whole
 subsystems) treats as a dependency decision rather than a build task. It also needs a verify host
 that is either a lab board or an emulator. Days to weeks, and not measured here. Upstreaming the machine
-model is the version of this that does not leave a fork behind; #2402's age says not to wait on it.
+model is the version of this that does not leave a fork behind; [#2402](https://github.com/model-checking/kani/issues/2402)'s age says not to wait on it.
 
 **Option 4: nothing.** Record the corrected wall in `notes/kernel-proofs.md` and move on.
 

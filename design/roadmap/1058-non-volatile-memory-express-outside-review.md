@@ -11,7 +11,7 @@ needs_person: yes
 
 Raised by the lane `milestone/1058-non-volatile-memory-express-outside-review`. A reviewer with no
 prior exposure to this project read `nifeos/non_volatile_memory_express` at commit `87bbef8`
-(`main`, after its pull request #12), against the step 5 section of
+(`main`, after its pull request [#12](https://github.com/nifeos/non_volatile_memory_express/pull/12)), against the step 5 section of
 [the review package](../../notes/crate-reviews.md). Every item below is work for a lane there.
 Milestone 814 (`non_volatile_memory_express`: proven NVMe queue logic, released on its own) owns
 the extraction and the release path; this block owns the findings that land inside that path.
@@ -292,7 +292,7 @@ answers becomes `None` in an `Option<IdentifyNamespace>`. One-way at the tag. XS
 3. The public API of P1-1, P1-2, P1-5, P1-9 and P1-14. All five ruled 2026-11-09, as the items
    state, and landed.
 4. The new names of P1-6, P1-10 and P2-1 to P2-5. Rulings of 2026-11-19 settled seven, and
-   nifeos/non_volatile_memory_express#35 and #36 landed them. Ruled 2026-11-19: the other fourteen
+   nifeos/non_volatile_memory_express#35 and [#36](https://github.com/nifeos/non_volatile_memory_express/pull/36) landed them. Ruled 2026-11-19: the other fourteen
    stand as built, ratified. They are `admin_queue_attributes`, `physical_region_page_list`,
    `Completion::is_success`, `status_code` and `status_code_type`, `STATUS_CODE_TYPE_GENERIC`,
    `GENERIC_STATUS_SUCCESSFUL_COMPLETION`, `GENERIC_STATUS_INVALID_FIELD_IN_COMMAND`,

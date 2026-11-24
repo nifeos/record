@@ -22,7 +22,7 @@ texts calef posts under his own account. The research behind it is the proposal
   export report the verification target and updates RFC 0015's field table.
 - "Review, 2026-09-30" below has what tautschnig's first review changed.
 - The pull request body as first posted: [kani-upstream/pull-request-4913-body.md](kani-upstream/pull-request-4913-body.md).
-- Comment for #2402: [kani-upstream/issue-2402-comment.md](kani-upstream/issue-2402-comment.md).
+- Comment for [#2402](https://github.com/model-checking/kani/issues/2402): [kani-upstream/issue-2402-comment.md](kani-upstream/issue-2402-comment.md).
 
 ## What Kani asks of a contributor
 
@@ -32,7 +32,7 @@ Read at `de756c936`, not recalled:
   request template ask for one sentence in the body: "By submitting this pull request, I confirm
   that my contribution is made under the terms of the Apache 2.0 and MIT licenses." That sentence is
   the attestation. It is already the last line of the body, and it is calef's to make.
-- **Discuss significant work in an issue first.** #2402 is that issue: open since 2023-04-23, with a
+- **Discuss significant work in an issue first.** [#2402](https://github.com/model-checking/kani/issues/2402) is that issue: open since 2023-04-23, with a
   second use case added by a zerocopy maintainer and no objection from anyone.
 - **The RFC process** applies to one-way doors and to changes with a significant design component.
   It also asks that a new feature be reachable only behind `-Z`. An option behind `-Z

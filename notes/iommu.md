@@ -46,7 +46,7 @@ today. Neither is executable.
 
 ## The two arch drivers, structural twins
 
-Under `arch/` per rule #1: `kernel/src/arch/{aarch64,riscv64}/iommu.rs`. They rhyme deliberately.
+Under `arch/` per rule `#1`: `kernel/src/arch/{aarch64,riscv64}/iommu.rs`. They rhyme deliberately.
 Each is driven almost entirely through memory, not registers:
 
 | role | SMMUv3 (aarch64) | RISC-V IOMMU (riscv) |

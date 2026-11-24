@@ -3,7 +3,7 @@
 The RISC-V port proved the capability core on a second ISA: boot, MMU (Sv39), traps, the SBI
 timer, the scheduler, preemption, U-mode programs and system calls, capability invocation, IPC,
 userspace-built processes, and device interrupts serviced by an unprivileged userspace driver. Rule
-#1 held: a new ISA was a new `arch/` directory, not a diff across the kernel.
+`#1` held: a new ISA was a new `arch/` directory, not a diff across the kernel.
 
 aarch64 is a strict superset. This note scopes the gap: what it would take to bring RISC-V to
 parity, what each item proves, and in what order to do them. Every item is done now, and the

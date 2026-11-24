@@ -43,16 +43,16 @@ read the same day.
 | last activity | 2026-10-16: 17 commits, 7 pull requests merged, 5 issues closed |
 | release request | rafalh/rust-fatfs#81, open since 2023-03-17, last comment 2026-04-28 |
 
-The maintainer's own words on a release, on GitHub. In March 2022 (#53) he said he had changes
-to make first, and asked users to take a git reference meanwhile. On 2026-03-08 (#110) he wrote "I
-want to release soon." On 2026-10-16 (#115) he named his uncertainty about the future of
+The maintainer's own words on a release, on GitHub. In March 2022 ([#53](https://github.com/rafalh/rust-fatfs/issues/53)) he said he had changes
+to make first, and asked users to take a git reference meanwhile. On 2026-03-08 ([#110](https://github.com/rafalh/rust-fatfs/issues/110)) he wrote "I
+want to release soon." On 2026-10-16 ([#115](https://github.com/rafalh/rust-fatfs/pull/115)) he named his uncertainty about the future of
 `fscommon`, his companion crate, as one of the main reasons 0.4.0 waits. He gave no date. 0.3.6
 was cut from a `stable-0.3` branch and is not an ancestor of the main line.
 
 `lamfat` republishes the main line under another name, for a company that needed it on crates.io
 for its own bootloader. Its provenance file pins upstream `c4b8847` (2026-03-08) and claims no change
 to the format logic. 0.4.3 was published 2026-10-15. It lacks upstream's 2026-10-16 fixes, among
-them a panic on a file name that starts with a multibyte character (#120). Its README says it lasts
+them a panic on a file name that starts with a multibyte character ([#120](https://github.com/rafalh/rust-fatfs/pull/120)). Its README says it lasts
 until upstream publishes 0.4.0.
 
 What 0.4 changes, from the CHANGELOG and read against the source:
@@ -192,7 +192,7 @@ Read from each crate's public API and source, not from its README:
 | free space and FSInfo | reads, counts, updates FSInfo | tracks the count and next free | writes FSInfo once |
 | dirty and I/O-error bits | set on mount, cleared on unmount, reported | no volume bit | no |
 | interface | byte-addressed `Read`, `Write`, `Seek`; no cache of its own | a `BlockDevice` of 512-byte blocks | sector contents out, no I/O |
-| fuzzing in its tree | none; #72, an integer-overflow panic a fuzzer found, open since 2022-07-02 | none | none |
+| fuzzing in its tree | none; [#72](https://github.com/rafalh/rust-fatfs/issues/72), an integer-overflow panic a fuzzer found, open since 2022-07-02 | none | none |
 | Kani harnesses | none | none | none |
 
 `fatfs` covers 140's read side as a driver, and it would run well as 140's one process per volume.

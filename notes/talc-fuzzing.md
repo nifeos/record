@@ -26,7 +26,7 @@ gaps overlap. None of the three reads a block back. They fill each block and nev
 handed out twice shows only if the consistency scan or the sanitizer notices. A coverage run of
 `manual` and `global_alloc` reaches `full_search_bin`, its fit check and the in-place grow check.
 
-These targets cannot find the defect #57 fixed. That code added a size to a pointer and compared
+These targets cannot find the defect [#57](https://github.com/SFBdragon/talc/pull/57) fixed. That code added a size to a pointer and compared
 the result with the heap end. On a 64-bit host the sum never wraps, so the comparison gives the
 right answer and nothing touches memory. AddressSanitizer sees only accesses. Only Miri, which
 checks every pointer computation against its allocation, reports it.
@@ -68,7 +68,7 @@ systemd-run --user --scope -q -p MemoryMax=12G python3 helpers/heavy_slot.py tal
 A long run uses the same command with `-max_total_time=14400 -max_len=4096`, at a time when the
 machine's heavy slots are otherwise idle.
 
-The seeds replay as an ordinary test, and under Miri, which is the check that would catch #57's
+The seeds replay as an ordinary test, and under Miri, which is the check that would catch [#57](https://github.com/SFBdragon/talc/pull/57)'s
 defect coming back (it needs a nightly that ships Miri, and reads the seed directory):
 
 ```sh

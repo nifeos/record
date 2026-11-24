@@ -115,7 +115,7 @@ The fix removed the defect but left four records reasoning from the old bound, a
 commit corrects each in place:
 
 - `xtask/src/uefi.rs`, the `NIFE_SMP=2` comment: it still said the tour does not touch a two-core
-  defect that "fails one of its tests about half the time", citing `ap_boot`'s BUGS #3, a section
+  defect that "fails one of its tests about half the time", citing `ap_boot`'s BUGS `#3`, a section
   the comment-cap cleanup deleted on 2026-10-13. It now states the split as it is: the tour is
   where the second core is gated, and the suite leg's one-core default is unmeasured-since, not a
   dodge.
@@ -123,7 +123,7 @@ commit corrects each in place:
   `every_secondary_runs_scheduled_work` fails about half the time at two cores and that the PVH
   runner defaults to one because of it. Milestone 316 (which core booted) fixed that defect, 19 of
   19 across its two-core campaign, and the PVH runner has defaulted to two since 2026-09-23.
-- `xtask/src/swish_check/boot.rs`: it still gave `ap_boot`'s BUGS #3 as the reason its OVMF leg
+- `xtask/src/swish_check/boot.rs`: it still gave `ap_boot`'s BUGS `#3` as the reason its OVMF leg
   boots one core.
 - `helpers/qemu-runner-x86_64.sh`: it still pointed at `ap_boot`'s BUGS section as the
   authoritative account of what is open at three cores and above. The pointer now names the module

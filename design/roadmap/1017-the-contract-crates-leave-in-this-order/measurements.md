@@ -123,7 +123,7 @@ path range from 5 (`byte_glob`) to 36 (`user_mode_runtime`).
 
 ## The landing durations
 
-- `jh7110_entropy` pull request #5: its `check` and `proofs` runs took 6 and 7 minutes
+- `jh7110_entropy` pull request [#5](https://github.com/nifeos/jh7110_entropy/pull/5): its `check` and `proofs` runs took 6 and 7 minutes
   (`gh run list -R nifeos/jh7110_entropy --branch lane/rename-constants`). Merged 22:22:46 UTC.
 - nife pull request #2979: opened 22:27:02, merged 23:15:31 (`gh pr view 2979 --json
   createdAt,mergedAt`).

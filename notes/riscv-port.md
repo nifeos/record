@@ -1,6 +1,6 @@
 # Porting nife to RISC-V (the second architecture)
 
-The point of a second port is not to reach RISC-V. It is to prove rule #1: that all
+The point of a second port is not to reach RISC-V. It is to prove rule `#1`: that all
 architecture-specific code lives under `kernel/src/arch/`, an assumption maintained on faith since
 milestone 1. A genuinely different ISA is the first real test of it. RISC-V (rv64, `qemu-system-riscv64
 -machine virt`) is chosen over x86_64 because it is clean-different rather than legacy-different. It

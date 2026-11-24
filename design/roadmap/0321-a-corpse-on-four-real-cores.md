@@ -100,7 +100,7 @@ It did not reproduce on anything patagonia can run, and the shape of that failur
 finding:
 
 - x86_64 under QEMU at `NIFE_SMP=4`: one full suite plus five filtered runs, all green, with
-  `smp: 4 core(s) online` confirmed in the boot print (so this was not `ap_boot`'s BUGS #1 quietly
+  `smp: 4 core(s) online` confirmed in the boot print (so this was not `ap_boot`'s BUGS `#1` quietly
   running three).
 - x86_64 under QEMU at `NIFE_SMP=8`: ten filtered runs, all green.
 - x86_64 under QEMU at `NIFE_SMP=4` with genuinely parallel cores: twelve filtered runs, all

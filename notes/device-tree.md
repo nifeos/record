@@ -213,10 +213,10 @@ failure, so every limitation here is a limitation on the boot path specifically.
 - nife reads device trees with its own parser, and Google's `dtoolkit` lacks five things nife needs.
   Two are bugs that nife's fuzzing found, each with an issue and a fix open upstream.
   `FdtNodeMut::add_property` panics on an unreferenced invalid string in the strings block
-  (google/dtoolkit#109, fix #111). `Fdt::new` does not check that the structure block ends
-  within `size_dt_struct` (#110, fix #112). The quadratic `children()` walk is the third. Issue #102
+  (google/dtoolkit#109, fix [#111](https://github.com/google/dtoolkit/pull/111)). `Fdt::new` does not check that the structure block ends
+  within `size_dt_struct` ([#110](https://github.com/google/dtoolkit/issues/110), fix [#112](https://github.com/google/dtoolkit/pull/112)). The quadratic `children()` walk is the third. Issue [#102](https://github.com/google/dtoolkit/issues/102)
   is open, and calef's pull request google/dtoolkit#108 answers it with `Fdt::events`. The fourth
-  is a reader that accepts what `dtc` and Linux accept: `Fdt::with_options` (#104) covers long
+  is a reader that accepts what `dtc` and Linux accept: `Fdt::with_options` ([#104](https://github.com/google/dtoolkit/pull/104)) covers long
   property names only. The fifth is `add_child` on the mutable tree, which has no upstream issue.
   Switching nife to `dtoolkit` after a release ships these needs its own architect yes under §46
   (thin primitives or whole subsystems). Until then nife retires nothing.

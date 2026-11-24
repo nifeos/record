@@ -30,7 +30,7 @@ and virtio-pci unchanged. The three decisions the scope note flagged, resolved a
    it. The portability claim is proven rather than promised. The same crate and seam drive the
    disk on riscv (INTx via the PLIC, irqs 32..35) and on aarch64 (INTx via the GIC, INTIDs
    35..38, the highmem ECAM at 0x40_1000_0000). The per-arch cost was exactly the predicted
-   constants-plus-map change. That is rule #1 doing its job on a whole subsystem.
+   constants-plus-map change. That is rule `#1` doing its job on a whole subsystem.
 
 Build-vs-reuse, recorded late. The `pci` crate was built rather than adopting `pci_types` (the
 kernel-agnostic config-space/BAR/capability crate several Rust OS projects use). The call was made

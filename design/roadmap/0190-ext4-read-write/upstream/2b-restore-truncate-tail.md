@@ -11,7 +11,7 @@ request.
 
 - Repository and branch: `rcore-os/tgoskits`, `dev`.
 - Base commit: `0353572d1e2cca79e25a2805deeff4521449a5c1` ("fix(x86_vlapic): stop the APIC timer
-  without yielding in the vCPU entry window (#2819)"), the head of `dev` at filing. The patch beside
+  without yielding in the vCPU entry window ([#2819](https://github.com/rcore-os/tgoskits/pull/2819))"), the head of `dev` at filing. The patch beside
   this file dates from the earlier base `6e80b940d` and applies to this one unchanged.
 - The change: [`2b-restore-truncate-tail.patch`](2b-restore-truncate-tail.patch), one commit, `git
   format-patch` output. It applies to the base alone, but [item 2a](2a-free-empty-extent-index.md)

@@ -2,7 +2,7 @@
 
 [The proposal](../1017-the-contract-crates-leave-in-this-order.md) holds the order and the policy. This appendix works two cases through it, one real and one hypothetical.
 
-A real one, 2026-10-31 (UTC). `jh7110_entropy` pull request #5 renamed five constants and merged at
+A real one, 2026-10-31 (UTC). `jh7110_entropy` pull request [#5](https://github.com/nifeos/jh7110_entropy/pull/5) renamed five constants and merged at
 22:22 (`nifeos/jh7110_entropy@535f79c`). nife pull request #2979 opened at 22:27, moved the three
 manifests that pin the crate and the program that names the constants, and merged at 23:15. Fifty-three
 minutes end to end. nife's `main` never broke, because it pinned the old commit until the bump.

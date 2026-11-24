@@ -266,7 +266,7 @@ first time it is enabled, round-robin over the online cores, and keeps it (`INTE
 because
 the `Interrupt` capability's ACKNOWLEDGE re-enables the line on every completion. The GIC driver is told
 which
-core and does not decide (rule #2). The PLIC does the same per hart (`SOURCE_CTX`), with each hart
+core and does not decide (rule `#2`). The PLIC does the same per hart (`SOURCE_CTX`), with each hart
 claiming and completing against its own context.
 
 The PLIC's enable bits share one word per 32 sources, so setting one is a read-modify-write two

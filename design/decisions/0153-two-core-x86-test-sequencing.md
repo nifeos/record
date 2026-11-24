@@ -41,8 +41,8 @@ default, on purpose. The decision is how to sequence that.
 The original crash that held it at 1 is fixed (a missing cross-core TLB shootdown). Two reasons
 remain open, both recorded in `arch::x86_64::ap_boot`'s own `BUGS`:
 
-- #1: AP-bring-up flakiness at three or more cores.
-- #3: a boot-core-identity bug that makes `smp::tests::every_secondary_runs_scheduled_work`
+- `#1`: AP-bring-up flakiness at three or more cores.
+- `#3`: a boot-core-identity bug that makes `smp::tests::every_secondary_runs_scheduled_work`
   fail about half the time at two.
 
 Separately, `design/roadmap/0412-the-uefi-boot-gate-asserts-two-cores-that-do-not-always-start.md`
@@ -54,12 +54,12 @@ unreliable.
 ## What changed, and what the question became
 
 Between this file being raised and being answered, milestone 316 fixed half of what it was about.
-`ap_boot`'s BUG #3, the boot-core-identity defect that failed
+`ap_boot`'s BUG `#3`, the boot-core-identity defect that failed
 `smp::tests::every_secondary_runs_scheduled_work` about half the time at two cores, is fixed:
 `boot_cpu_id` recomputed CPUID leaf 1's initial APIC id on every call, answering *"which core am
 I"* where every caller wanted *"which core booted"*. It now reads a boot-time record, the shape
 riscv64's `BOOT_HARTID` already had. Measured after: 19 of 19, and 26 of 26 boots reported
-`smp: 2 core(s) online`. BUG #1 never fired at two cores; it is a three-or-more bug.
+`smp: 2 core(s) online`. BUG `#1` never fired at two cores; it is a three-or-more bug.
 
 So the substrate is trustworthy at two cores, and two of the three options below lost their stated
 costs. Option 1's cost was waiting on unscheduled SMP work, and that work is done. Option 2's cost
@@ -85,7 +85,7 @@ a judgment into evidence. "Should we tolerate a red" is a question somebody has 
 
 ## The options as raised, kept because two of them were argued against a premise that moved
 
-**1. Order milestone 315 behind `ap_boot`'s BUGS #1 and #3.** The test lands on a configuration
+**1. Order milestone 315 behind `ap_boot`'s BUGS `#1` and `#3`.** The test lands on a configuration
 somebody trusts. A confinement test is only worth having if a red is believed, and a red on a flaky
 substrate is not. The cost: 315 waits on SMP work nobody has scheduled, and the one-tick revocation
 window stays open in the meantime.

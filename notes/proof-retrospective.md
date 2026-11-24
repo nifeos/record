@@ -84,7 +84,7 @@ Column 4 is a judgment in every row.
 | # | Defect | The false property | Provable? | Harness existed? | Found by |
 |---|---|---|---|---|---|
 | 1 | aarch64 exception-return race | staged `SPSR_EL1`/`ELR_EL1` survive to the `eret` | no (assembly, hardware semantics) | none possible | a flake, 1 run in 4 |
-| 2 | riscv64 `trap_return` sibling | same, for `sepc`/`sstatus` | no | none possible | reading, after #1 |
+| 2 | riscv64 `trap_return` sibling | same, for `sepc`/`sstatus` | no | none possible | reading, after `#1` |
 | 3 | riscv64 `trap_entry` `sscratch` window | no user value is a `&TrapStash` | no | none possible | the arch audit; left documented |
 | 4 | PLIC enable-bit lost update | concurrent `enable`/`disable` on one word preserve each other | by loom, not by Kani | none | the arch audit |
 | 5 | wake-before-switch-out race | a thread is never queued while a core still executes it | by loom, and now is | Kani harness existed, structurally blind | a flake, 10/10 to 8/10 |

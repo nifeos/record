@@ -57,7 +57,7 @@ PCIe, which §18 drives on both boards. Both need `iommu_platform=on` per virtio
 without it silently bypasses translation, the same manufactured-fact hazard the runners now
 fail loudly on. The two IOMMUs are structural siblings, and the deep symmetry is the payoff. Each
 translates with its own CPU's page-table format (VMSAv8-64; Sv39). So the format-generic `paging`
-crate, the seam that was HAL leak #2, builds IOMMU domains with the same proved code
+crate, the seam that was HAL leak `#2`, builds IOMMU domains with the same proved code
 that builds process address spaces. Shape: one portable DMA-domain seam, and two arch IOMMU drivers
 under `arch/` (device table, command queue, fault queue each). The `VirtualIo` capability is unchanged
 above, with the disk and attacker suites running behind the IOMMU on both ISAs, and the

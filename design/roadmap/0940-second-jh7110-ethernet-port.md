@@ -11,7 +11,7 @@ needs_person: yes
 
 *(Number, title and slug provisional.)*
 
-calef asked for this on 2026-10-20 (UTC), at the bench: "Lets create a milestones to get jack #1
+calef asked for this on 2026-10-20 (UTC), at the bench: "Lets create a milestones to get jack `#1`
 also working." A writing-only lane wrote it the same day and built nothing.
 
 ## Why

@@ -43,7 +43,7 @@ The port is worth doing precisely because it finds where the abstraction leaked.
      `global_asm!` right in the file, a standing rule-1 violation (`asm!`/`global_asm!` outside
      `arch/`) that predates the port.
 
-   The fix was a set of arch seams mirroring how leak #1 was closed:
+   The fix was a set of arch seams mirroring how leak `#1` was closed:
 
    - a `TrapFrame::for_user_entry(entry, user_sp, args)` constructor in `arch`;
    - an `arch::sync_icache(va, len)` (aarch64 `dc cvau`/`ic ivau`; RISC-V `fence.i`);

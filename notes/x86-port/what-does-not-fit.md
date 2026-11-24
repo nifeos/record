@@ -100,7 +100,7 @@ ordering constraint stops existing rather than being documented for callers to r
 
 ## The SMP bug that was a counting bug (2026-09-19)
 
-For a month `arch::x86_64::ap_boot`'s BUGS #1 said a secondary core "fails intermittently", with two
+For a month `arch::x86_64::ap_boot`'s BUGS `#1` said a secondary core "fails intermittently", with two
 refuted hypotheses beside it. No core was failing. `cpu_start` read the online count before the
 INIT, then read it *again* after the STARTUP IPIs and waited for it to move from the second value. A
 core that checked in during the 200 µs settle delay had already moved it. So the loop waited ten
@@ -116,7 +116,7 @@ quick as any other), which is the UEFI leg's one-in-three failure recorded in
 
 ## Where TSO pays out
 
-Rule #4 says to assume weak memory ordering because ARM is the weak one and that is a gift. This is
+Rule `#4` says to assume weak memory ordering because ARM is the weak one and that is a gift. This is
 the port where the bet settles, and it settles in the direction it was made: code proven correct
 under ARM's model and RISC-V's RVWMO is correct on x86's TSO by construction.
 `direct_memory_access_write_barrier` is an `sfence` here and is nearly free, because stores are

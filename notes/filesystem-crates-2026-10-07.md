@@ -199,7 +199,7 @@ calef ruled every fork on #1803, 2026-10-07 (UTC), and these replace this note's
 - Fork 4: the rust-fs-btrfs `capi` gate and the btrfsutils optional-zstd change wait until
   milestone 140 needs btrfs, and each project's contribution policy is checked before either is
   sent. *"Defer a and b."* No rust-fatfs release request is sent: one is already open upstream
-  (rafalh/rust-fatfs#53 and #81).
+  (rafalh/rust-fatfs#53 and [#81](https://github.com/rafalh/rust-fatfs/issues/81)).
 - Fork 5: read-only ZFS is not pursued. *"Read only isn't interesting to me. Read write is the
   point."* Read-write ZFS needs threads in one process, so calef reopened §105
   (`std::thread::spawn` stays declined, until a customer needs it): *"Yes. However read-write ZFS

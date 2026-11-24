@@ -18,7 +18,7 @@ of the repository split. The ruling includes the go-ahead for a lane's first wri
 
 ## What was built
 
-Built 2026-10-04 (UTC) in `nifeos/basalt` pull request #1, merged as `f5bb505a5`. Nothing in this repository changed. Every name below is
+Built 2026-10-04 (UTC) in `nifeos/basalt` pull request [#1](https://github.com/nifeos/basalt/pull/1), merged as `f5bb505a5`. Nothing in this repository changed. Every name below is
 provisional and calef's to name.
 
 - `pins.toml`, the manifest: one TOML table per component, `[nife]` with `repository` (a
@@ -61,7 +61,7 @@ with the gate run on it. A nife commit that fails the gate is a red pull request
 - The pin bump's App path works end to end. calef installed `nife-smelter` on basalt and set
   `AUTOMATION_APP_ID` and `AUTOMATION_APP_KEY` on 2026-10-04 (19:05 and 19:10 UTC). Run
   37227310530, dispatched from the lane's branch, minted the token, pushed `pin/nife` and opened
-  basalt pull request #3 as `nife-smelter[bot]`. The gate started on it by itself (run
+  basalt pull request [#3](https://github.com/nifeos/basalt/pull/3) as `nife-smelter[bot]`. The gate started on it by itself (run
   37227325610, event `pull_request`).
 - Corrected: the first green run kept the program archives but no kernel. The artifact globs
   named `debug/deps/`, and this nightly's cargo puts a test binary under

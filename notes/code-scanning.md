@@ -47,7 +47,7 @@ were dismissed, each with a comment naming the file and line and why.
 
 | Rule | Count | Disposition | Reasoning class |
 |---|---|---|---|
-| `py/redos` | 1 | Fixed (#26) | Real. See below. |
+| `py/redos` | 1 | Fixed ([#26](https://github.com/nifeos/nife/security/code-scanning/26)) | Real. See below. |
 | `rust/hard-coded-cryptographic-value` | 23 | Used in tests | Fixture salts and the phc-winner-argon2 reference vector inside `#[cfg(test)] mod tests` in `crates/credentialer/src/lib.rs` |
 | `rust/hard-coded-cryptographic-value` | 2 | Used in tests | GCM test case 2's all-zero key and IV in `cryptography_exerciser`, a known-answer program |
 | `rust/hard-coded-cryptographic-value` | 2 | False positive | `start` and `put` in `components/src/credentialer.rs`: zeroed buffers that `fill()` overwrites from the entropy service before use, or the service refuses |

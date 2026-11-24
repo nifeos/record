@@ -164,7 +164,7 @@ Read against nifeos/boot_ladder `main` at `6f2dfda` and nife `main`.
   `description`, `repository`, `readme` and the template's lints are literals, and the `publish`
   line carries the one-sentence comment.
 - P0-2, the files a stranger needs: Done, nifeos/boot_ladder#1 and nifeos/boot_ladder#2. The
-  README, both licenses, `CHANGELOG.md` and `_typos.toml` exist, #1 gave the README its proof
+  README, both licenses, `CHANGELOG.md` and `_typos.toml` exist, [#1](https://github.com/nifeos/boot_ladder/pull/1) gave the README its proof
   steps, and `docs/stranger-test.md` records a passing stranger run.
 - P0-3, shipped text points into this tree: Done, [#3565](https://github.com/nifeos/nife/pull/3565),
   [#3655](https://github.com/nifeos/nife/pull/3655) and the move

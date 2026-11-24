@@ -23,7 +23,7 @@ capability's ACKNOWLEDGE
 re-enables the line on every completion; re-rolling the target each time would make the line hop
 cores on every interrupt. The mechanism stays in the driver: `gic::enable(intid, target_cpu)`
 writes `ITARGETSR[intid] = 1 << target_cpu`. PPIs and SGIs are per-core, so the target is ignored
-for them (the timer PPI, the reschedule SGI). Rule #2 holds: the GIC driver is told which core, it
+for them (the timer PPI, the reschedule SGI). Rule `#2` holds: the GIC driver is told which core, it
 does not decide.
 
 What this does and does not buy, measured honestly:
@@ -66,7 +66,7 @@ for S-mode on QEMU
   passed to `plic::claim`/`complete`/`disable` from the external-interrupt handler). A source targets
   exactly one hart, so the hart that takes it is the hart it is enabled on, and the mask/complete land
   on the right context. The PLIC driver stays mechanism-only: it is told the context, it does not read
-  the hartid (rule #2, DECISIONS §4).
+  the hartid (rule `#2`, DECISIONS §4).
 - The enable bits are serialized; nothing else in the driver is. The sentence two bullets up, "the
   threshold and enable registers are global PLIC MMIO," is exactly what makes this necessary, and the
   assembly audit ([arch-audit.md](../arch-audit.md), finding 3) is where it was caught. One enable

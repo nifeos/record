@@ -45,10 +45,10 @@ claim. Risk 5 is specifically that "the bugs appear only on silicon" (QEMU canno
 has zero confirmed instances of that claim, not one.
 
 **The `ap_boot` bugs are real defects, and closed.** The boot-core-identity bug
-(`arch::x86_64::ap_boot`'s `BUGS` #3) was fixed by milestone 316 (which core booted: making
+(`arch::x86_64::ap_boot`'s `BUGS` `#3`) was fixed by milestone 316 (which core booted: making
 `NIFE_SMP=2` mean something on x86_64) on 2026-09-18 UTC, and the third-or-later-secondary race
-(`BUGS` #1) was fixed by milestone 161's own closing work (2026-09-19). A third x86_64 SMP bug from
-the same bring-up, a missing cross-core TLB shootdown (`BUGS` #2), is fixed too.
+(`BUGS` `#1`) was fixed by milestone 161's own closing work (2026-09-19). A third x86_64 SMP bug from
+the same bring-up, a missing cross-core TLB shootdown (`BUGS` `#2`), is fixed too.
 
 None of the three was found on silicon. All three were found and reproduced under QEMU TCG, never
 on real x86_64 hardware (xenon). They are genuine concurrency defects and belong in a defect history,
@@ -57,17 +57,17 @@ cannot show, and QEMU showed all three of these.
 
 So the seed set is:
 
-1. x86_64: a missing cross-core TLB shootdown (`ap_boot`'s `BUGS` #2). A dead thread's kernel
+1. x86_64: a missing cross-core TLB shootdown (`ap_boot`'s `BUGS` `#2`). A dead thread's kernel
    stack, unmapped and remapped onto a different frame for reuse, was still translated by another
    core through a stale TLB entry, so a recycled thread's context read back as stack paint.
    Reproduced 10 of 10 runs at `NIFE_SMP=2`; found and fixed 2026-08-26 (UTC; the commits are dated
    the evening of 2026-08-25 Pacific).
-2. x86_64: a boot-core-identity mixup (`ap_boot`'s `BUGS` #3). `boot_cpu_id` answered "which core
+2. x86_64: a boot-core-identity mixup (`ap_boot`'s `BUGS` `#3`). `boot_cpu_id` answered "which core
    am I" instead of "which core booted," so a test body DECISIONS §28 (SMP placement: two random
    choices at spawn, message-shaped stealing, local wakes)'s placement migrated onto a secondary
    mistook that secondary for the boot core. Found 2026-08-26 UTC (while verifying #2 above); fixed
    by milestone 316, 2026-09-18 UTC.
-3. x86_64: a lost-checkin race in secondary bring-up (`ap_boot`'s `BUGS` #1). `cpu_start`
+3. x86_64: a lost-checkin race in secondary bring-up (`ap_boot`'s `BUGS` `#1`). `cpu_start`
    re-read the online count after issuing `STARTUP` IPIs and waited for it to move again, so a core
    that checked in during the settle delay was counted absent. 26 of 40 plain boots failed at
    `-smp 4` before the fix; fixed by milestone 161's own closing work, 2026-09-19.

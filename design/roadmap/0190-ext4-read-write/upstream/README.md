@@ -14,7 +14,7 @@ reviewed its text and given a separate go.
   truncate that leaves the file's tail zeroed; it files after 2a and moves onto it once 2a lands.
 - [`4-fuzz-targets.md`](4-fuzz-targets.md): upstream item 4, seven `cargo fuzz` targets over the
   parsers, mount and journal replay, with an `mke2fs` seed corpus; filed as
-  rcore-os/tgoskits#2834 and #2835.
+  rcore-os/tgoskits#2834 and [#2835](https://github.com/rcore-os/tgoskits/pull/2835).
 - [`5a-crc32c-safety-arguments.md`](5a-crc32c-safety-arguments.md): upstream item 5, first half,
   a safety argument at each CRC32C `unsafe` use.
 - [`5b-group-descriptor-decode.md`](5b-group-descriptor-decode.md): upstream item 5, second half,

@@ -8,7 +8,7 @@ built: 2026-09-17
 Built by a lane on `milestone/316-x86-smp-two-cores`.
 *(Number provisional until the merge queue lands it.)*
 
-`arch::x86_64::ap_boot`'s `BUGS` #3 is fixed at its root, both of its symptoms are gone, and the
+`arch::x86_64::ap_boot`'s `BUGS` `#3` is fixed at its root, both of its symptoms are gone, and the
 two-core suite was run repeatedly rather than once. The `NIFE_SMP` default stays at 1, and the
 reason it stays is not the reason it stayed before, which is the finding worth carrying out of this
 milestone.
@@ -96,7 +96,7 @@ Measured with `NIFE_SMP=2 script/repeat-under-load -n 12 -s 0 -- --arch x86_64` 
 
 5 of 12 runs green, load average 2.0 to 8.9, one QEMU at every sample (no neighboring lane).
 The interesting number is not that one. It is that all seven failures are the same assertion in
-`a_revoked_holder_faults_on_its_next_port_write` in `system_tests/src/user/x86_port_tests.rs`, and none of them is #3 or #1:
+`a_revoked_holder_faults_on_its_next_port_write` in `system_tests/src/user/x86_port_tests.rs`, and none of them is `#3` or `#1`:
 
 | what was measured | across the 12 runs |
 |---|---|
@@ -111,7 +111,7 @@ runs of the one and twelve of the other is not a proof. A flake that fires one r
 more than twelve to be called gone. It is enough to say the half-the-time failure is not
 half-the-time any more.
 
-Neither `BUGS` #1 nor the UEFI two-core start flake fired once. Milestone 412
+Neither `BUGS` `#1` nor the UEFI two-core start flake fired once. Milestone 412
 (`design/roadmap/0412-the-uefi-boot-gate-asserts-two-cores-that-do-not-always-start.md`)
 records `smp: cpu 1 did not start (firmware returned -1)` at one run in three from a three-run
 sample; this campaign saw 26 two-core boots and zero such lines, 8 of them under OVMF. That is
@@ -155,7 +155,7 @@ architect's, and the above is evidence for it rather than an answer to it.
 
 ## BUGS
 
-- `ap_boot`'s `BUGS` #1 is untouched and still open. A third or later secondary fails
+- `ap_boot`'s `BUGS` `#1` is untouched and still open. A third or later secondary fails
   intermittently at `-smp 3` and above, two hypotheses tested and refuted, no root cause. It was out
   of this milestone's scope by the brief, and it did not fire in 26 two-core boots here, which is
   consistent with its recorded "three or later" bound and proves nothing about three.
@@ -181,13 +181,13 @@ architect's, and the above is evidence for it rather than an answer to it.
   still owes is the broadcast.
 - **Decision.** `design/decisions/0153-two-core-x86-test-sequencing.md` has its premise changed and
   wants re-reading with the section above beside it. Not this lane's to resolve.
-- **Recorded.** A bench boot on xenon would settle `BUGS` #1, and it is cheap now that the stick and the
-  procedure exist (notes/x86-uefi-boot.md). #1 was *"measured extensively on QEMU TCG"* and has
+- **Recorded.** A bench boot on xenon would settle `BUGS` `#1`, and it is cheap now that the stick and the
+  procedure exist (notes/x86-uefi-boot.md). `#1` was *"measured extensively on QEMU TCG"* and has
   never been tried on silicon. There the INIT-SIPI-SIPI timing, the `STARTUP` delays and the
   self-modifying-code behavior that two of its refuted hypotheses turned on are all real rather
   than emulated. xenon has four cores and printed `nife machine: x86_64, 4 processor(s)` on
   2026-09-17. **The exact line to look for is `smp: N core(s) online`** in the boot transcript at
-  `-smp 4`. `smp: 4 core(s) online` says #1 is a TCG artifact, and anything less, with a
+  `-smp 4`. `smp: 4 core(s) online` says `#1` is a TCG artifact, and anything less, with a
   `smp: cpu N did not start` line above it naming a core that varies between boots, says it is real.
   Boot it several times; one boot decides nothing, since the defect is intermittent under TCG too.
 
@@ -211,4 +211,4 @@ for a new reason**: what keeps the two-core suite from being clean is
 bitmap on the revoker's core only. That is milestone 313's accepted window and milestone 315's
 target. It is a red for exactly the reason the test exists rather than substrate flakiness, which is
 evidence DECISIONS §153 was written without. The two-core observer 315 planned to write already
-exists in the suite. `BUGS` #1 remains open and did not fire at two cores.
+exists in the suite. `BUGS` `#1` remains open and did not fire at two cores.
