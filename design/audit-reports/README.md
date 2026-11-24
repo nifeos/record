@@ -155,6 +155,7 @@ malformed it.
 | 2026-11-17 | documentation | The newcomer path, run rather than read: every command the README's Try it block, `CONTRIBUTING.md` and `AGENTS.md` tell a reader to run, followed to the scripts and notes they send that reader to next, with each claim checked against the tree | fixed 0, minted 9, accepted 1 | [The newcomer path](2026-11-17-the-newcomer-path.md) |
 | 2026-11-17 | security | The verifier, as code that runs with authority nobody reviewed: the stock Kani `.kani-version` pins and the bundle `cargo kani setup` fetches behind it, the daily bump job, the patched riscv64 Kani and the falsification records, then the window's ten new external packages followed to the graph each reaches | fixed 0, minted 3, accepted 2 | [The verifier](2026-11-17-the-verifier.md) |
 | 2026-11-17 | security | radon's device authority, read as a holder turned hostile: the clock and reset server, the GMAC's control process and the PMIC route, each page followed to what it reaches beyond its device, who can send to it and what it trusts | fixed 3, minted 3, accepted 2 | [radon's device authority](2026-11-17-radon-device-authority.md) |
+| 2026-11-24 | security | The graphical drivers' parsers, read as the other side turned hostile: the terminal engine against a program's bytes, `display_terminal` against the compositor's control page, the compositor against its input ring and display driver, `gpu_driver` against its device, and both keyboard drivers against theirs | fixed 6, minted 1, accepted 5 | [The graphical drivers' parsers](2026-11-24-the-graphical-drivers-parsers.md) |
 
 ## What the tree looked like when each ran
 
@@ -204,6 +205,7 @@ must not err in. So the count spans both, and it stays continuous across the spl
 | 2026-11-17 | documentation | 510 | 253 | 99 | 209 |
 | 2026-11-17 | security | 510 | 253 | 99 | 209 |
 | 2026-11-17 | security | 510 | 253 | 99 | 209 |
+| 2026-11-24 | security | 542 | 240 | 99 | 208 |
 
 The two `-` cells are honest rather than lazy: the roadmap was a single file with no status column
 until milestone 76 (split the roadmap: `design/roadmap/README.md` as index, one file per milestone) split it into `design/roadmap/` on 2026-08-03, and milestones 1 to 11 were
@@ -243,8 +245,8 @@ index that took every file called an audit would report a coverage it does not h
 
 1. **Pick the lens the last audit lacked.** That is milestone 43's insight and it is the whole
    reason the `Lens` column exists: read the rows above and ask what they did not look at.
-   Candidates not yet taken: the graphical drivers' parsers (milestone 600 (the graphical terminal
-   stack is built in userspace)).
+   Candidates not yet taken: radon's PCI Express root port and the devices it exposes
+   (`kernel/src/drivers/jh7110_pci_express.rs`).
 
    **For a `documentation` sweep the lens question has a starting answer rather than a blank**, and
    it is `script/audits --worklist`: it ranks every document by how many of the files it cites have
