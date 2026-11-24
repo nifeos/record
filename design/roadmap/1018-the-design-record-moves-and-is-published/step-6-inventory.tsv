@@ -10,7 +10,7 @@
 .github/workflows/coe-architect-label.yml	notes/coes notes/corrections	copied into nifeos/record by its lint pull request; removed from nife by the removal pull request
 .github/workflows/metrics.yml	notes/project-metrics.md	stays; notes/project-metrics.md moves with the record, so the workflow writes it into nifeos/record by pull request
 .github/workflows/mutation.yml	notes/mutation-testing.md	names a record file in a message or comment: becomes nifeos/record:<path> in the mention sweep
-.github/workflows/record-site.yml	design/** notes/**	leaves nife in the removal pull request; step 8 builds the site in nifeos/nifeos.org
+.github/workflows/record-site.yml	design/** notes/**	leaves nife in the removal pull request; step 8 builds the site in nifeos/partsfoundry.org
 .github/workflows/stranger-cadence.yml	notes/stranger-test notes/stranger-test.md	stays with script/stranger-test; reads the run record at the record pin
 .github/workflows/toolchain-bump.yml	notes/kernel-proofs/riscv64-with-a-patched-kani.md	names a record file in a message or comment: becomes nifeos/record:<path> in the mention sweep
 Cargo.toml	design	names a record file in a message or comment: becomes nifeos/record:<path> in the mention sweep
@@ -114,12 +114,12 @@ script/stranger-test	notes notes/stranger-test notes/stranger-test.md	stays (the
 script/supply-chain	notes/packages/container-format-measurements/fuzz	names a record file in a message or comment: becomes nifeos/record:<path> in the mention sweep
 script/verify	design notes	names a record file in a message or comment: becomes nifeos/record:<path> in the mention sweep
 script/verify-riscv64	notes/kani-upstream.md	names a record file in a message or comment: becomes nifeos/record:<path> in the mention sweep
-site/build.mjs	design notes	leaves nife in the removal pull request; step 8 builds the site in nifeos/nifeos.org
-site/layouts/index.njk	design	leaves nife in the removal pull request; step 8 builds the site in nifeos/nifeos.org
-site/layouts/page.njk	design	leaves nife in the removal pull request; step 8 builds the site in nifeos/nifeos.org
-site/lib/address.js	design design/decisions design/fatal-risks design/journeys design/roadmap notes	leaves nife in the removal pull request; step 8 builds the site in nifeos/nifeos.org
-site/lib/markdown.js	design/decisions design/roadmap	leaves nife in the removal pull request; step 8 builds the site in nifeos/nifeos.org
-site/package.json	design	leaves nife in the removal pull request; step 8 builds the site in nifeos/nifeos.org
+site/build.mjs	design notes	leaves nife in the removal pull request; step 8 builds the site in nifeos/partsfoundry.org
+site/layouts/index.njk	design	leaves nife in the removal pull request; step 8 builds the site in nifeos/partsfoundry.org
+site/layouts/page.njk	design	leaves nife in the removal pull request; step 8 builds the site in nifeos/partsfoundry.org
+site/lib/address.js	design design/decisions design/fatal-risks design/journeys design/roadmap notes	leaves nife in the removal pull request; step 8 builds the site in nifeos/partsfoundry.org
+site/lib/markdown.js	design/decisions design/roadmap	leaves nife in the removal pull request; step 8 builds the site in nifeos/partsfoundry.org
+site/package.json	design	leaves nife in the removal pull request; step 8 builds the site in nifeos/partsfoundry.org
 tools/redoxfs_host/src/main.rs	notes/host-recovery.md	names a record file in a message or comment: becomes nifeos/record:<path> in the mention sweep
 tools/redoxfs_host/src/volume.rs	notes/host-recovery.md	names a record file in a message or comment: becomes nifeos/record:<path> in the mention sweep
 xtask/falsifications/swish_check.boot.swish_check_boot.patch	notes/confinement-claims.md notes/packages/running-unvouched.md	names a record file in a message or comment: becomes nifeos/record:<path> in the mention sweep
