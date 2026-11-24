@@ -213,8 +213,8 @@ one's confinement, and it is why the driver is a separate process).
 The display driver sees the composed screen and nothing else of the clients: it never maps a client
 surface. The kernel is trusted absolutely, as always here, and in the tests it also plays the roles
 a full system would give to separate components (the input driver, and the display server in three
-of the four tests). That is worth saying so that "the kernel checked it" is not mistaken for "a
-distrusted component was checked".
+of the four tests). So "the kernel checked it" does not mean "a distrusted component was
+checked".
 
 ## What this does not do that a real compositor would
 
@@ -246,9 +246,12 @@ distrusted component was checked".
   about the code, exactly as `ROLE_CAPTURE`'s read-only screen already is. Recorded by the same
   audit and not taken in it, because flipping a mapping wants a test that proves the fault.
 - No defense against denial of service. A client can spam the doorbell, never answer an input
-  `CALL`, or never reply, and the compositor's single thread will slow or stall. Confidentiality and
+  `CALL`, or never reply, and the compositor's single thread will slow or stall. A display driver
+  that refuses one flush ends it. Confidentiality and
   integrity are what this rung proves; availability against a hostile client needs the same missing
   primitive plus a policy, and Wayland does not solve it either.
+- `Rect::intersect` and `Rect::union` overflow, and halt, on rectangles far off the screen. Every
+  caller clips first.
 - No vsync, no frame pacing, no cursor. There is no display interrupt to wake on (virtio-gpu's
   cursor queue is untouched, as rung one left it), so every frame is driven by a client's commit.
 - The window list is the scene, not live state. Enumeration returns the fixed geometry plus the
