@@ -121,7 +121,7 @@ picture.
 
 ### Lines are volume, not effort
 
-![Lines touched each week, by the model that signed them](../project-metrics/models-lines.svg)
+![Lines touched each week, by the model that signed them](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/models-lines.svg)
 
 The chart counts added plus removed: the churn, not the net. Net is the wrong quantity twice over.
 A commit that only deletes reads negative. A careful mechanical sweep can net out near nothing

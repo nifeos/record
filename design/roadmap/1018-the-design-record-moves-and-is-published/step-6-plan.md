@@ -206,9 +206,10 @@ resolves through basalt's pinned `Cargo.lock`. Anchors after `#` drop, because t
 32 of the 351 are image embeds, not links: 31 in `notes/project-metrics.md` and one in
 `notes/register-of-measures/which-model-wrote-it.md`, each drawing a chart from
 `notes/project-metrics/`. `script/metrics` writes its week notes under each chart by matching that
-embed, and text in its place would drop the chart and its notes. The embeds keep their form until
-the removal pull request settles where the charts are served from (provisional). The rewrite
-covers the other 319.
+embed, and text in its place would drop the chart and its notes. The charts stay in nife with the
+data, so each embed is an image URL into nifeos/nife's `main` branch
+(`https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/<chart>.svg`), the form
+`script/metrics` writes. The rewrite covers the other 319.
 
 Three checks hold it:
 
