@@ -1,0 +1,290 @@
+#!/bin/sh
+#
+# Cut a lane's branch and worktree, refusing a bad name before either exists.
+#
+#     script/claim milestone/238-a-thing --new-work
+#     script/claim maintainer/some-fix --debt-paydown --worktree ../nife-worktrees/somefix --no-claim
+#     script/claim maintainer/bold-sweep --debt-paydown
+#
+# # Why this exists
+#
+# script/lint-fleet's check 4 refuses a branch that LOOKS like a milestone claim but does not parse
+# (`milestone-126-pgrep`, a hyphen where `milestone/*` needs a slash), because a near-miss would
+# otherwise skip check 4b in silence, which is the check that moves a milestone's roadmap status at
+# merge. That check is right. It also only ever sees a branch that already exists, which means it
+# fires after `git worktree add`, after the work is written, sometimes after commits. On 2026-09-22
+# the maintainer hit it there and paid the late price: delete the branch, delete the worktree,
+# recreate both with the right name, re-apply the commit. A rung-two gate delivering a rung-four
+# experience, because the only place the rule was checkable was the last place it was cheap to fail.
+#
+# This runs the identical refusal (shared with script/lint-fleet through helpers/branch-name-check.sh, so
+# the two cannot drift into different answers for the same name) before touching the filesystem or
+# git at all. A bad name here costs one retyped command.
+#
+# # Why it also makes the claim
+#
+# AGENTS.md §90 (the claim is a draft pull request; the status flip is a gate): a lane's first act,
+# before any work, is one empty commit, a push, and a draft pull request, because that draft is what
+# stops two lanes silently taking the same milestone. A front door that stopped at `git worktree add`
+# would hand back exactly the gap that mechanism exists to close: a worktree and branch that exist
+# and claim nothing, for however long it takes the lane to remember the next three commands.
+# `--no-claim` is there for the caller who wants the branch alone.
+#
+# Name: provisional, minted 2026-09-22 for this milestone. A verb, per DECISIONS §134 ("family
+# splits in a way nobody had written down"), which records the split the `script/` family already
+# had: what does something takes a verb, what reports takes a noun. This script performs an action
+# rather than reads the tree back, so it takes the verb. Chosen for the word AGENTS.md and
+# helpers/lane-claim-check.sh already use for exactly this act, the empty commit plus draft pull
+# request that makes a lane visible before it has anything else to show. calef has not ruled on it.
+#
+# The claim commit carries a Co-Authored-By trailer because .githooks/commit-msg requires one of any
+# agent's commit; without it this script died at its own first commit (found 2026-10-05 UTC).
+#
+# # Why it refuses an unclassified lane
+#
+# Every lane says at the claim whether it repays debt, with exactly one of `--debt-paydown` or
+# `--new-work`, and this refuses to run with neither or both (calef's ruling R1 on #1894,
+# 2026-10-10 UTC). An optional flag counted only the lanes whose briefer remembered it; a required
+# one is asked of every lane at the moment it knows its own purpose best. `--debt-paydown` opens
+# the draft with the `debt-paydown` label on; `--new-work` adds no label, and the draft's body
+# records which was chosen. notes/debt-paydown.md has the definition. The name `debt-paydown`, as
+# label and flag, was ratified by calef on 2026-10-10 (UTC); `--new-work` is provisional.
+# helpers/claim-selftest.sh, run by script/lint-fleet, holds the refusal to that.
+#
+# See notes/scripts.md.
+
+set -eu
+
+repo_root="$(cd "$(dirname "$0")/.." && pwd)"
+# The shape rule itself lives here so this script and script/lint-fleet's check 4 read off one case
+# statement instead of two that can quietly stop agreeing.
+. "$repo_root/helpers/branch-name-check.sh"
+
+usage() {
+    cat >&2 <<'EOF'
+usage: script/claim <branch-name> (--debt-paydown | --new-work) [--worktree <dir>] [--title <text>] [--no-claim]
+
+  <branch-name>     e.g. milestone/238-a-thing or maintainer/some-fix. Checked against the same
+                     shape rule script/lint-fleet's check 4 enforces, before anything is created.
+  --worktree <dir>  where to put the worktree; a relative <dir> is read from the current
+                     directory. Default: <worktree root>/<slug>, where
+                     <slug> is the branch's last /-separated segment (the canonical location per
+                     notes on this project's worktree convention). The worktree root is
+                     `nife-worktrees` beside the main checkout; $NIFE_WORKTREES replaces it.
+  --title <text>    the draft pull request's title, and the text after "claim: " in the empty
+                     commit. Default: the branch name itself; `gh pr edit` renames the pull
+                     request later if a better title turns up mid-work.
+  --debt-paydown    the work repairs, cleans up, fixes a record or brings the tree up to a
+                     standard it already has (notes/debt-paydown.md); the draft gets the
+                     debt-paydown label. Exactly one of this or --new-work is required.
+  --new-work        anything else: a capability, a milestone's first build, a proposal, a
+                     measurement. No label. Exactly one of this or --debt-paydown is required.
+  --no-claim        stop once the branch and worktree exist. Skip the empty commit, the push, and
+                     the draft pull request (AGENTS.md §90's claim). Without this flag the claim is
+                     made, because that is every lane's documented first act and a front door that
+                     stops short of it hands back the exact race it exists to prevent.
+EOF
+}
+
+branch=""
+worktree=""
+title=""
+make_claim=yes
+label=""
+kind=""
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --worktree)
+            [ $# -ge 2 ] || { echo "claim: --worktree needs a path" >&2; exit 2; }
+            # Anchored to the caller's directory now, because three later uses disagree about a
+            # relative path: `[ -e ]` and the claim's `cd` read it from here, while `git -C
+            # "$repo_root" worktree add` reads it from the tree this script lives in. Run from the
+            # main checkout as a lane worktree's script/claim, `../nife-worktrees/x` would land at
+            # `nife-worktrees/nife-worktrees/x`. helpers/claim-selftest.sh holds it to that.
+            case "$2" in
+                /*) worktree="$2" ;;
+                *) worktree="$PWD/$2" ;;
+            esac
+            shift 2 ;;
+        --title)
+            [ $# -ge 2 ] || { echo "claim: --title needs text" >&2; exit 2; }
+            title="$2"; shift 2 ;;
+        --no-claim) make_claim=no; shift ;;
+        --debt-paydown|--new-work)
+            if [ -n "$kind" ] && [ "$kind" != "$1" ]; then
+                echo "claim: --debt-paydown and --new-work both given; a lane is one or the other" >&2
+                exit 2
+            fi
+            kind="$1"; shift ;;
+        -h|--help) usage; exit 0 ;;
+        -*)
+            echo "claim: unknown argument $1" >&2
+            usage
+            exit 2 ;;
+        *)
+            if [ -n "$branch" ]; then
+                echo "claim: one branch name only (already have '$branch', also saw '$1')" >&2
+                exit 2
+            fi
+            branch="$1"; shift ;;
+    esac
+done
+
+if [ -z "$branch" ]; then
+    usage
+    exit 2
+fi
+
+# Before anything touches git or the disk, like the name check below: an unclassified lane costs
+# one retyped command here.
+if [ -z "$kind" ]; then
+    echo "claim: say whether this lane repays debt: add --debt-paydown or --new-work" >&2
+    echo "  (definition in notes/debt-paydown.md; calef's ruling R1 on #1894)" >&2
+    exit 2
+fi
+[ "$kind" = --debt-paydown ] && label=debt-paydown
+
+# The refusal this script exists for, and it runs first: before the worktree, before the branch,
+# before a single file changes on disk.
+nife_check_branch_name_shape "$branch" claim || exit 1
+
+# A milestone number already held by an open pull request is refused, before git is touched
+# (2026-10-10 UTC). That day #1901, renumbered from 868 to 870, and #1906, newly cut as 870, took
+# 870 within minutes, and the claim never looked past its own name. Two open lanes on one number
+# are always wrong: the same milestone twice is forbidden, and two milestones on one number is
+# the collision. An open pull request's number is the one its title names (`milestone 871 (a
+# sixth outsider pass attacks the confinement claim): ...`, `milestone/561: ...`) and only failing
+# that its branch's, because a renumbered lane keeps its branch
+# (notes/skills/developer-lane/SKILL.md, shared state) and its title is what moved. It
+# narrows the race rather than closing it: two claims in the same minute still both pass, and a
+# lane that renumbers by hand is not checked here at all. Offline, `gh` fails and this warns.
+case "$branch" in
+milestone/[0-9]*-*)
+    claim_n="${branch#milestone/}"
+    claim_n="$(expr "${claim_n%%-*}" + 0)"
+    if open_prs="$(gh pr list --state open --limit 300 --json number,headRefName,title \
+            --jq '.[] | "\(.number)\t\(.headRefName)\t\(.title)"' 2>/dev/null)"; then
+        holders="$(printf '%s\n' "$open_prs" | awk -F '\t' -v n="$claim_n" -v self="$branch" '
+            $2 == self { next }
+            {
+                t = tolower($3); num = ""
+                if (t ~ /^milestone[ \/][0-9]+/) { sub(/^milestone[ \/]/, "", t); match(t, /^[0-9]+/); num = substr(t, 1, RLENGTH) }
+                else if ($2 ~ /^milestone\/[0-9]+-/) { h = $2; sub(/^milestone\//, "", h); sub(/-.*/, "", h); num = h }
+                if (num != "" && num + 0 == n) printf "  #%s %s (%s)\n", $1, $3, $2
+            }')"
+        if [ -n "$holders" ]; then
+            echo "claim: milestone $claim_n is already held by an open pull request:" >&2
+            printf '%s\n' "$holders" >&2
+            echo "  Take another number, or close that draft first if it is abandoned." >&2
+            exit 1
+        fi
+    else
+        echo "claim: could not list open pull requests, so milestone $claim_n is unchecked against them" >&2
+    fi
+    ;;
+esac
+
+# A lane's first act is the right moment to say which identity it is about to act as. A session
+# that opted in to the App (NIFE_SMELTER=1; milestone 128 (the automation gets its own identity),
+# notes/session-identity.md) but never applied `smelter-token env` would claim under the personal
+# login; this says so, loudly, and carries on. A session that did not opt in sees nothing.
+"$repo_root/helpers/smelter-token" check || true
+
+if [ -z "$worktree" ]; then
+    slug="${branch##*/}"
+    # Derived, not spelled: the main checkout owns the shared .git, and the root sits beside it.
+    common="$(git -C "$repo_root" rev-parse --path-format=absolute --git-common-dir)"
+    main_checkout="$(dirname "$common")"
+    default_root="$(cd "$main_checkout/.." && pwd)/nife-worktrees"
+    worktree="${NIFE_WORKTREES:-$default_root}/$slug"
+fi
+
+if [ -e "$worktree" ]; then
+    echo "claim: $worktree already exists; pass --worktree <dir> to pick another" >&2
+    exit 1
+fi
+
+if git -C "$repo_root" rev-parse --verify --quiet "refs/heads/$branch" >/dev/null 2>&1; then
+    echo "claim: branch '$branch' already exists locally" >&2
+    exit 1
+fi
+
+echo "==> fetching origin, so the branch starts from the real tip rather than a stale local main"
+git -C "$repo_root" fetch origin
+
+echo "==> creating worktree at $worktree on branch $branch"
+git -C "$repo_root" worktree add "$worktree" -b "$branch" origin/main
+
+# Lanes build without incremental compilation; the main checkout keeps it (2026-10-12 UTC,
+# maintainer/build-output-size). On 2026-10-12 the disk nearly filled with every lane worktree
+# holding 6 to 10 GB of `target/`, and in one lane worker's ~6 GB, 2.7 GB was `incremental/`
+# (host debug 1.1 GB, aarch64 788 MB, riscv64 362 MB, x86_64 368 MB, uefi 75 MB). A lane builds
+# its tree a handful of times and is pruned, so it rarely earns back a cache that size; the main
+# checkout is long-lived and edited in place, so it does. The switch is cargo's own `build.incremental`
+# in a `.cargo/config.toml` at the worktree root, which cargo finds by walking up from any lane's
+# directory and never from the main checkout beside it. It is written once, here, because every lane
+# is cut here; a lane cut before 2026-10-12 picks it up as soon as any later claim has run. The file
+# is the machine's, not the tree's, so it is not under version control. CI is unaffected: it never
+# sees this directory, and Swatinem/rust-cache already exports CARGO_INCREMENTAL=0 in the jobs that
+# use it. `CARGO_INCREMENTAL=1` in the environment overrides it for one command.
+lanes_root="$(dirname "$worktree")"
+if [ ! -e "$lanes_root/.cargo/config.toml" ]; then
+    echo "==> lane builds go non-incremental: writing $lanes_root/.cargo/config.toml"
+    mkdir -p "$lanes_root/.cargo"
+    cat >"$lanes_root/.cargo/config.toml" <<'EOF_CONFIG'
+# Written by nife's script/claim; its comment above `lanes_root` says why. Every lane worktree in
+# this directory builds without incremental compilation; the main checkout, outside it, keeps it.
+[build]
+incremental = false
+EOF_CONFIG
+fi
+
+# The pre-push hook's fleet half (the queued-branch refusal, script/lint-fleet and the ready-status
+# check) runs only where `nife.fleet` is set (milestone 889 (the tree's gates stop depending on the
+# fleet tooling), provisional), so that a stranger's push asks GitHub nothing. A machine that cuts
+# lanes is a fleet machine, and this is the one command every lane's cut goes through, so the
+# opt-in is set here. It lives in the shared .git's config, which every worktree reads.
+if [ "$(git -C "$repo_root" config --bool nife.fleet 2>/dev/null)" != true ]; then
+    echo "==> opting this clone in to the fleet's pre-push checks (git config nife.fleet true)"
+    git -C "$repo_root" config nife.fleet true
+fi
+# The same machine shares one stash stack across every lane, so `git stash` is blocked here for all
+# of them (milestone 118 (CLAUDE.md has a budget)'s budget rule 3; helpers/stash-block.sh). An existing stash leaves it
+# unblocked and is listed, never dropped: it is some lane's work.
+(cd "$repo_root" && helpers/stash-block.sh) || true
+
+if [ "$make_claim" = no ]; then
+    echo "claim: worktree and branch created; --no-claim given, stopping before the §90 claim"
+    echo "claim: cd $worktree"
+    exit 0
+fi
+
+claim_text="${title:-$branch}"
+
+echo "==> claim: empty commit, push, draft pull request"
+(
+    cd "$worktree"
+    # .githooks/commit-msg refuses an agent's commit (CLAUDECODE or OPENCODE set) that has no
+    # Co-Authored-By trailer, and the claim is made by agents, so the bare message failed there and
+    # lanes pushed their claims by hand. `Claude Code` is the one tool-level value script/metrics
+    # already files under other_models; an empty claim commit carries no model's work, so naming the
+    # tool is accurate. $NIFE_CLAIM_MODEL names a model instead, e.g. "Claude Opus 5.5".
+    git commit --allow-empty -m "claim: $claim_text
+
+Co-Authored-By: ${NIFE_CLAIM_MODEL:-Claude Code} <noreply@anthropic.com>"
+    git push -u origin HEAD
+    # The line names no person: AGENTS.md is in the repository and anybody may run their agents on it
+    # (calef, 2026-10-20 UTC). A session on the App (milestone 128 (the automation gets its own
+    # identity), helpers/smelter-token) is authored by the bot, not a person, so it names the bot.
+    author="the author GitHub shows is the person running it."
+    if [ "${NIFE_SMELTER_ACTIVE:-}" = 1 ]; then
+        bot="$("$repo_root/helpers/smelter-token" identity 2>/dev/null)" && author="$bot is the author GitHub shows."
+    fi
+    gh pr create --draft ${label:+--label "$label"} --title "$claim_text" --body "**Lane:** \`$branch\`, written by an agent; $author
+
+Claim commit only so far. Classified at claim: \`${kind#--}\`."
+)
+
+echo "claim: worktree $worktree, branch $branch, draft pull request opened"
+echo "claim: cd $worktree"

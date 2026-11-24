@@ -1,0 +1,47 @@
+# The record's lint (script/lint) on every pull request and in the merge queue.
+#
+# script/lint fetches what it needs itself: basalt's pins.toml on main, nife at the commit it pins
+# (helpers/nife_tree.py) and moho_abi at the revision nife's Cargo.lock names, all public and all
+# shallow. The job's name is the status check a ruleset requires, so renaming it is a ruleset
+# change too.
+
+name: lint
+
+on:
+  pull_request:
+  merge_group:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lint-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lint:
+    name: record lint
+    runs-on: ubuntu-26.04
+    timeout-minutes: 30
+    env:
+      TYPOS_VERSION: 1.51.1
+      TYPOS_SHA256: 93c301fd4120ff076e2cc2a6d6a61cab4a4bdb81899287c0938b452e56d1f454
+    steps:
+      # The whole history: the replay-line and citations sections compare this branch with main.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+
+      - name: Install typos
+        run: |
+          set -eu
+          tarball="typos-v${TYPOS_VERSION}-x86_64-unknown-linux-musl.tar.gz"
+          curl -fsSL -o "$RUNNER_TEMP/$tarball" \
+            "https://github.com/crate-ci/typos/releases/download/v${TYPOS_VERSION}/$tarball"
+          echo "${TYPOS_SHA256}  $RUNNER_TEMP/$tarball" | sha256sum -c -
+          mkdir -p "$RUNNER_TEMP/bin"
+          tar -xzf "$RUNNER_TEMP/$tarball" -C "$RUNNER_TEMP/bin" ./typos
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+
+      - name: script/lint
+        run: script/lint

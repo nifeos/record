@@ -1,0 +1,516 @@
+#!/bin/sh
+#
+# script/lint: every gate the record holds itself to, one section at a time.
+#
+#     script/lint                  run every section; fail at the end if any failed
+#     script/lint --list           print each section's id and name
+#     script/lint --section <id>   run one section (its verdict never stands in for a full run)
+#
+# Each section below is a shell function `section_<id>` that opens with `echo "==> <name>"`, the
+# name nife's `script/lint` gives the section it comes from, so a log reads the same in either
+# repository. A section runs in a shell of its own with `set -e`, a failing one prints what it
+# always printed, the next runs anyway, and the summary at the end names every section that
+# failed. The verdict is the fail-fast verdict: a run passes exactly when every section passes.
+#
+# What runs here. The record sections of nife's lint (the ones that read only the design record)
+# and the record halves of the sections that read both, each against the record's own files and
+# the record rows of the baselines (`design/*-baseline.*`, `design/removed.tsv`). The code halves
+# stay in nife. design/roadmap/1018-the-design-record-moves-and-is-published/step-6-inventory.tsv
+# says, section by section, which is which.
+#
+# **nife at its pin.** The record names nife's code: a `**Recorded.**` line names `script/lint`, a
+# citation names `xtask/src/host.rs`, a counted claim counts the kernel's proof harnesses. Those
+# resolve in nife at the commit basalt's `main` pins, which is the rule `nifeos/<repo>:<path>`
+# citations already follow (helpers/qualified_paths.py). Before the first section, lint links every
+# path nife has and the record lacks into this tree (`helpers/nife_tree.py overlay`), names each
+# link in the repository's `info/exclude` so git never sees it, and removes them all at the end,
+# on failure and on an interrupt too. A path the record has is never shadowed. While a run is in
+# progress, do not edit or copy through those links: the checkout they point at is read-only, so
+# a write fails instead of changing what the next run reads. `NIFE_TREE` names a checkout of nife at
+# the pinned commit instead of the cached one (CI sets it).
+#
+# Adding a section: write `section_<id>` with its `==>` line and a `# lint-scope:` line, add the id
+# to SECTIONS in the order it runs, and document any script it calls in AGENTS.md.
+
+set -u
+cd "$(dirname "$0")/.."
+
+SECTIONS="claim_copy replay_line conflict_markers todo_markers roadmap reviews decisions journeys
+four_digits citations citations_ratchet citations_moved fatal_risks script_docs counted_claims
+naming_conventions naming_rules audits_selftest audits environment_names tracked_ignored
+markdown_links prose_ratchet removed_index module_block_ratchet comment_block_ratchet parent_index
+house_style history line_citations outsider_pass exception_markers repeat_issue em_dashes spelling"
+
+section_claim_copy() {
+    echo "==> script/claim is nife's, byte for byte"
+    # lint-scope: record
+    # The record claims lanes with nife's own script/claim and the three helpers it runs, copied
+    # (decided provisionally 2026-11-23 UTC, until the fleet repository the tooling ruling names
+    # exists). The copy is the file at nife's pinned commit, so a change lands in nife first and
+    # reaches the record when basalt's pin moves and this section asks for the copy.
+    nife="$(python3 helpers/nife_tree.py path)"
+    commit="$(python3 helpers/nife_tree.py commit)"
+    differ=""
+    for f in script/claim helpers/branch-name-check.sh helpers/smelter-token helpers/stash-block.sh; do
+        if [ ! -f "$f" ] || [ -L "$f" ] || ! cmp -s "$f" "$nife/$f"; then
+            differ="$differ $f"
+        fi
+    done
+    if [ -n "$differ" ]; then
+        echo "lint: these differ from nifeos/nife at $commit, the commit basalt's main pins:$differ" >&2
+        echo "  Copy them from there, in a change of their own:" >&2
+        for f in $differ; do
+            echo "    git -C <nife checkout> show $commit:$f > $f" >&2
+        done
+        echo "  and keep each file's mode (script/claim and helpers/smelter-token are executable)." >&2
+        echo "  A change to the claim itself goes to nife; this copy follows the pin." >&2
+        exit 1
+    fi
+    echo "claim copy: 4 files identical to nifeos/nife@$(echo "$commit" | cut -c1-12)"
+}
+
+section_replay_line() {
+    echo "==> no reproducer in this branch's commit messages (a replay line, a seed assignment)"
+    # lint-scope: both
+    helpers/replay-line-check-selftest.sh >/dev/null
+    helpers/read-advisory-selftest.sh >/dev/null
+    helpers/ask-section-check.sh --selftest >/dev/null
+    if git rev-parse --verify -q origin/main >/dev/null; then
+        helpers/replay-line-check.sh --range origin/main..HEAD
+    else
+        echo "lint: no origin/main to compare with; the commit messages were not read for a reproducer" >&2
+    fi
+}
+
+section_conflict_markers() {
+    echo "==> conflict markers"
+    # lint-scope: both
+    if hits="$(git grep -nE '^(<{7}|={7}|>{7})( |$)' -- ':!*.lock')"; then
+        echo "lint: merge conflict markers left in tracked files:" >&2
+        printf '%s\n' "$hits" >&2
+        exit 1
+    fi
+    echo "conflict markers: none"
+}
+
+section_todo_markers() {
+    echo "==> TODO markers cite a milestone"
+    # lint-scope: both
+    # The record half: the record's own scripts and helpers. Markdown is out, as in nife.
+    pattern='(TODO|FIXME|XXX|HACK)[[:blank:]]*[(:]'
+    cited='(TODO|FIXME|XXX|HACK)[[:blank:]]*\(milestone [0-9]+\)'
+    bad="$(git grep -nE "$pattern" -- ':!*.md' ':!script/lint' | grep -vE "$cited" || true)"
+    if [ -n "$bad" ]; then
+        echo "lint: TODO/FIXME markers that do not name the milestone that owns them:" >&2
+        printf '%s\n' "$bad" | sed 's/^/  /' >&2
+        echo "Spell it TODO(milestone N): and add the block under design/roadmap/, or take the" >&2
+        echo "note out of the marker form. See design/roadmap/0094-untracked-work.md." >&2
+        exit 1
+    fi
+    dangling=""
+    for n in $(git grep -hoE "$cited" -- ':!*.md' ':!script/lint' | grep -oE '[0-9]+' | sort -un); do
+        ls design/roadmap/"$(printf '%04d' "$(expr "$n" + 0)")"-* >/dev/null 2>&1 ||
+            dangling="$dangling $n"
+    done
+    if [ -n "$dangling" ]; then
+        echo "lint: TODO markers cite milestones with no block under design/roadmap/:$dangling" >&2
+        exit 1
+    fi
+    echo "TODO markers: every one names a milestone that has a block"
+}
+
+section_roadmap() {
+    echo "==> roadmap status"
+    # lint-scope: record
+    script/roadmap --check
+    script/roadmap --selftest >/dev/null
+}
+
+section_reviews() {
+    echo "==> crate reviews keep one closed set of finding states"
+    # lint-scope: both
+    script/review-status --selftest >/dev/null
+    script/review-status --check
+}
+
+section_decisions() {
+    echo "==> decisions"
+    # lint-scope: record
+    script/decisions --check
+}
+
+section_journeys() {
+    echo "==> journeys"
+    # lint-scope: record
+    script/journeys --check
+}
+
+section_four_digits() {
+    echo "==> numbered record files carry four digits"
+    # lint-scope: record
+    python3 - <<'PY'
+import os, re, sys
+
+DIRS = ['design/decisions', 'design/roadmap']
+NUMBERED = re.compile(r'(\d+)-')
+bad = []
+for d in DIRS:
+    for name in sorted(os.listdir(d)):
+        m = NUMBERED.match(name)
+        if m and len(m.group(1)) != 4:
+            bad.append(f'{d}/{name}')
+if bad:
+    print('lint: numbered record files whose number is not exactly four digits:', file=sys.stderr)
+    for b in bad:
+        n = NUMBERED.match(os.path.basename(b)).group(1)
+        print(f'  {b} (rename it to {os.path.dirname(b)}/{int(n):04d}'
+              f'{os.path.basename(b)[len(n):]}, and its links with it)', file=sys.stderr)
+    print('These numbers are zero-padded to four digits so the directory sorts (ruled 2026-10-07 '
+          'UTC). See design/decisions/README.md and design/roadmap/README.md.', file=sys.stderr)
+    sys.exit(1)
+print(f'numbered records: every file in {", ".join(DIRS)} carries a four-digit number')
+PY
+}
+
+section_citations() {
+    echo "==> citations"
+    # lint-scope: record
+    script/citations --selftest >/dev/null
+    script/citations --check
+}
+
+section_citations_ratchet() {
+    echo "==> new citations say what they cite"
+    # lint-scope: record
+    script/citations --ratchet
+}
+
+section_citations_moved() {
+    echo "==> notes citing a milestone this branch moved"
+    # lint-scope: record
+    script/citations --moved || true
+}
+
+section_fatal_risks() {
+    echo "==> fatal risks"
+    # lint-scope: record
+    script/fatal-risks --selftest >/dev/null
+    script/fatal-risks --check
+}
+
+section_script_docs() {
+    echo "==> script docs"
+    # lint-scope: both
+    # The record half: nife's notes/scripts.md documents nife's scripts and stays there, so the
+    # record's own are documented in AGENTS.md.
+    missing=""
+    for f in $(git ls-files script); do
+        grep -qE "$f([^a-z-]|\$)" AGENTS.md || missing="$missing $f"
+    done
+    if [ -n "$missing" ]; then
+        echo "lint: scripts with no entry in AGENTS.md:$missing" >&2
+        exit 1
+    fi
+    for f in $(grep -oE 'script/[a-z-]+' AGENTS.md | sort -u); do
+        git ls-files --error-unmatch "$f" >/dev/null 2>&1 ||
+            { echo "lint: AGENTS.md names $f, which the record does not have" >&2; exit 1; }
+    done
+    echo "script docs: every script in AGENTS.md, every script AGENTS.md names exists"
+}
+
+section_counted_claims() {
+    echo "==> counted claims"
+    # lint-scope: both
+    python3 helpers/rust_source.py --selftest >/dev/null
+    python3 helpers/counted_claims_check.py
+}
+
+section_naming_conventions() {
+    echo "==> naming conventions"
+    # lint-scope: both
+    python3 helpers/vendored_name_gates.py service --selftest
+    python3 helpers/vendored_name_gates.py service --check
+}
+
+section_naming_rules() {
+    echo "==> names meet the current naming rules"
+    # lint-scope: both
+    python3 helpers/baseline_layout.py --selftest
+    python3 helpers/name_checks.py --selftest
+    python3 helpers/name_checks.py --check
+    python3 helpers/vendored_name_gates.py words --selftest
+    python3 helpers/vendored_name_gates.py words --check
+}
+
+section_audits_selftest() {
+    echo "==> the audit index's selftest (fixture indexes: duplicates, triples, missing rows)"
+    # lint-scope: record
+    script/audits --selftest
+}
+
+section_audits() {
+    echo "==> the audit index"
+    # lint-scope: record
+    script/audits --check
+}
+
+section_environment_names() {
+    echo "==> environment names in prose"
+    # lint-scope: both
+    # The record half: a name in the record's prose must be read or assigned in the record's own
+    # files or in nife's at its pin, which is where nearly every one of them lives.
+    NIFE="$(python3 helpers/nife_tree.py path)" python3 - <<'PY'
+import os, re, subprocess, sys
+
+def tracked(root):
+    out = subprocess.run(['git', '-C', root, 'ls-files'], capture_output=True, text=True,
+                         check=True).stdout
+    return [f for f in out.split('\n') if f]
+
+TOKEN = re.compile(r'\b((?:NIFE|CRICKER)_[A-Z0-9_]+)\b')
+RETIRED = {
+    'NIFE_MCAST_PORT': 'milestone 298 (retire the multicast DNS responder), 2026-09-15: the '
+                       'multicast prober and its runner hub (notes/mdns.md)',
+}
+live = set()
+for root in ('.', os.environ['NIFE']):
+    for f in tracked(root):
+        if f.endswith('.md') or f.startswith(('vendor/', 'patches/')):
+            continue
+        p = os.path.join(root, f)
+        if os.path.islink(p) or not os.path.isfile(p):
+            continue
+        text = open(p, errors='replace').read()
+        for m in re.finditer(r'\$\{?([A-Z0-9_]+)|\b([A-Z0-9_]+)\s*[:=]|"([A-Z0-9_]+)"', text):
+            live.add(m.group(1) or m.group(2) or m.group(3))
+bad = []
+for f in tracked('.'):
+    if not f.endswith('.md') or f.startswith(('design/decisions/', 'design/audit-reports/')):
+        continue
+    if f == 'notes/documentation-audit.md':
+        continue
+    for i, line in enumerate(open(f, errors='replace'), 1):
+        for name in TOKEN.findall(line):
+            if name not in live and name not in RETIRED:
+                bad.append((f, i, name))
+if bad:
+    print('lint: an environment variable named in prose does not exist in the record or in nife '
+          'at its pin:', file=sys.stderr)
+    for f, i, name in bad:
+        print(f'  {f}:{i}: {name}', file=sys.stderr)
+    print('Nothing reads or assigns it, so a reader who types it gets nothing. Either it was '
+          'renamed and the prose did not follow, or the code that reads it has not landed. See '
+          'notes/documentation-audit.md.', file=sys.stderr)
+    sys.exit(1)
+ours = sorted(n for n in live if n.startswith(('NIFE_', 'CRICKER_')))
+print(f'environment names: {len(ours)} live, and every one named in prose is read or assigned '
+      f'({len(RETIRED)} retired on the record)')
+PY
+}
+
+section_tracked_ignored() {
+    echo "==> tracked files the tree ignores"
+    # lint-scope: both
+    ignored="$(git ls-files -ci --exclude-standard)"
+    if [ -n "$ignored" ]; then
+        echo "lint: these tracked files match .gitignore:" >&2
+        printf '  %s\n' $ignored >&2
+        echo "  Remove it from the index (git rm --cached <path>) or un-ignore it." >&2
+        exit 1
+    fi
+    echo "tracked-but-ignored files: none"
+}
+
+section_markdown_links() {
+    echo "==> markdown links and the notes index"
+    # lint-scope: both
+    # The record half. The documents are the ones git tracks here, never a nife page reached
+    # through a link; a relative link resolves in the record, or in nife at its pin for a nife path.
+    python3 - <<'PY'
+import glob, os, re, subprocess, sys
+
+md = [f for f in subprocess.run(['git', 'ls-files', '*.md'], capture_output=True, text=True,
+                                check=True).stdout.split('\n') if f]
+bad = []
+for f in md:
+    base = os.path.dirname(f)
+    for m in re.finditer(r'\[[^\]]*\]\(([^)]+)\)', open(f, errors='replace').read()):
+        target = m.group(1).split('#')[0].strip()
+        if not target or target.startswith(('http://', 'https://', 'mailto:')):
+            continue
+        if not os.path.exists(os.path.normpath(os.path.join(base, target))):
+            bad.append(f'{f} -> {target}')
+index_pages = ['notes/README.md'] + sorted(glob.glob('notes/README/*.md'))
+index = ''.join(open(p, errors='replace').read() for p in index_pages)
+notes = sorted(n for n in md if n.startswith('notes/') and n.count('/') == 1)
+if not md or not notes:
+    sys.exit('lint: the markdown sweep selected nothing, so the link and index checks judged '
+             'nothing. See milestone 401.')
+missing = [n for n in notes if os.path.basename(n) != 'README.md' and os.path.basename(n) not in index]
+if bad:
+    print('lint: broken relative markdown links:', file=sys.stderr)
+    for b in bad:
+        print(f'  {b}', file=sys.stderr)
+if missing:
+    print('lint: notes/ files missing from notes/README.md and its area pages in notes/README/:',
+          file=sys.stderr)
+    for m in missing:
+        print(f'  {m}', file=sys.stderr)
+    print('Add a line to the notes/README/<area>.md page that fits; notes/README.md says how.',
+          file=sys.stderr)
+if bad or missing:
+    sys.exit(1)
+print(f'markdown: {len(md)} files, every relative link resolves, every note indexed')
+PY
+}
+
+section_prose_ratchet() {
+    echo "==> the prose ratchet (§212 words, §213 sentences, bold and passives)"
+    # lint-scope: both
+    python3 helpers/prose_ratchet.py --selftest
+    python3 helpers/prose_ratchet.py --check
+}
+
+section_removed_index() {
+    echo "==> the removed-files index (design/removed.tsv: each path absent, each sha real, no retired number returns)"
+    # lint-scope: both
+    python3 helpers/removed_index.py --selftest
+    python3 helpers/removed_index.py --check
+}
+
+section_module_block_ratchet() {
+    echo "==> the module-block ratchet (every module, document and pub item carries a Name: block; the unblocked list only shrinks)"
+    # lint-scope: both
+    python3 helpers/module_block_ratchet.py --selftest
+    python3 helpers/module_block_ratchet.py --check
+}
+
+section_comment_block_ratchet() {
+    echo "==> the comment-block ratchet (a 40-line cap on a comment block; per-directory caps and in-body ceilings)"
+    # lint-scope: both
+    python3 helpers/comment_block_ratchet.py --selftest
+    python3 helpers/comment_block_ratchet.py --check
+}
+
+section_parent_index() {
+    echo "==> the parent-index check (§282: when a file is split, the parent becomes an index)"
+    # lint-scope: both
+    python3 helpers/parent_index.py --selftest
+    python3 helpers/parent_index.py --check
+}
+
+section_house_style() {
+    echo "==> American spelling and metric units"
+    # lint-scope: both
+    python3 helpers/house_style.py --selftest
+    python3 helpers/house_style.py --check
+}
+
+section_history() {
+    echo "==> §298 (a document states what is in force now)"
+    # lint-scope: both
+    python3 helpers/history_ratchet.py --selftest
+    python3 helpers/history_ratchet.py --check
+}
+
+section_line_citations() {
+    echo "==> no line-number citations (§277: cite a heading or a symbol)"
+    # lint-scope: both
+    python3 helpers/line_citations.py --selftest
+    python3 helpers/line_citations.py --check
+}
+
+section_outsider_pass() {
+    echo "==> the outsider-pass floor checker and launcher selftests"
+    # lint-scope: record
+    python3 helpers/booted_rows.py --selftest >/dev/null
+    python3 helpers/launch_pass.py --selftest >/dev/null
+}
+
+section_exception_markers() {
+    echo "==> exception markers the ratchets honor (a warning, never a failure)"
+    # lint-scope: both
+    python3 helpers/exception_markers.py --selftest
+    python3 helpers/exception_markers.py
+    python3 helpers/baseline_drift.py --selftest >/dev/null
+}
+
+section_repeat_issue() {
+    echo "==> the scheduled-failure repeat issue (helpers/repeat_issue.py), against its fixtures"
+    # lint-scope: record
+    # The audit cadence workflow's repeat report files through this helper, so its selftest
+    # runs where the workflow does.
+    sh helpers/trunk-health-repeat-selftest.sh
+}
+
+section_em_dashes() {
+    echo "==> em-dashes"
+    # lint-scope: both
+    emdash="$(printf '\342\200\224')"
+    hits="$(git ls-files -z | xargs -0 grep -n "$emdash" 2>/dev/null |
+        grep -v -E '^[^:]*:[0-9]+:[[:space:]]*>' || true)"
+    if [ -n "$hits" ]; then
+        echo "lint: em-dashes found (use commas, periods, semicolons or parentheses;" >&2
+        echo "      a quotation on its own '>' line may keep its source's punctuation):" >&2
+        printf '%s\n' "$hits" | sed 's/^/  /' >&2
+        exit 1
+    fi
+    echo "em-dashes: none outside quoted blockquote lines"
+}
+
+section_spelling() {
+    echo "==> spelling"
+    # lint-scope: both
+    if ! command -v typos >/dev/null 2>&1; then
+        echo "lint: typos not found; install typos-cli (the workflow pins the version it runs)." >&2
+        exit 1
+    fi
+    typos
+    echo "spelling: clean"
+}
+
+if [ -n "${LINT_SECTION:-}" ]; then
+    set -e
+    "section_$LINT_SECTION"
+    exit 0
+fi
+
+case "${1:-}" in
+    --list)
+        for id in $SECTIONS; do
+            printf '%s\t%s\n' "$id" "$(sed -n "/^section_$id() {/,/^}/p" "$0" |
+                sed -n 's/^    echo "==> \(.*\)"$/\1/p' | head -n 1)"
+        done
+        exit 0 ;;
+    --section)
+        case " $(echo $SECTIONS) " in
+            *" ${2:-} "*) run="$2" ;;
+            *) echo "script/lint: no section '${2:-}'; script/lint --list names them" >&2; exit 2 ;;
+        esac ;;
+    "") run="$SECTIONS" ;;
+    *) echo "usage: script/lint [--list | --section <id>]" >&2; exit 2 ;;
+esac
+
+if ! python3 -c 'import tomllib' >/dev/null 2>&1; then
+    echo "script/lint: python3 has no tomllib; these checks need Python 3.11 or newer." >&2
+    exit 1
+fi
+
+python3 helpers/nife_tree.py overlay . || exit 1
+trap 'python3 helpers/nife_tree.py unoverlay .' EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+
+failed=""
+for id in $run; do
+    LINT_SECTION="$id" sh "$0" || failed="$failed $id"
+done
+
+if [ -n "$failed" ]; then
+    echo >&2
+    echo "lint: these sections failed:$failed" >&2
+    echo "  Rerun one with script/lint --section <id>." >&2
+    exit 1
+fi
+echo
+echo "lint: every section passed"
