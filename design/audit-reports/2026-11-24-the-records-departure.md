@@ -19,8 +19,8 @@ record](../roadmap/proposals/a-search-that-reaches-the-design-record.md).
 10). The security audit run the same day takes the graphical drivers' parsers; this sweep reads the
 documents.
 
-The window's largest change was not a milestone. The design record left nife (milestone 1018, the
-design record moves to nifeos/record and is published as a website), and nife removed `design/` and
+The window's largest change was not a milestone. The design record left nife under milestone 1018 (the
+design record moves to `nifeos/record` and is published as a website), and nife removed `design/` and
 most of `notes/` in one series. Every pointer nife's pages held into those directories went dead
 that day, and the record's own pages kept describing tools that stayed behind. `script/audits
 --worklist` cannot see this: it reads only this repository's history, so a move in nife's tree
@@ -59,10 +59,12 @@ how many it cites that no longer exist, and the departure's own commits were rea
 
 `script/audits --worklist` was then rechecked as nifeos/record#8 rebuilds it, reading nife's paths
 at basalt's pin. Its list grows from 119 documents to 1,635, and its top entries are pages whose
-cited nife code moved: milestone 902's `scripts.md` and `helpers-class-3.md`, milestone 1027's
-`consumers.md`, `notes/lint-sections-generic-or-nife-only/nife-only.md`, milestone 902's own block,
-milestone 407, two crate reviews and milestone 287. This sweep covers them only through finding 10,
-which counts their dead bare paths as a class. It read none of them sentence by sentence, and it
+cited nife code moved: `scripts.md` and `helpers-class-3.md` under milestone 902 (nife's tooling,
+sorted by who needs it, before any of it moves), `consumers.md` under milestone 1027 (leaving the
+central program table), `notes/lint-sections-generic-or-nife-only/nife-only.md`, milestone 902's
+own block, milestone 407 (one definition of the numbers a kernel test and its program agree on),
+two crate reviews and milestone 287 (`script/bootstrap` installs a working QEMU on Linux). This
+sweep covers them only through finding 10, which counts their dead bare paths as a class. It read none of them sentence by sentence, and it
 leaves the top of that list to the next documentation audit. Milestone 287 cites
 `script/apropos`, whose claims finding 2 corrects in nife.
 

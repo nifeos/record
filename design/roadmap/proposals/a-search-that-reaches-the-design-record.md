@@ -18,7 +18,7 @@ an inverted index over markdown and module headers. No new dependency.
 ## The problem
 
 nife's `script/apropos` exists because three strangers could not reach the network note, the
-capabilities note or any decision by following the tree (milestone 117, the stranger test). Since
+capabilities note or any decision by following the tree in milestone 117 (the stranger test: could someone build this and understand it without asking). Since
 the design record left nife, that search reads only nife's notes, root documents and module
 headers. Every page its own header names as the reason it exists is now here, and this repository
 has no search: its scripts are `audits`, `citations`, `claim`, `decisions`, `fatal-risks`,
@@ -36,5 +36,5 @@ decisions.
 - A host test in each repository searches for one word and checks which page leads. Here the
   word picks out a decision; in nife it picks out a crate header.
 
-Milestone 1018 publishes the record as a website, which may carry its own search. If that comes
+Milestone 1018 (the design record moves to `nifeos/record` and is published as a website) publishes the record as a website, which may carry its own search. If that comes
 first, the second item points there and the first goes away.
