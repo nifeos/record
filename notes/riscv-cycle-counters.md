@@ -39,7 +39,7 @@ Specification v3.0 (ratified 2025-07-16), `src/ext-pmu.adoc`, read 2026-09-03 fr
 Four calls, in this order, once, on the boot hart, right after `arch::isa::initialize` has probed
 which SBI extensions firmware implements.
 
-1. **`sbi_pmu_num_counters`** (FID #0). How many logical counters this hart has, hardware and
+1. **`sbi_pmu_num_counters`** (FID `#0`). How many logical counters this hart has, hardware and
    firmware together.
 2. **`sbi_pmu_counter_config_matching`** (FID #2) over that whole set, for event
    `SBI_PMU_HW_CPU_CYCLES` (type 0, code 1), with `CLEAR_VALUE` and `AUTO_START`. This is the call

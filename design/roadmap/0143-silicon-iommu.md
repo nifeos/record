@@ -64,7 +64,7 @@ whose status could not be established is recorded as **unconfirmed**, which is n
 | **SpacemiT K3** (X100, RVA23) | **Ratified**, as `spacemit,k3-t100` with a `riscv,iommu` fallback | **Yes**, ~$275-$299, multiple vendors | [dt-bindings patch](https://lkml.iu.edu/2602.3/08975.html), [CNX 2026-05-11](https://www.cnx-software.com/2026/05/11/rva23-pico-itx-sbc-spacemit-k3-octa-core-risc-v-ai-soc-up-to-32gb-ram-256gb-ufs/) |
 | **SpacemiT V100** (server) | **Ratified**, as `spacemit,v100-t100`, same binding | No: first small-scale cluster deployments late 2026 | [dt-bindings patch](https://lkml.iu.edu/2602.3/08975.html), [RISC-V International](https://riscv.org/blog/spacemit-develops-server-cpu-chip-v100-for-next-gen-ai-applications/) |
 | **SiFive P870-D** | Vendor material says "distributed IOMMU"; spec conformance not established | No: IP, no board | [SiFive P800 page](https://www.sifive.com/cores/performance-p800) |
-| **Ventana Veyron V2** | Unconfirmed | No: chiplets and IP, not a board a demonstrator can order | [Ventana](https://www.ventanamicro.com/ventana-introduces-veyron-v2/) |
+| **Ventana Veyron V2** | Unconfirmed | No: chiplets and IP, not a board a demonstrator can order | [Ventana](https://web.archive.org/web/20260307053433/https://www.ventanamicro.com/ventana-introduces-veyron-v2/) |
 | **ESWIN EIC7700X** (Milk-V Megrez, SiFive P550) | **Unconfirmed.** No IOMMU node or binding found in the upstream EIC7700 device tree work | Yes, ~$199 | [EIC7700 dts series](https://lkml.iu.edu/hypermail/linux/kernel/2504.1/05615.html), [Milk-V](https://milkv.io/megrez) |
 | **SOPHGO SG2042 / SG2044** (T-Head C910/C920) | **Unconfirmed.** Nothing found either way | SG2042 yes | [SOPHGO roadmap](http://riscv.epcc.ed.ac.uk/assets/files/hpcasia24/hpc_asia_wang.pdf) |
 | **StarFive JH8800** | Unconfirmed | No. Still not shipping; StarFive's own site lists only JH7110 | [StarFive hardware index](https://www.starfivetech.com/en/index.php?s=hardware&c=category&id=3) |
@@ -74,7 +74,7 @@ whose status could not be established is recorded as **unconfirmed**, which is n
 The spec itself. v1.0.1 was ratified 2024-09-11 and is archived under that date; the current
 rendering carries a 2026-02-22 stamp on the same v1.0.1 version number, so the block's "ratified
 2024" is right and the newer date is a re-publication rather than a new version.
-([v20240911 archive](https://docs.riscv.org/reference/hardware/iommu/v20240911/_attachments/riscv-iommu.pdf),
+([v20240911 archive](https://docs.riscv.org/reference/iommu/v20240911/_attachments/riscv-iommu.pdf),
 [current](https://docs.riscv.org/reference/iommu/_attachments/riscv-iommu.pdf))
 
 ### The K3, measured against the three requirements

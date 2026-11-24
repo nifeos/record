@@ -26,7 +26,7 @@ Read 2026-10-12 (UTC) unless marked.
   ([manual](https://nixos.org/manual/nixos/stable/#sec-changing-config)). The declaration bounds
   which packages run, but a Nix package carries no grants, so it cannot bound what they may do.
 - Fuchsia. Product assembly composes a system image from a product configuration naming its base
-  packages ([product configuration codelab](https://fuchsia.dev/fuchsia-src/concepts/software_assembly/product_configuration_codelab)).
+  packages ([product configuration codelab](https://fuchsia.dev/fuchsia-src/development/build/software_assembly/product_bundle_codelab)).
   Component manager's security policy holds `capability_policy` allowlists: for each routable
   capability, the component monikers that may use it
   ([`cm_config::SecurityPolicy`](https://docs.fuchsia.dev/rust/cm_config/struct.SecurityPolicy.html)).

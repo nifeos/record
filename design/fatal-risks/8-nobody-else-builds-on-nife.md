@@ -57,7 +57,7 @@ The first attempts, ruled 2026-10-27 (UTC):
 
 - Publish-first. The first attempts are crates nife publishes itself. A contribution to another
   project waits until a published crate has users who ask for it upstream. The reason is uptake so
-  far: the Kani pull request (#4913) has been open and unmerged since 2026-09-30, and the QEMU PLIC
+  far: the Kani pull request ([#4913](https://github.com/model-checking/kani/pull/4913)) has been open and unmerged since 2026-09-30, and the QEMU PLIC
   patch went unanswered. An unanswered contribution would count toward red's five expired attempts
   and measure the counterpart's attention instead of the value of the mechanism.
 - First: `file_allocation_table`. The incumbent `fatfs` has 422k downloads over 90 days and 58

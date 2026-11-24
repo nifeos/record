@@ -18,7 +18,7 @@ texts calef posts under his own account. The research behind it is the proposal
   changes on 2026-10-05 (UTC); calef answered every thread and asked for re-review. It waits on a
   maintainer approving the fork's CI run, then on re-review.
 - Upstream `main` was merged into the branch on 2026-10-22 (UTC) (`3b698421a`; the conflicts came
-  from upstream #4941, which rewrote `--export-json` to the RFC 0015 shape). `c264c6929` makes the
+  from upstream [#4941](https://github.com/model-checking/kani/pull/4941), which rewrote `--export-json` to the RFC 0015 shape). `c264c6929` makes the
   export report the verification target and updates RFC 0015's field table.
 - "Review, 2026-09-30" below has what tautschnig's first review changed.
 - The pull request body as first posted: [kani-upstream/pull-request-4913-body.md](kani-upstream/pull-request-4913-body.md).
@@ -105,14 +105,14 @@ compiles with the host's configuration. Re-measured on patagonia 2026-10-03 (UTC
 6.11.0: the Rust symbol table linked alone, or followed by a precompiled `kani_lib.c` object, keeps
 `"riscv64"`; the object first, or the C source anywhere, gives `"arm64"`. So Kani can fix it by
 precompiling `kani_lib.c` and linking it last, with no `goto-cc` change. That fix is offered as a
-follow-up to #4913, because it changes the linked model for every host run, not only `--target`.
+follow-up to [#4913](https://github.com/model-checking/kani/pull/4913), because it changes the linked model for every host run, not only `--target`.
 
 For nife this bounds what a riscv64 proof claims. Rust-level widths and `cfg` are riscv64's, but
 CBMC's C-library models run with the host's C configuration. Nothing in `kernel/` calls C.
 
 ## Review, 2026-09-30
 
-tautschnig (a Kani maintainer) left five inline comments on #4913. What became of each, as of
+tautschnig (a Kani maintainer) left five inline comments on [#4913](https://github.com/model-checking/kani/pull/4913). What became of each, as of
 2026-10-03 (UTC):
 
 | comment | outcome |
@@ -140,7 +140,7 @@ nife, so it stays a limitation.
 
 The pull request is open and the review is answered in code. Open:
 
-1. The `kani_lib.c` link fix is in #4913 (`1eaa2d9`), measured in
+1. The `kani_lib.c` link fix is in [#4913](https://github.com/model-checking/kani/pull/4913) (`1eaa2d9`), measured in
    [kani-upstream/kani-lib-link-order.md](kani-upstream/kani-lib-link-order.md). Milestone 635
    (riscv64 proofs check against the riscv64 model) carries it in nife's patch
    ([its block](../design/roadmap/0635-riscv64-proofs-check-against-the-riscv64-model.md)) and gates it in `script/verify-riscv64`. In CI the old link gave `arm64`/`linux`, so `arch` was the only field

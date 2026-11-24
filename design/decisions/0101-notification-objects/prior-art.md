@@ -21,5 +21,5 @@ synchronous IPC message or an async notification, and the badge tells you which.
 ### Unix, Fuchsia, Mach and Redox
 
 Cut on 2026-09-26 to fit the amendment under §212 (a prose budget)'s cap; the survey is
-[at `256815e56`](https://github.com/nifeos/nife/blob/256815e5609cfb961ccb6526f8a0d3316e589402/design/decisions/0101-notification-objects.md#unixlinux-selectpollepollkqueue).
+[at `256815e56`](https://github.com/nifeos/nife/blob/256815e5609cfb961ccb6526f8a0d3316e589402/design/decisions/101-notification-objects.md#unixlinux-selectpollepollkqueue).
 Mach's port sets are what seL4 replaced.

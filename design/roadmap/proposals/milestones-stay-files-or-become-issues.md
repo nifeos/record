@@ -260,7 +260,7 @@ requests #3427 and #3426, titled "1062 step 4" and "1062 step 6".
   repository. The code merges; the record draft then moves the block to `PARTIAL` with
   `nifeos/<repo>@<sha>`. A comment in moved code reads `TODO(milestone 1062): ...`, checked by the
   existence of `design/roadmap/1062-*.md` at the pin.
-- Under B, `nifeos/record#1062` holds the whole block. Labels say `not-started` and
+- Under B, `nifeos/record#<milestone-1062>` holds the whole block. Labels say `not-started` and
   `needs-person`; a link says blocked by `#811`; decision dependencies are prose links. Editing step
   2's design is an issue edit, unreviewed.
 - Under C, the file keeps the background, the step 7 design and `## Done when`. The issue holds the
