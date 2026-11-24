@@ -86,7 +86,8 @@
 # - **It cannot tell a report that says nothing from one that found nothing.** `fixed 0, minted 0,
 #   accepted 0` parses and passes.
 # - **`--worklist` ranks documents it can parse a citation out of, and says nothing about the rest.**
-#   138 of the 269 documents in its scope cite no code path it can resolve, and they are simply
+#   771 of the 2,777 documents in its scope cite no file it can resolve, in the record or in nife
+#   at basalt's pin, and a cited directory is never resolved. Those documents are simply
 #   absent from the list rather than reported as clean. It also never reads a sentence: a document at
 #   the top may be perfectly true and one that is absent may be a year out of date. See
 #   notes/documentation-audit.md, which is where the sweep procedure and this heuristic's limits are
@@ -156,6 +157,168 @@ if mode not in ("", "--check", "--due", "--baseline", "--worklist", "--selftest"
           f"(no argument, --check, --due, --baseline, --worklist, or --selftest)", file=sys.stderr)
     sys.exit(2)
 
+# ---- the worklist: which documents a documentation sweep should read first ------
+#
+# Milestone 93's block asks for this and leaves the shape open: "a note whose cited code has changed
+# substantially since the note's last edit is the highest-value candidate for the next sweep, and git
+# can compute that; whether it becomes a signal or stays a sweep heuristic is a decision for whoever
+# builds this." It is a **heuristic, not a signal**: it never fails and nothing consumes its exit
+# status. A document at the top of this list is a good guess about where claim rot is, and a
+# confident guess about where it is not would be a lie, because the ranking cannot read a sentence.
+#
+# The rank is **how many of a document's cited files moved**, and the commit count only breaks ties.
+# Ranking by commits alone puts every document that mentions xtask/src/main.rs on top, because that
+# file and system_tests/src/user.rs are where every lane wires its test (CLAUDE.md names them as the
+# merge hotspot). A note where eight of its twelve cited files moved has more surface that could have
+# gone stale than one where a single hotspot moved thirty times.
+#
+# **Most of what a note cites is nife's code, so the history read is nife's as well as the
+# record's.** A cited path resolves the way the overlay resolves it: the record's own file when the
+# record tracks one, and otherwise nife's file at the commit basalt's `main` pins. A
+# `nifeos/nife:<path>` citation, or a link into github.com/nifeos/nife, always means nife's. nife's
+# side is read from the git directory `helpers/nife_tree.py history` names, which holds nife's
+# history through that pin, so the list is the same on every machine for one record commit and one
+# pin, and never depends on how far a local nife clone has fetched. A cited directory is not
+# resolved, in either tree: `crates/` would rank every note that names it on every commit. Times
+# are compared as commit times in seconds, because the history carries several UTC offsets and an
+# ISO string compares wrongly across them.
+#
+# NIFE_AUDITS_ROOT, NIFE_AUDITS_NIFE_HISTORY and NIFE_AUDITS_NIFE_COMMIT point `--worklist` at a
+# fixture record and a fixture nife; `--selftest` is their only caller.
+
+def _commit_times(git, *rev):
+    """{path: [commit time, ...]}, newest first, from one walk of the log.
+
+    `--no-renames` keeps the walk to trees alone. With rename detection git reads file contents,
+    and in a blobless clone that is one network fetch per rename.
+    """
+    log = subprocess.run([*git, "log", "--no-renames", "--format=%x00%ct", "--name-only", *rev],
+                         capture_output=True, text=True,
+                         env=dict(os.environ, GIT_NO_LAZY_FETCH="1"))
+    if log.returncode:
+        print(f"audits: {' '.join(git)} log failed, so the worklist cannot be ranked:\n  "
+              f"{log.stderr.strip()[:300]}", file=sys.stderr)
+        sys.exit(1)
+    times, when = {}, None
+    for line in log.stdout.split("\n"):
+        if line.startswith("\x00"):
+            when = int(line[1:])
+        elif line.strip():
+            times.setdefault(line.strip(), []).append(when)
+    return times
+
+
+def _nife_history():
+    """(git command prefix, pinned commit) for nife, from the overlay's helper or the selftest."""
+    git_dir = os.environ.get("NIFE_AUDITS_NIFE_HISTORY")
+    pin = os.environ.get("NIFE_AUDITS_NIFE_COMMIT")
+    if not (git_dir and pin):
+        sys.path.insert(0, os.path.join(root, "helpers"))
+        import nife_tree
+        pin = nife_tree.commit()
+        git_dir = nife_tree.history(pin)
+    return ["git", "--git-dir", git_dir], pin
+
+
+def worklist():
+    tracked = set(subprocess.run(["git", "-C", root, "ls-files"],
+                                 capture_output=True, text=True).stdout.split("\n"))
+    tracked.discard("")
+    nife_git, pin = _nife_history()
+    listed = subprocess.run([*nife_git, "ls-tree", "-r", "--name-only", pin],
+                            capture_output=True, text=True)
+    if listed.returncode:
+        print(f"audits: cannot list nife's tree at {pin[:12]}:\n  {listed.stderr.strip()[:300]}",
+              file=sys.stderr)
+        sys.exit(1)
+    nife_files = set(listed.stdout.split("\n"))
+    nife_files.discard("")
+
+    # One walk of each history rather than two git calls per document. At 13,000 record commits,
+    # 23,000 nife commits and 270 documents the difference is two seconds against minutes, and a
+    # heuristic nobody waits for is a heuristic people run.
+    touched = _commit_times(["git", "-C", root])
+    trees = {"record": (tracked, touched), "nife": (nife_files, _commit_times(nife_git, pin))}
+
+    def resolve(side, path):
+        """A key for `path` in one tree when that tree tracks it and it is not a document."""
+        if path in trees[side][0] and not path.endswith(".md"):
+            return (side, path)
+        return None
+
+    # A backticked path, a `nifeos/nife:<path>` citation, or a markdown link target. A backticked
+    # span counts only when it holds a `/` or a `.`, so a bare word (`lint`) is never a path. Bare
+    # basenames (`sched.rs`) are deliberately not resolved: a basename is ambiguous across the
+    # tree, and every note in the sample that wrote one also wrote the full path somewhere near it.
+    # See BUGS in notes/documentation-audit.md.
+    cite = re.compile(r"`nifeos/nife:([^`\s<>]+)`"
+                      r"|`([A-Za-z0-9_][A-Za-z0-9_./-]*)`"
+                      r"|\]\(https://github\.com/nifeos/nife/(?:blob|tree)/[^/)\s]+/([^)#\s]+)\)"
+                      r"|\]\(([^)#\s:]+)\)")
+
+    rows = []
+    for doc in sorted(tracked):
+        if not doc.endswith(".md"):
+            continue
+        # notes/ and design/roadmap/ and the repository-root documents. design/decisions/ is out:
+        # a decision is a dated record of an argument, and code moving under it does not make it
+        # wrong, it makes it history. Superseding a decision is a new decision, not an edit.
+        if not (doc.startswith("notes/") or doc.startswith("design/roadmap/") or "/" not in doc):
+            continue
+        # CLAUDE.md is a symlink to AGENTS.md (they are one document with two names, for the
+        # cross-tool convention), and listing the same prose twice costs a slot on the list.
+        if os.path.islink(os.path.join(root, doc)):
+            continue
+        with open(os.path.join(root, doc), errors="replace") as f:
+            text = f.read()
+        cited = set()
+        for m in cite.finditer(text):
+            qualified, span, nife_link, link = m.groups()
+            if qualified or nife_link:
+                key = resolve("nife", qualified or nife_link)
+                if key:
+                    cited.add(key)
+                continue
+            raw = span or link
+            if span and "/" not in span and "." not in span:
+                continue
+            for cand in (raw, os.path.normpath(os.path.join(os.path.dirname(doc), raw))):
+                key = resolve("record", cand) or resolve("nife", cand)
+                if key:
+                    cited.add(key)
+        edited = touched.get(doc, [None])[0]
+        if edited is None:
+            continue
+        moved = {}
+        for side, path in cited:
+            n = sum(1 for t in trees[side][1].get(path, []) if t > edited)
+            if n:
+                moved[("nifeos/nife:" if side == "nife" else "") + path] = n
+        if moved:
+            last = datetime.datetime.fromtimestamp(edited, datetime.timezone.utc)
+            rows.append((len(moved), sum(moved.values()), doc, last.date().isoformat(), len(cited),
+                         sorted(moved.items(), key=lambda kv: (-kv[1], kv[0]))))
+    rows.sort(reverse=True)
+    return rows, pin
+
+
+if mode == "--worklist":
+    root = os.environ.get("NIFE_AUDITS_ROOT") or root
+    rows, pin = worklist()
+    print("Documents whose cited code has moved since they were last edited, most-moved first.")
+    print("A heuristic for picking a documentation sweep's scope, never a verdict on a document:")
+    print("nothing here has read a sentence. See notes/documentation-audit.md.")
+    print(f"nife's paths (nifeos/nife:) are read at {pin[:12]}, the commit basalt's main pins.")
+    print()
+    print(f"{'moved/cited':>12}  {'commits':>7}  {'last edit':<11} document")
+    for n_moved, n_commits, doc, edited, n_cited, moved in rows[:30]:
+        print(f"{n_moved:>5}/{n_cited:<6}  {n_commits:>7}  {edited:<11} {doc}")
+        print(f"{'':>23}{', '.join(p for p, _ in moved[:3])}")
+    print()
+    print(f"{len(rows)} documents cite code that has moved under them.")
+    sys.exit(0)
+
+
 if mode == "--selftest":
     # Fixture indexes run through `--check`, so a green real `--check` is known to be able to fail.
     import tempfile
@@ -206,9 +369,65 @@ if mode == "--selftest":
             print(f"audits --selftest: {name}: exit {got.returncode}, wanted "
                   f"{'pass' if want == 0 else 'failure naming ' + repr(needle)}\n{got.stderr}",
                   file=sys.stderr)
+
+    # The worklist, on a fixture record and a fixture nife whose commit times are set. One note
+    # cites five paths: a nife file moved after the note under a UTC offset that an ISO string
+    # compares wrongly, a `nifeos/nife:` path the record also has, a nife file moved only after the
+    # pin, the record's own copy of that shared path, and a record helper. Four moved, and the
+    # second note, whose one citation moved only after the pin, is not listed.
+    def commit(repo, when, files):
+        for name, body in files.items():
+            os.makedirs(os.path.dirname(os.path.join(repo, name)), exist_ok=True)
+            with open(os.path.join(repo, name), "w") as f:
+                f.write(body)
+        env = dict(os.environ, GIT_AUTHOR_DATE=when, GIT_COMMITTER_DATE=when)
+        for argv in (["add", "-A"], ["commit", "-q", "-m", when]):
+            subprocess.run(["git", "-c", "core.hooksPath=/dev/null", "-c", "commit.gpgsign=false",
+                            "-c", "user.name=fixture", "-c", "user.email=fixture@example.invalid",
+                            "-C", repo, *argv], env=env, check=True, capture_output=True)
+        return subprocess.run(["git", "-C", repo, "rev-parse", "HEAD"], capture_output=True,
+                              text=True, check=True).stdout.strip()
+
+    worklist_cases = 0
+    with tempfile.TemporaryDirectory() as tmp:
+        nife, record = os.path.join(tmp, "nife"), os.path.join(tmp, "record")
+        for repo in (nife, record):
+            subprocess.run(["git", "init", "-q", repo], check=True)
+        commit(nife, "2026-01-01T00:00:00Z", {"crates/a/src/lib.rs": "1", "script/lint": "1",
+                                              "kernel/old.rs": "1"})
+        commit(nife, "2026-01-03T05:00:00-07:00", {"crates/a/src/lib.rs": "2"})
+        pin = commit(nife, "2026-01-04T00:00:00Z", {"script/lint": "2"})
+        commit(nife, "2026-01-05T00:00:00Z", {"kernel/old.rs": "2"})
+        commit(record, "2026-01-01T00:00:00Z", {"helpers/x.py": "1", "script/lint": "1"})
+        commit(record, "2026-01-03T10:00:00Z", {
+            "notes/a.md": "`crates/a/src/lib.rs` `nifeos/nife:script/lint` `kernel/old.rs` "
+                          "`script/lint` `helpers/x.py`\n",
+            "notes/b.md": "`kernel/old.rs`\n"})
+        commit(record, "2026-01-04T00:00:00Z", {"helpers/x.py": "2", "script/lint": "2"})
+        got = subprocess.run([self_path, "--worklist"], capture_output=True, text=True,
+                             env=dict(os.environ, NIFE_AUDITS_ROOT=record,
+                                      NIFE_AUDITS_NIFE_HISTORY=os.path.join(nife, ".git"),
+                                      NIFE_AUDITS_NIFE_COMMIT=pin))
+        want = [("notes/a.md ranks 4 of its 5 cited paths moved, by 4 commits",
+                 re.search(r"^ +4/5 +4 +2026-01-03 +notes/a\.md$", got.stdout, re.M)),
+                ("a nife path moved after the note is read from nife",
+                 "nifeos/nife:crates/a/src/lib.rs" in got.stdout),
+                ("a nifeos/nife: citation means nife's file",
+                 "nifeos/nife:script/lint" in got.stdout),
+                ("a nife path moved only after the pin is not listed",
+                 "notes/b.md" not in got.stdout),
+                ("one document is listed", "\n1 documents cite code" in got.stdout)]
+        for name, ok in want:
+            worklist_cases += 1
+            if got.returncode or not ok:
+                failed += 1
+                print(f"audits --selftest: worklist: {name}: exit {got.returncode}\n"
+                      f"{got.stdout}{got.stderr}", file=sys.stderr)
+
     if failed:
         sys.exit(1)
-    print(f"audits --selftest: {len(cases)} fixture indexes judged as expected")
+    print(f"audits --selftest: {len(cases)} fixture indexes judged as expected, and "
+          f"{worklist_cases} worklist expectations held on a fixture record and nife")
     sys.exit(0)
 
 # The trigger names, in the order they are printed and in the order the cadence table's columns
@@ -540,94 +759,6 @@ if mode == "--baseline":
     print()
     for k in COUNTS:
         print(f"  {LABEL[k]:<20} {now[k]}")
-    sys.exit(0)
-
-
-# ---- the worklist: which documents a documentation sweep should read first ------
-#
-# Milestone 93's block asks for this and leaves the shape open: "a note whose cited code has changed
-# substantially since the note's last edit is the highest-value candidate for the next sweep, and git
-# can compute that; whether it becomes a signal or stays a sweep heuristic is a decision for whoever
-# builds this." It is a **heuristic, not a signal**: it never fails and nothing consumes its exit
-# status. A document at the top of this list is a good guess about where claim rot is, and a
-# confident guess about where it is not would be a lie, because the ranking cannot read a sentence.
-#
-# The rank is **how many of a document's cited files moved**, and the commit count only breaks ties.
-# Ranking by commits alone puts every document that mentions xtask/src/main.rs on top, because that
-# file and system_tests/src/user.rs are where every lane wires its test (CLAUDE.md names them as the
-# merge hotspot). A note where eight of its twelve cited files moved has more surface that could have
-# gone stale than one where a single hotspot moved thirty times.
-
-def worklist():
-    tracked = set(subprocess.run(["git", "-C", root, "ls-files"],
-                                 capture_output=True, text=True).stdout.split("\n"))
-    tracked.discard("")
-
-    # One walk of the whole history rather than two git calls per document. At 1,900 commits and 270
-    # documents the difference is a second against a minute, and a heuristic nobody waits for is a
-    # heuristic people run.
-    log = subprocess.run(["git", "-C", root, "log", "--format=%x00%cI", "--name-only"],
-                         capture_output=True, text=True).stdout
-    touched, when = {}, None
-    for line in log.split("\n"):
-        if line.startswith("\x00"):
-            when = line[1:]
-        elif line.strip():
-            touched.setdefault(line.strip(), []).append(when)
-
-    # A backticked path, or a markdown link target. Bare basenames (`sched.rs`) are deliberately not
-    # resolved: a basename is ambiguous across the tree, and every note in the sample that wrote one
-    # also wrote the full path somewhere near it. See BUGS in notes/documentation-audit.md.
-    cite = re.compile(r"`([A-Za-z0-9_][A-Za-z0-9_./-]*\.[A-Za-z0-9_]+)`|\]\(([^)#\s]+)\)")
-
-    rows = []
-    for doc in sorted(tracked):
-        if not doc.endswith(".md"):
-            continue
-        # notes/ and design/roadmap/ and the repository-root documents. design/decisions/ is out:
-        # a decision is a dated record of an argument, and code moving under it does not make it
-        # wrong, it makes it history. Superseding a decision is a new decision, not an edit.
-        if not (doc.startswith("notes/") or doc.startswith("design/roadmap/") or "/" not in doc):
-            continue
-        # CLAUDE.md is a symlink to AGENTS.md (they are one document with two names, for the
-        # cross-tool convention), and listing the same prose twice costs a slot on the list.
-        if os.path.islink(os.path.join(root, doc)):
-            continue
-        with open(os.path.join(root, doc), errors="replace") as f:
-            text = f.read()
-        cited = set()
-        for m in cite.finditer(text):
-            raw = m.group(1) or m.group(2)
-            for cand in (raw, os.path.normpath(os.path.join(os.path.dirname(doc), raw))):
-                if cand in tracked and not cand.endswith(".md"):
-                    cited.add(cand)
-        edited = touched.get(doc, [None])[0]
-        if edited is None:
-            continue
-        moved = {}
-        for path in cited:
-            n = sum(1 for t in touched.get(path, []) if t > edited)
-            if n:
-                moved[path] = n
-        if moved:
-            rows.append((len(moved), sum(moved.values()), doc, edited[:10], len(cited),
-                         sorted(moved.items(), key=lambda kv: -kv[1])))
-    rows.sort(reverse=True)
-    return rows
-
-
-if mode == "--worklist":
-    rows = worklist()
-    print("Documents whose cited code has moved since they were last edited, most-moved first.")
-    print("A heuristic for picking a documentation sweep's scope, never a verdict on a document:")
-    print("nothing here has read a sentence. See notes/documentation-audit.md.")
-    print()
-    print(f"{'moved/cited':>12}  {'commits':>7}  {'last edit':<11} document")
-    for n_moved, n_commits, doc, edited, n_cited, moved in rows[:30]:
-        print(f"{n_moved:>5}/{n_cited:<6}  {n_commits:>7}  {edited:<11} {doc}")
-        print(f"{'':>23}{', '.join(p for p, _ in moved[:3])}")
-    print()
-    print(f"{len(rows)} documents cite code that has moved under them.")
     sys.exit(0)
 
 

@@ -53,7 +53,9 @@ script/audits --worklist
 ```
 
 That ranks every document in `notes/`, `design/roadmap/` and the repository root by how many of the
-files it cites have moved since the document itself was last edited. It is milestone 93's block
+files it cites have moved since the document itself was last edited. A cited file is the record's
+own when the record tracks it, and otherwise nife's at the commit basalt's `main` pins, read
+through `helpers/nife_tree.py history`; the list marks nife's as `nifeos/nife:<path>`. It is milestone 93's block
 asking for exactly this ("a note whose cited code has changed substantially since the note's last
 edit is the highest-value candidate for the next sweep, and git can compute that"), and the answer to
 the question that block left open is: **a heuristic, not a signal.** Nothing consumes its exit
@@ -209,10 +211,12 @@ $ script/audits --baseline     # the counts to paste into both index tables
   comment will catch it.
 
 - The worklist ranks documents that cite code in a form it can parse, and says nothing about the
-  rest. 138 of the 269 documents in its scope resolve no code path at all and are simply absent
-  from the list rather than reported as clean. Many are conceptual notes that legitimately cite
-  nothing (`notes/acronyms.md`), and some are notes that cite by bare filename (`sched.rs`), which it
-  deliberately does not resolve because a basename is ambiguous across the tree.
+  rest. 771 of the 2,777 documents in its scope resolve no file at all and are simply absent from
+  the list rather than reported as clean. Many are conceptual notes that legitimately cite nothing
+  (`notes/acronyms.md`), and some are notes that cite by bare filename (`sched.rs`), which it
+  deliberately does not resolve because a basename is ambiguous across the tree. A cited directory
+  (`crates/`, `kernel/src/`) is not resolved either, because it would rank every note that names it
+  on every commit under it.
 
 - **It scores breadth, not staleness, and it cannot read a sentence.** The rank is how many cited
   files moved; whether any of that movement made a sentence wrong is exactly the judgment the sweep
