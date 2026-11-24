@@ -20,7 +20,7 @@ answered it. Every module name is provisional and is left to his naming pass.
 
 | Question | calef's words | What it decides |
 |---|---|---|
-| Do the two per-architecture boots live at the crate root or under `kernel/src/arch/<port>/`? | *"We should treat them as temporary."*, 2026-10-12 (UTC), recorded on [PR #1965](https://github.com/nifeos/nife/pull/1965#issuecomment-6117124813) | A, the recommendation: the crate root. |
+| Do the two per-architecture boots live at the crate root or under `kernel/src/arch/<port>/`? | *"We should treat them as temporary."*, 2026-10-12 (UTC), recorded on [PR #1965](https://github.com/partsfoundry/nife/pull/1965#issuecomment-6117124813) | A, the recommendation: the crate root. |
 
 The consequence is the reason. `kernel/src/x86_64_boot.rs` and `kernel/src/riscv64_boot.rs` are
 temporary. Each is its port's route until it joins the shared path in `kernel/src/boot.rs`, and the

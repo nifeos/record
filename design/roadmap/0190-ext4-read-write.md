@@ -15,7 +15,7 @@ writes ext4 as Linux wrote it. The requirement is standing and has no deadline.
 
 The implementation is the Rust crate `rsext4`. We bring it up to the bar of §46 (thin primitives
 or whole subsystems; we write everything in between) by contributing to it upstream, and take it
-from nifeos/rsext4, a fork that carries each contribution until an upstream release does. We test it here
+from partsfoundry/rsext4, a fork that carries each contribution until an upstream release does. We test it here
 against libext2fs and against Linux itself, under §136 (a mature foreign implementation earns its
 place as an oracle, not as a dependency). This is the ext4 row of milestone 140 (mount a drive this
 system did not create). It does not change 140's order for FAT32 or ext2, and it does not touch
@@ -24,7 +24,7 @@ RedoxFS.
 Reuse: `rsext4` 0.9.2 on crates.io (Apache-2.0, `no_std` with `alloc`, depending on `bitflags` and
 `thiserror`), developed in `rcore-os/tgoskits` under `fs/rsext4`. The `Starry-OS/rsext4`
 repository that its manifest names has not moved since 2026-04-02 and is not where work happens.
-nife uses [nifeos/rsext4](https://github.com/nifeos/rsext4), 0.9.2 with our fixes on top, which
+nife uses [partsfoundry/rsext4](https://github.com/partsfoundry/rsext4), 0.9.2 with our fixes on top, which
 its `CHANGES.md` lists.
 e2fsprogs 1.47 and a Linux kernel are the host-side oracles. The other candidates and the
 reason each lost are in [the survey](0190-ext4-read-write/survey.md).
@@ -86,12 +86,12 @@ and performance.
 
 §46's four conditions, as amended:
 
-| condition | `rsext4` as nife takes it, from nifeos/rsext4 | what closes it |
+| condition | `rsext4` as nife takes it, from partsfoundry/rsext4 | what closes it |
 |---|---|---|
 | a safety argument on every use of `unsafe` | the casts are gone, and each CRC32C use states one | the review below, in the `rsext4` release nife uses |
-| proofs that match ours | none upstream; eight Kani harnesses here | the harnesses below, upstream or in nifeos/rsext4 |
+| proofs that match ours | none upstream; eight Kani harnesses here | the harnesses below, upstream or in partsfoundry/rsext4 |
 | aarch64, riscv64 and x86_64 | builds for all three; hardware CRC32C on two, a software path on riscv64 | the oracle suite passing on each |
-| maintained | upstream is active in `tgoskits`, at least 24 commits by six people from 2026-08-04 to 2026-11-08 | met by nifeos/rsext4 while it carries unreleased fixes |
+| maintained | upstream is active in `tgoskits`, at least 24 commits by six people from 2026-08-04 to 2026-11-08 | met by partsfoundry/rsext4 while it carries unreleased fixes |
 
 ## What we contribute upstream
 
@@ -124,11 +124,11 @@ agent-written submissions is read, and followed, before the first one.
 **Every issue and pull request text is shown to the architect before it is filed.** An upstream
 submission is an outward step, and the review is of the exact text, not of the idea. A fuzz finding
 in `rsext4` is reported the same way. Upstream merge is the goal of every contribution, not a
-gate: nifeos/rsext4 carries each fix until an upstream release does.
+gate: partsfoundry/rsext4 carries each fix until an upstream release does.
 
-No contribution is consumed from a branch. §305 (git dependencies are allowed on `nifeos/*` only,
+No contribution is consumed from a branch. §305 (git dependencies are allowed on `partsfoundry/*` only,
 pinned to a landed commit) rules out a git dependency on `tgoskits`. A fix counts once it is in the
-`rsext4` release nife uses: a crates.io release of upstream's, or a commit on nifeos/rsext4's main
+`rsext4` release nife uses: a crates.io release of upstream's, or a commit on partsfoundry/rsext4's main
 that nife pins by `rev` under §305.
 
 ## What we test on our side
@@ -188,18 +188,18 @@ nife image until it is given.
 
 The rule in force for the oracle, ruled 2026-11-16 (UTC) on pull request #3639: `rsext4` is a
 host-only dependency of `tools/ext4_oracle`, in a workspace and lockfile of its own. It is pinned to
-nifeos/rsext4 at one commit by `rev`, under the 2026-11-23 (UTC) ruling to fork. It never enters a nife image, kernel, program or the lockfile of a shipping package. deny.toml
+partsfoundry/rsext4 at one commit by `rev`, under the 2026-11-23 (UTC) ruling to fork. It never enters a nife image, kernel, program or the lockfile of a shipping package. deny.toml
 refuses the crate anywhere else, and the oracle is a `test` package, so no shipping package may link
 it. That ruling is not the adoption ruling above, which stays open.
 
 ## Done when
 
 - Bugs 1 to 3 and the recovery-flag order are fixed in the `rsext4` release nife uses (upstream's
-  crates.io release, or nifeos/rsext4 at a pinned `rev`), each with its reproducer as a test.
+  crates.io release, or partsfoundry/rsext4 at a pinned `rev`), each with its reproducer as a test.
 - Every use of `unsafe` in that release carries a safety argument, and the group-descriptor casts
   are gone.
-- The Kani harnesses above pass, upstream or in nifeos/rsext4.
-- Fuzz targets are upstream or in nifeos/rsext4, and nife's rotation runs them and `ext4_server`'s
+- The Kani harnesses above pass, upstream or in partsfoundry/rsext4.
+- Fuzz targets are upstream or in partsfoundry/rsext4, and nife's rotation runs them and `ext4_server`'s
   with no open finding.
 - The oracle passes in CI on aarch64, riscv64 and x86_64, every image in the corpus included.
 - The write-reordering and power-cut sweeps recover every point to a clean volume under Linux
@@ -264,11 +264,11 @@ it. That ruling is not the adoption ruling above, which stays open.
   1 to 3 held as expected outcomes.
 - **Outstanding.** [Item 9's draft](0190-ext4-read-write/upstream/9-inode-bitmap-padding.md), for
   bug 3, awaits the architect.
-- **Done.** The oracle takes `rsext4` from nifeos/rsext4 at a pinned `rev`, and its expected
+- **Done.** The oracle takes `rsext4` from partsfoundry/rsext4 at a pinned `rev`, and its expected
   outcomes describe the fork.
-- **Outstanding.** nifeos/rsext4 does not carry upstream's fix for bug 1 and the recovery-flag
+- **Outstanding.** partsfoundry/rsext4 does not carry upstream's fix for bug 1 and the recovery-flag
   order (`rcore-os/tgoskits@dde4020be`); the write oracle still holds bug 1 as expected.
-- **Outstanding.** In nifeos/rsext4: the Kani harnesses, fuzzing in its CI, and the crate-standard
+- **Outstanding.** In partsfoundry/rsext4: the Kani harnesses, fuzzing in its CI, and the crate-standard
   gates upstream's code fails.
 - **Outstanding.** Our side: the oracle on aarch64 and riscv64 hosts, the kernel as a
   second read oracle, a volume over 1 GiB, the write-reordering and power-cut sweeps,
@@ -279,7 +279,7 @@ it. That ruling is not the adoption ruling above, which stays open.
 ## Index row
 
 calef's ext4 drives hold the family's borg repositories, so nife reads and writes the format Linux
-wrote. The implementation is `rsext4`, from nifeos/rsext4, a fork that carries our fixes until
+wrote. The implementation is `rsext4`, from partsfoundry/rsext4, a fork that carries our fixes until
 upstream releases them. Contributing upstream brings it to the bar of §46: write-path
 bug fixes with reproducers, fuzz targets, safety arguments and a sound replacement for
 two unchecked casts, and Kani harnesses. Here, a differential oracle against libext2fs and Linux

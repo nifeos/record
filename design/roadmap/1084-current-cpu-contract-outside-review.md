@@ -11,7 +11,7 @@ needs_person: no
 # 1084. `current_cpu_contract`: what an outside maintainer would fix before it leaves
 
 Raised by a read-only review lane that met `crates/current_cpu_contract` as a stranger would: the
-crate, every caller in the tree, the naming rules, the standalone gate and the `nifeos/crate-workflows`
+crate, every caller in the tree, the naming rules, the standalone gate and the `partsfoundry/crate-workflows`
 template. It changes nothing; it lists what the lanes that move the crate change, and the two
 one-way doors that need the architect.
 
@@ -40,28 +40,28 @@ Reuse: `script/crate-standalone`, `helpers/name_release.py`, `helpers/lint_exter
 
 - 1, the manifest is nife's (P0): At the move. The license, lints, `rust-version`, description,
   docs.rs targets and the pinned `address_space_layout` dependency are the crate's own
-  ([#3657](https://github.com/nifeos/nife/pull/3657)); the move commit adds `repository`.
-- 2, README and license files (P0): Done, [#3657](https://github.com/nifeos/nife/pull/3657).
-- 3, docs cite nife and quote the decider (P0): Done, [#3657](https://github.com/nifeos/nife/pull/3657).
-- 4, names that lack ratification (P0): Done, [#3953](https://github.com/nifeos/nife/pull/3953).
+  ([#3657](https://github.com/partsfoundry/nife/pull/3657)); the move commit adds `repository`.
+- 2, README and license files (P0): Done, [#3657](https://github.com/partsfoundry/nife/pull/3657).
+- 3, docs cite nife and quote the decider (P0): Done, [#3657](https://github.com/partsfoundry/nife/pull/3657).
+- 4, names that lack ratification (P0): Done, [#3953](https://github.com/partsfoundry/nife/pull/3953).
   Every public item carries a ratified `Name:` block, and the tests spell `virtual_address` out.
-- 5, `cpu()` returns an id past the bound (P1): Done, [#3542](https://github.com/nifeos/nife/pull/3542).
-- 6, `allowance()` truncates on narrow targets (P1): Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- 7, the reader reaches its word through an integer (P1): Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- 8, unsafe entry points check nothing in debug builds (P1): Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- 9, the builder and the readers disagree on unknown (P1): Done, [#3657](https://github.com/nifeos/nife/pull/3657).
-- 10, nothing machine-checked (P1): Done, [#3657](https://github.com/nifeos/nife/pull/3657).
-- 11, a stale BUGS section (P1): Done, [#3657](https://github.com/nifeos/nife/pull/3657).
-- 12, the single-file constraint (P1): Done, [#3953](https://github.com/nifeos/nife/pull/3953).
-  The README and `BUGS` sentence are in [#3657](https://github.com/nifeos/nife/pull/3657), and the
+- 5, `cpu()` returns an id past the bound (P1): Done, [#3542](https://github.com/partsfoundry/nife/pull/3542).
+- 6, `allowance()` truncates on narrow targets (P1): Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- 7, the reader reaches its word through an integer (P1): Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- 8, unsafe entry points check nothing in debug builds (P1): Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- 9, the builder and the readers disagree on unknown (P1): Done, [#3657](https://github.com/partsfoundry/nife/pull/3657).
+- 10, nothing machine-checked (P1): Done, [#3657](https://github.com/partsfoundry/nife/pull/3657).
+- 11, a stale BUGS section (P1): Done, [#3657](https://github.com/partsfoundry/nife/pull/3657).
+- 12, the single-file constraint (P1): Done, [#3953](https://github.com/partsfoundry/nife/pull/3953).
+  The README and `BUGS` sentence are in [#3657](https://github.com/partsfoundry/nife/pull/3657), and the
   farm refuses a copied file that names a source file the copy leaves behind.
-- 13, `cfg_attr(not(test), no_std)` (P2): Done, [#3565](https://github.com/nifeos/nife/pull/3565).
+- 13, `cfg_attr(not(test), no_std)` (P2): Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
 - 14, the type of `CPU_OFFSET_BYTES` (P2): Will not fix, ruled 2026-11-19. It stays `u64`.
-- 15, the kernel's safety comment says 16 bytes (P2): Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- 16, two notes that do not link (P2): Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- Decision A, the CPU id bound is part of the identity: Done, [#3542](https://github.com/nifeos/nife/pull/3542).
-- Decision B, the names: Done, [#3657](https://github.com/nifeos/nife/pull/3657), ratified as built (ruled 2026-11-19).
-- Review package: Done, [#3782](https://github.com/nifeos/nife/pull/3782).
+- 15, the kernel's safety comment says 16 bytes (P2): Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- 16, two notes that do not link (P2): Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- Decision A, the CPU id bound is part of the identity: Done, [#3542](https://github.com/partsfoundry/nife/pull/3542).
+- Decision B, the names: Done, [#3657](https://github.com/partsfoundry/nife/pull/3657), ratified as built (ruled 2026-11-19).
+- Review package: Done, [#3782](https://github.com/partsfoundry/nife/pull/3782).
 
 ## Goal
 
@@ -210,7 +210,7 @@ differs by spelling every abbreviation out. Concrete example: a runtime's one li
 
 Ruled 2026-11-19 (UTC), option A. With [the review package](../../notes/crate-reviews/current-cpu-contract.md)
 written, the review of this crate is clear, and that clearance is the go to create
-`nifeos/current_cpu_contract` and move the crate there.
+`partsfoundry/current_cpu_contract` and move the crate there.
 No tag is part of this ruling, and nothing is published. A public repository is one-way: others see
 and clone it once it exists, and nobody can withdraw its history.
 

@@ -63,7 +63,7 @@ pins, and in CI a failed fetch fails the row. basalt builds its packages with th
    §197's tar, `cargo xtask package` compresses it with zstd, and the readers accept `NIFEPKG1` too. The `NIFEPKG1` reader exists only to break the
    cycle: nife's CI must still install basalt's pinned packages until basalt has rebuilt them with
    this commit. It is not compatibility for users.
-2. basalt. Bump the nife pin to step 1's merge commit, cited as `nifeos/nife@<sha>`. Rebuild
+2. basalt. Bump the nife pin to step 1's merge commit, cited as `partsfoundry/nife@<sha>`. Rebuild
    every package, rewrite every recipe's digest table with `--update-digests` (milestone 917
    (basalt's packages build reproducibly)), drop the hand-copied `NAME_LEN`, and publish a new
    Release. Every digest changes, and the pull request says why.

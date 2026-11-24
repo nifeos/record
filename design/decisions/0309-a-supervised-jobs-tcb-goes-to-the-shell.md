@@ -9,7 +9,7 @@ ratified_by: calef
 
 *Number provisional; the integrator mints it at merge.*
 
-Raised by milestone 48 (job control)'s phase two, on nifeos/nife#2332. calef ruled option A on
+Raised by milestone 48 (job control)'s phase two, on partsfoundry/nife#2332. calef ruled option A on
 2026-10-18 (UTC), and the same day ruled the two clauses below that A left open: no wiring bit
 asks for the capability, and it travels without `GRANT`.
 

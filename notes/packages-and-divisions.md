@@ -106,7 +106,7 @@ packages, checked once and then pinned by digest, and it keeps them out of the b
 
 ## What a third party needs today
 
-basalt's package build (`recipes/ripgrep.toml` and `helpers/packages.py` in `nifeos/basalt`) is
+basalt's package build (`recipes/ripgrep.toml` and `helpers/packages.py` in `partsfoundry/basalt`) is
 the one out-of-tree build. It needs the target file, the linker
 script, the patched `nife-dev` toolchain made by `xtask std-src`, and `-Zbuild-std`. The `std`
 overlay reaches six crates: `moho_abi`, `user_mode_runtime`, `file_system_contract`,

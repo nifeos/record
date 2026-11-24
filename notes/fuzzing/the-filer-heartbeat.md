@@ -3,7 +3,7 @@
 *Name: provisional.*
 
 An appendix to [`continuous-host.md`](continuous-host.md). The filer, `fuzz-filer` in
-[nifeos/fuzz-host](https://github.com/nifeos/fuzz-host), turns each held cause into a private
+[partsfoundry/fuzz-host](https://github.com/partsfoundry/fuzz-host), turns each held cause into a private
 advisory. It files only while `fuzz-filer.timer` runs on the host, so a person must enable the timer.
 A release and an ok window prove that the supervisor runs and say nothing about the filer. The
 heartbeat therefore reads the filer's own line in the daily report.
@@ -42,7 +42,7 @@ provisionally.
 
 Parked causes are not a failure of the filer, so they never open `fuzz-loop-broken`. The filer parks
 budget and hang causes and never files them; each waits for a `file` or `suppress` rule in fuzz-host
-`etc/fuzz-filer/rules.tsv` ([the filer's rules](https://github.com/nifeos/fuzz-host/blob/main/docs/fuzz-filer.md#rules)).
+`etc/fuzz-filer/rules.tsv` ([the filer's rules](https://github.com/partsfoundry/fuzz-host/blob/main/docs/fuzz-filer.md#rules)).
 When the `Filer:` line shows more parked causes than the
 count already noticed, the heartbeat opens one issue with the label `fuzz-findings-parked`
 (provisional), or comments on the one already open. The count already noticed is a marker in that

@@ -2,8 +2,8 @@
 
 An appendix to [the milestone](../1099-machine-statistics-contract-outside-review.md).
 
-Verified firsthand, in a fresh shallow clone of `nifeos/nife` at the merge of pull request 3467
-and a clone of `nifeos/crate-workflows` at its head. The crate stood as a copy in a scratch
+Verified firsthand, in a fresh shallow clone of `partsfoundry/nife` at the merge of pull request 3467
+and a clone of `partsfoundry/crate-workflows` at its head. The crate stood as a copy in a scratch
 workspace with its two path dependencies beside it and the workspace's license and lints inlined. The checks:
 
 - `cargo test`: six unit tests and one documentation test pass on the current stable and on 1.88.

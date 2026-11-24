@@ -1,11 +1,11 @@
 # Globbing, and the property that the expansion you see is the grant
 
-Milestone 47's globbing lane. Built 2026-07-31. `nifeos/nife:notes/glob.md` is the matcher, a total function
+Milestone 47's globbing lane. Built 2026-07-31. `partsfoundry/nife:notes/glob.md` is the matcher, a total function
 on two byte strings with no filesystem in it; this note is the layer that turns a match into an
 authority, and the demonstration that hangs on it.
 
 The code is `crates/grant_plan/src/expansion.rs` (the expander and the name set, host-tested),
-`file_system_contract`'s `nameset` module (in `nifeos/file_system_contract`) (the wire encoding),
+`file_system_contract`'s `nameset` module (in `partsfoundry/file_system_contract`) (the wire encoding),
 `components/src/fs_nameset_caretaker.rs` (the caretaker), `components/src/swish/` (`echo`, and the
 grant path), `components/src/rm.rs` (the namespace mode), and `kernel/src/user/fs_service/set_grant.rs`'s
 `start_granted_set`, and `system_tests/src/user/glob_grant_tests.rs`.
@@ -241,7 +241,7 @@ Known limitations, next to the feature rather than only in a tracker.
 - Only the first pattern on a line is expanded. No manifest declares two name slots, so a second
   operand of any kind is already an unplaceable token and a refusal; the day one does, this needs a
   second expansion rather than a loop over the same one.
-- No `**`, no qualifiers, permanently and by decision respectively. `nifeos/nife:notes/glob.md` carries both
+- No `**`, no qualifiers, permanently and by decision respectively. `partsfoundry/nife:notes/glob.md` carries both
   arguments: `**` is a traversal feature (descending means holding a capability), and a qualifier
   needs type, mtime and size per candidate, which turns one enumeration into N `FSTAT`s and needs a
   read right beyond enumerate. Neither is a scheduling excuse; both are authority questions.
@@ -288,7 +288,7 @@ cargo test -p fs_proto       # the set encoding, and both fixtures pinned agains
 
 ## See also
 
-- `nifeos/nife:notes/glob.md`: the matcher, and the four scope decisions this lane inherits.
+- `partsfoundry/nife:notes/glob.md`: the matcher, and the four scope decisions this lane inherits.
 - [dir-capability.md](dir-capability.md): the rights ladder, `fs_subtree_caretaker`, and why the
   endpoint is the boundary.
 - [rm.md](rm.md): `rm` as a program, and why `-r` widens the grant.

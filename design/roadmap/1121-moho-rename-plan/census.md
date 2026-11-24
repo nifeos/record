@@ -2,7 +2,7 @@
 
 An appendix to [the milestone](../1121-moho-rename-plan.md).
 
-`git grep -c -E <pattern>` at `nifeos/nife@97d16ae8b` and `nifeos/basalt@2c437ca`, summed by file
+`git grep -c -E <pattern>` at `partsfoundry/nife@97d16ae8b` and `partsfoundry/basalt@2c437ca`, summed by file
 kind. It counts lines, not occurrences. Each line takes its kind from the path, in this order:
 `vendor/`, `patches/std-nife/` (the overlay), `xtask/`, `.github/`, `targets/`, any `build.rs`,
 `helpers/` and `script/`, then `*.md`, `Cargo.toml` and `Cargo.lock`, `*.rs`, other `*.toml`, and

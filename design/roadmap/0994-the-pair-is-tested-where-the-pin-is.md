@@ -63,13 +63,13 @@ basalt commit instead.
 ## Done when
 
 - basalt's `install` job lists the two `rg-threads` legs, and they pass on the pull request that
-  adds them: nifeos/basalt#83.
+  adds them: partsfoundry/basalt#83.
 - This block, milestone 1106 and milestone 1017 (the contract crates leave in this order) state
   the rule above.
 
 ## Follow-on
 
-- **Done.** nifeos/basalt#83 adds the two `rg-threads` legs to basalt's `install` job.
+- **Done.** partsfoundry/basalt#83 adds the two `rg-threads` legs to basalt's `install` job.
 - **Recorded.** The two legs are not required checks, so a basalt pull request can merge with them
   red and only `publish` stops; basalt's `CONTRIBUTING.md` says so. Adding them to basalt's ruleset
   is a settings change for a person.

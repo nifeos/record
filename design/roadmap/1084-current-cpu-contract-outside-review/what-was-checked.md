@@ -2,7 +2,7 @@
 
 An appendix to [the milestone](../1084-current-cpu-contract-outside-review.md).
 
-Verified firsthand, on a fresh shallow clone of `nifeos/nife` at the head of `main` (merge of
+Verified firsthand, on a fresh shallow clone of `partsfoundry/nife` at the head of `main` (merge of
 #3514), with the tree's pinned nightly:
 
 - `cargo test -p current_cpu_contract`: 13 unit tests and 3 documentation tests pass.

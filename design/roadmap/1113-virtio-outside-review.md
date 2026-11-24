@@ -20,7 +20,7 @@ to take. The one ruling it takes as settled is the crate name: `virtio` is ratif
 name (the specification's own) and this review does not reopen it. Everything else below is open.
 
 Reuse: `script/crate-review-packet`, `script/crate-standalone`, `script/names`,
-`helpers/name_release.py`, the template `nifeos/crate-workflows`, and the crates.io API for the
+`helpers/name_release.py`, the template `partsfoundry/crate-workflows`, and the crates.io API for the
 prior-art figures. No new tool.
 
 ## Goal
@@ -34,41 +34,41 @@ logic is testable on the host, and its names pass `design/naming.md`.
 
 ## Finding status
 
-- P0-1, the crate cannot leave as it stands: Done, [#3662](https://github.com/nifeos/nife/pull/3662). The roles live in
+- P0-1, the crate cannot leave as it stands: Done, [#3662](https://github.com/partsfoundry/nife/pull/3662). The roles live in
   `components/src/block_driver_roles.rs` (Decision 1, ruled 2026-11-16 UTC, option A).
-- P0-2, no test runs outside QEMU and no proof exists: Done, [#3613](https://github.com/nifeos/nife/pull/3613).
+- P0-2, no test runs outside QEMU and no proof exists: Done, [#3613](https://github.com/partsfoundry/nife/pull/3613).
 - P1-3, the ring layout is an unchecked copy of the proved layout: Waiting on milestone 1075 item 11
   (the version gate), which is Open. Decision 2 ruled the move (maintainer, provisional, 2026-11-14
   UTC), and it is not built: `QUEUE_ENTRIES` and the ring offsets are literals under a BUGS entry in
   `block_driver_roles.rs`, and `moho_abi::virtual_io` holds no ring constant. The `moho_abi` review has not
   settled how a change to a pinned value meets an `ABI_VERSION` bump once the crate leaves nife.
   New public constants would join a surface whose gate is not ready.
-- P1-4, a client-caused device error kills the block server: Done, [#3520](https://github.com/nifeos/nife/pull/3520).
-- P1-5, two `unsafe` blocks state an unchecked precondition: Done, [#3520](https://github.com/nifeos/nife/pull/3520).
-- P1-6, a handshake step the specification requires: Done, [#3559](https://github.com/nifeos/nife/pull/3559), [#3574](https://github.com/nifeos/nife/pull/3574) and
-  [#3628](https://github.com/nifeos/nife/pull/3628). The driver-side `Version` check stays closed on purpose (Decision 3).
-- P1-7, four completion loops and three submits: Done, [#3613](https://github.com/nifeos/nife/pull/3613).
-- P1-8, the receive parser trusts the buffer: Done, [#3520](https://github.com/nifeos/nife/pull/3520).
-- P1-9, names against `design/naming.md`: Done, [#3816](https://github.com/nifeos/nife/pull/3816)
-  and [#3983](https://github.com/nifeos/nife/pull/3983). Every name the item lists is spelled out,
+- P1-4, a client-caused device error kills the block server: Done, [#3520](https://github.com/partsfoundry/nife/pull/3520).
+- P1-5, two `unsafe` blocks state an unchecked precondition: Done, [#3520](https://github.com/partsfoundry/nife/pull/3520).
+- P1-6, a handshake step the specification requires: Done, [#3559](https://github.com/partsfoundry/nife/pull/3559), [#3574](https://github.com/partsfoundry/nife/pull/3574) and
+  [#3628](https://github.com/partsfoundry/nife/pull/3628). The driver-side `Version` check stays closed on purpose (Decision 3).
+- P1-7, four completion loops and three submits: Done, [#3613](https://github.com/partsfoundry/nife/pull/3613).
+- P1-8, the receive parser trusts the buffer: Done, [#3520](https://github.com/partsfoundry/nife/pull/3520).
+- P1-9, names against `design/naming.md`: Done, [#3816](https://github.com/partsfoundry/nife/pull/3816)
+  and [#3983](https://github.com/partsfoundry/nife/pull/3983). Every name the item lists is spelled out,
   each register, feature bit, descriptor flag and request type keeps the specification's spelling
   as `#[doc(alias)]` and in its doc comment's opening, and the public entry points carry `Name:`
   blocks. All are provisional (maintainer, two-way: the program publishes no name).
-- P1-10, the documentation describes a different crate: Done, [#3613](https://github.com/nifeos/nife/pull/3613) and [#3662](https://github.com/nifeos/nife/pull/3662).
+- P1-10, the documentation describes a different crate: Done, [#3613](https://github.com/partsfoundry/nife/pull/3613) and [#3662](https://github.com/partsfoundry/nife/pull/3662).
 - P1-11, the manifest does not stand alone: Will not fix. After the fold
-  ([#3662](https://github.com/nifeos/nife/pull/3662)) the roles have no manifest of their own, which
+  ([#3662](https://github.com/partsfoundry/nife/pull/3662)) the roles have no manifest of their own, which
   follows from Decision 1, ruled 2026-11-16 (UTC).
-- P2-12, `find_file` trusts the name length: Done, [#3613](https://github.com/nifeos/nife/pull/3613).
-- P2-13, `disk_size_bytes` and the configuration generation: Done, [#3520](https://github.com/nifeos/nife/pull/3520) and [#3613](https://github.com/nifeos/nife/pull/3613).
-- P2-14, one request in flight on the production path: Done, [#3613](https://github.com/nifeos/nife/pull/3613).
-- P2-15, an unused parameter of `run_attack`: Done, [#3613](https://github.com/nifeos/nife/pull/3613).
-- P2-16, an unbounded `complete_block`: Done, [#3613](https://github.com/nifeos/nife/pull/3613).
+- P2-12, `find_file` trusts the name length: Done, [#3613](https://github.com/partsfoundry/nife/pull/3613).
+- P2-13, `disk_size_bytes` and the configuration generation: Done, [#3520](https://github.com/partsfoundry/nife/pull/3520) and [#3613](https://github.com/partsfoundry/nife/pull/3613).
+- P2-14, one request in flight on the production path: Done, [#3613](https://github.com/partsfoundry/nife/pull/3613).
+- P2-15, an unused parameter of `run_attack`: Done, [#3613](https://github.com/partsfoundry/nife/pull/3613).
+- P2-16, an unbounded `complete_block`: Done, [#3613](https://github.com/partsfoundry/nife/pull/3613).
 - P2-17, the register map unchecked against a second driver: Open.
-- Decision 1, fold the roles into `block_driver`: Done, [#3662](https://github.com/nifeos/nife/pull/3662) (ruled 2026-11-16 UTC, A).
+- Decision 1, fold the roles into `block_driver`: Done, [#3662](https://github.com/partsfoundry/nife/pull/3662) (ruled 2026-11-16 UTC, A).
 - Decision 2, the ring layout moves to `moho_abi::virtual_io`: Waiting on milestone 1075 (what an
   outside maintainer would fix before the move) item 11. Ruled (maintainer, provisional, 2026-11-14
   UTC) and not built; P1-3 is the work.
-- Decision 3, the kernel checks `Version` and the driver does not: Done, [#3628](https://github.com/nifeos/nife/pull/3628) (maintainer,
+- Decision 3, the kernel checks `Version` and the driver does not: Done, [#3628](https://github.com/partsfoundry/nife/pull/3628) (maintainer,
   provisional, 2026-11-15 UTC).
 
 ## Open decisions

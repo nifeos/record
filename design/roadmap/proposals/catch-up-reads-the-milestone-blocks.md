@@ -16,7 +16,7 @@ departure](../../audit-reports/2026-11-24-the-records-departure.md), finding 9. 
 the newcomer path. nife's README offers `script/catch-up` in its Try it block as the way to learn
 what changed, and it does not answer.
 
-Reuse: `parse_blocks` in nifeos/nife:script/catch-up, `helpers/roadmap_block.status_and_built`
+Reuse: `parse_blocks` in partsfoundry/nife:script/catch-up, `helpers/roadmap_block.status_and_built`
 and this repository's `script/roadmap --index`. No new dependency.
 
 ## The problem
@@ -32,7 +32,7 @@ roadmap: the merged pull requests and the commits of the window.
 
 ## The work
 
-- The milestone half reads the blocks from nifeos/record. It takes a checkout named on the
+- The milestone half reads the blocks from partsfoundry/record. It takes a checkout named on the
   command line or found beside nife's. With no record to read, it prints the rest of its report.
   One line says the milestone half needs the record, and it exits 0.
 - A window that starts before the move reads its old end from nife's history. It reads the new

@@ -55,7 +55,7 @@ script/audits --worklist
 That ranks every document in `notes/`, `design/roadmap/` and the repository root by how many of the
 files it cites have moved since the document itself was last edited. A cited file is the record's
 own when the record tracks it, and otherwise nife's at the commit basalt's `main` pins, read
-through `helpers/nife_tree.py history`; the list marks nife's as `nifeos/nife:<path>`. It is
+through `helpers/nife_tree.py history`; the list marks nife's as `partsfoundry/nife:<path>`. It is
 milestone 93 (documentation audits as a mechanism)'s block asking for exactly this ("a note whose cited code has changed substantially since the note's last
 edit is the highest-value candidate for the next sweep, and git can compute that"), and the answer to
 the question that block left open is: **a heuristic, not a signal.** Nothing consumes its exit

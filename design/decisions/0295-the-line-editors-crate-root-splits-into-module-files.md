@@ -19,7 +19,7 @@ It blocked the move and nothing else.
 
 calef asked nothing separate on this section. The block's three questions are answered by
 decisions he had already made, and the maintainer recorded that on 2026-10-12 at 02:58 (UTC) on
-[PR #1969](https://github.com/nifeos/nife/pull/1969#issuecomment-6116941685): *"Settled by
+[PR #1969](https://github.com/partsfoundry/nife/pull/1969#issuecomment-6116941685): *"Settled by
 precedent; nothing asked."*
 
 1. By module, or tests only: by module. calef chose the code over the tests alone in §275 (the file

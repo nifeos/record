@@ -113,7 +113,7 @@ caveat until the reference C runs.
 
 ## Amendment, 2026-10-12 (UTC): wakeup latency replaces schbench
 
-calef ruled on #2009 ([his comment](https://github.com/nifeos/nife/pull/2009#issuecomment-6130684610)), choosing to measure wakeup latency from each kernel's own
+calef ruled on #2009 ([his comment](https://github.com/partsfoundry/nife/pull/2009#issuecomment-6130684610)), choosing to measure wakeup latency from each kernel's own
 trace: *"c, and drop schbench"*. He then ruled that this section be amended to match, on #2021:
 *"Amend"*. Both are dated 2026-10-12 (UTC).
 

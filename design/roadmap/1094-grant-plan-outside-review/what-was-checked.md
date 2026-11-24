@@ -2,7 +2,7 @@
 
 An appendix to [the milestone](../1094-grant-plan-outside-review.md).
 
-Verified firsthand, on a fresh `--depth 50` clone of `nifeos/nife` at the head of `main`, with the
+Verified firsthand, on a fresh `--depth 50` clone of `partsfoundry/nife` at the head of `main`, with the
 tree's pinned nightly toolchain, on one machine:
 
 - `cargo test -p grant_plan`: 252 unit tests and 7 documentation tests pass in under a second.

@@ -7,9 +7,9 @@ file holds the harness tables and the reasoning for the capability core, the unt
 accounting, the paging arithmetic, the frame allocator, the device-tree leaves, the IPC rendezvous,
 the generational table, the intrusive queue and the ASID allocator.
 
-## `nifeos/capability_table`
+## `partsfoundry/capability_table`
 
-12 harnesses in the repository `nifeos/capability_table`, in `src/lib.rs` under `#[cfg(kani)]`;
+12 harnesses in the repository `partsfoundry/capability_table`, in `src/lib.rs` under `#[cfg(kani)]`;
 the table names the eight this appendix adjudicated:
 
 | Harness | Property |
@@ -199,7 +199,7 @@ state. The proofs landed on code the kernel was running all along.
 
 ## `generational_table`
 
-Five in the repository `nifeos/generational_table`, whose `proofs` workflow proves them and replays
+Five in the repository `partsfoundry/generational_table`, whose `proofs` workflow proves them and replays
 each falsification patch. It is the generational thread table (milestone 14 phase A; see
 notes/generational-names.md); the table names the three this appendix adjudicated:
 
@@ -211,7 +211,7 @@ notes/generational-names.md); the table names the three this appendix adjudicate
 
 ## `intrusive_queue`
 
-Two in the repository `nifeos/intrusive_queue`, whose `proofs` workflow proves them and replays
+Two in the repository `partsfoundry/intrusive_queue`, whose `proofs` workflow proves them and replays
 each falsification patch. It is the scheduler's queue structure (milestone 14 phase A.2; see notes/intrusive-queues.md):
 
 | Harness | Property |

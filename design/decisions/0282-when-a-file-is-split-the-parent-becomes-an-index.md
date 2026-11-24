@@ -8,7 +8,7 @@ ratified_by: calef
 # 282. When a file is split, the parent becomes an index
 
 Raised and decided 2026-10-11 (UTC), while calef ruled fork 1 of
-[#1959](https://github.com/nifeos/nife/pull/1959), the cut of
+[#1959](https://github.com/partsfoundry/nife/pull/1959), the cut of
 [milestone 872 (the kernel's user-mode file is split along its seams)](../roadmap/0872-the-kernels-user-mode-file-is-split-along-its-seams.md).
 Written by lane `lane/split-parent-is-an-index`. *(Section number provisional until the merge queue
 lands it. The gate's file names are provisional too.)*

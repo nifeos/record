@@ -14,13 +14,13 @@ needs_person: no
 
 Raised by the lane `lane/unpublished-crates-pin-by-revision-and-version` on 2026-11-01 (UTC),
 recording the ruling of that day on how nife consumes a crate it does not publish. Journey 5 states
-the form: a git dependency on `https://github.com/nifeos/<crate>` whose `rev` names the commit of
-a tagged release, with the version requirement stated. §305 (git dependencies on `nifeos/*` only, pinned to a landed commit)
+the form: a git dependency on `https://github.com/partsfoundry/<crate>` whose `rev` names the commit of
+a tagged release, with the version requirement stated. §305 (git dependencies on `partsfoundry/*` only, pinned to a landed commit)
 governs the pin. Nothing moves that pin today when a producer tags a new release, so every consumer
 falls behind until someone edits it by hand.
 
 Reuse: the tree's dependency bot (`.github/dependabot.yml`, three `cargo` entries) and the shared
-crate template in `nifeos/crate-workflows`. It proposes no new dependency.
+crate template in `partsfoundry/crate-workflows`. It proposes no new dependency.
 
 ## The question
 
@@ -31,7 +31,7 @@ log as the evidence.
 - If it can, the work is its configuration, and a check that the new revision is a tagged
   release's commit whose manifest carries the version the consumer states.
 - If it cannot, the producer's release workflow opens a bump pull request in each consumer, citing
-  `nifeos/<crate>@<sha>` as §305 asks. The list of consumers has to come from somewhere a
+  `partsfoundry/<crate>@<sha>` as §305 asks. The list of consumers has to come from somewhere a
   workflow can read, and choosing that place is part of the work.
 
 ## An option, priced and not recommended

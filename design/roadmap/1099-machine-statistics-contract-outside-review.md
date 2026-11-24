@@ -24,39 +24,39 @@ checkable versions)) and the fixed address stand. The fixed address follows the 
 is `_VIRTUAL_ADDRESS` in every location. Every public name now carries a `Name:` block that reads
 ratified.
 
-Reuse: the template `nifeos/crate-workflows` and its helpers, `script/crate-move --dry-run`,
+Reuse: the template `partsfoundry/crate-workflows` and its helpers, `script/crate-move --dry-run`,
 `script/crate-standalone`, `helpers/name_release.py`, Kani, Miri, cargo-llvm-cov, and
 `block_roster_contract`'s `verification` module and `falsifications/` directory as the pattern.
 No new tool.
 
 ## Finding status
 
-- P0-1, names and the ratification table: Done, [#3801](https://github.com/nifeos/nife/pull/3801). The 2026-11-19 (UTC) ruling
+- P0-1, names and the ratification table: Done, [#3801](https://github.com/partsfoundry/nife/pull/3801). The 2026-11-19 (UTC) ruling
   ratified the table. The names ship, and every public name carries a ratified block.
-- P0-2, manifest, license files and README: Done, [#3801](https://github.com/nifeos/nife/pull/3801). `address_space_layout` is a pinned
+- P0-2, manifest, license files and README: Done, [#3801](https://github.com/partsfoundry/nife/pull/3801). `address_space_layout` is a pinned
   git dependency already; the move changes `current_cpu_contract` to one and adds `repository`.
-- P0-3, citations of this tree: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P1-4, saturating totals: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
+- P0-3, citations of this tree: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- P1-4, saturating totals: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
 - P1-5, `counter` lifetime and read-only contract: Done,
-  [#3566](https://github.com/nifeos/nife/pull/3566).
-- P1-6, line count owned by this crate: Done, [#3582](https://github.com/nifeos/nife/pull/3582).
-- P1-7, three Kani harnesses: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P1-8, host tests over an aligned frame: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
+  [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- P1-6, line count owned by this crate: Done, [#3582](https://github.com/partsfoundry/nife/pull/3582).
+- P1-7, three Kani harnesses: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- P1-8, host tests over an aligned frame: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
   Miri over the same tests ran on the package branch; the package records the result.
-- P1-9, header and line namespaces: Done, [#3801](https://github.com/nifeos/nife/pull/3801). The header indices live in
+- P1-9, header and line namespaces: Done, [#3801](https://github.com/partsfoundry/nife/pull/3801). The header indices live in
   `word::header` and the per-cpu offsets in `word::line`.
-- P1-10, `online_cpus` type and the word core: Done, [#3566](https://github.com/nifeos/nife/pull/3566)
-  and [#3801](https://github.com/nifeos/nife/pull/3801). `online_cpus` stays `usize`, and the prose says "cpu".
-- P1-11, documentation defects: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P2-12, dry run against the standalone check: Done, [#3839](https://github.com/nifeos/nife/pull/3839).
+- P1-10, `online_cpus` type and the word core: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566)
+  and [#3801](https://github.com/partsfoundry/nife/pull/3801). `online_cpus` stays `usize`, and the prose says "cpu".
+- P1-11, documentation defects: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- P2-12, dry run against the standalone check: Done, [#3839](https://github.com/partsfoundry/nife/pull/3839).
   The dry run reports the manifest findings with the standalone check's own function, inlines the
   inherited keys before it builds, and reports the scaffold's citations and `nife` lines after the
   crate's own, under their own step names.
-- P2-13, end-to-end test note: Done, [#3801](https://github.com/nifeos/nife/pull/3801). The README says the test lives with the kernel.
-- P2-14, unconditional `no_std`: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P2-15, `Snapshot` size: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
+- P2-13, end-to-end test note: Done, [#3801](https://github.com/partsfoundry/nife/pull/3801). The README says the test lives with the kernel.
+- P2-14, unconditional `no_std`: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- P2-15, `Snapshot` size: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
 - Decision 1, identity with the line count inside it: Done,
-  [#3582](https://github.com/nifeos/nife/pull/3582), ruled 2026-11-14 (UTC), option A.
+  [#3582](https://github.com/partsfoundry/nife/pull/3582), ruled 2026-11-14 (UTC), option A.
 
 ## Open decisions
 
@@ -69,7 +69,7 @@ Ruled 2026-11-19 (UTC), option A. The table stands as the maintainer set it: `PA
 ### Clear the review package and approve the repository (ruled)
 
 Ruled 2026-11-20 (UTC), option A: the package is cleared and the clearance creates the repository,
-`nifeos/machine_statistics_contract`, with `publish = false`. No tag and no publish.
+`partsfoundry/machine_statistics_contract`, with `publish = false`. No tag and no publish.
 
 Background. A crate leaves this tree for its own `nifeos` repository only when the architect
 clears its review package; that clearance is the approval to create the repository. A package
@@ -176,7 +176,7 @@ The P1 items are in [the appendix](1099-machine-statistics-contract-outside-revi
 
 - **Milestone 1017.** The move, at step 6, after `current_cpu_contract` leaves;
   `address_space_layout` has its own repository and this crate pins it by `rev`. With every finding Done, the milestone counts as built; the
-  architect cleared the review package and approved `nifeos/machine_statistics_contract`.
+  architect cleared the review package and approved `partsfoundry/machine_statistics_contract`.
 
 ## Decisions for the architect
 

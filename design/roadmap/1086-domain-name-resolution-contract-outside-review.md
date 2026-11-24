@@ -12,7 +12,7 @@ needs_person: yes
 
 Raised by a read-only review lane that met `crates/domain_name_resolution_contract` the way a
 maintainer outside this tree would, on a fresh clone of `main`. It changes nothing; it lists what
-the next lanes change before the crate moves to `nifeos/domain_name_resolution_contract`.
+the next lanes change before the crate moves to `partsfoundry/domain_name_resolution_contract`.
 
 The review package for this crate is in `notes/crate-reviews/`
 ([domain-name-resolution-contract.md](../../notes/crate-reviews/domain-name-resolution-contract.md)).
@@ -28,7 +28,7 @@ a release review rechecks names ratified before a later naming rule applies here
 `DATA_MAXIMUM` in the `socket_contract` package.
 
 Reuse: `script/crate-move --dry-run`, `helpers/lint_externalized_crates.py`, the template
-`nifeos/crate-workflows` and its helpers (`standalone.py`, `spelled_out.py`, `register_names.py`,
+`partsfoundry/crate-workflows` and its helpers (`standalone.py`, `spelled_out.py`, `register_names.py`,
 `abbreviations.py`, `prose_acronyms.py`), cargo-mutants' recorded census, Kani and cargo-fuzz for
 the proofs this block asks for. No new tool.
 
@@ -40,72 +40,72 @@ appendix](1086-domain-name-resolution-contract-outside-review/before-the-tag.md)
 nife `main`; the crate has not yet left.
 
 - Item 1 (P0), the crate describes its consumers in 54 lines: Done,
-  [#3641](https://github.com/nifeos/nife/pull/3641) and
-  [#3838](https://github.com/nifeos/nife/pull/3838). `helpers/lint_externalized_crates.py` counts
+  [#3641](https://github.com/partsfoundry/nife/pull/3641) and
+  [#3838](https://github.com/partsfoundry/nife/pull/3838). `helpers/lint_externalized_crates.py` counts
   one hit, the ratified crate-name `Name:` block, which the move strips with the others.
 - Item 2 (P0), `fixture` is nife's boot-test data: Done,
-  [#3838](https://github.com/nifeos/nife/pull/3838). The cases live in
+  [#3838](https://github.com/partsfoundry/nife/pull/3838). The cases live in
   `crates/domain_name_resolution_fixture`, which stays in nife and is never published.
 - Item 3 (P0), the manifest does not stand alone: Done,
-  [#3641](https://github.com/nifeos/nife/pull/3641),
-  [#3838](https://github.com/nifeos/nife/pull/3838) and
-  [#3818](https://github.com/nifeos/nife/pull/3818). `Cargo.toml` carries every field the shape
+  [#3641](https://github.com/partsfoundry/nife/pull/3641),
+  [#3838](https://github.com/partsfoundry/nife/pull/3838) and
+  [#3818](https://github.com/partsfoundry/nife/pull/3818). `Cargo.toml` carries every field the shape
   asks for and explicit lints, the crate carries a README and the two license files, and
   `domain_name_system` is a `git` dependency pinned at its `v0.1.0-pre.1` tag.
 - Item 4 (P1), the limits and offsets break the current rules: Done,
-  [#3641](https://github.com/nifeos/nife/pull/3641),
-  [nifeos/crate-workflows#76](https://github.com/nifeos/crate-workflows/pull/76) and
-  [#3865](https://github.com/nifeos/nife/pull/3865). The template's `spelled_out`,
+  [#3641](https://github.com/partsfoundry/nife/pull/3641),
+  [partsfoundry/crate-workflows#76](https://github.com/partsfoundry/crate-workflows/pull/76) and
+  [#3865](https://github.com/partsfoundry/nife/pull/3865). The template's `spelled_out`,
   `register_names`, `unit_symbols` and `question_shape` judge 319 names in the crate and refuse
   none.
-- Item 5 (P1), the interface identity: Done, [#3583](https://github.com/nifeos/nife/pull/3583).
+- Item 5 (P1), the interface identity: Done, [#3583](https://github.com/partsfoundry/nife/pull/3583).
 - Item 6 (P1), the reply word to a control `CALL`: Done,
-  [#3583](https://github.com/nifeos/nife/pull/3583).
+  [#3583](https://github.com/partsfoundry/nife/pull/3583).
 - Item 7 (P1), one field with three bounds: Done,
-  [#3641](https://github.com/nifeos/nife/pull/3641) and
-  [#3838](https://github.com/nifeos/nife/pull/3838). The resolver, the grant table and the std
+  [#3641](https://github.com/partsfoundry/nife/pull/3641) and
+  [#3838](https://github.com/partsfoundry/nife/pull/3838). The resolver, the grant table and the std
   client all read `MAXIMUM_NAME_FIELD_BYTES`, and two layout assertions bound the page.
 - Item 8 (P1), `Outcome::from_word` decodes words the resolver cannot send: Done,
-  [#3641](https://github.com/nifeos/nife/pull/3641).
+  [#3641](https://github.com/partsfoundry/nife/pull/3641).
 - Item 9 (P1), the documentation does not stand alone: Done,
-  [#3641](https://github.com/nifeos/nife/pull/3641) and
-  [#3838](https://github.com/nifeos/nife/pull/3838). The template's `prose_acronyms` finds every
+  [#3641](https://github.com/partsfoundry/nife/pull/3641) and
+  [#3838](https://github.com/partsfoundry/nife/pull/3838). The template's `prose_acronyms` finds every
   acronym expanded.
 - Item 10 (P1), the grant table has no proof: Done,
-  [#3641](https://github.com/nifeos/nife/pull/3641) and
-  [#3838](https://github.com/nifeos/nife/pull/3838). Two Kani harnesses with falsification
+  [#3641](https://github.com/partsfoundry/nife/pull/3641) and
+  [#3838](https://github.com/partsfoundry/nife/pull/3838). Two Kani harnesses with falsification
   patches, and the fuzz target `domain_name_resolution_grants_control` in the crate's own `fuzz/`
   workspace.
 - Item 11 (P1), the six surviving mutants: At the move. `script/crate-move` carries the census row
   into the new repository's `.github/mutants-exempts`, where the six equivalent mutants are listed
   with the reason, and deletes the row from `.cargo/mutants-baseline.txt`.
 - Item 12 (P2), `wire` carries the spawner's half into the standard library: Done,
-  [#3641](https://github.com/nifeos/nife/pull/3641).
+  [#3641](https://github.com/partsfoundry/nife/pull/3641).
 - Item 13 (P2), the root zone has three spellings: Done,
-  [#3641](https://github.com/nifeos/nife/pull/3641).
-- Item 14 (P2), small shapes: Done, [#3641](https://github.com/nifeos/nife/pull/3641) and
-  [#3785](https://github.com/nifeos/nife/pull/3785), which built decision 4.
+  [#3641](https://github.com/partsfoundry/nife/pull/3641).
+- Item 14 (P2), small shapes: Done, [#3641](https://github.com/partsfoundry/nife/pull/3641) and
+  [#3785](https://github.com/partsfoundry/nife/pull/3785), which built decision 4.
 - Decision 1, the reopened names: Done, ruled as built,
-  [#3641](https://github.com/nifeos/nife/pull/3641) and
-  [#3785](https://github.com/nifeos/nife/pull/3785). The `Name:` blocks that still say provisional
+  [#3641](https://github.com/partsfoundry/nife/pull/3641) and
+  [#3785](https://github.com/partsfoundry/nife/pull/3785). The `Name:` blocks that still say provisional
   go at the move with the others.
-- Decision 2, the control reply: Done, [#3583](https://github.com/nifeos/nife/pull/3583).
-- Decision 3, the identity: Done, [#3583](https://github.com/nifeos/nife/pull/3583).
+- Decision 2, the control reply: Done, [#3583](https://github.com/partsfoundry/nife/pull/3583).
+- Decision 3, the identity: Done, [#3583](https://github.com/partsfoundry/nife/pull/3583).
 - Decision 4, the reply to an unknown transport: Done,
-  [#3785](https://github.com/nifeos/nife/pull/3785).
-- Decision 5, the attach operation's name: Done, [#3785](https://github.com/nifeos/nife/pull/3785).
-- Decision 6, the review and the move: Done, [#3798](https://github.com/nifeos/nife/pull/3798),
+  [#3785](https://github.com/partsfoundry/nife/pull/3785).
+- Decision 5, the attach operation's name: Done, [#3785](https://github.com/partsfoundry/nife/pull/3785).
+- Decision 6, the review and the move: Done, [#3798](https://github.com/partsfoundry/nife/pull/3798),
   which wrote [the review package](../../notes/crate-reviews/domain-name-resolution-contract.md).
 - Decision 7, the fixture's names and the repository go: Done,
-  [#3838](https://github.com/nifeos/nife/pull/3838).
+  [#3838](https://github.com/partsfoundry/nife/pull/3838).
 - F-attach, the attach operation's name: Done, decision 5,
-  [#3785](https://github.com/nifeos/nife/pull/3785).
+  [#3785](https://github.com/partsfoundry/nife/pull/3785).
 - F-log, a runtime log channel for the spawner: Done,
-  [#3583](https://github.com/nifeos/nife/pull/3583), as an entry in the BUGS list of
+  [#3583](https://github.com/partsfoundry/nife/pull/3583), as an entry in the BUGS list of
   `crates/system_initializer`.
-- F-package, the review package: Done, [#3798](https://github.com/nifeos/nife/pull/3798).
-- F-clearance, review clearance: Done, [#3838](https://github.com/nifeos/nife/pull/3838). The
-  architect cleared the review package and approved `nifeos/domain_name_resolution_contract`.
+- F-package, the review package: Done, [#3798](https://github.com/partsfoundry/nife/pull/3798).
+- F-clearance, review clearance: Done, [#3838](https://github.com/partsfoundry/nife/pull/3838). The
+  architect cleared the review package and approved `partsfoundry/domain_name_resolution_contract`.
 
 ## Open decisions
 
@@ -113,7 +113,7 @@ None.
 
 ## Goal
 
-A stranger who opens `nifeos/domain_name_resolution_contract` can tell in one screen what the three
+A stranger who opens `partsfoundry/domain_name_resolution_contract` can tell in one screen what the three
 parties on the resolver's endpoint are (the spawner, a client, the resolver). The same stranger can
 see which words each sends, where the name and the addresses sit in the page, and what every reply
 word means. The crate names nothing that is not in its own repository. Its one stateful parser, the
@@ -270,7 +270,7 @@ on 2026-11-20 (UTC).
 7. The fixture's names and the repository go. Ruled 2026-11-20 (UTC). The crate that holds the
    boot-test fixture keeps the ratified name `domain_name_resolution_fixture`, and the code for a
    client whose first name did not resolve is `ECHO_UNRESOLVED`, with no alias. The architect
-   cleared the review package: the go creates `nifeos/domain_name_resolution_contract` with `publish
+   cleared the review package: the go creates `partsfoundry/domain_name_resolution_contract` with `publish
    = false`, no tag and no publish, and the move waits for the `domain_name_system` tag. Door:
    one-way once the repository exists. Prior art: `device_tree_blob` and `interfaces_note` cleared
    the same way. Example: the test client reports `ECHO_UNRESOLVED` (3) when `packages.nife.test`

@@ -127,7 +127,7 @@ both downward, which is what layout noise looks like when it is not a cost.
 
 - **FIXED: `a_child_can_neither_learn_nor_forge_its_label` hung on x86_64, twice.** The first was
   CI run 38144329675, job 114484454714, on PR #1933 at `3a7d1eea0`, 2026-10-11 (UTC). The second
-  was nifeos/basalt gate run 38411394702, job 115344364010, with nife at `6364221d1`, 2026-10-13
+  was partsfoundry/basalt gate run 38411394702, job 115344364010, with nife at `6364221d1`, 2026-10-13
   14:27 (UTC), after #2046's `while_installed` masking. Both transcripts end at the labeled child's
   expected kill (`vector 14 (page fault)`, `rip 0x60000005`, `addr 0xa50000`, `the kernel is
   fine.`). The second also shows that the guest's own watchdogs never fired: the host watchdog

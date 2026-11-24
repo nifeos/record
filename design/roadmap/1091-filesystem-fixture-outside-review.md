@@ -10,7 +10,7 @@ needs_person: yes
 # 1091. `file_system_fixture`: what an outside maintainer would fix before it leaves
 
 Raised by a read-only review of `crates/file_system_fixture` as a stranger would meet it, on a fresh
-clone of `nifeos/nife` at `137639a3a`. It changes nothing; it lists what the lanes that move the
+clone of `partsfoundry/nife` at `137639a3a`. It changes nothing; it lists what the lanes that move the
 crate change, and the two decisions only an architect can take.
 
 This review respects the rulings recorded in the tree and no earlier package; the crate's review
@@ -29,7 +29,7 @@ still leave together, for a different reason: Decision 1 puts them in one reposi
 workspace, where the fixture links the contract by path. The README and crate-root `BUGS` that say
 the contract leaves first and this crate then pins it by revision are stale (item 2).
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold and helpers; `script/crate-standalone`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold and helpers; `script/crate-standalone`,
 `script/crate-review-packet`, `helpers/lint_externalized_crates.py` and `helpers/name_release.py`
 in this tree; cargo-mutants' recorded census. No new tool.
 
@@ -42,47 +42,47 @@ items 13 to 18 in [the later-items appendix](1091-filesystem-fixture-outside-rev
 then the three decisions.
 
 - Item 1 (P0), the template's cargo-deny refuses a nifeos git dependency: Done,
-  [nifeos/crate-workflows#66](https://github.com/nifeos/crate-workflows/pull/66) allows git sources
+  [partsfoundry/crate-workflows#66](https://github.com/partsfoundry/crate-workflows/pull/66) allows git sources
   on the organization and
-  [nifeos/crate-workflows#64](https://github.com/nifeos/crate-workflows/pull/64) supports a
+  [partsfoundry/crate-workflows#64](https://github.com/partsfoundry/crate-workflows/pull/64) supports a
   repository of several crates.
-- Item 2 (P0), the order and pairing are stale: Done, [#3909](https://github.com/nifeos/nife/pull/3909).
+- Item 2 (P0), the order and pairing are stale: Done, [#3909](https://github.com/partsfoundry/nife/pull/3909).
   The README and the crate root say the dependency on `file_system_contract` is a path inside one
   workspace.
-- Item 3 (P0), acronyms and British spelling: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 4 (P0), names the gates refuse: Done, [#3910](https://github.com/nifeos/nife/pull/3910) applied
+- Item 3 (P0), acronyms and British spelling: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 4 (P0), names the gates refuse: Done, [#3910](https://github.com/partsfoundry/nife/pull/3910) applied
   Decision 2's three tables as provisional names, and the naming gates report none refused.
-- Item 5 (P0), no review package and unratified names: Done, [#4009](https://github.com/nifeos/nife/pull/4009).
+- Item 5 (P0), no review package and unratified names: Done, [#4009](https://github.com/partsfoundry/nife/pull/4009).
   The architect ratified the crate name, `INTERFACE_ID` 16 at `VERSION` 1 and the item names as
   built, ruled 2026-11-22 UTC.
-- Item 6 (P1), the crate describes this tree: Done, [#4000](https://github.com/nifeos/nife/pull/4000).
+- Item 6 (P1), the crate describes this tree: Done, [#4000](https://github.com/partsfoundry/nife/pull/4000).
   The externalization lint counts no consumer name, and the crate has no waiver.
-- Item 7 (P1), history residue: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 8 (P1), the `durability` module is unused: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
+- Item 7 (P1), history residue: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 8 (P1), the `durability` module is unused: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
 - Item 9 (P1), the shared-frame witness doc states the refuted outcome: Done,
-  [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 10 (P1), 14 equivalent mutants: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
+  [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 10 (P1), 14 equivalent mutants: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
 - Item 11 (P1), caller workflows, manifest and stranger run: Done in part,
-  [#4000](https://github.com/nifeos/nife/pull/4000) and [#4020](https://github.com/nifeos/nife/pull/4020). The manifest and the caller
+  [#4000](https://github.com/partsfoundry/nife/pull/4000) and [#4020](https://github.com/partsfoundry/nife/pull/4020). The manifest and the caller
   workflows (three targets, `allow-unpublished`) are in place; the stranger run comes before a tag.
-- Item 12 (P1), the README's claims mislead: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 13 (P2), `rg_match_path` unbounded: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 14 (P2), `wide_name` wraps: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
+- Item 12 (P1), the README's claims mislead: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 13 (P2), `rg_match_path` unbounded: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 14 (P2), `wide_name` wraps: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
 - Item 15 (P2), the throughput widths mix `usize` and `u64`: Done,
-  [#4000](https://github.com/nifeos/nife/pull/4000).
-- Item 16 (P2), hand-copied distinct-bits lists: Done, [#4000](https://github.com/nifeos/nife/pull/4000).
+  [#4000](https://github.com/partsfoundry/nife/pull/4000).
+- Item 16 (P2), hand-copied distinct-bits lists: Done, [#4000](https://github.com/partsfoundry/nife/pull/4000).
   Each witness module has a public `ALL`, and a test holds each to the bits its module declares.
 - Item 17 (P2), the doc comments are a note: Open.
 - Item 18 (P2), outsiders get nothing to run: Waiting on milestone 1017's move. A harness a third
   party can run belongs to the shared repository once both crates are there; the README and the
   crate root's `BUGS` record the gap.
-- Decision 1, the repository: Done, [#4020](https://github.com/nifeos/nife/pull/4020). One workspace repository shared with
+- Decision 1, the repository: Done, [#4020](https://github.com/partsfoundry/nife/pull/4020). One workspace repository shared with
   `file_system_contract`, ruled 2026-11-14 (UTC); nife depends on both crates at commit
   7577a7d0df339107f75747c3681f5990f116cf61.
-- Decision 2, the names: Done, [#3910](https://github.com/nifeos/nife/pull/3910).
-- Decision 3, the review package and clearance: Done, [#4009](https://github.com/nifeos/nife/pull/4009). Ruled 2026-11-22
+- Decision 2, the names: Done, [#3910](https://github.com/partsfoundry/nife/pull/3910).
+- Decision 3, the review package and clearance: Done, [#4009](https://github.com/partsfoundry/nife/pull/4009). Ruled 2026-11-22
   UTC: `file_system_fixture` is cleared as the second crate of the shared repository
-  `nifeos/file_system_contract`, `publish = false`.
+  `partsfoundry/file_system_contract`, `publish = false`.
 
 ## Open decisions
 
@@ -90,7 +90,7 @@ None.
 
 ## Goal
 
-A stranger who opens `nifeos/file_system_fixture` can tell in one screen what it holds and which
+A stranger who opens `partsfoundry/file_system_fixture` can tell in one screen what it holds and which
 programs read it. The stranger can build and test it from the README alone on stable Rust. Every
 gate of the shared template is green for the crate's own reasons. The crate names no program of this tree,
 describes no internals of it, and carries no history. Nothing in it goes to crates.io, by design, and the manifest says so in words a stranger can act on.
@@ -133,7 +133,7 @@ Ruled 2026-11-14 (UTC): `file_system_fixture` gets no repository of its own. It 
 repository with `file_system_contract`, as two crates in one Cargo workspace, and keeps
 `publish = false`. The two move together at milestone 1017's step 2, after items 1 to 5 have
 landed. Before the move a lane checks that the template handles a two-crate workspace, which
-[crate-workflows#64](https://github.com/nifeos/crate-workflows/pull/64) added.
+[crate-workflows#64](https://github.com/partsfoundry/crate-workflows/pull/64) added.
 
 Why. The test of whether a crate leaves is that it is publishable or used by more than one
 repository. This crate never publishes (it is test data, and the template's `allow-unpublished`

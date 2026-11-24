@@ -16,7 +16,7 @@ answering the deferral in section 1. The moved-things registry lives at `package
 at `design/roadmap/MOVED`.*
 
 *Amended 2026-11-01 (UTC) on #3034: the numbering namespace in section 4 moves with the record to
-`nifeos/record`, and `nifeos/nife` remains for history only.*
+`partsfoundry/record`, and `partsfoundry/nife` remains for history only.*
 
 The ruling, in one line. Keep option E, one roadmap in `basalt`, until the split makes a
 citation cross a repository boundary. Record the deferral rather than letting it happen by default.
@@ -105,8 +105,8 @@ Ruled 2026-10-28 (UTC), on the question section 1 deferred, ahead of the first c
 756 (process-tools, core-tools and disk-tools are the first code to leave this repository)), the
 revisit event section 1 defines. The rule, in force now:
 
-- One-way links. A record points at code as `nifeos/<repo>@<sha>` for a commit and as
-  `nifeos/<repo>` for a repository. Code does not cite roadmap records or decisions. When code
+- One-way links. A record points at code as `partsfoundry/<repo>@<sha>` for a commit and as
+  `partsfoundry/<repo>` for a repository. Code does not cite roadmap records or decisions. When code
   moves out, the moves/stays/gone sort (ruled 2026-10-26,
   [§315 (a crate's documentation leaves with it)](0315-a-crates-documentation-leaves-with-it.md),
   its number provisional until the merge queue mints it) converts citations to rulings into
@@ -119,11 +119,11 @@ revisit event section 1 defines. The rule, in force now:
   location `design/roadmap/MOVED` (milestone 533 (whether the roadmap should become issues, and
   what a citation means after the repository split)'s mechanism) gives way to it; the substance
   holds: the FreeBSD four-field form, append-only, written at the split.
-- The numbering namespace stays with the record repository, `nifeos/record`, and moves with
-  the record when it leaves `nifeos/nife`, which remains for history only. A record's
+- The numbering namespace stays with the record repository, `partsfoundry/record`, and moves with
+  the record when it leaves `partsfoundry/nife`, which remains for history only. A record's
   number stays its identity. A bare code path in an existing record means that path at the last
-  `nifeos/nife` commit before the move, the anchor, which `packages/moved.toml` records in one line.
-  New text uses `nifeos/<repo>:<path>`, resolved at basalt's pin. The site gives each number a stable
+  `partsfoundry/nife` commit before the move, the anchor, which `packages/moved.toml` records in one line.
+  New text uses `partsfoundry/<repo>:<path>`, resolved at basalt's pin. The site gives each number a stable
   address derived from the number alone. The revisit condition stays armed: when a component
   repository first needs numbered records of its own, milestone 533's options A and C re-open on
   evidence.

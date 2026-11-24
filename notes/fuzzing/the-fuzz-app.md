@@ -10,7 +10,7 @@ architect ruled this on 2026-11-01 (UTC) in
 [`fuzz-findings-without-a-person`](../../design/roadmap/1015-fuzz-findings-without-a-person.md) and
 narrowed it on 2026-11-04 (UTC): a person publishes each advisory, and the host does not.
 
-The App exists. A person created it on 2026-11-01 (UTC) and installed it on nifeos/nife only. Its
+The App exists. A person created it on 2026-11-01 (UTC) and installed it on partsfoundry/nife only. Its
 App ID is 5571801 and its installation ID is 177641059; neither is secret. The steps below stay as
 the procedure for replacing it or its key. A person does every step here. No lane creates the App,
 handles the key, reads it or looks for it.
@@ -33,15 +33,15 @@ Read this first. It is the exposure you accept by placing the key.
   auto-merge armed reaches main through the merge queue when its checks pass. A held finding's fix
   is outside that reach while a lane develops it and a person reviews it, in the advisory's temporary
   private fork, which GitHub opens to no integration. It comes within reach when the approved fix
-  lands as an ordinary pull request on nifeos/nife, for the time it spends in the merge queue. A
+  lands as an ordinary pull request on partsfoundry/nife, for the time it spends in the merge queue. A
   finding the architect judges low severity has its fix in a public pull request from the start.
 - With Contents write, a token can create, move or delete any `fuzz-*` tag and any release on
-  nifeos/nife. The ruleset "tags: only fuzz-* tags may be made" refuses creating, updating or
+  partsfoundry/nife. The ruleset "tags: only fuzz-* tags may be made" refuses creating, updating or
   deleting any other tag, and it has no bypass actor. An architect accepted the remaining exposure on
   2026-11-01 (UTC) on that condition.
 - It cannot push to main: main's ruleset requires a pull request and has no bypass actor.
 - With Repository security advisories write, a token can create, edit and publish any advisory on
-  nifeos/nife, including a held finding before its fix. A throwaway App with that permission alone
+  partsfoundry/nife, including a held finding before its fix. A throwaway App with that permission alone
   did create, complete and publish an advisory, so the permission is enough for the filer. It is also
 enough to publish. The filer never does: it only lists and creates drafts. The residual is that
 anything running as the fuzz account with a filer token could.
@@ -53,9 +53,9 @@ anything running as the fuzz account with a filer token could.
 
 ## Create the App
 
-1. Open <https://github.com/organizations/nifeos/settings/apps/new>, the organization's new GitHub
+1. Open <https://github.com/organizations/partsfoundry/settings/apps/new>, the organization's new GitHub
    App form.
-2. Name: `nife-fuzz`. Homepage: the nifeos/nife repository page.
+2. Name: `nife-fuzz`. Homepage: the partsfoundry/nife repository page.
 3. Switch the webhook off. The App has no server.
 4. Repository permissions: Contents, Read and write. Repository security advisories, Read and
    write. Leave every other permission at No access. Metadata stays Read-only, which GitHub sets on
@@ -69,9 +69,9 @@ Repository security advisories and Metadata.
 
 ## Install it on one repository
 
-1. On the App's page, <https://github.com/organizations/nifeos/settings/apps/nife-fuzz/installations>,
+1. On the App's page, <https://github.com/organizations/partsfoundry/settings/apps/nife-fuzz/installations>,
    choose Install beside the nifeos organization.
-2. Choose Only select repositories, and select nifeos/nife alone.
+2. Choose Only select repositories, and select partsfoundry/nife alone.
 3. Install. The address of the installation's settings page ends in the installation ID; note it.
 
 ## Generate the key and place it on the host
@@ -79,7 +79,7 @@ Repository security advisories and Metadata.
 1. [`finishing-the-setup.md`](finishing-the-setup.md) step P5 gives the commands for the steps
    below. The advisory permission is verified there: this App needs nothing more to file and
    publish an advisory.
-2. On the App's settings page, <https://github.com/organizations/nifeos/settings/apps/nife-fuzz>,
+2. On the App's settings page, <https://github.com/organizations/partsfoundry/settings/apps/nife-fuzz>,
    under Credentials, Key pairs, generate a private key. The browser downloads one
    `.pem` file.
 3. Copy it to the fuzz host over a channel you already trust, straight into a directory only root
@@ -98,30 +98,30 @@ environment, a repository secret, a log, a shell history and a clipboard manager
 A second App, `nife-fuzz-reader`, lets a fix lane read a held finding's advisory. It holds Repository
 security advisories read and nothing else. An architect ruled this on 2026-11-01 (UTC). It is an App
 and not a fine-grained personal token, because a token expires and belongs to a person. It exists,
-installed on nifeos/nife only: App ID 5571868, installation ID 177642435, neither secret. Steps 1
+installed on partsfoundry/nife only: App ID 5571868, installation ID 177642435, neither secret. Steps 1
 to 5 below stay as the procedure for replacing it.
 
 Its key lives in a file only root can read on the machine that launches fix lanes. It never sits on
 the fuzz host and never enters a lane's environment. A lane receives a one-hour installation token at
 launch, from `fuzz-token issue reader`, which a sudo rule lets a lane run.
 
-What the key can do: list and read every advisory on nifeos/nife, held findings included. It can
+What the key can do: list and read every advisory on partsfoundry/nife, held findings included. It can
 write nothing.
 
-1. Open <https://github.com/organizations/nifeos/settings/apps/new>.
-2. Name: `nife-fuzz-reader`. Homepage: the nifeos/nife repository page. Switch the webhook off.
+1. Open <https://github.com/organizations/partsfoundry/settings/apps/new>.
+2. Name: `nife-fuzz-reader`. Homepage: the partsfoundry/nife repository page. Switch the webhook off.
 3. Repository permissions: Repository security advisories, Read-only. Leave every other permission at
    No access; Metadata stays Read-only. No organization or account permissions.
 4. Under "Where can this GitHub App be installed", choose only on this account. Create the App and
    note its App ID.
-5. At <https://github.com/organizations/nifeos/settings/apps/nife-fuzz-reader/installations>,
-   install it on the nifeos organization with Only select repositories, nifeos/nife alone. Note the
+5. At <https://github.com/organizations/partsfoundry/settings/apps/nife-fuzz-reader/installations>,
+   install it on the nifeos organization with Only select repositories, partsfoundry/nife alone. Note the
    installation ID from the installation page's address.
-6. At <https://github.com/organizations/nifeos/settings/apps/nife-fuzz-reader>, under Credentials,
+6. At <https://github.com/organizations/partsfoundry/settings/apps/nife-fuzz-reader>, under Credentials,
    Key pairs, generate a private key. Copy it into a directory only root can enter on the machine that launches fix lanes, owned
    by root, mode 0400. Delete every other copy.
-7. Install the helper and the sudo rule as nifeos/fuzz-host's
-   [`docs/fuzz-token-reader.md`](https://github.com/nifeos/fuzz-host/blob/main/docs/fuzz-token-reader.md)
+7. Install the helper and the sudo rule as partsfoundry/fuzz-host's
+   [`docs/fuzz-token-reader.md`](https://github.com/partsfoundry/fuzz-host/blob/main/docs/fuzz-token-reader.md)
    says. The App ID and installation ID are in the helper; neither is secret.
 
 Never paste this key anywhere else either, a lane's environment included.
@@ -131,13 +131,13 @@ Never paste this key anywhere else either, a lane's environment included.
 1. Run `helpers/fuzz-daily-publish.sh --dry-run` as the fuzz account. It prints the tag and the
    assets and calls nothing.
 2. Set `NIFE_FUZZ_PUBLISH=1` and enable the publish timer. The next day a release
-   `fuzz-YYYY-MM-DD` appears on nifeos/nife, made by `nife-fuzz[bot]`.
+   `fuzz-YYYY-MM-DD` appears on partsfoundry/nife, made by `nife-fuzz[bot]`.
 
 ## Revoke or replace the key
 
 On the App's settings page, generate a new key first, place it as above, then delete the old one.
 GitHub refuses to delete an App's only key. To stop the host acting at all, suspend or uninstall the
-App on nifeos/nife.
+App on partsfoundry/nife.
 
 ## BUGS
 

@@ -10,7 +10,7 @@ needs_person: yes
 # 1071. `entropy_contract`: what an outside maintainer would fix before 0.1.0
 
 Raised by a read-only review of `crates/entropy_contract` as a stranger to this tree would meet it,
-made before the crate's move to `nifeos/entropy_contract`. It changes nothing; it lists what the
+made before the crate's move to `partsfoundry/entropy_contract`. It changes nothing; it lists what the
 next lanes change, in nife before the move where the runbook puts a finding against the crate
 itself, and in the new repository after it.
 
@@ -22,7 +22,7 @@ the four harnesses, the dual license, `publish = false` through the soak, and th
 No later rule in [design/naming.md](../naming.md) contradicts any ratified name. Every quantity ends
 in its unit, the rules spell out every abbreviation they list, and `fill_with` takes std's shape.
 
-Reuse: the template `nifeos/crate-workflows`, Kani, cargo-mutants and the crate's own harnesses.
+Reuse: the template `partsfoundry/crate-workflows`, Kani, cargo-mutants and the crate's own harnesses.
 
 ## Goal
 
@@ -42,67 +42,67 @@ The comparison with nearby work is in [the prior art appendix](1071-entropy-cont
 
 ## Finding status
 
-One line per finding, in the review's order. Pull requests are in nifeos/nife unless named
-otherwise; `entropy_contract#N` is nifeos/entropy_contract. Line numbers in the review are in
+One line per finding, in the review's order. Pull requests are in partsfoundry/nife unless named
+otherwise; `entropy_contract#N` is partsfoundry/entropy_contract. Line numbers in the review are in
 `crates/entropy_contract/` at `cf1328af`.
 
-- P0-1, the README denies the crate's proofs: Done, [#3512](https://github.com/nifeos/nife/pull/3512).
+- P0-1, the README denies the crate's proofs: Done, [#3512](https://github.com/partsfoundry/nife/pull/3512).
   `## What is proven` names every harness and its falsification patch.
 - P0-2, `request` truncates a byte count instead of clamping it: Done,
-  [#3512](https://github.com/nifeos/nife/pull/3512). `request` clamps to `MAXIMUM_BYTES` and the
+  [#3512](https://github.com/partsfoundry/nife/pull/3512). `request` clamps to `MAXIMUM_BYTES` and the
   harness asserts the clamp.
-- P1-3, the README fails the passive-voice gate: Done, [#3512](https://github.com/nifeos/nife/pull/3512).
+- P1-3, the README fails the passive-voice gate: Done, [#3512](https://github.com/partsfoundry/nife/pull/3512).
 - P1-4, no badge row and no path from a clone to a proof: Done,
-  [#3558](https://github.com/nifeos/nife/pull/3558),
-  [entropy_contract#10](https://github.com/nifeos/entropy_contract/pull/10). The README carries the
+  [#3558](https://github.com/partsfoundry/nife/pull/3558),
+  [entropy_contract#10](https://github.com/partsfoundry/entropy_contract/pull/10). The README carries the
   badge row, the install lines, the Kani install's cost, the measured proof time and memory, one
   harness, one falsification patch with its undo, the alarming output and the minimum-version check.
-- P1-5, `fill_with` folds two failures together: Done, [#3558](https://github.com/nifeos/nife/pull/3558).
+- P1-5, `fill_with` folds two failures together: Done, [#3558](https://github.com/partsfoundry/nife/pull/3558).
   `fill_with` returns `Result<(), Refusal>`; `user_mode_runtime::fill` maps it with `.ok()`.
 - P1-6, three rules the services keep are unwritten: Done (decision 2, ruled 2026-11-14 UTC),
-  [#3573](https://github.com/nifeos/nife/pull/3573),
-  [#3616](https://github.com/nifeos/nife/pull/3616). The crate documentation and README state them,
+  [#3573](https://github.com/partsfoundry/nife/pull/3573),
+  [#3616](https://github.com/partsfoundry/nife/pull/3616). The crate documentation and README state them,
   and the three service loops check `request_is_well_formed`.
 - P1-7, the manifest's `publish` comment, categories and metadata: Done,
-  [#3558](https://github.com/nifeos/nife/pull/3558),
-  [#3627](https://github.com/nifeos/nife/pull/3627). The repository's `ci.yml` passes
+  [#3558](https://github.com/partsfoundry/nife/pull/3558),
+  [#3627](https://github.com/partsfoundry/nife/pull/3627). The repository's `ci.yml` passes
   `allow-unpublished: true`.
 - P1-8, readiness passes a source stuck on a nonzero value: Done (ruled 2026-11-11 UTC),
-  [#3531](https://github.com/nifeos/nife/pull/3531). `readiness` refuses it under
+  [#3531](https://github.com/partsfoundry/nife/pull/3531). `readiness` refuses it under
   `STEP_FIRST_ALL_SAME`, with a harness and a patch.
-- P2-9, a reply builder for the service side: Done, [#3558](https://github.com/nifeos/nife/pull/3558),
-  [#3616](https://github.com/nifeos/nife/pull/3616). The three service loops build their replies
+- P2-9, a reply builder for the service side: Done, [#3558](https://github.com/partsfoundry/nife/pull/3558),
+  [#3616](https://github.com/partsfoundry/nife/pull/3616). The three service loops build their replies
   with `reply`.
-- P2-10, `#[must_use]` on the pure functions: Done, [#3558](https://github.com/nifeos/nife/pull/3558).
+- P2-10, `#[must_use]` on the pure functions: Done, [#3558](https://github.com/partsfoundry/nife/pull/3558).
 - P2-11, `request` and `bring_up_failure` accept values past their fields: Done (decision 4),
-  [entropy_contract#5](https://github.com/nifeos/entropy_contract/pull/5). Both return `Err` in
+  [entropy_contract#5](https://github.com/partsfoundry/entropy_contract/pull/5). Both return `Err` in
   every build, with a harness and a patch.
 - P2-12, the readiness proof's bound is below every draw: Done,
-  [#3531](https://github.com/nifeos/nife/pull/3531).
+  [#3531](https://github.com/partsfoundry/nife/pull/3531).
 - P2-13, the `Falsification:` lines sit at the foot of each comment: Done,
-  [#3627](https://github.com/nifeos/nife/pull/3627). The move placed them, and `proofs` is green on
+  [#3627](https://github.com/partsfoundry/nife/pull/3627). The move placed them, and `proofs` is green on
   the repository's `main`.
 - P2-14, two lines of the crate documentation name the architect: Done,
-  [#3627](https://github.com/nifeos/nife/pull/3627). The move stripped the `Name:` block.
-- P2-15, the README does not name `INTERFACE_ID`: Done, [#3558](https://github.com/nifeos/nife/pull/3558).
-- P2-16, the library's prose is over the caps: Done, [#3558](https://github.com/nifeos/nife/pull/3558).
-- P2-17, lints the crate cannot trip: Done, [#3558](https://github.com/nifeos/nife/pull/3558).
+  [#3627](https://github.com/partsfoundry/nife/pull/3627). The move stripped the `Name:` block.
+- P2-15, the README does not name `INTERFACE_ID`: Done, [#3558](https://github.com/partsfoundry/nife/pull/3558).
+- P2-16, the library's prose is over the caps: Done, [#3558](https://github.com/partsfoundry/nife/pull/3558).
+- P2-17, lints the crate cannot trip: Done, [#3558](https://github.com/partsfoundry/nife/pull/3558).
 - Decision 1, the name `STEP_FIRST_ALL_SAME`: Done (maintainer, provisional),
-  [#3531](https://github.com/nifeos/nife/pull/3531).
+  [#3531](https://github.com/partsfoundry/nife/pull/3531).
 - Decision 2, what the contract says a service does: Done (ruled 2026-11-14 UTC),
-  [#3573](https://github.com/nifeos/nife/pull/3573).
+  [#3573](https://github.com/partsfoundry/nife/pull/3573).
 - Decision 3, the names `Refusal`, `NoService`, `ShortReply` and `reply`: Done (maintainer,
-  provisional), [#3558](https://github.com/nifeos/nife/pull/3558).
+  provisional), [#3558](https://github.com/partsfoundry/nife/pull/3558).
 - Decision 4, a release build refuses an out-of-range opcode or step: Done (maintainer,
-  provisional), [entropy_contract#5](https://github.com/nifeos/entropy_contract/pull/5).
-- The move: Done, [#3627](https://github.com/nifeos/nife/pull/3627).
-- The stranger run: Done, [entropy_contract#7](https://github.com/nifeos/entropy_contract/pull/7),
-  [entropy_contract#10](https://github.com/nifeos/entropy_contract/pull/10).
+  provisional), [entropy_contract#5](https://github.com/partsfoundry/entropy_contract/pull/5).
+- The move: Done, [#3627](https://github.com/partsfoundry/nife/pull/3627).
+- The stranger run: Done, [entropy_contract#7](https://github.com/partsfoundry/entropy_contract/pull/7),
+  [entropy_contract#10](https://github.com/partsfoundry/entropy_contract/pull/10).
 - The pre-release tag `v0.1.0-pre.1`: Waiting on the maintainer's tag (ruled 2026-11-19 UTC). The
-  release workflow's dry run on nifeos/entropy_contract@5c9f8eb comes first, then the tag on that
+  release workflow's dry run on partsfoundry/entropy_contract@5c9f8eb comes first, then the tag on that
   commit.
 - nife's pins: Waiting on the tag. Every `entropy_contract` pin in nife is at
-  nifeos/entropy_contract@7e800fd; a nife pull request moves them to the tagged commit and cites it.
+  partsfoundry/entropy_contract@7e800fd; a nife pull request moves them to the tagged commit and cites it.
 
 ## Decisions
 
@@ -146,7 +146,7 @@ Ruled by the maintainer, provisional; landed in #3558. `Refusal`, `NoService`, `
 
 ### Decision 4: Whether a release build refuses an out-of-range opcode or step
 
-Ruled by the maintainer, provisional; landed in nifeos/entropy_contract#5. `request` and
+Ruled by the maintainer, provisional; landed in partsfoundry/entropy_contract#5. `request` and
 `bring_up_failure` return a `Result` and refuse a value past one byte in every build, where they
 had panicked in a debug build and accepted it in a release build. The restrictive form, since a
 later release can loosen it and cannot tighten it. The error types `OperationOutOfRange` and
@@ -156,7 +156,7 @@ later release can loosen it and cannot tighten it. The error types `OperationOut
 
 Ruled by the architect, 2026-11-19 (UTC): the repository takes the tag `v0.1.0-pre.1` once the
 release workflow's dry run is green on `main`; nothing publishes. The manifest reads `0.1.0-pre.1`
-(nifeos/entropy_contract#8), and `main` at nifeos/entropy_contract@5c9f8eb carries every finding's
+(partsfoundry/entropy_contract#8), and `main` at partsfoundry/entropy_contract@5c9f8eb carries every finding's
 fix. The dry run and the tag are the maintainer's, and the pin bump follows the tag.
 
 ## Open decisions
@@ -173,17 +173,17 @@ Every check holds on the repository's `main`.
 ## Where this stands
 
 Every finding, the four decisions, the move and the stranger run are Done (see the finding status).
-`check` and `proofs` are green on nifeos/entropy_contract@5c9f8eb, and `mutation` and `weekly` on
+`check` and `proofs` are green on partsfoundry/entropy_contract@5c9f8eb, and `mutation` and `weekly` on
 the commit before it. Two steps remain, in order: the tag `v0.1.0-pre.1` on `main` after a green
 release dry run, then a nife pull request that moves every `entropy_contract` pin from
-nifeos/entropy_contract@7e800fd to the tagged commit. Publishing stays under the publishing hold.
+partsfoundry/entropy_contract@7e800fd to the tagged commit. Publishing stays under the publishing hold.
 
 ## Follow-on
 
 - **Done.** The move, the stranger run and the JH7110 service loop's `reply`: see the finding status.
-- **Outstanding.** The tag `v0.1.0-pre.1`, which has its ruling: nifeos/entropy_contract lists no
+- **Outstanding.** The tag `v0.1.0-pre.1`, which has its ruling: partsfoundry/entropy_contract lists no
   tag (checked through the GitHub API). Then the pin bump: every `entropy_contract` pin in nife
-  reads nifeos/entropy_contract@7e800fd (checked with `grep` over the manifests).
+  reads partsfoundry/entropy_contract@7e800fd (checked with `grep` over the manifests).
 
 ## BUGS
 

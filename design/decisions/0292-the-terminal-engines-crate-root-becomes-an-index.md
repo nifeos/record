@@ -20,12 +20,12 @@ It blocked the move and nothing else.
 B, the index, settled by precedent on 2026-10-12 at 03:08 (UTC). calef asked nothing separate on
 this section. §282 (when a file is split, the parent becomes an index) postdates the block, and its
 third reason had already refused the block's one argument for keeping `Attr` and `Vt` in `lib.rs`.
-calef ruled the same way on [PR #1959](https://github.com/nifeos/nife/pull/1959): *"Agreed, make the
+calef ruled the same way on [PR #1959](https://github.com/partsfoundry/nife/pull/1959): *"Agreed, make the
 parent an index."* §279 (the system-initializer crate root splits into private modules) applied it to
 a crate root, and pull requests #1967 and #1969 applied it to blocks written before §282, as this
 one was. Tests sit beside their code as the 845 ruling has it, `test_support.rs` follows 842's
 shape, and the names wait for calef's naming pass. The maintainer recorded the ruling on
-[PR #1968](https://github.com/nifeos/nife/pull/1968#issuecomment-6117031057).
+[PR #1968](https://github.com/partsfoundry/nife/pull/1968#issuecomment-6117031057).
 
 The block asked three questions. Its ruling 2, the palette's 54-line doc comment, is
 answered by §267 (a comment states the constraint as it is now)'s amendment of 2026-10-11 (UTC). A

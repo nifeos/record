@@ -163,13 +163,13 @@ So class 2 should become a reusable toolkit only in its generic half. The nife-r
 | 2, nife records | Stays in nife. |
 | 2, generic checks | Into 887's template repository once 887 is built, consumed by nife at a pin like any crate repository. Until then, nothing moves. |
 | 3, governance mechanism | The rules stay in each repository as data; the bots become reusable workflows in 887's template (Fork 1, ruled A). |
-| 3, the rest | One new public repository (provisionally `nifeos/fleet`, name not yet ratified, not yet created), consumed by nife at a pin (Fork 2, ruled A), after the edges are cut (Fork 4, ruled A). |
+| 3, the rest | One new public repository (provisionally `partsfoundry/fleet`, name not yet ratified, not yet created), consumed by nife at a pin (Fork 2, ruled A), after the edges are cut (Fork 4, ruled A). |
 | 3, method metrics | Collectors move with the fleet; series, charts and caveats stay in nife (Fork 3, ruled A). |
 | 4 | The two constants go to an environment variable with no default, and their values to the lab record. |
 
 ## Fork 1, ruled A: where the architect governance sits
 
-calef, 2026-10-12 (UTC), [relayed by the maintainer session](https://github.com/nifeos/nife/pull/1976#issuecomment-6117241317): *"A"*.
+calef, 2026-10-12 (UTC), [relayed by the maintainer session](https://github.com/partsfoundry/nife/pull/1976#issuecomment-6117241317): *"A"*.
 Each repository keeps its own architect rules as in-tree data, and the label, hold and
 `record-ruling` bots become reusable workflows in 887's template. The options below stay as the
 record of what was weighed.
@@ -194,8 +194,8 @@ the template. Had calef said no, B was the fallback and 887 would have grown a c
 
 ## Fork 2, ruled A: one new public repository or several
 
-calef, 2026-10-12 (UTC), [relayed by the maintainer session](https://github.com/nifeos/nife/pull/1976#issuecomment-6117241317): *"A"*.
-One fleet repository, provisionally `nifeos/fleet`, beside 887's template. The name waits for his
+calef, 2026-10-12 (UTC), [relayed by the maintainer session](https://github.com/partsfoundry/nife/pull/1976#issuecomment-6117241317): *"A"*.
+One fleet repository, provisionally `partsfoundry/fleet`, beside 887's template. The name waits for his
 naming pass, and no repository is created yet. The options below stay as the record of what was
 weighed.
 
@@ -217,7 +217,7 @@ irreversible part; the code can move back. That part waits for the naming pass.
 
 ## Fork 3, ruled A: whether method metrics stay with nife
 
-calef, 2026-10-12 (UTC), [relayed by the maintainer session](https://github.com/nifeos/nife/pull/1976#issuecomment-6117241317): *"A"*.
+calef, 2026-10-12 (UTC), [relayed by the maintainer session](https://github.com/partsfoundry/nife/pull/1976#issuecomment-6117241317): *"A"*.
 The collectors move with the fleet tooling, and the series, the charts and their caveats stay in
 nife.
 
@@ -240,7 +240,7 @@ would measure any repository run this way. Fully reversible.
 
 ## Fork 4, ruled A: the order of extraction
 
-calef, 2026-10-12 (UTC), [relayed by the maintainer session](https://github.com/nifeos/nife/pull/1976#issuecomment-6117241317): *"A"*.
+calef, 2026-10-12 (UTC), [relayed by the maintainer session](https://github.com/partsfoundry/nife/pull/1976#issuecomment-6117241317): *"A"*.
 The edges are cut in place first, in one nife lane, and then class 3 moves as a unit. That lane is
 milestone 889 (the tree's gates stop depending on the fleet tooling), in
 [its block](0889-the-trees-gates-stop-depending-on-the-fleet-tooling.md).

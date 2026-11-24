@@ -8,7 +8,7 @@ only where evidence decides it.
 
 ## What each name touches today
 
-`git grep` at `nifeos/nife@a3c7d4647` counts lines, not occurrences, except where a row says
+`git grep` at `partsfoundry/nife@a3c7d4647` counts lines, not occurrences, except where a row says
 matches. The tree has 6,931 tracked files.
 
 | what | lines | files | command |
@@ -16,8 +16,8 @@ matches. The tree has 6,931 tracked files.
 | `nife`, any case, as a word | 12,011 matches | 2,613 | `git grep -iow nife` |
 | `nife`, any case, as a substring | 20,195 | 3,002 | `git grep -ic nife` |
 | `nifeos` | 1,447 | 497 | `git grep -ic nifeos` |
-| `github.com/nifeos` | 294 | 135 | `git grep -c github.com/nifeos` |
-| git pins to `https://github.com/nifeos` in `Cargo.toml` | 22 | 8 | `git grep -c 'git *= *"https://github.com/nifeos' -- '*Cargo.toml'` |
+| `github.com/partsfoundry` | 294 | 135 | `git grep -c github.com/partsfoundry` |
+| git pins to `https://github.com/partsfoundry` in `Cargo.toml` | 22 | 8 | `git grep -c 'git *= *"https://github.com/partsfoundry' -- '*Cargo.toml'` |
 | `nifeos.org` | 135 | 57 | `git grep -c 'nifeos\.org'` |
 | `target_os = "nife"` | 45 | 22 | `git grep -c 'target_os *= *"nife"'` |
 | `unknown-nife` (target triples) | 155 | 79 | `git grep -c unknown-nife` |
@@ -37,20 +37,20 @@ the 25 `*_contract` crates (`ls -d crates/*_contract`). The 1,784 uses of `abi` 
 counted for milestone 1075 (`abi`: what an outside maintainer would fix before the move), measure
 uses of the crate rather than lines naming the path.
 
-basalt at `nifeos/basalt@ecdfee7` has 32 tracked files. `nife` appears on 448 lines in 26 of
+basalt at `partsfoundry/basalt@ecdfee7` has 32 tracked files. `nife` appears on 448 lines in 26 of
 them and `basalt` on 147 lines in 26. No line sets `target_os`, and `pins.toml` holds one pin,
-`repository = "https://github.com/nifeos/nife"`.
+`repository = "https://github.com/partsfoundry/nife"`.
 
 ## How reversible each layer is, and who has acted on it
 
 The test is who else has already acted on a name. Today almost nobody outside the project has.
 
-- **The GitHub organization.** It holds 15 repositories, 14 of them public. `nifeos/nife` has 4
+- **The GitHub organization.** It holds 15 repositories, 14 of them public. `partsfoundry/nife` has 4
   stars and 1 fork, and no other repository has either. GitHub's documentation on renaming an
   organization says repository links and git remotes redirect. The old profile page and the API
   paths under the old name return 404, though. Anyone may then claim the old name and create
   repositories that override the redirects. The tree's side of the last organization rename took
-  one commit across 57 files (`nifeos/nife@acb285e00`).
+  one commit across 57 files (`partsfoundry/nife@acb285e00`).
 - **The domain.** whois gives `nifeos.org` a registration date of 2026-10-03. `basalt.nifeos.org`
   serves basalt's GitHub Pages site. §250 (an image names its distribution's package index, at
   `basalt.nifeos.org`) puts that host name in every image, and `capability_manifest_note`'s
@@ -75,7 +75,7 @@ The test is who else has already acted on a name. Today almost nobody outside th
   existing images carry them. The same reasoning holds for any later rename. These need not follow
   a name change, and each layer's ruling should say whether they do.
 - **Release artifacts.** basalt has 57 releases (`rolling-<date>-<commit>`) with 1,153 assets, and
-  their download counters sum to 171,035 (`gh api repos/nifeos/basalt/releases`). The counters
+  their download counters sum to 171,035 (`gh api repos/partsfoundry/basalt/releases`). The counters
   cannot tell automation from people. Asset names carry the package, version and architecture
   (`ripgrep-14.1.1-x86_64.nifepkg`), not the distribution.
 
@@ -90,7 +90,7 @@ names checked there, only suffixed forms came back free: `nife-os`, `craton-os`,
 
 ## Layer 1: the organization
 
-It touches the 294 `github.com/nifeos` lines, the 22 Cargo pins, basalt's `pins.toml`, 15
+It touches the 294 `github.com/partsfoundry` lines, the 22 Cargo pins, basalt's `pins.toml`, 15
 repositories, and the domain, and through the domain every image (§250).
 
 Ruled 2026-11-14 (UTC), ruling 3: the organization stays `nifeos` until the library takes a name.
@@ -203,7 +203,7 @@ when it exists, with its availability checked before it is first published.
 
 ## Layer 5: distributions
 
-It touches the repository `nifeos/basalt` and its mirror `nifeos/basalt-backup`, the index host
+It touches the repository `partsfoundry/basalt` and its mirror `partsfoundry/basalt-backup`, the index host
 `basalt.nifeos.org` that every image names (§250), the Pages site, and 1,411 lines in nife and 147
 in basalt. Release tags and asset names do not carry the distribution's name, so no published
 artifact changes with it. crates.io `basalt` belongs to a Vulkan UI framework (60,108 downloads),

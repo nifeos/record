@@ -10,7 +10,7 @@ needs_person: yes
 # 1057. `e1000e`: the outside review's findings land before its first release
 
 Raised by the lane `milestone/1057-e1000e-outside-review`. A reviewer with no prior exposure to
-this project read `nifeos/e1000e` at commit `8ac75a6` (`main`, after its pull request #2), against
+this project read `partsfoundry/e1000e` at commit `8ac75a6` (`main`, after its pull request #2), against
 [the review package](../../notes/crate-reviews/e1000e.md). This block proposes work and changes
 nothing in that repository. Every item below is work for a lane there. The 180 names the review
 package ratifies, and the decisions it records, stay closed here. Milestone 815 (`e1000e`: proven
@@ -23,7 +23,7 @@ as the reference for the I219 port. No new tool.
 
 ## Goal
 
-A stranger who finds `nifeos/e1000e` can read what the crate is, build it and run its proofs. They
+A stranger who finds `partsfoundry/e1000e` can read what the crate is, build it and run its proofs. They
 can drive a ring against a fake device from an example, and know exactly what the crate does not
 do, before the first tag goes on it. The weekly gates pass, the public trait names are final, and the port of the
 I219 bring-up states every place it departs from its source.
@@ -205,15 +205,15 @@ Ruled, with where each landed:
 
 1. The method names of `Hardware` (P0-1). Ruled 2026-11-09: `read` and `write` stay, `read16`
    becomes `read_flash_status`, and the six names are ratified. `read_u64` and `write_u64` on
-   `DirectMemoryAccessRegion` stay. Landed in `nifeos/e1000e#5`.
+   `DirectMemoryAccessRegion` stay. Landed in `partsfoundry/e1000e#5`.
 2. Which commit carries `v0.1.0-pre.1` (P0-4). Ruled: the first commit on `main` at which the
    weekly gates pass, after P0-2 and P0-3; a git tag only. It sits on `ef01cef`.
 3. The ring size stays a constant for 0.1 (P2-6). Provisional, ruled by the maintainers, since
    deferring changes nothing: the README's BUGS records that each ring holds 16 entries and that a
-   later version may change that (`nifeos/e1000e#9`). Generalizing the size later changes the layout
+   later version may change that (`partsfoundry/e1000e#9`). Generalizing the size later changes the layout
    constants, the callers of both traits and the proofs, and that change is the one-way door when
    it comes.
-4. The three harness names `nifeos/e1000e#31` minted for P2-11 are provisional, ruled by the maintainers in
+4. The three harness names `partsfoundry/e1000e#31` minted for P2-11 are provisional, ruled by the maintainers in
    that pull request. Harness names are not public API.
 
 5. Whether the first release of `e1000e` waits for a cabled I219 run (P1-7). Ruled 2026-11-19: it
@@ -248,84 +248,84 @@ One line per finding, in the review's order. This list is the one record of each
 the P2 text is in [the appendix](1057-e1000e-outside-review/after-the-first-release.md).
 
 - P0-1 (P0), `Hardware` method names: Done,
-  [`nifeos/e1000e#5`](https://github.com/nifeos/e1000e/pull/5).
+  [`partsfoundry/e1000e#5`](https://github.com/partsfoundry/e1000e/pull/5).
 - P0-2 (P0), red weekly mutation gate: Done,
-  [`nifeos/e1000e#3`](https://github.com/nifeos/e1000e/pull/3),
-  [`nifeos/e1000e#17`](https://github.com/nifeos/e1000e/pull/17) and
-  [`nifeos/e1000e#30`](https://github.com/nifeos/e1000e/pull/30).
+  [`partsfoundry/e1000e#3`](https://github.com/partsfoundry/e1000e/pull/3),
+  [`partsfoundry/e1000e#17`](https://github.com/partsfoundry/e1000e/pull/17) and
+  [`partsfoundry/e1000e#30`](https://github.com/partsfoundry/e1000e/pull/30).
 - P0-3 (P0), stranger test never run: Done,
-  [`nifeos/e1000e#4`](https://github.com/nifeos/e1000e/pull/4),
-  [`nifeos/e1000e#22`](https://github.com/nifeos/e1000e/pull/22) and
-  [`nifeos/e1000e#24`](https://github.com/nifeos/e1000e/pull/24).
-- P0-4 (P0), no baseline tag: Done, [`nifeos/e1000e#21`](https://github.com/nifeos/e1000e/pull/21);
+  [`partsfoundry/e1000e#4`](https://github.com/partsfoundry/e1000e/pull/4),
+  [`partsfoundry/e1000e#22`](https://github.com/partsfoundry/e1000e/pull/22) and
+  [`partsfoundry/e1000e#24`](https://github.com/partsfoundry/e1000e/pull/24).
+- P0-4 (P0), no baseline tag: Done, [`partsfoundry/e1000e#21`](https://github.com/partsfoundry/e1000e/pull/21);
   `v0.1.0-pre.1` sits on `ef01cef`.
 - P1-1 (P1), volatile and ordering contract: Done,
-  [`nifeos/e1000e#5`](https://github.com/nifeos/e1000e/pull/5).
+  [`partsfoundry/e1000e#5`](https://github.com/partsfoundry/e1000e/pull/5).
 - P1-2 (P1), three omitted FreeBSD steps: Done,
-  [`nifeos/e1000e#9`](https://github.com/nifeos/e1000e/pull/9), by documenting the `GCR`, `WUFC`,
+  [`partsfoundry/e1000e#9`](https://github.com/partsfoundry/e1000e/pull/9), by documenting the `GCR`, `WUFC`,
   `VET` and `PBA` departures in `sequence` and the module BUGS.
-- P1-3 (P1), BSD notice files: Done, [`nifeos/e1000e#6`](https://github.com/nifeos/e1000e/pull/6).
+- P1-3 (P1), BSD notice files: Done, [`partsfoundry/e1000e#6`](https://github.com/partsfoundry/e1000e/pull/6).
 - P1-4 (P1), manifest cites another repository: Done,
-  [`nifeos/e1000e#6`](https://github.com/nifeos/e1000e/pull/6).
+  [`partsfoundry/e1000e#6`](https://github.com/partsfoundry/e1000e/pull/6).
 - P1-5 (P1), ring example and bring-up order: Done,
-  [`nifeos/e1000e#9`](https://github.com/nifeos/e1000e/pull/9).
-- P1-6 (P1), ring cursor proofs: Done, [`nifeos/e1000e#8`](https://github.com/nifeos/e1000e/pull/8),
-  [`nifeos/e1000e#14`](https://github.com/nifeos/e1000e/pull/14) and
-  [`nifeos/e1000e#22`](https://github.com/nifeos/e1000e/pull/22).
+  [`partsfoundry/e1000e#9`](https://github.com/partsfoundry/e1000e/pull/9).
+- P1-6 (P1), ring cursor proofs: Done, [`partsfoundry/e1000e#8`](https://github.com/partsfoundry/e1000e/pull/8),
+  [`partsfoundry/e1000e#14`](https://github.com/partsfoundry/e1000e/pull/14) and
+  [`partsfoundry/e1000e#22`](https://github.com/partsfoundry/e1000e/pull/22).
 - P1-7 (P1), cabled I219 run: Waiting on a board run,
-  [`nifeos/e1000e#10`](https://github.com/nifeos/e1000e/issues/10).
-- P1-8 (P1), QEMU procedure: Done, [`nifeos/e1000e#18`](https://github.com/nifeos/e1000e/pull/18).
+  [`partsfoundry/e1000e#10`](https://github.com/partsfoundry/e1000e/issues/10).
+- P1-8 (P1), QEMU procedure: Done, [`partsfoundry/e1000e#18`](https://github.com/partsfoundry/e1000e/pull/18).
 - P2-1 (P2), VLAN-tagged full frame: Done,
-  [`nifeos/e1000e#23`](https://github.com/nifeos/e1000e/pull/23).
+  [`partsfoundry/e1000e#23`](https://github.com/partsfoundry/e1000e/pull/23).
 - P2-2 (P2), small caller buffer drops silently: Done,
-  [`nifeos/e1000e#23`](https://github.com/nifeos/e1000e/pull/23).
+  [`partsfoundry/e1000e#23`](https://github.com/partsfoundry/e1000e/pull/23).
 - P2-3 (P2), base address overflow: Done,
-  [`nifeos/e1000e#7`](https://github.com/nifeos/e1000e/pull/7).
+  [`partsfoundry/e1000e#7`](https://github.com/partsfoundry/e1000e/pull/7).
 - P2-4 (P2), one tail write per frame: Waiting on a board run,
-  [`nifeos/e1000e#10`](https://github.com/nifeos/e1000e/issues/10), for the hardware figure; the
+  [`partsfoundry/e1000e#10`](https://github.com/partsfoundry/e1000e/issues/10), for the hardware figure; the
   QEMU half and the batched receive tail are done in
-  [`nifeos/e1000e#31`](https://github.com/nifeos/e1000e/pull/31).
+  [`partsfoundry/e1000e#31`](https://github.com/partsfoundry/e1000e/pull/31).
 - P2-5 (P2), interrupt vocabulary: Done,
-  [`nifeos/e1000e#9`](https://github.com/nifeos/e1000e/pull/9) and
-  [`nifeos/e1000e#23`](https://github.com/nifeos/e1000e/pull/23).
+  [`partsfoundry/e1000e#9`](https://github.com/partsfoundry/e1000e/pull/9) and
+  [`partsfoundry/e1000e#23`](https://github.com/partsfoundry/e1000e/pull/23).
 - P2-6 (P2), ring size fixed at 16: Won't fix for 0.1: each ring holds 16 entries and the README's
   BUGS says a later version may change that
-  ([`nifeos/e1000e#9`](https://github.com/nifeos/e1000e/pull/9)); ruled provisionally by the
+  ([`partsfoundry/e1000e#9`](https://github.com/partsfoundry/e1000e/pull/9)); ruled provisionally by the
   maintainers 2026-11-09.
 - P2-7 (P2), private test doubles: Won't fix for 0.1: the README's BUGS names
   `examples/host_ring.rs` as the fake to start from
-  ([`nifeos/e1000e#9`](https://github.com/nifeos/e1000e/pull/9)); ruled provisionally by the
+  ([`partsfoundry/e1000e#9`](https://github.com/partsfoundry/e1000e/pull/9)); ruled provisionally by the
   maintainers 2026-11-09.
-- P2-8 (P2), fuzz target: Done, [`nifeos/e1000e#15`](https://github.com/nifeos/e1000e/pull/15) and
-  [`nifeos/e1000e#31`](https://github.com/nifeos/e1000e/pull/31).
+- P2-8 (P2), fuzz target: Done, [`partsfoundry/e1000e#15`](https://github.com/partsfoundry/e1000e/pull/15) and
+  [`partsfoundry/e1000e#31`](https://github.com/partsfoundry/e1000e/pull/31).
 - P2-9 (P2), port the link-up half: Waiting on a board run, P1-7 first; the port is
-  [`nifeos/e1000e#11`](https://github.com/nifeos/e1000e/issues/11).
-- P2-10 (P2), flush ring length: Done, [`nifeos/e1000e#7`](https://github.com/nifeos/e1000e/pull/7).
+  [`partsfoundry/e1000e#11`](https://github.com/partsfoundry/e1000e/issues/11).
+- P2-10 (P2), flush ring length: Done, [`partsfoundry/e1000e#7`](https://github.com/partsfoundry/e1000e/pull/7).
 - P2-11 (P2), harnesses prove less than their names: Done,
-  [`nifeos/e1000e#14`](https://github.com/nifeos/e1000e/pull/14) and
-  [`nifeos/e1000e#31`](https://github.com/nifeos/e1000e/pull/31).
+  [`partsfoundry/e1000e#14`](https://github.com/partsfoundry/e1000e/pull/14) and
+  [`partsfoundry/e1000e#31`](https://github.com/partsfoundry/e1000e/pull/31).
 - P2-12 (P2), single-bit constants as shifts: Done,
-  [`nifeos/e1000e#7`](https://github.com/nifeos/e1000e/pull/7).
-- P2-13 (P2), private names: Done, [`nifeos/e1000e#7`](https://github.com/nifeos/e1000e/pull/7).
+  [`partsfoundry/e1000e#7`](https://github.com/partsfoundry/e1000e/pull/7).
+- P2-13 (P2), private names: Done, [`partsfoundry/e1000e#7`](https://github.com/partsfoundry/e1000e/pull/7).
 - P2-14 (P2), wording a stranger cannot place: Done,
-  [`nifeos/e1000e#6`](https://github.com/nifeos/e1000e/pull/6) and
-  [`nifeos/e1000e#34`](https://github.com/nifeos/e1000e/pull/34).
+  [`partsfoundry/e1000e#6`](https://github.com/partsfoundry/e1000e/pull/6) and
+  [`partsfoundry/e1000e#34`](https://github.com/partsfoundry/e1000e/pull/34).
 - P2-15 (P2), doc gaps a user hits first: Done,
-  [`nifeos/e1000e#5`](https://github.com/nifeos/e1000e/pull/5).
-- P2-16 (P2), housekeeping: Done, [`nifeos/e1000e#6`](https://github.com/nifeos/e1000e/pull/6) and
-  [`nifeos/e1000e#32`](https://github.com/nifeos/e1000e/pull/32); the `crate-maintainers` team
+  [`partsfoundry/e1000e#5`](https://github.com/partsfoundry/e1000e/pull/5).
+- P2-16 (P2), housekeeping: Done, [`partsfoundry/e1000e#6`](https://github.com/partsfoundry/e1000e/pull/6) and
+  [`partsfoundry/e1000e#32`](https://github.com/partsfoundry/e1000e/pull/32); the `crate-maintainers` team
   exists.
 
 P1-7, the hardware half of P2-4 and P2-9 wait on one cabled I219 run, and this milestone is not
 delivered until it happens (decision 5). Every harness verifies on `v0.1.0-pre.3`, which carries
-[`nifeos/e1000e#31`](https://github.com/nifeos/e1000e/pull/31).
+[`partsfoundry/e1000e#31`](https://github.com/partsfoundry/e1000e/pull/31).
 
 ## Follow-on
 
 - **Done.** Every finding the finding status marks Done, each with the pull request that carried
   it.
 - **Outstanding.** The cabled I219 run behind P1-7, the hardware half of P2-4 and P2-9, tracked in
-  `nifeos/e1000e#10` and `#11`. Checked against the open issues of that repository; no consumer
+  `partsfoundry/e1000e#10` and `#11`. Checked against the open issues of that repository; no consumer
   has run the part with a cable.
 
 ## Index row

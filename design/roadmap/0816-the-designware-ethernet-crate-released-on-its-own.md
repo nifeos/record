@@ -82,7 +82,7 @@ and controller bring-up.
 
 1. The name is settled before anything leaves (857's Fork 5 as calef amended it on 2026-10-11 UTC).
    `script/names designware_ethernet` reports it ratified, crates.io answers 404 for it (or it is
-   already ours), and `nifeos/designware_ethernet` does not exist yet. `script/crate-standalone`
+   already ours), and `partsfoundry/designware_ethernet` does not exist yet. `script/crate-standalone`
    checks the first.
 2. Make the cut above. `cargo tree -p designware_ethernet` then lists no nife crate, and the tests
    read only fixtures inside the package.
@@ -93,17 +93,17 @@ and controller bring-up.
    and its source divides by purpose) has milestone 610 (the interface's stability is
    measured weekly)'s per-package co-change column, and the soak (step 6) is how the second is
    measured. When the soak exits, calef adds it to the lint-checked publish allowlist. The
-   `nifeos/designware_ethernet` repository is created when the crate moves, on the shared CI
+   `partsfoundry/designware_ethernet` repository is created when the crate moves, on the shared CI
    template (milestone 887), through reusable workflows: Kani through `kani-github-action`, lint,
    release. Its release workflow refuses to publish unless the proof job is green. No harness here
    reads `target_arch`, so stock Kani proves them. The patched Kani of §218 (carry a Kani patch so
    riscv64 is proved, and send it upstream) is carried only if one comes to need riscv64. Milestone
    589 (Kani can prove riscv64 from the hosts we already have) built it.
 6. Soak, as its own repository (calef, 2026-10-17 UTC, replying "Agrred" (sic) to the maintainer's
-   proposal; §305 (git dependencies are allowed on `nifeos/*` only, pinned to a landed commit)).
+   proposal; §305 (git dependencies are allowed on `partsfoundry/*` only, pinned to a landed commit)).
    Milestone 818 (`jh7110_entropy`: proven JH7110 TRNG logic, released on its own) is the pilot and
    soaks first. Before publication the crate is moved, not copied: it leaves this tree, and nife
-   depends on `nifeos/designware_ethernet` by `rev`. A copy left behind does not count. The soak
+   depends on `partsfoundry/designware_ethernet` by `rev`. A copy left behind does not count. The soak
    ends on evidence, not a duration, when all five hold:
    1. nife builds and passes CI against the repository at a pinned commit, with no path dependency
       left.
@@ -154,13 +154,13 @@ template's prose caps.
   or nife error enum in a public signature. A reviewer judges this; no script can. Known today:
   `Handoff` is nife's spawn ABI. The cut removed `jh7110::discover`, which took a `DeviceTreeBlob`.
 - The architect cleared the crate's review on 2026-11-11 (UTC), which approves creating
-  `nifeos/designware_ethernet`. The clearance covers neither the tag nor a publication.
+  `partsfoundry/designware_ethernet`. The clearance covers neither the tag nor a publication.
 
 ## Exit
 
 A check proves it. In nife, `cargo tree --locked -i designware_ethernet` resolves to `v0.1.x` from
 crates.io with a checksum in `Cargo.lock`, `crates/designware_ethernet` no longer exists, and the
-tree builds for all three targets. In `nifeos/designware_ethernet`, the run that published 0.1.0
+tree builds for all three targets. In `partsfoundry/designware_ethernet`, the run that published 0.1.0
 shows the Kani job green ahead of the publish job, and every harness's falsification patch makes its
 proof fail. The five soak criteria of release step 6 hold before it publishes.
 
@@ -213,12 +213,12 @@ names until the ratification pass, so this section keeps the links it carried.
   ([1074](1074-designware-ethernet-outside-review.md) says which). The crate passes the template's
   naming and prose gates, bounds `receive` and `reclaim`, and its manifest points at its own
   repository.
-- **Done.** The move. The crate lives at `nifeos/designware_ethernet`, `crates/designware_ethernet`
+- **Done.** The move. The crate lives at `partsfoundry/designware_ethernet`, `crates/designware_ethernet`
   no longer exists, and `components`, `driver_process_contract` and `machine_discovery` pin a
   commit of the repository's `main` by git revision.
 - **Outstanding.** The tag `v0.1.0-pre.1`, which waits for calef, the soak's end conditions, the
   publication and nife consuming the release by semantic version. Checked by
-  `git ls-remote --tags https://github.com/nifeos/designware_ethernet`, which lists no tag.
+  `git ls-remote --tags https://github.com/partsfoundry/designware_ethernet`, which lists no tag.
 - **Recorded.** Publishing to crates.io waits on the maintainers' hold and an architect's approval,
   as the *Release* section states.
 

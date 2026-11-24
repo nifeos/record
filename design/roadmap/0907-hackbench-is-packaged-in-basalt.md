@@ -44,7 +44,7 @@ same program on silicon, and from 2026-10-12 its exit needs the package this mil
 
 ## The work
 
-1. A recipe in `nifeos/basalt` naming rt-tests 2.11's `hackbench.c`, its source URL and the
+1. A recipe in `partsfoundry/basalt` naming rt-tests 2.11's `hackbench.c`, its source URL and the
    SHA-256 the helper pins. The build refuses a download that does not match.
 2. basalt's package build turns the helper into a build job at the nife commit `pins.toml`
    names. It links against that commit's C library with threads, once for each architecture
@@ -63,7 +63,7 @@ same program on silicon, and from 2026-10-12 its exit needs the package this mil
 
 ## Built 2026-10-14 (UTC)
 
-Lane `milestone/907-hackbench-is-packaged-in-basalt`, with nifeos/basalt#21.
+Lane `milestone/907-hackbench-is-packaged-in-basalt`, with partsfoundry/basalt#21.
 
 - The recipe is basalt's `recipes/hackbench.toml`: `hackbench.c` and rt-tests' `COPYING` at
   `v2.11`, each pinned by SHA-256, the source's being the helper's. It is `GPL-2.0-or-later`, so
@@ -98,7 +98,7 @@ moved rather than rewritten.
 
 - basalt's `recipes/hackbench.toml` carries a `[package_digest]` table, one SHA-256 for each of
   aarch64, riscv64 and x86_64, recorded by milestone 917 (basalt's packages build reproducibly)
-  in nifeos/basalt#29. basalt's pin-bump rewrites it with each new pin.
+  in partsfoundry/basalt#29. basalt's pin-bump rewrites it with each new pin.
 - basalt's `helpers/packages.py build` refuses a package whose bytes hash to anything else, and
   basalt's `packages` workflow builds twice, in separate checkouts, and fails unless the two
   repositories are byte-identical.

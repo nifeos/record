@@ -2,7 +2,7 @@
 
 An appendix to [the milestone](../1076-address-space-map-outside-review.md).
 
-Verified firsthand, on a fresh shallow clone of `nifeos/nife` at `137639a3` and a copy of the
+Verified firsthand, on a fresh shallow clone of `partsfoundry/nife` at `137639a3` and a copy of the
 crate standing alone with a literal manifest (`rust-version = "1.87"`, `license = "MIT OR
 Apache-2.0"`, the three template lints inline):
 

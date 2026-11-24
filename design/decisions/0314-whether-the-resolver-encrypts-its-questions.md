@@ -158,7 +158,7 @@ hides nothing. It needs EDNS(0), larger answers over TCP, a root trust anchor th
 2018 KSK rollover, recalled), and RSA and ECDSA verification, which `cryptography_provider` already
 carries. E protects only signed zones, and the café lookup is not one: on 2026-10-28 (UTC) `dig DS`
 through 1.1.1.1 returned a DS record for `org` and none for `nifeos.org` or for `github.io`, and
-`basalt.nifeos.org` is a CNAME to `nifeos.github.io`. So E protects nothing `jig` asks today.
+`basalt.nifeos.org` is a CNAME to `partsfoundry.github.io`. So E protects nothing `jig` asks today.
 
 ## Sub-forks, if B, C or D
 

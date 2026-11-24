@@ -9,7 +9,7 @@ ratified_by: calef
 
 *(The section number and title are provisional until the merge lands them.)*
 
-Counts are from `nifeos/nife@4e82cb0cc`, excluding `vendor/` and falsification patches unless a
+Counts are from `partsfoundry/nife@4e82cb0cc`, excluding `vendor/` and falsification patches unless a
 line says otherwise.
 
 ## Background

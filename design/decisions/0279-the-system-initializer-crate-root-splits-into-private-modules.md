@@ -19,8 +19,8 @@ neither question asked about one.
 
 | Question | calef's words | What it decides |
 |---|---|---|
-| 1. Move items alone now, while `boot` stays one body | *"A"*, 2026-10-11 (UTC), on [PR #1957](https://github.com/nifeos/nife/pull/1957) | Move now. Decomposing `boot` and `spawn_service` is the follow-on, not this milestone. |
-| 2. Where the layout constants go | *"Agreed, make the parent an index."*, 2026-10-11 (UTC), on [PR #1959](https://github.com/nifeos/nife/pull/1959) | A module of their own, kept whole, and the crate root an index. |
+| 1. Move items alone now, while `boot` stays one body | *"A"*, 2026-10-11 (UTC), on [PR #1957](https://github.com/partsfoundry/nife/pull/1957) | Move now. Decomposing `boot` and `spawn_service` is the follow-on, not this milestone. |
+| 2. Where the layout constants go | *"Agreed, make the parent an index."*, 2026-10-11 (UTC), on [PR #1959](https://github.com/partsfoundry/nife/pull/1959) | A module of their own, kept whole, and the crate root an index. |
 
 Question 1 is the recommendation, A. The follow-on is
 [the progenitor's boot is split by phase](../roadmap/0899-the-progenitors-boot-is-split-by-phase.md),

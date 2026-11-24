@@ -12,7 +12,7 @@ needs_person: no
 Raised by the documentation audit of 2026-11-24 (UTC), [the record's departure](../../audit-reports/2026-11-24-the-records-departure.md), finding 10. Severity low for any one
 page and medium for the class: a reader following one of these paths finds nothing at any commit.
 
-Reuse: `helpers/qualified_paths.py`, which resolves `nifeos/<repo>:<path>` at basalt's pin, and
+Reuse: `helpers/qualified_paths.py`, which resolves `partsfoundry/<repo>:<path>` at basalt's pin, and
 `helpers/nife_tree.py`, which already fetches nife's tree. No new dependency.
 
 ## The problem
@@ -34,5 +34,5 @@ paths (Linux's `kernel/printk/`) or paths quoted in a dated run log, so the true
   as its baseline, one sorted entry per line, and only falls.
 - A path that names another project, or one quoted in a dated log, takes a marker on its line, so
   the exemption is visible where the reader meets it.
-- The fixes themselves are ordinary lanes, most of them qualifying the path (`nifeos/moho_abi:`,
-  `nifeos/grant_plan:`) or naming the crate's present home.
+- The fixes themselves are ordinary lanes, most of them qualifying the path (`partsfoundry/moho_abi:`,
+  `partsfoundry/grant_plan:`) or naming the crate's present home.

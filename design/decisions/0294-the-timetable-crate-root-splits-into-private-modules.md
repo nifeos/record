@@ -22,15 +22,15 @@ before §282 (when a file is split, the parent becomes an index) was ruled, and 
 already given answer each. The cut is by feature, as §272 (the grant-plan crate root splits into
 private modules) and §279 (the system-initializer crate root splits into private modules) cut
 theirs. The tests sit beside their code, per his rulings on
-[#1913](https://github.com/nifeos/nife/pull/1913) and
-[#1915](https://github.com/nifeos/nife/pull/1915). `lib.rs` becomes an index, per §282 (when a file is
+[#1913](https://github.com/partsfoundry/nife/pull/1913) and
+[#1915](https://github.com/partsfoundry/nife/pull/1915). `lib.rs` becomes an index, per §282 (when a file is
 split, the parent becomes an index), which calef set on
-[#1959](https://github.com/nifeos/nife/pull/1959): *"Agreed, make the parent an index."* That
+[#1959](https://github.com/partsfoundry/nife/pull/1959): *"Agreed, make the parent an index."* That
 overrides the block's cut, which kept 1,690 lines in `lib.rs`. Modules are private with named re-exports, per
 §272's fork 1 (*"Private modules"*). Names stay provisional for his naming pass. §294 stays its own
 section, as §279 to §281 (the kernel's user-mode file splits into child modules of `user`) did,
 rather than folding into §282. The maintainer recorded this on
-[PR #1970](https://github.com/nifeos/nife/pull/1970#issuecomment-6116916808) at 02:55 (UTC) on
+[PR #1970](https://github.com/partsfoundry/nife/pull/1970#issuecomment-6116916808) at 02:55 (UTC) on
 2026-10-12.
 
 ## What the file is today

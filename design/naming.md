@@ -194,7 +194,7 @@ Reasons and what `crates/` holds: [crates.md](naming/crates.md).
 - `script/` is typed by people: no extension, hyphenated, Scripts to Rule Them All names kept.
   `helpers/` holds what scripts call, with an extension. A one-action script takes a verb, a
   standing tool a noun, and a gate ends `-check`. Every `script/` entry needs a row in
-  `nifeos/nife:notes/scripts.md`.
+  `partsfoundry/nife:notes/scripts.md`.
 
 Reasons: [programs-scripts-and-directories.md](naming/programs-scripts-and-directories.md).
 

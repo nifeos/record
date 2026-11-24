@@ -75,7 +75,7 @@ are the sharper reading. At 03:36:13, 60 jobs were in progress, 20 on `ubuntu-24
   cancelled by a later push. Thirty pull requests needed 46 merge-group runs.
 
 The owned host doing the lane work was not the limit:
-`nifeos/nife:briefs/run-a-milestone-wide.md` records its CPUs about
+`partsfoundry/nife:briefs/run-a-milestone-wide.md` records its CPUs about
 85% idle, because "CI runs off the host".
 
 §214 set the condition for this question: "Reconsider a self-hosted runner only if 60 concurrent
@@ -126,7 +126,7 @@ for merge groups is (b).
 
 ### (e) Pull requests from collaborators only
 
-`gh api repos/nifeos/nife` returns `pull_request_creation_policy: all`. GitHub's documented values
+`gh api repos/partsfoundry/nife` returns `pull_request_creation_policy: all`. GitHub's documented values
 are `all` and `collaborators_only`, per repository, so other nifeos repositories keep pull requests
 open. Turning pull requests off (`has_pull_requests: false`) would end nife's own workflow, since
 every lane lands through a pull request and the merge queue.
@@ -150,7 +150,7 @@ infrastructure. No job triggered by a fork's pull request, and no `pull_request_
 checks out fork code, ever runs on an owned runner, whatever happens to (e).
 
 A reviewed outside change may. After review, a member pushes the exact reviewed commits to a branch
-in nifeos/nife and opens or retargets the pull request from it. From then on it is a member's pull
+in partsfoundry/nife and opens or retargets the pull request from it. From then on it is a member's pull
 request, and it reaches owned runners only through the merge queue.
 
 This proposal does not use a label-gated `pull_request_target` that runs the fork's code. The label
@@ -187,7 +187,7 @@ unattended, as something other than the maintainer, which is a chance to run it 
   `runs-on` that is not the canonical expression or a hosted label literal. Its fixtures include
   each way to get this wrong.
 - The job's first step on an owned runner fails unless the event is `merge_group` or a push to
-  `main` in nifeos/nife. That covers a workflow that dodges the lint.
+  `main` in partsfoundry/nife. That covers a workflow that dodges the lint.
 
 ### The preconditions for (b)
 
@@ -197,7 +197,7 @@ unattended, as something other than the maintainer, which is a chance to run it 
 3. Ephemeral or just-in-time registration, one job each, with no writable cache shared between
    jobs.
 4. Egress to the local area network blocked; outbound allowed to GitHub and the crate registry only.
-5. A runner group restricted to nifeos/nife, with GitHub's public-repository override set on purpose.
+5. A runner group restricted to partsfoundry/nife, with GitHub's public-repository override set on purpose.
 
 A fresh VM per job is the stronger shape, and the appendix describes it. It becomes necessary the
 day a real outside contributor appears, because then the queue holds code from someone other than
@@ -225,7 +225,7 @@ slots, matching Enterprise 440. A larger slot would speed `verify`, whose `VERIF
 16 GB bound, but would change what the job measures.
 
 Power is unmeasured; at a few hundred watts around the clock (an assumption) it costs the same
-order as the seat, and the ledger (`nifeos/nife:notes/project-metrics/ledger.md`) would record it.
+order as the seat, and the ledger (`partsfoundry/nife:notes/project-metrics/ledger.md`) would record it.
 The larger cost is maintenance: runner releases to take before old ones stop receiving jobs
 (recalled), an image to rebuild, and somebody who answers when it stops.
 

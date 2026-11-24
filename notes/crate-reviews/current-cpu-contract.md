@@ -208,4 +208,4 @@ Ready for the move. The names and the type of `CPU_OFFSET_BYTES` are ruled, ever
 outside review has landed or is work the move does, and the crate's own tests, clippy, docs, Kani
 harnesses and falsification patches pass. Milestone 1084 rules the review clear once this
 package exists (2026-11-19 UTC), and that clearance is the go to create
-`nifeos/current_cpu_contract`.
+`partsfoundry/current_cpu_contract`.

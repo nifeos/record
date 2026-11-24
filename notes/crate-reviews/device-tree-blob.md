@@ -4,7 +4,7 @@
 own file because the packages together outgrow the page.*
 
 The architect cleared this package on 2026-11-20 (UTC): the go to create
-`nifeos/device_tree_blob`, as item 4 of
+`partsfoundry/device_tree_blob`, as item 4 of
 [milestone 857 (crates released on their own)](../../design/roadmap/0857-crates-released-on-their-own.md).
 It describes the crate as `main` leaves it. The findings behind it are in
 [milestone 1085 (what an outside maintainer would fix before it leaves)](../../design/roadmap/1085-device-tree-blob-outside-review.md);
@@ -119,7 +119,7 @@ nobody built a 32-bit target.
 
 ## Names
 
-The rulings of 2026-11-19 (UTC) merged as [#3783](https://github.com/nifeos/nife/pull/3783) and
+The rulings of 2026-11-19 (UTC) merged as [#3783](https://github.com/partsfoundry/nife/pull/3783) and
 change nothing in this table except the status column. A name below reads "ratified as built" when
 the milestone's ruling covers it, "ratified" when an earlier lane recorded a ruling in its `Name:`
 block, and "provisional" when the block still says so or no block exists. The proposal column is for
@@ -203,7 +203,7 @@ A lane after the go does these, in the order the milestone lists them:
    and the four test names, and clear the `prose_acronyms` and `abbreviations` findings in the
    `helpers/template_report_baseline.txt` rows.
 4. Convert the dependents' path dependencies (the six crates and two tools above) to `git` and
-   `rev` with `version = "0.1.0"`, per §305 (git dependencies on `nifeos/*` only, pinned to a landed commit), and update `packages/contracts.package.toml`,
+   `rev` with `version = "0.1.0"`, per §305 (git dependencies on `partsfoundry/*` only, pinned to a landed commit), and update `packages/contracts.package.toml`,
    `.cargo/mutants-baseline.txt` and the CI references.
 5. Run the stranger test, the template's workflows and the first weekly mutation run in the new
    repository.

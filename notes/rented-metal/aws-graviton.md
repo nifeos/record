@@ -44,7 +44,7 @@ in the console's top bar) in the chosen region. Fetch `bootstrap.sh` at the comm
 in, read it, and run it:
 
 ```sh
-curl -fsSLO https://raw.githubusercontent.com/nifeos/nife/<commit>/notes/rented-metal/aws-graviton/bootstrap.sh
+curl -fsSLO https://raw.githubusercontent.com/partsfoundry/nife/<commit>/notes/rented-metal/aws-graviton/bootstrap.sh
 sh bootstrap.sh <region> <email for budget alerts>
 ```
 
@@ -103,8 +103,8 @@ Get the boot disk from the newest green `main` CI run, which keeps it 14 days. A
 `cargo xtask acpi-boot` writes the same file to `target/cloud-image/nife-aarch64.img`.
 
 ```sh
-gh run download -R nifeos/nife -n nife-aarch64-cloud-image -D ~/nife-metal-disk \
-    "$(gh run list -R nifeos/nife -w ci.yml -b main -s success -L 1 --json databaseId -q '.[0].databaseId')"
+gh run download -R partsfoundry/nife -n nife-aarch64-cloud-image -D ~/nife-metal-disk \
+    "$(gh run list -R partsfoundry/nife -w ci.yml -b main -s success -L 1 --json databaseId -q '.[0].databaseId')"
 notes/rented-metal/aws-graviton/run preflight
 notes/rented-metal/aws-graviton/run all ~/nife-metal-disk/nife-aarch64.img
 ```

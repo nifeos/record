@@ -87,7 +87,7 @@ a repository boundary, so this is an existing framework rather than a new proble
 
 Once, by an owner of the `nifeos` organization.
 
-1. Go to https://github.com/organizations/nifeos/settings/apps and press New GitHub App.
+1. Go to https://github.com/organizations/partsfoundry/settings/apps and press New GitHub App.
    (The path by clicking: your avatar, Your organizations, `nifeos`, Settings,
    Developer settings, GitHub Apps, New GitHub App.)
 2. GitHub App name: type `smelter`. Ratified 2026-09-23 by calef; the refusals and the
@@ -100,7 +100,7 @@ Once, by an owner of the `nifeos` organization.
 
    Whichever of the two you get, the byline (`smelter[bot]` or `nife-smelter[bot]`) is what every
    future bump pull request is authored by, so write down which one you took.
-3. Homepage URL: `https://github.com/nifeos/nife`. It is required and unused.
+3. Homepage URL: `https://github.com/partsfoundry/nife`. It is required and unused.
 4. Webhook: untick Active. Nothing here listens for webhooks, and an inactive webhook is one
    fewer endpoint to secure.
 5. Repository permissions, exactly two, matching what the PAT carries today and nothing wider:
@@ -130,8 +130,8 @@ Once, by an owner of the `nifeos` organization.
 10. Store both as organization secrets, scoped to exactly the repositories that may read them.
     The commands are:
 
-        gh secret set AUTOMATION_APP_ID  --org nifeos --repos nife --body '5053502'
-        gh secret set AUTOMATION_APP_KEY --org nifeos --repos nife < ~/Downloads/smelter.private-key.pem
+        gh secret set AUTOMATION_APP_ID  --org partsfoundry --repos nife --body '5053502'
+        gh secret set AUTOMATION_APP_KEY --org partsfoundry --repos nife < ~/Downloads/smelter.private-key.pem
 
     Expect them to fail, and do not fix it the way `gh` suggests. Unless your shell's token
     already carries organization admin, both return:
@@ -146,7 +146,7 @@ Once, by an owner of the `nifeos` organization.
     unattended. Least privilege says do the one-time thing by hand. The reasoning is the
     durable part of this paragraph; the clicks below are not.
 
-    So use the browser. https://github.com/organizations/nifeos/settings/secrets/actions,
+    So use the browser. https://github.com/organizations/partsfoundry/settings/secrets/actions,
     then New organization secret, twice:
 
     - `AUTOMATION_APP_ID` = `5053502`
@@ -160,7 +160,7 @@ Once, by an owner of the `nifeos` organization.
         rm ~/Downloads/*.private-key.pem
 
     You cannot confirm this from the shell either, and that is not something being broken:
-    `gh secret list --org nifeos` needs the same `admin:org` scope. It returns the same 403 for any
+    `gh secret list --org partsfoundry` needs the same `admin:org` scope. It returns the same 403 for any
     shell that is not an organization admin's, which is the ordinary case rather than a fault. On
     the browser path the secrets page itself is the confirmation, and the first real proof is the
     identity probe in step 11, once the workflow change has merged.
@@ -193,8 +193,8 @@ Once, by an owner of the `nifeos` organization.
 
 11. Run the workflow by hand and read its identity probe:
 
-        gh workflow run toolchain-bump.yml --repo nifeos/nife
-        gh run watch "$(gh run list --workflow=toolchain-bump.yml --repo nifeos/nife \
+        gh workflow run toolchain-bump.yml --repo partsfoundry/nife
+        gh run watch "$(gh run list --workflow=toolchain-bump.yml --repo partsfoundry/nife \
               --limit 1 --json databaseId --jq '.[0].databaseId')"
 
     The Say which identity this run is authenticating as step must print
@@ -206,7 +206,7 @@ Once, by an owner of the `nifeos` organization.
     reading `TOOLCHAIN_BUMP_PAT` (#1562). Metrics run 37159312144 and vendor-watch run 37159313976
     (both `workflow_dispatch` from `main`) then succeeded, and the metrics run opened #1563 as
     `app/nife-smelter`, with CI started. calef then deleted the secret
-    (`gh secret delete TOOLCHAIN_BUMP_PAT --repo nifeos/nife`) and the fine-grained token itself.
+    (`gh secret delete TOOLCHAIN_BUMP_PAT --repo partsfoundry/nife`) and the fine-grained token itself.
     Nothing is left to revoke.
 
 ## The one dependency, and why it was taken
@@ -227,18 +227,18 @@ load-bearing for neither the PAT path nor the `github.token` path.
 **Read which identity yesterday's bump used.** The probe is the first thing in the job, so this
 needs no scrolling:
 
-    gh run list --workflow=toolchain-bump.yml --repo nifeos/nife --limit 1 \
+    gh run list --workflow=toolchain-bump.yml --repo partsfoundry/nife --limit 1 \
       --json databaseId --jq '.[0].databaseId' \
-      | xargs -I{} gh run view {} --repo nifeos/nife --log \
+      | xargs -I{} gh run view {} --repo partsfoundry/nife --log \
       | grep -A4 'identity:'
 
 **Check whether the bump pull request is actually getting CI**, which is the symptom the whole
 mechanism exists to prevent. A bump pull request with one or two checks is a pull request opened by
 the ephemeral token:
 
-    gh pr list --head toolchain/nightly-bump --repo nifeos/nife --state all --limit 1 \
+    gh pr list --head toolchain/nightly-bump --repo partsfoundry/nife --state all --limit 1 \
       --json number --jq '.[0].number' \
-      | xargs -I{} gh pr view {} --repo nifeos/nife \
+      | xargs -I{} gh pr view {} --repo partsfoundry/nife \
       --json author,statusCheckRollup \
       --jq '{author: .author.login, checks: (.statusCheckRollup | length)}'
 

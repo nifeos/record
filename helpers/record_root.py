@@ -1,6 +1,6 @@
 """Where the design record is, for the readers that stay in this repository when the record leaves.
 
-Milestone 1018 (the design record moves to `nifeos/record` and is published as a website), step 6.
+Milestone 1018 (the design record moves to `partsfoundry/record` and is published as a website), step 6.
 A reader that stays in nife and reads a record file, such as a roadmap block, a tenet or the naming
 rules, asks here for the directory that holds the record and joins the record path onto it. The
 move then changes this file and none of the readers.
@@ -9,7 +9,7 @@ The answer has two cases:
 
 - While the record lives in this tree, it is the work tree itself, the directory above `helpers/`
   or the `top` a caller passes. The record lives here while `MARKER` is a file under that top.
-- Once the record has left, it is a tree of `nifeos/record` at the commit that basalt's `[record]`
+- Once the record has left, it is a tree of `partsfoundry/record` at the commit that basalt's `[record]`
   table names, in basalt's `pins.toml` at the basalt commit `xtask/basalt-pin` names. That table
   does not exist yet, and nothing fetches the tree, so `fetched` refuses with a message that says
   so. The pull request that removes the record from nife builds `fetched`, and it is the only

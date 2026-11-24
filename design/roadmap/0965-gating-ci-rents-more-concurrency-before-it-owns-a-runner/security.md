@@ -23,10 +23,10 @@ can override this." So a public repository's runner group is an override an owne
 
 | setting | value | read with |
 |---|---|---|
-| fork pull request workflows | approval required from `all_external_contributors` | `gh api repos/nifeos/nife/actions/permissions/fork-pr-contributor-approval` |
+| fork pull request workflows | approval required from `all_external_contributors` | `gh api repos/partsfoundry/nife/actions/permissions/fork-pr-contributor-approval` |
 | default `GITHUB_TOKEN` | `read`, cannot approve reviews | `.../actions/permissions/workflow` |
 | actions pinned by SHA | required | `.../actions/permissions` |
-| pull requests | enabled, `pull_request_creation_policy: all` | `gh api repos/nifeos/nife` |
+| pull requests | enabled, `pull_request_creation_policy: all` | `gh api repos/partsfoundry/nife` |
 | forking | allowed; one fork exists, the maintainer's own | the same, and `.../forks` |
 | interaction limits | none set on the repository | `.../interaction-limits` |
 
@@ -81,7 +81,7 @@ not limit egress and keeps its volume across runs; a runner needs both.
 
 ## Pull-request settings: option (e)
 
-GitHub's REST reference for updating a repository lists two settings, and `gh api repos/nifeos/nife`
+GitHub's REST reference for updating a repository lists two settings, and `gh api repos/partsfoundry/nife`
 returns both:
 
 - `has_pull_requests`: "Either true to allow pull requests for this repository or false to prevent

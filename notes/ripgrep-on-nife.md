@@ -44,7 +44,7 @@ since milestone 206 (a program image has under 896 KiB) moved the ceiling to 496
 basalt's published package, accepted under the digest basalt's recipe records at the commit `xtask/basalt-pin` pins (milestone
 810 (`ripgrep` is packaged in basalt and installed with `jig`)). CI's `rg-threads` and
 `swish-check` rows run it. It is never part of the base image: calef ruled on 2026-10-07 (UTC) that
-`rg` is installed with `jig` from a package in nifeos/basalt, and `swish-check` types `jig install
+`rg` is installed with `jig` from a package in partsfoundry/basalt, and `swish-check` types `jig install
 ripgrep` then `rg --version` against the same package.
 
 By its path it runs too (milestone 595 (the shell runs a `std` program)). basalt's build links a
@@ -71,7 +71,7 @@ loader ignores it, as it does for `std_exerciser`.
 
 ## Building it
 
-basalt builds it: `recipes/ripgrep.toml` and `helpers/packages.py` in nifeos/basalt download the
+basalt builds it: `recipes/ripgrep.toml` and `helpers/packages.py` in partsfoundry/basalt download the
 published crate and build every target in one pass against a pinned nife, with no vendored copy
 and no fork. `ripgrep` is untouched. One dependency is patched: `ignore` 0.4.23, fetched from
 crates.io by its checksum and given basalt's `patches/ripgrep-ignore-walk.patch`, about ten lines. Milestone 812 (`std::thread::spawn` runs real

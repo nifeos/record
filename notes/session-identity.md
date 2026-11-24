@@ -94,11 +94,11 @@ set before this, so widening the App for sessions widens no workflow.
 
 ## Switching it on (calef, in order)
 
-1. Widen the App at https://github.com/organizations/nifeos/settings/apps/nife-smelter/permissions.
+1. Widen the App at https://github.com/organizations/partsfoundry/settings/apps/nife-smelter/permissions.
    Repository permissions: Actions, Administration, Contents, Issues, Pull requests and Workflows
    Read and write; Checks and Commit statuses Read-only; Metadata stays Read-only. Save, then
    approve the pending request on the installation at
-   https://github.com/organizations/nifeos/settings/installations.
+   https://github.com/organizations/partsfoundry/settings/installations.
 2. On the same installation page, set Repository access to All repositories. An installation
    belongs to one organization, so this reaches every `nifeos` repository as the monorepo splits,
    and nothing outside it.
@@ -144,8 +144,8 @@ Checked against the tree and the `main` ruleset on 2026-10-07 (UTC):
 helpers/smelter-token identity                       # nife-smelter[bot]
 helpers/smelter-token check                          # warns if opted in but not applied
 eval "$(NIFE_SMELTER=1 helpers/smelter-token env)"; gh pr list   # one opted-in command
-GH_TOKEN="$(helpers/smelter-token token)" gh api /repos/nifeos/nife --jq .full_name
-NIFE_SMELTER_SCOPE=maintainer gh api -X PATCH /repos/nifeos/nife -F allow_auto_merge=true
+GH_TOKEN="$(helpers/smelter-token token)" gh api /repos/partsfoundry/nife --jq .full_name
+NIFE_SMELTER_SCOPE=maintainer gh api -X PATCH /repos/partsfoundry/nife -F allow_auto_merge=true
 helpers/smelter-token --selftest                      # no network, no keychain
 ```
 

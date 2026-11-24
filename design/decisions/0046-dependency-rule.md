@@ -185,7 +185,7 @@ Two conditions come with it:
 - That commit sits on the repository's main.
 
 Third-party dependencies keep the hold unchanged. `helpers/architect-label-rules.py` applies the
-exception to a git dependency under `https://github.com/nifeos/` with a full `rev`. It does not
+exception to a git dependency under `https://github.com/partsfoundry/` with a full `rev`. It does not
 yet recognize a crates.io dependency by a first-party name. Nor does it check that the commit
 sits on main. A reviewer checks the second until a lint does.
 

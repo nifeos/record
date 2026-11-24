@@ -21,7 +21,7 @@ A crate gets a repository of its own on one of two grounds, and on no other:
   leave in this order) are the case: the kernel and every package link them.
 
 Any other crate stays in its package's repository. `number_writer`, which only `process-tools`
-links, leaves inside `nifeos/process-tools`. A crate that later meets one of the two grounds moves
+links, leaves inside `partsfoundry/process-tools`. A crate that later meets one of the two grounds moves
 to a repository of its own, and that promotion is a split like any other.
 
 The order follows from the rule. A crate with a repository of its own leaves before every package
@@ -39,8 +39,8 @@ draws on several repositories at install. §235 (its source divides by purpose) 
 repository is; this section says where a program package's crates go.
 
 The first cut applies the rule to three packages. `process-tools` leaves as
-`nifeos/process-tools`, `core-tools` as `nifeos/core-tools`, and `disk-tools` as
-`nifeos/disk-tools` (milestone 756 (process-tools, core-tools and disk-tools are the first code to
+`partsfoundry/process-tools`, `core-tools` as `partsfoundry/core-tools`, and `disk-tools` as
+`partsfoundry/disk-tools` (milestone 756 (process-tools, core-tools and disk-tools are the first code to
 leave this repository)). A package's `home` line keeps `status = "provisional"` until its
 repository exists; this section rules the destination and does not create one.
 

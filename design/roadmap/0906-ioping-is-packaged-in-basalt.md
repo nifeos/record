@@ -39,7 +39,7 @@ basalt's package build) named for ioping.
 
 ## The work
 
-1. A recipe in `nifeos/basalt` naming ioping 1.3, its source URL and the SHA-256 the helper pins.
+1. A recipe in `partsfoundry/basalt` naming ioping 1.3, its source URL and the SHA-256 the helper pins.
    The build refuses a download that does not match.
 2. basalt's package build turns the helper into a build job. At the nife commit `pins.toml`
    names, it compiles `ioping.c` with that commit's C library flags. It links the result the way
@@ -60,7 +60,7 @@ basalt's package build) named for ioping.
 
 ## Built 2026-10-14 (UTC)
 
-Lane `milestone/906-ioping-is-packaged-in-basalt`, with nifeos/basalt#17.
+Lane `milestone/906-ioping-is-packaged-in-basalt`, with partsfoundry/basalt#17.
 
 - The recipe is basalt's `recipes/ioping.toml`: `ioping.c` at `v1.3` under the SHA-256 the helper
   pinned, and the flags ioping's Makefile passes. A download that does not match is refused before
@@ -100,7 +100,7 @@ Reuse: the helper's pinned fetch and flags, `helpers/build-c-program.sh`'s link,
 
 - basalt's `recipes/ioping.toml` carries a `[package_digest]` table, one SHA-256 for each of
   aarch64, riscv64 and x86_64, recorded by milestone 917 (basalt's packages build reproducibly)
-  in nifeos/basalt#29. basalt's pin-bump rewrites it with each new pin.
+  in partsfoundry/basalt#29. basalt's pin-bump rewrites it with each new pin.
 - basalt's `helpers/packages.py build` refuses a package whose bytes hash to anything else, and
   basalt's `packages` workflow builds twice, in separate checkouts, and fails unless the two
   repositories are byte-identical.

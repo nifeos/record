@@ -30,8 +30,8 @@ on its five open questions on 2026-11-03 (UTC); the Rulings section below states
 ## What moves
 
 The kernel, its architecture code under `kernel/src/arch/`, and whatever the kernel alone links,
-moves to `nifeos/nife-kernel` by a path-filtered extraction that keeps each commit's message,
-author and date. It moves last among the code. After it, `nifeos/nife` holds only history, as §151
+moves to `partsfoundry/nife-kernel` by a path-filtered extraction that keeps each commit's message,
+author and date. It moves last among the code. After it, `partsfoundry/nife` holds only history, as §151
 states.
 
 ## What the order depends on
@@ -49,17 +49,17 @@ states.
 
 ## Acceptance
 
-1. `nifeos/nife-kernel` exists, created with the architect's approval, and holds the kernel with
+1. `partsfoundry/nife-kernel` exists, created with the architect's approval, and holds the kernel with
    its history.
 2. The kernel builds and passes its own suite on aarch64, riscv64 and x86_64 from a clean clone of
    that repository, as §19 (architectural parity is a tenet) requires.
-3. basalt's manifest pins `nifeos/nife-kernel@<sha>`, and basalt's full-system test is green on
+3. basalt's manifest pins `partsfoundry/nife-kernel@<sha>`, and basalt's full-system test is green on
    that pin.
 4. No file in any extracted repository names a nife path or pin; a check proves it, not a reading.
 5. The stranger test of the whole system runs against basalt, and its result gates the milestone.
    Three pieces make that possible. The instrument (`script/stranger-test`, the rubric and run
    record `notes/stranger-test.md` with its appendices, and `stranger-cadence.yml`) has moved to
-   its own repository, provisionally `nifeos/stranger-test`, which exists, created with the
+   its own repository, provisionally `partsfoundry/stranger-test`, which exists, created with the
    architect's approval. The new rubric lives there, with a date, committed before its first
    run. And `nife-kernel` carries the crate template's stranger test of milestone 887 for its own
    build half. One run then goes, scored against the new rubric, which starts series 2 at run 1.
@@ -138,7 +138,7 @@ The architect ruled on all five questions on 2026-11-03 (UTC).
    repository. The kernel's `script/test` boots images built from components in other
    repositories, so the build half cannot go green in `nife-kernel` alone.
 2. **Where the instrument lives.** The instrument moves to a new repository, provisionally
-   `nifeos/stranger-test`: the harness `script/stranger-test`, the rubric and run record
+   `partsfoundry/stranger-test`: the harness `script/stranger-test`, the rubric and run record
    `notes/stranger-test.md` with its appendices, and the weekly workflow `stranger-cadence.yml`.
    The architect approved the direction only. Creating the repository and its name still need the
    architect's separate go, which is why acceptance item 1 and item 5 keep "created with the

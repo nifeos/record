@@ -2,7 +2,7 @@
 
 An appendix to [the milestone](../1097-intrusive-queue-outside-review.md).
 
-Verified firsthand, on a fresh shallow clone of `nifeos/nife` at the head of `main`, with the tree's
+Verified firsthand, on a fresh shallow clone of `partsfoundry/nife` at the head of `main`, with the tree's
 pinned nightly unless the line names a toolchain:
 
 - `cargo test -p intrusive_queue`: 5 unit tests, 2 documentation tests and 1 compile-fail test pass.

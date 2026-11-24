@@ -20,7 +20,7 @@ which a lane does not edit, so it goes to an architect with its pull request.
 
 1. nife's `AGENTS.md` names where the design record lives. Six of its lines send a reader to
    paths nife no longer holds: `notes/project-metrics.md`, `notes/how-this-is-built.md` and four
-   mentions of `design/decisions/`. Each becomes a link into nifeos/record, or a sentence that
+   mentions of `design/decisions/`. Each becomes a link into partsfoundry/record, or a sentence that
    says the decisions are there.
 2. nife's `briefs/rebase-onto-main.md` names only the conflicts a nife branch can still meet. Of
    its nine conflict classes, four are about files that left with the record:

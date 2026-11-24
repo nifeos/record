@@ -24,7 +24,7 @@ Name: provisional. Every file and check name below is the lane's, not a ruling.
 Each in-guest fuzz driver has two public names: the build variable that sets its seed range and the
 test filter that selects it. nife writes them in four places that nothing compares. The driver's
 `option_env!` and its replay line in `system_tests/src/user/`, `driver_test` in
-`helpers/continuous-fuzz.sh`, and the selftests. nifeos/fuzz-host writes them a fifth time, as the
+`helpers/continuous-fuzz.sh`, and the selftests. partsfoundry/fuzz-host writes them a fifth time, as the
 `DRIVERS` table in `bin/fuzz-filer`, which checks a held log's replay line against it and builds each
 advisory's reproducer from it.
 

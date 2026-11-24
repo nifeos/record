@@ -77,7 +77,7 @@ inside the one `SPACES` hold. The fix raised one question this section's "left t
 line had not answered: what the method answers when the cursor is foreign on a *live* space.
 
 calef, 2026-10-06, on the recommendation in pull request #1745: *"A"* (option A, `BadPointer`
-over `DONE`; [the ruling comment](https://github.com/nifeos/nife/pull/1745#issuecomment-6027772247)).
+over `DONE`; [the ruling comment](https://github.com/partsfoundry/nife/pull/1745#issuecomment-6027772247)).
 
 `Error::BadPointer`, not `DONE`. `DONE` means the listing is exhausted. A legitimately stale cursor,
 one whose space died mid-walk, already gets `DONE` from the space-lookup miss. A foreign cursor on a

@@ -2,7 +2,7 @@
 
 An appendix to [the milestone](../1095-inter-process-communication-outside-review.md).
 
-Verified firsthand, on a fresh shallow clone of `nifeos/nife` at the head of `main`, on a Linux
+Verified firsthand, on a fresh shallow clone of `partsfoundry/nife` at the head of `main`, on a Linux
 host with stable Rust 1.99.1 and Kani 0.68.0:
 
 - `cargo test -p inter_process_communication`: 29 host tests and 5 documentation tests pass.

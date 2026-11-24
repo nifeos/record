@@ -218,7 +218,7 @@ The move waits for the template gates above.
 ## Clearance
 
 The architect cleared the review on 2026-11-11 (UTC), with the board run following the move as the
-README's stated limitation. Clearing approves creating `nifeos/jh7110_clock_and_reset`; the tag and
+README's stated limitation. Clearing approves creating `partsfoundry/jh7110_clock_and_reset`; the tag and
 a publication stay uncleared, and the move waits for the template gates.
 
 Decided by the maintainer, provisional (2026-11-11 UTC), and reversible until the first

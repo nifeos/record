@@ -17,7 +17,7 @@ follow-on.
 
 Reuse: the window logic of `helpers/continuous-fuzz.sh`, whose `--ci-range SHARD` gives a shard's
 driver and first seed. Also the follower's public reads and green rule in
-`helpers/fuzz-follow-main.py`, the held-findings store, and the filer in nifeos/fuzz-host, which files every held log as a private
+`helpers/fuzz-follow-main.py`, the held-findings store, and the filer in partsfoundry/fuzz-host, which files every held log as a private
 advisory. Nothing here writes a new transport, and the filer needs no change.
 
 ## Background

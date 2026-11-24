@@ -27,7 +27,7 @@ Two rulings touch `src/socket_frame.rs`: a send's length rides in the `CALL` arg
 (#3517), and `ACCEPT`'s second reply word carries the peer. The items below hold under both, which
 change only documentation and one example in this crate.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `script/crate-standalone`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `script/crate-standalone`,
 `script/crate-move --dry-run`, the template's name and prose gates, cargo-llvm-cov, cargo-mutants.
 No new tool.
 
@@ -44,47 +44,47 @@ crate's own reasons.
 ## Finding status
 
 
-- P0-1, `MappedWindow::read<T>` and `write<T>` take any type at any offset: Done, [#3580](https://github.com/nifeos/nife/pull/3580). They
+- P0-1, `MappedWindow::read<T>` and `write<T>` take any type at any offset: Done, [#3580](https://github.com/partsfoundry/nife/pull/3580). They
   take the sealed `WindowInteger`, and a misaligned address panics.
-- P0-2, two barriers declared `nomem`: Done, [#3527](https://github.com/nifeos/nife/pull/3527).
+- P0-2, two barriers declared `nomem`: Done, [#3527](https://github.com/partsfoundry/nife/pull/3527).
 - P0-3, the manifest and the files the standalone check refuses: Done,
-  [#3815](https://github.com/nifeos/nife/pull/3815) (maintainer, provisional, 2026-11-19 UTC). The
+  [#3815](https://github.com/partsfoundry/nife/pull/3815) (maintainer, provisional, 2026-11-19 UTC). The
   manifest writes `license`, `lints`, `rust-version`, a description, keywords, categories, `readme`
   and a publish comment as literals; the crate has a README for three targets and both license
   files; `jig`'s dependency carries a version. The `repository` key waits for the move.
-- P0-4, no test target: Done, [#3611](https://github.com/nifeos/nife/pull/3611). Two doctests stay `ignore` with a stated reason
+- P0-4, no test target: Done, [#3611](https://github.com/partsfoundry/nife/pull/3611). Two doctests stay `ignore` with a stated reason
   (`src/process.rs` lines 124 and 170).
-- P0-5, build scripts reach `link.ld` by a relative path: Done, [#3611](https://github.com/nifeos/nife/pull/3611).
-- P1-6, a zero `CNTFRQ_EL0` divides by zero: Done, [#3580](https://github.com/nifeos/nife/pull/3580).
-- P1-7, the aarch64 child stub hard-codes two `abi` constants: Done, [#3580](https://github.com/nifeos/nife/pull/3580).
-- P1-8, text that speaks to a reader inside nife: Done, [#3981](https://github.com/nifeos/nife/pull/3981).
+- P0-5, build scripts reach `link.ld` by a relative path: Done, [#3611](https://github.com/partsfoundry/nife/pull/3611).
+- P1-6, a zero `CNTFRQ_EL0` divides by zero: Done, [#3580](https://github.com/partsfoundry/nife/pull/3580).
+- P1-7, the aarch64 child stub hard-codes two `abi` constants: Done, [#3580](https://github.com/partsfoundry/nife/pull/3580).
+- P1-8, text that speaks to a reader inside nife: Done, [#3981](https://github.com/partsfoundry/nife/pull/3981).
   The sources state each rule instead of citing a section, a milestone or a note, the two notes
   live in the crate's `docs/` as `design.md` and `time.md`, and the crate has no row in the
   externalized-crates ceiling.
 - P1-9, twenty-four acronyms not expanded at first use: Done,
-  [#3815](https://github.com/nifeos/nife/pull/3815) (maintainer, provisional, 2026-11-19 UTC). The
+  [#3815](https://github.com/partsfoundry/nife/pull/3815) (maintainer, provisional, 2026-11-19 UTC). The
   `prose_acronyms` and `readme_acronyms` rows left the template baseline.
-- P1-10, `Frame::payload_read` trusts a reply length: Done, [#3580](https://github.com/nifeos/nife/pull/3580).
-- P1-11, `INITIAL_RAMDISK_VIRTUAL_ADDRESS` is a literal: Done, [#3611](https://github.com/nifeos/nife/pull/3611).
-- P2-12, an unused dependency on aarch64: Done, [#3580](https://github.com/nifeos/nife/pull/3580).
-- P2-13, names the abbreviation gate flags: Done, [#3611](https://github.com/nifeos/nife/pull/3611).
-- P2-14, two spellings of the empty-slot probe: Done, [#3580](https://github.com/nifeos/nife/pull/3580).
-- P2-15, ten receive functions in three shapes: Done, [#3611](https://github.com/nifeos/nife/pull/3611).
-- P2-16, a stale reason for `socket_frame` living here: Done, [#3580](https://github.com/nifeos/nife/pull/3580).
-- P2-17, no wrapper for `SYSTEM_CALL_EXIT_THREAD`: Done, [#3629](https://github.com/nifeos/nife/pull/3629) (maintainer, provisional,
+- P1-10, `Frame::payload_read` trusts a reply length: Done, [#3580](https://github.com/partsfoundry/nife/pull/3580).
+- P1-11, `INITIAL_RAMDISK_VIRTUAL_ADDRESS` is a literal: Done, [#3611](https://github.com/partsfoundry/nife/pull/3611).
+- P2-12, an unused dependency on aarch64: Done, [#3580](https://github.com/partsfoundry/nife/pull/3580).
+- P2-13, names the abbreviation gate flags: Done, [#3611](https://github.com/partsfoundry/nife/pull/3611).
+- P2-14, two spellings of the empty-slot probe: Done, [#3580](https://github.com/partsfoundry/nife/pull/3580).
+- P2-15, ten receive functions in three shapes: Done, [#3611](https://github.com/partsfoundry/nife/pull/3611).
+- P2-16, a stale reason for `socket_frame` living here: Done, [#3580](https://github.com/partsfoundry/nife/pull/3580).
+- P2-17, no wrapper for `SYSTEM_CALL_EXIT_THREAD`: Done, [#3629](https://github.com/partsfoundry/nife/pull/3629) (maintainer, provisional,
   2026-11-15 UTC); the docs of `exit` say why none is needed.
-- Decision 1, the names a stranger meets: Done. [#3611](https://github.com/nifeos/nife/pull/3611)
+- Decision 1, the names a stranger meets: Done. [#3611](https://github.com/partsfoundry/nife/pull/3611)
   built the rename table (maintainer, provisional, 2026-11-14 UTC).
-  [#3815](https://github.com/nifeos/nife/pull/3815) removed the sized accessors `read_u8` to
+  [#3815](https://github.com/partsfoundry/nife/pull/3815) removed the sized accessors `read_u8` to
   `write_u64`, and every call site uses `read::<T>` and `write::<T>` (maintainer, recommendation B,
   provisional, 2026-11-19 UTC). The names were ratified on 2026-11-20 UTC as built, with the short
   forms spelled out (`header_length`, `fill_random_bytes`, `read_volatile`, `write_volatile`,
   `reap_thread`, `counter_ticks`, and spelled-out parameters), the old spellings kept as
   `doc(alias)`, and every `Name:` block in the crate ratified.
-- Decision 2, `link.ld` on the link search path: Done, [#3611](https://github.com/nifeos/nife/pull/3611) (maintainer, provisional,
+- Decision 2, `link.ld` on the link search path: Done, [#3611](https://github.com/partsfoundry/nife/pull/3611) (maintainer, provisional,
   2026-11-14 UTC). A two-way door until `disk-tools` leaves (milestone 1017 step 4), so not calef's
   until then.
-- Decision 3, one `Message` and one `Received`: Done, [#3611](https://github.com/nifeos/nife/pull/3611) (maintainer, provisional,
+- Decision 3, one `Message` and one `Received`: Done, [#3611](https://github.com/partsfoundry/nife/pull/3611) (maintainer, provisional,
   2026-11-14 UTC).
 
 ## Open decisions
@@ -225,7 +225,7 @@ has no caller outside the crate. Item 15 is the work.
 
 ## Follow-on
 
-- **Milestone 1017.** Its step 3 moves the crate to `nifeos/user_mode_runtime`, cleared
+- **Milestone 1017.** Its step 3 moves the crate to `partsfoundry/user_mode_runtime`, cleared
   2026-11-21 UTC as `publish = false` with no tag and no publish, once `abi`,
   `address_space_layout`, `current_cpu_contract` and `socket_contract` have left the tree. The
   thin machine checks are a recorded limitation (the package lists them), and a first tag needs its

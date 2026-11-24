@@ -16,7 +16,7 @@ SHA-256 and publishes one package per architecture on a GitHub Release, indexed 
 refuses a package that hashes to anything else, and basalt's `packages` workflow fails its
 `the two builds are byte-identical` job unless two builds at different paths match (milestone 917).
 The Release `rolling-2026-10-19-b673abe` serves the three digests the recipe at
-nifeos/basalt@b673abe records. nife builds no `rg`. Its gates fetch that package by the recipe's
+partsfoundry/basalt@b673abe records. nife builds no `rg`. Its gates fetch that package by the recipe's
 digest, and a booted nife runs `jig install ripgrep` and `rg --version` against it on all three
 architectures under QEMU, on every pull request. The two "Built" sections below have the rest.
 
@@ -49,7 +49,7 @@ In nife:
 - `system_tests/src/user/ripgrep_tests.rs` and `ripgrep_threads_tests.rs` run it by hand-placed
   capabilities. `script/swish-check` installs it with `jig` and runs it by name and by path.
 
-In `nifeos/basalt`: `pins.toml` pins `nife` by full commit id. `gate.yml` runs the pinned commit's
+In `partsfoundry/basalt`: `pins.toml` pins `nife` by full commit id. `gate.yml` runs the pinned commit's
 own `script/ci-build test`. `pin-bump.yml` proposes a new pin daily, with the packages' new
 digests. `packages.yml` builds `recipes/ripgrep.toml` at the pin twice and compares the two, proves
 `jig` installs it, and on `main` publishes the packages to a Release and the index to Pages. The
@@ -58,7 +58,7 @@ that component's commit carries."*
 
 ## The work
 
-1. A recipe in `nifeos/basalt`, not in this tree, naming the crate (`ripgrep`), the version
+1. A recipe in `partsfoundry/basalt`, not in this tree, naming the crate (`ripgrep`), the version
    (`14.1.1`) and a SHA-256 of the `.crate` file. The build refuses a download that does not match.
    crates.io's index carries a `cksum` per version, which the recipe can be checked against
    (unverified). The recipe format is basalt's to choose; nife's `packages/*.recipe.toml` (§195 (a
@@ -86,7 +86,7 @@ that component's commit carries."*
 
 ## Built 2026-10-12 (UTC)
 
-- The recipe is `nifeos/basalt`'s `recipes/ripgrep.toml`: the crate at 14.1.1 and its SHA-256
+- The recipe is `partsfoundry/basalt`'s `recipes/ripgrep.toml`: the crate at 14.1.1 and its SHA-256
   (crates.io's `cksum`), and `ignore` 0.4.23 at its SHA-256 with basalt's
   `patches/ripgrep-ignore-walk.patch`, refused unless its SHA-256 is the recipe's. A download that does not match is refused before anything is built (item 1).
 - The build is basalt's `helpers/packages.py`: the pinned nife's `cargo xtask std-src` and
@@ -109,7 +109,7 @@ that component's commit carries."*
 
 ## Built 2026-10-13 (UTC): nife's tests take basalt's package
 
-Lane `lane/ripgrep-from-basalt`, with nifeos/basalt#15. DECISIONS §297 (software reaches a nife
+Lane `lane/ripgrep-from-basalt`, with partsfoundry/basalt#15. DECISIONS §297 (software reaches a nife
 system as a package `jig` installs from basalt) item 3 makes a `helpers/build-*.sh` scaffolding
 until the program's package exists, and this one's does.
 

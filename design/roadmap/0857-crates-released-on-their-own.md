@@ -56,7 +56,7 @@ session, relayed in comments on pull request #1806. Each fork's options, as weig
   published. calef: *"It seems like we should pick create names that can stand on their own. If
   Nife fails the crates may survive."* Amended by calef on 2026-10-11 (UTC): *"We should ensure
   that we ratify the crate names before we break them out."* So a name is ratified, as `script/names`
-  records it, before the crate leaves the tree: before its `nifeos/<name>` repository and before
+  records it, before the crate leaves the tree: before its `partsfoundry/<name>` repository and before
   the standalone copy, since both carry it. `script/crate-standalone` checks it.
 - Fork 6: crates.io trusted publishing from a `nifeos` workflow, no long-lived token, a `nifeos`
   team as owner, and a release only when calef approves it. calef: *"Yes"*.
@@ -91,8 +91,8 @@ No per-crate milestone is minted by this block. They come from the reviews below
   of `components`; revisit if that changes. The name holds for now. The crate breaks up as
   components become programs and crates of their own, and each piece takes its name then.
 - Ruled 2026-11-01 (UTC): this repository breaks up into single-purpose repositories and remains,
-  as `nifeos/nife`, only for its history. The design record (roadmap, decisions,
-  journeys, naming, notes) moves to its own repository, `nifeos/record`, which the site published
+  as `partsfoundry/nife`, only for its history. The design record (roadmap, decisions,
+  journeys, naming, notes) moves to its own repository, `partsfoundry/record`, which the site published
   at nifeos.org pulls. The kernel, programs, tooling and crates all leave, and a crate consumable
   outside nife shows good crate boundaries. What leaves references nothing back here, so moves go
   bottom-up: the crates a program links leave before it or with it. The kernel leaves last among

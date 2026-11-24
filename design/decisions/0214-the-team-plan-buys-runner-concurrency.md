@@ -16,14 +16,14 @@ touch that section's ruling.
 §203 ranked what rented runners buy, and put merge throughput third. Its reason was that GitHub's
 concurrency "binds on heavy branches rather than on a typical day". That held while lanes gated on
 this laptop. It stopped holding once lanes gated in CI, per
-`nifeos/nife:briefs/gate-in-ci.md`, written 2026-09-22. Every lane now spends
+`partsfoundry/nife:briefs/gate-in-ci.md`, written 2026-09-22. Every lane now spends
 runner jobs, so the runner pool is the shared ceiling.
 
 ## The evidence, measured 2026-09-24
 
 All of these were re-read from GitHub at 18:50 UTC on 2026-09-24.
 
-- `gh api orgs/nifeos -q .plan` reads `team`, with 1 seat and 1 filled.
+- `gh api orgs/partsfoundry -q .plan` reads `team`, with 1 seat and 1 filled.
 - The last pull request to merge before that time was #1202, at 16:51:21 UTC. Nothing merged for
   the following two hours.
 - At 18:50 UTC, 14 workflow runs were queued and 7 in progress. A higher peak earlier in the day
@@ -57,7 +57,7 @@ So the seat is the only cash this adds.
 The seat is $4 per user per month for the first 12 months, per
 [github.com/pricing](https://github.com/pricing). That page does not state the price after the first
 12 months. This section does not guess it. With one seat, the plan is $4.00 a month, recorded in
-`nifeos/nife:notes/project-metrics/ledger.md`.
+`partsfoundry/nife:notes/project-metrics/ledger.md`.
 
 ## The amended ranking
 

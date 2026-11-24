@@ -71,8 +71,8 @@ Other references that change meaning when the record leaves this repository:
 |---|---|
 | bare `#N` pull request references in the record | 2,866 in 803 files |
 | short commit hashes (9 to 12 hex digits) in the record's Markdown | 1,028, loosely matched |
-| `github.com/nifeos/nife/blob` or `tree` links in the record | 36 |
-| `nifeos/<repo>@<sha>` citations anywhere | 1 |
+| `github.com/partsfoundry/nife/blob` or `tree` links in the record | 36 |
+| `partsfoundry/<repo>@<sha>` citations anywhere | 1 |
 | record paths naming `crates/jh7110_entropy`, which left on 2026-10-31 | 32 |
 
 ## History
@@ -115,7 +115,7 @@ branch over `origin/main` `d669bd9a9`. Eleventy 3.1.7, Pagefind 1.5.2, Node 24.2
 | bytes a reader's first search fetches | 178 KB |
 | whole site | 50.3 MB in 6,144 files, 73 of them repository files a page links to |
 | citations linked (`milestone N`, `§N`) | 21,475, none naming a missing record |
-| bare `#N` linked to `nifeos/nife` | 3,023 |
+| bare `#N` linked to `partsfoundry/nife` | 3,023 |
 | internal links checked in the built pages | 30,777 |
 | in-record breaks (no file, no page, no heading) | 0 |
 | off-record links, shown as plain text | 67 |
@@ -166,7 +166,7 @@ record, the outsider-pass selftests, and three mutation-record checks that read 
 
 ## The record's checks by directory, step 5
 
-Measured 2026-11-09 (UTC) from the runs named below, all on hosted runners. `nifeos/record` does
+Measured 2026-11-09 (UTC) from the runs named below, all on hosted runners. `partsfoundry/record` does
 not exist yet, so this repository stands in for it: a record path here plays a record path there,
 and a code path plays a path in a code repository. The record paths are `design/`, `notes/`, `briefs/`
 and the root's `AGENTS.md`, `ARCHITECTS.md` and `CLAUDE.md`.
@@ -210,7 +210,7 @@ request run it took 654 seconds, of which 111 installed `typos` and `cargo-mache
 at a time with `script/lint --section`, the 43 passed alone in 147 seconds, each paying its own
 preamble.
 
-In `nifeos/record` the 35 `both` sections lose their code half. Each either fetches the code at
+In `partsfoundry/record` the 35 `both` sections lose their code half. Each either fetches the code at
 basalt's pins, as the path claims already plan to, or drops that half. The tree-wide hygiene checks
 among them would read the record's own tooling too; on the pull request run they cost about 18
 seconds.
@@ -251,7 +251,7 @@ Sorted 2026-11-10 (UTC) by reading each script, helper, lint section and workflo
 The sort is provisional. **R** goes to `nifeos/record`. **W** goes to `nifeos/partsfoundry.org`, the
 website. **C** stays with code. **S-each** runs in every repository on its own files. **S-cross**
 splits, and one side needs the other's data: code at basalt's pins, or the record's number index
-that open question 7 asks about. **T** goes to the template (`nifeos/crate-workflows`) or the fleet
+that open question 7 asks about. **T** goes to the template (`partsfoundry/crate-workflows`) or the fleet
 repository, under the forks of milestone 902 (nife's tooling, sorted by who needs it, before any
 of it moves).
 
@@ -275,7 +275,7 @@ the rework that moves the status flip to the record's pull request.
 Of the 43 lint sections tagged `record` or `both`, 5 go to R, 14 stay with code, 12 are S-each and
 12 are S-cross. The three mutation sections tagged `record` stay with code, since they read only
 `notes/project-metrics/`, which is tool data. The 97 `code` sections stay with code, 9 of them
-(hooks, push, empty diff, the label merge base, and the template gates) in T. `nifeos/record` needs
+(hooks, push, empty diff, the label merge base, and the template gates) in T. `partsfoundry/record` needs
 a lint driver of its own that runs only its subset.
 
 | workflow | goes to |

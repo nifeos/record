@@ -10,7 +10,7 @@
 The record names code that lives in nife: a roadmap block's `**Recorded.**` line names
 `script/lint`, a citation names `xtask/src/host.rs`, a counted claim counts the kernel's harnesses.
 Those names are checked against nife at the commit basalt's `main` pins, which is the rule
-`helpers/qualified_paths.py` already follows for a `nifeos/<repo>:<path>` citation. It is the only
+`helpers/qualified_paths.py` already follows for a `partsfoundry/<repo>:<path>` citation. It is the only
 nife the record can name and have every reader see the same thing.
 
 `path` prints `$NIFE_TREE` when it is set (CI checks nife out there, at `commit`), and otherwise a
@@ -61,7 +61,7 @@ def commit():
     except RuntimeError as e:
         sys.exit(f"nife_tree: cannot read basalt's pins.toml: {e}")
     if "nife" not in pins:
-        sys.exit("nife_tree: basalt's pins.toml on main pins no nifeos/nife")
+        sys.exit("nife_tree: basalt's pins.toml on main pins no partsfoundry/nife")
     return pins["nife"]
 
 

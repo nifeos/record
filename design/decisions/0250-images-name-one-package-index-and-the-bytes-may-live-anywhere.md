@@ -46,7 +46,7 @@ have its own pin or migration path), a GitHub host name (H2 below), and no built
 
 An image names its own distribution's host. A later distribution that is not rolling gets its own
 name, its own certificate pin and its own migration path, and none of them is shared with basalt's.
-GitHub Pages allows one custom domain per repository, so `nifeos/basalt` can own
+GitHub Pages allows one custom domain per repository, so `partsfoundry/basalt` can own
 `basalt.nifeos.org` outright, and the same host can serve basalt's web page as well as its index.
 `packages.nifeos.org`, ruled first the same day, was one name for every distribution and is
 refused for those reasons.
@@ -158,7 +158,7 @@ ruled so the change can be read against it.
    `nifeos.org` is at Name.com, so one registrar account's compromise or lapsed payment cannot take
    both. Its address is `basalt.crickertech.com`. Name: provisional. calef chose the domain; the
    `basalt.` label follows the first address and is not ruled.
-   It is served by a second GitHub Pages site in the `nifeos` organization, `nifeos/basalt-backup`
+   It is served by a second GitHub Pages site in the `nifeos` organization, `partsfoundry/basalt-backup`
    (Name: provisional), which basalt's publish fills with the same files as the first (calef,
    2026-10-21 UTC: *"P1: a second Pages site in nifeos for basalt.crickertech.com."*). Pages
    serves one custom domain per site, so the second address needs a site of its own.

@@ -22,7 +22,7 @@ milestone 1017 (the contract crates leave in this order), after the contract cra
 of those is reopened here. One ratified-name check: no later rule (units, standard-library
 spellings) contradicts `SyncOnly` or `bind_sync_only`.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `script/crate-move`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `script/crate-move`,
 `script/crate-review-packet`, Kani, cargo-mutants. No new tool.
 
 ## Goal
@@ -42,25 +42,25 @@ the crate's own reasons.
   the hard-cases prose of `notes/walk-cost.md`.
 - P0-3, the dependency on `file_system_contract` has nowhere to point: Waiting on
   `file_system_contract`'s repository (milestone 1017 step 2). The template half
-  landed in [nifeos/crate-workflows#66](https://github.com/nifeos/crate-workflows/pull/66), so
+  landed in [partsfoundry/crate-workflows#66](https://github.com/partsfoundry/crate-workflows/pull/66), so
   `deny.toml` admits git sources on the organization; the `git` and `rev` pin needs the repository,
   and the contract crates leave in the order milestone 1017 gives.
 - P1-4, `landing` answers `EINVAL` for `EISDIR`: Done,
-  [#3580](https://github.com/nifeos/nife/pull/3580).
+  [#3580](https://github.com/partsfoundry/nife/pull/3580).
 - P1-5, `unbind` uses handle 0 for nothing to close: Done,
-  [#3580](https://github.com/nifeos/nife/pull/3580).
+  [#3580](https://github.com/partsfoundry/nife/pull/3580).
 - P1-6, the badge-to-slot cast truncates on 32 bits: Done,
-  [#3580](https://github.com/nifeos/nife/pull/3580).
-- P1-7, names the rules refuse: Done, [#3813](https://github.com/nifeos/nife/pull/3813). The eight
+  [#3580](https://github.com/partsfoundry/nife/pull/3580).
+- P1-7, names the rules refuse: Done, [#3813](https://github.com/partsfoundry/nife/pull/3813). The eight
   renames (`PROOF_PATH_BYTES`, `directories`, `want_directory`, `component`, `NodeKind`,
   `Binding::Unbound`, `check_landing`, `Bindings::binding`) stand in the tree and in
   `redoxfs_server`, and `walk`'s parameter is `requested_rights`
-  ([#3858](https://github.com/nifeos/nife/pull/3858)). The architect ratified them with the review
+  ([#3858](https://github.com/partsfoundry/nife/pull/3858)). The architect ratified them with the review
   package on 2026-11-20 UTC.
 - P1-8, no example anywhere: At the move. The doctests on `walk` and `Bindings` landed in
-  [#3580](https://github.com/nifeos/nife/pull/3580); the README's `## EXAMPLES` remains.
+  [#3580](https://github.com/partsfoundry/nife/pull/3580); the README's `## EXAMPLES` remains.
 - P1-9, what the walk proofs leave out and cost: Done,
-  [#3980](https://github.com/nifeos/nife/pull/3980). The harness
+  [#3980](https://github.com/partsfoundry/nife/pull/3980). The harness
   `a_walk_asks_for_every_component_in_order` states that `walk` asks for every component before the
   last `/`, in order, and keeps one running offset instead of a record of the steps. Its
   falsification makes `walk` skip the first component. The README's line that the unit tests, not
@@ -68,14 +68,14 @@ the crate's own reasons.
 - P1-10, passive voice over the template's ceiling: At the move. The template counts 26 passives in
   4,081 words against an allowance of 8; the rewrite goes with P0-2.
 - P2-11, `Refusal::errno` restates the contract's numbers: Done,
-  [#3610](https://github.com/nifeos/nife/pull/3610).
+  [#3610](https://github.com/partsfoundry/nife/pull/3610).
 - P2-12, `admit` takes three `u64` words in a row: Done,
-  [#3610](https://github.com/nifeos/nife/pull/3610).
-- P2-13, `cfg_attr(not(test), no_std)`: Done, [#3580](https://github.com/nifeos/nife/pull/3580).
-- P2-14, how the requested rights mask: Done, [#3580](https://github.com/nifeos/nife/pull/3580).
+  [#3610](https://github.com/partsfoundry/nife/pull/3610).
+- P2-13, `cfg_attr(not(test), no_std)`: Done, [#3580](https://github.com/partsfoundry/nife/pull/3580).
+- P2-14, how the requested rights mask: Done, [#3580](https://github.com/partsfoundry/nife/pull/3580).
 - P2-15, where the crate is stricter than Linux: At the move. The README's section on `openat2` and
   `cap-std` goes with P0-1.
-- Decision, the crate's name: Done, [#3589](https://github.com/nifeos/nife/pull/3589) (maintainer,
+- Decision, the crate's name: Done, [#3589](https://github.com/partsfoundry/nife/pull/3589) (maintainer,
   provisional, 2026-11-14 UTC; nothing to build).
 
 ## Decisions
@@ -84,7 +84,7 @@ the crate's own reasons.
 
 Ruled 2026-11-20 (UTC): the architect cleared the
 [review package](../../notes/crate-reviews/subtree-scope.md) and approved the repository
-`nifeos/subtree_scope` with `publish = false`, no tag and no publish. The move waits on
+`partsfoundry/subtree_scope` with `publish = false`, no tag and no publish. The move waits on
 `file_system_contract`'s repository for P0-3's `git` pin. The package holds the ratified names.
 
 ## What was checked, and how
@@ -138,22 +138,22 @@ name or behavior, a dependency); everything else is two-way and the maintainer d
    bounds". `fs_subtree_caretaker` goes.
    Door: two-way. Effort: M.
 
-3. The dependency on `file_system_contract` has nowhere to point yet. PARTIAL: the template's rule landed (nifeos/crate-workflows#66). LEFT: `file_system_contract`'s repository, then the pin.
+3. The dependency on `file_system_contract` has nowhere to point yet. PARTIAL: the template's rule landed (partsfoundry/crate-workflows#66). LEFT: `file_system_contract`'s repository, then the pin.
    Finding: the only dependency is `file_system_contract` by path. The runbook's bottom-up rule
    (`notes/crate-move.md`, "A crate leaves only when nothing it depends on is still in this
    tree") holds the move until `file_system_contract` has its own repository, which step 2 of
    milestone 1017 schedules. The scaffold's `deny.toml` admits git sources on the organization
-   (nifeos/crate-workflows#66), and the maintainers hold publishing to crates.io, so the
+   (partsfoundry/crate-workflows#66), and the maintainers hold publishing to crates.io, so the
    dependency takes a `git` and `rev` pin. This is the first moved crate to depend on another
    nifeos crate.
    Evidence: `crates/subtree_scope/Cargo.toml` line 13; `crate-workflows/scaffold/deny.toml`
    lines 30 to 33; `design/roadmap/1017-the-contract-crates-leave-in-this-order.md`, the step
    table.
-   Change: in the template, an `allow-git` entry for `https://github.com/nifeos/` so a crate may
+   Change: in the template, an `allow-git` entry for `https://github.com/partsfoundry/` so a crate may
    depend on a sibling by `git` and `rev` during the soak, with the rule written beside it; this
    block names the dependency on the blocked side. In the crate, once `file_system_contract` has
    its tag: `file_system_contract = { version = "0.1.0", git =
-   "https://github.com/nifeos/file_system_contract", rev = "<commit of the tag>" }`. The
+   "https://github.com/partsfoundry/file_system_contract", rev = "<commit of the tag>" }`. The
    alternative cuts the dependency by making `walk` generic over a rights trait. This review does
    not recommend it. The walk's one job is the contract's rights arithmetic, and a second spelling
    of `DESCEND` would be a second place for it to be wrong.
@@ -177,7 +177,7 @@ The crate keeps `subtree_scope` (maintainer, provisional, 2026-11-14 UTC). It is
 spelled out, and it says what the crate is: the scope of a subtree grant. `use
 subtree_scope::{walk, admit}` reads as what the two calls do. The door is two-way. The crate's one
 consumer is `redoxfs_server`, and step 9 of milestone 1017 places it in its own repository,
-`nifeos/subtree_scope`.
+`partsfoundry/subtree_scope`.
 The publishing hold keeps it off crates.io. If the crate is ever published on
 its merits, its crates.io name comes to the architect then, and ratifying it stays the architect's.
 

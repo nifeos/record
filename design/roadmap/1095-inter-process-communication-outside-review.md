@@ -20,7 +20,7 @@ is the crate's own (§154 (the acronym test is whether the phrase is spoken)). E
 name carries a `provisional` block. Nothing below reopens the crate name. Everything else is open,
 and the first item says so.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, its name gates
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, its name gates
 (`helpers/spelled_out.py`, `question_shape.py`, `register_names.py`, `british_spelling.py`,
 `standalone.py`, `abbreviations.py`), `typos`, Kani, cargo-mutants, cargo-llvm-cov, and the
 crate's own harness helpers (`seed`, `mint`, `any_timers`). No new tool.
@@ -35,57 +35,57 @@ the items say which.
 Every finding not Done blocks the first crates.io publish, which waits until every outside-review
 milestone reaches delivery.
 
-- P0-1, no review package: Done, [#3824](https://github.com/nifeos/nife/pull/3824).
+- P0-1, no review package: Done, [#3824](https://github.com/partsfoundry/nife/pull/3824).
   [`notes/crate-reviews/inter-process-communication.md`](../../notes/crate-reviews/inter-process-communication.md)
   is the package, with a row in the index.
-- P0-2, the one dependency has not left and appears in no plan: Done, [#3892](https://github.com/nifeos/nife/pull/3892). `intrusive_queue`
-  left first (D3), and the crate takes `nifeos/intrusive_queue` by `rev`.
+- P0-2, the one dependency has not left and appears in no plan: Done, [#3892](https://github.com/partsfoundry/nife/pull/3892). `intrusive_queue`
+  left first (D3), and the crate takes `partsfoundry/intrusive_queue` by `rev`.
 - P0-3, the crate does not stand alone: At the move. The move strips every `Name:` block and the
   citations, and gives the manifest its own `license`, `lints` and `rust-version` in place of
   `license.workspace` and `[lints]`, which `Cargo.toml` still inherits.
-- P1-4, a public type named `Send`: Done, [#3824](https://github.com/nifeos/nife/pull/3824). The five operation enums are `SendVerdict`,
+- P1-4, a public type named `Send`: Done, [#3824](https://github.com/partsfoundry/nife/pull/3824). The five operation enums are `SendVerdict`,
   `ReceiveVerdict`, `SignalVerdict`, `WaitVerdict` and `ArmVerdict` (D1).
-- P1-5a, gate names in the private parts: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P1-5b, prose spellings: Done, [#3824](https://github.com/nifeos/nife/pull/3824).
-- P1-5c, gate names in the public parts: Done, [#3824](https://github.com/nifeos/nife/pull/3824). `Rendezvous::one_queue_invariant_holds`
+- P1-5a, gate names in the private parts: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- P1-5b, prose spellings: Done, [#3824](https://github.com/partsfoundry/nife/pull/3824).
+- P1-5c, gate names in the public parts: Done, [#3824](https://github.com/partsfoundry/nife/pull/3824). `Rendezvous::one_queue_invariant_holds`
   and `Key::virtual_address` (D4).
 - P1-6, the design record does not travel: At the move. The move writes `docs/design.md` and the
   README in place of the links to `notes/inter-process-communication.md`.
 - P1-7, manifest metadata: At the move. The move writes the description, repository, keywords and
   categories rows.
-- P1-8, a harness recorded as unfalsifiable: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
+- P1-8, a harness recorded as unfalsifiable: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
 - P1-9, the mutation record is stale: At the move. A full run in the new repository, with the three
   survivors triaged.
 - P2-10, a timer and a futex table in a crate named for inter-process communication: At the move.
   The README's first line, which states the shared reason (D2), comes with the move.
 - P2-11, the one-queue invariant could hold by construction: Done,
-  [#3963](https://github.com/nifeos/nife/pull/3963) (maintainer, provisional, 2026-11-22 UTC).
+  [#3963](https://github.com/partsfoundry/nife/pull/3963) (maintainer, provisional, 2026-11-22 UTC).
   `Rendezvous` holds one queue under a `Waiting` tag, five words on a 64-bit target in place of
   seven. `one_queue_invariant_holds` checks the half the layout leaves open, that a tag names a
   queue only while a thread is on it, and every rendezvous harness has a falsification patch cut
   against the new code.
-- P2-12a, `Futexes<T, 0>` panics: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P2-12b, `Futexes` as a stranger reads it: Done, [#3963](https://github.com/nifeos/nife/pull/3963)
-  and nifeos/intrusive_queue#2, which adds the read-only `Queue::iter` that lets
-  `AddressWaitTable::waiter_count` take `&self`. [#3824](https://github.com/nifeos/nife/pull/3824) built the names (D5),
-  [#3874](https://github.com/nifeos/nife/pull/3874) spelled the type out as `AddressWaitTable`,
-  and [#3883](https://github.com/nifeos/nife/pull/3883) ratified them.
-- P2-13, `Timer::deadline` answers with a sentinel: Done, [#3842](https://github.com/nifeos/nife/pull/3842). `Timer::deadline` and
+- P2-12a, `Futexes<T, 0>` panics: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- P2-12b, `Futexes` as a stranger reads it: Done, [#3963](https://github.com/partsfoundry/nife/pull/3963)
+  and partsfoundry/intrusive_queue#2, which adds the read-only `Queue::iter` that lets
+  `AddressWaitTable::waiter_count` take `&self`. [#3824](https://github.com/partsfoundry/nife/pull/3824) built the names (D5),
+  [#3874](https://github.com/partsfoundry/nife/pull/3874) spelled the type out as `AddressWaitTable`,
+  and [#3883](https://github.com/partsfoundry/nife/pull/3883) ratified them.
+- P2-13, `Timer::deadline` answers with a sentinel: Done, [#3842](https://github.com/partsfoundry/nife/pull/3842). `Timer::deadline` and
   `earliest` answer `Option<u64>` (D7).
-- P2-14, the pending count's saturation has no host test: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P2-15, five copies of the test node: Done, [#3842](https://github.com/nifeos/nife/pull/3842). `src/test_node.rs` holds the one node; the
+- P2-14, the pending count's saturation has no host test: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- P2-15, five copies of the test node: Done, [#3842](https://github.com/partsfoundry/nife/pull/3842). `src/test_node.rs` holds the one node; the
   futex tests keep their own, which carries the key it waits on.
-- P2-16a, documentation details: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P2-16b, tuples from `debug_counts`: Done, [#3824](https://github.com/nifeos/nife/pull/3824). `RendezvousCounts` and `NotificationCounts`.
-- P2-17, two Kani toolchain warnings: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- D1, the names of the verdict enums: Done, [#3824](https://github.com/nifeos/nife/pull/3824), ratified in [#3883](https://github.com/nifeos/nife/pull/3883).
+- P2-16a, documentation details: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- P2-16b, tuples from `debug_counts`: Done, [#3824](https://github.com/partsfoundry/nife/pull/3824). `RendezvousCounts` and `NotificationCounts`.
+- P2-17, two Kani toolchain warnings: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- D1, the names of the verdict enums: Done, [#3824](https://github.com/partsfoundry/nife/pull/3824), ratified in [#3883](https://github.com/partsfoundry/nife/pull/3883).
 - D2, whether the timer and the futex table stay in this crate: At the move, with P2-10.
-- D3, which crate leaves first: Done, [#3892](https://github.com/nifeos/nife/pull/3892).
-- D4, two public names the gates refuse: Done, [#3824](https://github.com/nifeos/nife/pull/3824), ratified in [#3883](https://github.com/nifeos/nife/pull/3883).
-- D5, the futex table's names: Done, [#3824](https://github.com/nifeos/nife/pull/3824), ratified in [#3883](https://github.com/nifeos/nife/pull/3883).
-- D6, review clearance and the repository: At the move. [#3883](https://github.com/nifeos/nife/pull/3883) cleared the package and ratified
-  the names; `nifeos/inter_process_communication` does not exist yet.
-- D7, the timer's deadline type: Done, [#3842](https://github.com/nifeos/nife/pull/3842).
+- D3, which crate leaves first: Done, [#3892](https://github.com/partsfoundry/nife/pull/3892).
+- D4, two public names the gates refuse: Done, [#3824](https://github.com/partsfoundry/nife/pull/3824), ratified in [#3883](https://github.com/partsfoundry/nife/pull/3883).
+- D5, the futex table's names: Done, [#3824](https://github.com/partsfoundry/nife/pull/3824), ratified in [#3883](https://github.com/partsfoundry/nife/pull/3883).
+- D6, review clearance and the repository: At the move. [#3883](https://github.com/partsfoundry/nife/pull/3883) cleared the package and ratified
+  the names; `partsfoundry/inter_process_communication` does not exist yet.
+- D7, the timer's deadline type: Done, [#3842](https://github.com/partsfoundry/nife/pull/3842).
 
 ## Open decisions
 
@@ -94,9 +94,9 @@ below.
 
 ## Goal
 
-A stranger who finds `nifeos/inter_process_communication` can tell in one screen what the crate
+A stranger who finds `partsfoundry/inter_process_communication` can tell in one screen what the crate
 decides and what it leaves to a kernel. The stranger can build, test and prove it from the README
-alone, and meets no name, path or citation that only makes sense inside `nifeos/nife`. The crate's gates in
+alone, and meets no name, path or citation that only makes sense inside `partsfoundry/nife`. The crate's gates in
 its own repository are green for the crate's own reasons. Its one dependency has left before it
 or with it.
 
@@ -192,7 +192,7 @@ The rules in force, with their background and prior art, are in
 ## Follow-on
 
 - **Recorded.** Every finding marked At the move under "Finding status" lands with the move, each
-  checked against the crate's sources on main and `nifeos/intrusive_queue`.
+  checked against the crate's sources on main and `partsfoundry/intrusive_queue`.
 - **Recorded.** `crates/externalization-list.txt` does not name this crate; milestone 1017's list
   records the pair, `intrusive_queue` first.
 

@@ -7,9 +7,9 @@ times are UTC.
 
 ## Method
 
-- Runs: `gh api repos/nifeos/nife/actions/runs?created=<hour>` for each hour from 2026-10-23 00:00
+- Runs: `gh api repos/partsfoundry/nife/actions/runs?created=<hour>` for each hour from 2026-10-23 00:00
   to 2026-10-24 03:59, 4,106 runs.
-- Jobs: `gh api repos/nifeos/nife/actions/runs/<id>/jobs?filter=all` for the 1,393 runs of `CI`,
+- Jobs: `gh api repos/partsfoundry/nife/actions/runs/<id>/jobs?filter=all` for the 1,393 runs of `CI`,
   `verify`, `codeql` and `mutation gate`, 14,803 jobs. Skipped jobs carry a runner label but never
   take a slot, so they are dropped.
 - Wait is a job's `started_at` minus its `created_at`. A job is created when its `needs:` finish,
@@ -130,11 +130,11 @@ The queue at 03:36: 13 entries, five awaiting checks (#2643, enqueued 01:59:29; 
 
 ## Repository settings read
 
-- `gh api repos/nifeos/nife/actions/permissions/fork-pr-contributor-approval`:
+- `gh api repos/partsfoundry/nife/actions/permissions/fork-pr-contributor-approval`:
   `all_external_contributors`.
-- `gh api repos/nifeos/nife/actions/permissions/workflow`: default permissions `read`, cannot
+- `gh api repos/partsfoundry/nife/actions/permissions/workflow`: default permissions `read`, cannot
   approve reviews.
-- `gh api repos/nifeos/nife/actions/permissions`: `sha_pinning_required: true`.
+- `gh api repos/partsfoundry/nife/actions/permissions`: `sha_pinning_required: true`.
 - `gh pr list --state all --limit 1000`: no cross-repository pull request.
 - The org plan reads `team`.
 

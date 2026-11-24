@@ -14,7 +14,7 @@ This answers GitHub's Community Standards checklist. The pull request template, 
 templates, the code of conduct and the content-reports setting are delivered (see `## Follow-on`),
 and `script/lint` check 12d (`helpers/issue_forms.py`) fails when an issue form would not render.
 
-GitHub's checklist (`repos/nifeos/nife/community/profile`) asks for `README`, `CONTRIBUTING`,
+GitHub's checklist (`repos/partsfoundry/nife/community/profile`) asks for `README`, `CONTRIBUTING`,
 `LICENSE`, `CODE_OF_CONDUCT`, an issue template and a pull request template, and offers a fourth
 item, *Repository admins accept content reports*. That is a setting rather than a file and cannot
 be delivered by a pull request.

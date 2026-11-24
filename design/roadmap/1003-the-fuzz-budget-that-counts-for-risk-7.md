@@ -60,7 +60,7 @@ syzkaller's service standards, not its code.
   and the risk 7 rating falls until a fix merges. A limit that lands on a weekend moves to the next
   work day. Decided 2026-10-31 (UTC). The OSS-Fuzz deadline is 90 days with a 14-day grace; nife
   sets a shorter limit for escapes because an open escape is the claim being false.
-- Disclosure. Every finding starts private, in a private security advisory on nifeos/nife, never a
+- Disclosure. Every finding starts private, in a private security advisory on partsfoundry/nife, never a
   public issue or branch. Triage sorts it. The held class is an escape, a crash or hang reached
   from user mode, and any finding not yet triaged. A held finding stays private until its fix
   merges and a rerun of its input passes against the fixed build, then turns public. A service on
@@ -74,7 +74,7 @@ syzkaller's service standards, not its code.
 - Consequences. The public corpus leaves out the reproducing inputs of held findings until the fix
   merges, and the daily job keeps them apart. The daily public report shows only the count and
   age of held findings (for example, "2 held, oldest 4 days"), so condition 3 stays checkable. The
-  fuzzer machine's findings credential must be able to create private advisories, and nifeos/nife
+  fuzzer machine's findings credential must be able to create private advisories, and partsfoundry/nife
   must have private advisories on, which is calef's step.
 - Until the work below runs, nothing satisfies conditions 1 to 4, so risk 7 stays AMBER and no run
   counts toward (d).
@@ -247,7 +247,7 @@ occurred. Until a fix lands, more concurrency buys false reds faster than seeds.
 
 Risk 7's green waits on four pieces of work, in this order. First, the harness false-red fix.
 Second, the coverage build for one architecture, which measures its cost. Third, the virtual
-machine with its daily job and report. Fourth, private advisories switched on for nifeos/nife,
+machine with its daily job and report. Fourth, private advisories switched on for partsfoundry/nife,
 with a findings credential that can create them.
 
 ## Index row

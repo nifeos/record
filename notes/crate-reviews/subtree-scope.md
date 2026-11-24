@@ -6,7 +6,7 @@ page.*
 
 The architect cleared this package for the crate's move to its own repository. The move is step 9 of
 [milestone 1017 (the contract crates leave in this order)](../../design/roadmap/1017-the-contract-crates-leave-in-this-order.md),
-where it leaves as the repository `nifeos/subtree_scope`. It describes the crate as
+where it leaves as the repository `partsfoundry/subtree_scope`. It describes the crate as
 `main` plus this branch leaves it. The outside review behind it is
 [milestone 1110 (`subtree_scope`: what an outside maintainer would fix before it leaves)](../../design/roadmap/1110-subtree-scope-outside-review.md).
 
@@ -32,7 +32,7 @@ lane rewrites that text (P0-2 of the milestone).
 | version | `0.1.0`; no tag |
 | edition, `rust-version` | 2024; the manifest sets none, the move lane writes 1.88 (P0-1) |
 | license | `license.workspace = true` today; the move lane inlines `MIT OR Apache-2.0` and copies both texts (P0-1) |
-| `publish` | `false`; milestone 1017 keeps moved crates unpublished under §305 (git dependencies on `nifeos/*` only, pinned to a landed commit) until their own release milestone |
+| `publish` | `false`; milestone 1017 keeps moved crates unpublished under §305 (git dependencies on `partsfoundry/*` only, pinned to a landed commit) until their own release milestone |
 | dependencies | `file_system_contract` only |
 | size | one `src/lib.rs` of about 860 lines: the library, 12 host tests, 2 doctests and 6 Kani harnesses |
 
@@ -202,7 +202,7 @@ and it copies no Linux or `cap-std` text.
 ## Open questions
 
 1. Clearing the move: answered. The architect cleared this package on 2026-11-20 (UTC) and approved
-   the repository `nifeos/subtree_scope` with `publish = false`, no tag and no publish. The move
+   the repository `partsfoundry/subtree_scope` with `publish = false`, no tag and no publish. The move
    waits on `file_system_contract`'s repository for the `git` pin of P0-3.
 2. Whether to spend a prove shard's room on the completeness harness of P1-9: answered. The
    running-offset shape costs less than the measured record, and it is in the tree.

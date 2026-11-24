@@ -140,7 +140,7 @@ EL0 runaway and reclaims its region out from under it, on both ISAs (`user.rs`,
 
 ## Amendment (2026-10-03): an out-of-order hole is reclaimed once nothing above it is held
 
-Recorded at merge by the maintainer from [#1517](https://github.com/nifeos/nife/pull/1517)
+Recorded at merge by the maintainer from [#1517](https://github.com/partsfoundry/nife/pull/1517)
 (reclaim a region's out-of-order holes: the riscv64 progenitor out-of-memory), which changed the
 semantics and asked for this record.
 
@@ -174,7 +174,7 @@ the parent, so a refusal leaves no child count without a child to stop the recla
 ## Amendment (2026-10-05): a thread whose space is rooted in the region dies as a resident
 
 Ruled by calef on 2026-10-05 (UTC), quoted: "A, queue it after #1665"
-([comment on #1665](https://github.com/nifeos/nife/pull/1665#issuecomment-5988177177)), on the
+([comment on #1665](https://github.com/partsfoundry/nife/pull/1665#issuecomment-5988177177)), on the
 options in `design/roadmap/0765-a-destroyed-region-cannot-free-a-running-root.md`. Recorded by the
 maintainer.
 

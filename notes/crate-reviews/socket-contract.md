@@ -65,7 +65,7 @@ Not run, and so not claimed: the stranger test, `cargo-semver-checks` (a first r
 baseline) and the template's workflows, which run in the repository.
 
 The lane `1108-renames-scope` moved three modules out and applied the names table below. Draft
-pull request [#3811](https://github.com/nifeos/nife/pull/3811) carries it. The maintainer ruled the
+pull request [#3811](https://github.com/partsfoundry/nife/pull/3811) carries it. The maintainer ruled the
 moves and the renames provisionally and as two-way doors on 2026-11-19 UTC; the architect ratified the names table as built on 2026-11-20 UTC.
 
 | check | result |
@@ -183,7 +183,7 @@ and `ADDRESSES_OFFSET_BYTES` in the same style. No other crate defines `REP_OK` 
 ## Recommendation
 
 Cleared on 2026-11-21 (UTC), as the architect's option A. The architect approved creating
-`nifeos/socket_contract` with `publish = false`, no tag and no publish. The template already
+`partsfoundry/socket_contract` with `publish = false`, no tag and no publish. The template already
 accepts `tcp` and `udp`. The move lane's first step is to prove that the `std` farm builds the
 platform layer from the pinned checkout.
 

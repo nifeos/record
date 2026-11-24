@@ -5,7 +5,7 @@ An appendix to [the milestone](../1091-filesystem-fixture-outside-review.md).
 ## P0: blocks the move
 
 1. The template's cargo-deny policy refuses the one dependency the moved crate will have.
-   Finding: the moved manifest pins `file_system_contract` by `git` and `rev` on `nifeos/<crate>`,
+   Finding: the moved manifest pins `file_system_contract` by `git` and `rev` on `partsfoundry/<crate>`,
    the form §305 allows and 1017 prescribes. The template's `deny.toml` and its scaffold's copy both
    say `unknown-git = "deny"` under `[sources]` and allow no git source, so `check / supply-chain`
    is red on the first pull request of the new repository. No crate repository in the organization

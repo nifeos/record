@@ -14,7 +14,7 @@ A pull request that cannot move yet says what it waits for, in one line of its b
 
 ```text
 Held on #1234
-Held on nifeos/basalt#56
+Held on partsfoundry/basalt#56
 ```
 
 `Held on #N` names a pull request or issue in the same repository; `Held on <owner>/<repo>#N` names

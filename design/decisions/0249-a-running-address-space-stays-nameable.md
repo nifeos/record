@@ -7,9 +7,9 @@ ratified_by: calef
 
 # 249. A running address space stays nameable, and a capability never decides when it dies
 
-calef, 2026-10-05 14:39 UTC, on [#1678](https://github.com/nifeos/nife/pull/1678), the pull request of milestone 95 (an
+calef, 2026-10-05 14:39 UTC, on [#1678](https://github.com/partsfoundry/nife/pull/1678), the pull request of milestone 95 (an
 unmap primitive, and the mappings init never lets go). Quoted from
-[ruling 3 of 3](https://github.com/nifeos/nife/pull/1678#issuecomment-5996726490): "Yes" to option A
+[ruling 3 of 3](https://github.com/partsfoundry/nife/pull/1678#issuecomment-5996726490): "Yes" to option A
 of `design/roadmap/0789-a-running-process-can-name-its-own-address-space.md`. It carries the two
 amendments from `notes/naming-a-running-address-space.md` (#1685). Recorded by the maintainer.
 

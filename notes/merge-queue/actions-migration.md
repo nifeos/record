@@ -40,7 +40,7 @@ It was measured on 2026-09-24 in a throwaway workflow, under a token minted from
 App, against a throwaway pull request that was closed and deleted the same minute:
 
 ```console
-$ gh pr merge 1176 --repo nifeos/nife --auto --merge
+$ gh pr merge 1176 --repo partsfoundry/nife --auto --merge
 ! The merge strategy for main is set by the merge queue      # exit 0, armed
 $ gh api graphql -f query='mutation{enablePullRequestAutoMerge(input:{pullRequestId:"...",mergeMethod:MERGE}){clientMutationId}}'
 {"data":{"enablePullRequestAutoMerge":{"clientMutationId":null}}}

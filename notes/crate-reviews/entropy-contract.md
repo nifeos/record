@@ -217,5 +217,5 @@ The crate is a leaf, builds alone and proves; the move's real cost is the `xtask
 Ruled 2026-11-11 (UTC) on #3480: the architect froze the identity at `INTERFACE_ID` 12, `VERSION` 1
 and no magic, and ratified the names, with `DEAD` renamed `BRING_UP_FAILED`.
 
-The architect cleared the move to `nifeos/entropy_contract` the same day, with no tag and no
+The architect cleared the move to `partsfoundry/entropy_contract` the same day, with no tag and no
 publication. The clearance is the go for creating the repository.

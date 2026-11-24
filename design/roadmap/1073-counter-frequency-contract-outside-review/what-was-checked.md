@@ -2,8 +2,8 @@
 
 An appendix to [the milestone](../1073-counter-frequency-contract-outside-review.md).
 
-Verified firsthand, in a fresh shallow clone of `nifeos/nife` at the merge of pull request 3461
-and a clone of `nifeos/crate-workflows` at its head, on a copy of the crate standing alone:
+Verified firsthand, in a fresh shallow clone of `partsfoundry/nife` at the merge of pull request 3461
+and a clone of `partsfoundry/crate-workflows` at its head, on a copy of the crate standing alone:
 
 - `cargo fmt --check` (the template's `rustfmt.toml`), `cargo test` (five unit tests, four
   documentation tests, the README's example among them) and `cargo doc` with broken links and

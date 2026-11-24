@@ -19,7 +19,7 @@ Motorcomm alias sets (built in #3319). Where a later rule or a later template ga
 ratified name, the item says so and leaves the rename to the release review that the rules provide
 for.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `helpers/crate_move.py`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `helpers/crate_move.py`,
 cargo-mutants, Kani, the crate's own `simulator`. No new tool.
 
 ## Goal
@@ -246,32 +246,32 @@ The checks are in [the done-when appendix](1074-designware-ethernet-outside-revi
 
 ## Finding status
 
-- Item 1 (P0), the template's naming and prose gates: Done, [#3569](https://github.com/nifeos/nife/pull/3569), [#3624](https://github.com/nifeos/nife/pull/3624) and [#3634](https://github.com/nifeos/nife/pull/3634).
-- Item 2 (P0), the manifest's outside pointers and `repository`: Done, [#3624](https://github.com/nifeos/nife/pull/3624).
-- Item 3 (P1), the receive and reclaim bounds: Done, [#3624](https://github.com/nifeos/nife/pull/3624) and
-  [nifeos/designware_ethernet#10](https://github.com/nifeos/designware_ethernet/pull/10), whose test reaches the receive budget.
-- Item 4 (P1), `Link` and `Speed` in a `link` module: Done, [#3569](https://github.com/nifeos/nife/pull/3569).
-- Item 5 (P1), the sixteen compile-time gates: Done, [#3569](https://github.com/nifeos/nife/pull/3569).
-- Item 6 (P1), one visibility rule for the register constants: Done, [#3624](https://github.com/nifeos/nife/pull/3624).
-- Item 7 (P1), the README's stranger path: Done, [#3624](https://github.com/nifeos/nife/pull/3624), [#3634](https://github.com/nifeos/nife/pull/3634) and [nifeos/designware_ethernet#7](https://github.com/nifeos/designware_ethernet/pull/7).
-- Item 8 (P1), the bench machine's name and the board's: Done, [#3624](https://github.com/nifeos/nife/pull/3624) and [nifeos/designware_ethernet#5](https://github.com/nifeos/designware_ethernet/pull/5).
-- Item 9 (P1), the falsification patches regenerated: Done, [#3634](https://github.com/nifeos/nife/pull/3634).
-- Item 10 (P1), two rename artifacts: Done, [#3624](https://github.com/nifeos/nife/pull/3624).
-- Item 11 (P1), `100BASE-TX` against the spelled-out gate: Done, [#3624](https://github.com/nifeos/nife/pull/3624).
-- Item 12 (P2), literal field values: Done, [nifeos/designware_ethernet#9](https://github.com/nifeos/designware_ethernet/pull/9).
-- Item 13 (P2), a short buffer loses the frame: Done, [nifeos/designware_ethernet#9](https://github.com/nifeos/designware_ethernet/pull/9).
-- Item 14 (P2), the extended-address port restored on failure: Done, [nifeos/designware_ethernet#9](https://github.com/nifeos/designware_ethernet/pull/9).
-- Item 15 (P2), a defaulted drive current: Done, [nifeos/designware_ethernet#9](https://github.com/nifeos/designware_ethernet/pull/9).
+- Item 1 (P0), the template's naming and prose gates: Done, [#3569](https://github.com/partsfoundry/nife/pull/3569), [#3624](https://github.com/partsfoundry/nife/pull/3624) and [#3634](https://github.com/partsfoundry/nife/pull/3634).
+- Item 2 (P0), the manifest's outside pointers and `repository`: Done, [#3624](https://github.com/partsfoundry/nife/pull/3624).
+- Item 3 (P1), the receive and reclaim bounds: Done, [#3624](https://github.com/partsfoundry/nife/pull/3624) and
+  [partsfoundry/designware_ethernet#10](https://github.com/partsfoundry/designware_ethernet/pull/10), whose test reaches the receive budget.
+- Item 4 (P1), `Link` and `Speed` in a `link` module: Done, [#3569](https://github.com/partsfoundry/nife/pull/3569).
+- Item 5 (P1), the sixteen compile-time gates: Done, [#3569](https://github.com/partsfoundry/nife/pull/3569).
+- Item 6 (P1), one visibility rule for the register constants: Done, [#3624](https://github.com/partsfoundry/nife/pull/3624).
+- Item 7 (P1), the README's stranger path: Done, [#3624](https://github.com/partsfoundry/nife/pull/3624), [#3634](https://github.com/partsfoundry/nife/pull/3634) and [partsfoundry/designware_ethernet#7](https://github.com/partsfoundry/designware_ethernet/pull/7).
+- Item 8 (P1), the bench machine's name and the board's: Done, [#3624](https://github.com/partsfoundry/nife/pull/3624) and [partsfoundry/designware_ethernet#5](https://github.com/partsfoundry/designware_ethernet/pull/5).
+- Item 9 (P1), the falsification patches regenerated: Done, [#3634](https://github.com/partsfoundry/nife/pull/3634).
+- Item 10 (P1), two rename artifacts: Done, [#3624](https://github.com/partsfoundry/nife/pull/3624).
+- Item 11 (P1), `100BASE-TX` against the spelled-out gate: Done, [#3624](https://github.com/partsfoundry/nife/pull/3624).
+- Item 12 (P2), literal field values: Done, [partsfoundry/designware_ethernet#9](https://github.com/partsfoundry/designware_ethernet/pull/9).
+- Item 13 (P2), a short buffer loses the frame: Done, [partsfoundry/designware_ethernet#9](https://github.com/partsfoundry/designware_ethernet/pull/9).
+- Item 14 (P2), the extended-address port restored on failure: Done, [partsfoundry/designware_ethernet#9](https://github.com/partsfoundry/designware_ethernet/pull/9).
+- Item 15 (P2), a defaulted drive current: Done, [partsfoundry/designware_ethernet#9](https://github.com/partsfoundry/designware_ethernet/pull/9).
 - Item 16 (P2), the fallback's 10 Mbit/s transmit clock inversion: Waiting on a board run.
-- Item 17 (P2), the stale-transmit verdict and the receive clock: Done, [nifeos/designware_ethernet#9](https://github.com/nifeos/designware_ethernet/pull/9).
-- Item 18 (P2), the transport's own peek: Done, [nifeos/designware_ethernet#9](https://github.com/nifeos/designware_ethernet/pull/9) and [#3939](https://github.com/nifeos/nife/pull/3939).
-- Item 19 (P2), `start` twice: Done, [nifeos/designware_ethernet#9](https://github.com/nifeos/designware_ethernet/pull/9).
-- Item 20 (P2), small text fixes: Done, [#3624](https://github.com/nifeos/nife/pull/3624) and [nifeos/designware_ethernet#9](https://github.com/nifeos/designware_ethernet/pull/9).
-- Item 21 (P2), the crate root's descriptor re-exports: Done, [nifeos/designware_ethernet#9](https://github.com/nifeos/designware_ethernet/pull/9).
-- Decision 1, where the link type lives: Done, [#3569](https://github.com/nifeos/nife/pull/3569).
-- Decision 2, the compile-time gates are not API: Done, [#3569](https://github.com/nifeos/nife/pull/3569).
-- Decision 3, the five public names: Done, [#3569](https://github.com/nifeos/nife/pull/3569).
-- Decision 4, the five names that say what they hold: Done, [#3624](https://github.com/nifeos/nife/pull/3624).
+- Item 17 (P2), the stale-transmit verdict and the receive clock: Done, [partsfoundry/designware_ethernet#9](https://github.com/partsfoundry/designware_ethernet/pull/9).
+- Item 18 (P2), the transport's own peek: Done, [partsfoundry/designware_ethernet#9](https://github.com/partsfoundry/designware_ethernet/pull/9) and [#3939](https://github.com/partsfoundry/nife/pull/3939).
+- Item 19 (P2), `start` twice: Done, [partsfoundry/designware_ethernet#9](https://github.com/partsfoundry/designware_ethernet/pull/9).
+- Item 20 (P2), small text fixes: Done, [#3624](https://github.com/partsfoundry/nife/pull/3624) and [partsfoundry/designware_ethernet#9](https://github.com/partsfoundry/designware_ethernet/pull/9).
+- Item 21 (P2), the crate root's descriptor re-exports: Done, [partsfoundry/designware_ethernet#9](https://github.com/partsfoundry/designware_ethernet/pull/9).
+- Decision 1, where the link type lives: Done, [#3569](https://github.com/partsfoundry/nife/pull/3569).
+- Decision 2, the compile-time gates are not API: Done, [#3569](https://github.com/partsfoundry/nife/pull/3569).
+- Decision 3, the five public names: Done, [#3569](https://github.com/partsfoundry/nife/pull/3569).
+- Decision 4, the five names that say what they hold: Done, [#3624](https://github.com/partsfoundry/nife/pull/3624).
 - The `v0.1.0-pre.1` tag: Waiting on a green release dry run (ruled 2026-11-19 UTC). The dry
   run's gate needs a full mutation run green on the same commit, and the crate's scheduled run
   still defers its record.

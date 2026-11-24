@@ -206,7 +206,7 @@ and the reason this lens is worth taking again after every batch of rulings.
 - §302 (the screen fact and one line of input: the spawn protocol's other two thirds)
 - §303 (the retention declaration says nothing about the region)
 - §304 (who may turn a device off, and what the unit of reclamation is)
-- §305 (git dependencies are allowed on `nifeos/*` only, pinned to a landed commit)
+- §305 (git dependencies are allowed on `partsfoundry/*` only, pinned to a landed commit)
 - §306 (the web's authority list is a package and a capability, and `jig`'s own channel never depends on it)
 - §307 (how long a name may be: one bound for programs, packages and the files they travel in)
 - §308 (the installer asks the terminal to swap: who holds the swap endpoint, and how a new image travels)

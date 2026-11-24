@@ -10,7 +10,7 @@ needs_person: no
 # `script/board-console` types a named command at the shell prompt
 
 Raised by lane `maintainer/radon-bench-2026-11-17-tree-findings`, from the 2026-11-17 (UTC) radon
-bench session on nifeos/nife#3509. Name: provisional.
+bench session on partsfoundry/nife#3509. Name: provisional.
 
 Reuse: `--stop`, the one named mode that already sends a byte, and its rule that the log shows every byte sent.
 

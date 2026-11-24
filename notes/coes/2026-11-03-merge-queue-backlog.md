@@ -211,10 +211,10 @@ Each proposal and milestone below names this file and its row, under its title.
 # pull requests updated since 11-02 20:00: queue, auto-merge, ready, label and commit events
 gh api graphql   # pullRequests(orderBy: UPDATED_AT) { timelineItems(itemTypes: [...]) }
 # runs in windows under the API's 1,000 cap, then jobs of the heavy workflows (1,337 runs)
-gh api --paginate "repos/nifeos/nife/actions/runs?created=<from>..<to>&per_page=100"
-gh api "repos/nifeos/nife/actions/runs/<id>/jobs?filter=all&per_page=100"
+gh api --paginate "repos/partsfoundry/nife/actions/runs?created=<from>..<to>&per_page=100"
+gh api "repos/partsfoundry/nife/actions/runs/<id>/jobs?filter=all&per_page=100"
 git merge-tree --write-tree --name-only <main at removal> <head then>
-gh api repos/nifeos/nife/rulesets/19596094
+gh api repos/partsfoundry/nife/rulesets/19596094
 ```
 
 A job waits from `created_at` to `started_at`; one cancelled before it started never waited. A PR-hour is one pull request armed or queued for one hour, cut at 05:58 UTC.

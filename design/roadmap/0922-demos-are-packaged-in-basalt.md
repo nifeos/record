@@ -37,7 +37,7 @@ benchmarks: the demos as the first first-party optional package, then `core-tool
 
 ## Built 2026-10-14 (UTC)
 
-Lane `milestone/922-demos-are-packaged-in-basalt`, with nifeos/basalt#25.
+Lane `milestone/922-demos-are-packaged-in-basalt`, with partsfoundry/basalt#25.
 
 - The recipe packs `bin/least_authority_demo`. The release build keeps its manifest note, a
   76-byte `PT_NOTE` on aarch64 (item 1). The first published Release is

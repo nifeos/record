@@ -63,7 +63,7 @@ Recommendation: (a), one repository per crate, named after the crate, on the cra
 - (a) Recommended. Each contract versions on its own, which independent release (§151 (the goal of
   the repository split is independent release)) asks for, and which an alternative implementation
   needs.
-- (b) One repository per package (`nifeos/contracts` and the rest). Fewer repositories; one version
+- (b) One repository per package (`partsfoundry/contracts` and the rest). Fewer repositories; one version
   line for 17 unrelated contracts.
 - (c) A repository per layer. Fuchsia tried layers and folded them back in 2019.
 

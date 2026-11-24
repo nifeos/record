@@ -182,7 +182,7 @@ meets a program, not a builtin.
    image names its distribution's package index)). The index's needs match the archive's metadata
    (§197 (a package is one archive file)). The metadata matches the manifests in its ELF notes,
    recomputed after download. A mismatch refuses (calef, 2026-10-07, "Yes"). The needs
-   come from [#1797's fork 1 ruling](https://github.com/nifeos/nife/pull/1797#issuecomment-6029565630):
+   come from [#1797's fork 1 ruling](https://github.com/partsfoundry/nife/pull/1797#issuecomment-6029565630):
    written only in program manifests, computed by the build into metadata and index. These checks
    keep resolution correct and records honest; they are not the security boundary, which stays at
    spawn, where a program gets only what its manifest names and the grant plan approves (§208).

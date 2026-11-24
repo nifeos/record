@@ -24,7 +24,7 @@ package, it says so at the item. The bind-time version check belongs to
 [milestone 1000 (message contracts carry bind-time version checks)](1000-message-contracts-carry-bind-time-version-checks.md)
 and is not repeated here.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, Kani, cargo-mutants, the crate's
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, Kani, cargo-mutants, the crate's
 own tests and falsification patches. No new tool, no new dependency.
 
 ## Goal
@@ -40,38 +40,38 @@ proofs cover the one piece of logic the crate holds beyond the grants.
 
 
 - P0-1, text and wire disagree on where a send's length travels: Done,
-  [#3517](https://github.com/nifeos/nife/pull/3517) (D1).
+  [#3517](https://github.com/partsfoundry/nife/pull/3517) (D1).
 - P0-2, the `publish` comment points outside: At the move. The comment and `repository` are in place; the
   new repository's caller passes `allow-unpublished` at the move.
-- P1-3, `ACCEPT` carries no peer: Done, [#3526](https://github.com/nifeos/nife/pull/3526), its
-  proof in [#3580](https://github.com/nifeos/nife/pull/3580) (D2).
-- P1-4, the reply vocabulary: Done, [#3517](https://github.com/nifeos/nife/pull/3517).
+- P1-3, `ACCEPT` carries no peer: Done, [#3526](https://github.com/partsfoundry/nife/pull/3526), its
+  proof in [#3580](https://github.com/partsfoundry/nife/pull/3580) (D2).
+- P1-4, the reply vocabulary: Done, [#3517](https://github.com/partsfoundry/nife/pull/3517).
 - P1-5, the README against the scaffold: At the move. The badges, the `rustup target add` line,
   the Kani time and peak, the one-harness command, a falsify example and the undo remain, then a
   stranger run.
 - P1-6, three equivalent mutants: At the move. The three are `|` to `^` in `listen_grant`,
   `udp_bind_grant` and `peer_word`, whose operands share no bit. `.github/mutants-exempts` exists
   only in the new repository; the move exempts them with the triage's reasons.
-- P2-7, the ephemeral cursor unproven: Done, [#3580](https://github.com/nifeos/nife/pull/3580) and
-  [#3610](https://github.com/nifeos/nife/pull/3610).
+- P2-7, the ephemeral cursor unproven: Done, [#3580](https://github.com/partsfoundry/nife/pull/3580) and
+  [#3610](https://github.com/partsfoundry/nife/pull/3610).
 - P2-8, offsets and lengths of mixed types: Will not fix, provisional, ruled 2026-11-22 UTC as a
   two-way door. `FRAME_BYTES` names the frame size and the layout note states the byte order once.
   Each type matches its consumer: an offset is `u64` because `MappedWindow` takes `u64` offsets at
   every call site, and `MAXIMUM_PAYLOAD_BYTES` is `usize` because it sizes arrays and slices. One
   type would move the casts to the window calls without removing them. The types turn one-way at
   the first release.
-- P2-9, names: Done, [#3811](https://github.com/nifeos/nife/pull/3811) built the package's names
+- P2-9, names: Done, [#3811](https://github.com/partsfoundry/nife/pull/3811) built the package's names
   table, and the architect ratified it as built on 2026-11-20 UTC. `Cursor::next` and `polled_wait::next` keep their spelling (the
   table keeps them). `tcp`, `udp` and `ipv4` stay abbreviated (ruled 2026-11-16 UTC), and the template
   accepts `tcp` and `udp`.
-- P2-10, inline "provisional" prose: Done, [#3811](https://github.com/nifeos/nife/pull/3811) and
-  [#3861](https://github.com/nifeos/nife/pull/3861). No doc comment in `src/lib.rs` says it; the
+- P2-10, inline "provisional" prose: Done, [#3811](https://github.com/partsfoundry/nife/pull/3811) and
+  [#3861](https://github.com/partsfoundry/nife/pull/3861). No doc comment in `src/lib.rs` says it; the
   move strips the ratified `Name:` blocks.
-- P2-11, vocabulary undefined: Done, [#3580](https://github.com/nifeos/nife/pull/3580).
+- P2-11, vocabulary undefined: Done, [#3580](https://github.com/partsfoundry/nife/pull/3580).
 - D1, a send's length in the argument word: Done,
-  [#3517](https://github.com/nifeos/nife/pull/3517) (ruled 2026-11-11 UTC).
+  [#3517](https://github.com/partsfoundry/nife/pull/3517) (ruled 2026-11-11 UTC).
 - D2, the `ACCEPT` peer in the second reply word: Done,
-  [#3526](https://github.com/nifeos/nife/pull/3526) (ruled 2026-11-11 UTC).
+  [#3526](https://github.com/partsfoundry/nife/pull/3526) (ruled 2026-11-11 UTC).
 
 ## Rules in force
 
@@ -81,7 +81,7 @@ proofs cover the one piece of logic the crate holds beyond the grants.
   new ruling. No operation sends `VERSION` on the wire; the bind-time check that reads it belongs
   to milestone 1000 (message contracts carry bind-time version checks).
 - The move of `socket_contract` is cleared (ruled 2026-11-21 UTC, option A): the architect approved
-  creating `nifeos/socket_contract` with `publish = false`, no tag and no publish. The move lane's
+  creating `partsfoundry/socket_contract` with `publish = false`, no tag and no publish. The move lane's
   first step is to prove that the `std` farm builds the platform layer from the pinned checkout.
 
 ## What was checked, and how
@@ -136,7 +136,7 @@ released, so its names are two-way today and the package's naming table stands.
    the template README's description of `check.yml`.
    Change: at the move, replace the comment with one sentence a stranger can act on ("set to
    `true` only in the release that publishes") and pass `allow-unpublished` in the caller until
-   then. Add `repository = "https://github.com/nifeos/socket_contract"` (the scaffold's badges
+   then. Add `repository = "https://github.com/partsfoundry/socket_contract"` (the scaffold's badges
    assume it). Publishing itself stays held, as the package records.
    Door: two-way. Effort: S.
 

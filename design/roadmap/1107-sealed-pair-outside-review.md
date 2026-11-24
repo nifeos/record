@@ -18,7 +18,7 @@ this crate. The only record is `notes/sealed-pair.md` plus the `Name:` block at 
 `seal`). Nothing below reopens those refusals. Every name in the crate is unratified, so every
 naming item here is a proposal for the architect and not a rename a lane may perform.
 
-Reuse: the template `nifeos/crate-workflows` and its helpers, `script/crate-review-packet`,
+Reuse: the template `partsfoundry/crate-workflows` and its helpers, `script/crate-review-packet`,
 `script/names`, `helpers/name_checks.py`, the mutation census series. No new tool.
 
 ## Goal
@@ -35,42 +35,42 @@ build and test from.
   and `measured_boot`. Decision A ruled the order on 2026-11-16 UTC, and the crate needs nothing
   more.
 - P1-2, the loader's digest words and the three-file card set: Done,
-  [#3580](https://github.com/nifeos/nife/pull/3580).
+  [#3580](https://github.com/partsfoundry/nife/pull/3580).
 - P1-3, a bad table line reported as an unreadable table: Done,
-  [#3580](https://github.com/nifeos/nife/pull/3580).
+  [#3580](https://github.com/partsfoundry/nife/pull/3580).
 - P1-4, the crate does not stand alone: At the move. The scaffold files, a measured
   `rust-version`, inlined lints, rewritten citations, a README and the `Name:` strip remain, and
   Decision A orders the move.
 - P1-5, `BOOT_PROGRAMS` restates `PROGENITOR`: Done,
-  [#3580](https://github.com/nifeos/nife/pull/3580).
-- P1-6, the notice constant is a sentence: Done, [#3610](https://github.com/nifeos/nife/pull/3610).
+  [#3580](https://github.com/partsfoundry/nife/pull/3580).
+- P1-6, the notice constant is a sentence: Done, [#3610](https://github.com/partsfoundry/nife/pull/3610).
 - P1-7, `EntrySeal` can say refused with no digest: Done,
-  [#3580](https://github.com/nifeos/nife/pull/3580).
-- P1-8, the refusal text asserts a cause: Done, [#3580](https://github.com/nifeos/nife/pull/3580).
+  [#3580](https://github.com/partsfoundry/nife/pull/3580).
+- P1-8, the refusal text asserts a cause: Done, [#3580](https://github.com/partsfoundry/nife/pull/3580).
 - P1-9, a British spelling in `test_support::pair`: Done,
-  [#3610](https://github.com/nifeos/nife/pull/3610).
+  [#3610](https://github.com/partsfoundry/nife/pull/3610).
 - P1-10, `Unreadable` is not a `std::error::Error`: Done,
-  [#3580](https://github.com/nifeos/nife/pull/3580).
+  [#3580](https://github.com/partsfoundry/nife/pull/3580).
 - P2-11, duplicate and non-UTF-8 entries unreported: Done,
-  [#3580](https://github.com/nifeos/nife/pull/3580), by the item's own alternative: the crate's
+  [#3580](https://github.com/partsfoundry/nife/pull/3580), by the item's own alternative: the crate's
   `BUGS` states the three facts.
 - P2-12, the stick-path haystack contains the archive: Done,
-  [#3810](https://github.com/nifeos/nife/pull/3810). `embedded_archive` returns the archive's
+  [#3810](https://github.com/partsfoundry/nife/pull/3810). `embedded_archive` returns the archive's
   span, `card_check` zeroes that span before it judges the rest of the boot file, and a test
   carries the `progenitor` digest in an archive entry.
 - P2-13, the cost of the `contains` window scan: Done,
-  [#3610](https://github.com/nifeos/nife/pull/3610) (about 1.6 ms per MiB).
-- P2-14, no proof: Done, [#3610](https://github.com/nifeos/nife/pull/3610) and
-  [#3810](https://github.com/nifeos/nife/pull/3810). The `contains` harness and the
+  [#3610](https://github.com/partsfoundry/nife/pull/3610) (about 1.6 ms per MiB).
+- P2-14, no proof: Done, [#3610](https://github.com/partsfoundry/nife/pull/3610) and
+  [#3810](https://github.com/partsfoundry/nife/pull/3810). The `contains` harness and the
   table-comparison harness each carry a falsification patch and share one `script/verify` row.
 - P2-15, `hex_string` and `measured_entries` public with one reader: At the move. Both stay
   public until then; a two-way door the maintainer rules at the move.
 - P2-16, the stale list in `notes/boot-stick.md`: Done,
-  [#3580](https://github.com/nifeos/nife/pull/3580).
-- Decision A, when it leaves: Done, [#3810](https://github.com/nifeos/nife/pull/3810) (ruled
+  [#3580](https://github.com/partsfoundry/nife/pull/3580).
+- Decision A, when it leaves: Done, [#3810](https://github.com/partsfoundry/nife/pull/3810) (ruled
   2026-11-16 UTC). Recorded in the `sealed_pair` row of
   `notes/releasable-crates-2026-10-07/inventory.md` and in milestone 1017's order.
-- Decision B, two public names: Done, [#3610](https://github.com/nifeos/nife/pull/3610)
+- Decision B, two public names: Done, [#3610](https://github.com/partsfoundry/nife/pull/3610)
   (maintainer, provisional, 2026-11-14 UTC).
 
 ## Open decisions

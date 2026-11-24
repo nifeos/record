@@ -4,7 +4,7 @@
 in its own file because the packages together outgrow the page.*
 
 The architect read this to clear the crate for its move to its own repository,
-`nifeos/pci_configuration_space`. Clearing it approved creating that repository
+`partsfoundry/pci_configuration_space`. Clearing it approved creating that repository
 ([milestone 1105 (`pci`: what an outside maintainer would fix before it leaves)](../../design/roadmap/1105-pci-outside-review.md),
 option A of its open decision, taken provisionally by the maintainer). It describes the crate as `main`
 plus this branch leaves it.
@@ -190,6 +190,6 @@ stays a recorded limitation.
 
 ## Recommendation
 
-Cleared on 2026-11-20 (UTC). The architect approved creating `nifeos/pci_configuration_space` with
+Cleared on 2026-11-20 (UTC). The architect approved creating `partsfoundry/pci_configuration_space` with
 `publish = false`, no tag and no publish. The move waits on the virtio to `virtual_io` sweep
 (draft #3854), because the crate carries `VirtioCapability` and the virtio constants.

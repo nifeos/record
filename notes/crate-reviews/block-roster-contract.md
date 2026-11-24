@@ -27,7 +27,7 @@ identity, and `write` no longer panics on any input. It is a leaf: nothing in th
 | version | `0.1.0`; no tag |
 | edition, `rust-version` | 2024, 1.88 |
 | license | `MIT OR Apache-2.0`, both texts at the crate root |
-| `publish` | `false`; milestone 1017 keeps the moved contract crates unpublished under §305 (git dependencies on `nifeos/*` only, pinned to a landed commit) until their own release milestone |
+| `publish` | `false`; milestone 1017 keeps the moved contract crates unpublished under §305 (git dependencies on `partsfoundry/*` only, pinned to a landed commit) until their own release milestone |
 | size | one `src/lib.rs` of 586 lines: about 290 of library, 190 of tests, 105 of Kani harnesses |
 | package | `cargo package` packs 11 files, 45.7 KiB (14.5 KiB compressed), the three patches included, and builds from the packed copy |
 | consumers in nife | the writer in `kernel` (`kernel/src/user/disk_service.rs`), the reader `disk_surveyor` in `components`, and `system_tests` (development only); all by path |
@@ -144,7 +144,7 @@ The crate itself does not: it is a leaf, with no dependency and no path, citatio
 
 | item | owner |
 |---|---|
-| Clear the move. The clearance is the go for creating `nifeos/block_roster_contract`; nothing publishes and no tag is asked. | architect |
+| Clear the move. The clearance is the go for creating `partsfoundry/block_roster_contract`; nothing publishes and no tag is asked. | architect |
 | Convert the three path dependencies (`kernel`, `components`, `system_tests`) to `git` and `rev` with `version = "0.1.0"`. The consumers stay in nife: the kernel's writer and `disk_surveyor`, the reader, which declares the pair of `INTERFACE_ID` and `VERSION`. | move lane |
 | `helpers/interface_declarations_check.py` finds each `INTERFACE_ID` by walking the workspace members, so once the crate is a git dependency it reports "the table assigns 5 to `block_roster_contract`, which carries no `INTERFACE_ID`". Milestone 1017 says the declaration check, the Kani reach list, the verify table and milestone 610 (the interface's stability is measured weekly)'s series must read the pinned checkout instead; `helpers/interface_stability.py` names the crate. `helpers/format_values_check.py` guards a magic and version change only under `crates/`, so after the move that guard is the crate's own identity test. | move lane |
 | Shipped text speaks of "the kernel" and "wiring time" (the crate header, `Device`, `write`, `TooManyDevices`, the manifest's `description`), where the README says "one party". | move lane |
@@ -168,5 +168,5 @@ values. The architect's clearance is the one decision.
 
 ## Decisions for the architect
 
-1. Clear the move to `nifeos/block_roster_contract`, with no tag and no publication. Background: the
+1. Clear the move to `partsfoundry/block_roster_contract`, with no tag and no publication. Background: the
    clearance of the review is the go for creating the repository.

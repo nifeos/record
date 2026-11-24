@@ -1,6 +1,6 @@
-# Step 6 plan: the record leaves for `nifeos/record`
+# Step 6 plan: the record leaves for `partsfoundry/record`
 
-An appendix to milestone 1018 (the design record moves to `nifeos/record` and is published as a
+An appendix to milestone 1018 (the design record moves to `partsfoundry/record` and is published as a
 website), for its step 6 and the part of step 7 that step 6 needs. Measured 2026-11-23 (UTC) at
 `origin/main` `96273a1de`. This page plans; it creates no repository and removes no path.
 [The inventory](step-6-inventory.tsv) lists, one row each, every file and lint section that reads
@@ -26,7 +26,7 @@ carries its own.
 69 under `helpers/`, 30 under `script/`, 17 under `xtask/`, 8 workflows, 4 issue and pull request templates,
 6 under `site/`, 2 under `tools/`, 2 under `.cargo/`, `Cargo.toml` and `deny.toml`. 69 of them
 name a record file only in a message, such as a help line or an error that cites a note; those
-become `nifeos/record:<path>` in the mention sweep. 45 of `script/lint`'s 154 sections carry the
+become `partsfoundry/record:<path>` in the mention sweep. 45 of `script/lint`'s 154 sections carry the
 `record` or `both` tag. The 14 symlinks under `.claude/skills/` and `.agents/skills/` point at
 `notes/skills/`, which stays, so they do not change. `.githooks/` reads no record path.
 
@@ -43,7 +43,7 @@ The readers whose behavior changes:
 | `helpers/consumer_census.py`, `helpers/interface_stability.py` | roadmap blocks | stay; read the record through `helpers/record_root.py`, at its pin once it leaves |
 | `helpers/agents-md-split-check.py` | `notes/skills/`, `design/tenets/` | stays; reads the skills in place and the tenets at the pin |
 | `xtask/src/manual.rs` and `xtask/src/disk.rs` | seven notes installed in the disk image | stay; the seven notes re-sort as package documentation that stays |
-| `metrics.yml` | regenerates lines of `notes/project-metrics.md` | stays; the page moves with the record, so the workflow writes it into `nifeos/record` by pull request, and the data under `notes/project-metrics/` stays in nife |
+| `metrics.yml` | regenerates lines of `notes/project-metrics.md` | stays; the page moves with the record, so the workflow writes it into `partsfoundry/record` by pull request, and the data under `notes/project-metrics/` stays in nife |
 | `script/stranger-test`, `stranger-cadence.yml` | the run record under `notes/stranger-test/` | stay, since the test builds the system; the run record lands in the record by pull request |
 | `record-site.yml`, `site/`, `script/site` | the whole record | leave nife in the removal pull request; step 8 builds in `nifeos/partsfoundry.org` |
 | `script/lint` | 9 `record` sections, 36 `both` | the record's driver runs the 9 and its half of the 36; nife keeps the rest |
@@ -77,7 +77,7 @@ prefixes under the record's directories whose home is elsewhere, `notes/skills/`
 third input maps every address calef has committed under to his GitHub no-reply address. It lists
 the old addresses, so it lives off-tree with the maintainers, and the extraction writes the
 mailmap from it into a temporary file that it deletes after the run. The sequence, from a clone
-of `nifeos/nife` and the full hash of the anchor commit:
+of `partsfoundry/nife` and the full hash of the anchor commit:
 
 ```sh
 git clone --no-local --no-checkout "$NIFE" record
@@ -153,15 +153,15 @@ in nife and every lane works as today.
    tree while the record lives here, and later a fetched tree at the commit basalt's `[record]`
    table names. Every reader in section 1 that stays switches to it. A no-op today.
 5. nife, several pull requests: rewrite code mentions of record paths to
-   `nifeos/record:<path>`, 4,468 exact mentions and 307 directory mentions in 1,267 files. Logs,
+   `partsfoundry/record:<path>`, 4,468 exact mentions and 307 directory mentions in 1,267 files. Logs,
    patches and `vendor/` keep their text, since each records what it was. One pull request per
    top-level directory keeps each reviewable.
 6. nife: freeze. A lint section refuses any change to a moving path, except in the removal
    pull request. Lanes with record edits keep their drafts and land them in the record afterward.
-7. nifeos/record: create it, public, and push `main` from the extraction at the frozen tip.
+7. partsfoundry/record: create it, public, and push `main` from the extraction at the frozen tip.
    Set the ruleset for `main` before the first push, so nothing lands unchecked.
-8. nifeos/record: its own `AGENTS.md`, which points at the lane skills as
-   `nifeos/nife:notes/skills/<name>/SKILL.md`, and a copy of `script/claim` with a check that keeps
+8. partsfoundry/record: its own `AGENTS.md`, which points at the lane skills as
+   `partsfoundry/nife:notes/skills/<name>/SKILL.md`, and a copy of `script/claim` with a check that keeps
    it identical to nife's copy (decided provisionally 2026-11-23, until the fleet repository the
    tooling ruling names exists). A lint driver runs the 9 record sections and the record halves of the 36, against the record
    rows of the baselines, and a CI workflow runs it on pull requests and the merge queue. This is
@@ -174,7 +174,7 @@ in nife and every lane works as today.
     `packages/moved.toml` with the anchor. It drops the record lint sections and the record rows
     of the baselines, removes `record-site.yml`, `site/` and `script/site`, lifts the freeze, and
     leaves a README pointer. The 28 links from 11 skill and brief files into the record become
-    URLs into `nifeos/record` in the same pull request, and the 32 chart embeds section 4 leaves
+    URLs into `partsfoundry/record` in the same pull request, and the 32 chart embeds section 4 leaves
     take whatever form it settles.
 11. basalt: rewrite the links in its `AGENTS.md` and `README.md` that point into nife's
     `design/`; its links into `notes/skills/` stay.
@@ -196,19 +196,19 @@ alone. 33 go into crates, tools and other code, 20 into root documents, 20 into 
 `system-tests/`, 12 into `briefs/` and 5 into `notes/skills/`.
 
 The rewrite is mechanical. For each listed link, a one-time script replaces the Markdown link
-with its text followed by ``(`nifeos/nife:<path>`)``, where `<path>` is the target resolved against the linking
+with its text followed by ``(`partsfoundry/nife:<path>`)``, where `<path>` is the target resolved against the linking
 file. When the text only repeats the target's path, file name or stem, the qualified path alone
 replaces the link (provisional), which keeps a note under its word cap. A link to a directory
 becomes plain text naming it, since the qualified form names files. A
-target that has already left nife takes its crate's repository, `nifeos/<crate>:<path>`, which
+target that has already left nife takes its crate's repository, `partsfoundry/<crate>:<path>`, which
 resolves through basalt's pinned `Cargo.lock`. Anchors after `#` drop, because the form has none.
 
 32 of the 351 are image embeds, not links: 31 in `notes/project-metrics.md` and one in
 `notes/register-of-measures/which-model-wrote-it.md`, each drawing a chart from
 `notes/project-metrics/`. `script/metrics` writes its week notes under each chart by matching that
 embed, and text in its place would drop the chart and its notes. The charts stay in nife with the
-data, so each embed is an image URL into nifeos/nife's `main` branch
-(`https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/<chart>.svg`), the form
+data, so each embed is an image URL into partsfoundry/nife's `main` branch
+(`https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/<chart>.svg`), the form
 `script/metrics` writes. The rewrite covers the other 319.
 
 Three checks hold it:
@@ -219,13 +219,13 @@ Three checks hold it:
 - The rewrite script runs again on the result and changes nothing.
 
 179 links from 56 staying files into the record (`README.md` 29, `notes/scripts.md` 28,
-`AGENTS.md` 22, `CONTRIBUTING.md` 12) become URLs into `nifeos/record` in the removal pull request.
+`AGENTS.md` 22, `CONTRIBUTING.md` 12) become URLs into `partsfoundry/record` in the removal pull request.
 They are links readers follow, so a URL fits better than a qualified path.
 
 ## 5. Risks, and what cannot be undone
 
-- A public push is permanent. Once `nifeos/record` holds history, clones, forks and caches keep
-  it. Everything extracted is already public in `nifeos/nife`'s history, so the push exposes no new
+- A public push is permanent. Once `partsfoundry/record` holds history, clones, forks and caches keep
+  it. Everything extracted is already public in `partsfoundry/nife`'s history, so the push exposes no new
   text. A scan of every blob and commit message of the extracted history for unit-specific and
   private content ran before this plan, and its results went to the maintainers off-tree.
 - Commit identities. The first push fixes them. The path files, the prune choice and the address

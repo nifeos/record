@@ -237,7 +237,7 @@ the measured-boot trusted base.
 
 ## Follow-on
 
-- **Done.** Item (a), 2026-10-18 (UTC), nifeos/nife#2289.
+- **Done.** Item (a), 2026-10-18 (UTC), partsfoundry/nife#2289.
 - **Done.** Item (e). calef, 2026-10-20 (UTC): "Yes", taking `r-efi` 7.1.0 under MIT (§46). Two
   gaps stay local, said at their call sites: RISC-V's boot protocol, which `r-efi` lacks, and
   `block_io::Media`'s flags, declared `bool` there and read as bytes.
@@ -251,14 +251,14 @@ the measured-boot trusted base.
   program in `mdr/`, and `crates/documentation` lays out the parser's events.
 - **Done.** Item (d). calef, 2026-10-21 (UTC), on #2490: "A sounds right." `talc` 5.1.1 is the heap
   everywhere, carrying SFBdragon/talc#57 until a release does (#2498).
-- **Done.** Item (g), 2026-10-21 (UTC), nifeos/nife#2497, on calef's "B" on #2490. `object`
+- **Done.** Item (g), 2026-10-21 (UTC), partsfoundry/nife#2497, on calef's "B" on #2490. `object`
   0.40.0 does the ELF and PE work in `xtask/src/portable_executable.rs`; our policy stays. Gate:
   `cargo xtask stick-boot`, all three firmwares. Milestone 821 (`portable_executable`: an
   ELF-to-PE converter, proven, then released on its own) is refused.
 - **Done.** Item (h), refused. calef, 2026-10-21 (UTC), on #2490: "A". uutils is a basalt package
   candidate under §297 (software reaches a nife system as a package `jig` installs from basalt's
   index).
-- **Done.** Item (i), nifeos/nife#2564, on calef's "A" on #2548.
+- **Done.** Item (i), partsfoundry/nife#2564, on calef's "A" on #2548.
 - **Outstanding.** (b) waits on 705, NOT-STARTED (checked 2026-10-21 UTC).
 - **Done.** Items (c1) to (c4), refused on calef's D of 2026-10-24 (UTC). The four drivers and
   the recorded reasons carry the `Reuse:` line; `vendor/virtio-drivers` is gone, settling (c0).

@@ -10,7 +10,7 @@ needs_person: yes
 # 1061. `file_allocation_table`: the outside review's findings land before its first release
 
 Raised by the lane `milestone/1061-file-allocation-table-outside-review`. A reviewer with no prior
-exposure to this project read `nifeos/file_allocation_table` at commit `8622b02` (`main`, after its
+exposure to this project read `partsfoundry/file_allocation_table` at commit `8622b02` (`main`, after its
 pull request #16), against [the review package](../../notes/crate-reviews/file-allocation-table.md)
 and [its public API appendix](../../notes/crate-reviews/file-allocation-table-public-api.md). This
 block cites files and symbols at that commit. Its `Finding status` is the one record of where every
@@ -66,43 +66,43 @@ Effort sizes: S is an afternoon for a lane, M a lane, L several lanes.
 ## Finding status
 
 One line per finding, in the review's order. Each state was read against
-`nifeos/file_allocation_table` at `faaf13f`, its `main`.
+`partsfoundry/file_allocation_table` at `faaf13f`, its `main`.
 
-- P0-1, no full mutation run: Done, `nifeos/file_allocation_table#21`, `#22` and `#53`; full
+- P0-1, no full mutation run: Done, `partsfoundry/file_allocation_table#21`, `#22` and `#53`; full
   mutation run 44049789540 is green at `6f8aa1d`, the `v0.1.0-pre.2` commit.
-- P0-2, template pin behind the one-shard fix: Done, `nifeos/file_allocation_table#17`, `#21` and
-  `#23`; `nifeos/file_allocation_table#54` moved every caller to the template's release v8.
+- P0-2, template pin behind the one-shard fix: Done, `partsfoundry/file_allocation_table#17`, `#21` and
+  `#23`; `partsfoundry/file_allocation_table#54` moved every caller to the template's release v8.
 - P0-3, first-publish token: Waiting on the go to publish, which waits for every outside review
   milestone to close (ruled 2026-11-18 UTC). The `crates-io` environment holds no secret.
-- P1-1, directory grown before zeroing: Done, `nifeos/file_allocation_table#24`.
-- P1-2, crash-ordering claim and `rename`: Done, `nifeos/file_allocation_table#24`; the README's
+- P1-1, directory grown before zeroing: Done, `partsfoundry/file_allocation_table#24`.
+- P1-2, crash-ordering claim and `rename`: Done, `partsfoundry/file_allocation_table#24`; the README's
   `BUGS` and the crate overview state the rename exception.
 - P1-3, ruleset lacks `check / mutation-diff`: Done; the `main` ruleset requires it, and weekly run
   43906126610 has `settings drift` green.
-- P1-4, default cluster size: Done, `nifeos/file_allocation_table#25`; the specification's tables
+- P1-4, default cluster size: Done, `partsfoundry/file_allocation_table#25`; the specification's tables
   are the default (the maintainers' provisional call).
-- P1-5, `VolumeLayoutOptions`: Done, `nifeos/file_allocation_table#19`; names ratified 2026-11-16
+- P1-5, `VolumeLayoutOptions`: Done, `partsfoundry/file_allocation_table#19`; names ratified 2026-11-16
   UTC.
-- P1-6, checked `CivilDateTime`: Done, `nifeos/file_allocation_table#18`; names ratified 2026-11-16
+- P1-6, checked `CivilDateTime`: Done, `partsfoundry/file_allocation_table#18`; names ratified 2026-11-16
   UTC.
-- P1-7, `trim_ascii_end`: Done, `nifeos/file_allocation_table#18`; name ratified 2026-11-16 UTC.
-- P1-8, `DirectoryCluster`: Done, `nifeos/file_allocation_table#18`; names ratified 2026-11-16 UTC.
-- P1-9, `OpenError<E>`: Done, `nifeos/file_allocation_table#18`; names ratified 2026-11-16 UTC.
-- P2-1, lower-case flags: Done, `nifeos/file_allocation_table#27`.
-- P2-2, untailed alias: Done, `nifeos/file_allocation_table#32`.
-- P2-3, lenient open: Done, `nifeos/file_allocation_table#31`.
-- P2-4, fuzz seeds: Done, `nifeos/file_allocation_table#20` (seeds under `fuzz/seeds/<target>/`)
-  and `nifeos/crate-workflows#58` (the weekly job reads them).
-- P2-5, `mtools`: Done, `nifeos/file_allocation_table#30`.
-- P2-6, memory footprint: Done, `nifeos/file_allocation_table#26`.
-- P2-7, `slot_location` walk: Done, `nifeos/file_allocation_table#28`.
-- P2-8, Cargo metadata: Done, `nifeos/file_allocation_table#26`.
-- P2-9, `examples/`: Done, `nifeos/file_allocation_table#29`.
-- P2-10, `embedded-io` feature: Done, `nifeos/file_allocation_table#46`; the `embedded-io-07`
+- P1-7, `trim_ascii_end`: Done, `partsfoundry/file_allocation_table#18`; name ratified 2026-11-16 UTC.
+- P1-8, `DirectoryCluster`: Done, `partsfoundry/file_allocation_table#18`; names ratified 2026-11-16 UTC.
+- P1-9, `OpenError<E>`: Done, `partsfoundry/file_allocation_table#18`; names ratified 2026-11-16 UTC.
+- P2-1, lower-case flags: Done, `partsfoundry/file_allocation_table#27`.
+- P2-2, untailed alias: Done, `partsfoundry/file_allocation_table#32`.
+- P2-3, lenient open: Done, `partsfoundry/file_allocation_table#31`.
+- P2-4, fuzz seeds: Done, `partsfoundry/file_allocation_table#20` (seeds under `fuzz/seeds/<target>/`)
+  and `partsfoundry/crate-workflows#58` (the weekly job reads them).
+- P2-5, `mtools`: Done, `partsfoundry/file_allocation_table#30`.
+- P2-6, memory footprint: Done, `partsfoundry/file_allocation_table#26`.
+- P2-7, `slot_location` walk: Done, `partsfoundry/file_allocation_table#28`.
+- P2-8, Cargo metadata: Done, `partsfoundry/file_allocation_table#26`.
+- P2-9, `examples/`: Done, `partsfoundry/file_allocation_table#29`.
+- P2-10, `embedded-io` feature: Done, `partsfoundry/file_allocation_table#46`; the `embedded-io-07`
   feature, off by default (ruled 2026-11-12 UTC).
-- P2-11, comparison paragraph: Done, `nifeos/file_allocation_table#26`.
-- P2-12, `mutants-exempts` header: Done, `nifeos/file_allocation_table#26`.
-- P2-13, stranger-run text: Done, `nifeos/file_allocation_table#26`.
+- P2-11, comparison paragraph: Done, `partsfoundry/file_allocation_table#26`.
+- P2-12, `mutants-exempts` header: Done, `partsfoundry/file_allocation_table#26`.
+- P2-13, stranger-run text: Done, `partsfoundry/file_allocation_table#26`.
 
 ## Findings, prioritized
 
@@ -126,7 +126,7 @@ reasoned line in `.github/mutants-exempts` for each. Two-way. S to M.
 
 #### P0-2. The template pin predates the one-shard verdict fix
 
-Every caller pins `nifeos/crate-workflows` at `57f2d528`. The template commit `ced625f4` fixes the
+Every caller pins `partsfoundry/crate-workflows` at `57f2d528`. The template commit `ced625f4` fixes the
 mutation verdict for a run of one shard, which failed every one-shard repository because
 `actions/download-artifact` extracts a lone artifact one level up. This crate's census is about 150
 mutants against a 200-per-shard default, so it runs as one shard, and P0-1 cannot go green at the
@@ -304,11 +304,11 @@ The checks are in [the done-when appendix](1061-file-allocation-table-outside-re
 
 ## Follow-on
 
-Pull request numbers are in `nifeos/file_allocation_table` unless named otherwise.
+Pull request numbers are in `partsfoundry/file_allocation_table` unless named otherwise.
 
 - **Done.** Every finding except P0-3, as `Finding status` lists. The second stranger run is #50,
   with its gaps closed in #51. nife's callers build against `v0.1.0-pre.2` through
-  `nifeos/nife#3568`. `main` at `faaf13f` has `check` run 44400592122 and
+  `partsfoundry/nife#3568`. `main` at `faaf13f` has `check` run 44400592122 and
   `proofs` run 44400592156 green.
 - **Outstanding.** P0-3, the first-publish token: ruled not yet, and the `crates-io` environment
   lists no secret, read through the GitHub API.

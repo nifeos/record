@@ -2,7 +2,7 @@
 
 *Name: provisional.*
 
-An appendix to `nifeos/nife:notes/capabilities.md`. It is the record of milestone 7e, which added endpoints.
+An appendix to `partsfoundry/nife:notes/capabilities.md`. It is the record of milestone 7e, which added endpoints.
 
 7d gave a process one thing it could do to a capability: invoke a `Console` and have the kernel
 act. 7e adds the capability that lets a process talk to another process, which is the whole
@@ -31,7 +31,7 @@ opposite rights, is a one-way pipe neither side can run backwards. The client ho
 `WRITE`-only capability: it can send and it *cannot express* receiving. Nobody had to tell it
 which end it is. It could not be the other end if it tried.
 
-This is [`capability_table::Rights`](https://github.com/nifeos/capability_table/blob/a8d0fa65b08050e788719bd0e88922f9cd6b43bb/src/lib.rs) doing real work, and it is a distinction Unix
+This is [`capability_table::Rights`](https://github.com/partsfoundry/capability_table/blob/a8d0fa65b08050e788719bd0e88922f9cd6b43bb/src/lib.rs) doing real work, and it is a distinction Unix
 does not have: a pipe fd is a pipe fd.
 
 ## The scheduler learned a third thing a thread can be

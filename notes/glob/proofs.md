@@ -2,7 +2,7 @@
 
 *Name: provisional.*
 
-An appendix to `nifeos/nife:notes/glob.md`, whose table lists the six Kani harnesses. This records
+An appendix to `partsfoundry/nife:notes/glob.md`, whose table lists the six Kani harnesses. This records
 why the domain is three bytes, what had to change to reach it, what it costs, the defect Kani found
 in a harness, and the host-test enumeration that carries the length-independent claims.
 
@@ -88,7 +88,7 @@ pass.
 
 ## What each harness's shape costs
 
-These are the measurements behind the shape of the harnesses in `src/lib.rs` of the repository `nifeos/byte_glob`, which
+These are the measurements behind the shape of the harnesses in `src/lib.rs` of the repository `partsfoundry/byte_glob`, which
 link here.
 
 - Totality and the cost bound are separate harnesses. `step_bound` is three saturating 64-bit

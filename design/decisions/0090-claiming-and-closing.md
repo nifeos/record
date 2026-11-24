@@ -136,7 +136,7 @@ draft pull request. The fuzz host files one advisory per finding, so the advisor
 for this kind of lane, as the draft list is for every other. The private fork has no CI and no merge
 queue, so the lane runs the local gates (`script/fmt`, `script/lint` and the tests) itself while a
 person reviews the fix there. Once the person approves it, the lane lands the same commits as an
-ordinary pull request on nifeos/nife, opened ready with auto-merge armed, through the merge queue.
+ordinary pull request on partsfoundry/nife, opened ready with auto-merge armed, through the merge queue.
 A person publishes the advisory when it merges. Nobody merges from the private fork: main's ruleset
 has no bypass actor, and a bypass actor would let any lane holding the admin token skip the queue
 and every required check. A finding the architect judges low severity may use a normal public

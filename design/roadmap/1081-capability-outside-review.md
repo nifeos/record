@@ -11,7 +11,7 @@ needs_person: no
 # 1081. `capability_table`: what an outside maintainer would fix before it leaves
 
 Raised by a read-only outside review of `crates/capability_table`, met as a stranger to this tree would
-meet it on the day it becomes `nifeos/<crate>`. The review changed nothing; it lists what the move
+meet it on the day it becomes `partsfoundry/<crate>`. The review changed nothing; it lists what the move
 lane and the lanes after it change.
 
 The crate's review package is [`notes/crate-reviews/capability-table.md`](../../notes/crate-reviews/capability-table.md),
@@ -29,76 +29,76 @@ depends on it). Milestone 1034 (a runbook for moving a crate out of nife) owns t
 findings that should land inside that path, and the two findings against the move tool that the
 lane will hit first.
 
-Reuse: `script/crate-move`, the template `nifeos/crate-workflows` at its newest release and at head,
+Reuse: `script/crate-move`, the template `partsfoundry/crate-workflows` at its newest release and at head,
 `helpers/falsify.py`, `helpers/standalone.py`, the template's naming helpers, cargo-mutants' recorded
 rows, Kani, and the crate's own harness builder (`any_small_capability_table`). No new tool.
 
 ## Finding status
 
-The crate lives in nifeos/capability_table, which the kernel pins. Each line states what that repository's
+The crate lives in partsfoundry/capability_table, which the kernel pins. Each line states what that repository's
 `main` and nife's show.
 
-- P0-1, the manifest stands alone: Done, [#3888](https://github.com/nifeos/nife/pull/3888). The
+- P0-1, the manifest stands alone: Done, [#3888](https://github.com/partsfoundry/nife/pull/3888). The
   manifest carries its own license, lints, `rust-version` 1.85, `description` and `repository`, and
   the crate has a README and both license files.
 - P0-2, the crate's text refers back into nife: Done,
-  [#3565](https://github.com/nifeos/nife/pull/3565),
-  [#3656](https://github.com/nifeos/nife/pull/3656). The move stripped the `Name:` blocks.
+  [#3565](https://github.com/partsfoundry/nife/pull/3565),
+  [#3656](https://github.com/partsfoundry/nife/pull/3656). The move stripped the `Name:` blocks.
 - P1-3, the proved `derive` is not the delegation the kernel runs: Done,
-  [#3656](https://github.com/nifeos/nife/pull/3656), [#3888](https://github.com/nifeos/nife/pull/3888).
+  [#3656](https://github.com/partsfoundry/nife/pull/3656), [#3888](https://github.com/partsfoundry/nife/pull/3888).
   `Capability::delegate` holds the rule once, the kernel's `Delegation::derive` calls it, and
   `delegation_needs_grant_and_never_widens` proves it. The two `REVOKE` arms in
   `kernel/src/system_call.rs` test `GRANT` inline with no harness. The reason sits beside them: a
   revoke mints nothing, `allows` has its proof in the crate, and a harness of the arm needs stubs
   the kernel proofs do not have.
 - P1-4, a slot truncates on a 32-bit target: Done,
-  [#3565](https://github.com/nifeos/nife/pull/3565).
-- P1-5, `len` means capacity: Done, [#3656](https://github.com/nifeos/nife/pull/3656). The ruling of
+  [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- P1-5, `len` means capacity: Done, [#3656](https://github.com/partsfoundry/nife/pull/3656). The ruling of
   2026-11-19 (UTC) keeps the name `capacity`.
 - P1-6, the move tool corrupts patches and skips `repository`: Done,
-  [#3521](https://github.com/nifeos/nife/pull/3521).
-- P1-7, two mutators outside every harness: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- P2-8, `Rights::ALL` is a literal: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- P2-9, abbreviated parameter names: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- P2-10, `Error` is thin for a stranger: Done, [#3565](https://github.com/nifeos/nife/pull/3565),
-  [#3656](https://github.com/nifeos/nife/pull/3656). The ruling of 2026-11-19 (UTC) keeps
+  [#3521](https://github.com/partsfoundry/nife/pull/3521).
+- P1-7, two mutators outside every harness: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- P2-8, `Rights::ALL` is a literal: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- P2-9, abbreviated parameter names: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- P2-10, `Error` is thin for a stranger: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565),
+  [#3656](https://github.com/partsfoundry/nife/pull/3656). The ruling of 2026-11-19 (UTC) keeps
   `GrantRequired` and `SlotOccupied`.
 - P2-11, the process-wide peak is unconditional: Done,
-  [#3565](https://github.com/nifeos/nife/pull/3565),
-  [#3888](https://github.com/nifeos/nife/pull/3888). `highest_seen` and its static sit behind the
+  [#3565](https://github.com/partsfoundry/nife/pull/3565),
+  [#3888](https://github.com/partsfoundry/nife/pull/3888). `highest_seen` and its static sit behind the
   cargo feature `peak` (provisional), off by default, which the kernel turns on.
 - P2-12, no read-only walk, and `delete_matching` takes `Fn`: Done,
-  [#3565](https://github.com/nifeos/nife/pull/3565),
-  [#3656](https://github.com/nifeos/nife/pull/3656).
+  [#3565](https://github.com/partsfoundry/nife/pull/3565),
+  [#3656](https://github.com/partsfoundry/nife/pull/3656).
 - P2-13, the mutation record travels as unknown: Done,
-  [#3888](https://github.com/nifeos/nife/pull/3888). The crate's `.github/mutants-exempts` lists the
+  [#3888](https://github.com/partsfoundry/nife/pull/3888). The crate's `.github/mutants-exempts` lists the
   three survivors and the timeouts with their reasons.
 - P2-14, one test pins the global exactly: Will not fix, ruled 2026-11-14 (UTC) by the maintainer as
   a two-way door. No table has more than 64 slots, so no test can exceed the pinned `(64, 64)`, and
   a wider table cannot break the exact assertion.
 - P2-15, notes beside the crate have drifted: Done,
-  [#3565](https://github.com/nifeos/nife/pull/3565),
-  [#3656](https://github.com/nifeos/nife/pull/3656).
-- P2-16, `Option<Capability<O>>` has no niche: Done, nifeos/capability_table#2, which keeps a
+  [#3565](https://github.com/partsfoundry/nife/pull/3565),
+  [#3656](https://github.com/partsfoundry/nife/pull/3656).
+- P2-16, `Option<Capability<O>>` has no niche: Done, partsfoundry/capability_table#2, which keeps a
   marker bit in a `NonZeroU32` so a 64-slot table of `u64` objects is 1,040 bytes, not 1,552. The
   kernel pins its merge commit, and the kernel's table is unchanged, because its `Object` enum
   already gave `Option` a niche.
-- D1, the crate's name: Done, [#3674](https://github.com/nifeos/nife/pull/3674), ruled 2026-11-16
+- D1, the crate's name: Done, [#3674](https://github.com/partsfoundry/nife/pull/3674), ruled 2026-11-16
   (UTC), option A.
-- D2, the five names: Done, [#3777](https://github.com/nifeos/nife/pull/3777), ruled 2026-11-19
+- D2, the five names: Done, [#3777](https://github.com/partsfoundry/nife/pull/3777), ruled 2026-11-19
   (UTC), option A. `delegate`, `GrantRequired`, `SlotOccupied`, `capacity` and `iter` stand as built.
-- The move: Done, [#3897](https://github.com/nifeos/nife/pull/3897),
-  `nifeos/capability_table#1`, cleared 2026-11-21 (UTC), option A. The kernel depends on
-  nifeos/capability_table at a pinned revision; `Reap`, `reap_decision` and `survey_includes` stay
+- The move: Done, [#3897](https://github.com/partsfoundry/nife/pull/3897),
+  `partsfoundry/capability_table#1`, cleared 2026-11-21 (UTC), option A. The kernel depends on
+  partsfoundry/capability_table at a pinned revision; `Reap`, `reap_decision` and `survey_includes` stay
   in `kernel/src/sched/region_reaping.rs` with their four proofs.
 
 ## Open decisions
 
 None. The clearance below has its ruling.
 
-### Clear the review, which creates nifeos/capability_table
+### Clear the review, which creates partsfoundry/capability_table
 
-Ruled 2026-11-21 (UTC), option A. The crate moves to nifeos/capability_table with `publish =
+Ruled 2026-11-21 (UTC), option A. The crate moves to partsfoundry/capability_table with `publish =
 false`, no tag and no publish. It carries the table, the rights algebra and `Capability::delegate`.
 `Reap`, `reap_decision` and `survey_includes`, with their Kani harnesses and falsification patches,
 stay in nife, wired into `script/verify` and `script/falsifications`, with no change of behavior.
@@ -121,7 +121,7 @@ crate from the first day; moving back is a second move.
 Prior art (recalled, not read): the Rust project moved `libc` out of the compiler's tree into a
 repository of its own, and the compiler consumes it back by version. Where nife differs: a review
 package checks that the crate stands alone before it leaves, not after. Example:
-`jh7110_entropy`, whose review the architect cleared on 2026-11-01 (UTC), lives in nifeos/jh7110_entropy,
+`jh7110_entropy`, whose review the architect cleared on 2026-11-01 (UTC), lives in partsfoundry/jh7110_entropy,
 and nife depends on it at a pinned revision.
 
 What it blocks: the move, and so the first tag and the first publish.
@@ -169,7 +169,7 @@ maintainer decides it, provisionally. The review clearance that creates the repo
 Ruled 2026-11-16 (UTC), option A. The crate carries the name `capability_table` from before the move. The name
 `capability` belongs on crates.io to an unrelated published crate (a skill-tree library for games,
 version 0.1.0, about 520 downloads all time, last updated more than a year before this review).
-A repository named `nifeos/capability` could never publish under its own name. A rename after the move
+A repository named `partsfoundry/capability` could never publish under its own name. A rename after the move
 would be a second move: a new repository, a new pin, and a dead name in every record between.
 
 The name is free on crates.io, it names the thing the crate is (a table of capabilities with their
@@ -187,7 +187,7 @@ Prior art. Fuchsia publishes its handle and rights types as `fuchsia-zircon`, a 
 Rust's convention for a taken name is a qualifier, not a prefix (`cap-std`, `cap-primitives`).
 
 Concrete example. The kernel's line is `capability_table = { version = "0.1.0",
-git = "https://github.com/nifeos/capability_table", rev = "<tag commit>" }` once the repository
+git = "https://github.com/partsfoundry/capability_table", rev = "<tag commit>" }` once the repository
 exists, and the two kernel files that name the crate (`kernel/src/capability_object.rs` and
 `kernel/src/sched/region_reaping.rs`, 17 lines) say `capability_table::`; `capability_object.rs` keeps
 its alias `pub(crate) type CapabilityTable = capability_table::CapabilityTable<Object,

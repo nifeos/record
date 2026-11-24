@@ -82,7 +82,7 @@ the riscv64 UEFI gate shows for this tree's own loader and nothing shows in gene
 
 1. The name is settled before anything leaves (857's Fork 5 as calef amended it on 2026-10-11 UTC).
    `script/names portable_executable` reports it ratified, crates.io answers 404 for it (or it is
-   already ours), and `nifeos/portable_executable` does not exist yet. `script/crate-standalone`
+   already ours), and `partsfoundry/portable_executable` does not exist yet. `script/crate-standalone`
    checks the first.
 2. Close the four holes in `BUGS`, write the five proofs above with their falsification patches, and
    rewrite `BUGS` to say what the crate now refuses.
@@ -93,7 +93,7 @@ the riscv64 UEFI gate shows for this tree's own loader and nothing shows in gene
    and its source divides by purpose) has milestone 610 (the interface's stability is
    measured weekly)'s per-package co-change column, and the soak (step 6) is how the second is
    measured. When the soak exits, calef adds it to the lint-checked publish allowlist. The
-   `nifeos/portable_executable` repository is created when the crate moves, on the shared CI
+   `partsfoundry/portable_executable` repository is created when the crate moves, on the shared CI
    template (milestone 887), through reusable workflows: Kani through `kani-github-action`, lint,
    release. Its release workflow refuses to publish unless the proof job is green. Nothing here
    reads `target_arch`; the ELF's machine is data, not the build target. So stock Kani serves. The
@@ -101,10 +101,10 @@ the riscv64 UEFI gate shows for this tree's own loader and nothing shows in gene
    only if a harness comes to need riscv64. Milestone 589 (Kani can prove riscv64 from the hosts we
    already have) built it.
 6. Soak, as its own repository (calef, 2026-10-17 UTC, replying "Agrred" (sic) to the maintainer's
-   proposal; §305 (git dependencies are allowed on `nifeos/*` only, pinned to a landed commit)).
+   proposal; §305 (git dependencies are allowed on `partsfoundry/*` only, pinned to a landed commit)).
    Milestone 818 (`jh7110_entropy`: proven JH7110 TRNG logic, released on its own) is the pilot and
    soaks first. Before publication the crate is moved, not copied: it leaves this tree, and nife
-   depends on `nifeos/portable_executable` by `rev`. A copy left behind does not count. The soak
+   depends on `partsfoundry/portable_executable` by `rev`. A copy left behind does not count. The soak
    ends on evidence, not a duration, when all five hold:
    1. nife builds and passes CI against the repository at a pinned commit, with no path dependency
       left.
@@ -149,7 +149,7 @@ A check proves it. `script/verify` proves the five properties, `script/falsifica
 harness `replayable`, and each of the four ELFs the audit described is refused with an error by a
 host test. In nife, `cargo tree --locked -i portable_executable` resolves to `v0.1.x` from crates.io
 with a checksum in `Cargo.lock`, `crates/portable_executable` no longer exists, and the riscv64
-stick still boots in EDK2 under the existing UEFI gate. In `nifeos/portable_executable`, the run
+stick still boots in EDK2 under the existing UEFI gate. In `partsfoundry/portable_executable`, the run
 that published 0.1.0 shows the Kani job green ahead of the publish job. The five soak criteria of
 release step 6 hold before it publishes.
 

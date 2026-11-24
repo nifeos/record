@@ -35,7 +35,7 @@ recommendations."*
    2,000 lines), and the cut meets it.
 
 Every module name ships marked `Name: provisional`, as the naming
-authority (`nifeos/nife:notes/skills/naming-authority/SKILL.md`) has a lane do. Ruling on them is still
+authority (`partsfoundry/nife:notes/skills/naming-authority/SKILL.md`) has a lane do. Ruling on them is still
 calef's, and nothing here ratifies one.
 
 ## What it does not decide

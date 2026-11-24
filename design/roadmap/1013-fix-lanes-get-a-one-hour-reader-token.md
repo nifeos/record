@@ -13,7 +13,7 @@ needs_person: no
 Raised by lane/fuzz-findings-without-a-person on 2026-11-01 (UTC), from the reader App ruling
 recorded in [fuzz-findings-without-a-person](1015-fuzz-findings-without-a-person.md).
 
-Reuse: `fuzz-token` in nifeos/fuzz-host already signs a JSON Web Token and trades it for an
+Reuse: `fuzz-token` in partsfoundry/fuzz-host already signs a JSON Web Token and trades it for an
 installation token
 ([the fuzz host mints its tokens](1022-the-fuzz-host-mints-its-tokens-from-the-app-key.md)); the reader
 is its third profile, `reader`, so the two Apps share one signing routine.
@@ -22,7 +22,7 @@ is its third profile, `reader`, so the two Apps share one signing routine.
 
 - A helper that runs as root on the machine that launches fix lanes. It reads the
   `nife-fuzz-reader` key from its root-only file and mints an installation token narrowed to
-  nifeos/nife and Repository security advisories read.
+  partsfoundry/nife and Repository security advisories read.
 - A lane asks the helper for one token, through a sudo rule, when it reads an advisory. It passes the
   token to the advisory-reading script alone, in that one command. The token never enters the lane's general environment and never
   lands in a worktree, a log or a pull request.
@@ -38,7 +38,7 @@ key. The helper must refuse when the key file is missing or readable by anyone b
 
 ## Status
 
-Built as `issue reader` in `fuzz-token` (nifeos/fuzz-host, pull request 4), with install steps in
+Built as `issue reader` in `fuzz-token` (partsfoundry/fuzz-host, pull request 4), with install steps in
 that repository's `docs/fuzz-token-reader.md`. The sudo question has a provisional answer: an
 architect ruled on 2026-11-03 (UTC) that a sudo rule names exactly `fuzz-token issue reader`, and a
 lane takes the token for one command:

@@ -15,7 +15,7 @@ milestone 1017 (the contract crates leave in this order). No review package exis
 `notes/crate-reviews/`, so this block has no settled baseline to defer to: the crate's ruled name,
 `moho_abi` (§323), and the sixteen ratified item names stand, and everything else below is open.
 
-Reuse: `script/crate-move --dry-run`, the template `nifeos/crate-workflows` and its helpers,
+Reuse: `script/crate-move --dry-run`, the template `partsfoundry/crate-workflows` and its helpers,
 `helpers/lint_externalized_crates.py`, `helpers/format_values_check.py`, `helpers/name_release.py`,
 cargo-mutants' recorded census, the crates.io API. No new tool.
 
@@ -52,7 +52,7 @@ dependency); everything else is two-way and the maintainer decides it.
 
 2. The crate cannot publish under its name.
    Finding: crates.io already has a crate named `abi` (version 0.1.4, 251 downloads, unrelated). The
-   repository can be `nifeos/abi` and consumers can pin it by `rev`, but the publication step of the
+   repository can be `partsfoundry/abi` and consumers can pin it by `rev`, but the publication step of the
    runbook (`notes/crate-move.md`, steps 16 to 19) and the README's badge row have no name to use.
    Fix: decision A below: the crate is `moho_abi` in code and as the package name, so the
    manifest and every `use abi::` change together.
@@ -117,49 +117,49 @@ The checks are in [the appendix](1075-abi-outside-review/done-when.md).
 
 ## Finding status
 
-- Item 1, P0, clippy red on `VisionFive 2`: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- Item 2 and decision A, P0, the published name: Done, [#4013](https://github.com/nifeos/nife/pull/4013), step 3 of
+- Item 1, P0, clippy red on `VisionFive 2`: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- Item 2 and decision A, P0, the published name: Done, [#4013](https://github.com/partsfoundry/nife/pull/4013), step 3 of
   milestone 1121 (the Moho rename: the order in which the binary interface takes its name). The
   package, the directory and every use are `moho_abi`, as §323 (the binary interface, and the names
   of the layers) ruling 2 rules.
-- Item 3, P1, the crate names nife and nife programs: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- Item 4, P1, twenty-eight references into nife: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- Item 5, P1, the virtio error that does not exist: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- Item 6, P1, the register convention: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- Item 7, P1, three self-contradictions: Done, (a) and (c) in [#3565](https://github.com/nifeos/nife/pull/3565), (b) in [#3596](https://github.com/nifeos/nife/pull/3596).
-- Item 8, P1, dates and rulings as history: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- Item 9, P1, README prose gates and badge row: Done. The badge row names `nifeos/moho_abi`
-  ([#4022](https://github.com/nifeos/nife/pull/4022)), and the prose passes the template's gates ([#3565](https://github.com/nifeos/nife/pull/3565), [#3942](https://github.com/nifeos/nife/pull/3942)) in the
+- Item 3, P1, the crate names nife and nife programs: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- Item 4, P1, twenty-eight references into nife: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- Item 5, P1, the virtio error that does not exist: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- Item 6, P1, the register convention: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- Item 7, P1, three self-contradictions: Done, (a) and (c) in [#3565](https://github.com/partsfoundry/nife/pull/3565), (b) in [#3596](https://github.com/partsfoundry/nife/pull/3596).
+- Item 8, P1, dates and rulings as history: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- Item 9, P1, README prose gates and badge row: Done. The badge row names `partsfoundry/moho_abi`
+  ([#4022](https://github.com/partsfoundry/nife/pull/4022)), and the prose passes the template's gates ([#3565](https://github.com/partsfoundry/nife/pull/3565), [#3942](https://github.com/partsfoundry/nife/pull/3942)) in the
   repository's first `check` run.
-- Item 10, P1, the manifest's publish comment: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- Item 11, P1, the version gate: Done, [#3942](https://github.com/nifeos/nife/pull/3942), on [#3565](https://github.com/nifeos/nife/pull/3565)'s counting test.
-- Item 12, P1, `futex::admitted` and `Error::from_ret`: Done, [#3942](https://github.com/nifeos/nife/pull/3942).
-- Item 13, P1, names not ready and no package: Done, [#3942](https://github.com/nifeos/nife/pull/3942); decision C clears
+- Item 10, P1, the manifest's publish comment: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- Item 11, P1, the version gate: Done, [#3942](https://github.com/partsfoundry/nife/pull/3942), on [#3565](https://github.com/partsfoundry/nife/pull/3565)'s counting test.
+- Item 12, P1, `futex::admitted` and `Error::from_ret`: Done, [#3942](https://github.com/partsfoundry/nife/pull/3942).
+- Item 13, P1, names not ready and no package: Done, [#3942](https://github.com/partsfoundry/nife/pull/3942); decision C clears
   [the package](../../notes/crate-reviews/moho-abi.md), and the rename has landed.
-- Item 14, P2, `Error` lacks `Display`, `Error` and `Hash`: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- Item 15, P2, `CapabilitySlot` has no user: Done, [#3942](https://github.com/nifeos/nife/pull/3942).
-- Item 16, P2, `RegisterShape::new`'s parameters: Done, [#3942](https://github.com/nifeos/nife/pull/3942).
-- Item 17, P2, `CycleMeaning` is not a system call contract: Done, [#3942](https://github.com/nifeos/nife/pull/3942).
-- Item 18, P2, doc nits: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- Item 19, P2, `Name:` blocks quote the decider: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
+- Item 14, P2, `Error` lacks `Display`, `Error` and `Hash`: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- Item 15, P2, `CapabilitySlot` has no user: Done, [#3942](https://github.com/partsfoundry/nife/pull/3942).
+- Item 16, P2, `RegisterShape::new`'s parameters: Done, [#3942](https://github.com/partsfoundry/nife/pull/3942).
+- Item 17, P2, `CycleMeaning` is not a system call contract: Done, [#3942](https://github.com/partsfoundry/nife/pull/3942).
+- Item 18, P2, doc nits: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- Item 19, P2, `Name:` blocks quote the decider: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
 - Item 20, P2, six survivors with no record: Waiting on the new repository's first weekly mutation
   run.
 - Item 21, P2, no machine checks: Done. The repository's first `proofs` run on main is green with
-  no harness ([run 45084955571](https://github.com/nifeos/moho_abi/actions/runs/45084955571)).
-- Decision B, `console::WRITE` stays reserved: Done, [#3596](https://github.com/nifeos/nife/pull/3596).
+  no harness ([run 45084955571](https://github.com/partsfoundry/moho_abi/actions/runs/45084955571)).
+- Decision B, `console::WRITE` stays reserved: Done, [#3596](https://github.com/partsfoundry/nife/pull/3596).
 - Found at the finish, six size names without a unit (`address_wait::SIZE_U8` to `SIZE_U64`,
-  `SIZE_MASK`, `usage::SIZE`): Done, [#3998](https://github.com/nifeos/nife/pull/3998), as decision C ratifies them.
-- The move: Done. The crate lives in [nifeos/moho_abi](https://github.com/nifeos/moho_abi), and nife
-  pins every consumer at its root commit, `nifeos/moho_abi@c8d556ec5ca7e567df529368c7dd24943423ab74`
-  ([#4021](https://github.com/nifeos/nife/pull/4021)).
+  `SIZE_MASK`, `usage::SIZE`): Done, [#3998](https://github.com/partsfoundry/nife/pull/3998), as decision C ratifies them.
+- The move: Done. The crate lives in [partsfoundry/moho_abi](https://github.com/partsfoundry/moho_abi), and nife
+  pins every consumer at its root commit, `partsfoundry/moho_abi@c8d556ec5ca7e567df529368c7dd24943423ab74`
+  ([#4021](https://github.com/partsfoundry/nife/pull/4021)).
 - Publishing: Waiting on the last outside-review milestone closing (ruled 2026-11-18 UTC).
 
 ## Follow-on
 
 - **Done.** Decision B: `console::WRITE` stays as a reserved operation (#3596).
-- **Done.** Decision A's rename to `moho_abi`, milestone 1121 step 3, [#4013](https://github.com/nifeos/nife/pull/4013).
-- **Done.** The six ratified size names, [#3998](https://github.com/nifeos/nife/pull/3998).
-- **Done.** The repository and the move, [#4021](https://github.com/nifeos/nife/pull/4021), with items 9 and 21.
+- **Done.** Decision A's rename to `moho_abi`, milestone 1121 step 3, [#4013](https://github.com/partsfoundry/nife/pull/4013).
+- **Done.** The six ratified size names, [#3998](https://github.com/partsfoundry/nife/pull/3998).
+- **Done.** The repository and the move, [#4021](https://github.com/partsfoundry/nife/pull/4021), with items 9 and 21.
 - **Outstanding.** Item 20, after the repository's first weekly mutation run.
 
 ## BUGS

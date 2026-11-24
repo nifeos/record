@@ -226,14 +226,14 @@ Highest rung first. `script/roadmap --check` fails a bullet that resolves to not
 
 ```
 # merge-queue events and pull requests, newest first, back to 09-06
-gh api graphql -f query='query($endCursor:String){repository(owner:"nifeos",name:"nife"){
+gh api graphql -f query='query($endCursor:String){repository(owner:"partsfoundry",name:"nife"){
   pullRequests(first:50,after:$endCursor,orderBy:{field:CREATED_AT,direction:DESC}){
   pageInfo{hasNextPage endCursor} nodes{number title createdAt mergedAt state
   timelineItems(first:100,itemTypes:[ADDED_TO_MERGE_QUEUE_EVENT,REMOVED_FROM_MERGE_QUEUE_EVENT]){
   nodes{__typename ...on AddedToMergeQueueEvent{createdAt}
   ...on RemovedFromMergeQueueEvent{createdAt reason}}}}}}}'
 # merge-group runs per day
-gh api --paginate "repos/nifeos/nife/actions/workflows/ci.yml/runs?event=merge_group&created=2026-09-15..2026-10-03&per_page=100"
+gh api --paginate "repos/partsfoundry/nife/actions/workflows/ci.yml/runs?event=merge_group&created=2026-09-15..2026-10-03&per_page=100"
 # z.ai: sessions, assistant messages and tokens, read only
 sqlite3 "file:$HOME/.local/share/opencode/opencode.db?mode=ro" "select s.title, count(*),
   sum(json_extract(m.data,'$.tokens.output')) from message m join session s on s.id=m.session_id

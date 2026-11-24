@@ -22,7 +22,7 @@ crate's own `Name:` block with four refusals, and it does not reopen it. Every o
 in the crate is unratified (`script/names boot_ladder` and `helpers/name_release.py --draft`
 list eight items with no `Name:` block and two marked provisional).
 
-Reuse: the crate template `nifeos/crate-workflows` and its scaffold, `script/crate-standalone`,
+Reuse: the crate template `partsfoundry/crate-workflows` and its scaffold, `script/crate-standalone`,
 `script/crate-review-packet`, `cargo kani`. No new tool.
 
 ## Goal
@@ -136,7 +136,7 @@ knows without the `BUGS` entry that it is not waiting for a `$ `.
 
 ### The review clears, and the crate carries only the console lines
 
-Ruled 2026-11-21 (UTC), option A. The crate moves to nifeos/boot_ladder with `publish = false`, no
+Ruled 2026-11-21 (UTC), option A. The crate moves to partsfoundry/boot_ladder with `publish = false`, no
 tag and no publication. It carries the heads, the check names and the verdict's grammar. The pages
 and slots the kernel, the progenitor and the self-test program agree on (`kernel_half` and
 `self_test_program`) stay in nife as `self_test_contract`, so their names are nife's to rule.
@@ -157,52 +157,52 @@ The checks are in [the appendix](1078-boot-ladder-outside-review/done-when.md).
 
 ## Finding status
 
-Read against nifeos/boot_ladder `main` at `6f2dfda` and nife `main`.
+Read against partsfoundry/boot_ladder `main` at `6f2dfda` and nife `main`.
 
-- P0-1, the manifest stands alone: Done, [#3655](https://github.com/nifeos/nife/pull/3655) and the
-  move ([#3894](https://github.com/nifeos/nife/pull/3894)). `license`, `rust-version`,
+- P0-1, the manifest stands alone: Done, [#3655](https://github.com/partsfoundry/nife/pull/3655) and the
+  move ([#3894](https://github.com/partsfoundry/nife/pull/3894)). `license`, `rust-version`,
   `description`, `repository`, `readme` and the template's lints are literals, and the `publish`
   line carries the one-sentence comment.
-- P0-2, the files a stranger needs: Done, nifeos/boot_ladder#1 and nifeos/boot_ladder#2. The
+- P0-2, the files a stranger needs: Done, partsfoundry/boot_ladder#1 and partsfoundry/boot_ladder#2. The
   README, both licenses, `CHANGELOG.md` and `_typos.toml` exist, #1 gave the README its proof
   steps, and `docs/stranger-test.md` records a passing stranger run.
-- P0-3, shipped text points into this tree: Done, [#3565](https://github.com/nifeos/nife/pull/3565),
-  [#3655](https://github.com/nifeos/nife/pull/3655) and the move
-  ([#3894](https://github.com/nifeos/nife/pull/3894)). No doc comment in nifeos/boot_ladder names a
+- P0-3, shipped text points into this tree: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565),
+  [#3655](https://github.com/partsfoundry/nife/pull/3655) and the move
+  ([#3894](https://github.com/partsfoundry/nife/pull/3894)). No doc comment in partsfoundry/boot_ladder names a
   nife path, a milestone, a pull request or a person.
 - P1-4, one verdict code for the writer and the readers: Done,
-  [#3655](https://github.com/nifeos/nife/pull/3655). The self-test program prints through
+  [#3655](https://github.com/partsfoundry/nife/pull/3655). The self-test program prints through
   `boot_ladder::verdict`, and `serial_console` and `xtask` read through `ParsedVerdict`.
-- P1-5, the check list's invariants: Done, [#3565](https://github.com/nifeos/nife/pull/3565). The
+- P1-5, the check list's invariants: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565). The
   test `the_check_names_are_plain_and_distinct` holds them, not a `const` block, because a `const`
   block drew five mutation survivors no test can kill.
-- P1-6, tests and proofs: Done, [#3565](https://github.com/nifeos/nife/pull/3565) and
-  [#3655](https://github.com/nifeos/nife/pull/3655). Two Kani harnesses in `src/verdict.rs`, each
+- P1-6, tests and proofs: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565) and
+  [#3655](https://github.com/partsfoundry/nife/pull/3655). Two Kani harnesses in `src/verdict.rs`, each
   with a falsification patch under `falsifications/`.
-- P1-7, head literals in `xtask`: Done, [#3655](https://github.com/nifeos/nife/pull/3655) and
-  [#3943](https://github.com/nifeos/nife/pull/3943). The literals went in #3655, and `script/lint` section 5c
+- P1-7, head literals in `xtask`: Done, [#3655](https://github.com/partsfoundry/nife/pull/3655) and
+  [#3943](https://github.com/partsfoundry/nife/pull/3943). The literals went in #3655, and `script/lint` section 5c
   (`helpers/boot_line_heads.py`) refuses a head spelled by hand outside test modules, fixtures and
   a copy marked `boot-line-head: copy, <reason>`.
-- P1-8, the ten public names: Done, [#3589](https://github.com/nifeos/nife/pull/3589) and
-  [#3655](https://github.com/nifeos/nife/pull/3655), ratified as built (ruled 2026-11-19 UTC).
+- P1-8, the ten public names: Done, [#3589](https://github.com/partsfoundry/nife/pull/3589) and
+  [#3655](https://github.com/partsfoundry/nife/pull/3655), ratified as built (ruled 2026-11-19 UTC).
 - P1-8b, the `self_test_program` names: Will not fix in this review, because the module stays in
   nife's `self_test_contract` (ruled 2026-11-21 UTC). Its names stay provisional there, on nife's
   name worklist, with the proposal that `DIRECT_MEMORY_ACCESS_PEEK_VIRTUAL_ADDRESS` become
   `DIRECT_MEMORY_ACCESS_OBSERVER_VIRTUAL_ADDRESS`.
 - P1-9, the boundary claim and the matching rule: Done,
-  [#3586](https://github.com/nifeos/nife/pull/3586) and
-  [#3655](https://github.com/nifeos/nife/pull/3655). The README's "The matching rule" states it.
-- P2-10, abbreviated check names: Done, [#3586](https://github.com/nifeos/nife/pull/3586). The
+  [#3586](https://github.com/partsfoundry/nife/pull/3586) and
+  [#3655](https://github.com/partsfoundry/nife/pull/3655). The README's "The matching rule" states it.
+- P2-10, abbreviated check names: Done, [#3586](https://github.com/partsfoundry/nife/pull/3586). The
   kernel's name column stays ten wide, which the crate's `BUGS` records.
-- P2-11, a version policy: Done, [#3655](https://github.com/nifeos/nife/pull/3655). The README's
+- P2-11, a version policy: Done, [#3655](https://github.com/partsfoundry/nife/pull/3655). The README's
   "Version policy" states it, and no identity constant exists.
-- P2-12, growth already proposed: Done, [#3943](https://github.com/nifeos/nife/pull/3943), by the
+- P2-12, growth already proposed: Done, [#3943](https://github.com/partsfoundry/nife/pull/3943), by the
   record the item allows. Milestone 972 (the boot stick's shared names are code) and the two
   hoists in
   `notes/bugs-without-milestones/drivers-boot-and-install-1.md` (soak markers, job-mix field names)
-  each land in nifeos/boot_ladder after the move and then move nife's pin.
-- P2-13, the banner's tail: Done, [#3565](https://github.com/nifeos/nife/pull/3565) and
-  [#3586](https://github.com/nifeos/nife/pull/3586). The crate states that the tail is free text
+  each land in partsfoundry/boot_ladder after the move and then move nife's pin.
+- P2-13, the banner's tail: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565) and
+  [#3586](https://github.com/partsfoundry/nife/pull/3586). The crate states that the tail is free text
   and a reader takes the architecture from the machine line.
 
 ## Open decisions

@@ -8,7 +8,7 @@ ratified_by: calef
 # 267. A comment states the constraint as it is now
 
 calef ruled the forks of `notes/comment-cost-2026-10-07.md` on
-[PR #1800](https://github.com/nifeos/nife/pull/1800) (2026-10-07, UTC) and ratified fork (c) in the
+[PR #1800](https://github.com/partsfoundry/nife/pull/1800) (2026-10-07, UTC) and ratified fork (c) in the
 sharper form, *"ratify #1800 Fork (c) in the sharper form"*. This section is the tree's copy of
 that ruling. Every script and file name below is provisional.
 
@@ -52,7 +52,7 @@ the sentences that accumulate in place.
 
 calef, 2026-10-22 00:53 UTC, on [milestone 929 (comments in the Linux style across first-party
 Rust)](../roadmap/0929-kernel-comments-in-the-linux-style.md) in the scope
-[PR #2531](https://github.com/nifeos/nife/pull/2531) set: *"Consider 929 ruled."* The rule binds
+[PR #2531](https://github.com/partsfoundry/nife/pull/2531) set: *"Consider 929 ruled."* The rule binds
 all first-party Rust, every non-`vendor/` directory:
 
 1. An item's doc comment opens with a summary sentence, then gives its arguments, what it holds and
@@ -110,7 +110,7 @@ copies §212 (a prose budget)'s prose ratchet:
   `--bank` lowers rows to the tree and never raises one.
 - A block that must stay over the cap needs this section amended, by an architect.
 
-**Amended 2026-10-11 (UTC), calef, on [PR #1915](https://github.com/nifeos/nife/pull/1915)**:
+**Amended 2026-10-11 (UTC), calef, on [PR #1915](https://github.com/partsfoundry/nife/pull/1915)**:
 *"Amend §267"*. He was ruling on the comment-block fork of milestone 845 (the filesystem-protocol
 crate root is split along its seams). A row moves with its block when a file splits, at the same
 ceiling, the way a rename already moves rows. No ceiling rises, the list still only falls, and a

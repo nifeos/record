@@ -9,7 +9,7 @@ ratified_by: calef
 
 The maintainer raised this on 2026-11-12 (UTC), on the intent that the crates are the product: a
 library of components from which the project builds several operating systems. Counts come from
-`nifeos/nife@a3c7d4647` and `nifeos/basalt@ecdfee7`, and each gives its command so a reviewer can
+`partsfoundry/nife@a3c7d4647` and `partsfoundry/basalt@ecdfee7`, and each gives its command so a reviewer can
 take it again at merge. On 2026-11-14 (UTC) the architect ruled question 1, what the layer above a
 kernel is, and rulings 2 to 6: the capability binary interface's name, the organization, the
 library, the distribution and the kernels. On 2026-11-15 (UTC) the architect named the
@@ -55,7 +55,7 @@ Mostly. One part of it meets an existing decision.
   does not contradict §82 by itself, since §82 speaks of one system's end state. A record that
   names an ambient-authority binary interface should still say how it stands beside §82. This file
   does not decide that.
-- Milestone 1039 (the kernel leaves nife) moves the kernel to `nifeos/nife-kernel`, a name ruled
+- Milestone 1039 (the kernel leaves nife) moves the kernel to `partsfoundry/nife-kernel`, a name ruled
   2026-11-03 (UTC). That repository does not exist yet.
 
 ## The rule: the layer above a kernel is its binary interface
@@ -286,5 +286,5 @@ names stay open.
 - Four steps, each waiting for a separate go from the architect and all before the first crates.io
   publish: creating the `partsfoundry` GitHub organization, moving repositories from `nifeos`,
   registering `partsfoundry.org` and building the website. The website's domain comes from
-  milestone 1018 (the design record moves to `nifeos/record` and is published as a website). The
+  milestone 1018 (the design record moves to `partsfoundry/record` and is published as a website). The
   rule that a leaving crate never mentions nife (now the name of one kernel) stays as it was.

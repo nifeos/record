@@ -2,7 +2,7 @@
 
 An appendix to [the milestone](../1072-jh7110-clock-and-reset-outside-review.md).
 
-Verified firsthand, on a fresh shallow clone of `nifeos/nife` at the head of `main`, with the crate
+Verified firsthand, on a fresh shallow clone of `partsfoundry/nife` at the head of `main`, with the crate
 copied out of the workspace into a directory of its own, as `script/crate-standalone` does:
 
 - `cargo +1.88 test`: 45 unit tests and 2 documentation tests pass. `cargo +1.85 test` refuses the

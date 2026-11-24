@@ -84,7 +84,7 @@ Releases, index on Pages"*. Each package is an asset on a GitHub Release, and Gi
   amendment of §250 (an image names its distribution's package index). So every `jig install` from a published
   basalt is one count.
 
-Reading the counts: `gh api repos/nifeos/basalt/releases --paginate --jq '.[].assets[] | [.name,
+Reading the counts: `gh api repos/partsfoundry/basalt/releases --paginate --jq '.[].assets[] | [.name,
 .download_count] | @tsv'`.
 
 ## The prior art, which has already solved half of this

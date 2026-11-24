@@ -48,7 +48,7 @@ The kernel leaves last among the code, to a repository named `nife-kernel` (rati
 name only). The name is distinct on disk from the `kernel/` directory inside this repository,
 matches the hyphenated repositories that are not crates (`crate-workflows` and `fuzz-host`), and
 says what the repository holds. Creating the repository still needs the architect's separate, named
-go. Once everything has left, `nifeos/nife` holds only the history.
+go. Once everything has left, `partsfoundry/nife` holds only the history.
 
 Churn does not hold a move. A contract crate leaves and carries a version while its interface still
 changes, and each consumer checks that version (milestone 956 (the linked interfaces carry checkable

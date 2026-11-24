@@ -8,7 +8,7 @@ shape of [universal-serial-bus.md](universal-serial-bus.md).*
 
 Name and version. `capability_manifest_note` `0.1.0`, edition 2024, `rust-version` 1.88, license
 `MIT OR Apache-2.0`, `publish = false`. The architect ratified the crate name on 2026-10-18 (UTC). The
-repository is `nifeos/capability_manifest_note`, which does not exist yet. The crate is on
+repository is `partsfoundry/capability_manifest_note`, which does not exist yet. The crate is on
 `crates/externalization-list.txt`, in step 6 of
 [milestone 1017 (the contract crates leave in this order)](../../design/roadmap/1017-the-contract-crates-leave-in-this-order.md),
 after `machine_statistics_contract`, `domain_name_resolution_contract` and `grant_plan`. The review
@@ -112,7 +112,7 @@ Open items before the move. These are in the milestone and belong to the move la
 - The consumers' lines converted from path dependencies to `git` and `rev` with `version = "0.1.0"`.
 
 Clearance. Cleared on 2026-11-20 (UTC), with `publish = false`, no tag and no publish. The go creates
-`nifeos/capability_manifest_note`; the move waits for its place in step 6 of milestone 1017. The names
+`partsfoundry/capability_manifest_note`; the move waits for its place in step 6 of milestone 1017. The names
 below are the only ones the architect has ratified beyond those the crate already carried; every
 other name is provisional.
 

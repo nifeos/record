@@ -144,7 +144,7 @@ Proofs are not a division: each lives beside its code in 28 places.
 | R1 (ruled, until each piece leaves). What has not left stays in one repository, boundaries enforced inside it | Each package's boundary is drawn in-tree and checked by lint, in the spirit of milestone 39 (repository structure for a loosely-coupled OS)'s option B. `script/test` stays one command. | A piece leaves only in the bottom-up order, and this repository pins each piece that has left. |
 | R2. Split out the SDK alone (not taken) | Contracts and runtime move out | 76% of contract commits touch another division, so most become two pull requests. |
 | R3. Split along all seven (not taken) | Milestone 39's option C, with `basalt` as the gate | 27% of code commits cross a division. |
-| R4 (ruled, the end state). Everything leaves | The kernel, the programs, the tooling and the crates each leave for a repository with one purpose, bottom-up; each package has a required `home`, no default | Forces a decision per piece rather than a default of staying. `nifeos/nife` keeps only the history. |
+| R4 (ruled, the end state). Everything leaves | The kernel, the programs, the tooling and the crates each leave for a repository with one purpose, bottom-up; each package has a required `home`, no default | Forces a decision per piece rather than a default of staying. `partsfoundry/nife` keeps only the history. |
 
 Two things stay single-tree under every option. One `script/test` proves every architecture (§19 (architectural parity is a tenet)),
 and the integration test suite needs every division at a known version to run. R1 keeps both. The

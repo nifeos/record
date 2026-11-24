@@ -49,7 +49,7 @@ calef ruled on every fork on 2026-09-27 (UTC), relayed by the maintainer on pull
 - The ABI revision is a field in the manifest note of milestone 597 (a program carries its manifest in an ELF note), not a separate note.
 - The repositories: R1 for what has not left, with package boundaries drawn in-tree and enforced
   by lint. The end state is everything leaving this repository, bottom-up, for repositories with
-  one purpose each: the kernel, the programs, the tooling and the crates. `nifeos/nife` keeps only
+  one purpose each: the kernel, the programs, the tooling and the crates. `partsfoundry/nife` keeps only
   the history (§151 (the goal of the repository split is independent release)). A package is the
   unit of install and a repository the unit of source, so one package may draw its source from
   several repositories. Each package's definition carries a required `home` with no default, and

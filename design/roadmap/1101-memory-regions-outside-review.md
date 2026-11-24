@@ -24,7 +24,7 @@ system call word, the `MIT OR Apache-2.0` license, and the pin of `generational_
 crate name. Every quantity in the crate is a count of pages or of objects and names the thing, so
 the unit rule has nothing to say; `len`, `is_empty`, `get` and `with` take std's spellings.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `script/crate-move --dry-run`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `script/crate-move --dry-run`,
 Kani, loom, cargo-mutants, and the crate's own harness helpers (`Run::any`, `Run::for_every_depth`,
 `RegionSnapshot`). No new tool.
 
@@ -39,53 +39,53 @@ for the crate's own reasons.
 
 ## Finding status
 
-- P0-1, a split refused for a full table: Done, [#3525](https://github.com/nifeos/nife/pull/3525).
+- P0-1, a split refused for a full table: Done, [#3525](https://github.com/partsfoundry/nife/pull/3525).
 - P0-2, the crate cannot stand alone: At the move. The doc comments and the manifest comments name
   no nife path, pull request or section. The README, both license files, an explicit license line,
   `rust-version` and inline lints are the move's work, and Decision 1 holds the move until its
   trigger fires.
-- P1-3, a root at the top of the page-number space: Done. The refusal landed in [#3534](https://github.com/nifeos/nife/pull/3534), and the
+- P1-3, a root at the top of the page-number space: Done. The refusal landed in [#3534](https://github.com/partsfoundry/nife/pull/3534), and the
   Kani harnesses `a_root_the_table_accepts_never_overflows_*` (four, one per operation, split to fit
   the shard's memory) drive one operation from any accepted root, each with its falsification
-  patch, in [#3825](https://github.com/nifeos/nife/pull/3825).
-- P1-4, a second release of one object: Done, [#3532](https://github.com/nifeos/nife/pull/3532).
+  patch, in [#3825](https://github.com/partsfoundry/nife/pull/3825).
+- P1-4, a second release of one object: Done, [#3532](https://github.com/partsfoundry/nife/pull/3532).
 - P1-5, the loom harnesses at the move: At the move. The template's `proofs` workflow runs a crate's
   loom models when its manifest depends on loom, from
-  [v8](https://github.com/nifeos/crate-workflows/pull/65); the README's split of what loom checks
+  [v8](https://github.com/partsfoundry/crate-workflows/pull/65); the README's split of what loom checks
   and what Kani proves is written with the README.
 - P1-6, gates of the template: At the move. (a) landed in the template in
-  [nifeos/crate-workflows#80](https://github.com/nifeos/crate-workflows/pull/80), (b) and (c) in
-  [#3567](https://github.com/nifeos/nife/pull/3567), and (d) in
-  [#3521](https://github.com/nifeos/nife/pull/3521). (e) is the move's, which pins the template at
+  [partsfoundry/crate-workflows#80](https://github.com/partsfoundry/crate-workflows/pull/80), (b) and (c) in
+  [#3567](https://github.com/partsfoundry/nife/pull/3567), and (d) in
+  [#3521](https://github.com/partsfoundry/nife/pull/3521). (e) is the move's, which pins the template at
   `v9` or later.
-- P1-7, documentation the code contradicts: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
+- P1-7, documentation the code contradicts: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
 - P1-8, manifest metadata and the dependency line: At the move. The manifest has `description`,
   `keywords` and `categories`; `documentation`, `readme`, `repository` and `rust-version` come with
   the move, and the `git` dependency waits for `generational_table` to publish.
 - P1-9, public names for the naming pass: Waiting on Decision 1's trigger, a second consumer or
   object kinds the caller defines. The name ratification under "Held decision" is asked then.
-- P2-10, a root ceiling under sixteen: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
+- P2-10, a root ceiling under sixteen: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
 - P2-11, the cost of `spent` and of the return: Done,
-  [#3567](https://github.com/nifeos/nife/pull/3567). Both doc comments state the cost, and
+  [#3567](https://github.com/partsfoundry/nife/pull/3567). Both doc comments state the cost, and
   `Children` reads the per-parent count without a scan.
-- P2-12, `ObjectKind::ALL`: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P2-13, `forbid(unsafe_code)`: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P2-14, a table-level invariant harness: Done, [#3567](https://github.com/nifeos/nife/pull/3567), with its shard times in [#3647](https://github.com/nifeos/nife/pull/3647).
-- P2-15, direct tests of the pure functions: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P2-16, a dropped claim: Done, [#3969](https://github.com/nifeos/nife/pull/3969), ruled by the
+- P2-12, `ObjectKind::ALL`: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P2-13, `forbid(unsafe_code)`: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P2-14, a table-level invariant harness: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567), with its shard times in [#3647](https://github.com/partsfoundry/nife/pull/3647).
+- P2-15, direct tests of the pure functions: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P2-16, a dropped claim: Done, [#3969](https://github.com/partsfoundry/nife/pull/3969), ruled by the
   maintainer, provisional. `return_to_parent` consumes its claim, so a second return of one claim
   does not compile, and the type's documentation says a dropped claim leaks and does not panic.
-- Decision 1, whether the crate leaves nife: Done, [#3803](https://github.com/nifeos/nife/pull/3803), ruled 2026-11-19 (UTC), option A.
+- Decision 1, whether the crate leaves nife: Done, [#3803](https://github.com/partsfoundry/nife/pull/3803), ruled 2026-11-19 (UTC), option A.
   The crate stays in the kernel base package, and the move waits until the crate has a second
   consumer or its object kinds are the caller's to define, whichever comes first.
-- Decision 2, typed region names: Done, [#3825](https://github.com/nifeos/nife/pull/3825), ruled by the maintainer, provisional,
+- Decision 2, typed region names: Done, [#3825](https://github.com/partsfoundry/nife/pull/3825), ruled by the maintainer, provisional,
   2026-11-14 (UTC). `RegionName` is `EntryName<Region>`, `Region` is the public opaque marker, and
   `entry()` is gone. The kernel converts with `to_bits` and `from_bits` in
   `kernel/src/memory_region.rs`.
-- Decision 3, zero pages: Done, [#3825](https://github.com/nifeos/nife/pull/3825), ruled by the maintainer, provisional, 2026-11-14 (UTC).
+- Decision 3, zero pages: Done, [#3825](https://github.com/partsfoundry/nife/pull/3825), ruled by the maintainer, provisional, 2026-11-14 (UTC).
   `retype_pages` is gone, `retype_run(name, 0)` is refused, and the kernel maps the system call
   word's zero to one.
-- Decision 4, the child's share: Done, [#3567](https://github.com/nifeos/nife/pull/3567), ruled by the maintainer, provisional, 2026-11-14
+- Decision 4, the child's share: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567), ruled by the maintainer, provisional, 2026-11-14
   (UTC). `CHILD_SHARE_OF_ROOT` stays private and its documentation states the limit.
 
 ## Held decision
@@ -149,7 +149,7 @@ numbers are in `crates/memory_regions/` at `75bb255a`.
 ### P0: blocks any publish
 
 1. A split refused for a full table leaves the parent as it was. Done,
-   [#3525](https://github.com/nifeos/nife/pull/3525). Door: two-way.
+   [#3525](https://github.com/partsfoundry/nife/pull/3525). Door: two-way.
 
 2. The crate cannot stand alone, and the template's `check / standalone` is red on the first push.
    Finding: no README, no `LICENSE-MIT`, no `LICENSE-APACHE`, `license.workspace = true`,

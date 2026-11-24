@@ -18,7 +18,7 @@ a follow-on approved the same day alongside the ruling that `NIFE_SMELTER_APP_ID
 it appears in the App's public page and in token requests. Only the private key needs to be a
 secret, so the id becomes an organization variable and the secret list shrinks to one.
 
-The change is in `nifeos/crate-workflows`: its reusable release workflow reads the id from
+The change is in `partsfoundry/crate-workflows`: its reusable release workflow reads the id from
 `vars.NIFE_SMELTER_APP_ID` where it now reads `secrets.NIFE_SMELTER_APP_ID`, and a new release of
 the template carries it. Each crate repository then moves to that release. The variable needs the
 same "selected repositories" scoping as the key, for the same reason, and the extraction checklist
@@ -26,7 +26,7 @@ in milestone 857 (crates released on their own) loses one grant per new reposito
 
 Reuse: the variables feature of GitHub organizations and the existing reusable release workflow; no new dependency.
 
-Not done in this lane; it is a milestone for a lane in `nifeos/crate-workflows`.
+Not done in this lane; it is a milestone for a lane in `partsfoundry/crate-workflows`.
 
 ## BUGS
 

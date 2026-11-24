@@ -98,7 +98,7 @@ rather than for job control alone. `notes/suspend-and-resume.md` has the kernel'
 
 ## Follow-on
 
-- **Done.** The kernel verbs, by nifeos/nife#2331, and `Ctrl-Z` and `bg`, by nifeos/nife#2332.
+- **Done.** The kernel verbs, by partsfoundry/nife#2331, and `Ctrl-Z` and `bg`, by partsfoundry/nife#2332.
 - **Recorded.** `&` on anything but a supervised job is refused, in this block's BUGS and in
   `components/src/swish/jobs.rs`.
 - **Recorded.** zsh's `suspend` is not built, in this block's BUGS.

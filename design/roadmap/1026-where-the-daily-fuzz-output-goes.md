@@ -27,7 +27,7 @@ Two places fit, and each needs a wider credential than the host holds today.
 ## What is in force
 
 Ruled 2026-11-01 (UTC): option A. The continuous fuzzing host publishes its daily output as one GitHub
-release per day on nifeos/nife, tagged `fuzz-YYYY-MM-DD`, with `report.md` and `clean-ranges.tsv` as
+release per day on partsfoundry/nife, tagged `fuzz-YYYY-MM-DD`, with `report.md` and `clean-ranges.tsv` as
 assets. It does not publish a branch of artifacts. The reasons:
 
 1. A release is deletable without touching history.
@@ -44,7 +44,7 @@ it, and dropping data needs a force-push, which this project forbids. The implem
 - A. A release per day, tagged `fuzz-YYYY-MM-DD`, with the report and the clean-range table as
   assets. Maintainers can delete an old release without touching history. The heartbeat is the newest
   release's date. Nothing enters the git tree or any clone.
-- B. A branch of artifacts, one commit per day on a branch of nifeos/nife that holds the same files.
+- B. A branch of artifacts, one commit per day on a branch of partsfoundry/nife that holds the same files.
   Plain `git` reaches the files and shows each day's diff. Every clone that fetches all branches pays
   for it, and dropping data needs a force-push, which this project forbids.
 
@@ -63,7 +63,7 @@ clone. Moving from a release to a branch later stays compatible; moving back doe
 The `--publish` path in `helpers/fuzz-daily-publish.sh` refused until the ruling. It now calls
 `gh release create` and still refuses unless the host sets the enable variable. The credential is an
 installation token of the `nife-fuzz` App, which holds Contents write and advisories write on
-nifeos/nife alone (ruled 2026-11-01 UTC,
+partsfoundry/nife alone (ruled 2026-11-01 UTC,
 [fuzz-findings-without-a-person](1015-fuzz-findings-without-a-person.md)).
 
 ## Done when
@@ -71,7 +71,7 @@ nifeos/nife alone (ruled 2026-11-01 UTC,
 The code builds every claim of the ruling, and `helpers/fuzz-daily-publish-selftest.sh` checks each
 one. `script/lint` runs it with stand-ins and never calls GitHub.
 
-- The tag is `fuzz-YYYY-MM-DD` (UTC), and the one `gh release create` call names `nifeos/nife`.
+- The tag is `fuzz-YYYY-MM-DD` (UTC), and the one `gh release create` call names `partsfoundry/nife`.
 - The assets are `report.md` and `clean-ranges.tsv`, and no others. The script never calls `git push`.
 - `--publish` refuses unless `NIFE_FUZZ_PUBLISH=1`, and then refuses by name a missing, unreadable,
   expired or nearly expired token, all before any `gh` call.
@@ -80,7 +80,7 @@ one. `script/lint` runs it with stand-ins and never calls GitHub.
 - The heartbeat (`helpers/fuzz-heartbeat.py`) reads the date of the newest `fuzz-*` release, and is
   quiet until the first one exists.
 - The credential is an installation token of the `nife-fuzz` App, minted by `fuzz-token` and limited
-  to Contents write and Repository security advisories write on nifeos/nife.
+  to Contents write and Repository security advisories write on partsfoundry/nife.
 
 What remains needs a person, which is why `needs_person` stays `yes`. No code remains
 to build.

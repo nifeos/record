@@ -104,7 +104,7 @@ inline Kani module meets this on its first weekly run; that is work for the temp
 
 #### P1-1. The CI wiring predates the template's mutation stack
 
-Every caller pins `nifeos/crate-workflows` at `cd1b484`. That commit is not behind release `v7`, so
+Every caller pins `partsfoundry/crate-workflows` at `cd1b484`. That commit is not behind release `v7`, so
 the lag check passes, but `main` of the template is 33 commits ahead and carries `mutation.yml`,
 `check / mutation-diff` and the mutation requirement of the release gate. The repository has no
 `.github/workflows/mutation.yml` caller. Change, once the template cuts its next release: bump
@@ -244,30 +244,30 @@ None needs hardware or QEMU.
 
 ## Finding status
 
-Each line names the pull request that closed the finding in `nifeos/block_roster_contract`, read on its `main`.
+Each line names the pull request that closed the finding in `partsfoundry/block_roster_contract`, read on its `main`.
 
-- P0-1, the stranger test: Done, `nifeos/block_roster_contract#3` and `nifeos/block_roster_contract#5`.
-- P0-2, mutation survivors: Done, `nifeos/block_roster_contract#6`.
-- P1-1, the CI pin and the mutation caller: Done, `nifeos/block_roster_contract#4`, `nifeos/block_roster_contract#7` and `nifeos/block_roster_contract#19`.
-- P1-2, `ReadError`: Done, `nifeos/block_roster_contract#9`, with the two call sites in nifeos/nife#3568.
-- P1-3, the capacity word checked: Done, `nifeos/block_roster_contract#9`. `CapacityBeyondPage` and `CountBeyondCapacity`
+- P0-1, the stranger test: Done, `partsfoundry/block_roster_contract#3` and `partsfoundry/block_roster_contract#5`.
+- P0-2, mutation survivors: Done, `partsfoundry/block_roster_contract#6`.
+- P1-1, the CI pin and the mutation caller: Done, `partsfoundry/block_roster_contract#4`, `partsfoundry/block_roster_contract#7` and `partsfoundry/block_roster_contract#19`.
+- P1-2, `ReadError`: Done, `partsfoundry/block_roster_contract#9`, with the two call sites in partsfoundry/nife#3568.
+- P1-3, the capacity word checked: Done, `partsfoundry/block_roster_contract#9`. `CapacityBeyondPage` and `CountBeyondCapacity`
   are provisional names, open to the naming review before any tag.
-- P1-4, `Display` and `Error` on `TooManyDevices`: Done, `nifeos/block_roster_contract#9`.
-- P1-5, `forbid(unsafe_code)`: Done, `nifeos/block_roster_contract#9`.
-- P1-6, `index` and the transport aliases: Done, `nifeos/block_roster_contract#9`.
-- P1-7, the shipped text: Done, `nifeos/block_roster_contract#5`, `nifeos/block_roster_contract#8`, `nifeos/block_roster_contract#9` and `nifeos/block_roster_contract#10`.
-- P1-8, `Hash`, `Ord` and an exact-size `devices()`: Done, `nifeos/block_roster_contract#9`.
-- P2-1, publishing metadata: Done, `nifeos/block_roster_contract#10`.
+- P1-4, `Display` and `Error` on `TooManyDevices`: Done, `partsfoundry/block_roster_contract#9`.
+- P1-5, `forbid(unsafe_code)`: Done, `partsfoundry/block_roster_contract#9`.
+- P1-6, `index` and the transport aliases: Done, `partsfoundry/block_roster_contract#9`.
+- P1-7, the shipped text: Done, `partsfoundry/block_roster_contract#5`, `partsfoundry/block_roster_contract#8`, `partsfoundry/block_roster_contract#9` and `partsfoundry/block_roster_contract#10`.
+- P1-8, `Hash`, `Ord` and an exact-size `devices()`: Done, `partsfoundry/block_roster_contract#9`.
+- P2-1, publishing metadata: Done, `partsfoundry/block_roster_contract#10`.
 - P2-2, `rust-version` 1.85: Won't fix. The reader uses `slice::as_chunks`, stable since 1.88; the
-  maintainers ruled it provisionally on 2026-11-18, and the README BUGS says so (`nifeos/block_roster_contract#18`).
-- P2-3, package contents: Done, `nifeos/block_roster_contract#10`.
-- P2-4, fuzz targets: Done, `nifeos/block_roster_contract#12`.
-- P2-5, proofs on longer pages: Done, `nifeos/block_roster_contract#11`.
-- P2-6, what a reader may trust: Done, `nifeos/block_roster_contract#10`.
-- P2-7, repository description and topics: Done, a settings change recorded in `nifeos/block_roster_contract#18`; the topics
+  maintainers ruled it provisionally on 2026-11-18, and the README BUGS says so (`partsfoundry/block_roster_contract#18`).
+- P2-3, package contents: Done, `partsfoundry/block_roster_contract#10`.
+- P2-4, fuzz targets: Done, `partsfoundry/block_roster_contract#12`.
+- P2-5, proofs on longer pages: Done, `partsfoundry/block_roster_contract#11`.
+- P2-6, what a reader may trust: Done, `partsfoundry/block_roster_contract#10`.
+- P2-7, repository description and topics: Done, a settings change recorded in `partsfoundry/block_roster_contract#18`; the topics
   carry `block-device`, `virtio` and `nvme`.
-- P2-8, single-letter locals: Done, `nifeos/block_roster_contract#10`.
-- Decision 6, `capacity_of(len)` becomes `entry_capacity(page_bytes)`: Done, `nifeos/block_roster_contract#20`.
+- P2-8, single-letter locals: Done, `partsfoundry/block_roster_contract#10`.
+- Decision 6, `capacity_of(len)` becomes `entry_capacity(page_bytes)`: Done, `partsfoundry/block_roster_contract#20`.
 
 The publishing hold keeps `publish = false`, and `v0.1.0-pre.2` stays the last tag (decision 6).
 
@@ -278,9 +278,9 @@ None. The publishing hold stands.
 ## Follow-on
 
 - **Done.** P0-1 to P0-2, P1-1 to P1-8 and every P2 item but P2-2 landed in
-  `nifeos/block_roster_contract`; the finding status above names the pull request of each. nife #3568 moved
+  `partsfoundry/block_roster_contract`; the finding status above names the pull request of each. nife #3568 moved
   the two call sites.
-- **Done.** The rename of `capacity_of` to `entry_capacity` is `nifeos/block_roster_contract` #20,
+- **Done.** The rename of `capacity_of` to `entry_capacity` is `partsfoundry/block_roster_contract` #20,
   merged. Read from the repository through the GitHub API.
 - **Recorded.** A tag for the rename waits until nife needs a newer pin or a release is near
   (decision 6, ruled 2026-11-19). `v0.1.0-pre.2` is the last tag, and the repository's tags list

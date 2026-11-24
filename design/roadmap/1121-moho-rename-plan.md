@@ -61,7 +61,7 @@ These stay.
 
 The full count by file kind, with the commands, is in
 [the census appendix](1121-moho-rename-plan/census.md). The lane measured it at
-`nifeos/nife@97d16ae8b` and `nifeos/basalt@2c437ca`. In short, 731 nife files carry at least one spelling that moves.
+`partsfoundry/nife@97d16ae8b` and `partsfoundry/basalt@2c437ca`. In short, 731 nife files carry at least one spelling that moves.
 
 | spelling | lines | files | where most of them are |
 |---|---|---|---|
@@ -101,7 +101,7 @@ list after the steps holds the outward ones.
    falsification patches whose context names the crate. Prose moves by status, per the rename
    checklist, and the path changes everywhere, as navigation. Effort: M.
    Lands alone. `needs-architect` follows from rule 1, and the first open decision covers its clearing.
-   Done in [#4013](https://github.com/nifeos/nife/pull/4013): the crate is `crates/moho_abi`, the
+   Done in [#4013](https://github.com/partsfoundry/nife/pull/4013): the crate is `crates/moho_abi`, the
    package and every use are `moho_abi`, and the `std` overlay's generated module is `moho_abi.rs`.
 4. **`target_os` and the `std` port.** One pull request changes the `os` field of the three
    specifications and the patcher's arms and `env_consts` (`xtask/src/farm/patch.rs`, `source.rs`).
@@ -113,7 +113,7 @@ list after the steps holds the outward ones.
    `.cargo/config.toml` that names one, xtask, helpers, the two workflows and the probe scripts in
    live notes. Effort: M. Lands alone, after steps 2 and 4.
 6. **basalt drops the old spellings** and bumps its nife pin to the commit of step 5, citing it as
-   `nifeos/nife@<sha>`. Effort: S. Lands alone, in basalt.
+   `partsfoundry/nife@<sha>`. Effort: S. Lands alone, in basalt.
 
 Steps 3 and 4 could share a pull request, and the plan keeps them apart. Each one alone already
 touches hundreds of files. A queue removal then names one cause.
@@ -141,8 +141,8 @@ rename before any move keeps the whole change inside one repository and one queu
 
 Each needs its own go from calef and none is part of steps 1 to 6.
 
-- A repository for `moho_abi`. Done: [nifeos/moho_abi](https://github.com/nifeos/moho_abi), which nife
-  pins by revision ([#4021](https://github.com/nifeos/nife/pull/4021)).
+- A repository for `moho_abi`. Done: [partsfoundry/moho_abi](https://github.com/partsfoundry/moho_abi), which nife
+  pins by revision ([#4021](https://github.com/partsfoundry/nife/pull/4021)).
 - The crates.io publish. Publishing waits until every outside-review milestone closes. The
   name `moho_abi` was free on crates.io on 2026-11-21.
 - An upstream rustc target. No rustc target, and no LLVM `OSType`, says `moho` or `nife`, on
@@ -227,7 +227,7 @@ Blocks: step 4 only in which line the C library's platform module keeps.
 
 ## Follow-on
 
-- **Done.** Step 3, the crate rename, in [#4013](https://github.com/nifeos/nife/pull/4013).
+- **Done.** Step 3, the crate rename, in [#4013](https://github.com/partsfoundry/nife/pull/4013).
 - **Outstanding.** Steps 1 and 6, in basalt. Checked by reading basalt's `main`:
   `helpers/packages.py` names no `*-unknown-moho` triple.
 - **Outstanding.** Step 2, nife's basalt pin, which waits on step 1's Release.

@@ -8,7 +8,7 @@ machine_requirements: none
 specific_machine: none
 needs_person: yes
 ---
-# 1018. The design record moves to `nifeos/record` and is published as a website
+# 1018. The design record moves to `partsfoundry/record` and is published as a website
 
 The lane `lane/the-design-record-moves-and-is-published` wrote this on 2026-11-01 (UTC), on that
 day's rulings. Its measurements are in
@@ -22,8 +22,8 @@ it as ground truth. `script/roadmap` reads block status, `script/journeys` reads
 blocks, and `script/citations` checks that every `milestone N` and `§N` resolves.
 
 On 2026-11-01 (UTC) the architect ruled the end state. The nife repository breaks up into
-single-purpose repositories and `nifeos/nife` keeps its name and remains for its history only. The
-kernel moves to `nifeos/nife-kernel`, a provisional name. The same day set a direction for the
+single-purpose repositories and `partsfoundry/nife` keeps its name and remains for its history only. The
+kernel moves to `partsfoundry/nife-kernel`, a provisional name. The same day set a direction for the
 record: it will likely move to a new repository of its own, and the intent is to publish it as a
 website.
 
@@ -31,18 +31,18 @@ Two older records already hold the question. Milestone 565 (a website for the pr
 milestone 684 (a documentation site, and documentation that ships in packages) each wait on a
 direction. §201 (one roadmap until a citation has to cross, and the blocked side declares the
 dependency) rules on citations across repositories. Its section 4 says a record points at code as
-`nifeos/<repo>@<sha>`, code does not cite records, and the numbering namespace stayed with nife until the ruling of 2026-11-01 (UTC) below.
+`partsfoundry/<repo>@<sha>`, code does not cite records, and the numbering namespace stayed with nife until the ruling of 2026-11-01 (UTC) below.
 
 On 2026-11-10 (UTC) the architect ruled question 1 below. The record lives in a repository of its
 own, `nifeos/record`. The website is a separate repository, `nifeos/partsfoundry.org`, a consumer
 of the record. At build time it pulls the record, a page for each crate from that crate's own repository,
 and the planned tutorial on building a RISC-V operating system, a class. None of them is copied
-into the website's repository. The same day ruled the name, `nifeos/record`, over `nifeos/project`
-and `nifeos/project-management`. Question 8's ruling of 2026-11-11 (UTC) creates each at its step
+into the website's repository. The same day ruled the name, `partsfoundry/record`, over `partsfoundry/project`
+and `partsfoundry/project-management`. Question 8's ruling of 2026-11-11 (UTC) creates each at its step
 below.
 
 The architect ruled question 4 below on 2026-11-01 (UTC), and its contents on 2026-11-10 (UTC).
-`nifeos/record` holds `design/`, `briefs/`, the lane skills, and `notes/` except the tool data that
+`partsfoundry/record` holds `design/`, `briefs/`, the lane skills, and `notes/` except the tool data that
 stays with code: `notes/project-metrics/`, `notes/mutation-testing/`,
 `notes/kernel-dependency-unsafe/sites.tsv` and `notes/scripts.md`. It also holds the record's own
 checks and tooling: `script/roadmap`, `script/decisions`, `script/journeys`, the core of
@@ -52,14 +52,14 @@ baselines and workflow data, and its own `AGENTS.md`. When a crate leaves this r
 notes move with it under §315 (a crate's documentation leaves with it): the sort that section
 orders puts a note about the crate alone into the crate's README, rustdoc or `docs/` folder.
 
-Why now. If the record stays in `nifeos/nife`, it stays in a repository whose stated role is
+Why now. If the record stays in `partsfoundry/nife`, it stays in a repository whose stated role is
 history. Every other move then lands its record edits in a repository that is winding down.
 
 ## Recommendation
 
-Move the record to `nifeos/record` by a path-filtered extraction, so every commit that touched a
+Move the record to `partsfoundry/record` by a path-filtered extraction, so every commit that touched a
 record file keeps its message, author and date. The record keeps its numbers, and the numbering
-namespace moves with it. `nifeos/record` runs the record's checks on every pull request.
+namespace moves with it. `partsfoundry/record` runs the record's checks on every pull request.
 `nifeos/partsfoundry.org` builds the website: it pulls the record, the crate pages and the tutorial
 at build time and publishes a static site with one stable address per record number, search, and a
 link check. What describes a single crate or carries a tool's data stays with that code, as the
@@ -75,14 +75,14 @@ The extraction reuses `git filter-repo`.
 ## How the record cites, once it leaves
 
 §201 section 4 already covers most of this. Records cite records by number, as today. A record
-cites code by repository, as `nifeos/<repo>@<sha>` for a claim about one commit. This proposal adds
-one form for a path inside another repository, `nifeos/<repo>:<path>`, resolved at the commit
+cites code by repository, as `partsfoundry/<repo>@<sha>` for a claim about one commit. This proposal adds
+one form for a path inside another repository, `partsfoundry/<repo>:<path>`, resolved at the commit
 basalt's manifest pins. basalt already names the current commit of each component, so the record
 gains no second list.
 
 Code does not cite records by number, under §201 section 4. That rule needs no change. Code that
-names a record file by path, 1,062 times today, writes `nifeos/record:<path>`, such as
-`nifeos/record:design/naming.md`. The 7,774 milestone citations in code convert when each crate
+names a record file by path, 1,062 times today, writes `partsfoundry/record:<path>`, such as
+`partsfoundry/record:design/naming.md`. The 7,774 milestone citations in code convert when each crate
 moves, under §315 (a crate's documentation leaves with it), and not in this move. The same section sends a note about one crate alone with that crate.
 
 A code repository checks each `milestone N`, `§N` and `TODO(milestone N)` citation by whether
@@ -91,22 +91,22 @@ A code repository checks each `milestone N`, `§N` and `TODO(milestone N)` citat
 The roadmap blocks already written are the hard part. A finished block's bullets name the files and
 checks that did the work, as bare paths such as `crates/x/src/y.rs`. Rewriting 7,845 of them is the
 sweep that `notes/citations.md` priced and refused for citations. So the recommendation is an
-anchor. The move records the last `nifeos/nife` commit before it, and every bare path in the
+anchor. The move records the last `partsfoundry/nife` commit before it, and every bare path in the
 record means that path at that commit. Text written after the move uses the qualified form. The
 anchor is one line in `packages/moved.toml`, the registry §201 section 4 names.
 
 A bare `#N` needs the same treatment for a different reason. On GitHub and on most generators it
-links to the repository that renders it. The site build rewrites `#N` to `nifeos/nife#N`; the
+links to the repository that renders it. The site build rewrites `#N` to `partsfoundry/nife#N`; the
 source text stays as written.
 
 ## How a qualified path resolves
 
-`script/roadmap --check` reads each `nifeos/<repo>:<path>` in a block, through
-`helpers/qualified_paths.py`, and fails one that names no file. `nifeos/record` resolves in the
+`script/roadmap --check` reads each `partsfoundry/<repo>:<path>` in a block, through
+`helpers/qualified_paths.py`, and fails one that names no file. `partsfoundry/record` resolves in the
 record's own tree. A repository basalt's `pins.toml` names resolves at its pin. Any other, such
 as a crate, resolves at every revision a pinned component's `Cargo.lock` names for it at that
 component's pin, provisionally, since that is what the image builds. Milestone 159 (a real
-hardware entropy source: the JH7110's TRNG) names `nifeos/jh7110_entropy:src/lib.rs` this way,
+hardware entropy source: the JH7110's TRNG) names `partsfoundry/jh7110_entropy:src/lib.rs` this way,
 for the crate milestone 818 (`jh7110_entropy`: proven JH7110 TRNG logic, released on its own)
 moved out.
 
@@ -118,8 +118,8 @@ arrive with the record half only, under the same message, author and date. `git 
 decision then lands on the commit that wrote the line, with its reasoning.
 
 Commit identities change in the new repository. A record citing a nife commit by hash (1,028 short
-hashes in Markdown, measured loosely) still resolves, because `nifeos/nife` keeps its history. The
-site links each one to `nifeos/nife`.
+hashes in Markdown, measured loosely) still resolves, because `partsfoundry/nife` keeps its history. The
+site links each one to `partsfoundry/nife`.
 
 The numbering survives because it lives in file names and H1s, which the extraction carries
 unchanged. `script/roadmap` and `script/decisions` mint from the directory listing, so they keep
@@ -168,7 +168,7 @@ built-in pull-request preview; and a soft bandwidth limit of 100 GB a month.
 - Gone from the record repository: every clippy, build, QEMU and unsafe-listing section, and the
   rule that a `TODO` names a milestone, which binds code to the record.
 
-The record's own checks and tooling live in `nifeos/record`, under the ruling on question 4.
+The record's own checks and tooling live in `partsfoundry/record`, under the ruling on question 4.
 [The appendix](1018-the-design-record-moves-and-is-published/measurements.md#where-each-script-goes)
 sorts each script and helper, provisionally. The record repository takes `script/roadmap`, `script/decisions`, `script/journeys`
 and the core of `script/citations`, the website takes `script/site` and `site/`, and the fleet and
@@ -183,12 +183,12 @@ change the dependent side in a separate pull request that cites the landed commi
 
 - A record-only lane, such as a proposal or a decision, has one draft, in the record repository.
 - A lane that builds code opens one draft in each. The code lands first, through its own queue.
-  The record's pull request then flips the block's status and cites `nifeos/<repo>@<sha>`, which
+  The record's pull request then flips the block's status and cites `partsfoundry/<repo>@<sha>`, which
   matches §90 (the claim is a draft pull request; the status flip is a gate). The two checks that
   read the block on the lane's own branch, `helpers/milestone-branch-block.sh` (`script/lint-fleet`
   4b) and `.github/workflows/ready-status.yml`, move that flip to the record's pull request,
   provisionally.
-- The board is `gh search prs --owner nifeos --draft`, which already spans repositories.
+- The board is `gh search prs --owner partsfoundry --draft`, which already spans repositories.
 - The record repository needs `script/claim` and the lane skills. The ruling on question 4 puts the
   lane skills in the record repository. Where `script/claim` lives stays with the tooling ruling.
 
@@ -199,7 +199,7 @@ Each step lands alone. Steps 1 to 5 land in this repository.
 1. Built: each `script/lint` section carries `# lint-scope: record`, `code` or `both`, as
    `lint-quick` tags sections. No run selects by it. Of 140 sections, 8 read only the record, 35
    read the record and code, and 97 read no record document.
-2. Built: `script/roadmap --check` resolves `nifeos/<repo>:<path>` at basalt's pin, as the
+2. Built: `script/roadmap --check` resolves `partsfoundry/<repo>:<path>` at basalt's pin, as the
    section on qualified paths states, and milestone 159's `jh7110_entropy` bullets use it.
 3. Built: `script/site` builds the site from `design/`, `notes/` and `briefs/`, and
    `.github/workflows/record-site.yml` runs it on each pull request that touches them and uploads
@@ -211,18 +211,18 @@ Each step lands alone. Steps 1 to 5 land in this repository.
    and stay with it, and 260 links from a record name a path that stays; each becomes a qualified
    path or plain text in step 6. [The record sort](1018-the-design-record-moves-and-is-published/the-record-sort.md)
    says how the lane judged each note.
-5. Measured: the record's checks can run by directory, which sets what `nifeos/record`'s CI runs.
+5. Measured: the record's checks can run by directory, which sets what `partsfoundry/record`'s CI runs.
    The hold check of §88 (`needs-architect` as a required check) reads labels and no file, in 4 to
    5 seconds, and applies to every change. Of `script/lint`'s 140 sections a record-only change
    needs the 43 tagged `record` or `both`: 80 of 454 seconds on a measured run. The merge queue
    classifies each entry against the entry ahead, so a record entry queued behind a code entry
    skips the heavy jobs while the code entry runs them.
-6. Once steps 2 and 4 have landed, create `nifeos/record`, public. Then extract by path into it,
+6. Once steps 2 and 4 have landed, create `partsfoundry/record`, public. Then extract by path into it,
    and remove the paths from this repository in one pull request. That pull request writes
    `packages/moved.toml` with the anchor, and leaves a pointer in the README.
    [The step 6 plan](1018-the-design-record-moves-and-is-published/step-6-plan.md) orders the pull
    requests and records a dry run of the extraction.
-7. Turn on `nifeos/record`'s CI: the record checks, limited to the record's directories, with the
+7. Turn on `partsfoundry/record`'s CI: the record checks, limited to the record's directories, with the
    record halves of the `both` sections and the tooling that runs them.
 8. Once step 7 runs the record's CI in `nifeos/record`, create `nifeos/partsfoundry.org`. Build
    there, pulling the record, the crate pages and the tutorial, and deploy from Actions to GitHub
@@ -256,15 +256,15 @@ verify](1018-the-design-record-moves-and-is-published/measurements.md#what-the-p
 
 One decision each, recommendation first. Ask them one at a time.
 
-1. Ruled 2026-11-10 (UTC): the record lives in its own repository, `nifeos/record`, and
+1. Ruled 2026-11-10 (UTC): the record lives in its own repository, `partsfoundry/record`, and
    `nifeos/partsfoundry.org` is the website, which pulls the record, the crate pages and the
-   tutorial at build time, as the Background states. The name `nifeos/record` is ruled the same day.
+   tutorial at build time, as the Background states. The name `partsfoundry/record` is ruled the same day.
 2. Ruled 2026-11-01 (UTC), as recommended: the number stays the identity and its namespace moves
    with the record, under the citation forms above. §201 section 4 says so, and its revisit
    condition stays armed.
 3. Ruled 2026-11-01 (UTC): GitHub Pages, deployed from `nifeos/partsfoundry.org`, as the website
    section states; step 8 names the person-only tasks.
-4. Ruled 2026-11-01 (UTC), as recommended, with the contents of `nifeos/record` ruled 2026-11-10
+4. Ruled 2026-11-01 (UTC), as recommended, with the contents of `partsfoundry/record` ruled 2026-11-10
    (UTC): the division the Background states, with a crate's notes moving with the crate under
    §315 (a crate's documentation leaves with it).
 
@@ -274,7 +274,7 @@ One decision each, recommendation first. Ask them one at a time.
    fork it.
 
 6. Provisional, recorded by the maintainer, and the architect may reverse each. The appendix's
-   sort of the record's own tooling into `nifeos/record`. The rework that moves the status flip in
+   sort of the record's own tooling into `partsfoundry/record`. The rework that moves the status flip in
    `helpers/milestone-branch-block.sh` and `ready-status.yml` to the record's pull request. Counted
    claims that fetch code at basalt's pins.
 
@@ -283,7 +283,7 @@ One decision each, recommendation first. Ask them one at a time.
    existence, as the section on citations states. A generated index may follow if that proves too
    slow.
 
-8. Ruled 2026-11-11 (UTC): `nifeos/record` and the website's repository, now
+8. Ruled 2026-11-11 (UTC): `partsfoundry/record` and the website's repository, now
    `nifeos/partsfoundry.org`, are created, each at its step. Steps 6 and 8 state when. Setting DNS,
    auto-renew and the organization's verified domain stay a person's steps.
 

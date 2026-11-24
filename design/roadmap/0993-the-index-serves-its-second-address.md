@@ -12,7 +12,7 @@ needs_person: yes
 
 Raised 2026-10-30 (UTC) by the session that landed step 1 of milestone 956 (the linked interfaces carry checkable versions). §250 (an image names its distribution's package index, at `basalt.nifeos.org`) clause 6 ruled the index at up to two addresses on different registrable domains. The first, `basalt.nifeos.org`, serves. The second, `basalt.crickertech.com`, does not: basalt's `backup` job exits 1 because `BACKUP_DEPLOY_KEY` is unset.
 
-Reuse: basalt's `backup` job already downloads `publish`'s artifact, writes a `CNAME`, and force-pushes one orphan commit to `nifeos/basalt-backup`'s `pages` branch. This proposal writes no code. The steps live in basalt's README under "What calef must do for the second address".
+Reuse: basalt's `backup` job already downloads `publish`'s artifact, writes a `CNAME`, and force-pushes one orphan commit to `partsfoundry/basalt-backup`'s `pages` branch. This proposal writes no code. The steps live in basalt's README under "What calef must do for the second address".
 
 ## Why a second address
 
@@ -26,7 +26,7 @@ Reuse: basalt's `backup` job already downloads `publish`'s artifact, writes a `C
 
 Six steps, all in basalt's README:
 
-1. Generate a deploy key, add its public half to `nifeos/basalt-backup` with write access, and store the private half as `BACKUP_DEPLOY_KEY` on `nifeos/basalt`.
+1. Generate a deploy key, add its public half to `partsfoundry/basalt-backup` with write access, and store the private half as `BACKUP_DEPLOY_KEY` on `partsfoundry/basalt`.
 2. Run `packages` on `main`; `backup` creates the `pages` branch.
 3. Verify `crickertech.com` for the organization before the DNS record exists.
 4. Add `basalt CNAME nifeos.github.io.` in the crickertech.com zone.

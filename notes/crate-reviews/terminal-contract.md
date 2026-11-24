@@ -6,8 +6,8 @@ the packages together outgrow the page. Its twin is [`line_editor`](line-editor.
 this crate's protocol serves.*
 
 The architect cleared this package on 2026-11-22 (UTC), with `publish = false`, no tag and no
-publish: the clearance was the go to create `nifeos/terminal_contract`. The crate now lives there,
-and nife depends on it by rev ([#4015](https://github.com/nifeos/nife/pull/4015)). It describes the crate as `main` leaves it at `97d16ae8b`,
+publish: the clearance was the go to create `partsfoundry/terminal_contract`. The crate now lives there,
+and nife depends on it by rev ([#4015](https://github.com/partsfoundry/nife/pull/4015)). It describes the crate as `main` leaves it at `97d16ae8b`,
 with the interface identity and the reserved-bit refusal built since. The crate came out of `line_editor` by decision 1 of
 [milestone 1098 (`line_editor`: what an outside maintainer would fix before it leaves)](../../design/roadmap/1098-line-editor-outside-review.md),
 which holds the rulings this package relies on. No outside review of this crate alone exists, so
@@ -63,7 +63,7 @@ All commands ran in this lane's worktree, at `main` with this lane's edits to do
 | `cargo clippy -p terminal_contract --all-targets -- -D warnings` | no warning |
 | `cargo doc -p terminal_contract --no-deps` with warnings denied | no warning |
 | `script/names terminal_contract` and `python3 helpers/name_release.py --draft terminal_contract` | `NOTE_NOT_ABSORBED` ratified; the crate and 12 items provisional; 20 items with no block |
-| the template's gating name checks (`spelled_out`, `unit_symbols`, `register_names`, `british_spelling`, `service_model`, `contract_names`, `question_shape`, and `service_model --prose`), from `nifeos/crate-workflows` at `56437de` | all pass, 52 names judged |
+| the template's gating name checks (`spelled_out`, `unit_symbols`, `register_names`, `british_spelling`, `service_model`, `contract_names`, `question_shape`, and `service_model --prose`), from `partsfoundry/crate-workflows` at `56437de` | all pass, 52 names judged |
 | the template's `abbreviations` report | 14 components: `readline`, `intrcount`, `rawmode`, `readraw`, `stdin`, `quiesced`, `ctl` (three names), `handoff` (two), `req`, `eof`, and `proto` in a test name |
 
 Not run, and so not claimed: the stranger test (there is no README), `cargo-mutants`, Kani (no
@@ -102,10 +102,10 @@ No nife type appears in a signature. What a stranger may find surprising:
 
 | item | state | evidence |
 |---|---|---|
-| Decision 1 of milestone 1098, the cut | landed ([#3587](https://github.com/nifeos/nife/pull/3587)) | the crate exists with no dependency; the kernel and the protocol's clients depend on it, not on `line_editor` |
-| Decision 4, an interface identity | landed ([#3972](https://github.com/nifeos/nife/pull/3972)) | `INTERFACE_ID` 25 and `VERSION` 1 in `src/lib.rs`, pinned by a host test; row 25 of milestone 956's table |
-| The reserved bits of the first word | landed ([#3972](https://github.com/nifeos/nife/pull/3972)) | `decode` refuses a word with any of bits 55 to 32 set; both servers answer it `BAD_REQUEST` |
-| Decision 5, the name | landed ([#3965](https://github.com/nifeos/nife/pull/3965)) | the crate root's `Name:` block records the ratification |
+| Decision 1 of milestone 1098, the cut | landed ([#3587](https://github.com/partsfoundry/nife/pull/3587)) | the crate exists with no dependency; the kernel and the protocol's clients depend on it, not on `line_editor` |
+| Decision 4, an interface identity | landed ([#3972](https://github.com/partsfoundry/nife/pull/3972)) | `INTERFACE_ID` 25 and `VERSION` 1 in `src/lib.rs`, pinned by a host test; row 25 of milestone 956's table |
+| The reserved bits of the first word | landed ([#3972](https://github.com/partsfoundry/nife/pull/3972)) | `decode` refuses a word with any of bits 55 to 32 set; both servers answer it `BAD_REQUEST` |
+| Decision 5, the name | landed ([#3965](https://github.com/partsfoundry/nife/pull/3965)) | the crate root's `Name:` block records the ratification |
 | Item 4, the crate's own name worklist | open | the 14 components the `abbreviations` report lists |
 | The externalization list | open | `crates/externalization-list.txt` names `line_editor` and not this crate |
 
@@ -134,7 +134,7 @@ the first tag even though the values are not.
 
 ## What still blocks the move
 
-Nothing: the move landed in [#4015](https://github.com/nifeos/nife/pull/4015). The repository's
+Nothing: the move landed in [#4015](https://github.com/partsfoundry/nife/pull/4015). The repository's
 root commit carries the README, both licenses, the literal manifest keys and the documentation
 rewritten without citations of this tree, and the six dependents take the crate by `git` and `rev`.
 What remains belongs to the repository and to later lanes:
@@ -147,7 +147,7 @@ What remains belongs to the repository and to later lanes:
 ## Recommendation
 
 Cleared 2026-11-22 (UTC). The crate is a dependency-free leaf with no `unsafe` and no nife type in
-a signature, and the template's gating name checks pass. It moved to `nifeos/terminal_contract`
+a signature, and the template's gating name checks pass. It moved to `partsfoundry/terminal_contract`
 the same day.
 
 ## Open questions
@@ -162,7 +162,7 @@ the same day.
 - The reserved bits (2026-11-22 UTC): a terminal refuses a first word with any of bits 55 to 32
   set, answering `BAD_REQUEST`, and both servers decode through one crate function that checks
   them, with a host test that pins the refusal.
-- The clearance (2026-11-22 UTC): cleared, the go to create `nifeos/terminal_contract` with
+- The clearance (2026-11-22 UTC): cleared, the go to create `partsfoundry/terminal_contract` with
   `publish = false`, no tag and no publish.
 
 ## Decisions for the architect

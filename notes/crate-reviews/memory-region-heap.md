@@ -9,7 +9,7 @@ The architect cleared this package on 2026-11-20 (UTC) for the crate's move to i
 It describes the crate as `main` leaves it. The outside review behind it is
 [milestone 1100 (`memory_region_heap`: what an outside maintainer would fix before it leaves)](../../design/roadmap/1100-memory-region-heap-outside-review.md).
 The ruling of 2026-11-19 (UTC) ratified the names. The clearance of 2026-11-20 (UTC) approves
-`nifeos/memory_region_heap` with `publish = false`; there is no tag and no publish.
+`partsfoundry/memory_region_heap` with `publish = false`; there is no tag and no publish.
 
 ## In one paragraph
 
@@ -170,6 +170,6 @@ The move is step 9 of milestone 1017, after the contract crates it links, on thi
 ## Open questions
 
 None for the maintainer. The package is cleared (2026-11-20 UTC, no tag, no publish), and the
-clearance approves the repository, `nifeos/memory_region_heap`, with `publish = false`. The move, in
+clearance approves the repository, `partsfoundry/memory_region_heap`, with `publish = false`. The move, in
 step 9 of milestone 1017, waits for `moho_abi`, `address_space_layout` and `user_mode_runtime` to get
 repositories. It leaves with `subtree_scope` or alone, decided at the move, and before `redoxfs`.

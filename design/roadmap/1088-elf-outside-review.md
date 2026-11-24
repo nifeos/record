@@ -21,7 +21,7 @@ did take is [milestone 784 (reuse what the tree wrote: which first-party code an
 That comparison measured fit, hostile input, proofs, cost and upkeep. It ended in the ruling that the crate
 stays ours. The baseline also takes the order in which milestone 857 (crates released on their own) moves it.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `script/crate-review-packet`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `script/crate-review-packet`,
 `script/crate-standalone`, Kani, cargo-mutants, cargo-fuzz, the crate's falsification patches,
 and milestone 784's probe script. No new tool.
 
@@ -57,61 +57,61 @@ appendix](1088-elf-outside-review/before-the-move.md), items 5 to 11 in [the bef
 appendix](1088-elf-outside-review/before-the-tag.md), and items 12 to 16 in [the later-items
 appendix](1088-elf-outside-review/later-items.md). The decisions and the release steps follow.
 
-- Item 1 (P0), shipped text cites this tree: Done, [#3642](https://github.com/nifeos/nife/pull/3642)
-  and [#3957](https://github.com/nifeos/nife/pull/3957), which moved the last provenance out of
+- Item 1 (P0), shipped text cites this tree: Done, [#3642](https://github.com/partsfoundry/nife/pull/3642)
+  and [#3957](https://github.com/partsfoundry/nife/pull/3957), which moved the last provenance out of
   prose into `Name:` blocks. The move commit strips the blocks.
 - Item 2 (P0), fuzz seeds and target: At the move. The seeds live in `tests/fixtures/` and the
   target looks up a `GNU` note; the `elf_parse` target and its `fuzz/Cargo.toml` entry move to the
   new repository's `fuzz/`, opted in since the crate has no `unsafe`.
 - Item 3 (P0), manifest and repository files: At the move. The manifest states every key as a
   literal with `rust-version` 1.88, and the license files are in the crate
-  ([#3642](https://github.com/nifeos/nife/pull/3642)); the scaffold's `CHANGELOG.md`, `SECURITY.md`,
+  ([#3642](https://github.com/partsfoundry/nife/pull/3642)); the scaffold's `CHANGELOG.md`, `SECURITY.md`,
   `CONTRIBUTING.md`, `deny.toml`, `_typos.toml` and caller workflows come with the move.
 - Item 4 (P0), a public name says nife and the machine list is public: Done,
-  [#3642](https://github.com/nifeos/nife/pull/3642). The guard is the test-only `unknown_machine`.
+  [#3642](https://github.com/partsfoundry/nife/pull/3642). The guard is the test-only `unknown_machine`.
 - Item 5 (P1), `page_range` panics on a bad page size: Done,
-  [#3642](https://github.com/nifeos/nife/pull/3642). `PageBytes` holds only a power of two, and a
+  [#3642](https://github.com/partsfoundry/nife/pull/3642). `PageBytes` holds only a power of two, and a
   harness quantifies over every one.
 - Item 6 (P1), the overlap check hard-codes 4 KiB: Done,
-  [#3642](https://github.com/nifeos/nife/pull/3642). `Elf::parse_with` takes the loader's page
+  [#3642](https://github.com/partsfoundry/nife/pull/3642). `Elf::parse_with` takes the loader's page
   size, and the kernel passes its frame size.
-- Item 7 (P1), four truncating casts: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
+- Item 7 (P1), four truncating casts: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
 - Item 8 (P1), `Display`, `core::error::Error` and derives: Done,
-  [#3565](https://github.com/nifeos/nife/pull/3565). The consumers keep their own wording by
+  [#3565](https://github.com/partsfoundry/nife/pull/3565). The consumers keep their own wording by
   design.
-- Item 9 (P1), the public vocabulary: Done, [#3642](https://github.com/nifeos/nife/pull/3642), with
-  the names ratified in [#3877](https://github.com/nifeos/nife/pull/3877).
+- Item 9 (P1), the public vocabulary: Done, [#3642](https://github.com/partsfoundry/nife/pull/3642), with
+  the names ratified in [#3877](https://github.com/partsfoundry/nife/pull/3877).
 - Item 10 (P1), README, example, shared forge and stranger run: At the move. The README and
-  `examples/parse_static_executable.rs` are in [#3642](https://github.com/nifeos/nife/pull/3642),
+  `examples/parse_static_executable.rs` are in [#3642](https://github.com/partsfoundry/nife/pull/3642),
   and the shared `cfg(test)` forge in `src/forge.rs` is in
-  [#3957](https://github.com/nifeos/nife/pull/3957). The stranger run in `docs/stranger-test.md`
+  [#3957](https://github.com/partsfoundry/nife/pull/3957). The stranger run in `docs/stranger-test.md`
   comes with the move.
 - Item 11 (P1), the program-header index has no proof: Done,
-  [#3642](https://github.com/nifeos/nife/pull/3642). Nine harnesses, each with a falsification
+  [#3642](https://github.com/partsfoundry/nife/pull/3642). Nine harnesses, each with a falsification
   patch.
 - Item 12 (P2), an entry in the zero-filled tail: Done,
-  [#3642](https://github.com/nifeos/nife/pull/3642). Refused as `EntryNotExecutable`.
+  [#3642](https://github.com/partsfoundry/nife/pull/3642). Refused as `EntryNotExecutable`.
 - Item 13 (P2), what the parser ignores is unwritten: Done,
-  [#3642](https://github.com/nifeos/nife/pull/3642). The README's "What it does not check",
+  [#3642](https://github.com/partsfoundry/nife/pull/3642). The README's "What it does not check",
   congruence included.
 - Item 14 (P2), `segments()` discards an unreachable error: Done,
-  [#3565](https://github.com/nifeos/nife/pull/3565). A comment states the invariant, and
+  [#3565](https://github.com/partsfoundry/nife/pull/3565). A comment states the invariant, and
   `exactly_the_maximum_header_count_is_accepted` counts.
 - Item 15 (P2), four mutation timeouts: Waiting on the first weekly mutation run in
-  `nifeos/static_elf`, which names the four for triage.
+  `partsfoundry/static_elf`, which names the four for triage.
 - Item 16 (P2), the note padding rule differs from LLVM: Done,
-  [#3957](https://github.com/nifeos/nife/pull/3957). LLVM's `ELFFile::notes_begin` accepts
+  [#3957](https://github.com/partsfoundry/nife/pull/3957). LLVM's `ELFFile::notes_begin` accepts
   `p_align` 0, 1, 4 and 8 and pads to the larger of `p_align` and 4, the crate's own rule, so the
   BUGS line goes and the docs state the rule.
-- D1, the machine as an input: Done, [#3642](https://github.com/nifeos/nife/pull/3642), with
-  `NATIVE_MACHINE` ratified as public in [#3877](https://github.com/nifeos/nife/pull/3877).
-- D2, the policy stays inside the parser: Done, [#3642](https://github.com/nifeos/nife/pull/3642).
-- D3, the public names: Done, [#3642](https://github.com/nifeos/nife/pull/3642).
-- The crate name: Done, [#3595](https://github.com/nifeos/nife/pull/3595).
-- Review package: Done, [#3877](https://github.com/nifeos/nife/pull/3877).
+- D1, the machine as an input: Done, [#3642](https://github.com/partsfoundry/nife/pull/3642), with
+  `NATIVE_MACHINE` ratified as public in [#3877](https://github.com/partsfoundry/nife/pull/3877).
+- D2, the policy stays inside the parser: Done, [#3642](https://github.com/partsfoundry/nife/pull/3642).
+- D3, the public names: Done, [#3642](https://github.com/partsfoundry/nife/pull/3642).
+- The crate name: Done, [#3595](https://github.com/partsfoundry/nife/pull/3595).
+- Review package: Done, [#3877](https://github.com/partsfoundry/nife/pull/3877).
   [`notes/crate-reviews/static-elf.md`](../../notes/crate-reviews/static-elf.md) lists the identity,
   the dependents, the checks and every public name.
-- Review clearance and name ratification: Done, [#3877](https://github.com/nifeos/nife/pull/3877).
+- Review clearance and name ratification: Done, [#3877](https://github.com/partsfoundry/nife/pull/3877).
   The architect cleared the review on 2026-11-20 (UTC) and ratified the public names on 2026-11-21
   (UTC).
 
@@ -160,7 +160,7 @@ Each decision's background, options and prior art are in
 
 - The clearance of the review of `static_elf` and its repository. Ruled 2026-11-20 (UTC), option
   A: the architect cleared the review package (`notes/crate-reviews/static-elf.md`) and gave the go
-  for `nifeos/static_elf` as a `publish = false` repository, with no tag and no publish. The
+  for `partsfoundry/static_elf` as a `publish = false` repository, with no tag and no publish. The
   architect ratified the package's public names on 2026-11-21 (UTC). The move lane runs the stranger test, the template's
   workflows and the first weekly mutation run in the new repository. The clearance gates
   milestone 1039.
@@ -179,7 +179,7 @@ Each decision's background, options and prior art are in
   `#[doc(alias)]` and no alias of this tree's earlier spelling.
 - The crate name. Ruled 2026-11-14 (UTC), option A: the crate is `static_elf`, in code and in
   package name, with no `package =` rename and no `doc(alias)` of the old spelling. The repository,
-  when the crate leaves, is `nifeos/static_elf`. The type `Elf` and every other public name keep
+  when the crate leaves, is `partsfoundry/static_elf`. The type `Elf` and every other public name keep
   their spelling, and the notes about the file format keep theirs.
 - `static_elf` stays this project's own code, with no switch to the `elf` or `object` crates.
   Ruled 2026-11-19 (UTC), option A, on the measurements in

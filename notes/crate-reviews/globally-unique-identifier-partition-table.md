@@ -208,7 +208,7 @@ For the move lane:
 
 ## What still blocks
 
-Nothing blocks the move to `nifeos/globally_unique_identifier_partition_table`, which waits only for
+Nothing blocks the move to `partsfoundry/globally_unique_identifier_partition_table`, which waits only for
 the move lane. The first tag's condition, a bounded totality harness for `parse`, is met:
 `the_entry_array_check_is_total`, `the_table_checks_are_total_on_one_entry` and
 `the_partition_checks_are_total_on_one_entry`, with the two `Header::decode` harnesses, prove
@@ -222,7 +222,7 @@ None. The `parse` totality harnesses exist, and `VERSION` is removed.
 ## Decisions for the architect
 
 None open. The architect ratified the names and cleared the repository
-`nifeos/globally_unique_identifier_partition_table` on 2026-11-20 (UTC), as `publish = false`, with
+`partsfoundry/globally_unique_identifier_partition_table` on 2026-11-20 (UTC), as `publish = false`, with
 no tag and no publication.
 
 ## Recommendation

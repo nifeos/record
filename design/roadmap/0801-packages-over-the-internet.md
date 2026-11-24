@@ -54,12 +54,12 @@ Item 2's five questions, ruled on #1884, add four items:
 ## Where the index and the bytes live
 
 - **The index is served by GitHub Pages; package bytes are GitHub Release assets.** The index
-  (`/rolling/metadata/`) is a project site of `nifeos/basalt` at `basalt.nifeos.org`, a CNAME to
-  `nifeos.github.io`, and not the organization's Pages site, which `nifeos/nifeos.github.io` serves
+  (`/rolling/metadata/`) is a project site of `partsfoundry/basalt` at `basalt.nifeos.org`, a CNAME to
+  `partsfoundry.github.io`, and not the organization's Pages site, which `partsfoundry/partsfoundry.github.io` serves
   as `www.nifeos.org`. Its certificate chains to ISRG Root X1 (measured 2026-10-13), so §250's pin
   holds unchanged. Each publish makes one Release, and each index line lists its asset as a
   location, which §250 clause 2 allows. An asset's `download_count` is the first adoption signal
-  for milestone 576. basalt's `publish` job (nifeos/basalt#13) builds both, and keeps clause 9's
+  for milestone 576. basalt's `publish` job (partsfoundry/basalt#13) builds both, and keeps clause 9's
   copy under `targets/` on Pages as the fallback when the Release cannot be reached. The other
   hosts on offer were a VPS running Caddy, Cloudflare, and S3 with CloudFront; no tree record gives
   a reason against them.
@@ -136,7 +136,7 @@ second boot. [notes/packages/jig.md](../../notes/packages/jig.md) has the transc
   removed it is refused (falsified on aarch64, 2026-10-12).
 - The store is a directory grant the owner's console alone makes, at the `std` layout's directory
   slot, on a line that names no directory of its own; the sources page comes with it (slot 18).
-- The host answers. `basalt.nifeos.org` is a CNAME to `nifeos.github.io`, and
+- The host answers. `basalt.nifeos.org` is a CNAME to `partsfoundry.github.io`, and
   `https://basalt.nifeos.org/rolling/metadata/stand-in-index` answers 200, listing every package
   against one Release (checked 2026-10-24 UTC, `rolling-2026-10-24-87a3b29`). From an installed disk
   built with `NIFE_INDEX_SOURCES=basalt`, `jig update` resolves `basalt.nifeos.org` by name and

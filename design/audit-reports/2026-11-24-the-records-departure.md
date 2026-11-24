@@ -20,7 +20,7 @@ record](../roadmap/proposals/a-search-that-reaches-the-design-record.md).
 documents.
 
 The window's largest change was not a milestone. The design record left nife under milestone 1018 (the
-design record moves to `nifeos/record` and is published as a website), and nife removed `design/` and
+design record moves to `partsfoundry/record` and is published as a website), and nife removed `design/` and
 most of `notes/` in one series. Every pointer nife's pages held into those directories went dead
 that day, and the record's own pages kept describing tools that stayed behind. `script/audits
 --worklist` cannot see this: it reads only this repository's history, so a move in nife's tree

@@ -120,7 +120,7 @@ Code lines are counted as 784 counts them, with blank and comment lines removed.
 | `fatfs` git pin on rafalh/rust-fatfs | ok | ok | ok | **failed** |
 | `embedded-sdmmc` 0.10.0 | ok | **failed**: a second `syn` major through `bitbybit` | ok | ok |
 
-`[sources]` allows git only under `nifeos`, per §305 (git dependencies are allowed on `nifeos/*`
+`[sources]` allows git only under `nifeos`, per §305 (git dependencies are allowed on `partsfoundry/*`
 only, pinned to a landed commit). So `fatfs` can arrive today as `lamfat`, as a `nifeos` fork, or
 later as a `fatfs` release. Taking a third party's republish is its own question: one publisher,
 behind upstream by seven months of fixes.

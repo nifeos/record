@@ -39,7 +39,7 @@ A rough count on 2026-11-01 (UTC), by name match and not by reading each note:
 
 1. List every link from the record to a path that stays, using the sort step 4 of the main proposal
    produces.
-2. For each, choose one: retarget it to the qualified form `nifeos/<repo>:<path>`, move the note
+2. For each, choose one: retarget it to the qualified form `partsfoundry/<repo>:<path>`, move the note
    because it is cross-cutting after all, or drop the link and keep the reason in the sentence.
 3. Make the record repository's link check name any link that reaches a path outside it.
 

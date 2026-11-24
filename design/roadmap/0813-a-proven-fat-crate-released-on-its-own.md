@@ -185,21 +185,21 @@ tree's build, so nothing about it can work on one target and not another.
 
 1. The name is settled before anything leaves (857's Fork 5 as calef amended it on 2026-10-11 UTC).
    `script/names file_allocation_table` reports it ratified, crates.io answers 404 for it (or it is
-   already ours), and `nifeos/file_allocation_table` does not exist yet. `script/crate-standalone`
+   already ours), and `partsfoundry/file_allocation_table` does not exist yet. `script/crate-standalone`
    checks the first.
 2. In the tree, `script/verify` runs the harnesses, and `Cargo.toml` says `publish = false`.
 3. The package is version 0.1.0 with its own semver, states its minimum Rust version in
    `rust-version`, and ships its harnesses and falsification patches. `cargo package --list` shows
    them.
 4. At first publication, and not before, calef adds it to the lint-checked publish allowlist. The
-   `nifeos/file_allocation_table` repository is created when the crate moves, for the soak (step 5),
+   `partsfoundry/file_allocation_table` repository is created when the crate moves, for the soak (step 5),
    on the shared CI template (Kani through `kani-github-action`, lint, release). Its release
    workflow refuses to publish unless the proof job is green.
 5. Soak, as its own repository (calef, 2026-10-17 UTC, replying "Agrred" (sic) to the maintainer's
-   proposal; §305 (git dependencies are allowed on `nifeos/*` only, pinned to a landed commit)).
+   proposal; §305 (git dependencies are allowed on `partsfoundry/*` only, pinned to a landed commit)).
    Milestone 818 (`jh7110_entropy`: proven JH7110 TRNG logic, released on its own) is the pilot and
    soaks first. Before publication the crate is moved, not copied: it leaves this tree, and nife
-   depends on `nifeos/file_allocation_table` by `rev`. A copy left behind does not count. The soak
+   depends on `partsfoundry/file_allocation_table` by `rev`. A copy left behind does not count. The soak
    is how the policy's "API stable" is measured. The soak ends on evidence, not a duration, when all
    five hold:
    1. nife builds and passes CI against the repository at a pinned commit, with no path dependency

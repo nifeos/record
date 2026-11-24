@@ -23,7 +23,7 @@ this crate in `notes/crate-reviews/`, so the baseline is milestone 953's built r
 `Name:` blocks in the source. No later rule contradicts a ratified name here: the six public names
 carry no unit, no abbreviation, and `lock` and `try_lock` are the standard library's spellings.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, loom 0.7, cargo-mutants,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, loom 0.7, cargo-mutants,
 cargo-llvm-cov, Miri, `cargo deny`, the template's name helpers. No new tool.
 
 ## Goal
@@ -38,45 +38,45 @@ proof the crate has runs somewhere after the move.
 
 
 - P0-1, the only proof runs nowhere after the move: Done, the template's `proofs / loom`
-  ([nifeos/crate-workflows#65](https://github.com/nifeos/crate-workflows/pull/65)).
-- P0-2, the crate does not stand alone: At the move. [#3636](https://github.com/nifeos/nife/pull/3636)
+  ([partsfoundry/crate-workflows#65](https://github.com/partsfoundry/crate-workflows/pull/65)).
+- P0-2, the crate does not stand alone: At the move. [#3636](https://github.com/partsfoundry/nife/pull/3636)
   added the README, the license files and the manifest literals; the `Name:` blocks, the citations
   of paths in this tree and the manifest's `repository` remain.
-- P0-3, the scaffold's lint table: Done, [#3636](https://github.com/nifeos/nife/pull/3636).
-- P1-4, another crate holds the name on crates.io: Done, [#3812](https://github.com/nifeos/nife/pull/3812).
+- P0-3, the scaffold's lint table: Done, [#3636](https://github.com/partsfoundry/nife/pull/3636).
+- P1-4, another crate holds the name on crates.io: Done, [#3812](https://github.com/partsfoundry/nife/pull/3812).
   The crate is `test_and_set_lock` (see "Open decisions"), which crates.io does not hold.
 - P1-5, test modules hidden from cargo-mutants' skip: Done,
-  [#3580](https://github.com/nifeos/nife/pull/3580).
+  [#3580](https://github.com/partsfoundry/nife/pull/3580).
 - P1-6, the `pause` survivor's exemption line: At the move. One `.github/mutants-exempts` line with
   the triage's reason.
 - P1-7, the second falsification is a hand step: At the move. The template's `proofs / loom`
   replays a loom model's patch since
-  [nifeos/crate-workflows#85](https://github.com/nifeos/crate-workflows/pull/85). The move commit
+  [partsfoundry/crate-workflows#85](https://github.com/partsfoundry/crate-workflows/pull/85). The move commit
   adds `falsifications/interleavings.two_takers_are_exclusive_and_ordered.patch` and its record, and
   the README's manual step becomes that gate. The patch waits for the move because this tree's
   `script/falsifications` replays a host test without `--cfg loom`, where the model does not exist.
-- P1-8, no README, example or doc-test: Done, [#3636](https://github.com/nifeos/nife/pull/3636).
-- P1-9, the standard library's accessors: Done, [#3580](https://github.com/nifeos/nife/pull/3580).
+- P1-8, no README, example or doc-test: Done, [#3636](https://github.com/partsfoundry/nife/pull/3636).
+- P1-9, the standard library's accessors: Done, [#3580](https://github.com/partsfoundry/nife/pull/3580).
 - P1-10, documentation for the kernel's reader: Done,
-  [#3580](https://github.com/nifeos/nife/pull/3580).
-- P2-11, what the models do not check: Done, [#3580](https://github.com/nifeos/nife/pull/3580).
-- P2-12, `T: ?Sized`: Done, [#3636](https://github.com/nifeos/nife/pull/3636).
-- P2-13, `repr(C)` reads as a promise: Done, [#3580](https://github.com/nifeos/nife/pull/3580).
-- P2-14, the `rust-version`: Done, [#3636](https://github.com/nifeos/nife/pull/3636) (1.88,
+  [#3580](https://github.com/partsfoundry/nife/pull/3580).
+- P2-11, what the models do not check: Done, [#3580](https://github.com/partsfoundry/nife/pull/3580).
+- P2-12, `T: ?Sized`: Done, [#3636](https://github.com/partsfoundry/nife/pull/3636).
+- P2-13, `repr(C)` reads as a promise: Done, [#3580](https://github.com/partsfoundry/nife/pull/3580).
+- P2-14, the `rust-version`: Done, [#3636](https://github.com/partsfoundry/nife/pull/3636) (1.88,
   tested on it).
-- P2-15, loom's lockfile footprint: Done, [#3636](https://github.com/nifeos/nife/pull/3636) (the
+- P2-15, loom's lockfile footprint: Done, [#3636](https://github.com/partsfoundry/nife/pull/3636) (the
   README says why).
 - P2-16, `is_locked`, `try_lock_weak`, `lock_api` and a fair variant: Will not fix. `try_lock`
   answers `is_locked`, nothing calls `try_lock_weak`, and a `lock_api` impl is a third-party
   dependency that gives loom nothing; declined by the maintainer, provisional, ruled 2026-11-19
-  (UTC) in [#3743](https://github.com/nifeos/nife/pull/3743).
+  (UTC) in [#3743](https://github.com/partsfoundry/nife/pull/3743).
 
 ## Open decisions
 
 None.
 
 The architect cleared the review package on 2026-11-20 (UTC) and approved the repository
-`nifeos/test_and_set_lock` with `publish = false`, no tag and no publish. They ratified `get_mut` and
+`partsfoundry/test_and_set_lock` with `publish = false`, no tag and no publish. They ratified `get_mut` and
 `into_inner`, in the standard library's spelling and meaning. The crate's first tag waits for
 `tools/host_reordering_litmus` (or an equivalent) to run on real Arm and RISC-V hardware, not QEMU
 TCG, with the result in the package, because loom checks C11 only. That run blocks no merge.
@@ -139,7 +139,7 @@ one-way door (a published name, wire format, identity, layout or dependency) or 
 
 ### P0
 
-1. The crate's only proof runs nowhere after the move. `crates/test_and_set_lock/src/lib.rs` line 307 DONE (the template's `proofs / loom`, nifeos/crate-workflows#65).
+1. The crate's only proof runs nowhere after the move. `crates/test_and_set_lock/src/lib.rs` line 307 DONE (the template's `proofs / loom`, partsfoundry/crate-workflows#65).
    holds the five loom models, and `script/interleaving-check` runs them as nife's required
    `interleavings` job. The template has no loom job: `check.yml` runs `cargo test` without
    `--cfg loom`, so the models are not compiled, and `proofs.yml`'s `falsify.py` reports
@@ -198,7 +198,7 @@ one-way door (a published name, wire format, identity, layout or dependency) or 
    `.github/mutants-exempts` line that gives the reason. Fix: one line at the move, with the
    triage's reason. Effort S. Two-way.
 
-7. The second falsification is a hand step, not a gate. `notes/interleaving/what-was-modeled.md` LEFT: move work (the template's replay landed in nifeos/crate-workflows#85).
+7. The second falsification is a hand step, not a gate. `notes/interleaving/what-was-modeled.md` LEFT: move work (the template's replay landed in partsfoundry/crate-workflows#85).
    records that weakening the compare-exchange's success ordering to Relaxed fails the four
    positive models; this review replayed it (4 failures, the should-panic model passing). The
    in-crate should-panic model (`a_relaxed_release_publishes_nothing`, `src/lib.rs` line 472) keeps

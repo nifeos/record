@@ -2,7 +2,7 @@
 
 An appendix to [the milestone](../1109-spin-lock-outside-review.md).
 
-Verified firsthand on a fresh shallow clone of `nifeos/nife` at the head of `main`. The checks ran
+Verified firsthand on a fresh shallow clone of `partsfoundry/nife` at the head of `main`. The checks ran
 inside the workspace and in a standalone copy of the crate with a template-shaped manifest:
 
 - Inside nife: `cargo test -p test_and_set_lock` (4 host tests, 0 doc-tests). `cargo clippy --all-targets`

@@ -46,7 +46,7 @@ assertions of `c_program_tests.rs`, moved rather than rewritten.
 
 ## Built 2026-10-14 (UTC)
 
-Lane `milestone/897-sqlite-is-packaged-in-basalt`, with nifeos/basalt#23.
+Lane `milestone/897-sqlite-is-packaged-in-basalt`, with partsfoundry/basalt#23.
 
 - basalt's C recipe shape unpacks a zip: a source with `unpack = true` is extracted beside itself
   after its SHA-256 matches. Every member is checked first, and an absolute name, a `..` step, a
@@ -72,7 +72,7 @@ Lane `milestone/897-sqlite-is-packaged-in-basalt`, with nifeos/basalt#23.
 
 - basalt's `recipes/sqlite.toml` carries a `[package_digest]` table, one SHA-256 for each of
   aarch64, riscv64 and x86_64, recorded by milestone 917 (basalt's packages build reproducibly)
-  in nifeos/basalt#29. basalt's pin-bump rewrites it with each new pin.
+  in partsfoundry/basalt#29. basalt's pin-bump rewrites it with each new pin.
 - basalt's `helpers/packages.py build` refuses a package whose bytes hash to anything else, and
   basalt's `packages` workflow builds twice, in separate checkouts, and fails unless the two
   repositories are byte-identical.

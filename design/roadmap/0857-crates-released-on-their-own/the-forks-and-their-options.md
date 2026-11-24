@@ -11,8 +11,8 @@ weighed for each. The rulings in force are on that page, under The rulings.
 | option | shape | prior art | cost |
 |---|---|---|---|
 | R-a. Publish from this repository | Each crate keeps its path; `cargo publish -p` from a workflow here | `wasmtime` publishes its `crates/` directory (38 entries) from one repository | A stranger's issue lands in an OS tracker. No move, so §235 holds |
-| R-b. One repository for every released crate | `nifeos/<name>`, one workspace | google/gpt-disk-rs holds three crates | A move before 610's column exists |
-| R-c. One repository per crate | `nifeos/<crate>` each | rust-osdev (`x86_64`, `uefi-rs`), rust-embedded-community | Nine repositories, each with its own CI, and two pull requests whenever a driver and its crate move together |
+| R-b. One repository for every released crate | `partsfoundry/<name>`, one workspace | google/gpt-disk-rs holds three crates | A move before 610's column exists |
+| R-c. One repository per crate | `partsfoundry/<crate>` each | rust-osdev (`x86_64`, `uefi-rs`), rust-embedded-community | Nine repositories, each with its own CI, and two pull requests whenever a driver and its crate move together |
 | R-d. One repository per family | Two today: device logic (seven crates) and formats (FAT, PE) | RustCrypto: `hashes` holds 23 crates | A move before 610's column exists; the family lines are a guess until it does |
 
 Recommendation as raised, replaced by the ruling: R-a now, R-d once 610 measures co-change.
@@ -32,7 +32,7 @@ them publishes proofs beside the crate, which is the part this tree would add.
 | C-c. path, as today | this tree | Only while the crate is in this repository |
 
 Recommendation as raised, and ruled with a `[patch]` rule added: C-c while a crate is here, C-a after. C-b would block exactly the third parties §151
-names as the goal. §305 (git dependencies on `nifeos/*` only) takes C-b for the soak before a
+names as the goal. §305 (git dependencies on `partsfoundry/*` only) takes C-b for the soak before a
 first publish.
 
 ## Fork 3. Versions, and what a release carries (ruled as recommended)

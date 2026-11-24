@@ -2,7 +2,7 @@
 
 An appendix to [the milestone](../1089-environment-contract-outside-review.md).
 
-Verified firsthand, on a fresh shallow clone of `nifeos/nife` at the head of `main`, on the pinned
+Verified firsthand, on a fresh shallow clone of `partsfoundry/nife` at the head of `main`, on the pinned
 nightly toolchain:
 
 - `cargo test -p environment_contract`: 9 unit tests and 2 documentation tests pass.

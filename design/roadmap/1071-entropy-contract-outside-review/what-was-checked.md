@@ -2,7 +2,7 @@
 
 An appendix to [the milestone](../1071-entropy-contract-outside-review.md).
 
-Verified firsthand, on a fresh shallow clone of `nifeos/nife` at `cf1328af` (the head of `main`
+Verified firsthand, on a fresh shallow clone of `partsfoundry/nife` at `cf1328af` (the head of `main`
 after #3480 merged), with the crate copied out of the workspace into a directory of its own:
 
 - `cargo test` on stable and on 1.88, the manifest's `rust-version`: 15 unit tests and 4

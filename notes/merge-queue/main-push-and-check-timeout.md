@@ -39,7 +39,7 @@ with every earlier entry of its batch already beneath it. So an exact-SHA lookup
 tree tested" without inferring anything about neighbors.
 
 ```console
-$ gh api "repos/nifeos/nife/actions/workflows/ci.yml/runs?event=merge_group&head_sha=47c3a3c9d01e96c8d007a4b41ff9d2adc8858f10&status=success&per_page=1" \
+$ gh api "repos/partsfoundry/nife/actions/workflows/ci.yml/runs?event=merge_group&head_sha=47c3a3c9d01e96c8d007a4b41ff9d2adc8858f10&status=success&per_page=1" \
     --jq '.workflow_runs[0].id'
 36025842548
 ```

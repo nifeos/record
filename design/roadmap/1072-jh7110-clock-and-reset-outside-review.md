@@ -25,7 +25,7 @@ in the chip crate. Pull request
 provisional name, and two new crates (`jh7110_clock_and_reset_contract`,
 `jh7110_clock_and_reset_devices`) become its callers. The review read that diff; it did not build it.
 
-Reuse: the template `nifeos/crate-workflows` and its helpers, Kani, cargo-mutants, cargo-llvm-cov,
+Reuse: the template `partsfoundry/crate-workflows` and its helpers, Kani, cargo-mutants, cargo-llvm-cov,
 the crate's own harness helpers (`any_domain`, `ungates_before_releasing`, `system_provider`) and
 the pinned Linux and vendor U-Boot sources the crate cites. No new tool.
 
@@ -195,33 +195,33 @@ The checks are in [the done-when appendix](1072-jh7110-clock-and-reset-outside-r
 
 ## Finding status
 
-- Item 1 (P0), `clippy` red standing alone: Done, [#3625](https://github.com/nifeos/nife/pull/3625).
-- Item 2 (P0), `standalone` refusals: Done, [#3572](https://github.com/nifeos/nife/pull/3572) and [#3625](https://github.com/nifeos/nife/pull/3625).
-- Item 3 (P1), 12-byte `reg`: Done, [#3625](https://github.com/nifeos/nife/pull/3625).
-- Item 4 (P1), one board's transmit parent: Done, [#3572](https://github.com/nifeos/nife/pull/3572) and [#3625](https://github.com/nifeos/nife/pull/3625).
+- Item 1 (P0), `clippy` red standing alone: Done, [#3625](https://github.com/partsfoundry/nife/pull/3625).
+- Item 2 (P0), `standalone` refusals: Done, [#3572](https://github.com/partsfoundry/nife/pull/3572) and [#3625](https://github.com/partsfoundry/nife/pull/3625).
+- Item 3 (P1), 12-byte `reg`: Done, [#3625](https://github.com/partsfoundry/nife/pull/3625).
+- Item 4 (P1), one board's transmit parent: Done, [#3572](https://github.com/partsfoundry/nife/pull/3572) and [#3625](https://github.com/partsfoundry/nife/pull/3625).
 - Item 5 (P1), stale mutation record: At the move. The census of run 43876176886 tested every
-  mutant and missed six algebraic equivalents, and [#3936](https://github.com/nifeos/nife/pull/3936) retires the stale triage rows for
+  mutant and missed six algebraic equivalents, and [#3936](https://github.com/partsfoundry/nife/pull/3936) retires the stale triage rows for
   five that reason about the current body. The move writes `.github/mutants-exempts` from those
   rows, and the crate repository's first full `mutation / mutation` run tests the mutants added
   since the census.
-- Item 6 (P2), fractional PLL2: Done, [#3625](https://github.com/nifeos/nife/pull/3625).
-- Item 7 (P2), `was_already_up`: Done, [#3625](https://github.com/nifeos/nife/pull/3625).
-- Item 8 (P2), I2C count margin and floor: Done, [#3625](https://github.com/nifeos/nife/pull/3625) and [#3936](https://github.com/nifeos/nife/pull/3936).
-- Item 9 (P2), `name_index`: Done, [#3625](https://github.com/nifeos/nife/pull/3625).
-- Item 10 (P2), fallback addresses: Done, [#3625](https://github.com/nifeos/nife/pull/3625).
-- Item 11 (P2), fetch dates: Done, [#3625](https://github.com/nifeos/nife/pull/3625).
-- Item 12 (P2), README sections: At the move. The sections and figures are in [#3625](https://github.com/nifeos/nife/pull/3625), and
-  [#3936](https://github.com/nifeos/nife/pull/3936) drops the test count the template now refuses; the badge row needs the repository's
+- Item 6 (P2), fractional PLL2: Done, [#3625](https://github.com/partsfoundry/nife/pull/3625).
+- Item 7 (P2), `was_already_up`: Done, [#3625](https://github.com/partsfoundry/nife/pull/3625).
+- Item 8 (P2), I2C count margin and floor: Done, [#3625](https://github.com/partsfoundry/nife/pull/3625) and [#3936](https://github.com/partsfoundry/nife/pull/3936).
+- Item 9 (P2), `name_index`: Done, [#3625](https://github.com/partsfoundry/nife/pull/3625).
+- Item 10 (P2), fallback addresses: Done, [#3625](https://github.com/partsfoundry/nife/pull/3625).
+- Item 11 (P2), fetch dates: Done, [#3625](https://github.com/partsfoundry/nife/pull/3625).
+- Item 12 (P2), README sections: At the move. The sections and figures are in [#3625](https://github.com/partsfoundry/nife/pull/3625), and
+  [#3936](https://github.com/partsfoundry/nife/pull/3936) drops the test count the template now refuses; the badge row needs the repository's
   caller workflows.
 - Item 13 (P2), manifest and repository plumbing: At the move. The manifest fields are in
-  [#3625](https://github.com/nifeos/nife/pull/3625); the repository files (`.github/accepted-words` with `jh`, the caller workflows, the
+  [#3625](https://github.com/partsfoundry/nife/pull/3625); the repository files (`.github/accepted-words` with `jh`, the caller workflows, the
   `-p1` patches) and the strip of the `Name:` blocks are the move's.
-- Item 14 (P2), README prose: Done, [#3625](https://github.com/nifeos/nife/pull/3625).
-- Decision 1, `POWER_MANAGEMENT_CHIP_BUS_BRING_UP`: Done, [#3572](https://github.com/nifeos/nife/pull/3572).
-- Decision 2, `size_bytes`: Done, [#3572](https://github.com/nifeos/nife/pull/3572).
-- Decision 3, `power_management_chip_bus_address`: Done, [#3572](https://github.com/nifeos/nife/pull/3572).
-- Decision 4, `SD_IO` and the always-on constants: Done, [#3572](https://github.com/nifeos/nife/pull/3572).
-- Decision 5, transmit parent from the tree: Done, [#3572](https://github.com/nifeos/nife/pull/3572).
+- Item 14 (P2), README prose: Done, [#3625](https://github.com/partsfoundry/nife/pull/3625).
+- Decision 1, `POWER_MANAGEMENT_CHIP_BUS_BRING_UP`: Done, [#3572](https://github.com/partsfoundry/nife/pull/3572).
+- Decision 2, `size_bytes`: Done, [#3572](https://github.com/partsfoundry/nife/pull/3572).
+- Decision 3, `power_management_chip_bus_address`: Done, [#3572](https://github.com/partsfoundry/nife/pull/3572).
+- Decision 4, `SD_IO` and the always-on constants: Done, [#3572](https://github.com/partsfoundry/nife/pull/3572).
+- Decision 5, transmit parent from the tree: Done, [#3572](https://github.com/partsfoundry/nife/pull/3572).
 - Decision 6, the `v0.1.0-pre.1` tag: At the move. The move lane places it after the move check
   and a green release dry run.
 
@@ -232,7 +232,7 @@ closes (ruled 2026-11-18 UTC).
 
 ## Follow-on
 
-- **Milestone 819.** The move to nifeos/jh7110_clock_and_reset. The review has its clearance and
+- **Milestone 819.** The move to partsfoundry/jh7110_clock_and_reset. The review has its clearance and
   the repository its approval (2026-11-11 UTC). Milestone 819 (JH7110 clock and reset logic,
   proven, then released) carries it, and the move carries items 5, 12 and 13 and decision 6,
   as the finding status says.

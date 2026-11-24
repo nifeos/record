@@ -16,7 +16,7 @@ that cannot be cut, so it needed a different answer, and every answer changes wh
 `MemoryRegion::DESTROY` does to a thread.
 
 **Decided.** calef ruled option A on 2026-10-05 (UTC), quoted: "A, queue it after #1665"
-([comment on #1665](https://github.com/nifeos/nife/pull/1665#issuecomment-5988177177)). The record
+([comment on #1665](https://github.com/partsfoundry/nife/pull/1665#issuecomment-5988177177)). The record
 is §16 (object revocation)'s amendment of that date. B, C, and A plus C were refused; the reasons
 are under the options below, which are kept as the record of what was weighed. Promoted from
 `design/roadmap/proposals/` to this milestone by the maintainer at the ruling's merge.

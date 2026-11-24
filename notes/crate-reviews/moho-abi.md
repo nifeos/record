@@ -69,7 +69,7 @@ On the branch of pull request 3942, on stable 1.99.1:
 | `RUSTDOCFLAGS="-D warnings" cargo doc -p abi --no-deps` | no warning |
 | `cargo build -p abi --lib --target <t>` for `x86_64-unknown-none`, `aarch64-unknown-none-softfloat`, `riscv64imac-unknown-none-elf` | all three build |
 | `cargo check -p pmap -p ps -p memory_region_heap -p user_mode_runtime` | builds |
-| the template's helpers at `nifeos/crate-workflows` `1b9abe9`, run by hand over the crate | prose caps, passive voice, history phrases, acronyms, comment blocks, file and function length, spelled-out words, unit symbols and British spelling pass. `register_names` refuses six names (below) |
+| the template's helpers at `partsfoundry/crate-workflows` `1b9abe9`, run by hand over the crate | prose caps, passive voice, history phrases, acronyms, comment blocks, file and function length, spelled-out words, unit symbols and British spelling pass. `register_names` refuses six names (below) |
 | `python3 helpers/name_release.py --draft abi` | 146 rows: 25 ratified, 121 provisional, none without a block |
 | `script/crate-review-packet abi` | no dependency, no `unsafe`, no reference back into nife |
 

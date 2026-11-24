@@ -2,7 +2,7 @@
 
 Where random numbers come from on this machine, who is allowed to reach the device, and what
 `std::random` does when nobody granted you any. Milestone 56, the entropy half; the decision and its
-argument are [DECISIONS §44 (entropy is a capability, `std::random` improves transparently, and the refusal is loud)](../design/decisions/0044-entropy-capability.md), the contract is `entropy_contract` (the repository `nifeos/entropy_contract`).
+argument are [DECISIONS §44 (entropy is a capability, `std::random` improves transparently, and the refusal is loud)](../design/decisions/0044-entropy-capability.md), the contract is `entropy_contract` (the repository `partsfoundry/entropy_contract`).
 
 ## The thing this replaced
 
@@ -187,7 +187,7 @@ it.
 - **No hardware TRNG yet, but "needs verifying" is now precise rather than open-ended** (milestone
   159, 2026-08-24). The StarFive JH7110's TRNG is documented, from the chip's own datasheet and
   Linux's mainline driver, but nothing about it has run. The `jh7110_entropy` crate
-  (nifeos/jh7110_entropy) holds the register layout (`CTRL`/`STAT`/`MODE`/`SMODE`/`IE`/`ISTAT`/`RAND0..RAND7`/`AUTO_RQSTS`/`AUTO_AGE`,
+  (partsfoundry/jh7110_entropy) holds the register layout (`CTRL`/`STAT`/`MODE`/`SMODE`/`IE`/`ISTAT`/`RAND0..RAND7`/`AUTO_RQSTS`/`AUTO_AGE`,
   transcribed from `drivers/char/hw_random/jh7110-trng.c`, mainline as of 2026-08-24) and a DTB
   discovery query (`starfive,jh7110-trng`, `reg = <0x1600C000 0x4000>`, PLIC interrupt 30, from the
   device-tree binding's own worked example). Both are host-tested against fixtures, never against

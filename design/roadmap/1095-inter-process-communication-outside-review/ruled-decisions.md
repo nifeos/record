@@ -76,7 +76,7 @@ type).
 Prior art: `generational_table` left before the kernel pinned it, and the kernel pins
 `extensible_host_controller_interface` by revision. Nife differs in nothing; this is the same step
 one level down. Example: after the move the manifest line reads
-`intrusive_queue = { version = "0.1.0", git = "https://github.com/nifeos/intrusive_queue", rev = "<full sha>" }`.
+`intrusive_queue = { version = "0.1.0", git = "https://github.com/partsfoundry/intrusive_queue", rev = "<full sha>" }`.
 
 Decided by the maintainer on 2026-11-19 (UTC), provisional: a two-way door, which the architect may
 revisit. `intrusive_queue` leaves first (milestone 1097 (`intrusive_queue`: what an outside
@@ -130,7 +130,7 @@ until the P1 items land as well.
 
 Prior art: `generational_table`, `block_roster` and `file_allocation_table` each moved on a cleared
 review with no tag. Nothing outside nife links this crate. Example: the kernel's manifest switches
-from a path to a pinned revision of `nifeos/inter_process_communication` in the move's pin pull
+from a path to a pinned revision of `partsfoundry/inter_process_communication` in the move's pin pull
 request.
 
 Decided by the maintainer on 2026-11-19 (UTC), provisional: a two-way door. A lane writes the

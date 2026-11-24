@@ -2,7 +2,7 @@
 
 *Name: provisional.*
 
-An appendix to `nifeos/nife:notes/documentation.md`, which states the conclusion.
+An appendix to `partsfoundry/nife:notes/documentation.md`, which states the conclusion.
 
 `cargo xtask manual` over the current bundles:
 

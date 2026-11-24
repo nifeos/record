@@ -23,7 +23,7 @@ linked interfaces carry checkable versions). It also includes the standing rulin
 crate carries no `Name:` block and mentions neither nife nor a nife program. None of those is reopened here, except where a later
 naming rule contradicts a name, and the text says so where it does.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold and helpers, Kani, cargo-mutants,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold and helpers, Kani, cargo-mutants,
 `helpers/lint_externalized_crates.py`, and the existing in-tree consumers as the regression suite
 (the kernel-side `sink_tests`, `system_log`, the shell's pipeline reader, std's PAL). No new tool.
 
@@ -62,7 +62,7 @@ The P1 items are in [the appendix](1079-byte-sink-contract-outside-review/before
 Each gives the background, then the recommendation, then prior art and one concrete example.
 A and B are two-way before the first tag, and the maintainer has decided them, provisionally.
 C and D have their rulings. The review was cleared on 2026-11-21 (UTC), and the crate lives in
-nifeos/byte_sink_contract.
+partsfoundry/byte_sink_contract.
 
 ### A. Does the byte-sink contract ever get a wire version operation?
 
@@ -170,42 +170,42 @@ The checks are in [the appendix](1079-byte-sink-contract-outside-review/done-whe
 
 ## Finding status
 
-- P0-1, the crate stands alone: Done, [#3900](https://github.com/nifeos/nife/pull/3900). The move
-  commit nifeos/byte_sink_contract@8a6c4599 carries the README in the template's section order, both
+- P0-1, the crate stands alone: Done, [#3900](https://github.com/partsfoundry/nife/pull/3900). The move
+  commit partsfoundry/byte_sink_contract@8a6c4599 carries the README in the template's section order, both
   licenses, a literal `license`, `rust-version` and lints, the scaffold, no `Name:` block and no
   reference into this tree; the crate-root specification landed in
-  [#3565](https://github.com/nifeos/nife/pull/3565).
-- P0-2, the `VERSION` text: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- P1-3, `fixture` in the public API: Done, [#3873](https://github.com/nifeos/nife/pull/3873). The
+  [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- P0-2, the `VERSION` text: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- P1-3, `fixture` in the public API: Done, [#3873](https://github.com/partsfoundry/nife/pull/3873). The
   module is the in-tree crate `byte_sink_fixture` (`publish = false`).
-- P1-4, the `abi` dev-dependency: Done, [#3565](https://github.com/nifeos/nife/pull/3565). The pin
+- P1-4, the `abi` dev-dependency: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565). The pin
   of `GONE` to `abi::Error::Gone` is a `const` assertion in `system_tests/src/user/sink_tests.rs`.
-- P1-5, proofs: Done, [#3565](https://github.com/nifeos/nife/pull/3565). The harnesses run in the
+- P1-5, proofs: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565). The harnesses run in the
   repository's `proofs` workflow, each with a falsification patch.
-- P1-6, the decoder ignores `kind`: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- P1-7, British spellings: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- P1-8, end-of-stream words reserved: Done, [#3581](https://github.com/nifeos/nife/pull/3581) and
-  [#3873](https://github.com/nifeos/nife/pull/3873).
-- P1-9, names a later rule reopens: Done, [#3873](https://github.com/nifeos/nife/pull/3873) and
-  [#3880](https://github.com/nifeos/nife/pull/3880), as decision D records.
-- P1-10, the zero-count contradiction: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- P2-11, `len` on a narrow `usize`: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- P2-12, `req` drops high bits: Done, [#3880](https://github.com/nifeos/nife/pull/3880).
+- P1-6, the decoder ignores `kind`: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- P1-7, British spellings: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- P1-8, end-of-stream words reserved: Done, [#3581](https://github.com/partsfoundry/nife/pull/3581) and
+  [#3873](https://github.com/partsfoundry/nife/pull/3873).
+- P1-9, names a later rule reopens: Done, [#3873](https://github.com/partsfoundry/nife/pull/3873) and
+  [#3880](https://github.com/partsfoundry/nife/pull/3880), as decision D records.
+- P1-10, the zero-count contradiction: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- P2-11, `len` on a narrow `usize`: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- P2-12, `req` drops high bits: Done, [#3880](https://github.com/partsfoundry/nife/pull/3880).
   `first_word` takes `operation: u8` and `len: u32`.
-- P2-13, `pack` returns a bare four-tuple: Done, [#3880](https://github.com/nifeos/nife/pull/3880).
+- P2-13, `pack` returns a bare four-tuple: Done, [#3880](https://github.com/partsfoundry/nife/pull/3880).
   `pack` and `unpack` take and return `MessageWords`, whose name waits for the release review.
-- P2-14, equivalent mutants: Done, nifeos/byte_sink_contract#1. The repository's
+- P2-14, equivalent mutants: Done, partsfoundry/byte_sink_contract#1. The repository's
   `.github/mutants-exempts` lists the four survivors its mutation run names, each with its reason,
   and its mutation configuration skips the Kani module.
-- P2-15, severity bits on any first word: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- Decision A, no wire version operation: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
+- P2-15, severity bits on any first word: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- Decision A, no wire version operation: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
 - Decision B, `fixture` out of the published crate: Done,
-  [#3873](https://github.com/nifeos/nife/pull/3873).
-- Decision C, end-of-stream words reserved: Done, [#3581](https://github.com/nifeos/nife/pull/3581).
-- Decision D, the names: Done, [#3873](https://github.com/nifeos/nife/pull/3873) and
-  [#3880](https://github.com/nifeos/nife/pull/3880).
-- The review clearance and the move: Done, [#3900](https://github.com/nifeos/nife/pull/3900). nife
-  depends on nifeos/byte_sink_contract by `rev`, with `publish = false`, no tag and no publish.
+  [#3873](https://github.com/partsfoundry/nife/pull/3873).
+- Decision C, end-of-stream words reserved: Done, [#3581](https://github.com/partsfoundry/nife/pull/3581).
+- Decision D, the names: Done, [#3873](https://github.com/partsfoundry/nife/pull/3873) and
+  [#3880](https://github.com/partsfoundry/nife/pull/3880).
+- The review clearance and the move: Done, [#3900](https://github.com/partsfoundry/nife/pull/3900). nife
+  depends on partsfoundry/byte_sink_contract by `rev`, with `publish = false`, no tag and no publish.
 
 ## Follow-on
 
@@ -226,4 +226,4 @@ The checks are in [the appendix](1079-byte-sink-contract-outside-review/done-whe
 An outside review of `byte_sink_contract` before it leaves found two findings that block the move. The crate does not stand alone, and its `VERSION` text specifies a wire operation that does not and cannot exist. It found eight to land before the first release. They are the fixture module in the public API, the `abi` dev-dependency, no proofs, a kind byte the decoder ignores, a British spelling, undefined end-of-stream words, names a later rule reopens, and a zero-count contradiction. It found five for later.
 Four decisions: the architect ruled the end-of-stream words reserved and the names, and the
 maintainer decided, provisionally, no wire version operation and `fixture` out of the published
-crate. The crate lives in nifeos/byte_sink_contract, and every finding has landed.
+crate. The crate lives in partsfoundry/byte_sink_contract, and every finding has landed.

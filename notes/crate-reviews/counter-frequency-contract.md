@@ -151,7 +151,7 @@ manifests switch to the tagged commit, and the mutation baseline row leaves.
 ## Recommendation
 
 Cleared to move. The architect cleared the review on 2026-11-19 (UTC), which approves creating
-`nifeos/counter_frequency_contract` and moving the crate there. The identity does not change. The
+`partsfoundry/counter_frequency_contract` and moving the crate there. The identity does not change. The
 clearance does not approve a publication. The architect also approved the tag `v0.1.0-pre.1` on
 the same date, once the move lane finds the new repository matches this copy and the release dry
 run is green. Nothing publishes.

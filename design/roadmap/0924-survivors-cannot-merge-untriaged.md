@@ -130,7 +130,7 @@ sides.
 
 ## Follow-on
 
-- **Recorded.** The `main` ruleset requires the check: `gh api repos/nifeos/nife/rules/branches/main`
+- **Recorded.** The `main` ruleset requires the check: `gh api repos/partsfoundry/nife/rules/branches/main`
   lists `mutation gate (a survivor on a changed line cannot merge untriaged)`. A lane cannot change
   that setting. The workflow header says the same where its job name is written.
 - **Recorded.** The gate has been watched failing: run 38803917791 (2026-10-15 UTC) went red at

@@ -4,7 +4,7 @@ def api(path):
     out=subprocess.run(['gh','api','--paginate',path,'--jq','.[] | arrays | .[]'],capture_output=True,text=True).stdout
     return [json.loads(l) for l in out.splitlines() if l.strip()]
 def jobs(run):
-    js=api(f'repos/nifeos/nife/actions/runs/{run}/jobs?per_page=100&filter=all')
+    js=api(f'repos/partsfoundry/nife/actions/runs/{run}/jobs?per_page=100&filter=all')
     return js
 def ts(s): return datetime.datetime.fromisoformat(s.replace('Z','+00:00'))
 ALWAYS={'draft gate','clippy'}
@@ -19,9 +19,9 @@ for n in targets:
         br=info['headRefName']; day=None
     runs=[]
     for w in ('ci.yml','verify.yml'):
-        runs+= [(w,'pr',x) for x in api(f'repos/nifeos/nife/actions/workflows/{w}/runs?branch={br}&event=pull_request&per_page=100')]
+        runs+= [(w,'pr',x) for x in api(f'repos/partsfoundry/nife/actions/workflows/{w}/runs?branch={br}&event=pull_request&per_page=100')]
         if day:
-            mg=api(f'repos/nifeos/nife/actions/workflows/{w}/runs?event=merge_group&created={day}&per_page=100')
+            mg=api(f'repos/partsfoundry/nife/actions/workflows/{w}/runs?event=merge_group&created={day}&per_page=100')
             runs+= [(w,'mg',x) for x in mg if f'/pr-{n}-' in x['head_branch']]
     tot={'pr':[0,0],'mg':[0,0]}; nruns={'pr':0,'mg':0}
     for w,kind,r in runs:

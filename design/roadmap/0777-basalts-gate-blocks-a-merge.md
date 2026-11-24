@@ -15,7 +15,7 @@ do from a lane. All names here are provisional.
 
 ## What is owed
 
-basalt v0 has a gate that reports and nothing that obeys it. `nifeos/basalt` has no ruleset, no
+basalt v0 has a gate that reports and nothing that obeys it. `partsfoundry/basalt` has no ruleset, no
 required check, auto-merge off and no merge queue. A red pin can be merged by hand, and a person
 merges the daily pin bump's pull request.
 

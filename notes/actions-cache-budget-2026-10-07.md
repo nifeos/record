@@ -34,7 +34,7 @@ calef's rulings drops rust-cache from 14 of the 17 jobs (section 5).
 
 ## 1. What the cache holds
 
-`gh api repos/nifeos/nife/actions/caches --paginate`, 2026-10-07 about 14:50 UTC. Usage then read
+`gh api repos/partsfoundry/nife/actions/caches --paginate`, 2026-10-07 about 14:50 UTC. Usage then read
 10,733,031,662 bytes in 455 entries; the paginated list returned 469 distinct entries, 10.99 GB, as
 entries came and went during the read.
 

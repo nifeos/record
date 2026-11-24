@@ -80,7 +80,7 @@ Crates.io figures are as measured on 2026-10-27 (UTC) and age quickly.
 The cost is low next to the project, and nothing here waits on milestone 801 (packages over the
 internet) or milestone 802 (the trivial install). Thirty crates can leave today, 23 standalone and
 7 one small cut away ([`notes/releasable-crates-2026-10-07.md`](../../notes/releasable-crates-2026-10-07.md)),
-and the release gates exist in `nifeos/crate-workflows`.
+and the release gates exist in `partsfoundry/crate-workflows`.
 
 Three caveats. Linux takes Rust code into its own tree rather than from crates.io, so a nife crate
 reaching Linux is a long road, and this entry measures whether anyone takes the crates at all.

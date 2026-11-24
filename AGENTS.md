@@ -3,23 +3,23 @@
 This repository holds the design record of the nifeos projects: the decisions in
 [design/decisions/](design/decisions/), the roadmap in [design/roadmap/](design/roadmap/), the
 journeys, the fatal risks, the audits and the notes. The code it describes lives in
-[nifeos/nife](https://github.com/nifeos/nife), and a record path that names code (`script/lint`,
+[partsfoundry/nife](https://github.com/partsfoundry/nife), and a record path that names code (`script/lint`,
 `xtask/src/host.rs`) means that path in nife at the commit basalt's `main` pins.
 
 ## The lane skills live in nife
 
 A lane here works by the same rules as a lane in nife, and nife keeps them, once. Read each one at the moment named, from nife's `main`:
 
-- Before any work in a lane, read `nifeos/nife:notes/skills/developer-lane/SKILL.md`. It holds the
+- Before any work in a lane, read `partsfoundry/nife:notes/skills/developer-lane/SKILL.md`. It holds the
   claim, the handoff and where identified work goes.
-- Before you brief, gate or merge a lane, read `nifeos/nife:notes/skills/maintainer/SKILL.md`.
+- Before you brief, gate or merge a lane, read `partsfoundry/nife:notes/skills/maintainer/SKILL.md`.
 - Before you choose between options, recommend one, or hold work for an architect, read
-  `nifeos/nife:notes/skills/decisions/SKILL.md`.
-- Before you mint or change a name, read `nifeos/nife:notes/skills/naming-authority/SKILL.md`.
-- Before you commit or push, read `nifeos/nife:notes/skills/worktree-commits/SKILL.md`. Never use
+  `partsfoundry/nife:notes/skills/decisions/SKILL.md`.
+- Before you mint or change a name, read `partsfoundry/nife:notes/skills/naming-authority/SKILL.md`.
+- Before you commit or push, read `partsfoundry/nife:notes/skills/worktree-commits/SKILL.md`. Never use
   git stash, and never rewrite a pushed commit.
 - Before you put a question or a report to an architect, read
-  `nifeos/nife:notes/skills/working-with-the-architect/SKILL.md`.
+  `partsfoundry/nife:notes/skills/working-with-the-architect/SKILL.md`.
 
 nife's `AGENTS.md` holds the rest of the house rules (American spelling, no em-dashes, a document
 states the rule in force now), and [design/tenets/](design/tenets/README.md) holds the reasons

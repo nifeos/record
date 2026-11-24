@@ -2,7 +2,7 @@
 
 An appendix to [the milestone](../1093-globally-unique-identifier-partition-table-outside-review.md).
 
-Verified firsthand, on a fresh shallow clone of `nifeos/nife` at its head, on a Linux host. The
+Verified firsthand, on a fresh shallow clone of `partsfoundry/nife` at its head, on a Linux host. The
 host had the workspace's nightly toolchain (1.102) and the three bare-metal targets the README names:
 
 - `cargo test --release`: 13 unit tests, 12 tests in `tests/real_disks.rs` (one `#[ignore]`, the
@@ -15,7 +15,7 @@ host had the workspace's nightly toolchain (1.102) and the three bare-metal targ
 - `cargo package --list`: the manifest, both licenses, the README, eleven source files, eight
   patches, two test files and four fixtures of 16.5 to 17 KiB. Cargo warns that the manifest has
   no `documentation`, `homepage` or `repository`.
-- The template's gates, run from a clone of `nifeos/crate-workflows` at its head over `src/*.rs`
+- The template's gates, run from a clone of `partsfoundry/crate-workflows` at its head over `src/*.rs`
   with the crate's manifest: `unit_symbols`, `question_shape`, `british_spelling`, `contract_names`
   and `service_model` judge 432 names and refuse none. `spelled_out` refuses one and
   `register_names` refuses ten. `prose_acronyms` reports nineteen unexpanded acronyms in the README

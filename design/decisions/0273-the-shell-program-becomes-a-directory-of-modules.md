@@ -16,7 +16,7 @@ merge queue lands it.)*
 ## The ruling
 
 calef ruled on 2026-10-11 at 07:23 (UTC), in the maintainer session, and the maintainer recorded it
-on [PR #1914](https://github.com/nifeos/nife/pull/1914#issuecomment-6106644498). Three blocking
+on [PR #1914](https://github.com/partsfoundry/nife/pull/1914#issuecomment-6106644498). Three blocking
 questions, three answers:
 
 | Question | calef's words | What it decides |

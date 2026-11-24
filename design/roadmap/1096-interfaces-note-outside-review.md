@@ -21,7 +21,7 @@ the missing-note rule. None of those is reopened here. Step 3 of
 [milestone 1017 (the contract crates leave in this order)](1017-the-contract-crates-leave-in-this-order.md)
 puts this crate last in its step and says it leaves like any leaf.
 
-Reuse: `script/crate-move`, the template `nifeos/crate-workflows` and its scaffold, Kani,
+Reuse: `script/crate-move`, the template `partsfoundry/crate-workflows` and its scaffold, Kani,
 cargo-mutants, cargo-fuzz. No new tool.
 
 ## Finding status
@@ -29,41 +29,41 @@ cargo-mutants, cargo-fuzz. No new tool.
 Every finding not Done blocks the first crates.io publish, which waits until every outside-review
 milestone reaches delivery.
 
-- Item 1 (P0), the manifest does not stand alone: Done, [#3835](https://github.com/nifeos/nife/pull/3835). The manifest in
-  `nifeos/interfaces_note` states its license, `rust-version`, description, keywords, categories
+- Item 1 (P0), the manifest does not stand alone: Done, [#3835](https://github.com/partsfoundry/nife/pull/3835). The manifest in
+  `partsfoundry/interfaces_note` states its license, `rust-version`, description, keywords, categories
   and lints.
-- Item 2 (P0), no README and no license files: Done, [#3835](https://github.com/nifeos/nife/pull/3835).
-- Item 3 (P0), the documentation cites this tree: Done, [#3835](https://github.com/nifeos/nife/pull/3835). The module doc in
-  `nifeos/interfaces_note` cites no milestone or script and does not speak of the progenitor.
-- Item 4 (P0), the owner string `nife` is the wire format: Done, [#3575](https://github.com/nifeos/nife/pull/3575) and [#3835](https://github.com/nifeos/nife/pull/3835). The bytes
+- Item 2 (P0), no README and no license files: Done, [#3835](https://github.com/partsfoundry/nife/pull/3835).
+- Item 3 (P0), the documentation cites this tree: Done, [#3835](https://github.com/partsfoundry/nife/pull/3835). The module doc in
+  `partsfoundry/interfaces_note` cites no milestone or script and does not speak of the progenitor.
+- Item 4 (P0), the owner string `nife` is the wire format: Done, [#3575](https://github.com/partsfoundry/nife/pull/3575) and [#3835](https://github.com/partsfoundry/nife/pull/3835). The bytes
   keep their spelling behind the `// wire literal` marker (decision 1), and no prose line names
   nife.
-- Item 5 (P1), passive voice over the template's ceiling: Done, [#3835](https://github.com/nifeos/nife/pull/3835).
-- Item 6 (P1), two acronyms unexpanded: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 7 (P1), a stranger cannot place the note: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 8 (P1), the only example does not compile: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 9 (P1), three lengths carry no unit: Done, [#3566](https://github.com/nifeos/nife/pull/3566) for the private lengths and [#3823](https://github.com/nifeos/nife/pull/3823)
+- Item 5 (P1), passive voice over the template's ceiling: Done, [#3835](https://github.com/partsfoundry/nife/pull/3835).
+- Item 6 (P1), two acronyms unexpanded: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 7 (P1), a stranger cannot place the note: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 8 (P1), the only example does not compile: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 9 (P1), three lengths carry no unit: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566) for the private lengths and [#3823](https://github.com/partsfoundry/nife/pull/3823)
   for the public ones: `INTERFACE_RECORD_BYTES`, `descriptor_bytes` and `note_bytes`, with no alias
   of the old spellings.
-- Item 10 (P1), `Declared` names a state: Done, [#3823](https://github.com/nifeos/nife/pull/3823). The type is `DeclaredInterface`.
+- Item 10 (P1), `Declared` names a state: Done, [#3823](https://github.com/partsfoundry/nife/pull/3823). The type is `DeclaredInterface`.
 - Item 11 (P2), no fuzz target: Done,
-  [nifeos/interfaces_note#2](https://github.com/nifeos/interfaces_note/pull/2). A decoder target
+  [partsfoundry/interfaces_note#2](https://github.com/partsfoundry/interfaces_note/pull/2). A decoder target
   encodes each accepted list back and compares, and the weekly run is opted in (decision 6).
-- Item 12 (P2), the proof runs one direction: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 13 (P2), a test name the abbreviation report flags: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 14 (P2), `iter` yields by value: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
+- Item 12 (P2), the proof runs one direction: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 13 (P2), a test name the abbreviation report flags: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 14 (P2), `iter` yields by value: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
 - Item 15 (P2), the triaged timeouts travel nowhere: Done,
-  [nifeos/interfaces_note#3](https://github.com/nifeos/interfaces_note/pull/3). The three rows are
+  [partsfoundry/interfaces_note#3](https://github.com/partsfoundry/interfaces_note/pull/3). The three rows are
   in `.github/mutants-exempts`, since the template's gate fails an unexempted timeout.
-- Decision 1, the owner string: Done, [#3575](https://github.com/nifeos/nife/pull/3575).
-- Decision 2, ratifying the twenty public names: Done, [#3823](https://github.com/nifeos/nife/pull/3823) for the four renames and [#3835](https://github.com/nifeos/nife/pull/3835)
+- Decision 1, the owner string: Done, [#3575](https://github.com/partsfoundry/nife/pull/3575).
+- Decision 2, ratifying the twenty public names: Done, [#3823](https://github.com/partsfoundry/nife/pull/3823) for the four renames and [#3835](https://github.com/partsfoundry/nife/pull/3835)
   for the ratified names, ruled 2026-11-19 (UTC).
-- Decision 3, the crate name: Done, [#3589](https://github.com/nifeos/nife/pull/3589), ruled 2026-11-14 (UTC) with nothing to build.
-- Decision 4, review clearance and the repository: Done, [#3835](https://github.com/nifeos/nife/pull/3835). The architect cleared
+- Decision 3, the crate name: Done, [#3589](https://github.com/partsfoundry/nife/pull/3589), ruled 2026-11-14 (UTC) with nothing to build.
+- Decision 4, review clearance and the repository: Done, [#3835](https://github.com/partsfoundry/nife/pull/3835). The architect cleared
   [notes/crate-reviews/interfaces-note.md](../../notes/crate-reviews/interfaces-note.md) and
-  approved `nifeos/interfaces_note`, with `publish = false`, no tag and no publish.
+  approved `partsfoundry/interfaces_note`, with `publish = false`, no tag and no publish.
 - Decision 6, the fuzz crate's dependency hold: Done,
-  [nifeos/interfaces_note#2](https://github.com/nifeos/interfaces_note/pull/2), ruled 2026-11-22 (UTC).
+  [partsfoundry/interfaces_note#2](https://github.com/partsfoundry/interfaces_note/pull/2), ruled 2026-11-22 (UTC).
 
 ## Open decisions
 
@@ -71,7 +71,7 @@ None.
 
 ## Goal
 
-A stranger who opens `nifeos/interfaces_note` can tell in one screen what the note is, place one in
+A stranger who opens `partsfoundry/interfaces_note` can tell in one screen what the note is, place one in
 a program from the README alone, and decode one from untrusted bytes without a panic. The move's
 dry run exits 0 at the newest template release, with its build step run, and every public name stands
 ratified.
@@ -185,7 +185,7 @@ The rules in force, with their background and prior art, are in
 - Decision 4, review clearance: the maintainer's provisional ruling of 2026-11-19 (UTC). Decision 5
   replaces it.
 - Decision 5, the repository: 2026-11-20 (UTC), option A. The architect cleared the review
-  package and gives the go to create `nifeos/interfaces_note`, with `publish = false`, no tag and no
+  package and gives the go to create `partsfoundry/interfaces_note`, with `publish = false`, no tag and no
   publish. The twenty public names keep decision 2's spelling. The move lane runs the
   stranger test, the template's workflows and the first weekly mutation run in the new repository.
 - Decision 6, the fuzz crate's dependency hold: 2026-11-22 (UTC), option A. The labeler's hold on
@@ -198,7 +198,7 @@ The comparison with nearby work is in [the appendix](1096-interfaces-note-outsid
 
 ## Follow-on
 
-- **Recorded.** The stranger test and the first weekly mutation run in `nifeos/interfaces_note`,
+- **Recorded.** The stranger test and the first weekly mutation run in `partsfoundry/interfaces_note`,
   whose `docs/stranger-test.md` reads `Last run: none`.
 
 ## Done when
@@ -219,6 +219,6 @@ The checks are in [the appendix](1096-interfaces-note-outside-review/done-when.m
 ## Index row
 
 An outside review of `interfaces_note` before its move. Every finding and decision is done: the
-crate stands alone in `nifeos/interfaces_note` with `publish = false`, no tag and no publish, a
+crate stands alone in `partsfoundry/interfaces_note` with `publish = false`, no tag and no publish, a
 decoder fuzz target and its triaged mutation exemptions. The stranger test and the first weekly
 mutation run in the new repository remain.

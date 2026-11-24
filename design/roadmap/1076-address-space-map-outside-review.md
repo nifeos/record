@@ -21,7 +21,7 @@ program image starts), option D). It also includes the placement of this crate a
 milestone 1017 (the contract crates leave in this order), after the linker-script test moves. Every other name in the crate is
 provisional by its own `Name:` block or carries none.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, Kani, cargo-mutants, the template's
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, Kani, cargo-mutants, the template's
 name helpers, and the move shape `jh7110_entropy` and `file_allocation_table` already took. No new
 tool.
 
@@ -92,9 +92,9 @@ The P1 items are in [the appendix](1076-address-space-map-outside-review/before-
 ## What the move needs in nife
 
 Twenty-seven manifests depend on the crate by `path`, all but `jig/Cargo.toml` with
-`version = "0.1.0"`; `page_tables` as a development dependency. Under §305 (git dependencies on `nifeos/*` only, pinned to a
+`version = "0.1.0"`; `page_tables` as a development dependency. Under §305 (git dependencies on `partsfoundry/*` only, pinned to a
 landed commit) each becomes
-`address_space_layout = { version = "0.1.0", git = "https://github.com/nifeos/address_space_layout", rev = "<landed commit>" }`,
+`address_space_layout = { version = "0.1.0", git = "https://github.com/partsfoundry/address_space_layout", rev = "<landed commit>" }`,
 the form `components/Cargo.toml` already uses for `jh7110_entropy` and `e1000e`. Milestone 1017 rules
 one revision per contract per image, so all twenty-seven move in one pull request, and recommends a
 root `[workspace.dependencies]` entry so the next bump touches one line. For `memory_region_heap`
@@ -156,7 +156,7 @@ state, including the provisional names of items 7, 9, 15 and 17. This decision i
 that package.
 
 Decision, option A, 2026-11-21 (UTC): the architect cleared the review. That approves creating
-`nifeos/address_space_layout` and moving the crate with `publish = false`, no tag and no publish.
+`partsfoundry/address_space_layout` and moving the crate with `publish = false`, no tag and no publish.
 The clearance ratifies the names of items 7, 9, 15 and 17 as the package proposed them, `window`
 included; `VERSION` and `INTERFACE_ID` stay provisional.
 
@@ -181,7 +181,7 @@ The checks are in [the appendix](1076-address-space-map-outside-review/done-when
 ## Finding status
 
 One line per finding, in the review's order. Each state was read against
-`nifeos/address_space_layout` at `02d497b`, its `main`, where `check` run 44924529322 and `proofs`
+`partsfoundry/address_space_layout` at `02d497b`, its `main`, where `check` run 44924529322 and `proofs`
 run 44924529336 are green.
 
 - P0 item 1, the host test reads a file outside the crate: Done, #3659; the test lives in
@@ -191,7 +191,7 @@ run 44924529336 are green.
 - P0 item 3, the manifest does not stand alone: Done, #3659.
 - P1 item 4, documentation addressed to a reader inside nife: Done, #3659.
 - P1 item 5, no README, licenses, changelog or scaffold: Waiting on
-  `nifeos/address_space_layout#2`, which records the first stranger run and closes the five README
+  `partsfoundry/address_space_layout#2`, which records the first stranger run and closes the five README
   gaps it found. #3659, #3886 and #3895 brought the rest.
 - P1 item 6, parameter and helper names the template refuses: Done, #3659.
 - P1 item 7, address and length constants: Done, #3886; names ratified 2026-11-21 UTC.
@@ -221,8 +221,8 @@ None.
 
 ## Follow-on
 
-- **Done.** The crate lives in `nifeos/address_space_layout`, and nife pins it by `rev`.
-- **Outstanding.** Item 5's stranger run, `nifeos/address_space_layout#2`.
+- **Done.** The crate lives in `partsfoundry/address_space_layout`, and nife pins it by `rev`.
+- **Outstanding.** Item 5's stranger run, `partsfoundry/address_space_layout#2`.
 
 ## BUGS
 

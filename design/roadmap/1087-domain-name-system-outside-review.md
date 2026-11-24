@@ -24,7 +24,7 @@ crates leave in this order) places this crate in step 5 with the `process-tools`
 none of those except where a later rule contradicts a ratified name, and says so where it does
 (items 6 and 7).
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `script/crate-standalone`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `script/crate-standalone`,
 `script/crate-review-packet`, `helpers/name_release.py`, Kani, cargo-mutants, cargo-fuzz. No new
 tool.
 
@@ -33,54 +33,54 @@ tool.
 Items 1 to 4 are under [P0](#p0-blocks-the-move), 5 to 9 in [the before-the-tag
 appendix](1087-domain-name-system-outside-review/before-the-tag.md), and 10 to 16 in [the later
 items](1087-domain-name-system-outside-review/later-items.md). The crate lives in
-`nifeos/domain_name_system`, tagged `v0.1.0-pre.1`.
+`partsfoundry/domain_name_system`, tagged `v0.1.0-pre.1`.
 
-- Item 1 (P0), unratified public names: Done, [#3728](https://github.com/nifeos/nife/pull/3728),
+- Item 1 (P0), unratified public names: Done, [#3728](https://github.com/partsfoundry/nife/pull/3728),
   which ratified every public name as built.
 - Item 2 (P0), the manifest does not stand alone: Done,
-  [#3658](https://github.com/nifeos/nife/pull/3658).
+  [#3658](https://github.com/partsfoundry/nife/pull/3658).
 - Item 3 (P0), the files a stranger needs are absent: Done,
-  [#3658](https://github.com/nifeos/nife/pull/3658) for the README and both license files, the move
-  commit for the scaffold files and caller workflows, and nifeos/domain_name_system#3 for
+  [#3658](https://github.com/partsfoundry/nife/pull/3658) for the README and both license files, the move
+  commit for the scaffold files and caller workflows, and partsfoundry/domain_name_system#3 for
   `docs/stranger-test.md` and the stranger run.
 - Item 4 (P0), shipped text points into nife: Done,
-  [#3608](https://github.com/nifeos/nife/pull/3608).
+  [#3608](https://github.com/partsfoundry/nife/pull/3608).
 - Item 5 (P1), the fuzz target lives in nife: Done,
-  [#3658](https://github.com/nifeos/nife/pull/3658) for `#![forbid(unsafe_code)]`, the move commit
+  [#3658](https://github.com/partsfoundry/nife/pull/3658) for `#![forbid(unsafe_code)]`, the move commit
   for the crate's own `fuzz/` and the caller's `public-crash-inputs: true`, and
-  [#3818](https://github.com/nifeos/nife/pull/3818), which removed the target from nife.
+  [#3818](https://github.com/partsfoundry/nife/pull/3818), which removed the target from nife.
 - Item 6 (P1), two length names break the units rule: Done,
-  [#3608](https://github.com/nifeos/nife/pull/3608).
+  [#3608](https://github.com/partsfoundry/nife/pull/3608).
 - Item 7 (P1), names that need the specification, and the `address` gate: Done, parts a, c and d in
-  [#3608](https://github.com/nifeos/nife/pull/3608) and
-  [#3668](https://github.com/nifeos/nife/pull/3668), and part b in nifeos/domain_name_system#1,
+  [#3608](https://github.com/partsfoundry/nife/pull/3608) and
+  [#3668](https://github.com/partsfoundry/nife/pull/3668), and part b in partsfoundry/domain_name_system#1,
   which names the binding and the test names as IPv4. `check / standalone` is green on the crate's
   `main` with no `tcp` or `udp` line in `.github/accepted-words`.
-- Item 8 (P1), a TTL with its high bit set: Done, [#3559](https://github.com/nifeos/nife/pull/3559).
-- Item 9 (P1), the equivalent mutants: Done, nifeos/domain_name_system#4, which exempts the six
+- Item 8 (P1), a TTL with its high bit set: Done, [#3559](https://github.com/partsfoundry/nife/pull/3559).
+- Item 9 (P1), the equivalent mutants: Done, partsfoundry/domain_name_system#4, which exempts the six
   survivors the first full run named, and `mutation / mutation` is green on the crate's `main`.
-- Item 10 (P2), `Display` and `FromStr`: Done, [#3608](https://github.com/nifeos/nife/pull/3608).
-- Item 11 (P2), type sizes: Done, [#3608](https://github.com/nifeos/nife/pull/3608).
-- Item 12 (P2), an exhaustive `Error`: Done, [#3608](https://github.com/nifeos/nife/pull/3608).
-- Item 13 (P2), documentation drift: Done, [#3608](https://github.com/nifeos/nife/pull/3608).
-- Item 14 (P2), host-name syntax: Done, [#3608](https://github.com/nifeos/nife/pull/3608).
+- Item 10 (P2), `Display` and `FromStr`: Done, [#3608](https://github.com/partsfoundry/nife/pull/3608).
+- Item 11 (P2), type sizes: Done, [#3608](https://github.com/partsfoundry/nife/pull/3608).
+- Item 12 (P2), an exhaustive `Error`: Done, [#3608](https://github.com/partsfoundry/nife/pull/3608).
+- Item 13 (P2), documentation drift: Done, [#3608](https://github.com/partsfoundry/nife/pull/3608).
+- Item 14 (P2), host-name syntax: Done, [#3608](https://github.com/partsfoundry/nife/pull/3608).
 - Item 15 (P2), fixtures that cannot be re-captured: Done,
-  [#3608](https://github.com/nifeos/nife/pull/3608).
-- Item 16 (P2), the TCP buffer: Done, [#3608](https://github.com/nifeos/nife/pull/3608) for
+  [#3608](https://github.com/partsfoundry/nife/pull/3608).
+- Item 16 (P2), the TCP buffer: Done, [#3608](https://github.com/partsfoundry/nife/pull/3608) for
   `MAXIMUM_TCP_MESSAGE_BYTES` and the `TcpReply::new` sentence, and
-  [#3658](https://github.com/nifeos/nife/pull/3658) for the test client's buffer.
+  [#3658](https://github.com/partsfoundry/nife/pull/3658) for the test client's buffer.
 - Decision 1, `MAXIMUM_LABEL_BYTES` and `HEADER_BYTES`: Done,
-  [#3608](https://github.com/nifeos/nife/pull/3608), ratified by
-  [#3728](https://github.com/nifeos/nife/pull/3728).
+  [#3608](https://github.com/partsfoundry/nife/pull/3608), ratified by
+  [#3728](https://github.com/partsfoundry/nife/pull/3728).
 - Decision 2, the specification's abbreviations: Done,
-  [#3668](https://github.com/nifeos/nife/pull/3668), ratified by
-  [#3728](https://github.com/nifeos/nife/pull/3728).
-- Decision 3, the IPv4 address names: Done, [#3608](https://github.com/nifeos/nife/pull/3608),
-  ratified by [#3728](https://github.com/nifeos/nife/pull/3728).
+  [#3668](https://github.com/partsfoundry/nife/pull/3668), ratified by
+  [#3728](https://github.com/partsfoundry/nife/pull/3728).
+- Decision 3, the IPv4 address names: Done, [#3608](https://github.com/partsfoundry/nife/pull/3608),
+  ratified by [#3728](https://github.com/partsfoundry/nife/pull/3728).
 - Decision 4, the review package and the clearance: Done,
-  [#3786](https://github.com/nifeos/nife/pull/3786) for [the
+  [#3786](https://github.com/partsfoundry/nife/pull/3786) for [the
   package](../../notes/crate-reviews/domain-name-system.md), cleared 2026-11-19 (UTC), and
-  [#3818](https://github.com/nifeos/nife/pull/3818) for the move.
+  [#3818](https://github.com/partsfoundry/nife/pull/3818) for the move.
 
 ## Open decisions
 
@@ -226,7 +226,7 @@ move does not wait for the resolver contract, whose names have settled. Creating
 is an outward step, so the clearance itself stays the architect's. Prior art:
 `file_allocation_table` and `e1000e` each cleared from a written package before their repository
 existed. Example: the architect clears the package, and `script/crate-move domain_name_system`
-creates `nifeos/domain_name_system` with the three mutant exemptions and the fuzz target staged.
+creates `partsfoundry/domain_name_system` with the three mutant exemptions and the fuzz target staged.
 
 ## Done when
 
@@ -235,7 +235,7 @@ The checks are in [the appendix](1087-domain-name-system-outside-review/done-whe
 ## Follow-on
 
 - **Done.** Every finding, by the pull requests under [Finding status](#finding-status). The crate
-  lives in `nifeos/domain_name_system`, and its later work is that repository's.
+  lives in `partsfoundry/domain_name_system`, and its later work is that repository's.
 
 ## BUGS
 

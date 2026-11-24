@@ -241,7 +241,7 @@ ripgrep working beautifully and confinement being decorative.
 
 ## Follow-on
 
-- **Recorded.** The patch nifeos/basalt carries for `ignore`'s parallel walker, in BUGS.
+- **Recorded.** The patch partsfoundry/basalt carries for `ignore`'s parallel walker, in BUGS.
 - **Milestone 205.** The ABI has no argument vector, which is what stops `rg` after it loads and
   resolves its own directory. `design/roadmap/0205-foreign-program-arguments.md` was minted from
   this lane on 2026-08-31 and carries the wire-format fork.

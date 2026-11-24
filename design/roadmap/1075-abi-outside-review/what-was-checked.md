@@ -2,7 +2,7 @@
 
 An appendix to [the milestone](../1075-abi-outside-review.md).
 
-Verified firsthand on a fresh shallow clone of `nifeos/nife` at the merge of pull request #3514. Also verified on the tree that `script/crate-move --dry-run --no-build` staged from it against template release v7:
+Verified firsthand on a fresh shallow clone of `partsfoundry/nife` at the merge of pull request #3514. Also verified on the tree that `script/crate-move --dry-run --no-build` staged from it against template release v7:
 
 - `cargo test` on stable 1.99.1 and on 1.88 (the manifest's `rust-version`): 20 unit tests and 4 documentation tests pass. The README's example is among them.
 - `cargo doc --no-deps` with warnings denied: clean. `cargo clippy --all-targets -- -D warnings`:

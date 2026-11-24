@@ -25,11 +25,11 @@ No step needs an organization secret or variable.
 | Watchdog workflow and its label | built, scheduled, quiet until the first release; it creates the label `fuzz-loop-broken` at its first failure | `.github/workflows/fuzz-heartbeat.yml`, #3049 |
 | The host follows main | built, running on the host | `helpers/fuzz-follow-main.py`, [continuous-host.md](continuous-host.md#following-main) |
 | Clean-range fix | built, on the host; a slot that held a finding publishes no more ranges, because nothing signals that a finding turned public | `helpers/fuzz-daily-publish.sh`, [milestone](../../design/roadmap/1016-the-clean-range-table-does-not-locate-a-held-seed.md) |
-| Mint helper | built and merged in nifeos/fuzz-host (pull requests 2 and 3), not installed | `fuzz-token` and [docs/fuzz-token.md](https://github.com/nifeos/fuzz-host/blob/main/docs/fuzz-token.md), [milestone](../../design/roadmap/1022-the-fuzz-host-mints-its-tokens-from-the-app-key.md) |
+| Mint helper | built and merged in partsfoundry/fuzz-host (pull requests 2 and 3), not installed | `fuzz-token` and [docs/fuzz-token.md](https://github.com/partsfoundry/fuzz-host/blob/main/docs/fuzz-token.md), [milestone](../../design/roadmap/1022-the-fuzz-host-mints-its-tokens-from-the-app-key.md) |
 | Advisory permission | verified: an App holding only Repository security advisories write, installed on one repository, creates, completes, publishes and publicly reads an advisory | [below](#the-advisory-permission) |
-| Finding filer | built and merged in nifeos/fuzz-host (pull request 5), not installed; it runs as `lane`; unverified against GitHub and systemd | `fuzz-filer` and [docs/fuzz-filer.md](https://github.com/nifeos/fuzz-host/blob/main/docs/fuzz-filer.md), [milestone](../../design/roadmap/1020-the-fuzz-host-files-held-findings-as-advisories.md) |
+| Finding filer | built and merged in partsfoundry/fuzz-host (pull request 5), not installed; it runs as `lane`; unverified against GitHub and systemd | `fuzz-filer` and [docs/fuzz-filer.md](https://github.com/partsfoundry/fuzz-host/blob/main/docs/fuzz-filer.md), [milestone](../../design/roadmap/1020-the-fuzz-host-files-held-findings-as-advisories.md) |
 | Fix lanes read the advisory: script, skill rule text, replay-line lint | built and merged | `script/read-advisory`, `helpers/replay-line-check.sh`, the developer-lane skill, [milestone](../../design/roadmap/1014-fix-lanes-read-the-advisory.md) |
-| Reader token helper | built and merged in nifeos/fuzz-host (pull request 4) as the `reader` profile of `fuzz-token`, with `issue reader` for the sudo rule; not installed; unverified under a real sudo rule | [docs/fuzz-token-reader.md](https://github.com/nifeos/fuzz-host/blob/main/docs/fuzz-token-reader.md), [milestone](../../design/roadmap/1013-fix-lanes-get-a-one-hour-reader-token.md) |
+| Reader token helper | built and merged in partsfoundry/fuzz-host (pull request 4) as the `reader` profile of `fuzz-token`, with `issue reader` for the sudo rule; not installed; unverified under a real sudo rule | [docs/fuzz-token-reader.md](https://github.com/partsfoundry/fuzz-host/blob/main/docs/fuzz-token-reader.md), [milestone](../../design/roadmap/1013-fix-lanes-get-a-one-hour-reader-token.md) |
 | Host replays a red CI shard | built; the host runs it once its clone follows main past it, and nothing files a reproduction until the filer is installed | `--replay` in `helpers/continuous-fuzz.sh`, `helpers/fuzz-red-shards.py`, [continuous-host.md](continuous-host.md#replaying-a-red-ci-shard) |
 | `nife-fuzz` App | created, installed, no key placed | App ID 5571801, installation 177641059 |
 | `nife-fuzz-reader` App | created, installed, no key placed | App ID 5571868, installation 177642435 |
@@ -106,7 +106,7 @@ Two machines take part. The **fuzz host** holds only the `nife-fuzz` key (P5) an
 and filer helpers (P6 to P8). The **fix-lane machine** is a separate machine where a person works the
 advisories with the regular lane workflow. It gets the `nife-fuzz-reader` key (P10) and the reader
 rule (P11), and nothing of P5 to P8. The reader key never goes to the fuzz host, because code from
-main runs there unattended as `lane`. The fuzz host needs no reader step. Pin one commit of nifeos/fuzz-host for the whole
+main runs there unattended as `lane`. The fuzz host needs no reader step. Pin one commit of partsfoundry/fuzz-host for the whole
 sequence:
 
 ```sh
@@ -120,13 +120,13 @@ Read the diff before using a later commit.
 Fetch it into your own account, never the fuzz account, and review what you will run as root.
 
 ```sh
-git clone https://github.com/nifeos/fuzz-host.git ~/fuzz-host
+git clone https://github.com/partsfoundry/fuzz-host.git ~/fuzz-host
 git -C ~/fuzz-host checkout --detach "$FUZZ_HOST_COMMIT"
 git -C ~/fuzz-host log --oneline -1
 ~/fuzz-host/script/test
 ```
 
-Verify: `git log` prints `5219b16 Merge pull request #13 from nifeos/lane/filer-group-normalize`, and
+Verify: `git log` prints `5219b16 Merge pull request #13 from partsfoundry/lane/filer-group-normalize`, and
 `script/test` (which needs `python3` and `openssl`, makes its own throwaway keys and never touches
 GitHub) ends with every selftest passing. Run it as yourself.
 
@@ -135,7 +135,7 @@ GitHub) ends with every selftest passing. Run it as yourself.
 The key never enters a repository, a chat, a pull request, a log, a shell history or a lane's
 environment.
 
-1. At <https://github.com/organizations/nifeos/settings/apps/nife-fuzz>, open Credentials, Key pairs
+1. At <https://github.com/organizations/partsfoundry/settings/apps/nife-fuzz>, open Credentials, Key pairs
    (older layouts say Private keys) and generate a private key. The browser downloads one
    `nife-fuzz.<date>.private-key.pem`. Note the SHA256 fingerprint GitHub shows beside the key.
 2. At once, `chmod 600 ~/Downloads/nife-fuzz.<date>.private-key.pem`.
@@ -183,15 +183,15 @@ sudo systemctl start fuzz-token@publish.service
 - `getent group fuzz-token-publish`: the group with `lane` as its only member.
 - `sudo stat -c '%U %G %a' /run/fuzz-token /run/fuzz-token/publish.env`: `root root 711`, then
   `root fuzz-token-publish 440`.
-- `sudo /usr/local/sbin/fuzz-token check publish`: a `repositories: nifeos/nife` line, an `expires:`
+- `sudo /usr/local/sbin/fuzz-token check publish`: a `repositories: partsfoundry/nife` line, an `expires:`
   line about an hour ahead, and exit status 0. It never prints the token.
 - `sudo /usr/local/sbin/fuzz-token check publish --fresh`: the same, with `permissions:` naming
   contents write and metadata read, and `revoked: yes`.
 - `systemctl list-timers 'fuzz-token@*'`: the next run within 20 minutes.
 
-If `check` lists any repository besides `nifeos/nife`, open
-<https://github.com/organizations/nifeos/settings/installations/177641059> and set Only select
-repositories to `nifeos/nife` alone.
+If `check` lists any repository besides `partsfoundry/nife`, open
+<https://github.com/organizations/partsfoundry/settings/installations/177641059> and set Only select
+repositories to `partsfoundry/nife` alone.
 
 ### P7. Turn on the daily release (root on the fuzz host; may go to the agent)
 
@@ -220,7 +220,7 @@ sudo systemctl start nife-fuzz-publish.service
 ```
 
 Verify: `systemctl show -p Result nife-fuzz-publish.service` prints `Result=success`. A release
-`fuzz-<today>` appears at <https://github.com/nifeos/nife/releases> with `report.md` and
+`fuzz-<today>` appears at <https://github.com/partsfoundry/nife/releases> with `report.md` and
 `clean-ranges.tsv`, made by `nife-fuzz[bot]`. The watchdog stops passing quietly from that day.
 
 ### P8. Turn on the filer (root on the fuzz host; may go to the agent)
@@ -254,7 +254,7 @@ sudo systemctl start fuzz-token@filer.service
 sudo /usr/local/sbin/fuzz-token check filer
 ```
 
-Verify `check filer`: `repositories: nifeos/nife`, `permissions:` naming advisories write and
+Verify `check filer`: `repositories: partsfoundry/nife`, `permissions:` naming advisories write and
 metadata read, and an expiry about an hour ahead. Then look before filing. The dry run sends nothing:
 
 ```sh
@@ -274,7 +274,7 @@ Verify:
 - `journalctl -u fuzz-filer.service -n 20`: one `filed finding <id> (held <age>) as GHSA-...` line per
   held finding, with no seed, file name or advisory text.
 - `sudo -u lane /usr/local/bin/fuzz-filer ledger`: one `filed` line per held finding.
-- <https://github.com/nifeos/nife/security/advisories>: one draft per held finding, made by
+- <https://github.com/partsfoundry/nife/security/advisories>: one draft per held finding, made by
   `nife-fuzz[bot]`.
 - Start the service again: the journal says `none to file`.
 - `systemctl list-timers fuzz-filer.timer`: the next run within 30 minutes.
@@ -298,7 +298,7 @@ and `sudo ls -ldn /etc/nife-fuzz-reader` shows `drwx------` and owner `0`.
 
 ### P10. Generate the `nife-fuzz-reader` key and place it on the fix-lane machine (person only, root)
 
-1. At <https://github.com/organizations/nifeos/settings/apps/nife-fuzz-reader>, under Credentials, Key
+1. At <https://github.com/organizations/partsfoundry/settings/apps/nife-fuzz-reader>, under Credentials, Key
    pairs, generate a private key. Note the SHA256 fingerprint. `chmod 600` the download at once.
 2. Install it and remove the download:
 
@@ -352,7 +352,7 @@ Verify. After each command, the text after the colon is its expected output:
   rule that grants anything more.
 - `sudo /usr/local/sbin/fuzz-token check reader --fresh`, as yourself: `app: nife-fuzz-reader (App ID
   5571868, installation 177642435)`, `permissions: metadata:read,repository_advisories:read`,
-  `repositories: nifeos/nife`, an `expires:` line about an hour ahead, `revoked: yes`, exit status 0.
+  `repositories: partsfoundry/nife`, an `expires:` line about an hour ahead, `revoked: yes`, exit status 0.
 - As the lane account, `sudo -n /usr/local/sbin/fuzz-token issue reader | wc -c`: a number near 521,
   and one `issued one reader token` line on standard error.
 - As the lane account, `sudo -n /usr/local/sbin/fuzz-token issue reader` with nothing after it: a
@@ -361,11 +361,11 @@ Verify. After each command, the text after the colon is its expected output:
   denied.
 
 Any lane on the machine can take a reader token, because every lane runs as one account, and the
-token reads every advisory on nifeos/nife. An architect accepted that on 2026-11-03 (UTC). The
+token reads every advisory on partsfoundry/nife. An architect accepted that on 2026-11-03 (UTC). The
 fix-lane skill, the replay-line check and sudo's log protect it, and the first fix lane starts a
 revisit of the account split. If `check` lists another repository, open
-<https://github.com/organizations/nifeos/settings/installations/177642435> and set Only select
-repositories to `nifeos/nife` alone.
+<https://github.com/organizations/partsfoundry/settings/installations/177642435> and set Only select
+repositories to `partsfoundry/nife` alone.
 
 ## What is not built
 
@@ -382,7 +382,7 @@ an advisory, a held finding's included. The filer never does: it calls GET to li
 to create a draft, sends no state in the body, and has no PATCH or other call. The permission is
 still there for anything that runs as `lane` with a filer token, which is the accepted risk of P8.
 [`the-fuzz-app.md`](the-fuzz-app.md) states what a leaked key can do. To revoke, suspend the
-installation at once, at <https://github.com/organizations/nifeos/settings/installations/177641059>
+installation at once, at <https://github.com/organizations/partsfoundry/settings/installations/177641059>
 (Suspend), which stops every token. Delete the key on the App's page, place a fresh one as in P5, and
 unsuspend. For the reader, suspend installation 177642435 and place a fresh key as in P10. Both fuzz-host
 profiles default to the reader `lane`, so the split isolates nothing between them.

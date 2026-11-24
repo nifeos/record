@@ -18,44 +18,44 @@ from milestone 1017 (the contract crates leave in this order), step 9 and its ap
 `talc` goes, and from the vendoring record in `vendor/README.md` and `vendor/talc.pin`. It raises none of the decisions those settle. Those are the algorithm (`talc` 5.1.1's core, `Manual` source), the geometric growth with a floor of eight pages and the one contiguous heap. They also include the untyped slot as part of the program's capability contract, and the step at which the crate leaves. The review package is
 [`notes/crate-reviews/memory-region-heap.md`](../../notes/crate-reviews/memory-region-heap.md).
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `script/crate-standalone`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `script/crate-standalone`,
 `script/crate-review-packet`, `helpers/name_release.py`, cargo-mutants, Kani, and the std farm's
 copied-file list (`xtask/src/farm/copied.rs`). No new tool.
 
 ## Finding status
 
-- P0-1, names and the missing `Name:` blocks: Done, [#3597](https://github.com/nifeos/nife/pull/3597). The names later items added are
+- P0-1, names and the missing `Name:` blocks: Done, [#3597](https://github.com/partsfoundry/nife/pull/3597). The names later items added are
   ratified (ruled 2026-11-19 UTC).
 - P0-2, `talc` and the path dependencies: Waiting on repositories for `moho_abi` and
   `user_mode_runtime`. The `talc` half follows Decision B, and the README's BUGS section states
-  what crates.io's 5.1.1 lacks ([#3840](https://github.com/nifeos/nife/pull/3840)). The manifest pins `address_space_layout` by `git` and `rev`
-  ([#3895](https://github.com/nifeos/nife/pull/3895)); `moho_abi` and `user_mode_runtime` have no repositories yet, so the manifest keeps their
+  what crates.io's 5.1.1 lacks ([#3840](https://github.com/partsfoundry/nife/pull/3840)). The manifest pins `address_space_layout` by `git` and `rev`
+  ([#3895](https://github.com/partsfoundry/nife/pull/3895)); `moho_abi` and `user_mode_runtime` have no repositories yet, so the manifest keeps their
   path dependencies, and `script/crate-move --dry-run` fails only on them.
-- P0-3, manifest, README and license files: Done, [#3840](https://github.com/nifeos/nife/pull/3840). The manifest states its license,
+- P0-3, manifest, README and license files: Done, [#3840](https://github.com/partsfoundry/nife/pull/3840). The manifest states its license,
   `rust-version`, description, keywords, categories and lints, both license files sit beside it,
   the README's host example runs as a doctest, and the crate's documentation cites nothing outside
   it.
 - P0-4, the `va` binding and `commit_all`: At the move. The binding and `commit_all` are done in
-  [#3597](https://github.com/nifeos/nife/pull/3597), and the fuzz workspace's binding in [#3840](https://github.com/nifeos/nife/pull/3840). The coverage half is the move's: the
+  [#3597](https://github.com/partsfoundry/nife/pull/3597), and the fuzz workspace's binding in [#3840](https://github.com/partsfoundry/nife/pull/3840). The coverage half is the move's: the
   template's `coverage` job first measures the host tests after the move.
-- P1-5, a second `initialize`: Done, [#3559](https://github.com/nifeos/nife/pull/3559).
-- P1-6, a grow of zero bytes: Done, [#3559](https://github.com/nifeos/nife/pull/3559).
-- P1-7, kernel refusals read as budget spent: Done, [#3609](https://github.com/nifeos/nife/pull/3609).
-- P1-8, page-source seam, host tests, proofs and one copy of the policy: Done, [#3609](https://github.com/nifeos/nife/pull/3609) and
-  [#3840](https://github.com/nifeos/nife/pull/3840). The seam, host tests and three harnesses landed in the first; in the second the
+- P1-5, a second `initialize`: Done, [#3559](https://github.com/partsfoundry/nife/pull/3559).
+- P1-6, a grow of zero bytes: Done, [#3559](https://github.com/partsfoundry/nife/pull/3559).
+- P1-7, kernel refusals read as budget spent: Done, [#3609](https://github.com/partsfoundry/nife/pull/3609).
+- P1-8, page-source seam, host tests, proofs and one copy of the policy: Done, [#3609](https://github.com/partsfoundry/nife/pull/3609) and
+  [#3840](https://github.com/partsfoundry/nife/pull/3840). The seam, host tests and three harnesses landed in the first; in the second the
   growth arithmetic lives in the core-only `src/growth.rs`, which `cargo xtask std-src` copies
   into std as `heap_growth.rs`, and `second_mount` runs on `MemoryRegionHeap` over a host page
   source. The fuzz target keeps a copy, because it reads talc's counters, and its README says so.
-- P1-9, documentation and the minimum cap: Done. The crate documentation landed in [#3609](https://github.com/nifeos/nife/pull/3609), the
-  README in [#3840](https://github.com/nifeos/nife/pull/3840).
-- P2-10, `PAGE_BYTES`: Done, [#3609](https://github.com/nifeos/nife/pull/3609).
-- P2-11, a panic inside the allocator: Done, [#3609](https://github.com/nifeos/nife/pull/3609).
-- P2-12, growth is monotonic: Done, [#3840](https://github.com/nifeos/nife/pull/3840). The crate documentation and the README say so, and
+- P1-9, documentation and the minimum cap: Done. The crate documentation landed in [#3609](https://github.com/partsfoundry/nife/pull/3609), the
+  README in [#3840](https://github.com/partsfoundry/nife/pull/3840).
+- P2-10, `PAGE_BYTES`: Done, [#3609](https://github.com/partsfoundry/nife/pull/3609).
+- P2-11, a panic inside the allocator: Done, [#3609](https://github.com/partsfoundry/nife/pull/3609).
+- P2-12, growth is monotonic: Done, [#3840](https://github.com/partsfoundry/nife/pull/3840). The crate documentation and the README say so, and
   the README's BUGS section carries the line.
-- P2-13, accessors for the cap and the base: Done, [#3609](https://github.com/nifeos/nife/pull/3609).
-- P2-14, the `Sync` argument: Done, [#3609](https://github.com/nifeos/nife/pull/3609).
-- Decision A, the seven names and `commit_all`: Done, [#3597](https://github.com/nifeos/nife/pull/3597), ruled 2026-11-14 (UTC), option A.
-- Decision B, which `talc` outside nife: Done, [#3840](https://github.com/nifeos/nife/pull/3840), ruled 2026-11-14 (UTC), option A. The
+- P2-13, accessors for the cap and the base: Done, [#3609](https://github.com/partsfoundry/nife/pull/3609).
+- P2-14, the `Sync` argument: Done, [#3609](https://github.com/partsfoundry/nife/pull/3609).
+- Decision A, the seven names and `commit_all`: Done, [#3597](https://github.com/partsfoundry/nife/pull/3597), ruled 2026-11-14 (UTC), option A.
+- Decision B, which `talc` outside nife: Done, [#3840](https://github.com/partsfoundry/nife/pull/3840), ruled 2026-11-14 (UTC), option A. The
   crate depends on crates.io's `talc` 5.1.1 with no patch outside nife, and the README says what
   that release lacks.
 
@@ -110,7 +110,7 @@ Blocks: nothing until the vendor-watch report passes in silence; after that, the
 ### Clear the review package and approve the repository (ruled)
 
 Ruled 2026-11-20 (UTC), option A: the architect clears the package, and the clearance creates the
-repository, `nifeos/memory_region_heap`, with `publish = false`. No tag and no publish. The move waits for `moho_abi`,
+repository, `partsfoundry/memory_region_heap`, with `publish = false`. No tag and no publish. The move waits for `moho_abi`,
 `address_space_layout` and `user_mode_runtime` to get repositories. It leaves on its own clearance, as
 one repository with `subtree_scope` or as a repository of its own, decided at the move (ruled
 2026-11-20 UTC), and before `redoxfs`, which keeps its own track.
@@ -137,7 +137,7 @@ Prior art. The Rust library team reviews a new std interface through an API chan
 before it stabilizes, and Fuchsia's API council reviews a library before it enters the SDK (both
 recalled, not re-read). nife differs in reviewing a whole crate once, before its first publish.
 Concrete example: the architect cleared `generational_table` on 2026-11-08 (UTC), and its
-repository `nifeos/generational_table` dates from that day.
+repository `partsfoundry/generational_table` dates from that day.
 
 Blocks: the move.
 

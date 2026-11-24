@@ -6,8 +6,8 @@ together outgrow the page. Its twin is [`terminal_contract`](terminal-contract.m
 the cut took out of this crate.*
 
 The architect cleared this package on 2026-11-22 (UTC), with `publish = false`, no tag and no
-publish: the clearance is the go to create `nifeos/line_editor`, and the move waits on the work
-under What still blocks the move. It describes the crate as `main` holds it once [#3965](https://github.com/nifeos/nife/pull/3965) lands; the checks under
+publish: the clearance is the go to create `partsfoundry/line_editor`, and the move waits on the work
+under What still blocks the move. It describes the crate as `main` holds it once [#3965](https://github.com/partsfoundry/nife/pull/3965) lands; the checks under
 "What was run" ran at `97d16ae8b`, before the renames. The findings and their statuses are in
 [milestone 1098 (`line_editor`: what an outside maintainer would fix before it leaves)](../../design/roadmap/1098-line-editor-outside-review.md);
 this package does not restate them, and checks which have landed.
@@ -44,7 +44,7 @@ has no dependency, and two Kani harnesses prove the cursor and range-delete inva
 | path dependency | `components` (the `line_editor` program, `display_terminal` and the shell's prompt), `fuzz` (targets `line_editor_feed` and `line_editor_handoff`); `crates/video_terminal` as a development dependency, whose keymap tests check its arrow sequences against this editor |
 | prose and tables | `crates/externalization-list.txt`, `packages/terminal.package.toml`, `packages/base-image.toml`, `helpers/trust_boundary_crates.tsv`, `helpers/interface_stability.py` |
 
-No kernel crate and no contract crate depends on it since the cut ([#3587](https://github.com/nifeos/nife/pull/3587)):
+No kernel crate and no contract crate depends on it since the cut ([#3587](https://github.com/partsfoundry/nife/pull/3587)):
 the kernel and every client of the protocol link `terminal_contract`, and the supervisor's routing
 lives in `line_editor_component`, which stays in nife.
 
@@ -60,7 +60,7 @@ All commands ran in this lane's worktree, at `main` with this lane's edits to do
 | `cargo clippy -p line_editor --all-targets -- -D warnings` | no warning |
 | `cargo doc -p line_editor --no-deps` with warnings denied | no warning |
 | `script/names line_editor` and `python3 helpers/name_release.py --draft line_editor` | the crate and the program ratified; `LINE_MAXIMUM`, `PROMPT_MAXIMUM` and `RAW_QUEUE_MAXIMUM` ratified before the units rule; four module names and `handoff`, `Event::Suspend` provisional; the standing `tests` and `verification` modules ratified; every other public item has no block |
-| the template's gating name checks (`spelled_out`, `unit_symbols`, `register_names`, `british_spelling`, `service_model`, `contract_names`, `question_shape`, and `service_model --prose`), from `nifeos/crate-workflows` at `56437de` | two fail. `spelled_out` refuses the parameter `dir` (`src/line_disc.rs` line 685). `register_names` refuses five length fields with no unit: `len`, `done_len`, `kill_len` and `prompt_len` (`src/line_disc.rs` lines 144 to 158) and `len` (`src/raw_queue.rs` line 24). The other six pass |
+| the template's gating name checks (`spelled_out`, `unit_symbols`, `register_names`, `british_spelling`, `service_model`, `contract_names`, `question_shape`, and `service_model --prose`), from `partsfoundry/crate-workflows` at `56437de` | two fail. `spelled_out` refuses the parameter `dir` (`src/line_disc.rs` line 685). `register_names` refuses five length fields with no unit: `len`, `done_len`, `kill_len` and `prompt_len` (`src/line_disc.rs` lines 144 to 158) and `len` (`src/raw_queue.rs` line 24). The other six pass |
 | the template's `abbreviations` report | 54 components in 7 files, 40 of them outside the tests: `buf`, `hist`, `esc`, `params`, `csi`, `cr`, `elen`, `slen`, `scur`, `prev`, `seq`, `src`, `dir`, `bs`, `bel`, `ss`, `eof` and `handoff` |
 | `python3 helpers/lint_externalized_crates.py --count` | 0 hits |
 
@@ -98,14 +98,14 @@ Checked against the source on `main`:
 
 | item | state | evidence |
 |---|---|---|
-| Item 2, the cut | landed ([#3587](https://github.com/nifeos/nife/pull/3587)) | no `proto` or `component` module; `[dependencies]` is empty; `terminal_contract` and `line_editor_component` exist |
+| Item 2, the cut | landed ([#3587](https://github.com/partsfoundry/nife/pull/3587)) | no `proto` or `component` module; `[dependencies]` is empty; `terminal_contract` and `line_editor_component` exist |
 | Item 5, bindings and limits | landed | the crate root holds the key-binding and limits tables, and the README repeats them |
 | Item 6, `forbid(unsafe_code)`, fuzz, Kani | landed | `#![forbid(unsafe_code)]` at `src/lib.rs` line 86; `fuzz/fuzz_targets/line_editor_feed.rs` and `line_editor_handoff.rs`; two harnesses with patches |
 | Item 7, the handoff version policy | landed | the `handoff` module's doc states that any change to order, meaning or width bumps `LAYOUT` and that a reader refuses every other layout |
 | Item 8, one `QUIESCED` | landed | `components/src/line_editor.rs` line 85 asserts `terminal_contract::QUIESCED == hot_swap_contract::QUIESCED` at compile time |
-| Items 9 to 14 | landed ([#3566](https://github.com/nifeos/nife/pull/3566)) | as milestone 1098's finding status records |
+| Items 9 to 14 | landed ([#3566](https://github.com/partsfoundry/nife/pull/3566)) | as milestone 1098's finding status records |
 
-| Items 3 and 4, the engine's names | landed ([#3965](https://github.com/nifeos/nife/pull/3965)) | `LineEditor`, `HISTORY_LINES`, `MAXIMUM_LINE_BYTES`, `MAXIMUM_PROMPT_BYTES`, `MAXIMUM_RAW_QUEUE_BYTES` and `pop_up_to_eight`; the private fields and locals spelled out, and the length fields end in `_bytes`. The template's `spelled_out` and `register_names` refuse none of 561 names |
+| Items 3 and 4, the engine's names | landed ([#3965](https://github.com/partsfoundry/nife/pull/3965)) | `LineEditor`, `HISTORY_LINES`, `MAXIMUM_LINE_BYTES`, `MAXIMUM_PROMPT_BYTES`, `MAXIMUM_RAW_QUEUE_BYTES` and `pop_up_to_eight`; the private fields and locals spelled out, and the length fields end in `_bytes`. The template's `spelled_out` and `register_names` refuse none of 561 names |
 
 What has not landed:
 
@@ -156,7 +156,7 @@ landed. What remains is the move's own work.
 
 ## Rulings
 
-- The clearance (2026-11-22 UTC): cleared, the go to create `nifeos/line_editor` with
+- The clearance (2026-11-22 UTC): cleared, the go to create `partsfoundry/line_editor` with
   `publish = false`, no tag and no publish. The move waits on its own remaining work.
 
 ## Decisions for the architect

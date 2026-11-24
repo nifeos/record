@@ -23,7 +23,7 @@ ruling, because none exists for this crate. The review used `script/crate-review
 `std` overlay (`patches/std-nife/overlay/std/src/sys/alloc/nife/`), reached through the file the
 `std` farm copies (`xtask/src/farm/copied.rs`), not through any `Cargo.toml`.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `helpers/crate_move.py`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `helpers/crate_move.py`,
 cargo-mutants, Miri, Kani, and the crate's own talc-backed host test. No new tool.
 
 ## Goal
@@ -109,7 +109,7 @@ one consumer reached by a generated copy, parameters and documentation tied to t
 proof yet. Splitting later is the easy direction, and the rule for crates that leave only if useful or
 shared applies.
 
-Example: `nifeos/runtime` holds `allocation_cache/` beside `user_mode_runtime/` in one workspace;
+Example: `partsfoundry/runtime` holds `allocation_cache/` beside `user_mode_runtime/` in one workspace;
 nife's `xtask` depends on it by `git` and `rev` on that repository, and `cargo xtask std-src` reads
 the copied file from Cargo's checkout.
 
@@ -162,42 +162,42 @@ Each line was checked against `crates/allocation_cache` on `main` and the pull r
 
 - P0-1, manifest and files stand alone: At the move. The README, both license files, a literal
   license, `rust-version`, `description`, `keywords`, `categories` and an inline lints table landed
-  in [#3565](https://github.com/nifeos/nife/pull/3565) and
-  [#3660](https://github.com/nifeos/nife/pull/3660). The `repository` and `documentation` fields
+  in [#3565](https://github.com/partsfoundry/nife/pull/3565) and
+  [#3660](https://github.com/partsfoundry/nife/pull/3660). The `repository` and `documentation` fields
   name the `runtime` package's repository, and the move strips the `Name:` blocks.
-- P0-2, documentation names no consumer: Done, [#3565](https://github.com/nifeos/nife/pull/3565)
-  and [#3660](https://github.com/nifeos/nife/pull/3660).
+- P0-2, documentation names no consumer: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565)
+  and [#3660](https://github.com/partsfoundry/nife/pull/3660).
 - P0-3, a workspace member depends on the crate: At the move. The move's nife-side pull request
   gives `xtask` a `git` dependency on the crate at the `runtime` repository's tag, so
   `cargo xtask std-src` still finds it.
-- P1-4, arithmetic edges on bare `usize`: Done, [#3565](https://github.com/nifeos/nife/pull/3565)
-  and [#3660](https://github.com/nifeos/nife/pull/3660). `class` compares before it rounds, and the
+- P1-4, arithmetic edges on bare `usize`: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565)
+  and [#3660](https://github.com/partsfoundry/nife/pull/3660). `class` compares before it rounds, and the
   `Class` newtype of decision 3 replaces the bare index.
-- P1-5, zeroed is empty: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- P1-6, the owner's rule beyond `push`: Done, [#3565](https://github.com/nifeos/nife/pull/3565)
-  and [#3660](https://github.com/nifeos/nife/pull/3660).
-- P1-7, constant and method names: Done, [#3660](https://github.com/nifeos/nife/pull/3660).
-- P1-8, proofs: Done, [#3565](https://github.com/nifeos/nife/pull/3565) and
-  [#3660](https://github.com/nifeos/nife/pull/3660). Five harnesses, each with a falsification
+- P1-5, zeroed is empty: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- P1-6, the owner's rule beyond `push`: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565)
+  and [#3660](https://github.com/partsfoundry/nife/pull/3660).
+- P1-7, constant and method names: Done, [#3660](https://github.com/partsfoundry/nife/pull/3660).
+- P1-8, proofs: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565) and
+  [#3660](https://github.com/partsfoundry/nife/pull/3660). Five harnesses, each with a falsification
   patch.
-- P1-9, `Free` alignment asserted: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
+- P1-9, `Free` alignment asserted: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
 - P2-10, the `talc` patch left behind: At the move. The `runtime` repository builds the host test
   against unpatched `talc` 5.1.1, and its Miri job on the move's first pull request settles the
   record in `vendor/README.md`.
-- P2-11, `proofs` on an empty harness set: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
+- P2-11, `proofs` on an empty harness set: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
   The crate has five harnesses, so the set is not empty.
 - P2-12, `Debug` and a leak-noticing `Drop`: Done,
-  [#3565](https://github.com/nifeos/nife/pull/3565) and
-  [#3660](https://github.com/nifeos/nife/pull/3660).
-- P2-13, constants not tunable: Done, [#3565](https://github.com/nifeos/nife/pull/3565). A `BUGS`
+  [#3565](https://github.com/partsfoundry/nife/pull/3565) and
+  [#3660](https://github.com/partsfoundry/nife/pull/3660).
+- P2-13, constants not tunable: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565). A `BUGS`
   line says the constants do not move.
 - P2-14, cross-owner free in the crate's `BUGS`: Done,
-  [#3565](https://github.com/nifeos/nife/pull/3565).
-- P2-15, the `uncached` test name: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
-- Decision 1, own repository: Done, [#3670](https://github.com/nifeos/nife/pull/3670). The crate
+  [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- P2-15, the `uncached` test name: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565).
+- Decision 1, own repository: Done, [#3670](https://github.com/partsfoundry/nife/pull/3670). The crate
   moves with the `runtime` package.
-- Decision 2, crate, constant and method names: Done, [#3660](https://github.com/nifeos/nife/pull/3660).
-- Decision 3, a `Class` newtype: Done, [#3660](https://github.com/nifeos/nife/pull/3660).
+- Decision 2, crate, constant and method names: Done, [#3660](https://github.com/partsfoundry/nife/pull/3660).
+- Decision 3, a `Class` newtype: Done, [#3660](https://github.com/partsfoundry/nife/pull/3660).
 
 ## Open decisions
 
@@ -206,7 +206,7 @@ None. The publishing hold stands.
 ## Follow-on
 
 - **Recorded.** Items 1, 3 and 10 finish when the `runtime` package moves. No milestone schedules
-  that move, which needs its own review clearance, and nifeos/runtime does not exist.
+  that move, which needs its own review clearance, and partsfoundry/runtime does not exist.
 
 ## BUGS
 

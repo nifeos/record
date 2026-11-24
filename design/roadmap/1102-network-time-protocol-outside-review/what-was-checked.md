@@ -2,8 +2,8 @@
 
 An appendix to [the milestone](../1102-network-time-protocol-outside-review.md).
 
-Verified firsthand, on a fresh shallow clone of `nifeos/nife` at the head of `main`
-(`59b97d5ccc3f29b2e4004b951cca2b43eabe9e95`) and a clone of `nifeos/crate-workflows`:
+Verified firsthand, on a fresh shallow clone of `partsfoundry/nife` at the head of `main`
+(`59b97d5ccc3f29b2e4004b951cca2b43eabe9e95`) and a clone of `partsfoundry/crate-workflows`:
 
 - `cargo test -p network_time_protocol`: 25 unit tests and 2 documentation tests pass, in under
   2 s with the workspace's `opt-level = 2` override for the crate. `cargo clippy --all-targets

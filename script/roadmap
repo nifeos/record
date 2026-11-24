@@ -1677,8 +1677,8 @@ for mid, fname in sorted(ids.items()):
 
 
 # ---- a path in another repository, at basalt's pin ---------------------------
-# Milestone 1018 (the design record moves to `nifeos/record` and is published as a website), step 2.
-# A record cites a file outside this repository as `nifeos/<repo>:<path>`, and the path means that
+# Milestone 1018 (the design record moves to `partsfoundry/record` and is published as a website), step 2.
+# A record cites a file outside this repository as `partsfoundry/<repo>:<path>`, and the path means that
 # file at the commit basalt builds. helpers/qualified_paths.py holds which commit that is and why
 # a fetch that fails is a problem. Every tracked Markdown file under `design/` and `notes/` is
 # read, not only the roadmap blocks: the step 6 rewrite turns each record link into a path that

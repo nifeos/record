@@ -10,7 +10,7 @@ needs_person: yes
 # 1105. `pci`: what an outside maintainer would fix before it leaves
 
 Raised by a read-only review of `crates/pci_configuration_space` as a stranger to this tree would meet it, on a fresh
-shallow clone of `main` and a checkout of `nifeos/crate-workflows`. It changes nothing; it lists
+shallow clone of `main` and a checkout of `partsfoundry/crate-workflows`. It changes nothing; it lists
 what the next lanes change, and the one decision the architect must take before a repository
 exists.
 
@@ -27,7 +27,7 @@ Milestone 1034 (a runbook for moving a crate out of nife) owns the move itself. 
 enumeration leaves the kernel) says the crate "moves with the server"; the crate leaves first, as
 the held item below records.
 
-Reuse: `script/crate-move`, `script/crate-standalone`, the template `nifeos/crate-workflows` and
+Reuse: `script/crate-move`, `script/crate-standalone`, the template `partsfoundry/crate-workflows` and
 its name gates, Kani, cargo-mutants and the crate's own fake configuration spaces (`FakeCfg`,
 `BridgedCfg`). No new tool.
 
@@ -42,55 +42,55 @@ crate's own reasons.
 
 ## Finding status
 
-- P0-1, fixture tests that reach into nife: Done, [#3807](https://github.com/nifeos/nife/pull/3807)
-  and [#3974](https://github.com/nifeos/nife/pull/3974). The five witness tests moved to
+- P0-1, fixture tests that reach into nife: Done, [#3807](https://github.com/partsfoundry/nife/pull/3807)
+  and [#3974](https://github.com/partsfoundry/nife/pull/3974). The five witness tests moved to
   `crates/machine_discovery/tests/pci_host_bridge_windows.rs` and the crate inlines the swizzle
   cells. A later merge restored the `device_tree_blob` dev-dependency, and #3974 removes it again.
-- P0-2, the staged tree's red gates: Done, [#3807](https://github.com/nifeos/nife/pull/3807). The
+- P0-2, the staged tree's red gates: Done, [#3807](https://github.com/partsfoundry/nife/pull/3807). The
   manifest states its license, lints and `rust-version` as literals, the README and both license
   files exist, and doc comments cite specifications.
-- P1-3, BAR size trusts the mask: Done, [#3519](https://github.com/nifeos/nife/pull/3519).
+- P1-3, BAR size trusts the mask: Done, [#3519](https://github.com/partsfoundry/nife/pull/3519).
 - P1-4, BAR probing on any header and past slot 5: Done,
-  [#3519](https://github.com/nifeos/nife/pull/3519).
-- P1-5, names the template's gates refuse: Done, [#3807](https://github.com/nifeos/nife/pull/3807),
-  [#3852](https://github.com/nifeos/nife/pull/3852) and
-  [#3974](https://github.com/nifeos/nife/pull/3974). The crate, the kernel,
+  [#3519](https://github.com/partsfoundry/nife/pull/3519).
+- P1-5, names the template's gates refuse: Done, [#3807](https://github.com/partsfoundry/nife/pull/3807),
+  [#3852](https://github.com/partsfoundry/nife/pull/3852) and
+  [#3974](https://github.com/partsfoundry/nife/pull/3974). The crate, the kernel,
   `driver_process_contract`, `jh7110_pci_express` and `machine_discovery` carry the new spellings,
   the architect ratified them on 2026-11-20 UTC with `Bdf` becoming `BusDeviceFunction`, and every
   `Name:` block in the crate reads ratified.
-- P1-6, names the naming rules refuse: Done, [#3807](https://github.com/nifeos/nife/pull/3807),
-  [#3852](https://github.com/nifeos/nife/pull/3852) and
-  [#3974](https://github.com/nifeos/nife/pull/3974). The same renames and ratification as P1-5.
-- P1-7, documentation that assumes the tree: Done, [#3807](https://github.com/nifeos/nife/pull/3807).
+- P1-6, names the naming rules refuse: Done, [#3807](https://github.com/partsfoundry/nife/pull/3807),
+  [#3852](https://github.com/partsfoundry/nife/pull/3852) and
+  [#3974](https://github.com/partsfoundry/nife/pull/3974). The same renames and ratification as P1-5.
+- P1-7, documentation that assumes the tree: Done, [#3807](https://github.com/partsfoundry/nife/pull/3807).
   Every public item has a doc comment that cites a specification, and `allow(missing_docs)` is gone.
-- P1-8, the MSI walk and the ceiling: Done, [#3807](https://github.com/nifeos/nife/pull/3807). The
+- P1-8, the MSI walk and the ceiling: Done, [#3807](https://github.com/partsfoundry/nife/pull/3807). The
   three capability walks are one shared walk with one bound. The scan loops stay bounded by
   literals, and the bus queue, the part a device controls, stays proved.
 - P2, `virtual_io_capabilities` ignores `cap_len`: Done,
-  [#3567](https://github.com/nifeos/nife/pull/3567).
+  [#3567](https://github.com/partsfoundry/nife/pull/3567).
 - P2, `intx_interrupt_number` precondition: Waiting on the bus server of milestone 1064, which owns
   `intx_pin_through_bridge` (maintainer, provisional, 2026-11-20 UTC). The doc comment states the
-  bus-0 precondition ([#3807](https://github.com/nifeos/nife/pull/3807)), and the BUGS section of
+  bus-0 precondition ([#3807](https://github.com/partsfoundry/nife/pull/3807)), and the BUGS section of
   `kernel/src/pci.rs` records the unrouted bridge case
-  ([#3974](https://github.com/nifeos/nife/pull/3974)).
-- P2, `Bdf` fields unmasked: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P2, `#![forbid(unsafe_code)]`: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P2, fuzz targets: Done, [#3974](https://github.com/nifeos/nife/pull/3974).
+  ([#3974](https://github.com/partsfoundry/nife/pull/3974)).
+- P2, `Bdf` fields unmasked: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P2, `#![forbid(unsafe_code)]`: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P2, fuzz targets: Done, [#3974](https://github.com/partsfoundry/nife/pull/3974).
   `crates/pci_configuration_space/fuzz/` holds one target over `memory_window_32_bit` and one over
   the walk, the BAR sizing and the capability walks; the move turns on the weekly opt-in, since the
   crate has no `unsafe`.
-- P2, stale patch headers: Done, [#3807](https://github.com/nifeos/nife/pull/3807) and
-  [#3974](https://github.com/nifeos/nife/pull/3974). All ten patches name the renamed harnesses and
+- P2, stale patch headers: Done, [#3807](https://github.com/partsfoundry/nife/pull/3807) and
+  [#3974](https://github.com/partsfoundry/nife/pull/3974). All ten patches name the renamed harnesses and
   apply to the source at offset zero, as `script/crate-move` requires.
-- P2, the proof table: Done, [#3807](https://github.com/nifeos/nife/pull/3807) and
-  [#3974](https://github.com/nifeos/nife/pull/3974). `notes/verification/parser-harnesses.md` and
+- P2, the proof table: Done, [#3807](https://github.com/partsfoundry/nife/pull/3807) and
+  [#3974](https://github.com/partsfoundry/nife/pull/3974). `notes/verification/parser-harnesses.md` and
   `notes/verification.md` list all ten harnesses under the package name.
 - P2, mutation survivors: At the move. The baseline row carries counts only; the first run in the
   repository exempts the 11 equivalent survivors.
-- Decision, the package name: Done, [#3588](https://github.com/nifeos/nife/pull/3588) (ruled
+- Decision, the package name: Done, [#3588](https://github.com/partsfoundry/nife/pull/3588) (ruled
   2026-11-14 UTC).
 - Decision, the crate moves before the bus server: Done,
-  [#3589](https://github.com/nifeos/nife/pull/3589) (maintainer, provisional, 2026-11-14 UTC;
+  [#3589](https://github.com/partsfoundry/nife/pull/3589) (maintainer, provisional, 2026-11-14 UTC;
   nothing to build).
 
 ## Open decisions
@@ -100,7 +100,7 @@ crate's own reasons.
 The crate decodes a PCI function's configuration space: its header, its base address registers,
 its capability list and the host bridge window from the device tree. The kernel and
 `driver_process_contract` link it today, and a bus server outside the kernel will link it later.
-Moving it into its own repository, `nifeos/pci_configuration_space`, is what lets those three
+Moving it into its own repository, `partsfoundry/pci_configuration_space`, is what lets those three
 consumers pin one released copy. Creating a public repository is an outward step, and the
 standing rule is that clearing a crate's review is what approves it.
 
@@ -237,7 +237,7 @@ The checks are in [the appendix](1105-pci-outside-review/done-when.md).
 
 - **Outstanding.** The `intx_interrupt_number` bridge route, which waits on the bus server of
   milestone 1064.
-- **Outstanding.** Creating `nifeos/pci_configuration_space`, which the clearance of 2026-11-20 UTC
+- **Outstanding.** Creating `partsfoundry/pci_configuration_space`, which the clearance of 2026-11-20 UTC
   approved with `publish = false`, no tag and no publish, and the move steps the review package
   lists.
 

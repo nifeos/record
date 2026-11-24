@@ -49,7 +49,7 @@ recorded on #2386: "No". Ruling (b) on #1814 stands. The measurement below is wh
 Measured against the cache as it stood at 2026-10-19 00:20 UTC: 10.72 GB in 408 entries, against
 GitHub's 10 GB limit, with 10.0 GB of it in pull request rust-cache entries. The eviction horizon (the
 least recently used entry's idle time) was 44.1 hours. Milestone 822 (the Actions cache horizon is charted) is not started, so these come
-from one read of `gh api repos/nifeos/nife/actions/caches`, not from its chart.
+from one read of `gh api repos/partsfoundry/nife/actions/caches`, not from its chart.
 
 | Quantity | Value | Source |
 |---|---|---|

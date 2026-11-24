@@ -99,7 +99,7 @@ double free in the frame allocator's caller was a protocol bug, and a protocol t
 
 Destroying a region returns its whole backing, and the name goes with it: the slot's generation is
 bumped, so every `MemoryRegion` capability minted for it stops resolving, and the slot is reused by
-the next `create` or `split` (`nifeos/nife:notes/generational-names.md`).
+the next `create` or `split` (`partsfoundry/nife:notes/generational-names.md`).
 
 Returning retyped pages is safe because `destroy` first revokes every mapped page in the region
 (`revoke.rs`, §13 (capability revocation and untyped reclamation)): each is unmapped from every
@@ -258,7 +258,7 @@ Limits that remain:
 - **`Error::OutOfMemory` collapses three causes into one code.** `SPLIT` returns it when the
   caller's own budget is exhausted, when the caller's capability table is full, or when
   `MAXIMUM_REGIONS` is exhausted; `RETYPE_OBJECT` collapses a different pair the same way (each
-  method's doc comment in `nifeos/moho_abi`). The first two are facts about the caller; the third is a
+  method's doc comment in `partsfoundry/moho_abi`). The first two are facts about the caller; the third is a
   fact about every other live region on the machine, which the caller did not cause and cannot fix.
   DECISIONS §119 (splitting `OutOfMemory`'s three causes is declined for want of a customer)
   declines it and records non-binding guidance for whoever has a customer: cause-specific `Error`

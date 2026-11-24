@@ -117,7 +117,7 @@ page-table window.
 - The review clearance of 2026-11-21 UTC ratifies the whole-window check `window`. The three
   one-page functions wrap it.
 - The review is cleared (option A, ruled 2026-11-21 UTC): the crate moves to
-  `nifeos/address_space_layout` with `publish = false`, no tag and no publish, and the names of
+  `partsfoundry/address_space_layout` with `publish = false`, no tag and no publish, and the names of
   items 7, 9, 15 and 17 are ratified as proposed.
 
 ## Names
@@ -137,8 +137,8 @@ page-table window.
 | item | owner |
 |---|---|
 | The repository, its secrets and the first push of the staged crate | move lane |
-| Item 13: the template's `register_names.py` reads `address` in a harness function name as an address. Until nifeos/crate-workflows fixes it, the crate's `check / standalone` is red on its first run | maintainer, in another repository |
-| The pins: all 27 dependents move to `address_space_layout = { version = "0.1.0", git = "https://github.com/nifeos/address_space_layout", rev = "<landed commit>" }` in one pull request, preferably through one root `[workspace.dependencies]` entry, with `helpers/interface_declarations_check.py` reading the pinned checkout | move lane |
+| Item 13: the template's `register_names.py` reads `address` in a harness function name as an address. Until partsfoundry/crate-workflows fixes it, the crate's `check / standalone` is red on its first run | maintainer, in another repository |
+| The pins: all 27 dependents move to `address_space_layout = { version = "0.1.0", git = "https://github.com/partsfoundry/address_space_layout", rev = "<landed commit>" }` in one pull request, preferably through one root `[workspace.dependencies]` entry, with `helpers/interface_declarations_check.py` reading the pinned checkout | move lane |
 | Item 18 and the milestone 1017 table: its blocker row for this crate names a test that has since moved | the 1017 lane |
 
 The clearance kept the three one-page functions as wrappers and `BANDS`' band names as strings, as

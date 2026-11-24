@@ -10,7 +10,7 @@ needs_person: no
 ---
 # 1111. `usb` (to be published as `universal_serial_bus`): what an outside maintainer would fix before its first release
 
-Raised by a read-only outside review of `crates/universal_serial_bus` in `nifeos/nife` at commit `cf1328a`
+Raised by a read-only outside review of `crates/universal_serial_bus` in `partsfoundry/nife` at commit `cf1328a`
 (`main`), read as a stranger meeting the crate for the first time would read it. It changes
 nothing; it lists what the next lanes change, in nife before the move and in the new repository
 after it.
@@ -35,7 +35,7 @@ block for any public item but the crate itself (`script/names --provisional` lis
 Item 5 is that gap. Milestone 820 (`extensible_host_controller_interface`: proven xHCI logic,
 released on its own) owns the move and the tag; this block owns what should land inside that path.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, its naming helpers
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, its naming helpers
 (`spelled_out.py`, `register_names.py`, `standalone.py`), Kani, cargo-mutants and cargo-fuzz. No
 new tool.
 
@@ -52,51 +52,51 @@ US one gives. The template's gates are green for the crate's own reasons.
 With every finding Done, the review counts as built.
 
 
-- P0-1, manifest that cannot stand alone: Done, [#3828](https://github.com/nifeos/nife/pull/3828). The manifest carries the literal license and lint
+- P0-1, manifest that cannot stand alone: Done, [#3828](https://github.com/partsfoundry/nife/pull/3828). The manifest carries the literal license and lint
   table, `rust-version`, description, keywords, categories and readme, with `publish = false`.
-- P0-2, package name `universal_serial_bus` and its alias: Done, [#3828](https://github.com/nifeos/nife/pull/3828). The package has the name, each
+- P0-2, package name `universal_serial_bus` and its alias: Done, [#3828](https://github.com/partsfoundry/nife/pull/3828). The package has the name, each
   public module carries `#[doc(alias = "usb")]` (rustdoc refuses it at the crate root), and the
   driver names it with a `package =` dependency.
 - P0-3, 30 names the template gates refuse: Done,
-  [#3614](https://github.com/nifeos/nife/pull/3614).
-- P1-4, README, license files, changelog, scaffold files and stranger test: Done, [#3828](https://github.com/nifeos/nife/pull/3828), which moved
-  them into the repository `nifeos/universal_serial_bus`.
+  [#3614](https://github.com/partsfoundry/nife/pull/3614).
+- P1-4, README, license files, changelog, scaffold files and stranger test: Done, [#3828](https://github.com/partsfoundry/nife/pull/3828), which moved
+  them into the repository `partsfoundry/universal_serial_bus`.
 - P1-5, review package and index row: Done,
-  [#3614](https://github.com/nifeos/nife/pull/3614)
+  [#3614](https://github.com/partsfoundry/nife/pull/3614)
   ([the package](../../notes/crate-reviews/universal-serial-bus.md)).
-- P1-6, usage table stops at 0x63: Done, [#3614](https://github.com/nifeos/nife/pull/3614). The
+- P1-6, usage table stops at 0x63: Done, [#3614](https://github.com/partsfoundry/nife/pull/3614). The
   table runs through 0x8b.
 - P1-7, two-interface paths and event order unproven: Done,
-  [#3614](https://github.com/nifeos/nife/pull/3614).
+  [#3614](https://github.com/partsfoundry/nife/pull/3614).
 - P1-8, short interface or endpoint descriptor leaves the candidate open: Done,
-  [#3580](https://github.com/nifeos/nife/pull/3580).
+  [#3580](https://github.com/partsfoundry/nife/pull/3580).
 - P1-9, duplicated usage releases twice: Done,
-  [#3580](https://github.com/nifeos/nife/pull/3580).
-- P1-10, no fuzz target: Done, [#3828](https://github.com/nifeos/nife/pull/3828). The repository holds two, one for `find_boot_keyboard` and one for
+  [#3580](https://github.com/partsfoundry/nife/pull/3580).
+- P1-10, no fuzz target: Done, [#3828](https://github.com/partsfoundry/nife/pull/3828). The repository holds two, one for `find_boot_keyboard` and one for
   `changes`, and its weekly fuzz is on because the crate has no `unsafe` code.
 - P2-11, `control_max_packet` looser than the specification: Done,
-  [#3614](https://github.com/nifeos/nife/pull/3614).
+  [#3614](https://github.com/partsfoundry/nife/pull/3614).
 - P2-12, reserved bits of `bEndpointAddress` pass through: Done,
-  [#3580](https://github.com/nifeos/nife/pull/3580).
-- P2-13, four documentation gaps: Done, [#3614](https://github.com/nifeos/nife/pull/3614). The
+  [#3580](https://github.com/partsfoundry/nife/pull/3580).
+- P2-13, four documentation gaps: Done, [#3614](https://github.com/partsfoundry/nife/pull/3614). The
   README half is P1-4's.
 - P2-14, private names the report-only gate lists: Done,
-  [#3614](https://github.com/nifeos/nife/pull/3614).
+  [#3614](https://github.com/partsfoundry/nife/pull/3614).
 - Decision 1, the public names the template's gates refuse: Done,
-  [#3614](https://github.com/nifeos/nife/pull/3614) and
-  [#3814](https://github.com/nifeos/nife/pull/3814). The first built the rename table as the
+  [#3614](https://github.com/partsfoundry/nife/pull/3614) and
+  [#3814](https://github.com/partsfoundry/nife/pull/3814). The first built the rename table as the
   maintainer's provisional ruling of 2026-11-14 UTC. The second recorded the ratification of
   2026-11-19 UTC, option A: every public name of
   [the package](../../notes/crate-reviews/universal-serial-bus.md) stands as built. The aliases are
   `bMaxPacketSize0`, `wTotalLength`, `wLength`, `ErrorRollOver` and `bcdUSB`, and `MODIFIER_CODES`
   stays private.
-- Decision 2, `changes` emits HID usages: Done, [#3814](https://github.com/nifeos/nife/pull/3814)
+- Decision 2, `changes` emits HID usages: Done, [#3814](https://github.com/partsfoundry/nife/pull/3814)
   (maintainer, provisional, 2026-11-14 UTC). `changes` emits usages, modifiers as 0xe0 to 0xe7;
   `evdev_code` answers for the eight modifiers; `MODIFIER_CODES` is private; the xHCI keyboard
   driver maps each usage through `evdev_code`.
 - Decision 3, one result type and a four-way `Speed`: Done (maintainer, provisional, 2026-11-14
-  UTC). [#3614](https://github.com/nifeos/nife/pull/3614) built `Speed`;
-  [#3814](https://github.com/nifeos/nife/pull/3814) made `DeviceDescriptor::parse` answer
+  UTC). [#3614](https://github.com/partsfoundry/nife/pull/3614) built `Speed`;
+  [#3814](https://github.com/partsfoundry/nife/pull/3814) made `DeviceDescriptor::parse` answer
   `Result<DeviceDescriptor, Refusal>`.
 
 ## Open decisions
@@ -243,7 +243,7 @@ returns `Result<DeviceDescriptor, Refusal>`, and `BootReport::parse` keeps `Opti
 
 ## Follow-on
 
-- **Milestone 820.** A tag of `nifeos/universal_serial_bus` needs its own approval. No publish.
+- **Milestone 820.** A tag of `partsfoundry/universal_serial_bus` needs its own approval. No publish.
 
 ## Done when
 

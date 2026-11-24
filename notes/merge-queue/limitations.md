@@ -60,7 +60,7 @@ rerun the run it finds:
 
   ```sh
   sha=$(gh pr view "$pr" --json headRefOid --jq .headRefOid)
-  gh api "repos/nifeos/nife/actions/runs?head_sha=$sha&event=pull_request&per_page=100" --jq '
+  gh api "repos/partsfoundry/nife/actions/runs?head_sha=$sha&event=pull_request&per_page=100" --jq '
     .workflow_runs | group_by(.name)[] | sort_by(.id) as $r | ($r | last) as $n
     | select($n.conclusion == "cancelled")
     | select([$r[] | select(.id != $n.id and .created_at == $n.created_at

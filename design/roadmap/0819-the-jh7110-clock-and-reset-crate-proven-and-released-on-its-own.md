@@ -102,7 +102,7 @@ and the device-tree queries, which the cut moves out of the crate.
 
 1. The name is settled before anything leaves (857's Fork 5 as calef amended it on 2026-10-11 UTC).
    `script/names jh7110_clock_and_reset` reports it ratified, crates.io answers 404 for it (or it is
-   already ours), and `nifeos/jh7110_clock_and_reset` does not exist yet. `script/crate-standalone`
+   already ours), and `partsfoundry/jh7110_clock_and_reset` does not exist yet. `script/crate-standalone`
    checks the first.
 2. The proofs above exist with their falsification patches, and the cut stands. `cargo tree -p
    jh7110_clock_and_reset` then lists no nife crate.
@@ -113,17 +113,17 @@ and the device-tree queries, which the cut moves out of the crate.
    and its source divides by purpose) has milestone 610 (the interface's stability is
    measured weekly)'s per-package co-change column, and the soak (step 6) is how the second is
    measured. When the soak exits, calef adds it to the lint-checked publish allowlist. The
-   `nifeos/jh7110_clock_and_reset` repository is created when the crate moves, on the shared CI
+   `partsfoundry/jh7110_clock_and_reset` repository is created when the crate moves, on the shared CI
    template (milestone 887), through reusable workflows: Kani through `kani-github-action`, lint,
    release. Its release workflow refuses to publish unless the proof job is green. Nothing here
    reads `target_arch`, so stock Kani serves. The patched Kani of §218 (carry a Kani patch so
    riscv64 is proved, and send it upstream) is carried only if a harness comes to need riscv64.
    Milestone 589 (Kani can prove riscv64 from the hosts we already have) built it.
 6. Soak, as its own repository (calef, 2026-10-17 UTC, replying "Agrred" (sic) to the maintainer's
-   proposal; §305 (git dependencies are allowed on `nifeos/*` only, pinned to a landed commit)).
+   proposal; §305 (git dependencies are allowed on `partsfoundry/*` only, pinned to a landed commit)).
    Milestone 818 (`jh7110_entropy`: proven JH7110 TRNG logic, released on its own) is the pilot and
    soaks first. Before publication the crate is moved, not copied: it leaves this tree, and nife
-   depends on `nifeos/jh7110_clock_and_reset` by `rev`. A copy left behind does not count. The soak
+   depends on `partsfoundry/jh7110_clock_and_reset` by `rev`. A copy left behind does not count. The soak
    ends on evidence, not a duration, when all five hold:
    1. nife builds and passes CI against the repository at a pinned commit, with no path dependency
       left.
@@ -175,7 +175,7 @@ template's prose caps.
   decoders take raw property bytes and a phandle lookup generic over the caller's error type, and
   their names are provisional.
 - The architect cleared the crate's review on 2026-11-11 (UTC), which approves creating
-  `nifeos/jh7110_clock_and_reset`. The board run of the PMIC reset path follows the move, and the
+  `partsfoundry/jh7110_clock_and_reset`. The board run of the PMIC reset path follows the move, and the
   README states it as a limitation until then. The clearance covers neither the tag nor a
   publication. The move waits for the rename pass in *Before the move*.
 
@@ -184,7 +184,7 @@ template's prose caps.
 A check proves it. `script/verify` proves the four properties and `script/falsifications` reports
 every harness `replayable`. In nife, `cargo tree --locked -i jh7110_clock_and_reset` resolves to
 `v0.1.x` from crates.io with a checksum in `Cargo.lock`, `crates/jh7110_clock_and_reset` no longer
-exists, and the tree builds for all three targets. In `nifeos/jh7110_clock_and_reset`, the run that
+exists, and the tree builds for all three targets. In `partsfoundry/jh7110_clock_and_reset`, the run that
 published 0.1.0 shows the Kani job green ahead of the publish job. The five soak criteria of release
 step 6 hold before it publishes.
 
@@ -241,7 +241,7 @@ names until the ratification pass, so this section keeps the links it carried.
 - **Outstanding.** The move. `crates/jh7110_clock_and_reset` is still in this tree and the crate
   repository does not exist. What remains is the repository, the tag `v0.1.0`, the soak's end
   conditions, the publication and nife consuming the release by semantic version. Checked by `ls
-  crates/jh7110_clock_and_reset` and by `gh api repos/nifeos/jh7110_clock_and_reset`, which returns
+  crates/jh7110_clock_and_reset` and by `gh api repos/partsfoundry/jh7110_clock_and_reset`, which returns
   not found.
 - **Recorded.** Publishing to crates.io waits on the maintainers' hold and an architect's approval,
   as the *Release* section states.

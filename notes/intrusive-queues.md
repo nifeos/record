@@ -1,7 +1,7 @@
 # Intrusive queues
 
 *(Milestone 14 (kernel objects from untyped) phase A.2. The mechanism behind
-the repository `nifeos/intrusive_queue`, which the per-CPU run queues and migration inboxes are built on. See
+the repository `partsfoundry/intrusive_queue`, which the per-CPU run queues and migration inboxes are built on. See
 design/kernel-objects-from-untyped.md, decision D1.)*
 
 ## The idea
@@ -57,7 +57,7 @@ safety is a discipline, stated once and kept:
 
 ## The crate's contract, and the `Unqueued` token
 
-`nifeos/intrusive_queue` states its caller's contract as three rules, and its doc comments cite them
+`partsfoundry/intrusive_queue` states its caller's contract as three rules, and its doc comments cite them
 by number:
 
 1. A node is pushed onto at most one queue, and not pushed again until popped. A push takes the

@@ -1,6 +1,6 @@
 # Pipes and redirection: the appendices
 
-`nifeos/nife:notes/pipes.md` is the page to read; it stands on its own, so a reader can act
+`partsfoundry/nife:notes/pipes.md` is the page to read; it stands on its own, so a reader can act
 without opening anything here, and its appendix table is the index. These files hold each
 mechanism's full reasoning, the measurements, the refused options and the BUGS history.
 

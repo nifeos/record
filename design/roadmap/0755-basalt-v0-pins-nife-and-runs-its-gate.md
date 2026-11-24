@@ -13,12 +13,12 @@ needs_person: no
 *(Title and slug are drafts.)* From calef's ruling of 2026-10-04 (UTC), recorded in §247
 (the split begins with basalt holding nife, and `procps` moves first). basalt v0 is the first step
 of the repository split. The ruling includes the go-ahead for a lane's first write to
-`nifeos/basalt`. The reasoning and the measurements are in
+`partsfoundry/basalt`. The reasoning and the measurements are in
 [notes/the-first-split.md](../../notes/the-first-split.md), section 3.
 
 ## What was built
 
-Built 2026-10-04 (UTC) in `nifeos/basalt` pull request #1, merged as `f5bb505a5`. Nothing in this repository changed. Every name below is
+Built 2026-10-04 (UTC) in `partsfoundry/basalt` pull request #1, merged as `f5bb505a5`. Nothing in this repository changed. Every name below is
 provisional and calef's to name.
 
 - `pins.toml`, the manifest: one TOML table per component, `[nife]` with `repository` (a
@@ -47,8 +47,8 @@ with the gate run on it. A nife commit that fails the gate is a red pull request
 
 | run | pin | result | job wall time | of which | billable |
 |---|---|---|---|---|---|
-| [37224826206](https://github.com/nifeos/basalt/actions/runs/37224826206) | `e2ee49717` (nife `main` at the pin) | green, all three architectures | 15 min 25 s | QEMU built cold 4 min 18 s, bootstrap 1 min 21 s, `ci-build test` 9 min 14 s | 0 |
-| [37225450461](https://github.com/nifeos/basalt/actions/runs/37225450461) | `e7c4f0219` (known bad) | red, as predicted | 6 min 32 s | QEMU built cold 4 min 12 s, bootstrap 1 min 23 s, `ci-build test` 36 s | 0 |
+| [37224826206](https://github.com/partsfoundry/basalt/actions/runs/37224826206) | `e2ee49717` (nife `main` at the pin) | green, all three architectures | 15 min 25 s | QEMU built cold 4 min 18 s, bootstrap 1 min 21 s, `ci-build test` 9 min 14 s | 0 |
+| [37225450461](https://github.com/partsfoundry/basalt/actions/runs/37225450461) | `e7c4f0219` (known bad) | red, as predicted | 6 min 32 s | QEMU built cold 4 min 12 s, bootstrap 1 min 23 s, `ci-build test` 36 s | 0 |
 
 - **The red pin is deterministic.** `e7c4f0219` (624's block header carries its own number and
   branch) is on `main` through a merge commit. Its host test

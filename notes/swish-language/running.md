@@ -2,7 +2,7 @@
 
 *Name: provisional, after `components/src/swish/running.rs`. calef names files.*
 
-`nifeos/nife:components/src/swish/running.rs` turns a planned line into
+`partsfoundry/nife:components/src/swish/running.rs` turns a planned line into
 messages on the spawn endpoint. This page carries the design its doc comments link to. The wire
 itself is `spawn_protocol`'s, in `crates/grant_plan`.
 

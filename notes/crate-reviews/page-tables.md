@@ -161,5 +161,5 @@ spell out.
 
 ## Recommendation
 
-Cleared (2026-11-20 UTC). The repository `nifeos/page_tables` is approved with `publish = false`, no tag
+Cleared (2026-11-20 UTC). The repository `partsfoundry/page_tables` is approved with `publish = false`, no tag
 and no publish. The move follows in its own lane.

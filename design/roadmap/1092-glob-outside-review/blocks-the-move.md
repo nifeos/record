@@ -68,7 +68,7 @@ is about the layer above. Two-way. M.
 `description`, `repository`, `readme`, `keywords`, `categories` or `include`, and the comment on
 `publish = false` sends the reader to `crates/publish-allowlist.txt`, a file the repository will not
 have. `standalone.py` fails on the inheritance and the missing `rust-version`; the weekly `msrv` job
-has nothing to build without it. Compare `nifeos/generational_table`'s manifest, which has every
+has nothing to build without it. Compare `partsfoundry/generational_table`'s manifest, which has every
 field.
 
 Change: add `license = "MIT OR Apache-2.0"` and `rust-version` (edition 2024 needs 1.85; the review

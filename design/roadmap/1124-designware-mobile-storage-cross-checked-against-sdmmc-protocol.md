@@ -34,9 +34,9 @@ adapt, not a dependency, and the crate takes no new crate.
 
 ## Where the work lands
 
-The crate lives in `nifeos/designware_mobile_storage`. Every change lands there, as an ordinary
+The crate lives in `partsfoundry/designware_mobile_storage`. Every change lands there, as an ordinary
 pull request through that repository's queue. This block cites each one as
-`nifeos/designware_mobile_storage#N` when it merges. nife changes nothing but this block, and its
+`partsfoundry/designware_mobile_storage#N` when it merges. nife changes nothing but this block, and its
 pin moves only when the crate next releases.
 
 ## The cases to port or adapt

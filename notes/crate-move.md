@@ -2,7 +2,7 @@
 
 *Name: provisional. The file name says what the page holds: the steps of one move.*
 
-This page takes one crate from `crates/<crate>` to a repository of its own, `nifeos/<crate>`, and
+This page takes one crate from `crates/<crate>` to a repository of its own, `partsfoundry/<crate>`, and
 back into nife as a pinned dependency, then through its soak to publication. Every step names its
 command, the result that says it worked, and who takes it. A lane is an agent working a
 milestone; calef marks a step only the architect takes, because it creates something, holds a
@@ -24,10 +24,10 @@ The rules every step keeps:
   literal (bytes already on a wire or in built programs, such as an owner string) may keep the
   word on a line that ends `// wire literal`; the lint lists those lines. Prose never names nife.
 - The naming gates run in the crate repository, through the shared template
-  `nifeos/crate-workflows` pinned at a release commit.
+  `partsfoundry/crate-workflows` pinned at a release commit.
 - The owned runners never run fork code. A crate repository runs on GitHub-hosted runners only,
   and a fork's pull request waits for a maintainer's approval before any workflow runs.
-- A pin cites a landed commit. nife depends on `nifeos/<crate>` by `rev`, at the commit of a
+- A pin cites a landed commit. nife depends on `partsfoundry/<crate>` by `rev`, at the commit of a
   tag whose manifest carries the version, with that version stated beside it.
 
 ## The dry run
@@ -74,10 +74,10 @@ harness's comment, where the template reads it, so those records pass `falsify.p
 5. Create it (calef).
 
    ```sh
-   gh repo create nifeos/<crate> --public --description "<one line from the manifest>"
+   gh repo create partsfoundry/<crate> --public --description "<one line from the manifest>"
    ```
 
-   Expected: `gh repo view nifeos/<crate> --json isEmpty --jq .isEmpty` prints `true`.
+   Expected: `gh repo view partsfoundry/<crate> --json isEmpty --jq .isEmpty` prints `true`.
 6. Install the `nife-smelter` app on it (calef, as an organization owner, in the app's
    repository access settings). The release workflow's tag job authenticates as the app, and the
    tag ruleset accepts the app as its bypass actor only once the app sits on the repository.
@@ -117,7 +117,7 @@ harness's comment, where the template reads it, so those records pass `falsify.p
    git config core.hooksPath .githooks
    git commit -m "Adopt the shared crate workflows at crate-workflows <release>" \
      -m "Co-Authored-By: <model> <noreply@anthropic.com>"
-   git remote add origin git@github.com:nifeos/<crate>.git
+   git remote add origin git@github.com:partsfoundry/<crate>.git
    git push -u origin main
    ```
 
@@ -128,16 +128,16 @@ harness's comment, where the template reads it, so those records pass `falsify.p
     at the pinned release:
 
     ```sh
-    script/apply-settings nifeos/<crate>
-    script/check-settings nifeos/<crate>
+    script/apply-settings partsfoundry/<crate>
+    script/check-settings partsfoundry/<crate>
     ```
 
     Expected: `apply-settings` reports nothing it could not set, and `check-settings` exits 0. That
     gives both rulesets, the `crates-io` environment with calef as required reviewer, the labels,
     the `crate-maintainers` team, and the fork approval policy for every outside contributor.
 11. The first runs are green (lane). End the turn with
-    `WAITING nifeos/<crate>:<run id>... on check and proofs`. Expected: `gh run list -R
-    nifeos/<crate> --branch main --limit 4` shows `check` and `proofs` succeeded. A pull request in the
+    `WAITING partsfoundry/<crate>:<run id>... on check and proofs`. Expected: `gh run list -R
+    partsfoundry/<crate> --branch main --limit 4` shows `check` and `proofs` succeeded. A pull request in the
     crate repository fixes a red job, and the maintainer gates and merges it as in nife.
 
 11a. Run the outside review (a fresh lane the maintainer launches, on the most capable model
@@ -180,12 +180,12 @@ harness's comment, where the template reads it, so those records pass `falsify.p
     workflow makes it:
 
     ```sh
-    gh workflow run release.yml -R nifeos/<crate> -f version=0.1.0 -f dry-run=false
+    gh workflow run release.yml -R partsfoundry/<crate> -f version=0.1.0 -f dry-run=false
     ```
 
     The gate and the tag job run, and the publish job waits in `crates-io`. calef cancels the run
-    there (`gh run cancel <run id> -R nifeos/<crate>`), so nothing publishes. Expected:
-    `gh api repos/nifeos/<crate>/git/ref/tags/v0.1.0` resolves, and the soak holds its first
+    there (`gh run cancel <run id> -R partsfoundry/<crate>`), so nothing publishes. Expected:
+    `gh api repos/partsfoundry/<crate>/git/ref/tags/v0.1.0` resolves, and the soak holds its first
     semver baseline.
 
 ## The nife side
@@ -193,13 +193,13 @@ harness's comment, where the template reads it, so those records pass `falsify.p
 14. Replace the path dependency (lane, one pull request in nife). Take the commit of the tag:
 
     ```sh
-    rev=$(gh api repos/nifeos/<crate>/commits/v0.1.0 --jq .sha)
+    rev=$(gh api repos/partsfoundry/<crate>/commits/v0.1.0 --jq .sha)
     ```
 
     In each consumer manifest the dry run listed, the line becomes
 
     ```toml
-    <crate> = { version = "0.1.0", git = "https://github.com/nifeos/<crate>", rev = "<rev>" }
+    <crate> = { version = "0.1.0", git = "https://github.com/partsfoundry/<crate>", rev = "<rev>" }
     ```
 
     keeping any other key the old line carried. Remove `crates/<crate>` from the workspace members
@@ -230,10 +230,10 @@ harness's comment, where the template reads it, so those records pass `falsify.p
     The crate's milestone block states the soak's state. Expected: `cargo tree --locked -i <crate>`
     prints the git source at `rev`, `git grep -n 'crates/<crate>' -- '*.toml'` prints nothing,
     `cargo xtask std-src` exits 0, `script/lint` exits 0, and the merge queue lands it.
-15. Bump basalt's pin (lane, a separate pull request in `nifeos/basalt`). It cites the landed
-    commit as `nifeos/nife@<sha>` and names the nife pull request it waits for.
+15. Bump basalt's pin (lane, a separate pull request in `partsfoundry/basalt`). It cites the landed
+    commit as `partsfoundry/nife@<sha>` and names the nife pull request it waits for.
 
-A later bump of the crate's pin is its own nife pull request, citing `nifeos/<crate>@<sha>` of a
+A later bump of the crate's pin is its own nife pull request, citing `partsfoundry/<crate>@<sha>` of a
 tagged commit.
 
 ## The soak's five end conditions
@@ -246,11 +246,11 @@ holds the grounds for four weeks.
 
 | condition | check | who |
 |---|---|---|
-| 1. nife builds and passes CI against the pinned commit, with no path dependency left | `git grep -n 'path = .*crates/<crate>' -- '*.toml'` is empty, and `gh run list -R nifeos/nife --branch main --workflow ci.yml --limit 1` shows success at or after the step 14 merge | lane |
-| 2. the template's weekly run is green | `gh run list -R nifeos/<crate> --workflow weekly.yml --limit 1 --json conclusion` prints `success`; `gh workflow run weekly.yml -R nifeos/<crate>` starts one early | lane |
-| 3. a release dry run is green | `gh workflow run release.yml -R nifeos/<crate> -f version=<manifest version> -f dry-run=true`, then that run's `gate` succeeds and it creates no tag | lane |
+| 1. nife builds and passes CI against the pinned commit, with no path dependency left | `git grep -n 'path = .*crates/<crate>' -- '*.toml'` is empty, and `gh run list -R partsfoundry/nife --branch main --workflow ci.yml --limit 1` shows success at or after the step 14 merge | lane |
+| 2. the template's weekly run is green | `gh run list -R partsfoundry/<crate> --workflow weekly.yml --limit 1 --json conclusion` prints `success`; `gh workflow run weekly.yml -R partsfoundry/<crate>` starts one early | lane |
+| 3. a release dry run is green | `gh workflow run release.yml -R partsfoundry/<crate> -f version=<manifest version> -f dry-run=true`, then that run's `gate` succeeds and it creates no tag | lane |
 | 4. the stranger test builds and proves the crate from its README alone | `grep '^Last run:' docs/stranger-test.md` in the crate repository prints a date, with that run's appendix beside it | step 12 |
-| 5. the API goes four weeks with no change `cargo-semver-checks` calls breaking | 28 days have passed since the tag nife pins, with at least four scheduled `weekly` runs green; `gh search prs --repo nifeos/<crate> --merged-at '>=<tag date>' '"major break"'` prints nothing; and `cargo semver-checks --baseline-rev v<pinned version>` on the crate's `main` reports no major change. A break restarts the period at the tag that carries it. | lane |
+| 5. the API goes four weeks with no change `cargo-semver-checks` calls breaking | 28 days have passed since the tag nife pins, with at least four scheduled `weekly` runs green; `gh search prs --repo partsfoundry/<crate> --merged-at '>=<tag date>' '"major break"'` prints nothing; and `cargo semver-checks --baseline-rev v<pinned version>` on the crate's `main` reports no major change. A break restarts the period at the tag that carries it. | lane |
 
 ## Publication and consumption by version
 
@@ -263,12 +263,12 @@ publishes.
 17. The first-publish token (calef). crates.io binds a trusted publisher only to a crate that
     exists, so 0.1.0 publishes with `CRATES_IO_FIRST_PUBLISH_TOKEN`, a `publish-new` token limited
     to the crate's name with a short expiry, stored on the repository's `crates-io` environment.
-18. Publish (calef). `gh workflow run release.yml -R nifeos/<crate> -f version=<version> -f
+18. Publish (calef). `gh workflow run release.yml -R partsfoundry/<crate> -f version=<version> -f
     dry-run=false`, then approve the `crates-io` deployment. Expected: `cargo search <crate>
     --limit 1` shows the version.
 19. Bind the owners and the trusted publisher, and delete the token (calef). `cargo owner --add
-    github:nifeos:crate-maintainers <crate>`; on crates.io, a trusted publisher for
-    `nifeos/<crate>`, workflow `release.yml`, environment `crates-io`; then delete the secret. Every
+    github:partsfoundry:crate-maintainers <crate>`; on crates.io, a trusted publisher for
+    `partsfoundry/<crate>`, workflow `release.yml`, environment `crates-io`; then delete the secret. Every
     later release publishes through trusted publishing alone.
 20. nife consumes the release (lane). Each consumer line becomes `<crate> = "<version>"`.
     Expected: `cargo tree --locked -i <crate>` resolves from crates.io and `Cargo.lock` records the
@@ -277,7 +277,7 @@ publishes.
 ## What calef does, in one list
 
 - Clear the crate's review, which approves creating its repository (step 4).
-- Create `nifeos/<crate>` (step 5).
+- Create `partsfoundry/<crate>` (step 5).
 - Install the `nife-smelter` app on it (step 6).
 - Run `script/grant-org-secrets <crate>` to grant `NIFE_SMELTER_PRIVATE_KEY` and `SETTINGS_TOKEN`
   to it (step 7).
@@ -285,7 +285,7 @@ publishes.
 - Approve each publication onto the allowlist (step 16).
 - Create the first-publish token on the `crates-io` environment (step 17).
 - Approve the `crates-io` deployment that publishes (step 18).
-- Add `github:nifeos:crate-maintainers` as the crates.io owner, bind the trusted publisher and
+- Add `github:partsfoundry:crate-maintainers` as the crates.io owner, bind the trusted publisher and
   delete the token (step 19).
 
 ## BUGS

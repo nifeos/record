@@ -2,7 +2,7 @@
 
 *Name: provisional. After the parent's own heading.*
 
-An appendix to `nifeos/nife:notes/capabilities.md`. It is the record of milestone 7d (user mode: EL0, capabilities, the ELF loader, and IPC), when the decision (§10) became code.
+An appendix to `partsfoundry/nife:notes/capabilities.md`. It is the record of milestone 7d (user mode: EL0, capabilities, the ELF loader, and IPC), when the decision (§10) became code.
 
 The decision (§10) is now code. Three things landed: an ABI that is one artifact, a capability
 table, and a system call dispatcher whose most important function is the one that says *no*.
@@ -37,7 +37,7 @@ else. `notes/abi.md` is the current contract and has the full table.
 
 ## The ABI is a crate, not a convention
 
-`nifeos/moho_abi` is a `no_std` crate that both the kernel and every user program depend on. The
+`partsfoundry/moho_abi` is a `no_std` crate that both the kernel and every user program depend on. The
 system call numbers, the register layout, the method constants, the error codes: one definition. If
 it changes, both sides fail to compile. A boundary that can drift silently is not a boundary, and
 two files that "agree" by having been edited to match are exactly that.
@@ -95,7 +95,7 @@ the program that could not read one byte of it receives all of it.
 
 **No capability check catches this.** The console capability is genuine; the program is entitled
 to print. The authority that leaks is not the console's. It is the kernel's own. That is exactly
-the compiler service and the billing log in the parent note (`nifeos/nife:notes/capabilities.md`): the deputy is confused about
+the compiler service and the billing log in the parent note (`partsfoundry/nife:notes/capabilities.md`): the deputy is confused about
 *whose authority it is acting under*.
 
 And it is real. With the check deleted, the demo prints raw kernel bytes, including the four

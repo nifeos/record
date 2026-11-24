@@ -99,7 +99,7 @@ sibling crates in nife. The run skips the build and proofs because the copy need
 ## Recommendation
 
 Cleared to move. The architect cleared this review together with `grant_plan`'s on 2026-11-22
-(UTC), which approves creating `nifeos/grant_contract` with `publish = false`, no tag and no
+(UTC), which approves creating `partsfoundry/grant_contract` with `publish = false`, no tag and no
 publication. The crate depends on `program_argument_contract`, so it moves after that crate has its
 own repository. The proofs (P1-5) and the first mutation run (P1-14) happen in the new repository
 before any tag.

@@ -10,7 +10,7 @@ ratified_by: calef
 *(The section number and title are provisional until the merge lands them.)*
 
 Raised by #3417's per-subtree ceilings, which bound what a region subtree holds but do not give it
-back. The code read is main and that branch (`nifeos/nife@0f9675218`).
+back. The code read is main and that branch (`partsfoundry/nife@0f9675218`).
 
 ## Background
 

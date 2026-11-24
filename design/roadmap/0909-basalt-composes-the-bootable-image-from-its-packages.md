@@ -137,7 +137,7 @@ than replaced.
 - **Milestone 990.** Item 3's table half, where a composed image keeps its first generation, waits
   on milestone 990 (the base image's first installed-programs table), which sits on the launch
   RedoxFS launch volume.
-- **Done.** `nifeos/basalt#50` carried item 4, the composed boot, into basalt's `packages.yml`.
+- **Done.** `partsfoundry/basalt#50` carried item 4, the composed boot, into basalt's `packages.yml`.
 - **Outstanding.** `script/swish-check`'s rows have not run against a composed image. They are the
   next piece after item 4, and until then a composed image proves it boots to the prompt only.
 

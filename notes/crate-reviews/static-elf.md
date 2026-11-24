@@ -160,7 +160,7 @@ None. The architect ratified the public names on 2026-11-21 (UTC).
 
 ## Recommendation
 
-Cleared on 2026-11-20 (UTC): the review approves the repository `nifeos/static_elf` as a
+Cleared on 2026-11-20 (UTC): the review approves the repository `partsfoundry/static_elf` as a
 `publish = false` repository, with no tag and no publish. The architect ratified the names separately,
 on 2026-11-21 (UTC). The move lane runs the stranger test, the template's workflows and the first
 weekly mutation run in the new repository.

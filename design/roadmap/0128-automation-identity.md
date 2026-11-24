@@ -195,7 +195,7 @@ expiry from an outage into a fifteen-minute procedure someone can run without re
 
 - **Done.** The two secret names, `AUTOMATION_APP_ID` and `AUTOMATION_APP_KEY`, ratified as-is by
   calef on 2026-10-24 (UTC): *"Ratify as-is"*. They name the role, not the App, so they survive a
-  rename of the App. Recorded by nifeos/nife#2695 here and in `notes/automation-identity.md`, whose
+  rename of the App. Recorded by partsfoundry/nife#2695 here and in `notes/automation-identity.md`, whose
   own name stays provisional. No workflow comment called them provisional.
 
 - **Done.** On 2026-10-03 (UTC) calef deleted the organization-level Actions secrets

@@ -27,7 +27,7 @@ citations, and the machine and tree names in the doc comments. The package's ope
 with the maintainer and is not reopened. Where a later rule contradicts the baseline, the item
 says so; one does (item 7, the `#[doc(alias)]` sentence).
 
-Reuse: the template `nifeos/crate-workflows` and its helpers, `script/crate-move --dry-run`,
+Reuse: the template `partsfoundry/crate-workflows` and its helpers, `script/crate-move --dry-run`,
 `script/crate-standalone`, Kani, cargo-llvm-cov, Miri and the sibling contract crates' tests as
 patterns. No new tool.
 
@@ -100,7 +100,7 @@ The architect froze the identity: magic `TIMEBAS1`, version 1, interface 9 (rule
 ### Clearing the review package
 
 Ruled 2026-11-19 (UTC): the architect clears the review of `counter_frequency_contract`. The
-clearance approves creating `nifeos/counter_frequency_contract` and moving the crate there. The review
+clearance approves creating `partsfoundry/counter_frequency_contract` and moving the crate there. The review
 package is [the review package](../../notes/crate-reviews/counter-frequency-contract.md). It
 states the crate, its thirteen ratified names, its frozen identity (`TIMEBAS1`, version 1,
 interface 9) and what the move changes.
@@ -144,44 +144,44 @@ The checks are in [the done-when appendix](1073-counter-frequency-contract-outsi
 ## Finding status
 
 - Item 1 (P0), the `std` farm reads the source by path: Done,
-  [#3514](https://github.com/nifeos/nife/pull/3514).
-- Item 2 (P0), clippy red on stable: Done, [#3513](https://github.com/nifeos/nife/pull/3513).
+  [#3514](https://github.com/partsfoundry/nife/pull/3514).
+- Item 2 (P0), clippy red on stable: Done, [#3513](https://github.com/partsfoundry/nife/pull/3513).
 - Item 3 (P1), BUGS in the contract's own terms: Done,
-  [#3556](https://github.com/nifeos/nife/pull/3556).
+  [#3556](https://github.com/partsfoundry/nife/pull/3556).
 - Item 4 (P1), the band is the reader's to apply: Done,
-  [#3556](https://github.com/nifeos/nife/pull/3556).
-- Item 5 (P1), pointer-width assertion: Done, [#3556](https://github.com/nifeos/nife/pull/3556).
-- Item 6 (P1), manifest `publish` comment: Done, [#3556](https://github.com/nifeos/nife/pull/3556).
+  [#3556](https://github.com/partsfoundry/nife/pull/3556).
+- Item 5 (P1), pointer-width assertion: Done, [#3556](https://github.com/partsfoundry/nife/pull/3556).
+- Item 6 (P1), manifest `publish` comment: Done, [#3556](https://github.com/partsfoundry/nife/pull/3556).
 - Item 7 (P1), documentation a stranger reads: Done,
-  [#3556](https://github.com/nifeos/nife/pull/3556).
-- Item 8 (P1), the template's prose gates: Done, [#3556](https://github.com/nifeos/nife/pull/3556).
+  [#3556](https://github.com/partsfoundry/nife/pull/3556).
+- Item 8 (P1), the template's prose gates: Done, [#3556](https://github.com/partsfoundry/nife/pull/3556).
 - Item 9 (P1), two Kani harnesses with falsification patches: Done,
-  [#3556](https://github.com/nifeos/nife/pull/3556).
-- Item 10 (P2), private offset constants: Done, [#3571](https://github.com/nifeos/nife/pull/3571).
+  [#3556](https://github.com/partsfoundry/nife/pull/3556).
+- Item 10 (P2), private offset constants: Done, [#3571](https://github.com/partsfoundry/nife/pull/3571).
 - Item 11 (P2), README says where the end-to-end test lives: Done,
-  [#3556](https://github.com/nifeos/nife/pull/3556).
+  [#3556](https://github.com/partsfoundry/nife/pull/3556).
 - Item 12 (P2), `Debug` prints the address: Won't fix. The address is a compile-time constant in
   every real use, and the change waits for the next change to the crate's public interface;
   maintainer's ruling, 2026-11-14 (UTC).
-- The frozen identity: Done, [#3516](https://github.com/nifeos/nife/pull/3516).
+- The frozen identity: Done, [#3516](https://github.com/partsfoundry/nife/pull/3516).
 - The mutation census after the harnesses: Done,
-  [run 43876176886](https://github.com/nifeos/nife/actions/runs/43876176886): 23 mutants tested,
+  [run 43876176886](https://github.com/partsfoundry/nife/actions/runs/43876176886): 23 mutants tested,
   0 missed.
-- The kernel's zeroed frame: Done, [#3283](https://github.com/nifeos/nife/pull/3283).
-- The move dry run's gaps: Done, [#3940](https://github.com/nifeos/nife/pull/3940).
+- The kernel's zeroed frame: Done, [#3283](https://github.com/partsfoundry/nife/pull/3283).
+- The move dry run's gaps: Done, [#3940](https://github.com/partsfoundry/nife/pull/3940).
   `script/crate-move --dry-run` runs the template's `clippy` job on stable and reports a path
   that leaves the crate, such as the manifest's old `publish` comment.
-- The review package: Done, [#3615](https://github.com/nifeos/nife/pull/3615),
-  [#3626](https://github.com/nifeos/nife/pull/3626) and
-  [#3635](https://github.com/nifeos/nife/pull/3635).
-- Clearance of the review package: Done, [#3773](https://github.com/nifeos/nife/pull/3773).
-- The move to its own repository: Done. The crate lives at `nifeos/counter_frequency_contract`,
+- The review package: Done, [#3615](https://github.com/partsfoundry/nife/pull/3615),
+  [#3626](https://github.com/partsfoundry/nife/pull/3626) and
+  [#3635](https://github.com/partsfoundry/nife/pull/3635).
+- Clearance of the review package: Done, [#3773](https://github.com/partsfoundry/nife/pull/3773).
+- The move to its own repository: Done. The crate lives at `partsfoundry/counter_frequency_contract`,
   and nife pins it by the commit of its tag.
 - The stranger test: Done,
-  [nifeos/counter_frequency_contract#2](https://github.com/nifeos/counter_frequency_contract/pull/2)
-  and [nifeos/counter_frequency_contract#3](https://github.com/nifeos/counter_frequency_contract/pull/3).
+  [partsfoundry/counter_frequency_contract#2](https://github.com/partsfoundry/counter_frequency_contract/pull/2)
+  and [partsfoundry/counter_frequency_contract#3](https://github.com/partsfoundry/counter_frequency_contract/pull/3).
 - A pre-release tag: Done. The release workflow made `v0.1.0-pre.1` after
-  [nifeos/counter_frequency_contract#4](https://github.com/nifeos/counter_frequency_contract/pull/4).
+  [partsfoundry/counter_frequency_contract#4](https://github.com/partsfoundry/counter_frequency_contract/pull/4).
 - Publishing to crates.io: Won't fix. A contract crate never publishes, and the tag is its release;
   ruled 2026-11-19 (UTC), under "The pre-release tag" above.
 

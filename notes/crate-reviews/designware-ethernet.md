@@ -21,7 +21,7 @@ against the simulator and no proof.
 
 Dependencies. None.
 
-Repository. `nifeos/designware_ethernet`. `components`, `driver_process_contract` and
+Repository. `partsfoundry/designware_ethernet`. `components`, `driver_process_contract` and
 `machine_discovery` depend on it by git revision.
 
 Provenance. The crate adapts OpenBSD's `dwqe` and `ytphy` (ISC, with copyright lines in `lib.rs`)
@@ -55,7 +55,7 @@ Outstanding before the move.
 
 | item | owner |
 |---|---|
-| none | the repository `nifeos/designware_ethernet` exists and nife pins it by revision |
+| none | the repository `partsfoundry/designware_ethernet` exists and nife pins it by revision |
 
 Recommendation. The architect cleared the move on 2026-11-11 (UTC), and has not cleared the tag or
 publication.

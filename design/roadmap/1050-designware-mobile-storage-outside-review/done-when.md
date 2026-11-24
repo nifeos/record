@@ -20,7 +20,7 @@ An appendix to [the milestone](../1050-designware-mobile-storage-outside-review.
 The review ran none of these. Each is a line in the storage bench of the kernel, run on a VisionFive 2:
 
 - The IDMAC path on silicon: a multi-block read and write through a region, read back through the
-  polled path. Done: nifeos/nife#3488 and #3695, on a microSD card.
+  polled path. Done: partsfoundry/nife#3488 and #3695, on a microSD card.
 - The eMMC socket: identification, the `EXT_CSD` read and the capacity, with an eMMC module fitted.
   Open: no module fitted.
 - Recovery (P1-1): a read interrupted by pulling the card or by an injected CRC error, then a
@@ -32,6 +32,6 @@ The review ran none of these. Each is a line in the storage bench of the kernel,
   clock it yields. Open.
 - The `VERID` and `HCON` words of both controllers, logged, so the 2.40a FIFO offset and the
   interface fields of the IDMAC are facts rather than readings of the tree. Done for the microSD
-  controller: nifeos/nife#3488.
+  controller: partsfoundry/nife#3488.
 - The scratch write (`MasterBootRecord::scratch_sector_range`) written and restored on the boot
-  card. Done: nifeos/nife#3695.
+  card. Done: partsfoundry/nife#3695.

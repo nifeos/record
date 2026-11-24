@@ -47,7 +47,7 @@ Risk 1 (only software written for nife runs on nife): a third-party C program ru
 
 ## The target and direct I/O on nife
 
-calef ruled both on nifeos/nife#2371 (2026-10-18 UTC): *"Yes, read-only at prompt"* (21:36) and
+calef ruled both on partsfoundry/nife#2371 (2026-10-18 UTC): *"Yes, read-only at prompt"* (21:36) and
 *"Per-client window"* (23:06).
 
 - **The target is the block window, through the disk tree.** `components/src/disk_tree.rs` serves

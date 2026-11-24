@@ -57,7 +57,7 @@ path is not. The causes, both in basalt's build and neither in nife's `write_pac
    The ids set function order, so the layout moved.
 
 basalt fixes them with a fixed build path (`/tmp/basalt-build`), cargo `trim-paths`, relative link
-inputs and the patched `ignore` inside the crate directory (nifeos/basalt#29). A path-independent
+inputs and the patched `ignore` inside the crate directory (partsfoundry/basalt#29). A path-independent
 `c_library` build in nife was declined as invasive.
 
 ## Exit

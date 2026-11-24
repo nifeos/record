@@ -150,7 +150,7 @@ repairs, and every other program is a package)). It is a package `jig` installs.
 
 The order across repositories: the nife pieces (`posix_spawn`, sockets, process ids, the manifest
 support) land first through nife's queue. basalt then bumps its pin in a separate pull request
-citing the landed commit (`nifeos/nife@<sha>`) and adds the recipe; that pull request records the
+citing the landed commit (`partsfoundry/nife@<sha>`) and adds the recipe; that pull request records the
 dependency.
 
 ## The license, as facts

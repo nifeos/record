@@ -30,7 +30,7 @@ public name stands as built (ruled 2026-11-19 UTC).
 | version | `0.1.0`; no tag |
 | edition, `rust-version` | 2024, 1.88 |
 | license | `MIT OR Apache-2.0`, both texts at the crate root, written in the manifest |
-| `publish` | `false`; milestone 1017 keeps the moved contract crates unpublished under §305 (git dependencies on `nifeos/*` only, pinned to a landed commit) until their own release milestone |
+| `publish` | `false`; milestone 1017 keeps the moved contract crates unpublished under §305 (git dependencies on `partsfoundry/*` only, pinned to a landed commit) until their own release milestone |
 | dependencies | none at run time; `loom = "0.7"` only under `cfg(loom)`, which only a model-checking run sets |
 | size | one `src/lib.rs` of about 1,550 lines: the library, its host tests, the loom models and the Kani harnesses |
 

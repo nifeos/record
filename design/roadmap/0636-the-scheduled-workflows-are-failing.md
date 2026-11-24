@@ -47,7 +47,7 @@ branch's head rather than `main`, which differs only by this milestone's commits
 is not this lane's to change; the number is offered to it as a fact.
 
 **The App token after the org rename.** It works. `merge-drain` run 37109755917 (2026-10-03 08:27
-UTC, after the 07:42 rename) minted an installation token "for this repository (nifeos/nife)", and
+UTC, after the 07:42 rename) minted an installation token "for this repository (partsfoundry/nife)", and
 its pass armed three pull requests with it. The repository's scripts still name `crickertech/nife`
 and reach it through GitHub's redirect; #1510 owns that rename.
 

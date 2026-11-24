@@ -31,7 +31,7 @@ Written by the milestone 642 lane, after the 2026-10-03 correction of error (the
 pull request at a time, #1564) made this its action item: it could not tell calef's own dequeues
 from a maintainer session's. Everything below "The requirement" is the 2026-09-23 proposal, kept as
 written. Two of its facts are stale: the organization is `nifeos`, not `crickertech`, and its plan
-is now `team` (`gh api orgs/nifeos`). The audit-log API still returns 404, but calef's token lacks
+is now `team` (`gh api orgs/partsfoundry`). The audit-log API still returns 404, but calef's token lacks
 the `read:audit_log` scope, so that 404 no longer proves the plan rule by itself.
 
 ### What the 2026-09-23 recommendation decided, and what has happened since
@@ -154,9 +154,9 @@ sentence is *"Organizations that use GitHub Enterprise Cloud can interact with t
 the GraphQL API and REST API."* Measured on this organization:
 
 ```console
-$ gh api /orgs/nifeos -q .plan
+$ gh api /orgs/partsfoundry -q .plan
 {"filled_seats":1,"name":"free","private_repos":10000,"seats":0,"space":976562499}
-$ gh api /orgs/nifeos/audit-log -X GET
+$ gh api /orgs/partsfoundry/audit-log -X GET
 {"message":"Not Found", ..., "status":"404"}
 ```
 

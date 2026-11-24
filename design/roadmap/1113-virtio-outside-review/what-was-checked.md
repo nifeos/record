@@ -2,8 +2,8 @@
 
 An appendix to [the milestone](../1113-virtio-outside-review.md).
 
-Verified firsthand, on a fresh shallow clone of `nifeos/nife` at `cf1328af6` and a clone of
-`nifeos/crate-workflows`, on the host named in the review's final message:
+Verified firsthand, on a fresh shallow clone of `partsfoundry/nife` at `cf1328af6` and a clone of
+`partsfoundry/crate-workflows`, on the host named in the review's final message:
 
 - `cargo build -p virtio`, `cargo clippy -p virtio --all-targets`, `cargo test -p virtio` and
   `cargo doc -p virtio --no-deps` with warnings denied: all clean on the workspace toolchain

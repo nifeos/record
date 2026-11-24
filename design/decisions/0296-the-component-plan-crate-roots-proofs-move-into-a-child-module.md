@@ -16,7 +16,7 @@ until the merge queue lands it.)*
 ## The ruling
 
 The lane recommended A, the proofs alone, and built it while the question waited. calef,
-2026-10-12 02:28 (UTC), on [PR #1971](https://github.com/nifeos/nife/pull/1971): "A". The Kani
+2026-10-12 02:28 (UTC), on [PR #1971](https://github.com/partsfoundry/nife/pull/1971): "A". The Kani
 proofs move to `proofs.rs`, and `lib.rs` keeps the declaration family and orchestration. A child
 named `proofs` does not make `lib.rs` a parent under §282, so it does not become an index.
 Orchestration stays where it is; the file has not grown since 2026-10-03. File names ship

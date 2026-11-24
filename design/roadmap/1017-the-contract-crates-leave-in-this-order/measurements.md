@@ -2,7 +2,7 @@
 
 [The proposal](../1017-the-contract-crates-leave-in-this-order.md) holds the order and the policy. This
 appendix holds the numbers behind them and the commands that produce them. Every number here comes
-from `nifeos/nife@a8b7524d7`, the tip of `main` on 2026-11-01 at 18:15 (UTC).
+from `partsfoundry/nife@a8b7524d7`, the tip of `main` on 2026-11-01 at 18:15 (UTC).
 
 ## How to rerun it
 
@@ -117,14 +117,14 @@ own tests, not files. Fuzz targets build `byte_sink_contract`, `capability_manif
 `globally_unique_identifier_partition_table` and `grant_plan`. Files in nife that name a crate's
 path range from 5 (`byte_glob`) to 36 (`user_mode_runtime`).
 
-`nifeos/jh7110_entropy` at `9b8769f`: its `Cargo.toml` has 31 lines and no path or `git` dependency.
-`git grep` finds `nifeos/nife` only in its README and two documents, and its workflows call
-`nifeos/crate-workflows` at a pinned commit.
+`partsfoundry/jh7110_entropy` at `9b8769f`: its `Cargo.toml` has 31 lines and no path or `git` dependency.
+`git grep` finds `partsfoundry/nife` only in its README and two documents, and its workflows call
+`partsfoundry/crate-workflows` at a pinned commit.
 
 ## The landing durations
 
 - `jh7110_entropy` pull request #5: its `check` and `proofs` runs took 6 and 7 minutes
-  (`gh run list -R nifeos/jh7110_entropy --branch lane/rename-constants`). Merged 22:22:46 UTC.
+  (`gh run list -R partsfoundry/jh7110_entropy --branch lane/rename-constants`). Merged 22:22:46 UTC.
 - nife pull request #2979: opened 22:27:02, merged 23:15:31 (`gh pr view 2979 --json
   createdAt,mergedAt`).
 - basalt's gate: 15 minutes cold and 10 warm, from milestone 755 (basalt v0 pins nife and runs its

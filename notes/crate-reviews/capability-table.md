@@ -97,7 +97,7 @@ No nife type appears in a public signature. What a stranger may find surprising:
 - `highest_seen` is one process-wide value across every table of every size, which suits a kernel
   and surprises a library user, so it is behind the `peak` feature, off by default (finding P2-11).
 - `Rights` keeps a marker bit in a `NonZeroU32`, so `Option<Capability<O>>` is no larger than
-  `Capability<O>` (finding P2-16, nifeos/capability_table#2).
+  `Capability<O>` (finding P2-16, partsfoundry/capability_table#2).
 
 ## Rulings
 
@@ -146,7 +146,7 @@ defines these names.
 
 | item | owner |
 |---|---|
-| Create nifeos/capability_table from `script/crate-move`, grant its secrets, push, apply the template settings and reach green runs | move lane |
+| Create partsfoundry/capability_table from `script/crate-move`, grant its secrets, push, apply the template settings and reach green runs | move lane |
 | Convert the kernel's dependency to `git` and `rev` with `version = "0.1.0"` at a commit on the new repository's main, drop the crate from the workspace members, and read the other files the dry run lists | move lane |
 | Run the stranger test and the template's workflows in the new repository | move lane |
 

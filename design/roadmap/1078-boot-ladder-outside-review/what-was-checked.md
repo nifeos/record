@@ -2,7 +2,7 @@
 
 An appendix to [the milestone](../1078-boot-ladder-outside-review.md).
 
-Verified firsthand on a fresh clone of `nifeos/nife` at its head, in a scratch directory, with every
+Verified firsthand on a fresh clone of `partsfoundry/nife` at its head, in a scratch directory, with every
 cargo run under a 12 GiB memory cap:
 
 - `cargo build`, `cargo test` (0 unit tests, 0 documentation tests), `cargo clippy --all-targets

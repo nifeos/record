@@ -19,7 +19,7 @@ on 2026-10-11 (UTC): "Keep it for now, and open the follow-up milestone". This i
 2026-10-15 (UTC) on branch
 `milestone/886-the-filesystem-test-fixture-moves-to-its-own-crate`, after 845 (built 2026-10-11)
 had landed, so the two never cut the same file at once; the std relief the block ordered as its own
-pull request went first, as nifeos/nife#2205.
+pull request went first, as partsfoundry/nife#2205.
 
 The crate name below is provisional and waits for calef's naming ratification pass; it does not
 block the lane.

@@ -26,7 +26,7 @@ calef's rulings, quoted from the maintainer comments on #1806 of 2026-10-07 (UTC
 
 ## What exists, checked 2026-10-07 (UTC)
 
-- `nifeos/e1000e`: 2,151 code lines (3,210 with comments), written by milestone 494 (a driver for
+- `partsfoundry/e1000e`: 2,151 code lines (3,210 with comments), written by milestone 494 (a driver for
   the network card a PC actually has), which is PARTIAL. It claims the 82574L that QEMU's
   `-device e1000e` presents and the Sunrise Point I219 rows, which is xenon's I219-LM5. Later PCH
   generations are refused until a bench proves one; the crate's `BUGS` says why.
@@ -78,7 +78,7 @@ first candidate for a fifth row.
 
 1. The name is settled before anything leaves (857's Fork 5 as calef amended it on 2026-10-11 UTC).
    `script/names e1000e` reports it ratified, crates.io answers 404 for it (or it is already
-   ours), and `nifeos/e1000e` does not exist yet. `script/crate-standalone` checks the first.
+   ours), and `partsfoundry/e1000e` does not exist yet. `script/crate-standalone` checks the first.
 2. Make the cut above. `cargo tree -p e1000e` then lists no nife crate.
 3. In the tree, `script/verify` proves the harnesses and `Cargo.toml` says `publish = false`.
 4. The package is 0.1.0 with its own semver, states `rust-version` (#1806's note built it on stable
@@ -87,17 +87,17 @@ first candidate for a fifth row.
    and its source divides by purpose) has milestone 610 (the interface's stability is
    measured weekly)'s per-package co-change column, and the soak (step 6) is how the second is
    measured. When the soak exits, calef adds it to the lint-checked publish allowlist. The
-   `nifeos/e1000e` repository exists since the crate moved, on the shared CI template (milestone
+   `partsfoundry/e1000e` repository exists since the crate moved, on the shared CI template (milestone
    887), through reusable workflows: Kani through `kani-github-action`, lint, release. Its release
    workflow refuses to publish unless the proof job is green. No harness here reads `target_arch`,
    so stock Kani proves them. The patched Kani of §218 (carry a Kani patch so riscv64 is proved, and
    send it upstream) is carried only if one comes to need riscv64. Milestone 589 (Kani can prove
    riscv64 from the hosts we already have) built it.
 6. Soak, as its own repository (calef, 2026-10-17 UTC, replying "Agrred" (sic) to the maintainer's
-   proposal; §305 (git dependencies are allowed on `nifeos/*` only, pinned to a landed commit)).
+   proposal; §305 (git dependencies are allowed on `partsfoundry/*` only, pinned to a landed commit)).
    Milestone 818 (`jh7110_entropy`: proven JH7110 TRNG logic, released on its own) is the pilot and
    soaks first. Before publication the crate is moved, not copied: it leaves this tree, and nife
-   depends on `nifeos/e1000e` by `rev`. A copy left behind does not count. The soak ends on
+   depends on `partsfoundry/e1000e` by `rev`. A copy left behind does not count. The soak ends on
    evidence, not a duration, when all five hold:
    1. nife builds and passes CI against the repository at a pinned commit, with no path dependency
       left.
@@ -154,7 +154,7 @@ at the release review, and the ones nobody has ratified.
 
 A check proves it. In nife, `cargo tree --locked -i e1000e` resolves to `v0.1.x` from crates.io with
 a checksum in `Cargo.lock`, `crates/e1000e` no longer exists, and the tree builds for all three
-targets. In `nifeos/e1000e`, the run that published 0.1.0 shows the Kani job green ahead of the
+targets. In `partsfoundry/e1000e`, the run that published 0.1.0 shows the Kani job green ahead of the
 publish job, and every harness's falsification patch makes its proof fail. The five soak criteria of
 release step 6 hold before it publishes.
 
@@ -186,13 +186,13 @@ names until the ratification pass, so this section keeps the links it carried.
 
 ## The soak
 
-- The crate lives in `nifeos/e1000e`, on the shared template of milestone 887 (crate repositories
-  share one CI template) with its callers pinned at `nifeos/crate-workflows` `e0c1fca`.
+- The crate lives in `partsfoundry/e1000e`, on the shared template of milestone 887 (crate repositories
+  share one CI template) with its callers pinned at `partsfoundry/crate-workflows` `e0c1fca`.
   `script/apply-settings` applied the settings there: both rulesets, the `crates-io` environment
   with calef as reviewer, the labels, the team and private vulnerability reporting. The manifest
   keeps `publish = false`, and the caller sets `allow-unpublished` for the soak. No tag exists.
-- nife keeps no copy. `kernel`, `components` and `system_tests` depend on `nifeos/e1000e` by `rev`
-  (§305 (git dependencies are allowed on `nifeos/*` only, pinned to a landed commit)), at the root
+- nife keeps no copy. `kernel`, `components` and `system_tests` depend on `partsfoundry/e1000e` by `rev`
+  (§305 (git dependencies are allowed on `partsfoundry/*` only, pinned to a landed commit)), at the root
   commit of its `main`, because no later commit has landed. The verify table, the Kani peaks table
   and the mutation exclusions no longer list it; the repository's own `proofs / kani` and
   `proofs / falsify` jobs prove the three harnesses. The `drivers` package no longer lists it as
@@ -200,7 +200,7 @@ names until the ratification pass, so this section keeps the links it carried.
 - End condition 1 holds once the repository's `main` is green at the pinned commit. Condition 2
   waits on the first weekly run, 3 on a release dry run, 4 on a recorded stranger run, and 5 on
   four weeks from the tag nife pins.
-- A bump of the pin is a separate pull request citing the landed commit as `nifeos/e1000e@<sha>`.
+- A bump of the pin is a separate pull request citing the landed commit as `partsfoundry/e1000e@<sha>`.
 
 ## What remains
 
@@ -214,19 +214,19 @@ names until the ratification pass, so this section keeps the links it carried.
 
 ## BUGS
 
-- `check / standalone` in `nifeos/e1000e` fails the template's register naming gate
+- `check / standalone` in `partsfoundry/e1000e` fails the template's register naming gate
   (`register_names.py`, ceiling 0) on 103 names. They are register offsets without the
   `_REGISTER` ending, bit constants written as values and not as shifts, addresses without
   `_VIRTUAL_ADDRESS` or `_PHYSICAL_ADDRESS`, and sizes without a unit. Many of them carry ratified names, so
   the repository's `main` cannot go green, and the repository's ruleset cannot merge a pull
   request, until the architect rules on them. The rest of the gates pass.
-- Nobody has installed the `nife-smelter` app on `nifeos/e1000e`, and the repository holds none of the
+- Nobody has installed the `nife-smelter` app on `partsfoundry/e1000e`, and the repository holds none of the
   organization secrets `NIFE_SMELTER_APP_ID`, `NIFE_SMELTER_PRIVATE_KEY` and `SETTINGS_TOKEN`.
   `script/apply-settings` refused the app (the API wants an organization owner). The release
   workflow's tag job and the weekly settings-drift job need them, so both wait on calef.
 - The mutation census lists 72 missed mutants and no locations, and the exclusions for mutants that
   cannot differ (an OR of operands that share no bit) did not travel. The first weekly mutation run
-  in `nifeos/e1000e` names each survivor, and each goes into `.github/mutants-exempts` there with
+  in `partsfoundry/e1000e` names each survivor, and each goes into `.github/mutants-exempts` there with
   its reason.
 
 - Steps 5 and 6 wait on milestone 887 (crate repositories share one CI template),
@@ -240,8 +240,8 @@ names until the ratification pass, so this section keeps the links it carried.
 ## Follow-on
 
 - **Outstanding.** The register naming ruling, the pin moved to a green commit, the tag `v0.1.0`,
-  the soak's end conditions 2 to 5 and the publication. Checked by `gh run list -R nifeos/e1000e
-  --workflow ci.yml`, which shows `check` red, and `gh api repos/nifeos/e1000e/tags`, which lists no
+  the soak's end conditions 2 to 5 and the publication. Checked by `gh run list -R partsfoundry/e1000e
+  --workflow ci.yml`, which shows `check` red, and `gh api repos/partsfoundry/e1000e/tags`, which lists no
   tag.
 - **Recorded.** An organization owner installs the `nife-smelter` app and grants the three secrets;
   see *BUGS* above.

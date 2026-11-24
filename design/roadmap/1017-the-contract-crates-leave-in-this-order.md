@@ -22,7 +22,7 @@ Two directions from the architect, both dated 2026-11-01 (UTC), frame it:
 
 - Crossing repositories is the goal of the split (§151 (the goal of the repository split is
   independent release)), not a cost to avoid, and the project should become good at changes that
-  span two repositories. Contract crates should carry versions and may leave `nifeos/nife`, so others
+  span two repositories. Contract crates should carry versions and may leave `partsfoundry/nife`, so others
   can write alternative implementations. Waiting for a crate to settle is not a criterion.
 - Anything that leaves must not reference back into nife. So a crate leaves bottom-up in the
   dependency graph, before or with every program that links it, and nothing that has left depends
@@ -38,7 +38,7 @@ architect](1017-the-contract-crates-leave-in-this-order/questions.md).
 
 ## What the measurements say
 
-Measured at `nifeos/nife@a8b7524d7` with one script, reproduced in the measurements appendix.
+Measured at `partsfoundry/nife@a8b7524d7` with one script, reproduced in the measurements appendix.
 
 - Through normal dependencies the 22 link no other nife crate. Fifteen are leaves, four sit one
   layer up and three sit two up.
@@ -145,12 +145,12 @@ One rule is new, ruled 2026-11-01 (UTC): one revision per contract per image. ba
 image whose components pin different revisions of one contract, and the bump pull request that
 moves a contract moves every pin of it together. Overriding the pins and building each as pinned
 are refused. The image is then the coherent set that §235 (its source divides by
-purpose) names. A pin is a git dependency on `nifeos/<crate>` by `rev` with its version stated.
+purpose) names. A pin is a git dependency on `partsfoundry/<crate>` by `rev` with its version stated.
 
 Two checks move with each crate. nife's diff check, which fails a moved magic without its version
 constant (milestone 956's step 4), joins the crate template. The template's `cargo-semver-checks`
 compares against the last published release, but these crates stay unpublished while nife pins them
-by `rev` (§305 (git dependencies on `nifeos/*` only, pinned to a landed commit)), so it never fires.
+by `rev` (§305 (git dependencies on `partsfoundry/*` only, pinned to a landed commit)), so it never fires.
 `jh7110_entropy`'s pull request #5 renamed five public constants and drew no hold. The fix is to
 compare against the commit whose manifest last changed version (`--baseline-rev`). Inside nife,
 `cargo-semver-checks` stays refused.
@@ -184,7 +184,7 @@ contract and a consumer to land together it needs four things:
    not, of repositories in the `nifeos` organization, runs checks 2 and 3 and the system test, and
    writes no pin and no file. It never runs a fork's pull request, and never on a self-hosted runner
    for a fork. It proves a pair before either half merges. The pin rule stands: a pin never names an
-   unmerged commit (§305 (git dependencies on `nifeos/*` only, pinned to a landed commit)).
+   unmerged commit (§305 (git dependencies on `partsfoundry/*` only, pinned to a landed commit)).
 
 ## How a breaking change lands across two repositories
 

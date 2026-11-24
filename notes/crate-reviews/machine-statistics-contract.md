@@ -155,5 +155,5 @@ them. The architect clears the package, and that clearance covers these two modu
 Cleared to move (2026-11-20 UTC, no tag, no publish). The names are ratified, every finding of the
 outside review has landed or is work the move does, and the crate's own tests, clippy, docs, Miri,
 Kani harnesses and falsification patches pass. The clearance is the go to create
-`nifeos/machine_statistics_contract` with `publish = false`, which then waits for `current_cpu_contract`
+`partsfoundry/machine_statistics_contract` with `publish = false`, which then waits for `current_cpu_contract`
 to leave first.

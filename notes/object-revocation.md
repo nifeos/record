@@ -19,7 +19,7 @@ its siblings) and it is the machinery milestone 19 (run a real workload) decline
 nife already had a different lever, and it decided the design:
 
 - **Objects carry generational names.** A `ThreadControlBlock`, `Rendezvous`, or `AddressSpace` capability holds a
-  `(generation, slot)` name into a registry (`nifeos/generational_table`, notes/generational-names.md). Free the
+  `(generation, slot)` name into a registry (`partsfoundry/generational_table`, notes/generational-names.md). Free the
   registry slot and every outstanding capability to that object stops resolving, *forever*, because
   its generation no longer matches. Invalidation is a side effect of freeing the object, with no
   capability to hunt down: the milestone-14 machinery, reused for teardown.
@@ -172,7 +172,7 @@ witness that memory came back rather than leaked:
 ## The surface, and what remains
 
 New EL0 methods on the `MemoryRegion` object (the system call boundary stays the three calls; these are methods
-under `invoke`): `SPLIT` (subdivide) and `DESTROY` (reclaim). See `nifeos/moho_abi` for the contract and
+under `invoke`): `SPLIT` (subdivide) and `DESTROY` (reclaim). See `partsfoundry/moho_abi` for the contract and
 `design/decisions/` for the record.
 
 The follow-ons this note once listed are all done: the EL0 spawn benchmark (`lat_proc`, notes/

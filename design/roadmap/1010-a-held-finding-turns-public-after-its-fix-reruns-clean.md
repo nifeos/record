@@ -20,7 +20,7 @@ in [fuzz-findings-without-a-person](1015-fuzz-findings-without-a-person.md), and
 of the disclosure ruling of 2026-10-31 (UTC).
 
 Reuse: the window code of `helpers/continuous-fuzz.sh` replays a seed; the filer's ledger (`ledger_state()` in
-`bin/fuzz-filer` of nifeos/fuzz-host) says which findings it filed, and with which advisory id.
+`bin/fuzz-filer` of partsfoundry/fuzz-host) says which findings it filed, and with which advisory id.
 
 ## What it builds
 

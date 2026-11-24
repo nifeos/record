@@ -30,15 +30,15 @@ not a proof about the silicon.
 ## The survey: where the hand-rolled protocols actually are
 
 The roadmap named three candidates (the per-CPU run-queue handoff, the reaper handoff, the IPC
-sender queue) and the brief added two more (`nifeos/intrusive_queue`, `nifeos/generational_table`).
+sender queue) and the brief added two more (`partsfoundry/intrusive_queue`, `partsfoundry/generational_table`).
 Four of those five have no atomic protocol at all, and finding that out is most of what the survey
 was for.
 
 | Candidate | What it actually is | Reachable by loom |
 |---|---|---|
 | The IPC sender queue (`crates/inter_process_communication`) | zero atomics. `Rendezvous` is plain data under the `SCHED` `InterruptSafeMutualExclusionLock` | nothing to explore |
-| `nifeos/intrusive_queue` (the run queues) | zero atomics. Single-owner with interrupts masked, plus an `UnsafeCell` | nothing to explore |
-| `nifeos/generational_table` (the thread table) | zero atomics. Under `SCHED` | nothing to explore **as atomics**, and that reading was too narrow: `crates/memory_regions` is a `generational_table` table under a lock, and its protocol had a real double free in it. See the `thread_wake_handshake` and `memory_regions` sections of [what-was-modeled.md](interleaving/what-was-modeled.md) |
+| `partsfoundry/intrusive_queue` (the run queues) | zero atomics. Single-owner with interrupts masked, plus an `UnsafeCell` | nothing to explore |
+| `partsfoundry/generational_table` (the thread table) | zero atomics. Under `SCHED` | nothing to explore **as atomics**, and that reading was too narrow: `crates/memory_regions` is a `generational_table` table under a lock, and its protocol had a real double free in it. See the `thread_wake_handshake` and `memory_regions` sections of [what-was-modeled.md](interleaving/what-was-modeled.md) |
 | The reaper handoff (`PerCpu::switched_from`) | one `AtomicU64`, both accesses `Relaxed`, written and read **by the same core** with interrupts masked. The atomic is interior mutability, not synchronization | nothing to explore |
 | The run-queue handoff | the migration inbox is an `InterruptSafeMutualExclusionLock`; the *steal request slot* is the lock-free part | **yes**, and it is the pilot |
 
@@ -65,7 +65,7 @@ and fetch-op outside test code:
 
 26 harnesses <!--count:loom-harnesses--> across five crates <!--count:loom-crates-->, run by
 `script/interleaving-check`. The clock page's eight models left with `clock_contract`, which runs
-them in its own repository, `nifeos/clock_contract`.
+them in its own repository, `partsfoundry/clock_contract`.
 
 The harness number is written in digits because `script/lint`'s marker reads small cardinals and no
 compositions, so "twenty-four" would be read as four; the crate number stays a word because five is

@@ -19,7 +19,7 @@ weekly) and should be built there, not twice.
 
 calef ruled both questions on 2026-10-04 (UTC), on pull request #1609. §247 (the split begins with
 basalt holding nife, and `procps` moves first) records them. basalt v0 is the first step, with the
-go-ahead for a lane's first write to `nifeos/basalt`; that is milestone 755 (basalt v0 pins nife and
+go-ahead for a lane's first write to `partsfoundry/basalt`; that is milestone 755 (basalt v0 pins nife and
 runs its gate). The first code cut is `procps` + `coreutils` + `util-linux`, only once all six
 conditions in milestone 756 hold. calef renamed the three `process-tools`, `core-tools` and
 `disk-tools` on 2026-10-06 (UTC), with `uuid` moving from the third to the second; the cut's
@@ -137,7 +137,7 @@ What the table says, read rather than summarized:
 
 ## 3. What basalt needs before the first cut, and the smallest basalt
 
-`github.com/nifeos/basalt` is empty. Milestone 120 (the rename: the OS becomes `nife`) reserved it; §151 names its job: it assembles
+`github.com/partsfoundry/basalt` is empty. Milestone 120 (the rename: the OS becomes `nife`) reserved it; §151 names its job: it assembles
 released pieces, as a Linux distribution assembles upstreams, owning none of them. §235's BUGS
 notes "manifest" already means two things; the list of what an image holds needs its own name.
 The names below are placeholders for calef.
@@ -180,7 +180,7 @@ milestone 607's item 1 and unbuilt.
 | `design/roadmap/MOVED` | absent | §201 requires it written at the split, not after | one line per record that moves; a code cut moves code, not records, so it may stay empty |
 | Merge queue and `nife-smelter[bot]` | 19 workflows, one ruleset, one queue | a second ruleset and queue; the bot App installed on the repository; the watchers (`merge-drain`, `ready-status`, `architect-label`, `trunk-health`) either copied or turned into reusable workflows | 19 workflow files, 48 jobs |
 | A cross-repository change | one pull request, one queue pass | component pull request, its queue, then basalt's pin bump and its queue; §201 puts the dependency on the blocked side only | at least two serial queue passes, about 32 minutes at today's median |
-| Lane workflow | one worktree, one branch, one draft pull request claims a milestone (§90 (the claim is a draft pull request)) | two clones; a lane spanning both opens two drafts; the board becomes `gh search prs --owner nifeos --draft` | the `nife-worktrees` directory grows a sibling |
+| Lane workflow | one worktree, one branch, one draft pull request claims a milestone (§90 (the claim is a draft pull request)) | two clones; a lane spanning both opens two drafts; the board becomes `gh search prs --owner partsfoundry --draft` | the `nife-worktrees` directory grows a sibling |
 | Gates that assume one tree | `script/lint` runs 73 sections; 33 scripts and helpers read `design/roadmap/` directly | the moving repository needs a subset (clippy, fmt, its own tests, naming, em-dashes, spelling); the roadmap gates stay in nife | the subset is unmeasured until a cut is chosen |
 | `packages.py` boundaries | every tracked path has one home in this tree | a moved package's `home` flips to ratified; its paths stop being tracked here | 1 of 27 packages per cut |
 | Supply chain | `script/vendor-verify` and `vendor-watch.yml` check `vendor/redoxfs` against its pin | if `redoxfs` leaves, both move with it | 2 vendor commits in thirty days |

@@ -5,7 +5,7 @@ Milestone 44 splits cleanly in two. The files are in the tree (`SECURITY.md`, `d
 which live in GitHub's web UI and cannot be committed. This note is the exact procedure for those,
 written to be followed rather than interpreted. The reasoning behind each is DECISIONS §36.
 
-Everything below needs admin on `nifeos/nife`.
+Everything below needs admin on `partsfoundry/nife`.
 
 ## 1. Private vulnerability reporting
 
@@ -23,10 +23,10 @@ vulnerability reporting → Enable.
 Or, in one command:
 
 ```
-gh api -X PUT repos/nifeos/nife/private-vulnerability-reporting
+gh api -X PUT repos/partsfoundry/nife/private-vulnerability-reporting
 ```
 
-Verify: open <https://github.com/nifeos/nife/security/advisories> and confirm the "Report a
+Verify: open <https://github.com/partsfoundry/nife/security/advisories> and confirm the "Report a
 vulnerability" button is present.
 
 ## 2. The ruleset on `main`
@@ -144,8 +144,8 @@ features, for a kernel that does not build for the host at all.
 To re-check the coverage number after a future run:
 
 ```
-gh run list --repo nifeos/nife --workflow CodeQL --limit 1 --json databaseId --jq '.[0].databaseId' \
-  | xargs -I{} gh run view {} --repo nifeos/nife --log \
+gh run list --repo partsfoundry/nife --workflow CodeQL --limit 1 --json databaseId --jq '.[0].databaseId' \
+  | xargs -I{} gh run view {} --repo partsfoundry/nife --log \
   | grep -E "scanned .* out of|extracted with"
 ```
 

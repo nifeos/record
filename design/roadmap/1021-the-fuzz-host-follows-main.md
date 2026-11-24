@@ -21,7 +21,7 @@ credential. No new dependency.
 
 An update step in `helpers/continuous-fuzz.sh`, run between windows at most every 5 minutes.
 
-1. Fetch only `main` of `https://github.com/nifeos/nife.git`.
+1. Fetch only `main` of `https://github.com/partsfoundry/nife.git`.
 2. Refuse a commit whose history does not contain the current one (`git merge-base --is-ancestor`).
 3. Read the check runs of the new commit from `api.github.com` with no token, and move only when
    every check in a named list of main's gates has concluded success. Red, pending, an error or a rate

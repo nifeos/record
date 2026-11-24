@@ -15,7 +15,7 @@
 
 set -eu
 me="repeat-watch-selftest"
-repo="nifeos/record"
+repo="partsfoundry/record"
 cd "$(dirname "$0")/.."
 
 unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_PREFIX GIT_COMMON_DIR GIT_OBJECT_DIRECTORY GIT_CONFIG_PARAMETERS
@@ -31,7 +31,7 @@ fail() {
 
 # A nife older than the flags reads `--repeat` as its watching form and never returns, so ask first.
 grep -q -e '--repo)' helpers/trunk-health.sh ||
-	fail "the linked helpers/trunk-health.sh has no --repo; basalt's nife pin predates nifeos/nife#4072"
+	fail "the linked helpers/trunk-health.sh has no --repo; basalt's nife pin predates partsfoundry/nife#4072"
 
 # The wiring the workflow itself must carry: both halves told the repository.
 wf=.github/workflows/repeat-watch.yml

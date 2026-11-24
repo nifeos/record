@@ -10,7 +10,7 @@ needs_person: yes
 # 1094. `grant_plan`: what an outside maintainer would fix before it leaves
 
 Raised by a read-only review of `crates/grant_plan` as a stranger to this tree would meet it:
-the crate an outside maintainer finds when `nifeos/grant_plan` appears, with no nife checkout
+the crate an outside maintainer finds when `partsfoundry/grant_plan` appears, with no nife checkout
 beside it. The review changes nothing; it lists what the move lane and the lanes after it change.
 
 There is **no review package** for this crate in `notes/crate-reviews/`, so there is no settled
@@ -22,7 +22,7 @@ commits in 30 days, 120 of them crossing, 227 breaking API items in four weeks).
 the crate in step 6. Where a name below is already ratified, this block does not reopen it unless a later rule
 (units spelled out, standard-library spellings) contradicts it, and says so where it does.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold and helpers (`standalone.py`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold and helpers (`standalone.py`,
 `spelled_out.py`, `register_names.py`, `british_spelling.py`), cargo-mutants, Kani, and the crate's
 own `test_support::plan_line`. No new tool.
 
@@ -31,15 +31,15 @@ own `test_support::plan_line`. No new tool.
 Every item not Done blocks the first crates.io publish, which waits until every outside-review
 milestone reaches delivery.
 
-- P0-1, split the catalog from the planner: Done, [#3584](https://github.com/nifeos/nife/pull/3584).
-- P0-2, the documentation does not build with warnings denied: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
+- P0-1, split the catalog from the planner: Done, [#3584](https://github.com/partsfoundry/nife/pull/3584).
+- P0-2, the documentation does not build with warnings denied: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
 - P0-3, the manifest and the repository root are the workspace's: At the move. The tests plan
-  against rows of their own and the `program_table` dev-dependency is gone ([#3961](https://github.com/nifeos/nife/pull/3961)); `ISOLATION_WORD`
+  against rows of their own and the `program_table` dev-dependency is gone ([#3961](https://github.com/partsfoundry/nife/pull/3961)); `ISOLATION_WORD`
   lives in `program_table`. `Cargo.toml` still inherits `license` and `[lints]`, and the move
   writes the crate's own manifest, a README and a LICENSE.
-- P1-4, the tokenizer drops a seventeenth token: Done, [#3559](https://github.com/nifeos/nife/pull/3559).
+- P1-4, the tokenizer drops a seventeenth token: Done, [#3559](https://github.com/partsfoundry/nife/pull/3559).
 - P1-5, no proof: At the move. Neither `grant_plan` nor `grant_contract` has a Kani harness. By
-  the 2026-11-22 (UTC) ruling ([#3977](https://github.com/nifeos/nife/pull/3977)), a lane writes one per claim in each new repository before
+  the 2026-11-22 (UTC) ruling ([#3977](https://github.com/partsfoundry/nife/pull/3977)), a lane writes one per claim in each new repository before
   any tag; the two `job_windows` patches in `program_table` replay host tests.
 - P1-6, limits carry their unit, and four fields named `len`: Done (ruled by the maintainer,
   provisional, 2026-11-19 UTC; two-way until the first publish). Every limit now ends in
@@ -47,53 +47,53 @@ milestone reaches delivery.
   fields that held a length are `length_bytes` or `name_length_bytes`. The names are provisional
   until the architect ratifies them from the review packages.
 - P1-7, public names that need a decoder: Done (ruled by the maintainer, provisional, 2026-11-14
-  UTC, [#3589](https://github.com/nifeos/nife/pull/3589)). The modules are `navigation`,
+  UTC, [#3589](https://github.com/partsfoundry/nife/pull/3589)). The modules are `navigation`,
   `rm_options`, `spawn_protocol` and `job_channel_page`; `BindEntry::position`,
   `COOPERATIVE_GRACE_POLLS`, `RIGHTS_BITS_DO_NOT_OVERLAP` and `program_id` follow. The names are
   provisional until the architect ratifies them from the review packages.
-- P1-8, British spellings: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P1-9, documentation for a stranger: At the move. [#3566](https://github.com/nifeos/nife/pull/3566) and [#3961](https://github.com/nifeos/nife/pull/3961) close the `missing_docs`
+- P1-8, British spellings: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- P1-9, documentation for a stranger: At the move. [#3566](https://github.com/partsfoundry/nife/pull/3566) and [#3961](https://github.com/partsfoundry/nife/pull/3961) close the `missing_docs`
   worklists of all three crates; the move strips the citations, the quotations and the `Name:`
   lines.
-- P1-9b, `missing_docs` in the split crates: Done, [#3961](https://github.com/nifeos/nife/pull/3961). Neither `grant_contract`
+- P1-9b, `missing_docs` in the split crates: Done, [#3961](https://github.com/partsfoundry/nife/pull/3961). Neither `grant_contract`
   nor `program_table` allows `missing_docs`.
-- P1-10, numbers in refusal sentences: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P1-11, two-kilobyte values by value: Done, [#3566](https://github.com/nifeos/nife/pull/3566) and [#3961](https://github.com/nifeos/nife/pull/3961). The planning functions take
+- P1-10, numbers in refusal sentences: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- P1-11, two-kilobyte values by value: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566) and [#3961](https://github.com/partsfoundry/nife/pull/3961). The planning functions take
   `&ShellHoldings`, `&Expansion` and `&Streams`, provisional until the release review; the move
   writes the sizes into the README.
-- P1-12, narrow length fields: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P1-13, an undeclared widening option: Done, [#3566](https://github.com/nifeos/nife/pull/3566) and [#3961](https://github.com/nifeos/nife/pull/3961). A `const` assertion in
+- P1-12, narrow length fields: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- P1-13, an undeclared widening option: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566) and [#3961](https://github.com/partsfoundry/nife/pull/3961). A `const` assertion in
   `program_table` checks every row with `Manifest::is_well_formed`, and the note decoder already
   refuses an undeclared subtree letter.
 - P1-14, the mutation record predates the split: At the move. By the 2026-11-22 (UTC) ruling
-  ([#3977](https://github.com/nifeos/nife/pull/3977)), the first mutation run of `grant_plan` and `grant_contract` happens in their own
+  ([#3977](https://github.com/partsfoundry/nife/pull/3977)), the first mutation run of `grant_plan` and `grant_contract` happens in their own
   repositories before any tag, and gives the figure the release gate asks for.
-- P2-15, `NameSet`'s `Debug`: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P2-16, `Result<_, ()>` operands: Done, [#3961](https://github.com/nifeos/nife/pull/3961). `job_operand` and `kill_operands` return the
+- P2-15, `NameSet`'s `Debug`: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- P2-16, `Result<_, ()>` operands: Done, [#3961](https://github.com/partsfoundry/nife/pull/3961). `job_operand` and `kill_operands` return the
   error `NoJobNamed`, provisional.
-- P2-17, an unchecked window shift: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P2-18, tests pin thirteen of twenty-eight wire ids: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P2-19, no runnable example: Done, [#3961](https://github.com/nifeos/nife/pull/3961). `examples/plan_a_line.rs` plans a pipeline against a
+- P2-17, an unchecked window shift: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- P2-18, tests pin thirteen of twenty-eight wire ids: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- P2-19, no runnable example: Done, [#3961](https://github.com/partsfoundry/nife/pull/3961). `examples/plan_a_line.rs` plans a pipeline against a
   caller's manifest; the move adds the README's examples section.
-- Decision, where the crate boundary falls: Done, [#3584](https://github.com/nifeos/nife/pull/3584), ruled 2026-11-14 (UTC).
-- Decision, public names that need a decoder: Done, [#3589](https://github.com/nifeos/nife/pull/3589), maintainer provisional 2026-11-14
+- Decision, where the crate boundary falls: Done, [#3584](https://github.com/partsfoundry/nife/pull/3584), ruled 2026-11-14 (UTC).
+- Decision, public names that need a decoder: Done, [#3589](https://github.com/partsfoundry/nife/pull/3589), maintainer provisional 2026-11-14
   (UTC).
-- Decision, limits carry their unit: Done, [#3822](https://github.com/nifeos/nife/pull/3822), maintainer provisional 2026-11-19 (UTC).
-- Decision, the names `grant_contract` and `program_table`: Done, [#3822](https://github.com/nifeos/nife/pull/3822), ruled 2026-11-19
+- Decision, limits carry their unit: Done, [#3822](https://github.com/partsfoundry/nife/pull/3822), maintainer provisional 2026-11-19 (UTC).
+- Decision, the names `grant_contract` and `program_table`: Done, [#3822](https://github.com/partsfoundry/nife/pull/3822), ruled 2026-11-19
   (UTC), both as built.
-- Decision, review clearance and the repositories: Done, [#3977](https://github.com/nifeos/nife/pull/3977), ruled 2026-11-22 (UTC). The
+- Decision, review clearance and the repositories: Done, [#3977](https://github.com/partsfoundry/nife/pull/3977), ruled 2026-11-22 (UTC). The
   architect cleared `grant_plan` and `grant_contract` together, which approves creating both
   repositories with `publish = false`, no tag and no publication. `grant_contract` moves after
   `program_argument_contract` has its own repository, since it depends on that crate.
-- The move of `grant_contract`: Done as a pin, [#4016](https://github.com/nifeos/nife/pull/4016).
-  nifeos/grant_contract exists, and nife depends on it at commit
+- The move of `grant_contract`: Done as a pin, [#4016](https://github.com/partsfoundry/nife/pull/4016).
+  partsfoundry/grant_contract exists, and nife depends on it at commit
   d4e9ca29d51bc71d678aadaa00411eba953202b3 (`version = "0.1.0"`, `publish = false`). No tag and
   no publish; a pre-release tag moves the pin later.
-- The move of `grant_plan`: Done as a pin, [#4018](https://github.com/nifeos/nife/pull/4018).
-  nifeos/grant_plan exists, and nife depends on it at commit
+- The move of `grant_plan`: Done as a pin, [#4018](https://github.com/partsfoundry/nife/pull/4018).
+  partsfoundry/grant_plan exists, and nife depends on it at commit
   a5d87c426ec0aeebeb51a13d3ffb116caebd73c9 (`version = "0.1.0"`, `publish = false`). No tag and
   no publish; a pre-release tag moves the pin later.
-- Decision, the names of both crates: Done, [#3868](https://github.com/nifeos/nife/pull/3868), ruled 2026-11-20 (UTC). Names with no block
+- Decision, the names of both crates: Done, [#3868](https://github.com/partsfoundry/nife/pull/3868), ruled 2026-11-20 (UTC). Names with no block
   wait on rulings by family.
 
 ## Open decisions
@@ -247,9 +247,9 @@ The checks are in [the appendix](1094-grant-plan-outside-review/done-when.md).
   no tag and no publish.
 - **Outstanding.** Every finding marked Open or Waiting on under "Finding status", each checked
   against the three crates' sources on main.
-- **Outstanding.** Creating `nifeos/grant_plan` and `nifeos/grant_contract`, cleared on
+- **Outstanding.** Creating `partsfoundry/grant_plan` and `partsfoundry/grant_contract`, cleared on
   2026-11-22 (UTC); `grant_contract` waits on a repository for `program_argument_contract`.
-- **Done.** `crates/externalization-list.txt` names both crates that leave ([#3961](https://github.com/nifeos/nife/pull/3961));
+- **Done.** `crates/externalization-list.txt` names both crates that leave ([#3961](https://github.com/partsfoundry/nife/pull/3961));
   `program_table` stays in nife and needs no row.
 
 ## Index row

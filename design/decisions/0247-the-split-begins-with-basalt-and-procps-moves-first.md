@@ -20,7 +20,7 @@ its order "should be ruled on its own". This is that ruling. calef answered both
 
 1. **basalt v0 is the first step.** basalt pins `nife` whole at a commit and runs its image build
    and system test on all three architectures; nothing leaves this repository. The ruling includes
-   the go-ahead for a lane's first write to `nifeos/basalt`. The manifest's file name and format
+   the go-ahead for a lane's first write to `partsfoundry/basalt`. The manifest's file name and format
    ship provisional. Milestone 755 (basalt v0 pins nife and runs its gate) builds it.
 2. **The first code cut is `procps` + `coreutils` + `util-linux`, and only once all six
    conditions hold**:

@@ -12,7 +12,7 @@ needs_person: yes
 Raised by lane proposal/milestones-as-files-or-issues. Name: provisional.
 
 Ruled 2026-11-11 (UTC): shape A, milestones stay files, with no published index. The ruling also
-answers question 7 of milestone 1018 (the design record moves to `nifeos/record`).
+answers question 7 of milestone 1018 (the design record moves to `partsfoundry/record`).
 
 Reuse: GitHub's own issues, sub-issues and closing keywords, which shapes B and C would take whole.
 
@@ -45,8 +45,8 @@ says so in fields a script can walk). Then it has prose: why the work exists, wh
 weighed, the steps, what done means, the follow-on work and the recorded limitations.
 `script/roadmap --check` reads all of it on every push and in the merge queue.
 
-The record is leaving this repository for its own, `nifeos/record`, under milestone 1018 (the design
-record moves to `nifeos/record` and is published as a website). Once it has left, code no
+The record is leaving this repository for its own, `partsfoundry/record`, under milestone 1018 (the design
+record moves to `partsfoundry/record` and is published as a website). Once it has left, code no
 longer sits beside the files that its comments cite. That reopens a question the tree answered
 once, in §90's "Why not GitHub Issues": should the work-tracking part of a milestone live in an
 issue tracker instead? It matters now because the citation rules for the new layout are open, and only a fresh
@@ -131,13 +131,13 @@ outcome record stays reviewed text under every shape, since readers check claims
 - Audit. GitHub keeps at most 100 edits per issue or comment, and anyone with write access can
   delete a comment revision's content; the page does not say whether the same holds for an issue body. A label change or a body edit passes no lint, no review and
   no `needs-architect` hold: §88's hold is a check on pull requests.
-- Cross-repository references. `nifeos/record#N` links from any repository, and a closing keyword
-  in a pull request, `Fixes nifeos/record#N`, closes an issue in another repository when the pull
+- Cross-repository references. `partsfoundry/record#N` links from any repository, and a closing keyword
+  in a pull request, `Fixes partsfoundry/record#N`, closes an issue in another repository when the pull
   request merges into the default branch.
 - Transfer. An issue moves only within one owner; comments come along, labels and milestones only
   where the target has them, and the old address redirects. The page does not say what happens to
   the number; it likely takes the target's next number.
-- Numbering. Issues and pull requests share one sequence. In `nifeos/nife` the next number is
+- Numbering. Issues and pull requests share one sequence. In `partsfoundry/nife` the next number is
   3,432, of which 59 are issues. Milestone numbers run to 1,068 with 41 unused. Only a fresh
   repository whose first 1,068 numbers are all issues, created in order before any pull request,
   could make issue `#N` equal milestone `N`. After that, a new milestone would take the next shared
@@ -180,7 +180,7 @@ They convert as each crate moves, under §315 (a crate's documentation leaves wi
 
 ### B. All issues
 
-What changes. Each block becomes an issue in `nifeos/record`: the body holds the text, labels hold
+What changes. Each block becomes an issue in `partsfoundry/record`: the body holds the text, labels hold
 the status and the person and machine fields, and the issue's dependency links hold
 `milestone_dependencies`. Appendices become linked files or comments.
 
@@ -193,7 +193,7 @@ over 1.27 million words, and 5,702 commits of block history; GitHub keeps 100 ed
 and gates that read a commit. The prose ratchet and the citation glosses, which run on files.
 §90's own argument: a second place where truth lives.
 
-The code side. `TODO(nifeos/record#N)`, with `N` equal to the milestone only for the backfill.
+The code side. `TODO(partsfoundry/record#N)`, with `N` equal to the milestone only for the backfill.
 The 668 paths are rewritten to issue addresses.
 
 ### C. Hybrid
@@ -201,7 +201,7 @@ The 668 paths are rewritten to issue addresses.
 What changes. The file keeps the design text and the outcome record, reviewed as now. An issue
 holds the work item: status as a label, the five dependency fields, the steps as sub-issues, the
 effort and the done-when checklist. The file names its issue and the issue names its file. A code
-pull request closes its step's sub-issue with `Fixes nifeos/record#N`.
+pull request closes its step's sub-issue with `Fixes partsfoundry/record#N`.
 
 Cost: L, a guess. 1,027 issues created and each block split into two halves by a script that
 knows which sections go where, which the sample shows headings cannot always say. The status
@@ -218,7 +218,7 @@ both places?)'s failure in a new place. A closing keyword knows two states; the 
 What we gain. A code pull request that merges marks its work item done in the same moment, with
 no second queue, and the step list becomes clickable.
 
-The code side. `TODO(nifeos/record#N)` against the issue, or `TODO(milestone N)` against the file
+The code side. `TODO(partsfoundry/record#N)` against the issue, or `TODO(milestone N)` against the file
 file existence as in A. The 11,069 citations stay as written in either case.
 
 ## Prior art
@@ -258,14 +258,14 @@ requests #3427 and #3426, titled "1062 step 4" and "1062 step 6".
 
 - Under A it is as it is. Each step lane opens a draft in the code repository and one in the record
   repository. The code merges; the record draft then moves the block to `PARTIAL` with
-  `nifeos/<repo>@<sha>`. A comment in moved code reads `TODO(milestone 1062): ...`, checked by the
+  `partsfoundry/<repo>@<sha>`. A comment in moved code reads `TODO(milestone 1062): ...`, checked by the
   existence of `design/roadmap/1062-*.md` at the pin.
-- Under B, `nifeos/record#1062` holds the whole block. Labels say `not-started` and
+- Under B, `partsfoundry/record#1062` holds the whole block. Labels say `not-started` and
   `needs-person`; a link says blocked by `#811`; decision dependencies are prose links. Editing step
   2's design is an issue edit, unreviewed.
 - Under C, the file keeps the background, the step 7 design and `## Done when`. The issue holds the
   status label, the dependencies and seven sub-issues; #3427's body says
-  `Fixes nifeos/record#<step 4>`, and merging it ticks that step. `PARTIAL` is still a label someone
+  `Fixes partsfoundry/record#<step 4>`, and merging it ticks that step. `PARTIAL` is still a label someone
   sets by hand.
 
 ## What I need from you
@@ -282,11 +282,11 @@ basalt's record pin, with no index, keeping `TODO(milestone N)`.
 - C. Files for design text, an issue per milestone for the work item.
 
 If the answer is B or C, the order matters: someone must create the issues in number order in
-`nifeos/record` before its first pull request, or issue numbers and milestone numbers never match.
+`partsfoundry/record` before its first pull request, or issue numbers and milestone numbers never match.
 That is the one irreversible step here.
 
 What waits on the answer: milestone 1018's question on what code citations check against, and
-the shape of its step creating `nifeos/record`.
+the shape of its step creating `partsfoundry/record`.
 
 ## Sources
 

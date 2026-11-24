@@ -31,7 +31,7 @@ crates leave in this order), paired there with `file_system_fixture`. The manife
 dependencies of any kind, and the README says where the fixture's tests went. The two crates share
 one workspace repository, ruled 2026-11-14 (UTC); the fixture never publishes.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, its helpers (`standalone.py`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, its helpers (`standalone.py`,
 `falsify.py`, `coverage-floor.sh`, the name gates), Kani, cargo-mutants, cargo-llvm-cov, the
 classification of equivalent mutants already in `notes/mutation-testing/`. No new tool.
 
@@ -44,66 +44,66 @@ in [the later-items appendix](1090-filesystem-contract-outside-review/later-item
 decisions and the review package. The item texts use the names the review read; the crate's names
 now are `file_system_contract`, `directory`, `extended_attribute` and `block`.
 
-- Item 1 (P0), the crate does not stand alone: Done, [#3911](https://github.com/nifeos/nife/pull/3911), [#3999](https://github.com/nifeos/nife/pull/3999) and [#4020](https://github.com/nifeos/nife/pull/4020).
+- Item 1 (P0), the crate does not stand alone: Done, [#3911](https://github.com/partsfoundry/nife/pull/3911), [#3999](https://github.com/partsfoundry/nife/pull/3999) and [#4020](https://github.com/partsfoundry/nife/pull/4020).
   The text names no program of this tree, the externalization lint carried no waiver for the crate,
   and the repository's root commit carries no `Name:` block and no milestone citation.
-- Item 2 (P0), clippy refuses `RedoxFS` without a `clippy.toml`: Done, [#3911](https://github.com/nifeos/nife/pull/3911). The crate root
+- Item 2 (P0), clippy refuses `RedoxFS` without a `clippy.toml`: Done, [#3911](https://github.com/partsfoundry/nife/pull/3911). The crate root
   carries `clippy.toml` with `doc-valid-idents`.
-- Item 3 (P0), the falsification patches carry this tree's path: Done, [#4020](https://github.com/nifeos/nife/pull/4020). The
+- Item 3 (P0), the falsification patches carry this tree's path: Done, [#4020](https://github.com/partsfoundry/nife/pull/4020). The
   repository's patches and harness doc comments name its own paths.
-- Item 4 (P0), `rm.rs` uncovered: Done, [#3566](https://github.com/nifeos/nife/pull/3566). The test now lives with the module in
-  `grant_plan::rm_report` ([#3999](https://github.com/nifeos/nife/pull/3999)).
-- Item 5 (P0), names the gates refuse: Done, [#3726](https://github.com/nifeos/nife/pull/3726) and [#3999](https://github.com/nifeos/nife/pull/3999). Decision B's renames are in
+- Item 4 (P0), `rm.rs` uncovered: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566). The test now lives with the module in
+  `grant_plan::rm_report` ([#3999](https://github.com/partsfoundry/nife/pull/3999)).
+- Item 5 (P0), names the gates refuse: Done, [#3726](https://github.com/partsfoundry/nife/pull/3726) and [#3999](https://github.com/partsfoundry/nife/pull/3999). Decision B's renames are in
   force with their aliases, `GET_SIZE_BYTES` carries its unit, and the last two refusals of the
   repository's naming gates (`spec`, `PAGE_NAME_SET_OFFSET`) now have new names.
-- Item 6 (P1), `reply_errno` not total: Done, [#3577](https://github.com/nifeos/nife/pull/3577). Now `error::word` and `error::code`.
-- Item 7 (P1), the packers mask: Done, [#4010](https://github.com/nifeos/nife/pull/4010). `file_system::request`, `rename_destination`,
+- Item 6 (P1), `reply_errno` not total: Done, [#3577](https://github.com/partsfoundry/nife/pull/3577). Now `error::word` and `error::code`.
+- Item 7 (P1), the packers mask: Done, [#4010](https://github.com/partsfoundry/nife/pull/4010). `file_system::request`, `rename_destination`,
   `grant::specification` and `extended_attribute::specification` assert their field bounds, as
   `block::request` does (provisional, restrictive first). No call site needed a change: each proxy
   forwards fields it decoded through the masks, each server mints handles from a table far below
   `MAXIMUM_HANDLE`, and no attack fixture sends a field past its bound.
-- Item 8 (P1), seven unproven properties: Done, [#3566](https://github.com/nifeos/nife/pull/3566), [#3637](https://github.com/nifeos/nife/pull/3637) and [#4010](https://github.com/nifeos/nife/pull/4010).
+- Item 8 (P1), seven unproven properties: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566), [#3637](https://github.com/partsfoundry/nife/pull/3637) and [#4010](https://github.com/partsfoundry/nife/pull/4010).
   Ten harnesses carry falsification patches. Four of them prove that the four walkers end on every
   buffer up to eight bytes (sixteen for the store). Each yielded record takes a fixed least number of
   bytes, which bounds a walk over a page; a host test walks a page of the smallest records for each.
 - Item 9 (P1), equivalent mutants need a home: Waiting on the first full mutation run of
-  nifeos/file_system_contract. Its `.github/mutants-exempts` carries the census counts; each
+  partsfoundry/file_system_contract. Its `.github/mutants-exempts` carries the census counts; each
   survivor that run names goes in with its reason, and one green full run comes before the tag.
-- Item 10 (P1), the README is short of the scaffold: Done, [#3911](https://github.com/nifeos/nife/pull/3911) and [#3999](https://github.com/nifeos/nife/pull/3999). The badge row,
+- Item 10 (P1), the README is short of the scaffold: Done, [#3911](https://github.com/partsfoundry/nife/pull/3911) and [#3999](https://github.com/partsfoundry/nife/pull/3999). The badge row,
   `patch -p1` and the single-harness command came first; the measured Kani time and peak memory
   follow.
-- Item 11 (P1), twelve bare acronyms: Done, [#3566](https://github.com/nifeos/nife/pull/3566) and [#3911](https://github.com/nifeos/nife/pull/3911). The template's
+- Item 11 (P1), twelve bare acronyms: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566) and [#3911](https://github.com/partsfoundry/nife/pull/3911). The template's
   `prose_acronyms` gate passes on the crate's text.
-- Item 12 (P1), `rm` is not filesystem protocol: Done, [#3999](https://github.com/nifeos/nife/pull/3999). `rm`'s report protocol is
+- Item 12 (P1), `rm` is not filesystem protocol: Done, [#3999](https://github.com/partsfoundry/nife/pull/3999). `rm`'s report protocol is
   `grant_plan::rm_report`, beside `rm_options`, and the text states `CLIENT_WINDOWS` as a contract fact: a
   server refuses a badge at or past it.
-- Item 13 (P1), dates and British spellings: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 14 (P2), `request_block_count` decodes 256: Done, [#3999](https://github.com/nifeos/nife/pull/3999). It answers `None` past
+- Item 13 (P1), dates and British spellings: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 14 (P2), `request_block_count` decodes 256: Done, [#3999](https://github.com/partsfoundry/nife/pull/3999). It answers `None` past
   `TRANSFER_BLOCKS`, and the three block servers refuse with `EINVAL` (provisional, restrictive
   first).
-- Item 15 (P2), `directory_entry::encode` accepts an empty name: Done, [#3999](https://github.com/nifeos/nife/pull/3999). The encoder
+- Item 15 (P2), `directory_entry::encode` accepts an empty name: Done, [#3999](https://github.com/partsfoundry/nife/pull/3999). The encoder
   refuses one; the reader still reads one, so the refusal can relax later.
 - Item 16 (P2), three spellings of the errno vocabulary: Waiting on the build of §326 (the names and numbers of the services'
   wire error codes), which replaces the errno numbers this item would gather into one module.
-- Item 17 (P2), the length-or-offset doc: Done, [#3566](https://github.com/nifeos/nife/pull/3566); the name is `MAXIMUM_LENGTH_BYTES`
-  ([#3726](https://github.com/nifeos/nife/pull/3726)).
-- Item 18 (P2), stale distinctness tests: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 19 (P2), `usize` width: Done, [#3566](https://github.com/nifeos/nife/pull/3566). A `const` assertion that `usize::BITS >= 40`.
-- Item 20 (P2), `in_opcode_order` warns at 1.88: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
+- Item 17 (P2), the length-or-offset doc: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566); the name is `MAXIMUM_LENGTH_BYTES`
+  ([#3726](https://github.com/partsfoundry/nife/pull/3726)).
+- Item 18 (P2), stale distinctness tests: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 19 (P2), `usize` width: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566). A `const` assertion that `usize::BITS >= 40`.
+- Item 20 (P2), `in_opcode_order` warns at 1.88: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
 - Item 21 (P2), no fuzz target: Waiting on the crate's own repository (milestone 1017 step 2). The
   `fuzz/` crate and the template's crash-input opt-in live there, and the standing approval of the fuzzing dependency covers only a crate repository's unpublished fuzz crate.
-- Item 22 (P2), `extended_attribute::reply` masks a kind: Done, [#3999](https://github.com/nifeos/nife/pull/3999). The packer panics on a
+- Item 22 (P2), `extended_attribute::reply` masks a kind: Done, [#3999](https://github.com/partsfoundry/nife/pull/3999). The packer panics on a
   kind past `MAXIMUM_KIND`, and the store's walk stops before a record that carries one.
-- Decision A, the store directory: Done, [#3577](https://github.com/nifeos/nife/pull/3577). Ruled 2026-11-14 UTC.
-- Decision B, the names and units: Done, [#3726](https://github.com/nifeos/nife/pull/3726). Maintainer ruling, provisional, 2026-11-14
+- Decision A, the store directory: Done, [#3577](https://github.com/partsfoundry/nife/pull/3577). Ruled 2026-11-14 UTC.
+- Decision B, the names and units: Done, [#3726](https://github.com/partsfoundry/nife/pull/3726). Maintainer ruling, provisional, 2026-11-14
   UTC; the aliases are item 5.
-- Decision C, the reply error range: Done, [#3577](https://github.com/nifeos/nife/pull/3577). Ruled 2026-11-14 UTC.
-- Decision D, §99's store name: Done, [#3789](https://github.com/nifeos/nife/pull/3789). Ruled 2026-11-19 UTC; §99 names
+- Decision C, the reply error range: Done, [#3577](https://github.com/partsfoundry/nife/pull/3577). Ruled 2026-11-14 UTC.
+- Decision D, §99's store name: Done, [#3789](https://github.com/partsfoundry/nife/pull/3789). Ruled 2026-11-19 UTC; §99 names
   `.extended-attributes`.
-- The move: Done as a pin, [#4020](https://github.com/nifeos/nife/pull/4020). nifeos/file_system_contract holds both crates as one
+- The move: Done as a pin, [#4020](https://github.com/partsfoundry/nife/pull/4020). partsfoundry/file_system_contract holds both crates as one
   workspace, and nife depends on both at commit 7577a7d0df339107f75747c3681f5990f116cf61 (`version = "0.1.0"`,
   `publish = false`). No tag and no publish; a pre-release tag moves the pin later.
-- Decision E, the review package for the shared repository: Done, [#3889](https://github.com/nifeos/nife/pull/3889). [The contract's
+- Decision E, the review package for the shared repository: Done, [#3889](https://github.com/partsfoundry/nife/pull/3889). [The contract's
   package](../../notes/crate-reviews/filesystem-contract.md) and [the
   fixture's](../../notes/crate-reviews/filesystem-fixture.md) form the one package.
 

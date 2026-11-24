@@ -137,7 +137,7 @@ Measured 2026-10-13 (UTC) with `openssl s_client` and `curl --http1.0`:
 
 | Host | Chain ends at | Role |
 |---|---|---|
-| `nifeos.github.io` (Pages, so `basalt.nifeos.org`) | ISRG Root X1 | the index, and basalt's `targets/` copy |
+| `partsfoundry.github.io` (Pages, so `basalt.nifeos.org`) | ISRG Root X1 | the index, and basalt's `targets/` copy |
 | `github.com` | Sectigo Public Server Authentication Root E46, sent cross-signed by USERTrust ECC (cross certificate valid to 2038-01-18) | the stable download URL, which answers `302` |
 | `release-assets.githubusercontent.com` | ISRG Root X1 | the redirect's target |
 

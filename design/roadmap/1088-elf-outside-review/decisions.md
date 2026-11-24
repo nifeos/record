@@ -148,5 +148,5 @@ Ruled 2026-11-14 (UTC), option A: the crate is `static_elf`, in code and in pack
 different, widely used parser (14.1 million downloads), and `static_elf` was free on 2026-11-14. The
 crate stays the front half of an ELF loader for static executables; the rename changes no behavior.
 The type `Elf` and every other public name keep their spelling. The repository, when the crate
-leaves, is `nifeos/static_elf`. The notes about the file format keep their names (`notes/elf.md`,
+leaves, is `partsfoundry/static_elf`. The notes about the file format keep their names (`notes/elf.md`,
 `notes/elf/`).

@@ -2,7 +2,7 @@
 
 An appendix to [the milestone](../1111-usb-outside-review.md).
 
-Verified firsthand, on a fresh shallow clone of `nifeos/nife` at `cf1328a`, on the pinned nightly
+Verified firsthand, on a fresh shallow clone of `partsfoundry/nife` at `cf1328a`, on the pinned nightly
 toolchain:
 
 - `cargo test -p usb`: 26 unit tests and 2 documentation tests pass. `cargo clippy -p usb

@@ -43,7 +43,7 @@ will never take it and blocks whatever needs it. For that reason `script/lint` r
 ## Who can reach the pool
 
 Code reaches an owned runner only through a merge group or a push to `main`, and both need write
-access to nifeos/nife:
+access to partsfoundry/nife:
 
 - A merge group holds pull requests that an account with write access armed or enqueued. It runs
   each pull request's own code, its workflow files included, so a pull request that edits a
@@ -118,7 +118,7 @@ runs-on: ${{ vars.NIFE_RUNNER_OWNED == 'true' && (github.event_name == 'merge_gr
 A job that has no pull request path, such as the canary, may instead carry
 `if: github.event_name == 'merge_group' || github.event_name == 'push'` with the plain form.
 
-Set it with `gh variable set NIFE_RUNNER_OWNED --repo nifeos/nife --body true`.
+Set it with `gh variable set NIFE_RUNNER_OWNED --repo partsfoundry/nife --body true`.
 
 ## The canary
 
@@ -236,7 +236,7 @@ variable `false`. They are not required checks and do not hold the queue.
 
 ## Rollback
 
-Set the variable to `false` (`gh variable set NIFE_RUNNER_OWNED --repo nifeos/nife --body false`).
+Set the variable to `false` (`gh variable set NIFE_RUNNER_OWNED --repo partsfoundry/nife --body false`).
 It needs no pull request and no review, and works with the pool down. Jobs that start after it use
 `ubuntu-26.04` for every job on the switch. A job already waiting on the owned label keeps
 waiting: dequeue the pull request and enqueue it again, which builds a new merge group whose run

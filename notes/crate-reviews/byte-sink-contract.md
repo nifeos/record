@@ -64,7 +64,7 @@ All commands ran in this lane's worktree, at `main` with this lane's edits to do
 
 Not run, and so not claimed: the stranger test, since there is no README to follow. Also not run are
 the template's naming checks and `abbreviations` report, which need a checkout of
-`nifeos/crate-workflows`. The renames of P1-9 apply what that report listed, and the test local `src` remains. Also not run:
+`partsfoundry/crate-workflows`. The renames of P1-9 apply what that report listed, and the test local `src` remains. Also not run:
 `cargo-mutants`, whose census belongs to its own window, and Miri. A first release has no baseline
 for `cargo-semver-checks`, and no repository exists for the template's workflows. The lane ran
 neither `cargo package`, the QEMU-side `sink_tests` nor a build for a 16-bit target.
@@ -100,7 +100,7 @@ The three items the milestone says the clearance waits for, verified by reading 
 
 | item | state | evidence |
 |---|---|---|
-| P1-3, `fixture` out of the published crate | landed ([#3873](https://github.com/nifeos/nife/pull/3873)) | no `fixture` module in `crates/byte_sink_contract/src/lib.rs`; `crates/byte_sink_fixture` holds the six items, has `publish = false`, and depends on the contract crate; the five consumers use it |
+| P1-3, `fixture` out of the published crate | landed ([#3873](https://github.com/partsfoundry/nife/pull/3873)) | no `fixture` module in `crates/byte_sink_contract/src/lib.rs`; `crates/byte_sink_fixture` holds the six items, has `publish = false`, and depends on the contract crate; the five consumers use it |
 | P1-8, end-of-stream words reserved | landed | `unpack` returns `EndOfStream` only for `(end_of_stream(), 0, 0)`, with a doctest and a Kani harness (`an_end_of_stream_decodes_exactly_from_its_one_message`); the crate root's "What it does not carry" and `OPERATION_END_OF_STREAM` say the words are reserved and refused; `rm`'s verdict has its own endpoint (`grant_plan::rm_report::VERDICT_SLOT`, slot 2) |
 | P1-9, names a later rule reopens | landed | `MAXIMUM_INLINE_BYTES`, `first_word`, `Message` and the `classify` parameter `returned` replace the old names, with no alias |
 
@@ -108,7 +108,7 @@ The other P1 and P2 items:
 
 | item | state |
 |---|---|
-| P0-1, the crate stands alone | done; the move commit in nifeos/byte_sink_contract carries the README, both licenses, literal `license`, `lints` and `rust-version`, and the scaffold, with no `Name:` block ([#3900](https://github.com/nifeos/nife/pull/3900)) |
+| P0-1, the crate stands alone | done; the move commit in partsfoundry/byte_sink_contract carries the README, both licenses, literal `license`, `lints` and `rust-version`, and the scaffold, with no `Name:` block ([#3900](https://github.com/partsfoundry/nife/pull/3900)) |
 | P0-2, `VERSION` text | done |
 | P1-4, `moho_abi` dev-dependency | done; the crate has no dependency |
 | P1-5, proofs | done, six harnesses each with a patch that fails it |
@@ -118,7 +118,7 @@ The other P1 and P2 items:
 | P2-11, narrow `usize` | done; `unpack` compares the count as `u64` |
 | P2-12, `first_word` typed parameters | done (ruled 2026-11-21 UTC); `first_word` takes a `u8` opcode and a `u32` length, and the opcodes are `u8` |
 | P2-13, a words struct for `pack` | done (ruled 2026-11-21 UTC); `pack` returns `(MessageWords, taken)` and `unpack` takes the struct |
-| P2-14, mutant exemptions | done (nifeos/byte_sink_contract#1); the four survivors the repository's mutation run names are exempted with their reasons |
+| P2-14, mutant exemptions | done (partsfoundry/byte_sink_contract#1); the four survivors the repository's mutation run names are exempted with their reasons |
 | P2-15, severity on any first word | done |
 
 ## Names
@@ -143,8 +143,8 @@ The std copy (`sys/pal/nife/sinkproto.rs`) is copied from `src/lib.rs` by `cargo
 
 ## The move
 
-The crate lives in nifeos/byte_sink_contract, and nife depends on it by `git` and `rev`
-([#3900](https://github.com/nifeos/nife/pull/3900)). The repository's `check` and `proofs` workflows
+The crate lives in partsfoundry/byte_sink_contract, and nife depends on it by `git` and `rev`
+([#3900](https://github.com/partsfoundry/nife/pull/3900)). The repository's `check` and `proofs` workflows
 pass on its main branch.
 
 ## Recommendation

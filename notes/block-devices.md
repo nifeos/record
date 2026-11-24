@@ -63,7 +63,7 @@ This is the design claim, and milestone 57's entry has been making it since 2026
 > instructions carry a "confirm the target device path before proceeding" warning precisely because
 > the tool cannot enforce it. **Here the warning is structural**: the tool was handed one disk.
 
-`block_roster_contract`, in the repository `nifeos/block_roster_contract`, is the listing half. One page, written by the kernel at wiring time from its
+`block_roster_contract`, in the repository `partsfoundry/block_roster_contract`, is the listing half. One page, written by the kernel at wiring time from its
 own mmio and PCIe scans (virtio-blk on either transport, and NVMe controllers by class code),
 mapped **read-only** into whichever program was granted it. A program without the mapping has
 nowhere to look, and the refusal is "you hold no such capability" rather than a permission check.
@@ -291,7 +291,7 @@ read.
 
 ## See also
 
-- The GUID Partition Table (`nifeos/nife:notes/globally-unique-identifier-partition-table.md`) for the format, the fixtures and the proofs.
+- The GUID Partition Table (`partsfoundry/nife:notes/globally-unique-identifier-partition-table.md`) for the format, the fixtures and the proofs.
 - [The RedoxFS filesystem server](fs-server.md) for the block server and the blk protocol.
 - [Reading the backup from a MacBook or a Linux host](host-recovery.md) for the other half of "the
   board is dead, can I get my data".

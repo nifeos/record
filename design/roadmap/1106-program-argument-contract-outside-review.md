@@ -11,8 +11,8 @@ needs_person: yes
 # 1106. `program_argument_contract`: what an outside maintainer would fix before it leaves
 
 Raised by a read-only review of `crates/program_argument_contract` as a stranger to this tree would
-meet it, in a fresh shallow clone of `nifeos/nife` at the head of `main` and a clone of
-`nifeos/crate-workflows` at the head of its `main`. It changes nothing; it lists what the next
+meet it, in a fresh shallow clone of `partsfoundry/nife` at the head of `main` and a clone of
+`partsfoundry/crate-workflows` at the head of its `main`. It changes nothing; it lists what the next
 lanes change before the crate moves to a repository of its own (milestone 1017 (the contract crates
 leave in this order), step 5).
 
@@ -21,7 +21,7 @@ The settled baseline this review takes instead has three parts. The first is the
 other public name in the crate is provisional by the crate's own manifest, and this block proposes
 the ones the template's gates refuse.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, its name helpers
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, its name helpers
 (`spelled_out.py`, `standalone.py`, `unsafe_scan.py`), Kani, cargo-mutants, and the sibling page
 contracts (`environment_contract`, `counter_frequency_contract`) as the shapes to match. No new
 tool.
@@ -37,51 +37,51 @@ section number, a milestone or a person in another repository.
 
 ## Finding status
 
-- P0-1, the manifest does not stand alone: Done, [#3808](https://github.com/nifeos/nife/pull/3808).
+- P0-1, the manifest does not stand alone: Done, [#3808](https://github.com/partsfoundry/nife/pull/3808).
   The move added `repository`.
 - P0-2, the repository files: Done. The README and both license texts came from the crate
-  ([#3808](https://github.com/nifeos/nife/pull/3808)), and the move added the scaffold's other
+  ([#3808](https://github.com/partsfoundry/nife/pull/3808)), and the move added the scaffold's other
   files. The stranger run is the maintainer's.
-- P0-3, text that reaches into nife: Done, [#3808](https://github.com/nifeos/nife/pull/3808). The
+- P0-3, text that reaches into nife: Done, [#3808](https://github.com/partsfoundry/nife/pull/3808). The
   crate's text has no section, milestone or path, and no architect's name or quotation. The move
   strips the `Name:` blocks.
 - P0-4, seven names the spelled-out gate refuses: Done,
-  [#3808](https://github.com/nifeos/nife/pull/3808), ratified 2026-11-21 (UTC; see "Three public
+  [#3808](https://github.com/partsfoundry/nife/pull/3808), ratified 2026-11-21 (UTC; see "Three public
   names" below). The crate and the `std` overlay carry the new names. The overlay's `args()` is
   the standard library's own name and stays.
-- P1-5, `CAPACITY` carries no unit: Done, [#3808](https://github.com/nifeos/nife/pull/3808).
+- P1-5, `CAPACITY` carries no unit: Done, [#3808](https://github.com/partsfoundry/nife/pull/3808).
   Ratified 2026-11-21 (UTC).
-- P1-6, no proof: Done, [#3567](https://github.com/nifeos/nife/pull/3567) and
-  [#3978](https://github.com/nifeos/nife/pull/3978). The round-trip harness fixes the lengths at
+- P1-6, no proof: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567) and
+  [#3978](https://github.com/partsfoundry/nife/pull/3978). The round-trip harness fixes the lengths at
   three and two bytes, which keeps the page inside the solver's memory.
-- P1-7, the `unsafe` reader has no test: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
+- P1-7, the `unsafe` reader has no test: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
 - P1-8, the mutation exemption and the coverage figure: Done at the move,
-  [#4007](https://github.com/nifeos/nife/pull/4007). The new repository's
+  [#4007](https://github.com/partsfoundry/nife/pull/4007). The new repository's
   `.github/mutants-exempts` lists the one survivor, an equivalent `<` against `<=` in the header
   check. The tests reach every line and 98 percent of regions.
-- P1-9, the all-or-nothing claim: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
+- P1-9, the all-or-nothing claim: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
 - P2-10, the address truncates on narrow targets: Done,
-  [#3978](https://github.com/nifeos/nife/pull/3978) (maintainer, provisional, 2026-11-22 UTC). The
+  [#3978](https://github.com/partsfoundry/nife/pull/3978) (maintainer, provisional, 2026-11-22 UTC). The
   `# Safety` section of `from_virtual_address` requires the address to fit the target's `usize`,
   the review's second alternative; a panic would add a failure path to an unchecked reader.
 - P2-11, `EMPTY` unused and its literal duplicated: Done,
-  [#3567](https://github.com/nifeos/nife/pull/3567).
-- P2-12, the builder takes a fixed array: Done, [#3808](https://github.com/nifeos/nife/pull/3808).
+  [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P2-12, the builder takes a fixed array: Done, [#3808](https://github.com/partsfoundry/nife/pull/3808).
   `PageBuilder::new` takes `&mut [u8]` and refuses any length but `PAGE_BYTES` with
   `WrongPageLength`.
 - P2-13, the layout arithmetic copied in `grant_plan`: Done,
-  [#3808](https://github.com/nifeos/nife/pull/3808). `grant_plan` sums with `record_bytes`. `impl
+  [#3808](https://github.com/partsfoundry/nife/pull/3808). `grant_plan` sums with `record_bytes`. `impl
   IntoIterator` stays out: the `std` port copies this file and would demand stability attributes.
-- P2-14, the data bounds the record walk: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P2-15, the one-file constraint: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
+- P2-14, the data bounds the record walk: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P2-15, the one-file constraint: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
 - Ruling, the layout leaves as built, with a numbered magic: Done,
-  [#3579](https://github.com/nifeos/nife/pull/3579) and
-  [#3982](https://github.com/nifeos/nife/pull/3982) (ruled 2026-11-22 UTC): `PROGARG2`, `VERSION` 2.
-- Ruling, three public names: Done, [#3808](https://github.com/nifeos/nife/pull/3808) and
-  [#3978](https://github.com/nifeos/nife/pull/3978), with P0-4 and P1-5.
-- Ruling, the remaining names: Done, [#3885](https://github.com/nifeos/nife/pull/3885).
-- The move: Done as a pin, [#4007](https://github.com/nifeos/nife/pull/4007).
-  nifeos/program_argument_contract exists with `proofs` green on its first run, and nife depends
+  [#3579](https://github.com/partsfoundry/nife/pull/3579) and
+  [#3982](https://github.com/partsfoundry/nife/pull/3982) (ruled 2026-11-22 UTC): `PROGARG2`, `VERSION` 2.
+- Ruling, three public names: Done, [#3808](https://github.com/partsfoundry/nife/pull/3808) and
+  [#3978](https://github.com/partsfoundry/nife/pull/3978), with P0-4 and P1-5.
+- Ruling, the remaining names: Done, [#3885](https://github.com/partsfoundry/nife/pull/3885).
+- The move: Done as a pin, [#4007](https://github.com/partsfoundry/nife/pull/4007).
+  partsfoundry/program_argument_contract exists with `proofs` green on its first run, and nife depends
   on it at commit 764e0e55a238252391b1c06135e228ef6b9436c8 (`version = "0.1.0"`,
   `publish = false`). No tag and no publish; a pre-release tag moves the pin later.
 
@@ -284,7 +284,7 @@ iterator) and `Refused` becomes `PushRefused` (the name says what it refuses).
 ### The repository
 
 Ruled by the architect, 2026-11-14 (UTC), who cleared the review. A lane creates the repository
-`nifeos/program_argument_contract` after the three renames above and milestone 994 land.
+`partsfoundry/program_argument_contract` after the three renames above and milestone 994 land.
 It takes the tag `v0.1.0-pre.1` after the move check and a release dry run, with `publish = false`.
 
 ## Follow-on
@@ -292,9 +292,9 @@ It takes the tag `v0.1.0-pre.1` after the move check and a release dry run, with
 - **Done.** Two milestones meet the layout ruling's condition (maintainer's reading, provisional,
   2026-11-19 UTC): 1115 (the gate builds basalt's delivered programs from the candidate tree) in
   every merge group, and 994 in basalt.
-- **Done.** The numbered magic, [#3982](https://github.com/nifeos/nife/pull/3982).
+- **Done.** The numbered magic, [#3982](https://github.com/partsfoundry/nife/pull/3982).
 - **Recorded.** The repository (ruled 2026-11-14 UTC): a lane creates
-  `nifeos/program_argument_contract`, runs the move check and a dry run, and tags `v0.1.0-pre.1`
+  `partsfoundry/program_argument_contract`, runs the move check and a dry run, and tags `v0.1.0-pre.1`
   with no publish, after the renames and milestone 994.
 
 ## Done when

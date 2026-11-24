@@ -5,7 +5,7 @@ request is now measured against a base that is wrong, and the merge queue will h
 groups that cannot pass. Three scripts watched the queue before 2026-09-23 and all three reported;
 none responded. This note is the response, what it is made of, and what it got wrong first.
 
-The procedure itself is in `nifeos/nife:briefs/main-is-red.md`; the mechanics are in
+The procedure itself is in `partsfoundry/nife:briefs/main-is-red.md`; the mechanics are in
 `helpers/queue-hold.sh`'s header. Neither is repeated here. This is the why, and the evidence.
 
 ## The gap calef named
@@ -117,7 +117,7 @@ request under `helpers/queue-eligible.jq`'s admission policy.
 ## How it was rehearsed, since the live queue was not available
 
 The script was written while seven pull requests were genuinely held for a red trunk, so testing the
-mutating path against `nifeos/nife` was out: `hold` would have labeled other lanes' work and
+mutating path against `partsfoundry/nife` was out: `hold` would have labeled other lanes' work and
 cancelled live group builds. Two things made it testable anyway.
 
 - `--dry-run` against the real repository, which is read-only and proved the selection: it named

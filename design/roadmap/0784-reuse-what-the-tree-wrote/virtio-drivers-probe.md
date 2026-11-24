@@ -1,7 +1,7 @@
 # `virtio-drivers` behind the IOMMU, probed for item (c0)
 
 Appendix to [784. Reuse what the tree wrote](../0784-reuse-what-the-tree-wrote.md). calef's ruling
-on (c0), 2026-10-22 21:58 (UTC), on nifeos/nife#2586, carries `virtio-drivers` 0.13.0 plus
+on (c0), 2026-10-22 21:58 (UTC), on partsfoundry/nife#2586, carries `virtio-drivers` 0.13.0 plus
 rcore-os/virtio-drivers#232 as a vendored fork "once a probe shows #232 works for the input device
 behind the IOMMU". This is that probe.
 

@@ -18,13 +18,13 @@ It blocked the move and nothing else.
 calef asked nothing separate on this section. The block named three forks, and rulings and
 conventions already in place answer each, as the section below sets out. The topic files land as
 siblings, the shape of the 77 existing `*_tests.rs` files and of
-[#1892](https://github.com/nifeos/nife/pull/1892). `user.rs` stays an index under §282 (when a file
+[#1892](https://github.com/partsfoundry/nife/pull/1892). `user.rs` stays an index under §282 (when a file
 is split, the parent becomes an index), which calef set on
-[#1959](https://github.com/nifeos/nife/pull/1959): *"Agreed, make the parent an index."* Under it the
+[#1959](https://github.com/partsfoundry/nife/pull/1959): *"Agreed, make the parent an index."* Under it the
 shared helpers move to a child whichever layout is chosen. The split moves code only, so folding
 topics into existing files waits for a later lane. Names stay provisional for his naming pass. The
 maintainer recorded this as settled by precedent on
-[PR #1966](https://github.com/nifeos/nife/pull/1966#issuecomment-6117068748) at 03:12 (UTC) on 2026-10-12.
+[PR #1966](https://github.com/partsfoundry/nife/pull/1966#issuecomment-6117068748) at 03:12 (UTC) on 2026-10-12.
 
 ## What the file was
 

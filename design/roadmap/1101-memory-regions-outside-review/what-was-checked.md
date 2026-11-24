@@ -2,8 +2,8 @@
 
 An appendix to [the milestone](../1101-memory-regions-outside-review.md).
 
-Verified firsthand, in a fresh depth-50 clone of `nifeos/nife` at `75bb255a` (the merge of #3515)
-and a clone of `nifeos/crate-workflows` at its head (`v7` is the newest tag), on the tree's pinned
+Verified firsthand, in a fresh depth-50 clone of `partsfoundry/nife` at `75bb255a` (the merge of #3515)
+and a clone of `partsfoundry/crate-workflows` at its head (`v7` is the newest tag), on the tree's pinned
 nightly.
 
 - `cargo test -p memory_regions`: 30 unit tests, 6 documentation tests and 2 compile-fail

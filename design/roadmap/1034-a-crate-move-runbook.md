@@ -19,7 +19,7 @@ steps each carry a command, an expected result and an owner, and a dry run that 
 repository's first tree without creating anything. The next move, `file_allocation_table` of
 milestone 813 (a proven FAT crate, released on its own), drives it.
 
-Reuse: the template `nifeos/crate-workflows` (milestone 887 (crate repositories share one CI
+Reuse: the template `partsfoundry/crate-workflows` (milestone 887 (crate repositories share one CI
 template)) supplies the scaffold and the checks the dry run runs; `helpers/crate_release.py`
 supplies the `Name:` block reader and the citation rules. This milestone writes neither twice.
 

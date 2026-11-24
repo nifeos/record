@@ -2,7 +2,7 @@
 
 An appendix to [the milestone](../1107-sealed-pair-outside-review.md).
 
-Verified firsthand, on a fresh shallow clone of `nifeos/nife` at `137639a3a` (the `main` head at the
+Verified firsthand, on a fresh shallow clone of `partsfoundry/nife` at `137639a3a` (the `main` head at the
 time of the review). Every run used the tree's pinned nightly and a 12 GiB cap:
 
 - `cargo test -p sealed_pair`: 11 unit tests and 2 documentation tests pass. `cargo clippy -p
@@ -30,7 +30,7 @@ time of the review). Every run used the tree's pinned nightly and a 12 GiB cap:
 - The mutation census series (`notes/project-metrics/mutation-census.csv`, latest row): 69 mutants
   tested, 63 caught, 0 missed, 0 timed out, 6 unviable, 0 real holes. Not re-run; the window rule
   forbids a census outside 08:00 to 13:00 UTC.
-- `nifeos/basalt` at its `main` head names neither the crate nor `card-check`.
+- `partsfoundry/basalt` at its `main` head names neither the crate nor `card-check`.
 
 Inferred from reading, not run: the behavior of `card_check` on a card whose boot environment
 carries stale digest words (item 2). Also inferred: the time `contains` takes over a release kernel

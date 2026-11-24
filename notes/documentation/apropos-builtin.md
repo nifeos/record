@@ -2,7 +2,7 @@
 
 *Name: provisional.*
 
-An appendix to `nifeos/nife:notes/documentation.md`, which states the conclusion.
+An appendix to `partsfoundry/nife:notes/documentation.md`, which states the conclusion.
 
 Phase 2's other half, and the decision in it is *where the search runs* rather than how.
 

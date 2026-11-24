@@ -21,7 +21,7 @@ The lane ran or read every claim in this section on a host; nothing here ran on 
   crate does not.
 - The source holds no `unsafe`, no dependency, no contraction in prose, and no mention of the
   parent project beyond the organization and App names the workflows need.
-- The template pin `d332215` sits on `nifeos/crate-workflows` `main`, 57 commits behind it. Since the pin the template has moved the full mutation run into its own `mutation.yml`. It has made
+- The template pin `d332215` sits on `partsfoundry/crate-workflows` `main`, 57 commits behind it. Since the pin the template has moved the full mutation run into its own `mutation.yml`. It has made
   `check / mutation-diff` a required check on every crate repository's `main`. It has also taught the release gate to refuse a release without a green full mutation run at the release commit.
 - The newest weekly run (`42658233510`) failed in `weekly / mutation`: the verdict step found
   `0 of 1 shards left an outcomes.json` after the shard itself passed in 55 seconds. The weekly
@@ -33,7 +33,7 @@ The lane ran or read every claim in this section on a host; nothing here ran on 
   `TryRng`, `Rng`, `CryptoRng` and `TryCryptoRng`, with `RngCore` and `TryRngCore` kept as
   compatibility traits. getrandom's README documents an opt-in `custom` backend selected by the
   `getrandom_backend` configuration flag.
-- The GitHub team `nifeos/crate-maintainers` that `CODEOWNERS` names exists.
+- The GitHub team `partsfoundry/crate-maintainers` that `CODEOWNERS` names exists.
 
 Not run: a comparison against the JH7110 Technical Reference Manual (no copy in hand), the vendor
 Linux and U-Boot trees, Miri, fuzzing, a build on a 1.85 toolchain, the template's release dry run,
@@ -49,8 +49,8 @@ The bench ran on radon (a VisionFive 2) on 2026-11-09 and 2026-11-10 (UTC) again
 `ee0bde8feb9f78a67da011c928f9a2a697f3bbc1`, with one payload built from
 nife `9a1c55963b`. It loaded over the network after a cold power-on; the person says the second followed
 an hour unpowered. The checker printed PASS both times. Tables, logs and SHA-256 sums are in
-bench/radon-2026-11-09/ (`nifeos/nife:bench/radon-2026-11-09/README-1049.md`) and
-bench/radon-2026-11-10/ (`nifeos/nife:bench/radon-2026-11-10/README-1049.md`).
+bench/radon-2026-11-09/ (`partsfoundry/nife:bench/radon-2026-11-09/README-1049.md`) and
+bench/radon-2026-11-10/ (`partsfoundry/nife:bench/radon-2026-11-10/README-1049.md`).
 
 - Passed, both runs: the polled reseed and generations, 256-bit output after `MODE_256_BIT_OUTPUT`, and
   1,048,576 driver-path generations with no timeout, wrong width or all-zero output.

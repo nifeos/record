@@ -18,7 +18,7 @@ The crate has no review package under `notes/crate-reviews/`; the accepted basel
 (the naming page, the units rule, the standard-library-names rule) bears on the crate, the item says
 so; the template's name checks refuse nothing in it.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, Kani, Miri, cargo-llvm-cov,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, Kani, Miri, cargo-llvm-cov,
 cargo-mutants. No new tool.
 
 ## Finding status
@@ -26,36 +26,36 @@ cargo-mutants. No new tool.
 Every finding not Done blocks the first crates.io publish, which waits until every outside-review
 milestone reaches delivery.
 
-- Item 1 (P0), the manifest is a workspace member's: Done, [#3882](https://github.com/nifeos/nife/pull/3882). The manifest states its own
+- Item 1 (P0), the manifest is a workspace member's: Done, [#3882](https://github.com/partsfoundry/nife/pull/3882). The manifest states its own
   license, `rust-version = "1.85"`, description, keywords, categories and lint tables.
-- Item 2 (P0), the front page points into nife: Done, [#3882](https://github.com/nifeos/nife/pull/3882) and [#3892](https://github.com/nifeos/nife/pull/3892). `src/lib.rs` no
+- Item 2 (P0), the front page points into nife: Done, [#3882](https://github.com/partsfoundry/nife/pull/3882) and [#3892](https://github.com/partsfoundry/nife/pull/3892). `src/lib.rs` no
   longer carries the notes pointers or the DECISIONS citation, the README holds the contract's fine
   print, and the repository carries no `Name:` blocks.
-- Item 3 (P0), no repository skeleton: Done, nifeos/intrusive_queue#4. The crate lives in
-  `nifeos/intrusive_queue` with the template's scaffold ([#3892](https://github.com/nifeos/nife/pull/3892)), pinned at crate-workflows v9 by
-  nifeos/intrusive_queue#3, and `docs/stranger-test.md` records a passing stranger run.
-- Item 4 (P1), `Queue<T>` is `Send` for every `T`: Done, [#3795](https://github.com/nifeos/nife/pull/3795). `Queue<T>` is `Send` only when
+- Item 3 (P0), no repository skeleton: Done, partsfoundry/intrusive_queue#4. The crate lives in
+  `partsfoundry/intrusive_queue` with the template's scaffold ([#3892](https://github.com/partsfoundry/nife/pull/3892)), pinned at crate-workflows v9 by
+  partsfoundry/intrusive_queue#3, and `docs/stranger-test.md` records a passing stranger run.
+- Item 4 (P1), `Queue<T>` is `Send` for every `T`: Done, [#3795](https://github.com/partsfoundry/nife/pull/3795). `Queue<T>` is `Send` only when
   `T: Send`, with a compile-fail doctest (decision 1).
-- Item 5 (P1), the documentation teaches an aliasing minting shape: Done, [#3523](https://github.com/nifeos/nife/pull/3523).
-- Item 6 (P1), seven public names lack ratification: Done, [#3795](https://github.com/nifeos/nife/pull/3795). The `Name:` blocks read
+- Item 5 (P1), the documentation teaches an aliasing minting shape: Done, [#3523](https://github.com/partsfoundry/nife/pull/3523).
+- Item 6 (P1), seven public names lack ratification: Done, [#3795](https://github.com/partsfoundry/nife/pull/3795). The `Name:` blocks read
   ratified 2026-11-19 (UTC) (decision 2), and the move stripped them.
-- Item 7 (P1), the compile-fail doctest accepts any error: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 8 (P1), no rule for dropping a non-empty `Queue`: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 9 (P2), `remove` and an `extract_if`-shaped method: Done, nifeos/intrusive_queue#4 and
-  [#3970](https://github.com/nifeos/nife/pull/3970). `Queue::remove` and `Queue::extract_if` carry provisional names, each with a Kani
+- Item 7 (P1), the compile-fail doctest accepts any error: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 8 (P1), no rule for dropping a non-empty `Queue`: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 9 (P2), `remove` and an `extract_if`-shaped method: Done, partsfoundry/intrusive_queue#4 and
+  [#3970](https://github.com/partsfoundry/nife/pull/3970). `Queue::remove` and `Queue::extract_if` carry provisional names, each with a Kani
   harness and a falsification patch, and the five drain-and-rebuild loops in
   `inter_process_communication` are calls to them.
-- Item 10 (P2), link hygiene after a pop: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 11 (P2), the standard traits: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 12 (P2), acronyms: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 13 (P2), one shared test node: Done, nifeos/intrusive_queue#4. The host tests and the
+- Item 10 (P2), link hygiene after a pop: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 11 (P2), the standard traits: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 12 (P2), acronyms: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 13 (P2), one shared test node: Done, partsfoundry/intrusive_queue#4. The host tests and the
   harnesses share one test node under `cfg(any(test, kani))`.
-- Decision 1, the `Send` bound on `Queue`: Done, [#3795](https://github.com/nifeos/nife/pull/3795).
-- Decision 2, the seven public names the release publishes: Done, [#3795](https://github.com/nifeos/nife/pull/3795), ratified 2026-11-19
+- Decision 1, the `Send` bound on `Queue`: Done, [#3795](https://github.com/partsfoundry/nife/pull/3795).
+- Decision 2, the seven public names the release publishes: Done, [#3795](https://github.com/partsfoundry/nife/pull/3795), ratified 2026-11-19
   (UTC).
-- Decision 3, review clearance and the repository: Done, [#3892](https://github.com/nifeos/nife/pull/3892), ruled 2026-11-20 (UTC), option
+- Decision 3, review clearance and the repository: Done, [#3892](https://github.com/partsfoundry/nife/pull/3892), ruled 2026-11-20 (UTC), option
   A. The package [`notes/crate-reviews/intrusive-queue.md`](../../notes/crate-reviews/intrusive-queue.md)
-  is cleared, and `nifeos/intrusive_queue` holds the crate with `publish = false`, no tag and no
+  is cleared, and `partsfoundry/intrusive_queue` holds the crate with `publish = false`, no tag and no
   publish.
 
 ## Open decisions

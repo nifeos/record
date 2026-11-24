@@ -16,7 +16,7 @@ Raised 2026-09-26 by lane `milestone/fs-client-page` (pull request #1358), for i
 frame per filesystem client channel. That milestone is provisionally numbered 599 and its block is
 not yet on `main`. The fork, its premise check, the analogous cases in the tree and the cost figures
 are in `notes/a-frame-per-filesystem-client-channel.md`, which lands with that lane's [pull
-request](https://github.com/nifeos/nife/pull/1358). It is not linked relatively because it is
+request](https://github.com/partsfoundry/nife/pull/1358). It is not linked relatively because it is
 not on `main` yet; whoever lands the second of the two can make it a relative link. This section
 records the ruling and does not restate the note.
 
@@ -95,7 +95,7 @@ supported architecture per §19 (architectural parity is a tenet). Milestone 47 
 Recorded at merge by the maintainer. The 2026-10-03 security audit found the wire had changed and
 this section had not (finding 1 of
 [`2026-10-03-eight-constants-and-thirteen-components.md`](../audit-reports/2026-10-03-eight-constants-and-thirteen-components.md)). The ruling is calef's, on
-[#1494](https://github.com/nifeos/nife/pull/1494) at 05:04Z on 2026-10-03 (UTC): *yes*, a plain
+[#1494](https://github.com/partsfoundry/nife/pull/1494) at 05:04Z on 2026-10-03 (UTC): *yes*, a plain
 `SEND` delivers its capability's badge to `RECV` in `x3`. The code is commit `4feaf0dc2`
 (2026-10-03 04:30Z), landed with milestone 613 (a system log service: the in-memory half).
 

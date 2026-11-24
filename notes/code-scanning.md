@@ -18,18 +18,18 @@ analyzed before it. Default setup's own configuration is still worth reading, be
 OFF before the workflow's uploads are accepted (below):
 
 ```
-gh api repos/nifeos/nife/code-scanning/default-setup --jq '{state, languages}'
+gh api repos/partsfoundry/nife/code-scanning/default-setup --jq '{state, languages}'
 ```
 
 Rust was off for about four hours on 2026-10-07 (UTC). Six `Analyze (rust)` jobs started between
 16:47 and 16:54 UTC failed about 17 seconds into the SARIF upload, with no error text in the log
-(for example run [37655236254](https://github.com/nifeos/nife/actions/runs/37655236254) on
+(for example run [37655236254](https://github.com/partsfoundry/nife/actions/runs/37655236254) on
 `main`), so calef removed Rust from default setup. All twelve Rust jobs outside that window
 succeeded, seven of them running concurrently, and extraction was identical in passing and failing
 jobs. That points at a transient upload incident on GitHub's side, but the cause is unconfirmed.
 At about 20:40 UTC default setup was toggled off and on with no language list (the API rejects
 `rust` by name; auto-detection includes it), and run
-[37684382643](https://github.com/nifeos/nife/actions/runs/37684382643) on `main` analyzed Rust
+[37684382643](https://github.com/partsfoundry/nife/actions/runs/37684382643) on `main` analyzed Rust
 successfully.
 
 The 43 Rust alerts open that day came from analyses before the gap. They were each read and
@@ -101,7 +101,7 @@ The toggle. Default setup must be OFF before the workflow's uploads are accepted
 it is calef's admin act in repository settings, outside this tree (§36 records why settings are
 not committed). Until then every upload is rejected and the upload jobs are red on purpose;
 CodeQL is not a required check, so that red blocks no merge. The first observed rejection is run
-[37863703201](https://github.com/nifeos/nife/actions/runs/37863703201) (2026-10-09 UTC), on the
+[37863703201](https://github.com/partsfoundry/nife/actions/runs/37863703201) (2026-10-09 UTC), on the
 lane that landed the workflow. calef toggled default setup off on 2026-10-09 (UTC), between 00:52
 and 00:57: PR #1871 merged at 00:57:06 and its push run started two seconds later, so that run
 raced the change.
@@ -110,5 +110,5 @@ It went green, with one wrinkle worth a rerun before a diagnosis. The merge run'
 about 01:07, were still rejected with the same "default setup is enabled" message ten minutes
 after the toggle; GitHub's upload path lags the settings change. A rerun of the failed jobs
 alone, about 100 minutes later, went green on every language (run
-[37867349621](https://github.com/nifeos/nife/actions/runs/37867349621), rerun). So: a red upload
+[37867349621](https://github.com/partsfoundry/nife/actions/runs/37867349621), rerun). So: a red upload
 soon after the toggle is propagation until a rerun says otherwise.

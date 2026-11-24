@@ -158,7 +158,7 @@ The judgment calls, each a place the table could reasonably differ:
 - `socket_test_client.rs` and `virtual_io_net_transport.rs` are `path` members of `network`, because
   `net_stack` includes both through `#[path]` and neither is a binary.
 - `redoxfs` holds the vendored library, the server and the host tool. calef ruled its home with
-  the name (2026-10-28, relayed by the maintainer): the package leaves as `nifeos/redoxfs` under
+  the name (2026-10-28, relayed by the maintainer): the package leaves as `partsfoundry/redoxfs` under
   the upstream name, whole. It keeps `redoxfs` for the vendored library and the `redoxfs_` prefix
   for the first-party server and host tool. Whether the port goes upstream stays open.
 - Documentation is in no package yet. calef (2026-09-27): "I'm thinking of building a website for

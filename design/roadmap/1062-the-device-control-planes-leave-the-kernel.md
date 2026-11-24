@@ -274,8 +274,8 @@ the starter's carve-out, 80 for the contract, 200 for the userspace transport an
 
 ## Follow-on
 
-- **Done.** Step 4 in #3427 (nifeos/nife@7e45d7269).
-- **Done.** Step 6 in #3426 (nifeos/nife@cc48e8b34).
+- **Done.** Step 4 in #3427 (partsfoundry/nife@7e45d7269).
+- **Done.** Step 6 in #3426 (partsfoundry/nife@cc48e8b34).
 - **Outstanding.** Step 1: `kernel/src/e1000e.rs` exists, and 811 is NOT-STARTED.
 - **Done.** Step 2 in #3475: `components/src/jh7110_clock_and_reset.rs`.
 - **Done.** Step 3: radon booted it on 2026-11-17 UTC (main `cfe18db337`, `LEASED-AND-MEASURED`, `coherence : Coherent`) and `PROVEN_ON_SILICON` is `true`.

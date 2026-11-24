@@ -11,7 +11,7 @@ needs_person: no
 # 1103. `page_frames`: what an outside maintainer would fix before 0.1.0
 
 Raised by a read-only review of `crates/page_frames` as a stranger to this tree would meet it,
-made before any move to `nifeos/page_frames`. It changes nothing; it lists what the next lanes
+made before any move to `partsfoundry/page_frames`. It changes nothing; it lists what the next lanes
 change, in nife before the move where the runbook puts a finding against the crate itself, and in
 the new repository after it.
 
@@ -21,7 +21,7 @@ exists, so every public item name was provisional until the ratification of 2026
 they meet [design/naming.md](../naming.md). Two of them fail a rule there and are one-way doors
 after a release (Decisions 1 and 2).
 
-Reuse: the template `nifeos/crate-workflows`, `script/crate-move --dry-run`, Kani, cargo-mutants and
+Reuse: the template `partsfoundry/crate-workflows`, `script/crate-move --dry-run`, Kani, cargo-mutants and
 the crate's own harness pattern (a symbolic 8-frame bitmap built without `new`).
 
 ## Goal
@@ -34,47 +34,47 @@ The repository's `check` and `proofs` runs are green on the first push for the c
 
 ## Finding status
 
-- P0-1, the manifest stands alone: Done, [#3971](https://github.com/nifeos/nife/pull/3971). The manifest writes its license, lint
+- P0-1, the manifest stands alone: Done, [#3971](https://github.com/partsfoundry/nife/pull/3971). The manifest writes its license, lint
   set and measured `rust-version` (1.87) itself, and both license files sit beside it.
   `publish = false` stays, as the soak allows, and `script/crate-move --dry-run` reports the crate
   clean.
-- P0-2, a README: Done, [#3971](https://github.com/nifeos/nife/pull/3971), in the template's shape with the three design arguments,
+- P0-2, a README: Done, [#3971](https://github.com/partsfoundry/nife/pull/3971), in the template's shape with the three design arguments,
   the nine harnesses, the measured proof run and one falsification.
-- P0-3, documentation that cites this tree: Done, [#3805](https://github.com/nifeos/nife/pull/3805).
+- P0-3, documentation that cites this tree: Done, [#3805](https://github.com/partsfoundry/nife/pull/3805).
   The sentences in `src/lib.rs`, `tests/allocator.rs` and the falsification headers carry their
   reasons and cite no section, milestone, path or program of this tree.
-- P1-4, `mark_free` rounds outward: Done, [#3524](https://github.com/nifeos/nife/pull/3524).
-- P1-5, `forbid(unsafe_code)`: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P1-6, three more harnesses: Done, [#3567](https://github.com/nifeos/nife/pull/3567), each with a
+- P1-4, `mark_free` rounds outward: Done, [#3524](https://github.com/partsfoundry/nife/pull/3524).
+- P1-5, `forbid(unsafe_code)`: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P1-6, three more harnesses: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567), each with a
   falsification patch.
-- P1-7, the acronyms gate: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P1-8, the names the release review meets: Done, [#3805](https://github.com/nifeos/nife/pull/3805).
+- P1-7, the acronyms gate: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P1-8, the names the release review meets: Done, [#3805](https://github.com/partsfoundry/nife/pull/3805).
   Decisions 1 and 2 and the two-way renames are built across the crate, `kernel/` and
   `system_tests/`, with no alias of an old spelling, and every renamed name is ratified.
-- P1-9, `page_frames_in` truncates: Done, [#3567](https://github.com/nifeos/nife/pull/3567), with
+- P1-9, `page_frames_in` truncates: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567), with
   `page_frames_covering`.
-- P1-10, the falsification patches drift: Done, [#3521](https://github.com/nifeos/nife/pull/3521)
-  for the regeneration and [#3567](https://github.com/nifeos/nife/pull/3567) for the patches in
+- P1-10, the falsification patches drift: Done, [#3521](https://github.com/partsfoundry/nife/pull/3521)
+  for the regeneration and [#3567](https://github.com/partsfoundry/nife/pull/3567) for the patches in
   the tree.
-- P2-11, `#[must_use]`: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P2-12, a `free` for a run: Done, [#3971](https://github.com/nifeos/nife/pull/3971), as `free_contiguous` (provisional name). The
+- P2-11, `#[must_use]`: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P2-12, a `free` for a run: Done, [#3971](https://github.com/partsfoundry/nife/pull/3971), as `free_contiguous` (provisional name). The
   two kernel loops call it.
-- P2-13, the alignment BUGS entry: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P2-14, a fallible `from_addr`: Done, [#3567](https://github.com/nifeos/nife/pull/3567), as
+- P2-13, the alignment BUGS entry: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P2-14, a fallible `from_addr`: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567), as
   `PageFrame::try_aligned`.
-- P2-15, the 64-bit `usize`: Done, [#3567](https://github.com/nifeos/nife/pull/3567), a `const`
+- P2-15, the 64-bit `usize`: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567), a `const`
   assertion at the crate root.
-- P2-16, the `Name:` paragraph: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
+- P2-16, the `Name:` paragraph: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
 - P2-17, the mutation exemptions: At the move. The move lane writes the three entries the
   census argued equivalent into the new repository's `.github/mutants-exempts`.
-- P2-18, `Hash`: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P2-19, the scan hint: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P2-20, the stale note: Done, [#3567](https://github.com/nifeos/nife/pull/3567), and the note
-  points at the README in [#3971](https://github.com/nifeos/nife/pull/3971).
-- Decision 1, `FRAME_SIZE` or `FRAME_BYTES`: Done, [#3805](https://github.com/nifeos/nife/pull/3805),
+- P2-18, `Hash`: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P2-19, the scan hint: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P2-20, the stale note: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567), and the note
+  points at the README in [#3971](https://github.com/partsfoundry/nife/pull/3971).
+- Decision 1, `FRAME_SIZE` or `FRAME_BYTES`: Done, [#3805](https://github.com/partsfoundry/nife/pull/3805),
   as `FRAME_BYTES`, ratified.
 - Decision 2, `physical_address` and `from_physical_address`: Done,
-  [#3805](https://github.com/nifeos/nife/pull/3805), ratified.
+  [#3805](https://github.com/partsfoundry/nife/pull/3805), ratified.
 
 ## Rulings
 
@@ -86,7 +86,7 @@ ratified.
 ### Clear the review package and approve the repository
 
 Ruled 2026-11-20 (UTC): A. Clear the package. The clearance creates the repository
-`nifeos/page_frames` as `publish = false`, with no tag and no publish. The move lane
+`partsfoundry/page_frames` as `publish = false`, with no tag and no publish. The move lane
 follows.
 
 ## What was checked, and how

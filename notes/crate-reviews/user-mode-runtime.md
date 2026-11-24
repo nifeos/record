@@ -5,7 +5,7 @@
 page.*
 
 The names are ratified (2026-11-20 UTC). The architect cleared the package on 2026-11-21 UTC: the repository
-`nifeos/user_mode_runtime` is approved as `publish = false`, with no tag and no publish. The move to that
+`partsfoundry/user_mode_runtime` is approved as `publish = false`, with no tag and no publish. The move to that
 repository is step 3 of
 [milestone 1017 (the contract crates leave in this order)](../../design/roadmap/1017-the-contract-crates-leave-in-this-order.md),
 after the contract crates the crate links. It waits until `moho_abi`, `address_space_layout`,
@@ -35,7 +35,7 @@ block, none is provisional and 42 have no block (the module-block baseline holds
 | version | `0.1.0`; no tag |
 | edition, `rust-version` | 2024, 1.88, both literals |
 | license | `MIT OR Apache-2.0`, both texts at the crate root, written in the manifest. The crate adapts no source |
-| `publish` | `false`, with the one-sentence reason in the manifest: milestone 1017 keeps moved crates unpublished under §305 (git dependencies are allowed on `nifeos/*` only, pinned to a landed commit) until their release milestone |
+| `publish` | `false`, with the one-sentence reason in the manifest: milestone 1017 keeps moved crates unpublished under §305 (git dependencies are allowed on `partsfoundry/*` only, pinned to a landed commit) until their release milestone |
 | dependencies | `moho_abi`, `address_space_layout`, `current_cpu_contract` and `socket_contract` by path, `counter_frequency_contract` by git `rev` outside `aarch64`, and `clock_contract` and `entropy_contract` already by git `rev` |
 | manifest metadata | description, keywords (`no-std`, `runtime`, `system_call`), categories (`no-std`, `embedded`, `os`), `readme`, and `[package.metadata.docs.rs]` for the three targets. The `repository` key waits for the move |
 | size | 14 files under `src`, 2,689 lines |

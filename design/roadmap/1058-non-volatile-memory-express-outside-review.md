@@ -10,7 +10,7 @@ needs_person: yes
 # 1058. `non_volatile_memory_express`: the outside review's findings land before its first release
 
 Raised by the lane `milestone/1058-non-volatile-memory-express-outside-review`. A reviewer with no
-prior exposure to this project read `nifeos/non_volatile_memory_express` at commit `87bbef8`
+prior exposure to this project read `partsfoundry/non_volatile_memory_express` at commit `87bbef8`
 (`main`, after its pull request #12), against the step 5 section of
 [the review package](../../notes/crate-reviews.md). Every item below is work for a lane there.
 Milestone 814 (`non_volatile_memory_express`: proven NVMe queue logic, released on its own) owns
@@ -19,12 +19,12 @@ the extraction and the release path; this block owns the findings that land insi
 The review package settles the crate name, the version `0.1.0`, the dual license and every name it
 records as ratified. It clears the move, and neither the tag nor publication.
 
-Reuse: the shared crate workflows `nifeos/crate-workflows`, `cargo-mutants`, Kani, `cargo-fuzz`
+Reuse: the shared crate workflows `partsfoundry/crate-workflows`, `cargo-mutants`, Kani, `cargo-fuzz`
 and the crate's harness shapes. No new tool.
 
 ## Goal
 
-A stranger who finds `nifeos/non_volatile_memory_express` can tell in one screen what it does and
+A stranger who finds `partsfoundry/non_volatile_memory_express` can tell in one screen what it does and
 what it leaves to them. They can build, test, prove and falsify it from the README alone, and write
 a working polled driver against QEMU from its example without first reading the specification. Every name they meet says what it holds, and every claim of the README is a
 harness that fails under its patch.
@@ -222,7 +222,7 @@ five. Two-way. XS.
 
 #### P1-13. The template pin predates the mutation stack, and the ruleset does not require it
 
-Every caller workflow (`.github/workflows/ci.yml` and the six others) pins `nifeos/crate-workflows`
+Every caller workflow (`.github/workflows/ci.yml` and the six others) pins `partsfoundry/crate-workflows`
 at `4e5b07dd`, 68 commits past the newest release of the template and 68 behind its head, so the
 lag job passes. The head adds a `mutation.yml` caller, `check / mutation-diff` on every pull request, and a release
 gate that wants a green full mutation run at the released commit. The `main` ruleset requires nine checks, and
@@ -243,42 +243,42 @@ answers becomes `None` in an `Option<IdentifyNamespace>`. One-way at the tag. XS
 
 ## Finding status
 
-- P0-1, the publish comment: Done, nifeos/non_volatile_memory_express#15.
+- P0-1, the publish comment: Done, partsfoundry/non_volatile_memory_express#15.
 - P0-2, four register names: Done, ruled 2026-11-09; `main` already spelled them so.
-- P1-1, `Namespace` carries its unit: Done, nifeos/non_volatile_memory_express#19.
-- P1-2, unit and address names on parameters: Done, nifeos/non_volatile_memory_express#19 and
-  nifeos/non_volatile_memory_express#35.
-- P1-3, `sq` and `cq` in two harness names: Done, nifeos/non_volatile_memory_express#19.
-- P1-4, mnemonics as aliases: Done, nifeos/non_volatile_memory_express#17.
-- P1-5, `Direction` in place of a `bool`: Done, nifeos/non_volatile_memory_express#19.
-- P1-6, the ordering both rings need: Done, nifeos/non_volatile_memory_express#16 and
-  nifeos/non_volatile_memory_express#23.
-- P1-7, a README completion that frees nothing: Done, nifeos/non_volatile_memory_express#16.
-- P1-8, two undocumented panics: Done, nifeos/non_volatile_memory_express#16.
-- P1-9, a fixed 4 KiB memory page: Done, nifeos/non_volatile_memory_express#20.
-- P1-10, a builder for the admin queue attributes: Done, nifeos/non_volatile_memory_express#22.
-- P1-11, the README section order: Done, nifeos/non_volatile_memory_express#16.
-- P1-12, `nvme` among the keywords: Done, nifeos/non_volatile_memory_express#16.
-- P1-13, the template pin and the mutation stack: Done, nifeos/non_volatile_memory_express#13 and
-  nifeos/non_volatile_memory_express#34.
-- P1-14, no `Default` on the Identify parse: Done, nifeos/non_volatile_memory_express#19.
-- P2-1, the PRP list: Done, nifeos/non_volatile_memory_express#26.
-- P2-2, the completion status by its parts: Done, nifeos/non_volatile_memory_express#23 and
-  nifeos/non_volatile_memory_express#36.
-- P2-3, the shutdown value and status bits: Done, nifeos/non_volatile_memory_express#21 and
-  nifeos/non_volatile_memory_express#36.
-- P2-4, Identify Controller and the namespace list: Done, nifeos/non_volatile_memory_express#24 and
-  nifeos/non_volatile_memory_express#38.
-- P2-5, command identifiers in flight: Done, nifeos/non_volatile_memory_express#25 and
-  nifeos/non_volatile_memory_express#36.
-- P2-6, the software controller example: Done, nifeos/non_volatile_memory_express#27.
-- P2-7, the mutation ledger by configuration: Done, nifeos/non_volatile_memory_express#18.
-- P2-8, the package ships its CI: Done, nifeos/non_volatile_memory_express#16 and
-  nifeos/non_volatile_memory_express#32.
-- P2-9, the minimum Rust version: Done, nifeos/non_volatile_memory_express#16.
-- P2-10, small text fixes: Done, nifeos/non_volatile_memory_express#16.
-- The QEMU run at depth 2 and with a 16 KiB page: Done, nifeos/non_volatile_memory_express#33 and
-  nifeos/non_volatile_memory_express#38.
+- P1-1, `Namespace` carries its unit: Done, partsfoundry/non_volatile_memory_express#19.
+- P1-2, unit and address names on parameters: Done, partsfoundry/non_volatile_memory_express#19 and
+  partsfoundry/non_volatile_memory_express#35.
+- P1-3, `sq` and `cq` in two harness names: Done, partsfoundry/non_volatile_memory_express#19.
+- P1-4, mnemonics as aliases: Done, partsfoundry/non_volatile_memory_express#17.
+- P1-5, `Direction` in place of a `bool`: Done, partsfoundry/non_volatile_memory_express#19.
+- P1-6, the ordering both rings need: Done, partsfoundry/non_volatile_memory_express#16 and
+  partsfoundry/non_volatile_memory_express#23.
+- P1-7, a README completion that frees nothing: Done, partsfoundry/non_volatile_memory_express#16.
+- P1-8, two undocumented panics: Done, partsfoundry/non_volatile_memory_express#16.
+- P1-9, a fixed 4 KiB memory page: Done, partsfoundry/non_volatile_memory_express#20.
+- P1-10, a builder for the admin queue attributes: Done, partsfoundry/non_volatile_memory_express#22.
+- P1-11, the README section order: Done, partsfoundry/non_volatile_memory_express#16.
+- P1-12, `nvme` among the keywords: Done, partsfoundry/non_volatile_memory_express#16.
+- P1-13, the template pin and the mutation stack: Done, partsfoundry/non_volatile_memory_express#13 and
+  partsfoundry/non_volatile_memory_express#34.
+- P1-14, no `Default` on the Identify parse: Done, partsfoundry/non_volatile_memory_express#19.
+- P2-1, the PRP list: Done, partsfoundry/non_volatile_memory_express#26.
+- P2-2, the completion status by its parts: Done, partsfoundry/non_volatile_memory_express#23 and
+  partsfoundry/non_volatile_memory_express#36.
+- P2-3, the shutdown value and status bits: Done, partsfoundry/non_volatile_memory_express#21 and
+  partsfoundry/non_volatile_memory_express#36.
+- P2-4, Identify Controller and the namespace list: Done, partsfoundry/non_volatile_memory_express#24 and
+  partsfoundry/non_volatile_memory_express#38.
+- P2-5, command identifiers in flight: Done, partsfoundry/non_volatile_memory_express#25 and
+  partsfoundry/non_volatile_memory_express#36.
+- P2-6, the software controller example: Done, partsfoundry/non_volatile_memory_express#27.
+- P2-7, the mutation ledger by configuration: Done, partsfoundry/non_volatile_memory_express#18.
+- P2-8, the package ships its CI: Done, partsfoundry/non_volatile_memory_express#16 and
+  partsfoundry/non_volatile_memory_express#32.
+- P2-9, the minimum Rust version: Done, partsfoundry/non_volatile_memory_express#16.
+- P2-10, small text fixes: Done, partsfoundry/non_volatile_memory_express#16.
+- The QEMU run at depth 2 and with a 16 KiB page: Done, partsfoundry/non_volatile_memory_express#33 and
+  partsfoundry/non_volatile_memory_express#38.
 - The driver on a real controller with a non-zero `FLBAS`: Waiting on a board run.
 - The long ordering run on a weakly ordered host: Waiting on a board run.
 
@@ -292,7 +292,7 @@ answers becomes `None` in an `Option<IdentifyNamespace>`. One-way at the tag. XS
 3. The public API of P1-1, P1-2, P1-5, P1-9 and P1-14. All five ruled 2026-11-09, as the items
    state, and landed.
 4. The new names of P1-6, P1-10 and P2-1 to P2-5. Rulings of 2026-11-19 settled seven, and
-   nifeos/non_volatile_memory_express#35 and #36 landed them. Ruled 2026-11-19: the other fourteen
+   partsfoundry/non_volatile_memory_express#35 and #36 landed them. Ruled 2026-11-19: the other fourteen
    stand as built, ratified. They are `admin_queue_attributes`, `physical_region_page_list`,
    `Completion::is_success`, `status_code` and `status_code_type`, `STATUS_CODE_TYPE_GENERIC`,
    `GENERIC_STATUS_SUCCESSFUL_COMPLETION`, `GENERIC_STATUS_INVALID_FIELD_IN_COMMAND`,
@@ -301,7 +301,7 @@ answers becomes `None` in an `Option<IdentifyNamespace>`. One-way at the tag. XS
    `IdentifyController::maximum_data_transfer_bytes`, `NotInFlightError` and
    `CompletionQueue::expects_phase_tag_set`.
 5. Every two-way item, the harness names of P1-3 among them, is a provisional call of the
-   maintainers and not a ruling. So are the two of nifeos/non_volatile_memory_express#38: two
+   maintainers and not a ruling. So are the two of partsfoundry/non_volatile_memory_express#38: two
    kernel command line words that shape the QEMU example, and a BUGS line in place of a parse for
    P2-4's entry sizes.
 6. Whether the first release waits for the two hardware rows. Ruled 2026-11-19: it waits for both.

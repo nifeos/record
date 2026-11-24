@@ -175,7 +175,7 @@ if mode not in ("", "--check", "--due", "--baseline", "--worklist", "--selftest"
 # **Most of what a note cites is nife's code, so the history read is nife's as well as the
 # record's.** A cited path resolves the way the overlay resolves it: the record's own file when the
 # record tracks one, and otherwise nife's file at the commit basalt's `main` pins. A
-# `nifeos/nife:<path>` citation, or a link into github.com/nifeos/nife, always means nife's. nife's
+# `partsfoundry/nife:<path>` citation, or a link into github.com/partsfoundry/nife, always means nife's. nife's
 # side is read from the git directory `helpers/nife_tree.py history` names, which holds nife's
 # history through that pin, so the list is the same on every machine for one record commit and one
 # pin, and never depends on how far a local nife clone has fetched. A cited directory is not
@@ -246,14 +246,14 @@ def worklist():
             return (side, path)
         return None
 
-    # A backticked path, a `nifeos/nife:<path>` citation, or a markdown link target. A backticked
+    # A backticked path, a `partsfoundry/nife:<path>` citation, or a markdown link target. A backticked
     # span counts only when it holds a `/` or a `.`, so a bare word (`lint`) is never a path. Bare
     # basenames (`sched.rs`) are deliberately not resolved: a basename is ambiguous across the
     # tree, and every note in the sample that wrote one also wrote the full path somewhere near it.
     # See BUGS in notes/documentation-audit.md.
-    cite = re.compile(r"`nifeos/nife:([^`\s<>]+)`"
+    cite = re.compile(r"`partsfoundry/nife:([^`\s<>]+)`"
                       r"|`([A-Za-z0-9_][A-Za-z0-9_./-]*)`"
-                      r"|\]\(https://github\.com/nifeos/nife/(?:blob|tree)/[^/)\s]+/([^)#\s]+)\)"
+                      r"|\]\(https://github\.com/partsfoundry/nife/(?:blob|tree)/[^/)\s]+/([^)#\s]+)\)"
                       r"|\]\(([^)#\s:]+)\)")
 
     rows = []
@@ -293,7 +293,7 @@ def worklist():
         for side, path in cited:
             n = sum(1 for t in trees[side][1].get(path, []) if t > edited)
             if n:
-                moved[("nifeos/nife:" if side == "nife" else "") + path] = n
+                moved[("partsfoundry/nife:" if side == "nife" else "") + path] = n
         if moved:
             last = datetime.datetime.fromtimestamp(edited, datetime.timezone.utc)
             rows.append((len(moved), sum(moved.values()), doc, last.date().isoformat(), len(cited),
@@ -308,7 +308,7 @@ if mode == "--worklist":
     print("Documents whose cited code has moved since they were last edited, most-moved first.")
     print("A heuristic for picking a documentation sweep's scope, never a verdict on a document:")
     print("nothing here has read a sentence. See notes/documentation-audit.md.")
-    print(f"nife's paths (nifeos/nife:) are read at {pin[:12]}, the commit basalt's main pins.")
+    print(f"nife's paths (partsfoundry/nife:) are read at {pin[:12]}, the commit basalt's main pins.")
     print()
     print(f"{'moved/cited':>12}  {'commits':>7}  {'last edit':<11} document")
     for n_moved, n_commits, doc, edited, n_cited, moved in rows[:30]:
@@ -372,7 +372,7 @@ if mode == "--selftest":
 
     # The worklist, on a fixture record and a fixture nife whose commit times are set. One note
     # cites five paths: a nife file moved after the note under a UTC offset that an ISO string
-    # compares wrongly, a `nifeos/nife:` path the record also has, a nife file moved only after the
+    # compares wrongly, a `partsfoundry/nife:` path the record also has, a nife file moved only after the
     # pin, the record's own copy of that shared path, and a record helper. Four moved, and the
     # second note, whose one citation moved only after the pin, is not listed.
     def commit(repo, when, files):
@@ -400,7 +400,7 @@ if mode == "--selftest":
         commit(nife, "2026-01-05T00:00:00Z", {"kernel/old.rs": "2"})
         commit(record, "2026-01-01T00:00:00Z", {"helpers/x.py": "1", "script/lint": "1"})
         commit(record, "2026-01-03T10:00:00Z", {
-            "notes/a.md": "`crates/a/src/lib.rs` `nifeos/nife:script/lint` `kernel/old.rs` "
+            "notes/a.md": "`crates/a/src/lib.rs` `partsfoundry/nife:script/lint` `kernel/old.rs` "
                           "`script/lint` `helpers/x.py`\n",
             "notes/b.md": "`kernel/old.rs`\n"})
         commit(record, "2026-01-04T00:00:00Z", {"helpers/x.py": "2", "script/lint": "2"})
@@ -411,9 +411,9 @@ if mode == "--selftest":
         want = [("notes/a.md ranks 4 of its 5 cited paths moved, by 4 commits",
                  re.search(r"^ +4/5 +4 +2026-01-03 +notes/a\.md$", got.stdout, re.M)),
                 ("a nife path moved after the note is read from nife",
-                 "nifeos/nife:crates/a/src/lib.rs" in got.stdout),
-                ("a nifeos/nife: citation means nife's file",
-                 "nifeos/nife:script/lint" in got.stdout),
+                 "partsfoundry/nife:crates/a/src/lib.rs" in got.stdout),
+                ("a partsfoundry/nife: citation means nife's file",
+                 "partsfoundry/nife:script/lint" in got.stdout),
                 ("a nife path moved only after the pin is not listed",
                  "notes/b.md" not in got.stdout),
                 ("one document is listed", "\n1 documents cite code" in got.stdout)]
@@ -529,7 +529,7 @@ def current():
     # blind whenever a constant landed outside lib.rs. Found by milestone 427 (the documentation
     # sweep the worklist already ranks) from its own baseline row's 76 -> 6 drop.
     #
-    # The crate lives in its own repository, nifeos/moho_abi, pinned by git revision. The revision
+    # The crate lives in its own repository, partsfoundry/moho_abi, pinned by git revision. The revision
     # is read from the workspace lockfile and fetched at depth one, which needs git and the network
     # but no toolchain, so the weekly job stays a checkout and a script. A lockfile with no pin, or a
     # fetch that fails, stops the run: a count of zero would read as "no ABI change", which is the

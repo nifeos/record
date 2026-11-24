@@ -7,7 +7,7 @@ page.*
 The architect reads this to clear the crate for its move to its own repository, as part of
 [milestone 1109 (what an outside maintainer would fix before it leaves)](../../design/roadmap/1109-spin-lock-outside-review.md).
 It describes the crate as `main` leaves it. The architect cleared it on 2026-11-20 (UTC) and approved the
-repository `nifeos/test_and_set_lock` with `publish = false`, no tag and no publish.
+repository `partsfoundry/test_and_set_lock` with `publish = false`, no tag and no publish.
 
 ## In one paragraph
 
@@ -133,7 +133,7 @@ spellings, and no name carries a unit or an abbreviation.
 | Rewrite the README's 6 passives in the active voice, strip the `Name:` blocks, rewrite the 6 citations of paths in this tree as plain prose, and drop `notes/...` and `script/...` mentions from the manifest comments. | move lane |
 | Write `repository`, `description` and the manifest literals; the moved `[lints.rust]` keeps `cfg(loom)` in `check-cfg`. | move lane |
 | Add one `.github/mutants-exempts` line for the `pause` survivor, with the triage's reason. | move lane |
-| Ship `falsifications/interleavings.two_takers_are_exclusive_and_ordered.patch` and a loom form of the template's falsify gate (item 7 of the milestone). | move lane, with `nifeos/crate-workflows` |
+| Ship `falsifications/interleavings.two_takers_are_exclusive_and_ordered.patch` and a loom form of the template's falsify gate (item 7 of the milestone). | move lane, with `partsfoundry/crate-workflows` |
 | Convert the three dependents to `git` and `rev` with `version = "0.1.0"`; keep `weaken-spin.sh` and `script/interleaving-check` pointed at the pinned checkout. | move lane |
 | Run the stranger test, the template's workflows and the first weekly mutation run in the new repository. | move lane |
 
@@ -151,5 +151,5 @@ None.
 
 ## Recommendation
 
-The architect cleared the crate on 2026-11-20 (UTC). The go creates `nifeos/test_and_set_lock` with `publish = false`, no
+The architect cleared the crate on 2026-11-20 (UTC). The go creates `partsfoundry/test_and_set_lock` with `publish = false`, no
 tag and no publish. The first tag waits for the hardware litmus run above.

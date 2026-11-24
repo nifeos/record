@@ -5,7 +5,7 @@
 
 A record document states a count with a marker after the number, `<!--count:NAME-->` (or
 `-at-least:` and `-at-most:`), and this check derives each NAME and fails when the prose disagrees.
-nifeos/record:notes/counted-claims.md is the manual. The prose lives here and almost every count is
+partsfoundry/record:notes/counted-claims.md is the manual. The prose lives here and almost every count is
 of nife's code (Kani harnesses, `unsafe` blocks, system calls), so the markers are read from the
 record's tree and each derivation runs in nife's tree at the commit basalt's main pins
 (`helpers/nife_tree.py`), which is the only nife every reader of the record sees. The audit count
@@ -140,7 +140,7 @@ def _sh_scripts():
 def _moho_abi_source():
     """The `src` directory of the `moho_abi` nife links, at the revision its Cargo.lock names.
 
-    The crate lives in its own repository (`nifeos/moho_abi`), which nife pins by git revision, so
+    The crate lives in its own repository (`partsfoundry/moho_abi`), which nife pins by git revision, so
     the counts below describe the binary interface nife actually builds against. The checkout is
     kept beside the nife tree's, one per revision.
     """
@@ -188,7 +188,7 @@ def _rights_bits():
     """Named single-bit rights in `moho_abi::rights`: how many rights a capability can carry.
 
     Counted from the ABI's rights module, which the kernel asserts equal to the rights mask of the
-    capability table crate it links (`nifeos/capability_table`, a pinned dependency that is no
+    capability table crate it links (`partsfoundry/capability_table`, a pinned dependency that is no
     longer in this tree). Only the single-bit constants count: `ALL` and `SPEND_ONLY` are masks of
     the others, so the shape assumed is `pub const NAME: u64 = 1 << N;` and neither mask matches it.
 
@@ -244,7 +244,7 @@ def _security_audits():
 # unsafe code is there in a code base, and is that something we should be monitoring and driving in
 # a particular direction over time?" A standalone census would have answered it with another
 # one-time number nobody re-takes, which is the failure this milestone exists to fix, so it is a
-# derivation here instead. See nifeos/record:notes/register-of-measures.md and nifeos/record:notes/unsafe-obligations.md.
+# derivation here instead. See partsfoundry/record:notes/register-of-measures.md and partsfoundry/record:notes/unsafe-obligations.md.
 #
 # **The counting lives in `helpers/rust_source.py` and the file WALK lives here**, which is
 # milestone 236's line and worth reading before moving either. `script/metrics` derives the same
@@ -318,7 +318,7 @@ REGISTRY = {
         'how many workspace packages carry at least one Kani proof harness',
         lambda: len(_harness_hits()),
     ),
-    # The per-crate harness counts nifeos/record:notes/verification/core-harnesses.md marks. One entry per crate
+    # The per-crate harness counts partsfoundry/record:notes/verification/core-harnesses.md marks. One entry per crate
     # that appendix covers, added by milestone 427 (the documentation sweep the worklist already
     # ranks) after five of its nine counts were found wrong: a count that rots silently in prose
     # had already cost two sweeps their re-derivation. A lane landing a harness in one of these
@@ -391,7 +391,7 @@ REGISTRY = {
     # The census's third population (milestone 139 (drive the unsafe count down), 2026-10-07 UTC;
     # name provisional). Its opening measurement counted `unsafe impl` as one number and the gate
     # above watched only its Send/Sync half; this is the other half, held the same way, at the
-    # tree's exact value. `unsafe fn` is deliberately still not here: nifeos/record:notes/unsafe-obligations.md
+    # tree's exact value. `unsafe fn` is deliberately still not here: partsfoundry/record:notes/unsafe-obligations.md
     # says why, beside this marker.
     'unsafe-trait-claims': (
         'how many `unsafe impl` of an unsafe trait other than Send/Sync the tree makes, each one a '
@@ -401,7 +401,7 @@ REGISTRY = {
     # The census's fourth population, added 2026-10-12 (UTC) by milestone 891 (a mutable static
     # becomes an atomic, a lock or a recorded cell); name provisional. A ratchet ceiling, so it
     # fails in both directions: a new `static mut` stops the lane that adds it, and one converted
-    # away has to be banked by lowering the marker. nifeos/record:notes/unsafe-obligations/ceilings.md has the
+    # away has to be banked by lowering the marker. partsfoundry/record:notes/unsafe-obligations/ceilings.md has the
     # scope.
     'static-mut-declarations': (
         'how many `static mut` declarations the Rust that runs on nife makes outside its test '
@@ -422,7 +422,7 @@ REGISTRY = {
 # **A ratchet ceiling (2026-09-24): a ceiling that must also follow the tree DOWN.** An ordinary
 # ceiling is silent when the tree falls below it, which is right for a quantity with headroom and
 # wrong for one whose ceiling is meant to sit at the tree's exact value. `agents-md-lines` is the
-# case. Its ceiling was 935 when #1189 split AGENTS.md into imperatives plus `nifeos/record:design/tenets/`
+# case. Its ceiling was 935 when #1189 split AGENTS.md into imperatives plus `partsfoundry/record:design/tenets/`
 # appendices and took the file to 584 lines, and from then on the gate would have let the file
 # regrow by 351 lines without a word: a fixed ceiling far above the file stops nothing. So a name in
 # this set fails in BOTH directions. Above the ceiling is the old failure (take the addition out, or
@@ -431,8 +431,8 @@ REGISTRY = {
 #
 # The shape is `unsafe-thread-safety-claims`' (a ceiling written at the tree's exact value) with the
 # slack direction closed, and the baseline stays where every counted claim's does: in the marker,
-# beside the claim it counts (for `static-mut-declarations`, nifeos/record:notes/unsafe-obligations/ceilings.md;
-# for `agents-md-lines`, nifeos/record:design/roadmap/0118-constitution-budget.md until 2026-10-06). Not a
+# beside the claim it counts (for `static-mut-declarations`, partsfoundry/record:notes/unsafe-obligations/ceilings.md;
+# for `agents-md-lines`, partsfoundry/record:design/roadmap/0118-constitution-budget.md until 2026-10-06). Not a
 # separate baseline file, because the marker already is one, and two places holding one number is
 # the drift this convention exists to end. BUGS: a raise is still an ordinary edit to that marker. Nothing here compares the number
 # against origin/main, because every raise on record (925 to 929, and before) was a considered act
@@ -510,7 +510,7 @@ if bad:
         print(f'  {entry}', file=sys.stderr)
     print('', file=sys.stderr)
     print('Fix the number, or fix the derivation in helpers/counted_claims_check.py if the tree is right and the gate '
-          'is asking the wrong question. See nifeos/record:notes/counted-claims.md.', file=sys.stderr)
+          'is asking the wrong question. See partsfoundry/record:notes/counted-claims.md.', file=sys.stderr)
     sys.exit(1)
 
 unused = sorted(set(REGISTRY) - seen)
@@ -533,4 +533,4 @@ if _census:
           f'{_census["thread_safety"]} Send/Sync claims (ceiling); '
           f'{_census["trait_claims"]} other unsafe trait impls (ceiling); '
           f'{_census["static_mut"]} static mut declarations (ceiling, follows the tree down). '
-          f'See nifeos/record:notes/register-of-measures.md')
+          f'See partsfoundry/record:notes/register-of-measures.md')

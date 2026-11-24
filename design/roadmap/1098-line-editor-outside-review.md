@@ -24,7 +24,7 @@ root splits into module files). No review package existed for this crate under
 `notes/crate-reviews/` when the review ran, so the baseline is thinner than other crates'.
 Three names #2797 ratified, `LINE_MAXIMUM`, `PROMPT_MAXIMUM` and `RAW_QUEUE_MAXIMUM`, are reopened here. The later unit rule (design/naming.md, "Units": a limit opens `MAXIMUM_` and ends with its unit) contradicts them. The rule in force is that a release review rechecks a name ratified before a later rule.
 
-Reuse: the template `nifeos/crate-workflows` and its helpers (`spelled_out.py`,
+Reuse: the template `partsfoundry/crate-workflows` and its helpers (`spelled_out.py`,
 `abbreviations.py`, `standalone.py`), cargo-fuzz, Kani, cargo-mutants. No new tool.
 
 ## Finding status
@@ -32,41 +32,41 @@ Reuse: the template `nifeos/crate-workflows` and its helpers (`spelled_out.py`,
 Every finding not Done blocks the first crates.io publish, which waits until every outside-review
 milestone reaches delivery.
 
-- Item 1 (P0), the crate does not stand alone: Done, [#4002](https://github.com/nifeos/nife/pull/4002).
-- Item 2 (P0), the cut: Done, [#3587](https://github.com/nifeos/nife/pull/3587).
-- Item 3 (P1), public names the naming rules refuse: Done, [#3965](https://github.com/nifeos/nife/pull/3965).
-- Item 4 (P1), names the template's gates refuse: Done, [#3965](https://github.com/nifeos/nife/pull/3965).
+- Item 1 (P0), the crate does not stand alone: Done, [#4002](https://github.com/partsfoundry/nife/pull/4002).
+- Item 2 (P0), the cut: Done, [#3587](https://github.com/partsfoundry/nife/pull/3587).
+- Item 3 (P1), public names the naming rules refuse: Done, [#3965](https://github.com/partsfoundry/nife/pull/3965).
+- Item 4 (P1), names the template's gates refuse: Done, [#3965](https://github.com/partsfoundry/nife/pull/3965).
   `terminal_contract` and `line_editor_component` keep their own worklists, and `proto` is no
   longer a module of this crate.
-- Item 5 (P1), bindings and limits a stranger can read: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 6 (P1), `forbid(unsafe_code)`, fuzz targets and Kani harnesses: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 7 (P1), the handoff layout's version policy: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 8 (P1), one `QUIESCED`: Done, [#3587](https://github.com/nifeos/nife/pull/3587).
-- Item 9 (P2), stack copies: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 10 (P2), the `csi_move` bound: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 11 (P2), three repaints with one body: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 12 (P2), the history depth: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 13 (P2), the test terminal's row: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Item 14 (P2), `Writer::field` width: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- Decision 1, where the cut falls: Done, [#3587](https://github.com/nifeos/nife/pull/3587), ruled 2026-11-14 (UTC).
-- Decision 2, `LineEditor` and `HISTORY_LINES`: Done, [#3965](https://github.com/nifeos/nife/pull/3965),
+- Item 5 (P1), bindings and limits a stranger can read: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 6 (P1), `forbid(unsafe_code)`, fuzz targets and Kani harnesses: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 7 (P1), the handoff layout's version policy: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 8 (P1), one `QUIESCED`: Done, [#3587](https://github.com/partsfoundry/nife/pull/3587).
+- Item 9 (P2), stack copies: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 10 (P2), the `csi_move` bound: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 11 (P2), three repaints with one body: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 12 (P2), the history depth: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 13 (P2), the test terminal's row: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Item 14 (P2), `Writer::field` width: Done, [#3566](https://github.com/partsfoundry/nife/pull/3566).
+- Decision 1, where the cut falls: Done, [#3587](https://github.com/partsfoundry/nife/pull/3587), ruled 2026-11-14 (UTC).
+- Decision 2, `LineEditor` and `HISTORY_LINES`: Done, [#3965](https://github.com/partsfoundry/nife/pull/3965),
   ruled 2026-11-14 (UTC) by the maintainer, provisional.
-- Decision 3, the three limits take their unit: Done, [#3965](https://github.com/nifeos/nife/pull/3965),
+- Decision 3, the three limits take their unit: Done, [#3965](https://github.com/partsfoundry/nife/pull/3965),
   ruled 2026-11-19 (UTC) by the maintainer, provisional.
-- Decision 4, an interface identity for `terminal_contract`: Done, [#3972](https://github.com/nifeos/nife/pull/3972),
+- Decision 4, an interface identity for `terminal_contract`: Done, [#3972](https://github.com/partsfoundry/nife/pull/3972),
   ruled 2026-11-19 (UTC), A, and frozen 2026-11-22 (UTC) as interface 25, version 1, with no magic.
-- Decision 5, the name `terminal_contract`: Done, [#3965](https://github.com/nifeos/nife/pull/3965),
-  ruled 2026-11-19 (UTC), A, in [#3796](https://github.com/nifeos/nife/pull/3796).
+- Decision 5, the name `terminal_contract`: Done, [#3965](https://github.com/partsfoundry/nife/pull/3965),
+  ruled 2026-11-19 (UTC), A, in [#3796](https://github.com/partsfoundry/nife/pull/3796).
 - Decision 6, review clearance and the repositories: At the move. The architect cleared both
   `notes/crate-reviews/line-editor.md` and `notes/crate-reviews/terminal-contract.md` on
-  2026-11-22 (UTC). `terminal_contract` lives in `nifeos/terminal_contract`, and nife depends on
-  it by rev ([#4015](https://github.com/nifeos/nife/pull/4015)). The move of `line_editor` waits on
+  2026-11-22 (UTC). `terminal_contract` lives in `partsfoundry/terminal_contract`, and nife depends on
+  it by rev ([#4015](https://github.com/partsfoundry/nife/pull/4015)). The move of `line_editor` waits on
   its own remaining work.
 - Decision 7, the reserved bits of the terminal's first request word: Done,
-  [#3972](https://github.com/nifeos/nife/pull/3972), ruled 2026-11-22 (UTC), A.
+  [#3972](https://github.com/partsfoundry/nife/pull/3972), ruled 2026-11-22 (UTC), A.
 
-- The move: Done, [#4001](https://github.com/nifeos/nife/pull/4001). The crate lives in
-  [nifeos/line_editor](https://github.com/nifeos/line_editor), and nife depends on it by git and
+- The move: Done, [#4001](https://github.com/partsfoundry/nife/pull/4001). The crate lives in
+  [partsfoundry/line_editor](https://github.com/partsfoundry/line_editor), and nife depends on it by git and
   `rev`, a commit on its `main`, with `version = "0.1.0"`. It keeps `publish = false`; no tag
   exists, and crates.io holds no release.
 
@@ -141,8 +141,8 @@ The P2 items are in [the appendix](1098-line-editor-outside-review/later-items.m
   the cut, and `line_editor` depends on nothing. Item 8: a `const` assertion in the `line_editor`
   program holds the two `QUIESCED` values equal. Items 3 and 4 and decisions 2, 3 and 5: the
   engine's names and the crate root's ratification are built.
-- **Done.** The move to `nifeos/terminal_contract`, [#4015](https://github.com/nifeos/nife/pull/4015).
-- **Recorded.** The move to `nifeos/line_editor`, with item 1 and the rest of its review package's
+- **Done.** The move to `partsfoundry/terminal_contract`, [#4015](https://github.com/partsfoundry/nife/pull/4015).
+- **Recorded.** The move to `partsfoundry/line_editor`, with item 1 and the rest of its review package's
   "What still blocks the move".
 - **Recorded.** The externalization list: `crates/externalization-list.txt` names
   `line_editor` and not `terminal_contract`, checked in that file on main.
@@ -224,7 +224,7 @@ linenoise has `LINENOISE_MAX_LINE`. The tree's own `MAXIMUM_SURFACE_BYTES` and
 
 Decided by the maintainer on 2026-11-19 (UTC), provisional: a two-way door until the first tag.
 Rule A: `MAXIMUM_LINE_BYTES`, `MAXIMUM_PROMPT_BYTES` and `MAXIMUM_RAW_QUEUE_BYTES`, with no alias.
-[#3965](https://github.com/nifeos/nife/pull/3965) builds it with item 3.
+[#3965](https://github.com/partsfoundry/nife/pull/3965) builds it with item 3.
 
 ### An interface identity for `terminal_contract`
 
@@ -296,7 +296,7 @@ and `terminal_contract` leave; `line_editor_component` stays in nife.
 
 Prior art. In this tree `generational_table`, `block_roster` and `file_allocation_table` each moved
 on a cleared review with no tag. Where nife differs: nothing outside nife links either crate.
-Example: under A, the shell pins `nifeos/line_editor` by revision.
+Example: under A, the shell pins `partsfoundry/line_editor` by revision.
 
 Decided by the maintainer on 2026-11-19 (UTC), provisional: a one-way door at repository creation,
 and the clearance itself stays the architect's. Rule A: one review package covers `line_editor` and
@@ -304,8 +304,8 @@ and the clearance itself stays the architect's. Rule A: one review package cover
 both from the package, with no tag and no publication.
 
 Cleared 2026-11-22 (UTC): both packages, `notes/crate-reviews/line-editor.md` and
-`notes/crate-reviews/terminal-contract.md`, as the go to create `nifeos/line_editor` and
-`nifeos/terminal_contract` with `publish = false`, no tag and no publish. Each move waits on its own
+`notes/crate-reviews/terminal-contract.md`, as the go to create `partsfoundry/line_editor` and
+`partsfoundry/terminal_contract` with `publish = false`, no tag and no publish. Each move waits on its own
 remaining work.
 
 ## Done when

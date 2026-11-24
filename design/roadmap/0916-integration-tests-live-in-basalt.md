@@ -63,7 +63,7 @@ the distribution, so basalt proves it, on the image it ships.
    bootable image from its packages) composes, runs `jig install ripgrep`, and checks `rg`'s
    four-thread walk.
 3. That stage runs on every pin-bump pull request. Making it blocking needs a required status
-   check on basalt's `main`. That is a branch-protection change in `nifeos/basalt`, an admin act,
+   check on basalt's `main`. That is a branch-protection change in `partsfoundry/basalt`, an admin act,
    and it is calef's.
 4. nife keeps the early-warning rows of item 3 above, as milestone 810 builds them, and adds no
    others without a reason recorded beside the row.

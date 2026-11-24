@@ -53,7 +53,7 @@ whose input this system produced is a correctness question. A parser whose input
 produced is a security question, and it is the one where a panic has a consequence a user notices.
 
 Fifteen parser targets, fewer than one per crate; the FAT crate fuzzes its own in its
-repository, `nifeos/file_allocation_table`. A fuzz target that finds nothing
+repository, `partsfoundry/file_allocation_table`. A fuzz target that finds nothing
 because it fuzzes a total function is worse than no target: it costs CI time on every commit and it
 implies coverage the project does not have.
 
@@ -147,12 +147,12 @@ Seeds are committed, and they are read-only. A fuzzer starting from `[]` spends 
 minutes rediscovering that a device tree begins `d0 0d fe ed`, and with a sixty-second budget never
 gets past the magic check. Where the tree already holds real inputs, such as the three device trees
 in `crates/machine_discovery/tests/fixtures/`, `script/fuzz` passes that directory to libFuzzer as an
-extra corpus; a copy under `fuzz/` would drift from it. `nifeos/nife:fuzz/seeds/README.md`
+extra corpus; a copy under `fuzz/` would drift from it. `partsfoundry/nife:fuzz/seeds/README.md`
 lists each target's seeds.
 
 The ELF seeds, `crates/static_elf/tests/fixtures/minimal_rx_<machine>.elf`, are 120 bytes each, because nothing
 else in the tree is a small ELF (our real binaries are over a megabyte). They are hand-assembled,
-and `nifeos/nife:fuzz/seeds/README.md` carries the generator that produces them.
+and `partsfoundry/nife:fuzz/seeds/README.md` carries the generator that produces them.
 
 There is one per machine nife runs, because `static_elf` picks the `e_machine` it accepts at compile time;
 `crates/static_elf/tests/fuzz_seed.rs` holds each build's seed to actually parsing and the directory to

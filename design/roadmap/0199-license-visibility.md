@@ -17,7 +17,7 @@ provisional until the merge queue lands it.)*
 Refused because the premise was false: the terms are ratified by DECISIONS §87, and GitHub
 already shows them. One tool's field read as none, and nothing needs fixing.
 
-In brief. `gh repo view nifeos/nife --json licenseInfo` returns none. The tree carries
+In brief. `gh repo view partsfoundry/nife --json licenseInfo` returns none. The tree carries
 `LICENSE-MIT`, `LICENSE-APACHE` and `license = "MIT OR Apache-2.0"` in the workspace manifest, and
 DECISIONS §87 (MIT OR Apache-2.0, and why the GPL's lesson does not transfer) ratifies the choice.
 GitHub's license detector does not recognize the dual-file Rust convention, so a stranger opening

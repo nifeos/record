@@ -27,7 +27,7 @@ The board's test steps live in the kernel's storage bench, not here. No decision
 | license | `(MIT OR Apache-2.0) AND ISC`; `LICENSE-MIT` and `LICENSE-APACHE` at the crate root, the ISC notice in `src/lib.rs` |
 | `publish` | `false` |
 | size | 8,324 lines in 12 files: about 5,150 of library, 720 of shared tests, 1,026 of simulator, 1,426 of Kani harnesses |
-| repository | `nifeos/designware_mobile_storage` |
+| repository | `partsfoundry/designware_mobile_storage` |
 | consumers in nife | `kernel`, `components` and `machine_discovery`, by git revision |
 
 ## Public API
@@ -183,7 +183,7 @@ release stays compatible.
 
 ## Outstanding before the move
 
-Nothing. The repository `nifeos/designware_mobile_storage` exists, its checks pass on `main`, and nife pins it by revision. The `Name:` blocks stay in this tree's history and the repository carries none.
+Nothing. The repository `partsfoundry/designware_mobile_storage` exists, its checks pass on `main`, and nife pins it by revision. The `Name:` blocks stay in this tree's history and the repository carries none.
 
 No shipped text names this tree, a milestone number or a lane. The board is "a VisionFive 2"
 throughout.

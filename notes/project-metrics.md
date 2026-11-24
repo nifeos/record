@@ -8,8 +8,8 @@ directory `notes/project-metrics/` are **provisional**; naming is an architect's
 provisional name and says so.*
 
 One row per ISO week, computed by `script/metrics` from git history. The data is one CSV per
-measure in `notes/project-metrics/` (in nifeos/nife), versioned with the code it describes. The
-charts are SVGs beside the data, and this page draws each one from nifeos/nife's `main` branch.
+measure in `notes/project-metrics/` (in partsfoundry/nife), versioned with the code it describes. The
+charts are SVGs beside the data, and this page draws each one from partsfoundry/nife's `main` branch.
 
 **This page is a deck** (calef, 2026-09-24). A chart is a heading, an image, and at most a line or
 two saying what it plots and what would otherwise be misread. Everything longer, the definitions,
@@ -32,13 +32,13 @@ line belongs there, not in a caption.
 
 ## The nine things that would kill nife
 
-![Fatal risks by color](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/fatal-risks-colors.svg)
+![Fatal risks by color](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/fatal-risks-colors.svg)
 
 - 2026W41: risk 4 went green on 2026-10-05 UTC (calef); milestones 761 and 766 cut the null system call's growth to four tasks from 48 to 10 ticks.
 
 ## Names by what the tree records about them
 
-![Names by what the tree records about them](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/names.svg)
+![Names by what the tree records about them](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/names.svg)
 
 <!-- week-notes: script/metrics writes this -->
 - 2026W42: the total fell from 9,111 in 2026W41 to 8,544. Pull requests #2353 (merged 2026-10-18 20:26 UTC) and #2375 (21:58 UTC) narrowed `pub` items no package reads to `pub(crate)`, taking 884 and 411 names out of the no-provenance-block band. The rest of the week added 728. No name was lost; the narrowed items are no longer counted.
@@ -56,7 +56,7 @@ band without changing the bar's height. The current week's total is checked agai
 
 ## unsafe blocks outside kernel/src/arch/
 
-![unsafe density](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/unsafe.svg)
+![unsafe density](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/unsafe.svg)
 
 Blocks per 10,000 code lines outside `kernel/src/arch/`, `script/lint`'s gated census; the orange
 line is the ceiling its marker held that week, the other the trailing 13-week mean. Only the ratio
@@ -64,7 +64,7 @@ is about soundness.
 
 ## The same unsafe blocks, by trust boundary
 
-![unsafe blocks by trust boundary](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/unsafe-trust.svg)
+![unsafe blocks by trust boundary](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/unsafe-trust.svg)
 
 <!-- week-notes: script/metrics writes this -->
 - 2026W41: userspace rose 466 to 531. Of those, 29 blocks are c_library and jig, which landed this week; they were in the census and in no band until pull request #2482 (2026-10-20 UTC) placed them.
@@ -77,7 +77,7 @@ so a crate is counted on its current side throughout.
 
 ## Debt paydown
 
-![Debt paydown share](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/debt-paydown.svg)
+![Debt paydown share](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/debt-paydown.svg)
 
 The share of each week's merged pull requests labeled `debt-paydown` ([what
 counts](debt-paydown.md)). The label is chosen at the claim and judged from titles, so a lane that
@@ -85,7 +85,7 @@ became a repair is missed.
 
 ## Milestones built each week
 
-![Milestones built each week](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/velocity.svg)
+![Milestones built each week](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/velocity.svg)
 
 A flow: milestones whose `Built:` date falls in that week, read from today's tree for every week.
 It does not reconcile with the `Built` stock (BUGS).
@@ -94,7 +94,7 @@ weeks exist behind it.
 
 ## Pull requests merged each week
 
-![Pull requests merged each week](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/pull-requests.svg)
+![Pull requests merged each week](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/pull-requests.svg)
 
 The second flow, counted from `main`'s merge subjects rather than the API, so it backfills to the first commit. 2026W29 and 2026W30 are zeros: the practice starts in
 2026W31.
@@ -102,13 +102,13 @@ The line is the same trailing mean.
 
 ## Merge queue ejections
 
-![Merge queue ejections](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/merge-queue.svg)
+![Merge queue ejections](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/merge-queue.svg)
 
 Queue began 2026-08-15; W31 and W32 predate it.
 
 ## How long a hosted job waits for a runner
 
-![How long a hosted job waits for a runner](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/ci-job-waits.svg)
+![How long a hosted job waits for a runner](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/ci-job-waits.svg)
 
 The weekly median of the time between a hosted job's creation and its start, over the jobs of every
 `ci.yml` and `verify.yml` merge-group run, from the Actions API (`helpers/ci_job_times.py`;
@@ -120,7 +120,7 @@ from 5 to 8 ([the queue's own settings](merge-queue.md)). The record starts on 2
 
 ## How long a merge-group build takes
 
-![How long a merge-group build takes](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/ci-jobs.svg)
+![How long a merge-group build takes](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/ci-jobs.svg)
 
 <!-- week-notes: script/metrics writes this -->
 - 2026W41: prove shards rebalanced on 2026-10-07 UTC by a 40-run median and split three ways (calef, #1802), planned at 15.7 minutes each from 20.5 and 27
@@ -137,7 +137,7 @@ from 5 to 8 ([the queue's own settings](merge-queue.md)). The record starts on 2
 - 2026W47: CI job prove ran at 88% of its budget on its newest merge-group run; tracking issue #3763
 <!-- /week-notes -->
 
-![Where a merge-group build's time goes](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/ci-critical-path.svg)
+![Where a merge-group build's time goes](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/ci-critical-path.svg)
 
 A build is a merge commit's `ci.yml` and `verify.yml` runs (same `head_sha`), first job start to
 last job end, green only, from 2026-08-15 (`helpers/ci_job_times.py`). The timeline is the newest full
@@ -145,7 +145,7 @@ week.
 
 ## Which model wrote it
 
-![Commits each week, by the model that signed them](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/models-commits.svg)
+![Commits each week, by the model that signed them](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/models-commits.svg)
 
 From the `Co-Authored-By` trailer. Attributed plus unattributed plus merge is every commit that
 week; a merge is a pull request landing, not writing. 2026W29 predates
@@ -161,19 +161,19 @@ charts show that week's z.ai work as nothing at all.
 
 ## Lines touched, by the model that signed them
 
-![Lines touched each week, by the model that signed them](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/models-lines.svg)
+![Lines touched each week, by the model that signed them](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/models-lines.svg)
 
 Added plus removed, not net; volume, not effort. Merges count no lines.
 
 ## What a turn costs
 
-![What a turn carried, in thousands of tokens of context](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/context-per-turn.svg)
+![What a turn carried, in thousands of tokens of context](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/context-per-turn.svg)
 
 Mean prompt per request, from session records that are not in git. A turn costs the size of its context: cache reads are about 98% of every token spent. 2026W29 through 2026W33 are absent, not zero.
 
 ## Milestones by status
 
-![Milestones by status, and proposals waiting for a number](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/milestones.svg)
+![Milestones by status, and proposals waiting for a number](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/milestones.svg)
 
 <!-- week-notes: script/metrics writes this -->
 - 2026W43: the Recorded band fell from 7 to 0: calef retired the status on 2026-10-20 (#2467). 52 moved to Not started, 39 to Closed (replaced by a later milestone), 224, 199 and 244 to Closed (refused), and 263 and 626 to Built.
@@ -189,7 +189,7 @@ drain it.
 
 ## Rust in the tree
 
-![Rust in the tree, in thousands of lines](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/lines.svg)
+![Rust in the tree, in thousands of lines](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/lines.svg)
 
 <!-- week-notes: script/metrics writes this -->
 - 2026W40: the kernel code series fell 46,665 to 33,192 lines because milestone 609 (the system tests leave the kernel crate), pull request #1404, moved 66 test-only files unchanged into the system_tests crate; no code was deleted
@@ -199,13 +199,13 @@ Every tracked `.rs` file outside `vendor/`, with `kernel/src` split from the res
 
 ## BUGS sections
 
-![BUGS sections](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/bugs.svg)
+![BUGS sections](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/bugs.svg)
 
 Markdown headings plus Rust doc comments. Rising is good: a `BUGS` section is a limitation written next to the feature it limits.
 
 ## Coverage
 
-![Coverage](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/coverage.svg)
+![Coverage](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/coverage.svg)
 
 Line coverage, each week measured by its own tree's `script/coverage` on its own pinned nightly, so
 this is the one series on the page that is not a restatement. Weeks 2026W30 to 2026W38 were
@@ -213,7 +213,7 @@ backfilled that way on 2026-09-19. 2026W29 is empty because no instrument existe
 
 ## The lowest-covered file
 
-![Minimum per-file coverage](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/coverage-floor.svg)
+![Minimum per-file coverage](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/coverage-floor.svg)
 
 The minimum per-file coverage, which is the number `script/coverage` actually gates on at 80%.
 The aggregate can hold steady while one file slides, so this panel predicts a failing build.
@@ -223,17 +223,17 @@ because the floor did not exist yet. The provenance is in the register's
 
 ## Homes
 
-![Packages](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/homes-packages.svg)
+![Packages](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/homes-packages.svg)
 
-![Files](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/homes-paths.svg)
+![Files](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/homes-paths.svg)
 
 ## Unexplained benchmark drift on main
 
-![Unexplained benchmark drift on main](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/unexplained-drift.svg)
+![Unexplained benchmark drift on main](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/unexplained-drift.svg)
 
-Drift since the anchors that no line in `nifeos/nife:bench/attributions.tsv`
+Drift since the anchors that no line in `partsfoundry/nife:bench/attributions.tsv`
 accounts for, read at each week's last merge. Above 5% is a lane (calef, 2026-10-22). Every row,
-save and reason: the drift report (`nifeos/nife:notes/project-metrics/baseline-drift.md`).
+save and reason: the drift report (`partsfoundry/nife:notes/project-metrics/baseline-drift.md`).
 
 <!-- baseline-drift: script/metrics writes this -->
 2026W48, `main` at `995720623`: nothing unexplained past 5%; the largest, aarch64 `ipc_rtt_el0` +2.32%, riscv64 `sink_throughput` -2.80%, x86_64 `call_reply` +1.93%.
@@ -241,11 +241,11 @@ save and reason: the drift report (`nifeos/nife:notes/project-metrics/baseline-d
 
 ## Interface stability
 
-![Breaking changes to the interface](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/interface-stability.svg)
+![Breaking changes to the interface](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/interface-stability.svg)
 
 The boundary a program outside the tree is written against, each week: system call surface moves
 and wire-format value changes. [definitions](interface-stability.md),
-per crate and package (`nifeos/nife:notes/project-metrics/interface-stability.md`).
+per crate and package (`partsfoundry/nife:notes/project-metrics/interface-stability.md`).
 
 <!-- interface-stability: script/metrics writes this -->
 interface, 2026W45 to 2026W48: 151 breaking changes (33 additions); 119 system call numbers changed, 0 format bumps; 49% co-change, 51% across packages.
@@ -253,16 +253,16 @@ interface, 2026W45 to 2026W48: 151 breaking changes (33 additions); 119 system c
 
 ## The crates 857 releases
 
-![The crates 857 releases, by how far each has got](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/crate-release.svg)
+![The crates 857 releases, by how far each has got](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/crate-release.svg)
 
-![Properties the crate milestones require, proven and owed](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/crate-proofs.svg)
+![Properties the crate milestones require, proven and owed](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/crate-proofs.svg)
 
 Milestones 813 to 821; all nine crates start in the tree. Both charts read git alone
 (`helpers/crate_release.py`).
 
 ## Kani proof harnesses, and what can falsify them
 
-![Kani proof harnesses](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/harnesses.svg)
+![Kani proof harnesses](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/harnesses.svg)
 
 - 2026W41: unfalsified fell 56 to 0 across #1697, #1701 and #1713; the middle band is new (§134 (a harness carries a machine-replayable falsification record, or it is not evidence), amended 2026-10-06 UTC). Its two harnesses were examined and no defect in today's code can turn them red; each carries its reason.
 
@@ -271,7 +271,7 @@ code: unharnessed code is outside it ([what each ratio is of](denominators.md#th
 
 ## Action items the corrections of error still owe
 
-![Action items the corrections of error still owe](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/coe-actions.svg)
+![Action items the corrections of error still owe](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/coe-actions.svg)
 
 <!-- week-notes: script/metrics writes this -->
 - 2026W40: open items fell 3 to 0 on 2026-10-04 UTC. Milestone 641 (a mechanism that reports clean), 725 (count every vendor) and 640 (a gate is not evidence) turned BUILT.
@@ -282,9 +282,9 @@ Each week is read from its own commit, so 2026W39 is the first correction, alrea
 
 ## Passive voice
 
-![Passive constructions in the prose](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/passive-voice.svg)
+![Passive constructions in the prose](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/passive-voice.svg)
 
-![Passive constructions per 1,000 words of prose](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/passive-voice-rate.svg)
+![Passive constructions per 1,000 words of prose](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/passive-voice-rate.svg)
 
 §213 (writing standards) rule 6's count over the prose ratchet's documents, then per 1,000 words of prose. The line is
 the limit a new document meets ([definitions](register-of-measures/ratchet-debt.md#passive-voice)).
@@ -292,7 +292,7 @@ the limit a new document meets ([definitions](register-of-measures/ratchet-debt.
 
 ## Line-number citations
 
-![Line-number citations](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/line-citations.svg)
+![Line-number citations](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/line-citations.svg)
 
 Citations by line number, which §277 (cite a heading or a symbol, never a line number) retires. The
 line is the code ceiling. Markdown is held at zero, so what remains there carries an exception marker.
@@ -307,7 +307,7 @@ rest.
 
 ## BUGS
 
-The series' known limitations are in project-metrics/limitations.md (`nifeos/nife:notes/project-metrics/limitations.md`).
+The series' known limitations are in project-metrics/limitations.md (`partsfoundry/nife:notes/project-metrics/limitations.md`).
 
 - The paragraph under "Interface stability" predates the 2026-10-28 policy (accommodate change
   rather than wait for a lull; the four-week-zero reading is a reported interpretation that gates
@@ -316,7 +316,7 @@ The series' known limitations are in project-metrics/limitations.md (`nifeos/nif
 
 ## Architecture decisions by status
 
-![Architecture decisions by status](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/decisions.svg)
+![Architecture decisions by status](https://raw.githubusercontent.com/partsfoundry/nife/main/notes/project-metrics/decisions.svg)
 
 From `design/decisions/`. The gray band in the first three weeks is decisions that predate
 a status existing at all, counted as having none rather than as `DECIDED`.

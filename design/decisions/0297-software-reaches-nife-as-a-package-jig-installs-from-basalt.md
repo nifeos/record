@@ -41,7 +41,7 @@ Asked how the programs that run before `jig` reach a system, he answered the sam
    what this tree writes. It holds for the kernel too.
 2. basalt builds and publishes every package. That includes first-party ones: swish, process-tools,
    kilo, and the `tar` milestone 258 writes. The recipe, the pinned source and the published
-   archive live in `nifeos/basalt`. That is what basalt is for (§247 (the split begins with basalt
+   archive live in `partsfoundry/basalt`. That is what basalt is for (§247 (the split begins with basalt
    holding nife, and `procps` moves first)).
 3. A `helpers/build-*.sh` script, or an image that packs a program by hand, is interim scaffolding.
    It may keep feeding nife's tests until the program's package exists. No milestone is done on

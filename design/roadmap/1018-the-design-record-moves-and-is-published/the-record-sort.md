@@ -1,6 +1,6 @@
-# The record sort: what moves to `nifeos/record` and what stays
+# The record sort: what moves to `partsfoundry/record` and what stays
 
-An appendix to milestone 1018 (the design record moves to `nifeos/record` and is published as a
+An appendix to milestone 1018 (the design record moves to `partsfoundry/record` and is published as a
 website), for its step 4. `packages/homes.toml` holds the sort itself, and
 `python3 helpers/record_links.py` counts it and lists the links it cuts. This page says how the
 lane made the sort and what the counts were on 2026-11-11 (UTC), at `20275e6d0`.
@@ -52,7 +52,7 @@ directory stays when any tracked file under it stays.
 | the build and gates, and `vendor/` documentation | 1 each |
 
 That is 260 links from 125 record files, and `--list` prints each with its line. Each becomes a
-qualified `nifeos/<repo>:<path>` or plain text in step 6, since the site's link check fails the
+qualified `partsfoundry/<repo>:<path>` or plain text in step 6, since the site's link check fails the
 build on a link into nothing. A code path in backticks is not a link, and the main appendix
 counts those.
 

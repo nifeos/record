@@ -17,7 +17,7 @@ Reuse: `gh api` reads the advisory. No new transport.
 
 ## What it builds
 
-- A script a fix lane runs to read one advisory: `GET /repos/nifeos/nife/security-advisories/<id>`
+- A script a fix lane runs to read one advisory: `GET /repos/partsfoundry/nife/security-advisories/<id>`
   with a one-hour token of the `nife-fuzz-reader` App, which the lane takes for that one command. It prints the advisory to
   the lane's terminal and writes nothing to disk inside a worktree. It refuses, by name, when no
   credential is present, and it never searches for one.

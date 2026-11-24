@@ -52,7 +52,7 @@ The host updates itself from main with no person pulling, within four limits tha
 on 2026-11-01 (UTC) in
 [`fuzz-findings-without-a-person`](../../design/roadmap/1015-fuzz-findings-without-a-person.md).
 At most every 5 minutes (`NIFE_FUZZ_FOLLOW_EVERY`, in seconds; 0 turns it off) the supervisor runs
-`helpers/fuzz-follow-main.py look`. It fetches main alone from `https://github.com/nifeos/nife.git`,
+`helpers/fuzz-follow-main.py look`. It fetches main alone from `https://github.com/partsfoundry/nife.git`,
 with every other protocol refused and no credential helper. It refuses a commit that does not contain
 the clone's commit. It reads the names of main's required checks from the branch's rules and the
 commit's check runs from the public API, with no credential. It moves only when each required check
@@ -154,17 +154,17 @@ report. A finding sorted as public at triage is the exception.
 The host's duties end at filing. An architect ruled on 2026-11-04 (UTC) that the continuous fuzzer
 reports each problem and stops. No lane opens, copies, prints or moves anything under the held
 directory. A plain service on the host, not an agent, files each held finding as a private security
-advisory on nifeos/nife, holding the finding class and the reproducer. A person works the queue of
+advisory on partsfoundry/nife, holding the finding class and the reproducer. A person works the queue of
 advisories with the regular lane workflow on a separate fix-lane machine, where a lane reads an
 advisory and nothing else. The host never replays a fix and never publishes an advisory. Crash
 inputs, seeds and reproducers stay out of every public text until the fix is on main. An architect
 ruled this on 2026-11-01 (UTC) in
 [`fuzz-findings-without-a-person`](../../design/roadmap/1015-fuzz-findings-without-a-person.md),
 which also lists the milestones that build it. The filer is `fuzz-filer` in
-[nifeos/fuzz-host](https://github.com/nifeos/fuzz-host); it runs as the fuzz account and files from a
+[partsfoundry/fuzz-host](https://github.com/partsfoundry/fuzz-host); it runs as the fuzz account and files from a
 one-hour token that a root timer mints. Its binary is installed. It files only while `fuzz-filer.timer` runs, and the heartbeat fails when it does not.
 
-With `--publish` it creates one GitHub release per day on nifeos/nife, tagged `fuzz-YYYY-MM-DD` (the
+With `--publish` it creates one GitHub release per day on partsfoundry/nife, tagged `fuzz-YYYY-MM-DD` (the
 UTC date), with `report.md` and `clean-ranges.tsv` as its assets: `gh release create fuzz-YYYY-MM-DD
 report.md clean-ranges.tsv`. The newest release's date is the heartbeat. A maintainer can delete an
 old release without touching history, and no clone carries it. An architect ruled this on 2026-11-01
@@ -180,9 +180,9 @@ a person decides. Assets match by name, since each run writes a newer report.
 
 The credential is a one-hour installation token of the `nife-fuzz` GitHub App, which a mint helper
 on the host makes from the App's private key, readable by root alone. The helper is `fuzz-token` in
-[nifeos/fuzz-host](https://github.com/nifeos/fuzz-host), and it mints one token per service, each
+[partsfoundry/fuzz-host](https://github.com/partsfoundry/fuzz-host), and it mints one token per service, each
 narrower than the App. The App holds Contents write and Repository
-security advisories write on nifeos/nife alone (ruled 2026-11-01 UTC).
+security advisories write on partsfoundry/nife alone (ruled 2026-11-01 UTC).
 [`the-fuzz-app.md`](the-fuzz-app.md) is the runbook for the person who creates it, and it states
 what the key can do. Main's ruleset requires a pull request and has no bypass actor, so the token
 cannot push to main; the script calls only `gh release view` and `gh release create`.

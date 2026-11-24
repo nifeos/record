@@ -6,7 +6,7 @@ set -eu
 here="$(cd "$(dirname "$0")" && pwd)"
 tag="$1"; work="$2"
 mkdir -p "$work/pkgs" "$work/out"
-gh release download "$tag" -R nifeos/basalt -p '*.nifepkg' -D "$work/pkgs"
+gh release download "$tag" -R partsfoundry/basalt -p '*.nifepkg' -D "$work/pkgs"
 python3 -I "$here/scripts/build.py" "$work/out" "$work/pkgs"/*.nifepkg > /dev/null
 cd "$work/out"
 for f in *.nifepkg2 *.tar; do

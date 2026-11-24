@@ -97,7 +97,7 @@ field that later diverges from a host's.
 Kani's CI runs its regression on `macos-15-intel`, `ubuntu-22.04`, `ubuntu-24.04`, `macos-14` and
 `ubuntu-24.04-arm` (`.github/workflows/kani.yml`). Without the link hunk the test was observed red
 on macOS arm64 and arm64 Linux, and green on x86_64 Linux, where host and model agree. The x86_64
-rows are nife's scratch workflow run [37156714124](https://github.com/nifeos/nife/actions/runs/37156714124) on a GitHub-hosted `ubuntu-24.04` runner
+rows are nife's scratch workflow run [37156714124](https://github.com/partsfoundry/nife/actions/runs/37156714124) on a GitHub-hosted `ubuntu-24.04` runner
 (2026-10-03, UTC): Kani's own setup scripts, CBMC 6.11.0's x86_64 `.deb`, the saved patch applied
 with `git am`, then the three variants. x86_64 macOS was not run.
 

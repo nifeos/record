@@ -59,7 +59,7 @@ Milestone 812's block lists those forks with options and a recommendation for ea
 ## Amendment, 2026-10-12 (UTC): schbench is no longer waiting
 
 `schbench` leaves the uses waiting on threads. calef dropped it on #2009
-([his comment](https://github.com/nifeos/nife/pull/2009#issuecomment-6130684610)): *"c, and drop schbench"*. He ruled on #2021 that this section be amended to
+([his comment](https://github.com/partsfoundry/nife/pull/2009#issuecomment-6130684610)): *"c, and drop schbench"*. He ruled on #2021 that this section be amended to
 match: *"Amend"*. Risk 5 (it cannot be made reliable on multicore, and the bugs appear only on
 silicon) now takes its wakeup-latency tails from each kernel's own scheduler trace. That is
 milestone 830 (wakeup latency on nife and Linux, from each kernel's own scheduler trace), and it

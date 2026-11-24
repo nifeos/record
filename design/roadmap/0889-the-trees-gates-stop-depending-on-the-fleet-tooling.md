@@ -19,7 +19,7 @@ below are drafts for calef's naming pass.)*
 Raised 2026-10-12 (UTC) by lane `maintainer/tooling-inventory`. It is the first step calef ruled
 on pull request #1976: Fork 4 of
 [nife's tooling, sorted by who needs it](0902-tooling-sorted-by-who-needs-it.md), answered
-[*"A"*](https://github.com/nifeos/nife/pull/1976#issuecomment-6117241317) on 2026-10-12 (UTC). The
+[*"A"*](https://github.com/partsfoundry/nife/pull/1976#issuecomment-6117241317) on 2026-10-12 (UTC). The
 edges are cut in place, in one nife lane, before any fleet tooling leaves. The title, the slug and
 every new name below are provisional, for calef's naming pass.
 

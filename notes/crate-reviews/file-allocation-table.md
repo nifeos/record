@@ -25,8 +25,8 @@ the API the provisional rulings below leave it, and of the version, tag and repo
 | item | value |
 |---|---|
 | crate | `file_allocation_table`, ratified on #1806 (FAT spelled out); crates.io answers 404 for it |
-| version and tag | `0.1.0` in the manifest; the tag `v0.1.0` goes on the move commit, as `nifeos/jh7110_entropy`'s did |
-| repository | `nifeos/file_allocation_table`, the crate's own name, as the pilot's is; it exists |
+| version and tag | `0.1.0` in the manifest; the tag `v0.1.0` goes on the move commit, as `partsfoundry/jh7110_entropy`'s did |
+| repository | `partsfoundry/file_allocation_table`, the crate's own name, as the pilot's is; it exists |
 | edition, `rust-version` | 2024, 1.88 |
 | license | `MIT OR Apache-2.0`, both texts at the crate root |
 | `publish` | `false`; `crates/publish-allowlist.txt` lists no crate |
@@ -203,7 +203,7 @@ then measures a period with no change the tool calls breaking; nobody has set th
 | item | owner |
 |---|---|
 | Clear this package: confirm or change the provisional rulings on questions 1 to 6, and rule on question 7. | architect |
-| `repository = "https://github.com/nifeos/file_allocation_table"` in the manifest. | move lane |
+| `repository = "https://github.com/partsfoundry/file_allocation_table"` in the manifest. | move lane |
 | The `lamfat` exception in the new repository's `deny.toml`. | move lane |
 | nife's three consumers (`components`, `xtask`, `fuzz`) move from the path dependency to `git` and `rev` with `version = "0.1.0"`. | move lane |
 
@@ -276,7 +276,7 @@ open.
 
 6. Where the two fuzz targets live after the move.
    Background: `file_allocation_table_boot_sector` and `file_allocation_table_writer` sit in nife's
-   `fuzz/`, which the fuzz host runs; it files each finding as a private advisory on nifeos/nife.
+   `fuzz/`, which the fuzz host runs; it files each finding as a private advisory on partsfoundry/nife.
    The shared crate template has no fuzz job. After the move the targets fuzz the crate through
    nife's `git` and `rev` dependency, and a finding lands on nife for code in another repository.
    Recommendation: keep both targets in nife for the soak, since the pinned dependency is exactly
@@ -289,4 +289,4 @@ open.
    pins it by `rev` with the version beside it. The pilot's repository carries the crate's own
    name, underscores included.
    Recommendation: `0.1.0`, the tag `v0.1.0` on the move commit once the answers above have landed,
-   and `nifeos/file_allocation_table`.
+   and `partsfoundry/file_allocation_table`.

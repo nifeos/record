@@ -5,7 +5,7 @@ package of [crate-reviews.md](../crate-reviews.md), in its own file because the 
 outgrow the page.*
 
 The architect cleared this package on 2026-11-20 (UTC): the go to create
-`nifeos/domain_name_resolution_contract` with `publish = false`, no tag and no publish, as part of
+`partsfoundry/domain_name_resolution_contract` with `publish = false`, no tag and no publish, as part of
 step 6 of
 [milestone 1017 (the contract crates leave in this order)](../../design/roadmap/1017-the-contract-crates-leave-in-this-order.md).
 The move waits for the `domain_name_system` tag.
@@ -38,7 +38,7 @@ library's platform layer copies it verbatim. nife's boot-test data lives in
 | version | `0.1.0`; no tag |
 | edition, `rust-version` | 2024, 1.88 |
 | license | `MIT OR Apache-2.0` in the manifest; the two license texts are not yet at the crate root (the move adds them) |
-| `publish` | `false`; milestone 1017 keeps the moved contract crates unpublished under §305 (git dependencies on `nifeos/*` only, pinned to a landed commit) until their own release milestone |
+| `publish` | `false`; milestone 1017 keeps the moved contract crates unpublished under §305 (git dependencies on `partsfoundry/*` only, pinned to a landed commit) until their own release milestone |
 | dependencies | `domain_name_system` 0.1.0, a path dependency until that crate leaves (step 5) |
 | size | 1,546 lines in `src/`: 899 of library (`wire` 216, `grants` 327, `control` 161, `endowment` 46, `messages` 60, `lib` 89), 513 of tests, 134 of Kani harnesses; a 144-line README and two falsification patches |
 
@@ -213,7 +213,7 @@ The move lane works from `script/crate-move --dry-run` and runs after `domain_na
 | Clear the prose findings: prose caps, 13 passive-voice lines, and the acronyms `prose_acronyms` flags (RFC, TTL, NXDOMAIN, GB, OK). | move lane |
 | Set `-Z stubbing` where the template runs Kani, so the stubbed harness compiles. | move lane |
 | Carry the six missed mutants into `.github/mutants-exempts` after the first weekly census. | move lane |
-| In nife, drop the workspace member, convert the nine dependency lines to `git` and `rev`, delete the census row in `.cargo/mutants-baseline.txt`, and read the files the dry run lists (the resolver program, the spawner's three files, the installed-programs files, `xtask/src/farm/copied.rs` for the std copy, `script/falsifications`, `script/verify`, `helpers/lint_externalized_crates.py`, `helpers/template_report_baseline.txt`, `helpers/trust_boundary_crates.tsv`, `helpers/verify-stub-selftest.sh` and `packages/network.package.toml`). | the nife-side pull request, citing `nifeos/domain_name_resolution_contract@<sha>` |
+| In nife, drop the workspace member, convert the nine dependency lines to `git` and `rev`, delete the census row in `.cargo/mutants-baseline.txt`, and read the files the dry run lists (the resolver program, the spawner's three files, the installed-programs files, `xtask/src/farm/copied.rs` for the std copy, `script/falsifications`, `script/verify`, `helpers/lint_externalized_crates.py`, `helpers/template_report_baseline.txt`, `helpers/trust_boundary_crates.tsv`, `helpers/verify-stub-selftest.sh` and `packages/network.package.toml`). | the nife-side pull request, citing `partsfoundry/domain_name_resolution_contract@<sha>` |
 | Run the stranger test and the first weekly mutation census in the new repository. | move lane |
 
 `xtask std-src` must read the pinned checkout once the crate leaves, as it does for the other

@@ -18,7 +18,7 @@ Nothing is built on this section yet.
 ## The ruling
 
 calef ruled on 2026-10-08 at 21:20 (UTC), in the maintainer session, and the maintainer recorded it
-on [PR #1867](https://github.com/nifeos/nife/pull/1867#issuecomment-6070003952) the same evening.
+on [PR #1867](https://github.com/partsfoundry/nife/pull/1867#issuecomment-6070003952) the same evening.
 Two questions, two answers:
 
 | Question | calef's words | What it decides |

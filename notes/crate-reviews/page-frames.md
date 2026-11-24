@@ -158,12 +158,12 @@ no text.
 
 1. Whether the crate leaves at all, given that only the kernel and `system_tests` use it: it leaves,
    so the proofs and the falsification patches run in a repository whose gates a stranger can read.
-   Approved: repository `nifeos/page_frames` as `publish = false`, with no tag and no publish.
+   Approved: repository `partsfoundry/page_frames` as `publish = false`, with no tag and no publish.
 2. Whether the abbreviations helper's word list gains `allocator`: it does. The helper comes
-   from `nifeos/crate-workflows` (a vendored copy), so the word and the helper's selftest land there and the pin
+   from `partsfoundry/crate-workflows` (a vendored copy), so the word and the helper's selftest land there and the pin
    moves to that commit.
 
 ## Recommendation
 
-Cleared 2026-11-20 (UTC). Repository `nifeos/page_frames` as `publish = false`; no tag and no publish.
+Cleared 2026-11-20 (UTC). Repository `partsfoundry/page_frames` as `publish = false`; no tag and no publish.
 The move lane follows.

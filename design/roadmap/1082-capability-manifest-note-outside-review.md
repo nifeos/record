@@ -11,9 +11,9 @@ needs_person: yes
 # 1082. `capability_manifest_note`: what an outside maintainer would fix before it leaves
 
 Raised by a read-only review of `crates/capability_manifest_note`, done as a stranger meeting the
-crate for the first time would, on a fresh shallow clone of `nifeos/nife` at the head of `main`
+crate for the first time would, on a fresh shallow clone of `partsfoundry/nife` at the head of `main`
 (the merge of #3514). It changes nothing; it lists what the next lanes change before the crate
-moves to `nifeos/capability_manifest_note` and what can wait until after.
+moves to `partsfoundry/capability_manifest_note` and what can wait until after.
 
 There is no review package for this crate in `notes/crate-reviews/`, so this block has no settled
 baseline to stand on. It treats as settled, and does not reopen, what the crate's own text records
@@ -25,50 +25,50 @@ The crate is on `crates/externalization-list.txt`, in step 6 of milestone 1017 (
 crates leave in this order): after `machine_statistics_contract`,
 `domain_name_resolution_contract` and `grant_plan`.
 
-Reuse: `script/crate-move --dry-run`, the template `nifeos/crate-workflows` and its scaffold and
+Reuse: `script/crate-move --dry-run`, the template `partsfoundry/crate-workflows` and its scaffold and
 helpers, Kani, cargo-fuzz, the crate's own encoders as seed writers. No new tool.
 
 ## Finding status
 
 No finding remains Open or Waiting. The move itself is step 6 of milestone 1017: it creates
-nifeos/capability_manifest_note from the cleared review package and does the At the move lines.
+partsfoundry/capability_manifest_note from the cleared review package and does the At the move lines.
 
-- P0-1, the manifest cannot stand alone: Done, [#3643](https://github.com/nifeos/nife/pull/3643), [#3951](https://github.com/nifeos/nife/pull/3951). The only path dependencies left are the
+- P0-1, the manifest cannot stand alone: Done, [#3643](https://github.com/partsfoundry/nife/pull/3643), [#3951](https://github.com/partsfoundry/nife/pull/3951). The only path dependencies left are the
   crate's own two, `grant_contract` and `domain_name_resolution_contract`, which the move converts
   to `git` and `rev`.
-- P0-2, there is no README: At the move. The README is in the scaffold's sections ([#3643](https://github.com/nifeos/nife/pull/3643)); the move
+- P0-2, there is no README: At the move. The README is in the scaffold's sections ([#3643](https://github.com/partsfoundry/nife/pull/3643)); the move
   pull request records the stranger run in `docs/stranger-test.md`, which the template's scaffold
   supplies, and brings the README under the template's prose caps.
-- P0-3, the encoders accept manifests the decoder refuses: Done, [#3565](https://github.com/nifeos/nife/pull/3565), [#3643](https://github.com/nifeos/nife/pull/3643).
-- P1-4, the shipped text names a person and cites the tree: Done, [#3643](https://github.com/nifeos/nife/pull/3643). Only the `Name:` blocks
+- P0-3, the encoders accept manifests the decoder refuses: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565), [#3643](https://github.com/partsfoundry/nife/pull/3643).
+- P1-4, the shipped text names a person and cites the tree: Done, [#3643](https://github.com/partsfoundry/nife/pull/3643). Only the `Name:` blocks
   remain, and the move strips them.
-- P1-5, stale documentation: Done, [#3643](https://github.com/nifeos/nife/pull/3643).
-- P1-6, private names break the spelled-out rule: Done, [#3643](https://github.com/nifeos/nife/pull/3643).
-- P1-7, the tests and examples depend on nife's catalog: Done, [#3643](https://github.com/nifeos/nife/pull/3643), [#3951](https://github.com/nifeos/nife/pull/3951). The unit tests, the verb
+- P1-5, stale documentation: Done, [#3643](https://github.com/partsfoundry/nife/pull/3643).
+- P1-6, private names break the spelled-out rule: Done, [#3643](https://github.com/partsfoundry/nife/pull/3643).
+- P1-7, the tests and examples depend on nife's catalog: Done, [#3643](https://github.com/partsfoundry/nife/pull/3643), [#3951](https://github.com/partsfoundry/nife/pull/3951). The unit tests, the verb
   tests, the doctests, the README example, the seed writer and the fuzz target build their own
   manifests from `grant_contract`; `every_compiled_in_manifest_round_trips` runs in
   `crates/program_table`, which holds the catalog.
 - P1-8, the fuzz target and seeds stay behind: At the move. `script/crate-move` stages the target,
   its 14 seeds as `fuzz/corpus/`, and a `fuzz/Cargo.toml` with the crate's own dependencies, and
-  rewrites the seed test to read `fuzz/corpus/` ([#3951](https://github.com/nifeos/nife/pull/3951)); the move pull request drops the target from
+  rewrites the seed test to read `fuzz/corpus/` ([#3951](https://github.com/partsfoundry/nife/pull/3951)); the move pull request drops the target from
   nife's fuzz workspace.
-- P1-9, the template refuses the fuzz opt-in over `carry!`: Done, [#3643](https://github.com/nifeos/nife/pull/3643). The maintainer ruled it a
+- P1-9, the template refuses the fuzz opt-in over `carry!`: Done, [#3643](https://github.com/partsfoundry/nife/pull/3643). The maintainer ruled it a
   two-way door: the weekly opt-in stays off, the project's own host fuzzes the crate, and the
   template's scan does not change.
-- P2-10, `Error` is not `Display` or `Error`: Done, [#3565](https://github.com/nifeos/nife/pull/3565), [#3643](https://github.com/nifeos/nife/pull/3643).
-- P2-11, `Zones` lacks `len`, and the views differ on lifetimes: Done, [#3643](https://github.com/nifeos/nife/pull/3643).
-- P2-12, the proofs cover version 1 only: Done, [#3643](https://github.com/nifeos/nife/pull/3643).
-- P2-13, the note header written four times: Done, [#3643](https://github.com/nifeos/nife/pull/3643).
-- P2-14, the `interfaces_note` dev-dependency: Done, [#3643](https://github.com/nifeos/nife/pull/3643).
-- P2-15, `std` inside a `no_std` crate: Done, [#3643](https://github.com/nifeos/nife/pull/3643).
-- The wire literal `nife`: Done, [#3575](https://github.com/nifeos/nife/pull/3575), ruled
+- P2-10, `Error` is not `Display` or `Error`: Done, [#3565](https://github.com/partsfoundry/nife/pull/3565), [#3643](https://github.com/partsfoundry/nife/pull/3643).
+- P2-11, `Zones` lacks `len`, and the views differ on lifetimes: Done, [#3643](https://github.com/partsfoundry/nife/pull/3643).
+- P2-12, the proofs cover version 1 only: Done, [#3643](https://github.com/partsfoundry/nife/pull/3643).
+- P2-13, the note header written four times: Done, [#3643](https://github.com/partsfoundry/nife/pull/3643).
+- P2-14, the `interfaces_note` dev-dependency: Done, [#3643](https://github.com/partsfoundry/nife/pull/3643).
+- P2-15, `std` inside a `no_std` crate: Done, [#3643](https://github.com/partsfoundry/nife/pull/3643).
+- The wire literal `nife`: Done, [#3575](https://github.com/partsfoundry/nife/pull/3575), ruled
   2026-11-14 (option A).
-- The `_LEN` family: Done, [#3643](https://github.com/nifeos/nife/pull/3643), ruled 2026-11-19 (option A). The `_BYTES` names stand as built.
-- `service` as a yes-or-no function: Done, [#3643](https://github.com/nifeos/nife/pull/3643), ruled 2026-11-19 (option A). `asks_service` stands
+- The `_LEN` family: Done, [#3643](https://github.com/partsfoundry/nife/pull/3643), ruled 2026-11-19 (option A). The `_BYTES` names stand as built.
+- `service` as a yes-or-no function: Done, [#3643](https://github.com/partsfoundry/nife/pull/3643), ruled 2026-11-19 (option A). `asks_service` stands
   as built.
-- `VERSION` as the name of version 1: Done, [#3643](https://github.com/nifeos/nife/pull/3643), ruled 2026-11-19 (option A). `BARE_VERSION`
+- `VERSION` as the name of version 1: Done, [#3643](https://github.com/partsfoundry/nife/pull/3643), ruled 2026-11-19 (option A). `BARE_VERSION`
   stands as built.
-- BUGS, the two statics `carry!` emits: Done, [#3817](https://github.com/nifeos/nife/pull/3817).
+- BUGS, the two statics `carry!` emits: Done, [#3817](https://github.com/partsfoundry/nife/pull/3817).
   They are `MANIFEST_NOTE` and `SUBTREE_GRANTS_NOTE`, provisional (a two-way door, ruled by the
   maintainer). `globally_unique_identifier_partition_table`'s `NIFE_DATA` and `NIFE_BOOT` are that
   crate's own.
@@ -119,7 +119,7 @@ wire literal, below.
 ### The review clearance
 
 Ruled 2026-11-20 UTC (option A): the review package is cleared. The go is given to create
-`nifeos/capability_manifest_note` with `publish = false`; no tag and no publish. The move waits for
+`partsfoundry/capability_manifest_note` with `publish = false`; no tag and no publish. The move waits for
 its place in step 6 of milestone 1017, after `machine_statistics_contract`,
 `domain_name_resolution_contract` and `grant_plan`. The move pull request carries the stranger run
 (P0-2) and the fuzz workspace (P1-8).
@@ -127,7 +127,7 @@ its place in step 6 of milestone 1017, after `machine_statistics_contract`,
 Prior art: the Rust project moved `libc` out of the compiler's tree into a repository of its own,
 and the compiler consumes it back by version. Where nife differs: a review package checks that the
 crate stands alone before it leaves. Example: `jh7110_entropy`, cleared on 2026-11-01 (UTC), lives
-in nifeos/jh7110_entropy, and nife depends on it at a pinned revision.
+in partsfoundry/jh7110_entropy, and nife depends on it at a pinned revision.
 
 ### The `_BYTES` names
 

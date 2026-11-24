@@ -14,7 +14,7 @@ Raised by lane/fuzz-findings-without-a-person on 2026-11-01 (UTC), to record fou
 of that date and split them into milestones. They amend the mechanics of the disclosure ruling of
 2026-10-31 (UTC) in [the risk 7 proposal](1003-the-fuzz-budget-that-counts-for-risk-7.md), under
 "Disclosure", which #2955 records. That ruling stands. Every finding starts private, in a private
-security advisory on nifeos/nife. A held finding turns public after its fix, or 90 days after the
+security advisory on partsfoundry/nife. A held finding turns public after its fix, or 90 days after the
 report.
 
 Reuse: the supervisor, the held directory and the daily report of
@@ -33,11 +33,11 @@ place where a reproducer can leak.
 
 Ruled 2026-11-01 (UTC), narrowed 2026-11-04 (UTC): the fuzzing loop runs with no person in it, after
 a person places one credential once, and it ends at reporting. The fuzz host files one private
-advisory per held finding on nifeos/nife and stops. A person works the queue of security reports
+advisory per held finding on partsfoundry/nife and stops. A person works the queue of security reports
 on the fix-lane machine, in each advisory's private fork, and publishes each advisory when its fix
 merges. Four steps handle findings.
 
-1. Filing. A plain service on the fuzz host files a private security advisory on nifeos/nife for
+1. Filing. A plain service on the fuzz host files a private security advisory on partsfoundry/nife for
    each new held finding. The service is a program, not an agent and not a language model. The
    advisory holds the finding class and the reproducer.
 2. Reading. A fix lane reads the advisory, never the host's held-findings directory. The standing
@@ -52,7 +52,7 @@ merges. Four steps handle findings.
 ## What is in force: the credential
 
 Ruled 2026-11-01 (UTC): one new GitHub App, provisionally named `nife-fuzz`, installed on
-nifeos/nife only, holds two permissions and nothing else. Contents write lets it create the daily
+partsfoundry/nife only, holds two permissions and nothing else. Contents write lets it create the daily
 `fuzz-YYYY-MM-DD` release. Repository security advisories write lets it run the findings path. It
 holds no workflow or administration permission. It is separate from `nife-smelter`, whose key never
 sits on the fuzz host: that App is on every repository and bypasses the tag rulesets of the crate
@@ -63,15 +63,15 @@ tokens from it. A person creates the App and places the key once. The key does n
 schedule rotates it. [`notes/fuzzing/the-fuzz-app.md`](../../notes/fuzzing/the-fuzz-app.md) is the
 person's runbook.
 
-What the key can do is the exposure. The main ruleset of nifeos/nife has no bypass actor and
+What the key can do is the exposure. The main ruleset of partsfoundry/nife has no bypass actor and
 requires a pull request, so Contents write cannot push to main. A token minted from the key can
 create, move or delete any `fuzz-*` tag and any release. Advisories write lets
 it publish any draft advisory, a held finding's included.
 
-Ruled 2026-11-01 (UTC): the architect accepts that exposure, with a tag ruleset on nifeos/nife that
+Ruled 2026-11-01 (UTC): the architect accepts that exposure, with a tag ruleset on partsfoundry/nife that
 refuses creating, updating and deleting any tag outside `fuzz-*`, with no bypass actor. The ruleset
-exists on the repository as "tags: only fuzz-* tags may be made", and nifeos/nife had no tags when
-it took effect. The App is created and installed on nifeos/nife only: App ID 5571801, installation
+exists on the repository as "tags: only fuzz-* tags may be made", and partsfoundry/nife had no tags when
+it took effect. The App is created and installed on partsfoundry/nife only: App ID 5571801, installation
 ID 177641059, neither secret. A future nife release that uses a tag outside `fuzz-*` must amend the
 ruleset first, in its own step recorded in a pull request.
 
@@ -79,7 +79,7 @@ ruleset first, in its own step recorded in a pull request.
 
 Ruled 2026-11-01 (UTC): fix lanes read a held finding's advisory through a second GitHub App,
 provisionally named `nife-fuzz-reader`. It holds Repository security advisories read and nothing
-else, installed on nifeos/nife only. A fine-grained personal token is not used, because it expires
+else, installed on partsfoundry/nife only. A fine-grained personal token is not used, because it expires
 and belongs to a person. The App's key lives in a root-only file on the machine that launches fix
 lanes. It never sits on the fuzz host and never enters a lane's environment. A lane gets a one-hour
 installation token at launch; the milestone
@@ -96,7 +96,7 @@ reviewed fix lands as an ordinary pull request through the merge queue.
 - The private fork has no CI and no merge queue, so the lane runs the local gates itself:
   `script/fmt`, `script/lint` and the tests its change reaches. The lane reports each gate's exit.
 - A person reviews the fix in the private fork. Once the person approves it, the lane pushes the
-  same commits to a branch on nifeos/nife and opens an ordinary pull request, ready for review, with
+  same commits to a branch on partsfoundry/nife and opens an ordinary pull request, ready for review, with
   auto-merge armed and a neutral title. The merge queue runs every gate on it.
 - A person publishes the advisory when that pull request merges. No lane publishes.
 - Nobody merges from the private fork. On a test repository, a ruleset with no bypass actor blocked
@@ -118,7 +118,7 @@ An example. The fuzz host files a held crash in a parser as a draft advisory. Th
 launches a fix lane on the fix-lane machine, which adds a note to the advisory naming the lane and
 opens the advisory's private fork. The lane commits the fix and a regression test of the broken
 invariant there, runs `script/fmt`, `script/lint` and the parser's tests, and reports their exits.
-A person reads the diff in the fork and approves it. The lane pushes the same commits to nifeos/nife
+A person reads the diff in the fork and approves it. The lane pushes the same commits to partsfoundry/nife
 and opens the pull request ready, with auto-merge armed. About an hour later it merges from the
 queue, and the person publishes the advisory.
 
@@ -129,7 +129,7 @@ windows the supervisor, running as the unprivileged fuzz account, fetches and fa
 and re-executes itself, under four limits.
 
 1. Fast-forward only. It refuses a new commit whose history does not contain the current one.
-2. It fetches only the main branch of the public nifeos/nife repository, over https.
+2. It fetches only the main branch of the public partsfoundry/nife repository, over https.
 3. It moves only to a commit whose checks on main are green, read from the public API without a
    credential. A red or unreadable result keeps the current commit.
 4. It does not apply a change to the unit file, which needs root. It writes one journal line saying

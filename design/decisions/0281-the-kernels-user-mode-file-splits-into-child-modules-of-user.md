@@ -14,7 +14,7 @@ says is calef's call before a line moves. Written by lane
 until the merge queue lands it.)*
 
 It blocked the whole milestone until calef ruled both forks on 2026-10-11 (UTC), recorded on
-[PR #1959](https://github.com/nifeos/nife/pull/1959). Nothing else waited on it.
+[PR #1959](https://github.com/partsfoundry/nife/pull/1959). Nothing else waited on it.
 
 ## What the file is today
 

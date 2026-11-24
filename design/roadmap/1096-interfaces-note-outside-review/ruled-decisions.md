@@ -65,7 +65,7 @@ one-way at the first tag that nife pins, and ratifying them is what lets the mov
 Ruled 2026-11-14 UTC (decision 3, option A): the crate and repository name `interfaces_note` is
 ratified, and the crate's `Name:` block says so. The crates.io name waits on the publishing hold.
 
-Background. The repository `nifeos/interfaces_note` takes the name at creation, which is the
+Background. The repository `partsfoundry/interfaces_note` takes the name at creation, which is the
 one-way step; the crates.io name waits on the publishing hold.
 
 Recommendation. Keep `interfaces_note`. It follows the sibling `capability_manifest_note` (what the
@@ -87,7 +87,7 @@ step 3 of milestone 1017 (the contract crates leave in this order), after the th
 it. The repository name is one-way: a repository that exists has a name others link to.
 
 Ruled 2026-11-19 UTC (option A, the maintainer's provisional ruling): clear the review once the
-four renames land. The architect then gives the go to create `nifeos/interfaces_note`, with no tag
+four renames land. The architect then gives the go to create `partsfoundry/interfaces_note`, with no tag
 and no publication, and the maintainer asks for that go from milestone 1096. Clearing now with the move waiting
 (B), and holding until a dry run also stages the move's own items 1 to 5, 11 and 15 (C), were the
 alternatives.
@@ -95,7 +95,7 @@ alternatives.
 Prior art. In this tree `generational_table`, `block_roster` and `file_allocation_table` each moved
 on a cleared review with no tag. Where nife differs: nothing outside nife links the crate.
 
-Example. Once the renames land, `nifeos/interfaces_note` opens with the README of item 2, and nife
+Example. Once the renames land, `partsfoundry/interfaces_note` opens with the README of item 2, and nife
 pins it by revision.
 
 ## The fuzz crate's dependency hold
@@ -112,5 +112,5 @@ crate (B) was the alternative.
 Prior art. `generational_table` and `block_roster_contract` recorded the same hold as a false
 positive when their fuzz targets landed. Where nife differs: nothing; the rule is the template's.
 
-Example. [nifeos/interfaces_note#2](https://github.com/nifeos/interfaces_note/pull/2) adds
+Example. [partsfoundry/interfaces_note#2](https://github.com/partsfoundry/interfaces_note/pull/2) adds
 `fuzz/Cargo.toml` with those two dependencies and landed on this ruling.

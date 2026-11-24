@@ -10,7 +10,7 @@ ratified_by: calef
 *(The section number and title are provisional until the merge lands them. Every code name below,
 §326's and this file's, is provisional until ruled.)*
 
-The survey reads `nifeos/nife@af1ed9df6`.
+The survey reads `partsfoundry/nife@af1ed9df6`.
 
 ## Background
 

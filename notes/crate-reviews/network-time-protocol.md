@@ -6,7 +6,7 @@ page.*
 
 The architect ratified the crate's names and cleared it for its move to its own
 repository on 2026-11-20, as part of [milestone 1102 (`network_time_protocol`: what an outside maintainer would fix before it leaves)](../../design/roadmap/1102-network-time-protocol-outside-review.md).
-It describes the crate as `main` plus this branch leaves it. The package is cleared and the repository `nifeos/network_time_protocol` is approved; there is no tag and no publish.
+It describes the crate as `main` plus this branch leaves it. The package is cleared and the repository `partsfoundry/network_time_protocol` is approved; there is no tag and no publish.
 
 ## In one paragraph
 
@@ -34,7 +34,7 @@ milestone and section citations, which the move rewrites.
 | size | `src/lib.rs` of 1,238 lines (library and host tests) and `src/verification.rs` of 187 lines (Kani, under `cfg(kani)`) |
 
 Decision 1 removed the crate's only dependency, so the pin that lane PR #3781 adds for
-`nifeos/clock_contract` is not needed by this crate. That pin serves other dependents of
+`partsfoundry/clock_contract` is not needed by this crate. That pin serves other dependents of
 `clock_contract` and can proceed without this crate.
 
 ## Who in nife depends on it
@@ -194,5 +194,5 @@ stay open.
 ## Recommendation
 
 Cleared, ruled 2026-11-20. The names are ratified as the table lists them, and the repository
-`nifeos/network_time_protocol` is approved. There is no tag and no publish. The move lane carries
+`partsfoundry/network_time_protocol` is approved. There is no tag and no publish. The move lane carries
 the remaining work in the table above.

@@ -26,7 +26,7 @@ stopped being true at merge; whether that counts as bookkeeping is the integrato
 1. `script/apropos` keeps the promise it opens with. Its header and `CONTRIBUTING.md` gave
    `script/apropos system call` as the way to find the system call numbers, and the header carried
    figures no test checked. `moho_abi` now has its own repository, so no search of nife's tree can
-   find it. nifeos/nife#4071 gives both documents an example that works (`script/apropos socket`)
+   find it. partsfoundry/nife#4071 gives both documents an example that works (`script/apropos socket`)
    and drops the figures; this item is done when that lands. A search that reaches the design
    record is its own proposal, [a search that reaches the design
    record](a-search-that-reaches-the-design-record.md).

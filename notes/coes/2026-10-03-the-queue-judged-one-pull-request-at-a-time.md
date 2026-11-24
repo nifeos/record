@@ -176,7 +176,7 @@ gh api graphql -f query='...pullRequests(first:20,orderBy:{field:CREATED_AT,dire
   {nodes{number timelineItems(first:250,itemTypes:[ADDED_TO_MERGE_QUEUE_EVENT,
   REMOVED_FROM_MERGE_QUEUE_EVENT,AUTO_MERGE_ENABLED_EVENT,READY_FOR_REVIEW_EVENT,ISSUE_COMMENT,
   LABELED_EVENT,PULL_REQUEST_COMMIT,HEAD_REF_FORCE_PUSHED_EVENT]){...actor{login}}}}'
-gh api --paginate "repos/nifeos/nife/actions/runs?event=merge_group&created=2026-10-03"
+gh api --paginate "repos/partsfoundry/nife/actions/runs?event=merge_group&created=2026-10-03"
 gh run view <id> --log-failed | grep -B4 'lint ends'
 git show --remerge-diff <merge> | grep '^remerge CONFLICT'
 ```

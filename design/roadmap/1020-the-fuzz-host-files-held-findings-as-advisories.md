@@ -13,12 +13,12 @@ needs_person: no
 Raised by lane/fuzz-findings-without-a-person on 2026-11-01 (UTC), from step 1 of the ruling recorded
 in [fuzz-findings-without-a-person](1015-fuzz-findings-without-a-person.md).
 
-Reuse: the mint helper `fuzz-token` in nifeos/fuzz-host signs the App's token; the filer reads the
+Reuse: the mint helper `fuzz-token` in partsfoundry/fuzz-host signs the App's token; the filer reads the
 token file it writes and calls GitHub's repository security advisories API. No new dependency.
 
 ## What it builds
 
-A plain service on the fuzz host, a Python program with a systemd timer, files one private security advisory on nifeos/nife for each held
+A plain service on the fuzz host, a Python program with a systemd timer, files one private security advisory on partsfoundry/nife for each held
 window that has none yet. It is a program, not an agent or a language model.
 
 - It reads the held directory, which it alone of the repository's programs may open, and
@@ -40,17 +40,17 @@ window that has none yet. It is a program, not an agent or a language model.
 
 ## How it is checked
 
-A selftest, `tests/fuzz-filer-selftest` in nifeos/fuzz-host, runs the service against a stub GitHub
+A selftest, `tests/fuzz-filer-selftest` in partsfoundry/fuzz-host, runs the service against a stub GitHub
 on a loopback address and a synthetic held directory, with no network. It plants three fake held windows, one of each class,
 and checks that the stub received three create calls with the expected fields. A second run must
 send none, nothing it prints may contain a planted seed, and it must refuse to run without a token. `script/lint` runs it.
 
 ## Status
 
-Built as `fuzz-filer` in nifeos/fuzz-host, with its install steps in that repository's
+Built as `fuzz-filer` in partsfoundry/fuzz-host, with its install steps in that repository's
 `docs/fuzz-filer.md`. It departs from the text above in four ways: it is Python, not shell; the
 ledger lives outside the held directory; `patched_versions` is not set at filing; and the code is in
-nifeos/fuzz-host, not here. An architect ruled on 2026-11-03 (UTC) that it runs as `lane`, the
+partsfoundry/fuzz-host, not here. An architect ruled on 2026-11-03 (UTC) that it runs as `lane`, the
 account that also runs the fuzzed code, and that it uses one-hour installation tokens from a root
 timer with no long-lived credential. The accepted risk is that code reaching main runs as an account
 that can read the filer token. Unverified: that GitHub accepts `<= <commit>` as a range for the

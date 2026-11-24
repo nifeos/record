@@ -65,7 +65,7 @@ list reaches the distribution through basalt's pin of nife.
 
 ## Follow-on
 
-- **Done.** §241 (a threadbare base)'s floor table no longer names the retired program: nifeos/nife#2695.
+- **Done.** §241 (a threadbare base)'s floor table no longer names the retired program: partsfoundry/nife#2695.
 
 ## Index row
 

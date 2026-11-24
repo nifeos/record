@@ -106,7 +106,7 @@ included, is provisional.
 
 An image built for real machines names `basalt.nifeos.org` on 443, on the provisional channel,
 pinned to ISRG Root X1, as §250 rules. calef ruled on 2026-10-12 (UTC) that the host is GitHub Pages
-under that custom domain. `nifeos.github.io` chains to X1 (measured 2026-10-13 UTC), so the pin
+under that custom domain. `partsfoundry.github.io` chains to X1 (measured 2026-10-13 UTC), so the pin
 holds there. The second address is `basalt.crickertech.com`, tried when the first stops answering.
 §250 clause 6 puts it on another registrable domain, and calef chose `crickertech.com` on
 2026-10-21 (UTC). One root covers both (clause 10). The test image carries `helpers/tls-peer` and

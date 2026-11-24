@@ -23,12 +23,12 @@ given answer each. Modules are private with named re-exports, per §272 (the gra
 splits into private modules), whose fork 1 he answered *"Private modules"*, and §279 (the
 system-initializer crate root splits into private modules); `ivrs` stays public because it already
 is. Tests and Kani harnesses sit beside their table, per §274 (the filesystem-protocol crate root
-splits into its module files) and his rulings on [#1913](https://github.com/nifeos/nife/pull/1913)
-and [#1915](https://github.com/nifeos/nife/pull/1915). `acpi.rs` becomes an index, per §282, which
-calef set on [#1959](https://github.com/nifeos/nife/pull/1959): *"Agreed, make the parent an
+splits into its module files) and his rulings on [#1913](https://github.com/partsfoundry/nife/pull/1913)
+and [#1915](https://github.com/partsfoundry/nife/pull/1915). `acpi.rs` becomes an index, per §282, which
+calef set on [#1959](https://github.com/partsfoundry/nife/pull/1959): *"Agreed, make the parent an
 index."* That overrides the block's cut, which kept the RSDP, header and root walk in `acpi.rs`.
 Names stay provisional for his naming pass. The maintainer recorded this as settled by precedent
-on [PR #1972](https://github.com/nifeos/nife/pull/1972#issuecomment-6117079229) at 03:13 (UTC) on
+on [PR #1972](https://github.com/partsfoundry/nife/pull/1972#issuecomment-6117079229) at 03:13 (UTC) on
 2026-10-12. The forks are kept below as they were raised.
 
 ## What the file was

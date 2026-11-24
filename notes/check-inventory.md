@@ -19,8 +19,8 @@ the answer to four bad checks is not six more.
 ## How to re-run this audit
 
 ```
-gh api repos/nifeos/nife/rulesets                                    # find the ruleset id
-gh api repos/nifeos/nife/rulesets/19596094 \
+gh api repos/partsfoundry/nife/rulesets                                    # find the ruleset id
+gh api repos/partsfoundry/nife/rulesets/19596094 \
   --jq '.rules[] | select(.type=="required_status_checks")
         | .parameters.required_status_checks[].context'                   # what blocks
 grep -n 'name:' .github/workflows/*.yml                                   # what runs

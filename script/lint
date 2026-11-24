@@ -20,7 +20,7 @@
 #
 # **nife at its pin.** The record names nife's code: a `**Recorded.**` line names `script/lint`, a
 # citation names `xtask/src/host.rs`, a counted claim counts the kernel's proof harnesses. Those
-# resolve in nife at the commit basalt's `main` pins, which is the rule `nifeos/<repo>:<path>`
+# resolve in nife at the commit basalt's `main` pins, which is the rule `partsfoundry/<repo>:<path>`
 # citations already follow (helpers/qualified_paths.py). Before the first section, lint links every
 # path nife has and the record lacks into this tree (`helpers/nife_tree.py overlay`), names each
 # link in the repository's `info/exclude` so git never sees it, and removes them all at the end,
@@ -57,7 +57,7 @@ section_claim_copy() {
         fi
     done
     if [ -n "$differ" ]; then
-        echo "lint: these differ from nifeos/nife at $commit, the commit basalt's main pins:$differ" >&2
+        echo "lint: these differ from partsfoundry/nife at $commit, the commit basalt's main pins:$differ" >&2
         echo "  Copy them from there, in a change of their own:" >&2
         for f in $differ; do
             echo "    git -C <nife checkout> show $commit:$f > $f" >&2
@@ -66,7 +66,7 @@ section_claim_copy() {
         echo "  A change to the claim itself goes to nife; this copy follows the pin." >&2
         exit 1
     fi
-    echo "claim copy: 4 files identical to nifeos/nife@$(echo "$commit" | cut -c1-12)"
+    echo "claim copy: 4 files identical to partsfoundry/nife@$(echo "$commit" | cut -c1-12)"
 }
 
 section_replay_line() {

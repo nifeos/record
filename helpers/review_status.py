@@ -293,7 +293,7 @@ def selftest():
             "- Item 4: At the move.\n"
             "- Item 5: At the release, the manifest.\n"
             "- Decision 1: Will not fix, ruled 2026-11-14 (UTC): the reason.\n"
-            "- Item 6: Done in nifeos/other#3.\n"
+            "- Item 6: Done in partsfoundry/other#3.\n"
             "- P1-7, an id: Open.\n")
     cases = [
         ("the closed set parses", block("PARTIAL", good), 0),

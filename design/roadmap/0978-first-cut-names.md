@@ -44,21 +44,21 @@ exists: ratifying a name and ratifying a home stay two events (§316).
 
 | string | names today | is, under the ruling |
 |---|---|---|
-| `process-tools` | the package of Debian's procps programs (milestone 126 (the `procps` package)) | the repository `nifeos/process-tools` |
-| `core-tools` | the package holding `date`, `printenv`, `rm`, `uuid` and `wc` | the repository `nifeos/core-tools` |
-| `disk-tools` | the package holding `disk_surveyor` and `disk_partitioner` | the repository `nifeos/disk-tools` |
+| `process-tools` | the package of Debian's procps programs (milestone 126 (the `procps` package)) | the repository `partsfoundry/process-tools` |
+| `core-tools` | the package holding `date`, `printenv`, `rm`, `uuid` and `wc` | the repository `partsfoundry/core-tools` |
+| `disk-tools` | the package holding `disk_surveyor` and `disk_partitioner` | the repository `partsfoundry/disk-tools` |
 
 Each name holds six surfaces at once:
 
 1. A GitHub repository name under `nifeos`.
-2. A git dependency URL fragment, `https://github.com/nifeos/<repository>`, pinned by `rev` to a
-   landed commit (§305 (git dependencies on `nifeos/*` only)).
-3. A basalt pin target, `nifeos/<repo>@<sha>`, cited in the pull request that bumps it.
+2. A git dependency URL fragment, `https://github.com/partsfoundry/<repository>`, pinned by `rev` to a
+   landed commit (§305 (git dependencies on `partsfoundry/*` only)).
+3. A basalt pin target, `partsfoundry/<repo>@<sha>`, cited in the pull request that bumps it.
 4. A package name in the image's package index (§250 (an image names its distribution's package
    index)), and the head of the package file name
    `<name>-<version>-<architecture>.jig.tar.zst` (§307 (how long a name may be)).
 5. A citation site in prose and records: "the `process-tools` repository" in a milestone's gate, a
-   moved-things entry, a bump's `nifeos/<repo>@<sha>` line.
+   moved-things entry, a bump's `partsfoundry/<repo>@<sha>` line.
 6. A row in the workspace's front page, the table of checkouts.
 
 A rename after anything exists touches every surface on that list. The review ran before the first

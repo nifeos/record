@@ -34,7 +34,7 @@ back into nife except text this package lists. Every public name stands as built
 | version | `0.1.0`; no tag |
 | edition, `rust-version` | 2024, 1.88 (the floor that `as_chunks_mut` sets) |
 | license | `MIT OR Apache-2.0`, both texts at the crate root, written in the manifest with `description`, `readme`, `keywords` and `categories` |
-| `publish` | `false`; milestone 1017 keeps the moved contract crates unpublished under §305 (git dependencies are allowed on `nifeos/*` only, pinned to a landed commit) until their own release milestone, and the publish hold stands |
+| `publish` | `false`; milestone 1017 keeps the moved contract crates unpublished under §305 (git dependencies are allowed on `partsfoundry/*` only, pinned to a landed commit) until their own release milestone, and the publish hold stands |
 | dependencies | none |
 | size | `src/lib.rs` 1,086 lines, `src/proofs.rs` 165 lines (the Kani harnesses, compiled only under `cfg(kani)`), `tests/replies.rs` 781 lines, three captured replies under `tests/fixtures/` |
 

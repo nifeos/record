@@ -31,7 +31,7 @@ and nothing says where they go. `file_allocation_table`, the next crate to move,
 move they fuzz the crate at the commit nife pins, inside nife's merge queue.
 
 The premise needed one correction. The continuous fuzz host does not run these targets. It runs the
-in-guest system call drivers against the kernel, and its filer files private advisories on nifeos/nife
+in-guest system call drivers against the kernel, and its filer files private advisories on partsfoundry/nife
 alone ([notes/fuzzing/continuous-host.md](../../notes/fuzzing/continuous-host.md)). A cargo-fuzz
 crash, in nife or in a crate repository, is a red hosted job with a public log. The template also
 has a fuzz job already, `weekly / fuzz`, which has run five minutes per target since the template's
@@ -133,7 +133,7 @@ shows `weekly / fuzz` succeeded, and `script/fuzz --list` in nife names neither 
 
 - A crash in `weekly / fuzz` prints its input to a public log, as nife's shard does today. A
   finding meant to stay private has no path in a crate repository: the fuzz host's App and filer
-  reach nifeos/nife alone, and widening either is a credential decision for the architect, not this
+  reach partsfoundry/nife alone, and widening either is a credential decision for the architect, not this
   milestone.
 - `weekly / fuzz` does not keep its corpus between runs, as nife's shard does not, so each week
   starts from the committed seeds.

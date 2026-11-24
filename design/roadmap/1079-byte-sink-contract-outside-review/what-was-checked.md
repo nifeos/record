@@ -2,8 +2,8 @@
 
 An appendix to [the milestone](../1079-byte-sink-contract-outside-review.md).
 
-Verified firsthand, on a fresh shallow clone of `nifeos/nife` at the head of `main` and a fresh
-clone of `nifeos/crate-workflows`:
+Verified firsthand, on a fresh shallow clone of `partsfoundry/nife` at the head of `main` and a fresh
+clone of `partsfoundry/crate-workflows`:
 
 - The whole crate (467 lines of `src/lib.rs`, 26 of `Cargo.toml`) and every caller. The callers are thirteen programs in `components/`, `crates/system_log`, `crates/primitive_benchmark_contract`, `crates/system_initializer`, `fixtures/`, `system_tests/`, `kernel/` (behind `bench`), the fuzz workspace (`system_log_session` only), and the std PAL copy. `cargo xtask std-src` generates that copy (`sys/pal/nife/sinkproto.rs`) from this file with its test module and `# Examples` stripped.
 - `cargo test -p byte_sink_contract` (11 unit tests, 2 documentation tests), `cargo clippy

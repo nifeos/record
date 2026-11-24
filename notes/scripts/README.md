@@ -1,6 +1,6 @@
 # Scripts: the appendices to notes/scripts.md
 
-`nifeos/nife:notes/scripts.md` is the page to read. It lists every `script/` command, so a
+`partsfoundry/nife:notes/scripts.md` is the page to read. It lists every `script/` command, so a
 reader can act without opening anything here, and its appendix table is the index. These files hold
 each command's full table row, with its flags, gates and history, and the longer explanations the
 main page summarizes.

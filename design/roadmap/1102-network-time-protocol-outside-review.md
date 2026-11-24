@@ -19,7 +19,7 @@ so this review had no settled package to inherit. The baseline it takes instead,
 reopened below, as the release-review rule allows: `UNIX_MINIMUM` carries no unit, and
 `UNSYNCHRONISED` is a British spelling the cited source does not use.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, its naming helpers, Kani, cargo-mutants
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, its naming helpers, Kani, cargo-mutants
 and cargo-fuzz. No new tool.
 
 ## Goal
@@ -35,49 +35,49 @@ for the crate's own reasons.
   from the workspace and points at nife's publish allowlist; the move inlines both.
 - P0-2, README, licenses, changelog and a stranger record: At the move. The move writes them, and a
   stranger runs the README before the first tag.
-- P0-3, the contract-crate gate: Done, [#3841](https://github.com/nifeos/nife/pull/3841). The crate-root documentation opens with the kept-name
+- P0-3, the contract-crate gate: Done, [#3841](https://github.com/partsfoundry/nife/pull/3841). The crate-root documentation opens with the kept-name
   form in code spans, ``(`network_time_protocol`, `RFC 5905`)``, which the template's
   `contract_names` and clippy's `doc_markdown` both accept.
-- P0-4, `PACKET_LEN`: Done, [#3804](https://github.com/nifeos/nife/pull/3804), by Decision 2. The constant is `PACKET_BYTES`.
-- P0-5, British spellings in names: Done, [#3804](https://github.com/nifeos/nife/pull/3804), by Decision 2. The low-bit randomizer is gone, the
+- P0-4, `PACKET_LEN`: Done, [#3804](https://github.com/partsfoundry/nife/pull/3804), by Decision 2. The constant is `PACKET_BYTES`.
+- P0-5, British spellings in names: Done, [#3804](https://github.com/partsfoundry/nife/pull/3804), by Decision 2. The low-bit randomizer is gone, the
   `Reject` variant for leap indicator 3 is `Unsynchronized` and the harness is
   `parse_then_serialize_is_the_identity`.
-- P0-6, acronyms at first use: Done, [#3841](https://github.com/nifeos/nife/pull/3841). The crate-root documentation expands each acronym where
+- P0-6, acronyms at first use: Done, [#3841](https://github.com/partsfoundry/nife/pull/3841). The crate-root documentation expands each acronym where
   it first appears, and the template's `prose_acronyms` reports none. Each RFC citation is a code
-  span, as `nifeos/domain_name_system` writes them, because that gate drops "for" as a small word
+  span, as `partsfoundry/domain_name_system` writes them, because that gate drops "for" as a small word
   and so never reads "Request for Comments" as an expansion of RFC.
-- P0-7, the dependency on `clock_contract`: Done, [#3804](https://github.com/nifeos/nife/pull/3804), by Decision 1. The crate keeps a private
+- P0-7, the dependency on `clock_contract`: Done, [#3804](https://github.com/partsfoundry/nife/pull/3804), by Decision 1. The crate keeps a private
   `NANOSECONDS_PER_SECOND` and has no dependencies.
 - P1-8, shipped text that points back into nife: At the move.
-- P1-9, safe Rust: At the move. `#![forbid(unsafe_code)]` landed in [#3567](https://github.com/nifeos/nife/pull/3567); the new repository's fuzz
+- P1-9, safe Rust: At the move. `#![forbid(unsafe_code)]` landed in [#3567](https://github.com/partsfoundry/nife/pull/3567); the new repository's fuzz
   opt-in and target remain.
 - P1-10, the exhaustive sweep and the workspace profile: At the move, in the new manifest. At
   `opt-level = 2` line coverage of `src/lib.rs` is 97 per cent, over the template's floor of 85,
   so the full sweep can stay in the default test.
 - P1-11, surviving mutants: At the move, in the new repository's exemptions file.
-- P1-12, the totality of `Interval`: Done, [#3841](https://github.com/nifeos/nife/pull/3841). Both accessors saturate, and the Kani harness
+- P1-12, the totality of `Interval`: Done, [#3841](https://github.com/partsfoundry/nife/pull/3841). Both accessors saturate, and the Kani harness
   `the_interval_conversions_are_total` proves them free of overflow and sign-preserving over every
   `i128` tick count, with a falsification patch. Narrowing `from_ticks` to `i64` is a further
   two-way door before the first publish, which the maintainer may rule; the done-when check does
   not need it.
-- P1-13, two checks the RFC's reference implementation makes: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
+- P1-13, two checks the RFC's reference implementation makes: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
 - P1-14, the caller's replay duty: At the move. The `Query::accept` documentation states it
-  ([#3567](https://github.com/nifeos/nife/pull/3567)); the README's BUGS line is written with the README.
-- P1-15, a proof that `accept` ever accepts: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P2-16, `Timestamp::fraction`: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P2-17, the low-entropy items: Done, [#3804](https://github.com/nifeos/nife/pull/3804), by Decision 3. `Query::new` and the low-bit randomizer
+  ([#3567](https://github.com/partsfoundry/nife/pull/3567)); the README's BUGS line is written with the README.
+- P1-15, a proof that `accept` ever accepts: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P2-16, `Timestamp::fraction`: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P2-17, the low-entropy items: Done, [#3804](https://github.com/partsfoundry/nife/pull/3804), by Decision 3. `Query::new` and the low-bit randomizer
   no longer exist; `Query::with_nonce` is the only constructor.
-- P2-18, `Short`'s public field: Done, [#3804](https://github.com/nifeos/nife/pull/3804), by Decision 2. `ShortFormat` keeps its field private,
+- P2-18, `Short`'s public field: Done, [#3804](https://github.com/partsfoundry/nife/pull/3804), by Decision 2. `ShortFormat` keeps its field private,
   with `from_bits` and `bits`.
-- P2-19, the `dest` parameter: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P2-20, drifted notes: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P2-21, the `Reject` order claim: Done, [#3567](https://github.com/nifeos/nife/pull/3567).
-- P2-22, `abs_ticks`: Done, [#3804](https://github.com/nifeos/nife/pull/3804), by Decision 2. `abs_ticks` no longer exists.
-- Decision 1, `clock_contract`: Done, [#3804](https://github.com/nifeos/nife/pull/3804), ruled by the maintainer, provisional, 2026-11-14 (UTC).
-- Decision 2, the public names: Done, [#3804](https://github.com/nifeos/nife/pull/3804), ruled by the maintainer, provisional, 2026-11-14 (UTC),
+- P2-19, the `dest` parameter: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P2-20, drifted notes: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P2-21, the `Reject` order claim: Done, [#3567](https://github.com/partsfoundry/nife/pull/3567).
+- P2-22, `abs_ticks`: Done, [#3804](https://github.com/partsfoundry/nife/pull/3804), by Decision 2. `abs_ticks` no longer exists.
+- Decision 1, `clock_contract`: Done, [#3804](https://github.com/partsfoundry/nife/pull/3804), ruled by the maintainer, provisional, 2026-11-14 (UTC).
+- Decision 2, the public names: Done, [#3804](https://github.com/partsfoundry/nife/pull/3804), ruled by the maintainer, provisional, 2026-11-14 (UTC),
   with the `UNIX_*` constants, `DEFAULT_POLL_EXPONENT` and `ShortFormat` renamed, and ratified
   with `PORT` kept.
-- Decision 3, the low-entropy items: Done, [#3804](https://github.com/nifeos/nife/pull/3804), ruled by the maintainer, provisional, 2026-11-14
+- Decision 3, the low-entropy items: Done, [#3804](https://github.com/partsfoundry/nife/pull/3804), ruled by the maintainer, provisional, 2026-11-14
   (UTC).
 
 ## Decisions recorded
@@ -113,7 +113,7 @@ clears its review package, and that clearance approves the repository. `network_
 pure RFC 5905 wire format with no nife vocabulary, so it meets the bar for leaving. The package
 is `notes/crate-reviews/network-time-protocol.md`.
 
-Ruling 2026-11-20 UTC: A. The architect clears the package and approves `nifeos/network_time_protocol`.
+Ruling 2026-11-20 UTC: A. The architect clears the package and approves `partsfoundry/network_time_protocol`.
 No tag, no publish.
 
 - A. The architect clears the package, and that clearance creates the repository.
@@ -125,7 +125,7 @@ Door: one-way. Creating a public repository and moving the crate are outward ste
 Prior art. `sntpc` and `ntp-proto` each live in their own repository and publish on their own
 cadence. nife differs in reviewing a whole crate once, before its first publish.
 Concrete example: the architect cleared `generational_table` on 2026-11-08 (UTC), and its
-repository, `nifeos/generational_table`, dates from that day.
+repository, `partsfoundry/generational_table`, dates from that day.
 
 Blocks: the move.
 

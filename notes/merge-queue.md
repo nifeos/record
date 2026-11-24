@@ -35,9 +35,9 @@ drain acts by labeling rather than arming: see its section.)
 
 ```console
 $ helpers/merge-drain.sh --dry-run
-merge-drain[patagonia]: (dry run) would run: gh pr edit 1569 --repo nifeos/nife --add-label needs-maintainer
+merge-drain[patagonia]: (dry run) would run: gh pr edit 1569 --repo partsfoundry/nife --add-label needs-maintainer
 merge-drain[patagonia]: LABELLED #1569 (conflict, ejected)
-merge-drain[patagonia]: (dry run) would run: gh pr comment 1569 --repo nifeos/nife --body merge-drain[patagonia]: needs-maintainer. CONFLICTS with `main` ...
+merge-drain[patagonia]: (dry run) would run: gh pr comment 1569 --repo partsfoundry/nife --body merge-drain[patagonia]: needs-maintainer. CONFLICTS with `main` ...
 ```
 
 That is a real pass, against the live repository at 2026-10-03 23:54 UTC, minutes after #1569 was
@@ -152,7 +152,7 @@ What to do once it speaks is [notes/main-is-red.md](main-is-red.md), added 2026-
 calef asked whether the response existed and it did not: this watcher reported a red trunk and
 `helpers/merge-drain.sh` carried on arming pull requests into it every five minutes. The response is
 `helpers/queue-hold.sh` (hold the queue, land one fix alone, release) with the judgment in
-`nifeos/nife:briefs/main-is-red.md`. It stays a person's to run, for the reason this
+`partsfoundry/nife:briefs/main-is-red.md`. It stays a person's to run, for the reason this
 note gives throughout: a queue reports, it does not resolve.
 
 This watcher reads CI's *conclusion*, and a skipped required check posts `success` (its `BUGS`).

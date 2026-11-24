@@ -18,7 +18,7 @@ It blocked the whole milestone until the ruling below. Nothing else waited on it
 ## The ruling
 
 calef ruled on 2026-10-11 at 07:15 (UTC), and the maintainer recorded it on
-[PR #1913](https://github.com/nifeos/nife/pull/1913#issuecomment-6106583264) the same morning.
+[PR #1913](https://github.com/partsfoundry/nife/pull/1913#issuecomment-6106583264) the same morning.
 Three forks, three answers, each the recommendation:
 
 | Fork | calef's words | What it decides |

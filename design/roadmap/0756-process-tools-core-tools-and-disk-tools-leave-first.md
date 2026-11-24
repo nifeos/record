@@ -24,11 +24,11 @@ calef ruled both questions on 2026-10-04 (UTC), relayed by the maintainer on pul
 §247 (the split begins with basalt holding nife, and `procps` moves first) records them.
 
 - **Yes, basalt v0 is the first step**, including the go-ahead for a lane's first write to
-  `nifeos/basalt`. That is milestone 755 (basalt v0 pins nife and runs its gate).
+  `partsfoundry/basalt`. That is milestone 755 (basalt v0 pins nife and runs its gate).
 - **Yes, the first code cut is `procps` + `coreutils` + `util-linux`, and only once all six
   conditions below hold.** This block is that cut.
 - Ruled 2026-10-28 (UTC): the cut leaves as three repositories named after the packages,
-  `nifeos/process-tools`, `nifeos/core-tools` and `nifeos/disk-tools`. Each holds that package's
+  `partsfoundry/process-tools`, `partsfoundry/core-tools` and `partsfoundry/disk-tools`. Each holds that package's
   programs and every crate only that package uses, in a workspace beside the programs (ruled
   2026-11-04 UTC). The crates the package shares with other repositories, and any crate published
   on its own, have already left, each as its own repository, and the programs depend on them by
@@ -81,7 +81,7 @@ programs, so the six conditions and the measurements stand. The title and slug c
 The title was `procps`, `coreutils` and `util-linux` are the first code to leave this repository,
 and older records cite it by that or as procps, coreutils and util-linux leave first. The ruling
 above and the analysis below keep the names they were written with. The homes are
-`nifeos/process-tools`, `nifeos/core-tools` and `nifeos/disk-tools` (ruled 2026-10-28); the
+`partsfoundry/process-tools`, `partsfoundry/core-tools` and `partsfoundry/disk-tools` (ruled 2026-10-28); the
 packages' `home` lines keep `status = "provisional"` until each repository exists.
 
 What is below is the proposal's analysis. The argument is its author's; it changes only where a

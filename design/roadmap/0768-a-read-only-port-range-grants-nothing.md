@@ -37,7 +37,7 @@ hardware exactly as a `WRITE` one did. `component_plan` maps `Serve` to `READ` a
 
 calef ruled on 2026-10-05 (UTC), answer 1 of the proposal, quoted: "grant nothing without WRITE
 since we can't grant READ without write"
-([comment on #1687](https://github.com/nifeos/nife/pull/1687#issuecomment-5998739348)). The TSS
+([comment on #1687](https://github.com/partsfoundry/nife/pull/1687#issuecomment-5998739348)). The TSS
 I/O bitmap has one bit per port and cannot permit `in` without `out`. Refused: declaring a port
 range a rights-free object (makes `READ` on it a lie a reader must know about). Also refused: splitting it
 into an `in`-only and an `out`-only kind (needs trapping every port access, the cost the bitmap

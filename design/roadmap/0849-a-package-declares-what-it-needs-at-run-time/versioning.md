@@ -2,7 +2,7 @@
 
 An appendix of [a package declares what it needs at run time](../0849-a-package-declares-what-it-needs-at-run-time.md):
 its fork 5, versioning. calef ruled all nine rules below on 2026-10-19 (UTC), each as written here,
-on [#2417](https://github.com/nifeos/nife/pull/2417). It is a separate file because the rules would
+on [#2417](https://github.com/partsfoundry/nife/pull/2417). It is a separate file because the rules would
 put the block over §212 (a prose budget)'s cap.
 
 Reuse: `package_index::version` (dpkg's ordering, already in the tree), milestone 614 (two installed

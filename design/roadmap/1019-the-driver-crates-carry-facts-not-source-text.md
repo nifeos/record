@@ -14,7 +14,7 @@ A read-and-report lane raised this on 2026-11-01 (UTC) after it audited the outs
 of eight crates: `e1000e`, `designware_ethernet`, `designware_mobile_storage`,
 `jh7110_clock_and_reset`, `jh7110_watchdog`, `extensible_host_controller_interface`, `usb` and
 `machine_discovery`. The audit used the method of the `jh7110_entropy` license audit
-(nifeos/jh7110_entropy#3). For each citation it fetched the cited file at a pinned revision, read
+(partsfoundry/jh7110_entropy#3). For each citation it fetched the cited file at a pinned revision, read
 its license header, and compared it with the crate as runs of identical lower-case word tokens,
 with hexadecimal normalized and identifiers split at underscores. The pull request that adds this
 file also fixes the citations that were only wrong about a path, a function name or what a source
