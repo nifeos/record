@@ -39,6 +39,6 @@ separate endpoints, and the multiplexing happens at the wait level, not the prot
 ### Buffering stage
 
 Measured and rejected (notes/pipes.md, 2026-08-03; full text [at
-`256815e56`](https://github.com/nifeos/nife/blob/256815e5609cfb961ccb6526f8a0d3316e589402/design/decisions/0101-notification-objects.md#buffering-stage)).
+`256815e56`](https://github.com/nifeos/nife/blob/256815e5609cfb961ccb6526f8a0d3316e589402/design/decisions/101-notification-objects.md#buffering-stage)).
 A buffer doubles the per-message cost and buys decoupling, not bandwidth, and the notification
 object solves the deadlock it was proposed for.
