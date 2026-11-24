@@ -1,10 +1,10 @@
 """Reading a `Name:` provenance block, for the `script/` entry points that count them.
 
-**Why this file exists.** Milestone 115 put a name's provenance in the header of the thing it names
+**Why this file exists.** Milestone 115 (the names that were ratified) put a name's provenance in the header of the thing it names
 (`//! Name: ratified 2026-08-04 (calef, milestone 63). Refused `x` (why).`), and `script/names`
-derives the table from it. Milestone 276 put the same four-word vocabulary on the metrics dashboard
+derives the table from it. Milestone 276 (the dashboard counts milestones and decisions by status) put the same four-word vocabulary on the metrics dashboard
 as a weekly series, which is a second reader of the same blocks. The derivation is shared rather
-than copied for milestone 236's reason: a gate and a dashboard that each carry their own copy of a
+than copied for the reason of milestone 236 (three derivations are copied between scripts): a gate and a dashboard that each carry their own copy of a
 definition will drift, both will look authoritative, and nothing will fire. `helpers/rust_source.py`
 is the same move for the `unsafe` census and the harness count, and its docstring is the longer
 argument.
@@ -34,14 +34,14 @@ import re
 
 # The four words, in the order a reader meets them in `script/names`' own report. `provisional` is a
 # claim about INTENT (whoever chose this expects it to change) where the other three are claims about
-# the RECORD; §89 added it on 2026-08-16 and the states are orthogonal in principle. The tree spends
+# the RECORD; §89 (provisional becomes the fourth provenance state) added it on 2026-08-16 and the states are orthogonal in principle. The tree spends
 # one word on the common case rather than modeling the cross product.
 STATUSES = ['ratified', 'recorded', 'provisional', 'unrecorded']
 
 _HEAD = re.compile(r"(ratified|recorded|unrecorded|provisional)\b")
 _DATE = re.compile(r"ratified (\d{4}-\d{2}-\d{2})\b")
 
-# `recorded` claims the reasoning is somewhere else, so it has to point: `recorded (milestone 46)`,
+# `recorded` claims the reasoning is somewhere else, so it has to point: `recorded (milestone 46 (rename the components for what they are))`,
 # `recorded (nifeos/record:design/naming.md)`. Same shape of check as the date on `ratified`, and the same limit,
 # since nothing here follows the citation to see whether it says what the block claims.
 CITED = re.compile(r"^recorded \([^()]+\)")
@@ -66,7 +66,7 @@ RECORDS_REFUSAL = re.compile(r"\bRefused\s+`[A-Za-z][A-Za-z0-9_-]*`")
 
 # ---- what a READER takes for a header, which is wider than what `block()` can parse -------------
 #
-# The gap between those two is where two of calef's ratifications went missing (milestone 283). A
+# The gap between those two is where two of calef's ratifications went missing (milestone 283 (one provenance block per file)). A
 # file carried `//! **Name: ratified 2026-09-08 ...**` under a stale `//! Name: provisional` block;
 # the bold prefix does not match `head` below, so the parse read the proposal and reported
 # `provisional`, which is a legitimate answer nothing disputes. Neither defect was visible alone.
@@ -116,12 +116,12 @@ def block(text, prefix):
     A continuation is the next comment line at the same prefix, **across paragraph breaks**: an empty
     comment line is a break, and the end of the comment run is the terminator.
 
-    **It used to stop at the first empty comment line, and that hid refusals** (DECISIONS §155's
-    sibling finding, 2026-09-18). A block written as one paragraph per argument, which is how the
+    **It used to stop at the first empty comment line, and that hid refusals** (a sibling finding of DECISIONS §155 (the naming conventions move out of the
+    constitution), 2026-09-18). A block written as one paragraph per argument, which is how the
     tree's best ones are written, put every refusal after the first break and therefore out of
     reach: `crates/screen_console` recorded four and `script/names --refused` could see none of
     them. That defeats the one query milestone 115 exists to serve, *has this name been refused
-    before*, whose worked example is milestone 63 having already refused `system_builder` for a
+    before*, whose worked example is milestone 63 (directory and package names) having already refused `system_builder` for a
     reason nobody could find.
 
     **The widening was measured before it was made**, because this parse is shared with

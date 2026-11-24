@@ -30,7 +30,7 @@ import re
 # fails the build. Deleting harnesses below a stated floor is exactly the event worth catching, and
 # it is the one an equality check would have drowned in noise.
 #
-# **Why the ceiling (milestone 134, 2026-08-18), and it is the floor's mirror rather than a third
+# **Why the ceiling (milestone 134 (the register of measures), 2026-08-18), and it is the floor's mirror rather than a third
 # idea.** A floor suits a quantity where MORE IS BETTER and the bad event is a deletion. Some
 # quantities are the other way up, and unsafe is the tree's clearest one: nobody wants more of it,
 # every addition should be a deliberate act with a written reason, and the bad event is a drift

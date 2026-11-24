@@ -1,4 +1,4 @@
-# Spell checking for the prose (milestone 68). The documentation is a deliverable here, not a
+# Spell checking for the prose, one of the gates of milestone 68 (code-quality gates). The documentation is a deliverable here, not a
 # by-product, so a typo in a decision or a note is a defect in the thing being shipped.
 #
 # The honest result of turning it on, because it argues against overselling this gate: of 213
@@ -43,7 +43,7 @@ extend-ignore-re = ["\\b[0-9a-f]{12,}\\b"]
 
 [default.extend-words]
 # Eduard Suess's 1909 name for the Earth's nickel-iron core, Ni plus Fe, and the name this OS takes
-# under milestone 120. `typos` reports it as a misspelling of "knife" and is not wrong to: the whole
+# under milestone 120 (the rename). `typos` reports it as a misspelling of "knife" and is not wrong to: the whole
 # argument for the name is that its accidental reading is `knife`, which is sharp, single-purpose and
 # a held tool with no authority of its own. That is the same coin as this entry. Recorded here rather
 # than argued with, and worth knowing before the rename lands: every contributor's spell-checker will
@@ -151,7 +151,7 @@ IDentifier = "IDentifier"
 # Valid variant spellings, not errors. British/American and -able/-eable splits are style, and this
 # tree already chose; a checker should not relitigate that.
 Writeable = "Writeable"
-# tock_registers' read-modify-write trait (milestone 139 round 5, input.rs's IMSC register): the
+# tock_registers' read-modify-write trait (milestone 139 (drive the unsafe count down) round 5, input.rs's IMSC register): the
 # checker splits the camelCase compound into "Read" + "Writeable" and only the bare word was
 # allowlisted before, so the compound slipped through until this driver needed `.modify()`.
 ReadWriteable = "ReadWriteable"
@@ -160,10 +160,10 @@ unparseable = "unparseable"
 # Proper nouns: a chip vendor and a Rust TUI crate.
 Synopsys = "Synopsys"
 ratatui = "ratatui"
-# A crates.io package name (the DEFLATE bindings), cited throughout milestone 64's probe results.
+# A crates.io package name (the DEFLATE bindings), cited throughout the probe results of milestone 64 (enough std to run somebody else's crate).
 # The checker splits the trailing digit off and reports `flate` as a misspelling of `flat`.
 flate2 = "flate2"
-# The e2fsprogs command that writes an ext4 filesystem, named in milestone 38's Linux comparison.
+# The e2fsprogs command that writes an ext4 filesystem, named in the Linux comparison of milestone 38 (filesystem throughput).
 # Same split as `flate2`, one character earlier: the checker takes `mke` and offers `make`.
 mke2fs = "mke2fs"
 # The environment variable naming mke2fs's configuration file, which the corpus script of milestone
@@ -180,7 +180,7 @@ everybodies = "everybodies"
 # RMRR/ATSR/RHSA/SATC in acpi.rs's `DmarEntry::Other` doc. The checker reads it as "AND" plus a
 # stray D.
 ANDD = "ANDD"
-# A misspelling in somebody else's document, quoted verbatim (milestone 168). Warton's 2005 thesis
+# A misspelling in somebody else's document, quoted verbatim (milestone 168 (a multi-tasking workload benchmark)). Warton's 2005 thesis
 # abstract writes "single stack architecure", and nifeos/record:notes/job-mix.md quotes the sentence because the
 # strength of that claim differs from the retrospective's summary of it, which is the whole point of
 # the quotation. Correcting a source inside quotation marks would be worse than the typo.

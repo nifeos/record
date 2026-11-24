@@ -345,7 +345,7 @@ index = ''.join(open(p, errors='replace').read() for p in index_pages)
 notes = sorted(n for n in md if n.startswith('notes/') and n.count('/') == 1)
 if not md or not notes:
     sys.exit('lint: the markdown sweep selected nothing, so the link and index checks judged '
-             'nothing. See milestone 401.')
+             'nothing. See milestone 401 (a gate that selects the set it judges).')
 missing = [n for n in notes if os.path.basename(n) != 'README.md' and os.path.basename(n) not in index]
 if bad:
     print('lint: broken relative markdown links:', file=sys.stderr)
@@ -366,6 +366,7 @@ PY
 
 section_prose_ratchet() {
     echo "==> the prose ratchet (§212 words, §213 sentences, bold and passives)"
+    # §212 (a prose budget) and §213 (writing standards).
     # lint-scope: both
     python3 helpers/prose_ratchet.py --selftest
     python3 helpers/prose_ratchet.py --check
@@ -394,6 +395,7 @@ section_comment_block_ratchet() {
 
 section_parent_index() {
     echo "==> the parent-index check (§282: when a file is split, the parent becomes an index)"
+    # §282 (when a file is split, the parent becomes an index).
     # lint-scope: both
     python3 helpers/parent_index.py --selftest
     python3 helpers/parent_index.py --check
@@ -415,6 +417,7 @@ section_history() {
 
 section_line_citations() {
     echo "==> no line-number citations (§277: cite a heading or a symbol)"
+    # §277 (cite a heading or a symbol, never a line number).
     # lint-scope: both
     python3 helpers/line_citations.py --selftest
     python3 helpers/line_citations.py --check

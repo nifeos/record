@@ -81,7 +81,7 @@ def non_blank(text):
     return sum(1 for line in text.split('\n') if line.strip())
 
 
-# --- the unsafe census (milestone 134) -----------------------------------------------------------
+# --- the unsafe census (milestone 134 (the register of measures)) -----------------------------------------------------------
 #
 # Raised by calef on 2026-08-18 as one question: "how much unsafe code is there in a code base, and
 # is that something we should be monitoring and driving in a particular direction over time?" See
@@ -282,7 +282,7 @@ def trust_bucket(path):
     has no opinion about (already out of every census, e.g. `vendor/`, or excluded above as host
     tooling).
 
-    `user/src/` is milestone 175's predecessor to `components/`/`fixtures/` (renamed 2026-09-13);
+    `user/src/` is the predecessor, before milestone 175 (split user/), of `components/`/`fixtures/` (renamed 2026-09-13);
     a historical week's tree carries whichever name was current then, never both, so both are
     handled here rather than only in the caller.
 
@@ -343,7 +343,7 @@ def trust_boundary_census(files):
 
 # --- the proof-harness count, the text-only derivation -------------------------------------------
 #
-# The falsification record milestone 194 built and DECISIONS §134 ratified: what evidence each Kani
+# The falsification record milestone 194 (the falsification record, its lint) built and DECISIONS §134 ratified: what evidence each Kani
 # harness carries that it can fail. `replayable` has a patch a script applies to turn the harness
 # red; `attested` is a person who broke it and watched; `unfalsified` is the claim's honest
 # denominator. A harness with no record at all counts as unfalsified, which is what it is.
@@ -457,7 +457,7 @@ def harness_count(files):
         # is does not count as one. A raw grep counts 151 where the tree has 146.
         total += len(PROOF.findall(strip_non_code(text)))
         # Raw, because a falsification record lives in a doc comment by construction, and
-        # attributed to what it annotates, because since milestone 305 a record may sit above a
+        # attributed to what it annotates, because since milestone 305 (the six kernel confinement rows get a falsification) a record may sit above a
         # kernel `#[test_case]` instead of a `#[kani::proof]`. `total` counts harnesses, so a
         # record counted here that belongs to a test would put two different populations in one
         # fraction: it inflates `falsified` and deflates `unfalsified` by the same amount, and

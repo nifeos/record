@@ -4,10 +4,10 @@
 #
 # PROVISIONAL NAME. See the `Name:` block at the end of this comment.
 #
-# **The tripwire milestone 92 asks for, and the machinery milestone 93 shares.** An audit is a
+# **The tripwire milestone 92 asks for, and the machinery milestone 93 (documentation audits as a mechanism) shares.** An audit is a
 # deliberate adversarial read of the tree through one named lens, and the failure mode this exists to
 # prevent is not a bad audit: it is no audit, because auditing depended on someone remembering to
-# ask. §74 decided what "due" means, on measured intervals rather than on a calendar somebody liked:
+# ask. §74 (audits run on change) decided what "due" means, on measured intervals rather than on a calendar somebody liked:
 # event triggers first, a count second, six weeks as a backstop for a quiet period.
 #
 # **This never runs an audit and never edits anything.** Red means "run the audit", not "an
@@ -266,7 +266,7 @@ def current():
 
     crates = len([d for d in glob.glob(os.path.join(root, "crates", "*")) if os.path.isdir(d)])
     # **Both packages, and the reason is the baseline table rather than the word "component".**
-    # This read `user/Cargo.toml` until milestone 311. Milestone 175 split `user/` into
+    # This read `user/Cargo.toml` until milestone 311 (the audit cadence tripwire). Milestone 175 split `user/` into
     # `components/` (a distribution would ship it) and `fixtures/` (it exists to test something),
     # and from 2026-08-11 to 2026-09-17 this line raised FileNotFoundError on every scheduled run:
     # five weeks in which nothing reported whether an audit was due.
@@ -411,7 +411,7 @@ for cells in table(lines, INDEX_HDR, index_path):
     if not fm:
         problems.append(f"audit {date} ({kind}): findings {findings!r} must read "
                         f"'fixed N, minted N, accepted N'. Every finding ends in exactly one of "
-                        f"the three states; \"noted\" is not a state (DECISIONS §35).")
+                        f"the three states; \"noted\" is not a state (DECISIONS §35 (what a scanner is for here)).")
     lm = LINK.match(report)
     if not lm:
         problems.append(f"audit {date} ({kind}): report {report!r} must be a markdown link")

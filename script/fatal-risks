@@ -8,15 +8,15 @@
 # `design/fatal-risks/README.md` is the falsification list: nine claims that, if false, mean the project
 # should stop. Its own BUGS section has said since the day it was written that **nothing gates this
 # file**, and on 2026-09-10 a maintainer reading it against the tree found that warning firing four
-# separate ways in one pass. Milestone 275 is that finding turned into a check.
+# separate ways in one pass. Milestone 275 (a gate that diffs design/fatal-risks/README.md against the roadmap) is that finding turned into a check.
 #
 # The defect class, stated once: every risk entry is prose ABOUT a milestone or a decision, and the
 # thing it is about has a recorded status somewhere else. `script/roadmap --check` proves a cited
 # `milestone N` resolves to SOME row and `script/decisions --check` proves a `§N` resolves to SOME
 # decision; `script/citations` proves a gloss names the RIGHT one. **None of the three asks whether
 # what this file SAYS about what it cited is still true**, which is why risk 2 could carry
-# `RUN, 2026-08-30. AMBER` for eleven days while milestone 191's own block read `NOT-STARTED`, and
-# why risk 9 could cite milestone 164 as the reason x86_64 has no `fs_server` nine days after 164
+# `RUN, 2026-08-30. AMBER` for eleven days while the block of milestone 191 (did the proofs catch the bugs) read `NOT-STARTED`, and
+# why risk 9 could cite milestone 164 (x86_64 userspace and aes) as the reason x86_64 has no `fs_server` nine days after 164
 # turned BUILT.
 #
 # ---------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@
 #
 # **2. A risk whose experiment has NOT run names a milestone that is not finished.** The mirror, and
 #    it is the one that goes stale silently: `**The decisive experiment that has not been run:**
-#    milestone 168` is a claim that stops being true the day 168 turns BUILT, and nothing else in the
+#    milestone 168 (a multi-tasking workload benchmark)` is a claim that stops being true the day 168 turns BUILT, and nothing else in the
 #    tree would notice. Same shape as `script/roadmap`'s rule that a `Gate: MILESTONE N` may not name
 #    a BUILT milestone, which is where the idea comes from.
 #
@@ -62,8 +62,8 @@
 #    pending: the owner column names who owns the experiment, not a milestone whose completion IS the
 #    experiment. So a pending row over a BUILT owner is legitimate and stays unreported.
 #
-# **4. A stated status word must be the recorded one.** `milestone 161 is `PARTIAL`` and
-#    `§86 is DECIDED` are the cheapest claims in the file to check and the cheapest to get wrong.
+# **4. A stated status word must be the recorded one.** `milestone 161 (the x86_64 kernel port) is `PARTIAL`` and
+#    `§86 (whether an NVMe driver can leave the kernel) is DECIDED` are the cheapest claims in the file to check and the cheapest to get wrong.
 #    Exact match against `script/roadmap`'s and `script/decisions`' own vocabulary.
 #
 # **5. A cited path exists**, including the proposal files, since a proposal cited as pending work
@@ -81,7 +81,7 @@
 #    asymmetry is not tidy and it is honest: a proposal has no completion date to record, so the only
 #    available answer to "did this move after the risk entry did" is the last commit that touched it.
 #    That is what catches the risk-6 finding, where the instrument
-#    (milestone 306, `design/roadmap/0306-time-the-hw-entropy-step.md`) shipped on 2026-09-10 and the entry
+#    (milestone 306 (time the hw-entropy step), `design/roadmap/0306-time-the-hw-entropy-step.md`) shipped on 2026-09-10 and the entry
 #    still called the step untimed. Exactly one proposal is cited in the file today, so the noise
 #    surface of the git half is one path rather than the tree.
 #
@@ -90,7 +90,7 @@
 # ---------------------------------------------------------------------------------------------
 #
 # **A premise that was overtaken.** Risk 9's second stale claim was that milestone 177 needs the
-# graphical stack, which stopped holding when `DECISIONS §149` landed. No status field encodes a
+# graphical stack, which stopped holding when `DECISIONS §149 (may the kernel answer on an endpoint)` landed. No status field encodes a
 # premise, and nothing here pretends to see one. Milestone 275's block says so in its own BUGS and
 # this says so where the reader meets the check: **a green run means no status word contradicts the
 # record, never that the file's arguments still hold.**
@@ -120,10 +120,10 @@
 # ---------------------------------------------------------------------------------------------
 #
 # `script/fatal-risks --selftest` drives every check above against a fixture built to trip it, and
-# **requires each one to come back red**. It is the same discipline DECISIONS §134 put on a Kani
+# **requires each one to come back red**. It is the same discipline DECISIONS §134 (a harness carries a machine-replayable falsification record) put on a Kani
 # harness (a proof that has never been falsified is a claim about a claim) applied to a gate, and it
 # is here for a defect this tree has already had twice: `script/roadmap`'s merged-branch check
-# "spent a day passing in CI while being unable to fail", and milestone 193's record is that both of
+# "spent a day passing in CI while being unable to fail", and the record of milestone 193 (put kernel/src within reach of the prover) is that both of
 # its claims were "falsified before they were believed".
 #
 # The fixtures are in `SELFTEST` at the bottom. A check that stops firing on its own fixture is a
@@ -396,7 +396,7 @@ def analyze(text, milestones, built_on, decisions, exists, last_touched, appendi
             # The lead-in's own sentence, and only that. Risk 6's `**The decisive experiment:** one
             # real, non-virtio device on real silicon, confined, at throughput.` is followed in the
             # SAME paragraph by "The JH7110's GMAC (milestone 53) ... are the candidates", which
-            # names candidates rather than the experiment. A paragraph-wide read would take 53 as
+            # names candidates rather than the experiment. A paragraph-wide read would take milestone 53 (the board's own peripherals) as
             # the experiment and be wrong about which milestone the claim is about.
             sentence = first_sentence(body[em.end():em.end() + 400])
             cited = [int(m.group(1)) for m in CITE_M.finditer(sentence)]

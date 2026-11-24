@@ -27,8 +27,8 @@ import subprocess
 import sys
 
 # The derivations this gate shares with `script/metrics`, in one place rather than copied into both
-# (milestone 236: three derivations are copied between scripts, and nothing notices when they
-# drift). This script `cd`s to the repository root on line 18, which is what lets a heredoc import
+# (milestone 236 (three derivations are copied between scripts), because nothing noticed when they
+# drifted). This script `cd`s to the repository root on line 18, which is what lets a heredoc import
 # at all; the block comment above `_unsafe_census` below says what stays here and why.
 # `dont_write_bytecode` because the import would otherwise leave a `helpers/__pycache__/`
 # behind on every run, which is an untracked directory a gate has no business creating.
@@ -85,7 +85,7 @@ def _harness_hits():
     """(workspace package, number of harnesses) for every package that has any.
 
     Scoped to the workspace because that is what `cargo kani` can reach, and **it was scoped to
-    `crates/` until milestone 212**, with a docstring here that gave the reason as "the kernel, the
+    `crates/` until milestone 212 (script/falsifications walks crates/ only)**, with a docstring here that gave the reason as "the kernel, the
     user programs and xtask are not packages it compiles". That stopped being true a milestone
     later: 193 (put `kernel/src` within reach of the prover) and 197 (`user/` and `xtask` are out of
     reach of the prover) each added a row to `script/verify`'s crate table, and this count went on
@@ -240,7 +240,7 @@ def _security_audits():
     return len(re.findall(r'^\| \d{4}-\d\d-\d\d \| security \|.*\]\(', text, re.M))
 
 
-# The unsafe census (milestone 134), raised by calef on 2026-08-18 as one question: "how much
+# The unsafe census (milestone 134 (the register of measures)), raised by calef on 2026-08-18 as one question: "how much
 # unsafe code is there in a code base, and is that something we should be monitoring and driving in
 # a particular direction over time?" A standalone census would have answered it with another
 # one-time number nobody re-takes, which is the failure this milestone exists to fix, so it is a
@@ -441,7 +441,7 @@ REGISTRY = {
 #
 # Empty from 2026-10-06 to 2026-10-12 (UTC): calef dropped the line limit of milestone 118 (CLAUDE.md has a
 # budget), "drop 118's limit and rely on §212's cap", so AGENTS.md is budgeted in words by the prose
-# ratchet and `agents-md-lines` is gone. The mechanism stays for the next ceiling that must sit at the tree's exact value.
+# ratchet of §212 (a prose budget) and `agents-md-lines` is gone. The mechanism stays for the next ceiling that must sit at the tree's exact value.
 #
 # `static-mut-declarations` is that next one (milestone 891, 2026-10-12 UTC): a population of a few
 # dozen that should only ever fall, where a fixed ceiling would let a converted static be quietly

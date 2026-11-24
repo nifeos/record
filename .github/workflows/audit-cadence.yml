@@ -7,11 +7,11 @@ name: audit cadence
 # **Is a security audit due?** Asked weekly, answered before somebody has to remember to ask.
 #
 # The tree has had four adversarial reviews and every one of them happened because a person thought
-# of it. That is the failure mode milestone 92 exists to close: a practice that lives in memory gets
-# skipped exactly when it matters, and DECISIONS §35 already names what an unactioned finding turns
+# of it. That is the failure mode milestone 92 (security audits as a mechanism) exists to close: a practice that lives in memory gets
+# skipped exactly when it matters, and DECISIONS §35 (what a scanner is for here) already names what an unactioned finding turns
 # into.
 #
-# §74 decided what "due" means, on measured intervals rather than on a calendar anybody liked: event
+# §74 (audits run on change) decided what "due" means, on measured intervals rather than on a calendar anybody liked: event
 # triggers first (a new system call method, a new component holding device or network authority, a new
 # dependency class, first boot on a new machine class), a count second (15 milestones built or 8 new
 # components since the last audit), and six weeks as a backstop whose job is catching a *quiet*
@@ -29,7 +29,7 @@ name: audit cadence
 #
 # **Red means run the audit.** Nothing here runs one, and nothing here can.
 #
-# Milestone 93 reuses this without a second workflow: it adds a `documentation` row to the cadence
+# Milestone 93 (documentation audits as a mechanism) reuses this without a second workflow: it adds a `documentation` row to the cadence
 # table in design/audit-reports/README.md, and script/audits evaluates every kind it finds there.
 
 on:
