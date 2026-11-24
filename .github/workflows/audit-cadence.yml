@@ -65,9 +65,16 @@ jobs:
         timeout-minutes: 3
         if: steps.checkout_first_1.outcome != 'success'
 
+      # The counts are of nife at the commit basalt's main pins, so this links nife's tree into the
+      # record's the way script/lint does (helpers/nife_tree.py, which fetches that commit at depth
+      # one). Without it script/audits stops at once: components/ is nife's, not the record's.
+      - name: Link nife's tree at basalt's pin
+        run: python3 helpers/nife_tree.py overlay .
+
       # No toolchain, no cache, no build. Every number script/audits reads is counted out of files
-      # in the checkout, and the ABI constants out of one depth-one git fetch of moho_abi at the
-      # revision Cargo.lock pins, which is why this job takes seconds and can afford to run weekly.
+      # in the record and in nife at its pin, and the ABI constants out of one depth-one git fetch
+      # of moho_abi at the revision nife's Cargo.lock pins, which is why this job takes seconds and
+      # can afford to run weekly.
       # `set -o pipefail` is load-bearing and not decoration. The default shell here is `bash -e`
       # WITHOUT pipefail, so a pipeline exits with `tee`'s status and `tee` always succeeds: without
       # this line the step would be green no matter what script/audits said, and the whole mechanism
