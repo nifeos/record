@@ -3,6 +3,7 @@
 
     helpers/nife_tree.py commit            print the nife commit basalt's main pins
     helpers/nife_tree.py path              print a checkout of nife at that commit
+    helpers/nife_tree.py history           print a git directory holding nife's history to that commit
     helpers/nife_tree.py overlay <root>    link into <root> every nife path <root> lacks
     helpers/nife_tree.py unoverlay <root>  remove the links `overlay` made
 
@@ -16,6 +17,15 @@ nife the record can name and have every reader see the same thing.
 checkout kept under `$NIFE_PINNED_TREES` (default `~/.cache/nife/pinned-trees`), fetched once per
 pinned commit. A `$NIFE_TREE` at another commit is refused, because a check against the wrong nife
 passes or fails for the wrong reason.
+
+`history` prints a git directory that holds every commit of nife up to and including `commit`,
+with their trees and without their file contents: `$NIFE_HISTORY` when it is set (a full clone,
+which is refused if it is shallow or lacks the commit), and otherwise a bare blobless clone kept as
+`nife-history.git` under the same cache, fetched once and then only by what a new pin adds. That
+is enough for `git log --no-renames --name-only <commit>` and `git ls-tree -r <commit>`, which is
+what `script/audits --worklist` asks of it. A commit's history never changes, so a log read at the
+pin is the same on every machine. Run such a log with `GIT_NO_LAZY_FETCH=1`, because rename
+detection or a content read would otherwise fetch blobs one at a time over the network.
 
 `overlay` is what lets the record's checks, written when the record was half of nife's tree, run
 unchanged: for each path nife tracks and the record does not, it puts a symbolic link in the
@@ -79,6 +89,37 @@ def path():
     except OSError:
         subprocess.run(["rm", "-rf", tmp])
     return tree
+
+
+def _has_commit(where, sha):
+    return subprocess.run(["git", *where, "cat-file", "-e", f"{sha}^{{commit}}"],
+                          capture_output=True,
+                          env=dict(os.environ, GIT_NO_LAZY_FETCH="1")).returncode == 0
+
+
+def history(want=None):
+    want = want or commit()
+    have = os.environ.get("NIFE_HISTORY")
+    if have:
+        if _git("-C", have, "rev-parse", "--is-shallow-repository") != "false":
+            sys.exit(f"nife_tree: $NIFE_HISTORY ({have}) is a shallow clone, so its log stops "
+                     f"short. Fetch it whole, or unset NIFE_HISTORY.")
+        if not _has_commit(["-C", have], want):
+            sys.exit(f"nife_tree: $NIFE_HISTORY ({have}) lacks {want[:12]}, basalt main's nife "
+                     f"pin. Fetch it there, or unset NIFE_HISTORY.")
+        return _git("-C", have, "rev-parse", "--path-format=absolute", "--git-dir")
+    git_dir = os.path.join(qualified_paths._cache_dir(), "nife-history.git")
+    if not os.path.isdir(git_dir):
+        tmp = git_dir + f".partial-{os.getpid()}"
+        _git("init", "-q", "--bare", tmp)
+        try:
+            os.rename(tmp, git_dir)
+        except OSError:
+            subprocess.run(["rm", "-rf", tmp])
+    if not _has_commit(["--git-dir", git_dir], want):
+        _git("--git-dir", git_dir, "fetch", "-q", "--no-write-fetch-head", "--filter=blob:none",
+             f"https://github.com/{qualified_paths.ORGANIZATION}/nife", f"{want}:refs/pins/{want}")
+    return git_dir
 
 
 def _read_only(tree):
@@ -175,6 +216,8 @@ def main(argv):
         print(commit())
     elif argv[:1] == ["path"] and len(argv) == 1:
         print(path())
+    elif argv[:1] == ["history"] and len(argv) == 1:
+        print(history())
     elif argv[:1] == ["overlay"] and len(argv) == 2:
         overlay(argv[1])
     elif argv[:1] == ["unoverlay"] and len(argv) == 2:
