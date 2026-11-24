@@ -23,13 +23,13 @@ stopped being true at merge; whether that counts as bookkeeping is the integrato
 
 ## The work
 
-1. `script/apropos` keeps the promise it opens with. Its header and `CONTRIBUTING.md` give
-   `script/apropos system call` as the way to find `crates/moho_abi/src/lib.rs`. The search now returns 16
-   pages of 520 matches and `crates/moho_abi` is not among them. Either the ranking puts a crate's own
-   `lib.rs` above prose that mentions the word, or both documents name an example that works. The
-   header's figures (512 pages, five megabytes, four system call numbers) become a sentence with no
-   count, or a count a test checks: the corpus is 2040 pages and 16.6 MB, and `crates/moho_abi` declares
-   five calls.
+1. `script/apropos` keeps the promise it opens with. Its header and `CONTRIBUTING.md` gave
+   `script/apropos system call` as the way to find the system call numbers, and the header carried
+   figures no test checked. `moho_abi` now has its own repository, so no search of nife's tree can
+   find it. nifeos/nife#4071 gives both documents an example that works (`script/apropos socket`)
+   and drops the figures; this item is done when that lands. A search that reaches the design
+   record is its own proposal, [a search that reaches the design
+   record](a-search-that-reaches-the-design-record.md).
 2. `notes/adding-a-program.md` points at the file a newcomer edits. Step 1 says the
    `programs!` row goes in `crates/program_table/src/program.rs`. The macro and its 28 rows are in
    `crates/program_table/src/program/catalog.rs`, and the `manifest()` arms are in

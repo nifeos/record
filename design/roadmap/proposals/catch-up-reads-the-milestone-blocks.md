@@ -10,34 +10,33 @@ needs_person: no
 # `script/catch-up` reads the milestone blocks
 
 Raised by the documentation audit of 2026-11-17 (UTC),
-[the newcomer path](../../audit-reports/2026-11-17-the-newcomer-path.md), finding 1. Severity: high
-for the newcomer path, because the README's Try it block offers this script as the way to learn
-what changed, and it answers "nothing" with exit 0.
+[the newcomer path](../../audit-reports/2026-11-17-the-newcomer-path.md), finding 1. Restated by
+the documentation audit of 2026-11-24 (UTC), [the record's
+departure](../../audit-reports/2026-11-24-the-records-departure.md), finding 9. Severity: high for
+the newcomer path. nife's README offers `script/catch-up` in its Try it block as the way to learn
+what changed, and it does not answer.
 
-Reuse: `parse_blocks` in `script/catch-up` itself, and `helpers/roadmap_block.status_and_built`,
-which it already uses. No new dependency.
+Reuse: `parse_blocks` in nifeos/nife:script/catch-up, `helpers/roadmap_block.status_and_built`
+and this repository's `script/roadmap --index`. No new dependency.
 
 ## The problem
 
-`parse_roadmap` in `script/catch-up` tries `design/roadmap/README.md` first and returns whatever
-rows it finds there. That file still exists, but it is prose and holds no `| N |` row, so the
-function returns an empty table and never reaches `parse_blocks`, the reader written for the block
-files. The same happens at both ends of the window, so every milestone section prints as empty.
+`script/catch-up` reads milestone status from `design/roadmap/` in nife's own history. The
+roadmap left nife with the rest of the design record. At nife's `main` there is no block to read.
+The script says so and exits 1 before it prints anything else. Its message begins
+`catch-up: no roadmap at HEAD`.
 
-Run on `main` at `9e8c189c0` with the default window (since 2026-11-10), the script prints
-`MILESTONES THAT CHANGED STATUS (0)` and `MILESTONES NEWLY MINTED (0)`. A count over the block
-files with `helpers/roadmap_block.status_and_built`, for the same two commits, gives 26 status
-changes and 60 new blocks. A window that reaches back before the tree retired the generated index (for
-example `--since 2026-09-01`) instead reports 208 `MILESTONE ROWS THAT DISAPPEARED`, because the old end
-still has the table and the new end has none.
+The refusal is honest. The 2026-11-17 audit found an empty report instead, which was worse. But
+the README's command now gives a newcomer nothing. That includes the half that never needed the
+roadmap: the merged pull requests and the commits of the window.
 
 ## The work
 
-- `parse_roadmap` takes the index table only when it yields at least one row, and otherwise falls
-  back to `parse_blocks`. A window whose old end predates the block files keeps the table read for
-  that end, so "newly minted" stays exact across the change of format.
-- A window that crosses the format change compares numbers and statuses, not the source each came
-  from, so the retirement of the index does not read as 208 removals.
-- A host test runs the script over two fixed commits of this repository's history, one window
-  inside the block era and one across the change, and checks the counts it prints. The test fails
-  when `parse_roadmap` returns an empty table for a tree that holds blocks.
+- The milestone half reads the blocks from nifeos/record. It takes a checkout named on the
+  command line or found beside nife's. With no record to read, it prints the rest of its report.
+  One line says the milestone half needs the record, and it exits 0.
+- A window that starts before the move reads its old end from nife's history. It reads the new
+  end from the record. It compares numbers and statuses, not sources, so the move does not read
+  as every milestone removed.
+- A host test runs the script over two fixed windows and checks the counts it prints. One window
+  lies inside nife's history alone and one crosses the move.
