@@ -155,6 +155,7 @@ malformed it.
 | 2026-11-17 | documentation | The newcomer path, run rather than read: every command the README's Try it block, `CONTRIBUTING.md` and `AGENTS.md` tell a reader to run, followed to the scripts and notes they send that reader to next, with each claim checked against the tree | fixed 0, minted 9, accepted 1 | [The newcomer path](2026-11-17-the-newcomer-path.md) |
 | 2026-11-17 | security | The verifier, as code that runs with authority nobody reviewed: the stock Kani `.kani-version` pins and the bundle `cargo kani setup` fetches behind it, the daily bump job, the patched riscv64 Kani and the falsification records, then the window's ten new external packages followed to the graph each reaches | fixed 0, minted 3, accepted 2 | [The verifier](2026-11-17-the-verifier.md) |
 | 2026-11-17 | security | radon's device authority, read as a holder turned hostile: the clock and reset server, the GMAC's control process and the PMIC route, each page followed to what it reaches beyond its device, who can send to it and what it trusts | fixed 3, minted 3, accepted 2 | [radon's device authority](2026-11-17-radon-device-authority.md) |
+| 2026-11-24 | documentation | The record's departure from nife, read from both sides: every pointer in nife's front pages, briefs, skills and kept notes to a `design/` or `notes/` path that now lives only in nifeos/record, and every claim the record's front pages make about where a tool or a file lives, with each one checked against the tree it names | fixed 5, minted 6, accepted 1 | [The record's departure](2026-11-24-the-records-departure.md) |
 | 2026-11-24 | security | The graphical drivers' parsers, read as the other side turned hostile: the terminal engine against a program's bytes, `display_terminal` against the compositor's control page, the compositor against its input ring and display driver, `gpu_driver` against its device, and both keyboard drivers against theirs | fixed 6, minted 1, accepted 5 | [The graphical drivers' parsers](2026-11-24-the-graphical-drivers-parsers.md) |
 
 ## What the tree looked like when each ran
@@ -167,10 +168,11 @@ audits, which is what stops them drifting apart.
 Every number is **counted, not remembered**, by `script/audits --baseline` at the commit that landed
 the report. Milestones built is the `BUILT` rows of
 `script/roadmap --index`, which assembles them from the blocks in
-[design/roadmap/](../roadmap/); components is `crates/*/` plus `[[bin]]` targets in
-`components/Cargo.toml` **and** `fixtures/Cargo.toml`; ABI constants is the `pub const NAME: u64`
-surface of `crates/moho_abi`; external
-packages is the distinct registry packages across every committed lockfile but the vendored one.
+[design/roadmap/](../roadmap/). The other three are counted in nife's tree at the commit basalt
+pins: components is `crates/*/` plus `[[bin]]` targets in `components/Cargo.toml` **and**
+`fixtures/Cargo.toml`; ABI constants is the `pub const NAME: u64` surface of `moho_abi` at the
+revision nife's `Cargo.lock` pins, since that crate has its own repository; external packages is the
+distinct registry packages across every lockfile nife tracks but the vendored one.
 
 **Both userspace packages, and the reason is this table rather than the word "component"**
 (milestone 311). Every row below was counted when `user/` was one directory; milestone 175 split it
@@ -205,6 +207,7 @@ must not err in. So the count spans both, and it stays continuous across the spl
 | 2026-11-17 | documentation | 510 | 253 | 99 | 209 |
 | 2026-11-17 | security | 510 | 253 | 99 | 209 |
 | 2026-11-17 | security | 510 | 253 | 99 | 209 |
+| 2026-11-24 | documentation | 542 | 240 | 99 | 208 |
 | 2026-11-24 | security | 542 | 240 | 99 | 208 |
 
 The two `-` cells are honest rather than lazy: the roadmap was a single file with no status column
@@ -279,8 +282,9 @@ index that took every file called an audit would report a coverage it does not h
    read as a citation to milestone zero and failed the build on this milestone's first full lint
    run.
 4. **Re-baseline the docs in the same lane.** `SECURITY.md`'s claims, the confinement scope, and the
-   affected notes' `BUGS` sections are part of the audit's diff. An audit that finds the docs
-   overclaiming fixes them there and then, because an overclaim in `SECURITY.md` is itself a security
+   affected notes' `BUGS` sections are part of the audit's work. `SECURITY.md` and the code's own
+   `BUGS` sections are nife's, so that part goes in a nife pull request, and the report's pull request
+   here says it waits on it. An audit that finds the docs overclaiming fixes them there and then, because an overclaim in `SECURITY.md` is itself a security
    finding.
 5. **Add both rows**, here and in the baseline table. `script/audits --baseline` prints the counts
    to paste.
