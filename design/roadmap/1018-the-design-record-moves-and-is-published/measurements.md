@@ -248,7 +248,7 @@ should.
 ## Where each script goes
 
 Sorted 2026-11-10 (UTC) by reading each script, helper, lint section and workflow at `8e597457a`.
-The sort is provisional. **R** goes to `nifeos/record`. **W** goes to `nifeos/nifeos.org`, the
+The sort is provisional. **R** goes to `nifeos/record`. **W** goes to `nifeos/partsfoundry.org`, the
 website. **C** stays with code. **S-each** runs in every repository on its own files. **S-cross**
 splits, and one side needs the other's data: code at basalt's pins, or the record's number index
 that open question 7 asks about. **T** goes to the template (`nifeos/crate-workflows`) or the fleet
@@ -305,7 +305,5 @@ a lint driver of its own that runs only its subset.
 - Where `script/claim` lives once tooling leaves. The lane skills are ruled; the code repositories'
   `AGENTS.md` files point at them today by relative path, and how they point at skills held in
   another repository is not worked out.
-- How `nifeos/nifeos.org` learns that the record's main moved: a schedule, a dispatch from
-  `nifeos/record`, or a build on demand. Not tried.
 - How many links from the record reach a note or crate path that stays. A rough count found 168
   notes linked from the record, 5 named for a crate. Step 4 replaces it with a real sort.
