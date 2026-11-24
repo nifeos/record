@@ -262,7 +262,7 @@ These are an architect's, and nothing above decides them.
    tree pins `.qemu-version` and the toolchain. A runner that changes release unannounced changes
    what "the tests passed" means. The cost is this proposal, once every two years.
 2. When to flip. Now, with a `tmp.mount` mask in the jobs that need it, or after a released 26.04
-   image carries #14814. Recommendation: land step 1 now and run the canaries now. Flip once
+   image carries [#14814](https://github.com/actions/runner-images/pull/14814). Recommendation: land step 1 now and run the canaries now. Flip once
    `findmnt` shows the fix, since a mask step is code to delete later.
 3. Whether CI keeps building QEMU 11.1.2 now that 26.04's packaged 10.2.1 has the device. A cold
    build is about 4.5 minutes per pool per cache expiry. Using apt's would change the emulator

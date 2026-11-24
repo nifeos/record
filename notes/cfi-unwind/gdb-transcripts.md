@@ -52,7 +52,7 @@ FDE; there was none. That heuristic is what makes the before transcript dramatic
 incomplete.
 
 Before (second hit; this is not abbreviated for effect, the real output kept going until it was
-killed at frame #9976, three minutes and forty-five seconds after the `bt`):
+killed at frame `#9976`, three minutes and forty-five seconds after the `bt`):
 ```
 Thread 3 hit Breakpoint 1, 0xffff0000400d9450 in switch_to ()
 #0  0xffff0000400d9450 in switch_to ()

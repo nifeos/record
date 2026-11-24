@@ -133,7 +133,7 @@ Before, breaking on `switch_to` and asking for a backtrace. GDB's own frame-poin
 (there was no CFI at all to consult, the compiler's included, because of the discard line above)
 correctly walked four real Rust frames using the AAPCS64 `x29` chain ordinary functions still build
 regardless of CFI. Then it walked into `exception_vectors`, which builds a raw trap frame rather
-than a conventional `x29` link -- and looped, printing the identical bogus frame past #9976, three
+than a conventional `x29` link -- and looped, printing the identical bogus frame past `#9976`, three
 minutes and forty-five seconds before being killed by hand. This is the sharpest evidence in the
 whole milestone that "no CFI" is not merely "less information": GDB's own fallback trusted a
 hand-written function that looked frame-pointer-shaped and was not, and had nothing telling it when

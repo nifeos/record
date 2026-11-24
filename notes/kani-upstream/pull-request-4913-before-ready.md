@@ -13,22 +13,22 @@ hosts we already have) as a `-Z` flag against
 [#4913](https://github.com/model-checking/kani/pull/4913), from calef/kani `riscv64-target`, built
 by `lane/kani-upstream` and recorded in [kani-upstream.md](../kani-upstream.md). Milestone 589's
 block still said "a separate lane holds it", which is how the brief came to ask for it again. So
-this lane did not write a second patch. It read where #4913 stands, tested its head, and drafted
+this lane did not write a second patch. It read where [#4913](https://github.com/model-checking/kani/pull/4913) stands, tested its head, and drafted
 what is left before it can leave draft.
 
 Read through `gh` on 2026-10-03 (UTC):
 
 | | state |
 |---|---|
-| #4913 | open, **draft**, `MERGEABLE`, head `2d0a623`, 20 files, +411 −36, base Kani `main` at `1640445da` (current) |
+| [#4913](https://github.com/model-checking/kani/pull/4913) | open, **draft**, `MERGEABLE`, head `2d0a623`, 20 files, +411 −36, base Kani `main` at `1640445da` (current) |
 | review | tautschnig, 2026-09-30: five inline comments. calef answered all five on 2026-10-03, and each is in code at `2d0a623` |
 | upstream CI | never ran. Six workflows (Kani CI, Format Check, Cargo Deny, Benchmarks, Release Bundle, Std Verification) are `action_required` at `2d0a623`: a first-time contributor's runs wait for a maintainer to approve them. Only `Auto Label` and `Kani Extra` (`pull_request_target`) ran. So the regression matrix that runs `target_riscv64` has not run anywhere but patagonia |
-| #2402 | open, last activity 2024-10-02, two comments. The comment drafted in [issue-2402-comment.md](issue-2402-comment.md) is not posted; #4913's "Towards #2402" puts a cross-reference in its timeline either way |
-| follow-up | the `kani_lib.c` link-order pull request promised on #4913: drafted in [kani-lib-link-order.md](kani-lib-link-order.md), not opened |
+| #2402 | open, last activity 2024-10-02, two comments. The comment drafted in [issue-2402-comment.md](issue-2402-comment.md) is not posted; [#4913](https://github.com/model-checking/kani/pull/4913)'s "Towards #2402" puts a cross-reference in its timeline either way |
+| follow-up | the `kani_lib.c` link-order pull request promised on [#4913](https://github.com/model-checking/kani/pull/4913): drafted in [kani-lib-link-order.md](kani-lib-link-order.md), not opened |
 
 ## Tested here, at `2d0a623`
 
-On patagonia, in a scratch clone of #4913's head (push URL disabled), with CBMC 6.11.0 (Kani's pin)
+On patagonia, in a scratch clone of [#4913](https://github.com/model-checking/kani/pull/4913)'s head (push URL disabled), with CBMC 6.11.0 (Kani's pin)
 unpacked from the cached Homebrew bottle into the session scratchpad. Nothing installed.
 
 | run | result |
@@ -76,7 +76,7 @@ calef to apply to calef/kani `riscv64-target` with `git am` if he agrees. 3 file
 
 ## Edits to the posted body
 
-The body on #4913 is the one in [pull-request-4913-body.md](pull-request-4913-body.md) with the September fixes. Four
+The body on [#4913](https://github.com/model-checking/kani/pull/4913) is the one in [pull-request-4913-body.md](pull-request-4913-body.md) with the September fixes. Four
 places are now stale or wrong. Replacement text, ready to paste:
 
 1. **Testing, first bullet.** Delete "and (as of the follow-up commit) the exit-code discipline for
@@ -100,7 +100,7 @@ follow-up offer, which is current. It can stay.
 Every claim below rests on memory, inference, or a measurement this lane did not repeat.
 
 - [ ] Approving the CI runs is a maintainer's action. Asking for it is the one thing that moves
-      #4913 today. "Waiting for approval to run for a first-time contributor" is inferred from the
+      [#4913](https://github.com/model-checking/kani/pull/4913) today. "Waiting for approval to run for a first-time contributor" is inferred from the
       `action_required` conclusion and GitHub's general behavior, recalled, not read in Kani's
       settings.
 - [ ] Mark ready, or ask first? Leaving draft is what invites a full review. The patch above and
@@ -123,7 +123,7 @@ Every claim below rests on memory, inference, or a measurement this lane did not
       `cbmc-6.11.0`.
 - [ ] Apply the patch or not. If not, findings 5 and 7 and the `long double` sentence go to review
       as they are; none blocks correctness.
-- [ ] Post the #2402 comment, or let the cross-reference stand. The comment describes #4913 as it is
+- [ ] Post the #2402 comment, or let the cross-reference stand. The comment describes [#4913](https://github.com/model-checking/kani/pull/4913) as it is
       now, except that it says "64-bit little-endian targets" and Kani accepts only riscv64gc Linux
       beyond the old hosts.
 
@@ -132,5 +132,5 @@ Every claim below rests on memory, inference, or a measurement this lane did not
 - Review latency, unknown. Upstream's next move is a maintainer approving the runs.
 - The `kani_lib.c` follow-up, which waits on calef's reading of its draft.
 - nife drops `patches/kani-0.67.0-riscv64-target.patch` when its Kani pin reaches a release
-  containing #4913 (and the link-order fix, which milestone 635 carries as the patch's second
+  containing [#4913](https://github.com/model-checking/kani/pull/4913) (and the link-order fix, which milestone 635 carries as the patch's second
   commit), per §218 (carry a Kani patch so riscv64 is proved).
