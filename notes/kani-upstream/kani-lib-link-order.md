@@ -8,7 +8,7 @@ model-checking/kani#4913 (`1eaa2d9`, with the Apple `char` fix in `9b72fa016`), 
 below; no separate pull request is opened, and the branch plan below is not used. calef reads
 every upstream word before anything goes to model-checking/kani. Measured 2026-10-03 (UTC).*
 
-This is the pull request promised in calef's reply to tautschnig on #4913
+This is the pull request promised in calef's reply to tautschnig on [#4913](https://github.com/model-checking/kani/pull/4913)
 ([discussion_r4172069063](https://github.com/model-checking/kani/pull/4913#discussion_r4172069063)):
 "I'd rather do the precompiled-object change as a follow-up, because it changes the linked model
 for every run, host runs included (on macOS `char_is_unsigned` would go from 0 back to the aarch64
@@ -28,7 +28,7 @@ are in this file's history (`git log -p` on it).
 
 1. An Apple Silicon host run does not move `long_double_width`: Kani's aarch64 model uses 64 off
    Linux (#2757), and 128 is nife's riscv64 model. Only `char_is_unsigned` changes on this Mac, as
-   calef's #4913 comment said.
+   calef's [#4913](https://github.com/model-checking/kani/pull/4913) comment said.
 2. macOS is not the only host that differs. x86_64 macOS matches Kani's model (by proxy, below);
    aarch64 Linux does not (`wchar_t_is_unsigned`: `goto-cc` 0, Kani 1).
 3. Linux sees no change on x86_64, and a change on aarch64, where Kani's 1 is right.
@@ -36,9 +36,9 @@ are in this file's history (`git log -p` on it).
 ## Branch plan
 
 - Base: upstream `main` at `1640445da3fa0d2cb19739652057dc992fef3f18` (2026-10-02, "Stop a SIMD
-  comparison with float mask lanes from aborting the crate (#4951)").
-- Fork `calef/kani`, branch `kani-lib-link-order` (provisional). Cut from `main`, not from #4913,
-  because it changes host runs and should not wait for or be reverted with #4913.
+  comparison with float mask lanes from aborting the crate ([#4951](https://github.com/model-checking/kani/pull/4951))").
+- Fork `calef/kani`, branch `kani-lib-link-order` (provisional). Cut from `main`, not from [#4913](https://github.com/model-checking/kani/pull/4913),
+  because it changes host runs and should not wait for or be reverted with [#4913](https://github.com/model-checking/kani/pull/4913).
 - One commit: [kani-lib-link-order.patch](kani-lib-link-order.patch), `git format-patch` form. To
   use it: `git checkout -b kani-lib-link-order 1640445da && git am
   notes/kani-upstream/kani-lib-link-order.patch`. 6 files, 99 lines added, 5 removed. Checked
@@ -135,7 +135,7 @@ failed, 1 ignored (exit 1, 838 s). Each failure was the environment, and each pa
 (exit 0). `cbmc_truncated_results` and `compiler_defaults` needed `jq`. `playback_expected` (CBMC
 out of memory) and `std_codegen` (SIGKILL compiling std) ran short of the 6 GiB VM under parallel
 tests; `std_codegen` passed with `CARGO_BUILD_JOBS=1`.
-`target_riscv64` is #4913's test and does not exist on upstream `main`, so it was not run here.
+`target_riscv64` is [#4913](https://github.com/model-checking/kani/pull/4913)'s test and does not exist on upstream `main`, so it was not run here.
 
 On the x86_64 runner, with the patch, `script-based-pre` gave 91 passed, 1 ignored (the test just
 run in (a)), exit 0. Not run: the other suites on either Linux, x86_64 macOS, `coverage`,
@@ -151,7 +151,7 @@ what the linked `.out` carried before this change. Every other field Kani writes
 | aarch64 macOS | `char_is_unsigned = 0` | 1 | 0 | 0: Apple clang leaves `__CHAR_UNSIGNED__` undefined, Rust's `c_char` is `i8`, CBMC's own `config.cpp` says signed for `macos`/`arm64` | Kani run, `.symtab.out` and `.out` |
 | x86_64 macOS | none | none | none | | proxy: `goto-cc -arch x86_64` on this Mac against Kani's x86_64 model in source |
 | aarch64 Linux | `wchar_t_is_unsigned = 0` | 1 | 1 | 1: gcc 13.3 on Ubuntu 24.04 arm64 gives `__WCHAR_TYPE__ unsigned int` | Kani run in an arm64 Ubuntu 24.04 container, `.symtab.out` and `.out` |
-| x86_64 Linux | none | none | none | | Kani run on a GitHub `ubuntu-24.04` runner, run 37156714124; agrees with tautschnig's #4913 measurement |
+| x86_64 Linux | none | none | none | | Kani run on a GitHub `ubuntu-24.04` runner, run 37156714124; agrees with tautschnig's [#4913](https://github.com/model-checking/kani/pull/4913) measurement |
 
 The link hunk alone corrects aarch64 Linux and, on Apple Silicon, swaps a right value for a wrong
 one because Kani's model was wrong there. With the model line, every host ends on the right value.
@@ -217,7 +217,7 @@ Title: Keep Kani's machine model through the link, and make it right for Apple a
 > `link_goto_binary` passes `kani_lib.c` to `goto-cc` as C source. `goto-cc` compiles it with its
 > own host configuration, and the `__CPROVER_architecture_*` symbols that produces replace the
 > machine model Kani wrote into the symbol table. CBMC reads those symbols back when it adds its C
-> library. @tautschnig traced this in review of #4913
+> library. @tautschnig traced this in review of [#4913](https://github.com/model-checking/kani/pull/4913)
 > ([comment](https://github.com/model-checking/kani/pull/4913#discussion_r4143913613)), and this is
 > the follow-up I offered there.
 >
@@ -271,7 +271,7 @@ ABI page (cited, not read here) and x86_64 macOS (measured by proxy).
 ## calef's checklist before posting
 
 - [ ] When to post is calef's call. The coordinator recommends waiting until a maintainer has
-      engaged on #4913, so a first-time contributor's second pull request does not land on an
+      engaged on [#4913](https://github.com/model-checking/kani/pull/4913), so a first-time contributor's second pull request does not land on an
       unanswered first one. That is a recommendation, not a ruling.
 - [ ] `git am` the patch on `1640445da` (or rebase if `main` moved) and rerun the new test once.
 - [ ] The code comment links Apple's "Writing arm64 code for Apple platforms" page; it is taken from

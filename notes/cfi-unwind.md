@@ -181,7 +181,7 @@ against the commit before this milestone and this branch's tip.
   and is reported because claiming one would be invented CFI.
 - Resuming an already-running thread is the case that matters. Before, the link script had discarded
   the compiler's CFI too, and GDB's frame-pointer fallback walked into `exception_vectors` and
-  looped. It was killed at frame #9976, nearly four minutes after the `bt`. After, the backtrace
+  looped. It was killed at frame `#9976`, nearly four minutes after the `bt`. After, the backtrace
   shows seven real Rust frames past `switch_to`, then `<signal handler called>` for the vector
   entry, then stops cleanly at the trap boundary that the hard case above describes.
 

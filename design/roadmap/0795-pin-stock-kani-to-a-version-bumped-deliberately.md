@@ -42,7 +42,7 @@ The pin policy was approved by calef on 2026-10-17 (UTC) for the shared crate CI
 milestone launched on the same design. Whether the stock and riscv64 pins must converge before
 kani#4913 ships is open and asked on the pull request.
 
-## What becomes droppable if upstream Kani PR #4913 lands
+## What becomes droppable if upstream Kani PR [#4913](https://github.com/model-checking/kani/pull/4913) lands
 
 [model-checking/kani#4913](https://github.com/model-checking/kani/pull/4913) adds `--target`
 (see `notes/kani-upstream.md`). Once a released Kani carries it:

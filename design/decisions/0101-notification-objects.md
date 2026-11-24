@@ -112,7 +112,7 @@ deliberately not a rendezvous.
 What is missing is a user-callable signal, a separate object type, binding to a TCB, and a badge.
 The design adds the first three. The list was cut on 2026-09-26 to fit the second amendment
 under §212's cap, and is
-[at `256815e56`](https://github.com/nifeos/nife/blob/256815e5609cfb961ccb6526f8a0d3316e589402/design/decisions/0101-notification-objects.md#the-kernel-already-has-half-the-mechanism).
+[at `256815e56`](https://github.com/nifeos/nife/blob/256815e5609cfb961ccb6526f8a0d3316e589402/design/decisions/101-notification-objects.md#the-kernel-already-has-half-the-mechanism).
 
 ## What other operating systems do
 

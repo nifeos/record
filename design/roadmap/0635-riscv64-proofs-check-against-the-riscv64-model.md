@@ -93,9 +93,9 @@ so the model Kani wrote survives. The shim in section 1 is this fix, applied fro
 
 - In tree: change `patches/kani-0.67.0-riscv64-target.patch`. Editing the patch rebuilds the
   cached Kani in CI once, which is the cost.
-- Upstream: the precompiled object is in #4913 (`1eaa2d9`), as promised in
+- Upstream: the precompiled object is in [#4913](https://github.com/model-checking/kani/pull/4913) (`1eaa2d9`), as promised in
   [the reply to tautschnig](https://github.com/model-checking/kani/pull/4913#discussion_r4172069063).
-  It changes the linked model for host runs too. When #4913 ships in a Kani release, the in-tree
+  It changes the linked model for host runs too. When [#4913](https://github.com/model-checking/kani/pull/4913) ships in a Kani release, the in-tree
   patch loses this hunk with the rest of the patch.
 
 ## Part 4: The fatal risks it bears on
