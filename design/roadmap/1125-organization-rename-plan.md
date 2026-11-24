@@ -42,8 +42,18 @@ GitHub's page on transferring a repository, read on 2026-11-24, states these:
 - A repository with more than 100 uses of GitHub Actions in the week before its transfer has its
   old owner and name combination retired for good.
 
-The page says nothing of variables, environments, rulesets or teams. The trial transfer measures
-them. Two documented rules from the Actions reference shape the order. Actions follows no redirect
+The page says nothing of variables, environments, rulesets or teams. The rsext4 trial measured
+them:
+
+- Both rulesets stay, with their rules and required checks, but the tags ruleset loses its bypass
+  actor, nife-smelter, which is not installed on `partsfoundry`.
+- The `crates-io` environment stays with calef as its required reviewer, as do the description,
+  homepage, topics, labels, merge settings, the Actions allowlist and the fork approval policy.
+- The team named in the transfer call's `team_ids` arrives with the read role, not maintain.
+- Secret scanning and its push protection come back off.
+
+`script/apply-settings` restores all of it in one run, and `script/check-settings` then matches.
+Two documented rules from the Actions reference shape the order. Actions follows no redirect
 for a reusable workflow or an action. A caller may run a reusable workflow from a public repository
 in another organization only when its own Actions settings allow it.
 
@@ -68,14 +78,20 @@ Read-only calls on 2026-11-24 found these:
 
 - Every crate repository sets its allowed actions to `selected`, with one pattern,
   `taiki-e/install-action@*`. That allows reusable workflows from its own organization and nothing
-  else, so a crate in `partsfoundry` cannot call `nifeos/crate-workflows`. The interim fix is a
-  second pattern naming `nifeos/crate-workflows`, applied to every crate before the trial.
+  else, so a crate in `partsfoundry` cannot call `nifeos/crate-workflows`. The settings file holds a
+  table of values per owner, merged over the shared ones by `helpers/settings_owner.py`
+  ([nifeos/crate-workflows#92](https://github.com/nifeos/crate-workflows/pull/92), landed at
+  11d6d6b). Its `partsfoundry` row adds the pattern
+  `nifeos/crate-workflows/.github/workflows/*@*`, the team organization, the App and the tags
+  bypass, so a crate in `nifeos` sees no change and a crate in `partsfoundry` gets these values.
 - Callers pass their secrets by name (`SETTINGS_TOKEN`, `NIFE_SMELTER_APP_ID`,
   `NIFE_SMELTER_PRIVATE_KEY`), never through `secrets: inherit`. A named secret comes from the
   caller's own organization, so `partsfoundry` needs all three before the first crate's weekly or
   release run.
 - The tags ruleset of each crate exempts one actor: nife-smelter, an App owned by `nifeos`. Its
-  release `tag` job mints that App's installation token in the caller's organization.
+  release `tag` job mints that App's installation token in the caller's organization. In
+  `partsfoundry` the actor is partsfoundry-smelter, an App owned there and installed on every
+  repository, whose credentials sit in the same two secret names.
 - The crate repositories hold no repository secrets, variables, webhooks or deploy keys. Each has a
   `crates-io` environment whose one rule names calef as reviewer, and the `crate-maintainers` team
   with the maintain role.
@@ -88,19 +104,28 @@ Effort: S is under half a day for a lane. Every step inside a repository is a tw
 except the last transfer, which may be one-way (see the risks).
 
 0. Preparation in `partsfoundry`, all of it calef's: the secrets, the team, the App, and the
-   Actions settings (the list after the steps). One crate-workflows pull request adds the
-   `nifeos/crate-workflows` pattern to `settings/repository-settings.json`, and calef applies it to
-   every crate with `script/apply-settings`. Effort: S.
-1. The trial: calef transfers rsext4. The lane then measures what survived (the verification list)
-   and runs its `check`, `proofs` and weekly workflows, still calling `nifeos/crate-workflows`.
-   Effort: S.
+   Actions settings (the list after the steps). Nothing changes in the crates still in `nifeos`,
+   since the owner table applies only after a crate arrives. Effort: S.
+1. The trial: calef transfers rsext4 (done). The lane runs `script/apply-settings`,
+   measures what survived (the verification list), and runs its `check`, `proofs`, weekly and
+   dry-run release workflows, still calling `nifeos/crate-workflows`. Effort: S.
 2. The other 30 crate repositories, then crate-workflows-test, one transfer at a time, in any
-   order. Each keeps calling `nifeos/crate-workflows`, so each stays green. Effort: S in all.
+   order. Each crate follows the trial's steps:
+   - Before it transfers, it pins crate-workflows at 11d6d6b or later, the first commit that holds
+     the owner table. An older pin's weekly settings check reads the shared values alone and
+     reports drift in `partsfoundry`.
+   - At its own transfer, `script/apply-settings` runs against it, and the first half of its draft
+     lands: the names of the repository itself (README badges, code owners, the manifest's
+     `repository`, cargo-deny's allowed organization). The `check / standalone` badge check reads
+     the current owner, so that draft is red before the transfer and green after it.
+   - Its `uses:` lines keep calling `nifeos/crate-workflows`, so it stays green. They are the
+     second half of its draft, which waits for step 3.
+   Effort: S in all.
 3. crate-workflows, last. From this moment every caller's `uses:` line fails until its draft lands.
 4. crate-workflows' own draft
    ([nifeos/crate-workflows#91](https://github.com/nifeos/crate-workflows/pull/91)) lands first,
-   then each crate's draft (one per repository, all titled "crate transfer"), grant_plan's among
-   the first. Each draft's pull request runs its new `uses:` lines, so it can pass while `main` is
+   then each crate's second draft, its `uses:` lines (one per repository, all titled "crate
+   transfer"), grant_plan's among the first. Each draft's pull request runs its new `uses:` lines, so it can pass while `main` is
    red. Effort: S.
 5. The record amends DECISIONS §305 (git dependencies are allowed on `nifeos/*` only, pinned to a
    landed commit) to name the library's organization.
@@ -108,7 +133,8 @@ except the last transfer, which may be one-way (see the risks).
    `grant_plan` to the merge commit of grant_plan's draft, and lands. It rewrites every cargo
    source together, because one repository under two URLs is two sources to cargo. At its present
    pin, grant_plan's manifest names three crates under `nifeos`. Effort: S.
-7. The interim `nifeos/crate-workflows` pattern leaves the settings file and every crate.
+7. The `partsfoundry` row of the owner table becomes the shared values, its
+   `nifeos/crate-workflows` pattern leaves, and `script/apply-settings` runs against every crate.
 
 The preparation list for calef:
 
@@ -116,17 +142,17 @@ The preparation list for calef:
   granted to each crate as it arrives. If `SETTINGS_TOKEN` is a fine-grained token, it reads one
   owner's repositories, and `partsfoundry` needs a new one. The lane did not check its kind.
 - The `crate-maintainers` team. The transfer call's `team_ids` field can then attach it.
-- nife-smelter installed on `partsfoundry`. A private App installs only on its owner, so this needs
-  the App made public or a new App, and the choice is calef's.
-- Fork pull request approval set to all outside contributors, as in `nifeos`. `partsfoundry` asks
-  only first-time contributors today. Its other Actions settings already match.
+- partsfoundry-smelter, owned by `partsfoundry` and installed on all its repositories (done).
+- Fork pull request approval stays at all outside contributors in each repository, as the transfer
+  keeps the repository's own setting. `partsfoundry`'s organization default asks only first-time
+  contributors.
 
 ## The window
 
 | what | why | until |
 |---|---|---|
 | CI of every crate repository and crate-workflows-test | `uses:` follows no redirect | step 4, each repository's own draft |
-| a release tag in a transferred crate | the tag ruleset admits only nife-smelter, which must be installed in `partsfoundry` | step 0 |
+| a release tag in a transferred crate | the transfer drops the tags ruleset's bypass actor | `script/apply-settings` at that crate's transfer |
 | code owner review requests in a transferred crate | `@nifeos/crate-maintainers` names a team in the old organization | step 4 (no rule requires these reviews) |
 | the draft board, `gh search prs --owner nifeos --draft` | it lists one organization | a second search with `--owner partsfoundry` |
 
@@ -142,11 +168,12 @@ drafts.
 
 ## Verification
 
-- After the trial, through `gh api`: the two rulesets, the tags ruleset's bypass actor, the
-  `crates-io` environment and its reviewer, the team, the Actions settings, and the redirect from
-  `nifeos/rsext4` for git and the API.
-- The trial crate's `check`, `proofs` and weekly runs pass, and the weekly settings check reports
-  no drift.
+- After each crate's transfer and `script/apply-settings`, `script/check-settings` matches and the
+  tags ruleset's bypass actor is partsfoundry-smelter.
+- Its `check`, `proofs` and weekly runs pass, and the weekly settings check reports no drift.
+- A dry-run release starts and its gate runs. A crate with no stranger-test run on record stops at
+  that step, as it does in `nifeos`, so rsext4's dry run shows only that the cross-organization
+  call starts.
 - After step 4, `organization_rename.py census --moving` over every moving repository reports no
   line in the breaks, tied, redirects or stale groups.
 - nife's `cargo metadata --locked` passes after step 6, with one source for each first-party crate.
@@ -167,13 +194,11 @@ names.
   transfer back.
 - A stale draft. A pull request that lands before cutover may add a line naming `nifeos` for a
   moving repository. The tool's `--check` mode finds it, and the lane runs the rewrite again.
-- The interim pattern format. The lane did not test the pattern that admits `nifeos/crate-workflows`,
-  and the trial is where a wrong one shows, as a run that fails to start.
 
 ## Open decisions
 
-The App: make nife-smelter public, or create a second App owned by `partsfoundry`. Either keeps the
-release path working. Every other step follows the 2026-11-24 ruling.
+- **None.** The App is partsfoundry-smelter, a second App owned by `partsfoundry`, and every other
+  step follows the 2026-11-24 ruling.
 
 ## Follow-on
 
@@ -183,8 +208,8 @@ release path working. Every other step follows the 2026-11-24 ruling.
 
 - The census counts lines, not occurrences, and sorts each line by the first form it matches.
 - Three nife tools name `nifeos` for the organization's secrets, its App and its repository list
-  (`script/grant-org-secrets`, `helpers/smelter-token`, `helpers/idle_pull_requests.py`). They wait
-  for the App decision.
+  (`script/grant-org-secrets`, `helpers/smelter-token`, `helpers/idle_pull_requests.py`). Each
+  needs a `partsfoundry` case for partsfoundry-smelter.
 
 ## Index row
 
