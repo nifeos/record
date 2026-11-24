@@ -42,7 +42,12 @@
 #   milestones built     BUILT rows from `script/roadmap --index`, generated from the blocks
 #   components           crates/*/ plus [[bin]] targets in components/Cargo.toml and fixtures/Cargo.toml
 #   ABI constants        the `pub const NAME: u64` surface of moho_abi at its pinned revision (see BUGS)
-#   external packages    distinct registry packages across every committed Cargo.lock but vendor's
+#   external packages    distinct registry packages across every Cargo.lock nife tracks but vendor's
+#
+# Three of the four are counts of nife at the commit basalt's main pins: the components and the
+# moho_abi pin in Cargo.lock through the links `helpers/nife_tree.py overlay` puts in this tree
+# (script/lint and the audit-cadence workflow make them first), and the external packages from
+# that nife checkout's own index, since git here does not track the links.
 #
 # ABI constants are milestone 92's system call event trigger made countable: a new method arrives as a new
 # constant, and both cadence rows set it to 1, so any change at all fires. External packages are a
@@ -289,6 +294,10 @@ def current():
     for pkg in ("components", "fixtures"):
         path = os.path.join(root, pkg, "Cargo.toml")
         if not os.path.exists(path):
+            if not os.path.lexists(os.path.join(root, pkg)):
+                sys.exit("script/audits: %s/ is nife's, and nife's tree is not linked into this "
+                         "one. Run `python3 helpers/nife_tree.py overlay .` first, and "
+                         "`python3 helpers/nife_tree.py unoverlay .` after." % pkg)
             sys.exit("script/audits: %s is gone. If a directory of programs was renamed or split, "
                      "this count has to be told; it cannot discover the difference between a "
                      "program and a fuzz target. See the comment above." % path)
@@ -333,13 +342,25 @@ def current():
     # Discovered, not listed. A hard-coded set of lockfile paths is a copy of a fact about the
     # workspace layout, and script/drift's header records what that costs when it drifts. vendor/ is
     # somebody else's graph and enters our builds only through the consumers that depend on it.
-    locks = subprocess.run(["git", "-C", root, "ls-files", "*Cargo.lock"],
-                           capture_output=True, text=True).stdout.split()
+    #
+    # The lockfiles are nife's, listed from nife's own index at the commit basalt's main pins
+    # (helpers/nife_tree.py path). The record's index cannot list them: the overlay links nife's
+    # paths into this tree untracked, so `git ls-files` here sees only the record's own lockfile and
+    # the count falls by an order of magnitude, the one direction this signal must not err in.
+    nife = subprocess.run([sys.executable, os.path.join(root, "helpers", "nife_tree.py"), "path"],
+                          capture_output=True, text=True)
+    if nife.returncode != 0:
+        print("audits: helpers/nife_tree.py path would not run, so the external packages cannot "
+              f"be counted:\n  {nife.stderr.strip()[:200]}", file=sys.stderr)
+        sys.exit(1)
+    nife = nife.stdout.strip()
+    locks = subprocess.run(["git", "-C", nife, "ls-files", "*Cargo.lock"],
+                           capture_output=True, text=True, check=True).stdout.split()
     names = set()
     for lock in locks:
         if lock.startswith("vendor/"):
             continue
-        with open(os.path.join(root, lock), errors="replace") as f:
+        with open(os.path.join(nife, lock), errors="replace") as f:
             for block in f.read().split("[[package]]"):
                 m = re.search(r'^name = "([^"]+)"', block, re.M)
                 if m and 'source = "registry' in block:
