@@ -1,0 +1,60 @@
+# Tell basalt that the record's main moved, so its record pin bump proposes the new commit.
+#
+# basalt's `pins.toml` pins this repository in its `[record]` table, and nife reads the record at
+# that commit. basalt's `record pin bump` workflow (`.github/workflows/record-pin-bump.yml` in
+# nifeos/basalt) proposes a new pin as a pull request when it receives a `repository_dispatch` of
+# type `record-merged`, which this workflow sends on every push to main, that is, every merge. The
+# dispatch carries the pushed commit for the log only: basalt proposes main's head as it reads it.
+#
+# A dispatch to another repository needs a token that can write to it, so the job mints one for
+# the nife-smelter App, scoped to nifeos/basalt alone, from the organization secrets
+# `NIFE_SMELTER_APP_ID` and `NIFE_SMELTER_PRIVATE_KEY`. Without them it warns and stops, and basalt's
+# daily run proposes the commit instead.
+#
+# Names provisional: the file, the workflow, the job and the dispatch type `record-merged`.
+
+name: basalt record pin
+
+on:
+  push:
+    branches: [main]
+
+permissions: {}
+
+concurrency:
+  group: basalt-record-pin
+  cancel-in-progress: true
+
+jobs:
+  dispatch:
+    name: ask basalt to propose the record pin
+    runs-on: ubuntu-26.04
+    timeout-minutes: 5
+    env:
+      APP_ID: ${{ secrets.NIFE_SMELTER_APP_ID }}
+      APP_KEY_SET: ${{ secrets.NIFE_SMELTER_PRIVATE_KEY != '' }}
+    steps:
+      - name: Say why there is no dispatch
+        if: env.APP_ID == '' || env.APP_KEY_SET != 'true'
+        run: |
+          echo "::warning::NIFE_SMELTER_APP_ID or NIFE_SMELTER_PRIVATE_KEY is not available to this" \
+               "repository, so basalt was not told; its daily record pin bump will propose $GITHUB_SHA."
+
+      - name: Mint a token for nifeos/basalt
+        id: app-token
+        if: env.APP_ID != '' && env.APP_KEY_SET == 'true'
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3
+        with:
+          app-id: ${{ secrets.NIFE_SMELTER_APP_ID }}
+          private-key: ${{ secrets.NIFE_SMELTER_PRIVATE_KEY }}
+          owner: nifeos
+          repositories: basalt
+
+      - name: Send the dispatch
+        if: steps.app-token.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          gh api --method POST repos/nifeos/basalt/dispatches \
+            -f event_type=record-merged -f "client_payload[commit]=$GITHUB_SHA"
+          echo "Asked nifeos/basalt to propose the record pin; main is at $GITHUB_SHA."
