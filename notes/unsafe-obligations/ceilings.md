@@ -8,7 +8,7 @@ measurement behind these numbers is in [census.md](census.md). Both are the work
 
 ## The density outside `arch/`
 
-At most 53 <!--count-at-most:unsafe-density-outside-arch--> unsafe blocks per 10,000 lines
+At most 54 <!--count-at-most:unsafe-density-outside-arch--> unsafe blocks per 10,000 lines
 outside `kernel/src/arch/`. The direction is down, because unsafe outside `arch/` is not paying
 for hardware access. It is a raw system call, a shared page, or a hand-rolled data structure, and each
 of those has a safe wrapper somebody could write. The ceiling was first written at a threshold the
@@ -34,6 +34,7 @@ Every move of this ceiling came behind a measured reduction. The rule each move 
 | 12 | 2026-10-19 | 52 to 51 | 51.48 | six more test suites' repeated contracts into one helper, token or fixture method each |
 | 784(g) | 2026-10-21 | 51 to 52 | 52.17 | nothing; 818 safe lines left the denominator and no unsafe was added (calef, on #2497) |
 | #4020 | 2026-11-22 | 52 to 53 | 53.75 | nothing; 3,439 safe lines left the denominator when `file_system_contract` and `file_system_fixture` moved to their own repository, and no unsafe was added (maintainer, provisional, 2026-11-22) |
+| #4068 | 2026-11-24 | 53 to 54 | 54.14 | nothing; 982 lines and one block left the denominator when the design record's probes and measurement crates under `notes/` moved out of nife with the record, and no unsafe was added (maintainer, provisional, 2026-11-24) |
 
 ## Round 1 chose the headroom
 
