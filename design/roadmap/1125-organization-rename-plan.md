@@ -109,8 +109,9 @@ two-way door. The list after the steps holds what only calef can do.
 8. basalt ([nifeos/basalt#98](https://github.com/nifeos/basalt/pull/98)), then basalt's record
    pin bump to the commit of step 7, as its own pull request. basalt-backup and the site repository
    follow in any order. Effort: S.
-9. nife, in eight drafts, one per top-level directory group. The tooling draft lands first,
-   since the other drafts' lints run its code. The rest follow in any order: kernel, crates,
+9. nife, in nine drafts, one per top-level directory group. The tooling draft
+   ([nifeos/nife#4077](https://github.com/nifeos/nife/pull/4077)) lands first, since the other
+   drafts' lints run its code. The others are #4078 to #4084 and #4086. The rest follow in any order: kernel, crates,
    components, system_tests, xtask, the remaining program directories, the prose, and the Cargo
    files. The Cargo draft holds every `Cargo.toml` and `Cargo.lock`, `deny.toml` and `.cargo/`,
    because one crate under two URLs in one workspace is two sources to cargo. For the same reason
@@ -145,12 +146,12 @@ From step 2 to the end of step 9, these stop working.
 | code owner review requests in the crate repositories | an unknown team | step 5 |
 
 Expected length: one working day, if a lane rebuilds the drafts the day before and merges each as
-soon as its checks pass. nife's eight drafts are the long part, because each one is a queue
+soon as its checks pass. nife's nine drafts are the long part, because each one is a queue
 run. That is an estimate from queue run times, not a measurement.
 
 ## The queue meanwhile
 
-nife's merge queue takes nothing between steps 1 and 9 except the eight rename drafts, the tooling
+nife's merge queue takes nothing between steps 1 and 9 except the nine rename drafts, the tooling
 draft first. Each draft's lint runs the tooling draft's code, so before that draft lands a later
 one fails its citations and tied-path checks. Heavy gates run on `merge_group` on the owned runners.
 Nobody has measured whether those runners keep their registration through the rename, and the
@@ -227,5 +228,5 @@ the former organization, in a follow-up the maintainer rules on.
 
 The GitHub organization takes the name partsfoundry. The census sorts 8,923 lines across 39
 repositories into those that break at the rename, those tied to a pin or lockfile, those that
-redirect and those that stay. One draft per repository, eight in nife, lands in a fixed order:
+redirect and those that stay. One draft per repository, nine in nife, lands in a fixed order:
 the shared workflows, the crates, the fuzz host, the record, basalt, then nife.
