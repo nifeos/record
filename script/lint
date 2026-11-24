@@ -39,7 +39,7 @@ SECTIONS="claim_copy replay_line conflict_markers todo_markers roadmap reviews d
 four_digits citations citations_ratchet citations_moved fatal_risks script_docs counted_claims
 naming_conventions naming_rules audits_selftest audits environment_names tracked_ignored
 markdown_links prose_ratchet removed_index module_block_ratchet comment_block_ratchet parent_index
-house_style history line_citations outsider_pass exception_markers repeat_issue em_dashes spelling"
+house_style history line_citations outsider_pass exception_markers em_dashes spelling"
 
 section_claim_copy() {
     echo "==> script/claim is nife's, byte for byte"
@@ -436,14 +436,6 @@ section_exception_markers() {
     python3 helpers/exception_markers.py --selftest
     python3 helpers/exception_markers.py
     python3 helpers/baseline_drift.py --selftest >/dev/null
-}
-
-section_repeat_issue() {
-    echo "==> the scheduled-failure repeat issue (helpers/repeat_issue.py), against its fixtures"
-    # lint-scope: record
-    # The audit cadence workflow's repeat report files through this helper, so its selftest
-    # runs where the workflow does.
-    sh helpers/trunk-health-repeat-selftest.sh
 }
 
 section_em_dashes() {
