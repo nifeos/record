@@ -4,7 +4,7 @@ An appendix to [the milestone](../1113-virtio-outside-review.md).
 
 ## P1
 
-3. The ring layout is a copy of the proved layout, and nothing checks the copy. NOT DONE (a BUGS entry at the constants records the copy; the move to `moho_abi::virtual_io` adds public constants to `crates/moho_abi`, so it is a pull request of its own). `QSIZE`
+3. The ring layout is a copy of the proved layout, and nothing checks the copy. DONE (the constants live in `moho_abi::virtual_io`, [nifeos/moho_abi#3](https://github.com/nifeos/moho_abi/pull/3), and every driver imports them, [nifeos/nife#4095](https://github.com/nifeos/nife/pull/4095)). `QSIZE`
 (`:72`), `OFF_DESC`, `OFF_AVAIL`, `OFF_USED` (`:99-101`) and the net driver's `0x200` stride
 (`:564-569`) restate `direct_memory_access_validator::{LAYOUT_QSIZE, DESC_OFF, AVAIL_OFF,
 USED_OFF, RING_BLOCK}` as literals. The kernel aliases those constants, so the layout it runs
@@ -43,9 +43,9 @@ behavior with no diagnostic. The fix: a `debug_assert!` on bounds and `off % siz
 or `MappedWindow` (item 2), whose constructor asserts once. Effort: S. Two-way.
 
 6. The handshake skipped a step the specification requires of a driver. DONE (the status read-back, bounded, in both handshakes: `a_reset_waits_for_status_to_read_back_as_zero`). The driver's `Version` check is not done, on purpose. The kernel's scan refuses a slot whose `Version` is not 2 in every build and reports it once, `a_slot_whose_version_is_not_2_is_refused`, since the kernel's own queue setup writes modern registers; the PCI transport answers 2 there. The driver does not check it again (Decision 3, provisional, 2026-11-15 UTC). After writing 0 to
-`Status` (`:143`, `:624`) the driver proceeds without reading `Status` back as 0, which the
-specification requires before reinitialization (virtio 1.2, the device initialization
-requirements of the PCI and MMIO transports; section numbers unverified). It checks the magic
+`Status` (`:143`, `:624`) the driver proceeds without reading `Status` back as 0. The specification requires
+that read before reinitialization (virtio 1.2 section 4.1.4.3.2 for the PCI transport;
+for the MMIO transport virtio 1.2 has only section 2.4.2's SHOULD). It checks the magic
 value (`:141`, `:622`) and never `DeviceID`. Today the
 kernel enumerates the device and QEMU resets synchronously, so the gap cannot bite. Under the
 ruled direct grant (milestone 1062 (the device control planes leave the kernel) step 7) a driver will own its own bring-up against a real

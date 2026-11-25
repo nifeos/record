@@ -37,12 +37,12 @@ logic is testable on the host, and its names pass `design/naming.md`.
 - P0-1, the crate cannot leave as it stands: Done, [#3662](https://github.com/nifeos/nife/pull/3662). The roles live in
   `components/src/block_driver_roles.rs` (Decision 1, ruled 2026-11-16 UTC, option A).
 - P0-2, no test runs outside QEMU and no proof exists: Done, [#3613](https://github.com/nifeos/nife/pull/3613).
-- P1-3, the ring layout is an unchecked copy of the proved layout: Open. Its blocker, milestone 1075 item 11
-  (the version gate), landed in [#3942](https://github.com/nifeos/nife/pull/3942). Decision 2 ruled the move (maintainer, provisional, 2026-11-14
-  UTC), and it is not built: `QUEUE_ENTRIES` and the ring offsets are literals under a BUGS entry in
-  `block_driver_roles.rs`, and `moho_abi::virtual_io` holds no ring constant. The `moho_abi` review has not
-  settled how a change to a pinned value meets an `ABI_VERSION` bump once the crate leaves nife.
-  New public constants would join a surface whose gate is not ready.
+- P1-3, the ring layout is an unchecked copy of the proved layout: Done, [nifeos/moho_abi#3](https://github.com/nifeos/moho_abi/pull/3) and
+  [nifeos/nife#4095](https://github.com/nifeos/nife/pull/4095). `moho_abi::virtual_io` holds `QUEUE_ENTRIES`, `DESCRIPTOR_TABLE_OFFSET_BYTES`,
+  `AVAILABLE_RING_OFFSET_BYTES`, `USED_RING_OFFSET_BYTES`, `RINGS_END_OFFSET_BYTES` and
+  `RING_BLOCK_BYTES` (names provisional), pinned under the version gate of milestone 1075 (what an
+  outside maintainer would fix before the move) item 11. The kernel, the validator and every virtio
+  driver import them.
 - P1-4, a client-caused device error kills the block server: Done, [#3520](https://github.com/nifeos/nife/pull/3520).
 - P1-5, two `unsafe` blocks state an unchecked precondition: Done, [#3520](https://github.com/nifeos/nife/pull/3520).
 - P1-6, a handshake step the specification requires: Done, [#3559](https://github.com/nifeos/nife/pull/3559), [#3574](https://github.com/nifeos/nife/pull/3574) and
@@ -63,11 +63,11 @@ logic is testable on the host, and its names pass `design/naming.md`.
 - P2-14, one request in flight on the production path: Done, [#3613](https://github.com/nifeos/nife/pull/3613).
 - P2-15, an unused parameter of `run_attack`: Done, [#3613](https://github.com/nifeos/nife/pull/3613).
 - P2-16, an unbounded `complete_block`: Done, [#3613](https://github.com/nifeos/nife/pull/3613).
-- P2-17, the register map unchecked against a second driver: Open.
+- P2-17, the register map unchecked against a second driver: Open. Read against `virtio-drivers`
+  0.13 and the virtio 1.2 tables, every constant agrees; the recording-transport test is not built.
 - Decision 1, fold the roles into `block_driver`: Done, [#3662](https://github.com/nifeos/nife/pull/3662) (ruled 2026-11-16 UTC, A).
-- Decision 2, the ring layout moves to `moho_abi::virtual_io`: Open. Milestone 1075 (what an
-  outside maintainer would fix before the move) item 11 landed in [#3942](https://github.com/nifeos/nife/pull/3942). Ruled (maintainer, provisional, 2026-11-14
-  UTC) and not built; P1-3 is the work.
+- Decision 2, the ring layout moves to `moho_abi::virtual_io`: Done, [nifeos/moho_abi#3](https://github.com/nifeos/moho_abi/pull/3) and [nifeos/nife#4095](https://github.com/nifeos/nife/pull/4095)
+  (maintainer, provisional, 2026-11-14 UTC).
 - Decision 3, the kernel checks `Version` and the driver does not: Done, [#3628](https://github.com/nifeos/nife/pull/3628) (maintainer,
   provisional, 2026-11-15 UTC).
 
@@ -206,13 +206,13 @@ Decided by the maintainer on 2026-11-14 (UTC), provisional: a two-way door, whic
 revisit. The layout values are already the agreement between kernel and driver and do not change;
 only the home of their names moves, inside unreleased crates. They stay relevant after the virtio
 default ruling of 2026-11-11, because every mediated grant still uses `SETUP_QUEUE` at the
-validator's layout. The five constants (`crates/direct_memory_access_validator/src/lib.rs` lines
-294 to 304) move to `moho_abi::virtual_io`, beside the DMA-layout fact already there
-(`crates/moho_abi/src/virtual_io.rs` line 38), with `RING_END`, which the validator derives from them and
-the kernel also aliases. The validator and the kernel alias them from there. The present names fail
-the spelled-out rule (`QSIZE`, `DESC`, `OFF`), so the lane that moves them proposes spelled-out
-names in `moho_abi`, provisional. They join the pinned-value list and version gate of milestone
-1075 (what an outside maintainer would fix before the move), its item 11. Item 3 is the work.
+validator's layout. The five constants and the rings' end, which the validator derives from them,
+live in `moho_abi::virtual_io` beside the DMA-layout fact already there, with spelled-out names,
+provisional: `QUEUE_ENTRIES`, `DESCRIPTOR_TABLE_OFFSET_BYTES`, `AVAILABLE_RING_OFFSET_BYTES`,
+`USED_RING_OFFSET_BYTES`, `RINGS_END_OFFSET_BYTES` and `RING_BLOCK_BYTES`. The validator, the
+kernel and every driver import them. They are on the pinned-value list and under the version gate
+of milestone 1075 (what an outside maintainer would fix before the move), its item 11. Item 3 is
+the work.
 
 ### Decision 3. The driver does not check `Version`; the kernel does
 
@@ -245,13 +245,11 @@ The kernel's scan does not offer the slot, so nothing starts a driver for it.
 
 ## Follow-on
 
-- **Outstanding.** P1-3 and Decision 2. Their blocker, milestone 1075 item 11, landed in
-  [#3942](https://github.com/nifeos/nife/pull/3942).
 - **Milestone 1062.** The shared library that holds the name `virtio`, ruled 2026-11-16 UTC.
   Whether and when to cut it waits on milestone 1062 (the device control planes leave the kernel),
   step 7.
-- **Outstanding.** P2-17, the check against `virtio-drivers`, before anyone cuts the library
-  that holds the name `virtio`.
+- **Outstanding.** P2-17's recording-transport test, before anyone cuts the library that holds
+  the name `virtio`.
 
 ## Done when
 
@@ -261,8 +259,9 @@ The checks are in [the appendix](1113-virtio-outside-review/done-when.md).
 
 - The review did not boot the QEMU suite. The review took the roles' behavior under test from the
   entry points and from `notes/virtual-io.md`, and did not observe it.
-- Items 6 and 13 cite specification requirements from memory; nobody has verified the section
-  numbers,   and the recording lane should confirm them against virtio 1.2 before the text lands.
+- `MAXIMUM_QUEUES`, the bound `SETUP_QUEUE` puts on a queue index, stays in
+  `direct_memory_access_validator` and is not in `moho_abi::virtual_io`. A driver learns it only
+  from a refusal. Decision 2 moved the layout and not the bound.
 - Item 14's figure is the storage benchmark already recorded in `notes/benchmarks.md`; nobody ran
   `script/bench` for this milestone.
 - The crates.io figures are one API call each at the time of the review; the `virtio` name's
