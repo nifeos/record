@@ -58,6 +58,8 @@ copied-file list (`xtask/src/farm/copied.rs`). No new tool.
 - Decision B, which `talc` outside nife: Done, [#3840](https://github.com/nifeos/nife/pull/3840), ruled 2026-11-14 (UTC), option A. The
   crate depends on crates.io's `talc` 5.1.1 with no patch outside nife, and the README says what
   that release lacks.
+- Fork `talc` if upstream stays silent: Will not fix (ruled 2026-11-25), option A. No fork; the unpatched
+  dependency and the README sentence stay, and nife keeps watching upstream.
 
 ## Open decisions
 
@@ -77,19 +79,19 @@ ones a README shows. Concrete example: a consumer writes
 `MemoryRegionHeap::with_source(source)` and matches `Refusal` from `last_refusal()`; those
 spellings are what it compiles against.
 
-### Fork `talc` if upstream stays silent
+### Fork `talc` if upstream stays silent (ruled 2026-11-25 UTC)
+
+The rule in force, option A. The crate keeps the unpatched crates.io `talc` 5.1.1 dependency and the
+README sentence that states the gap, and nife keeps watching upstream. nife makes no fork. nife
+reconsiders a fork only if a 32-bit target arrives or its maintainer declares upstream abandoned.
 
 Background. The crate's allocator core is `talc` 5.1.1 from crates.io. nife builds a patched copy
 (`vendor/talc`, carrying upstream pull request 57, two fit-check overflow fixes), but a `[patch]`
 table does not travel with a library, so outside nife the crate builds the unpatched release.
-Decision B accepts that, because the overflow needs addresses that wrap at the top of a 64-bit
-space. It also rules that the question returns as a fork request if upstream stays silent past
-the next monthly `script/vendor-watch` report. Pull request 57 is open with no comments, and no
-release carries the fix. This decision exists only once that report passes in silence.
-
-Recommendation: A, when the question arises. The fix does not reach a 64-bit process, nife's own
-images build the patched source, and a fork adds a crate, a repository and a maintenance duty
-that a later upstream release would make redundant.
+Upstream pull request
+[SFBdragon/talc#57](https://github.com/SFBdragon/talc/pull/57) has had no comment since 2026-09-24,
+and the last upstream commit is 2026-09-09. The overflow needs addresses that wrap at the top of a
+64-bit space, so no 64-bit process meets it. nife's images build the patched vendor copy.
 
 - A. Keep the unpatched crates.io dependency and the README sentence, and keep watching upstream.
 - B. Fork `talc` under `nifeos`, publish the fork, and depend on it.
@@ -101,11 +103,10 @@ changes nothing.
 Prior art. Rust's std depends on crates.io `dlmalloc` 0.2 for its wasm targets with no patch,
 and takes fixes only through releases. Debian and the BSD ports keep a patch at the distribution,
 which is the shape nife's root `[patch]` has today. A fork is the usual answer when an upstream has
-stopped, and `talc` has a working maintainer. Concrete example: under A, the crate's own repository runs its
+stopped, but here the fix does not reach a 64-bit process, so a fork would add a crate, a repository
+and a maintenance duty for no reachable gain. Concrete example: the crate's own repository runs its
 host tests against unpatched 5.1.1 and passes, while basalt's image, built in nife's workspace,
 links the patched source.
-
-Blocks: nothing until the vendor-watch report passes in silence; after that, the first publish.
 
 ### Clear the review package and approve the repository (ruled)
 
@@ -234,7 +235,7 @@ The P1 items are in [the appendix](1100-memory-region-heap-outside-review/before
 
 ## Decisions for the architect
 
-Two one-way doors, both ruled. The decisions still open are under "Open decisions" above.
+The architect ruled both one-way doors. No decision stays open.
 
 ### A. The seven public names, and the shape of `commit_all` (ruled 2026-11-14 UTC)
 
@@ -266,8 +267,8 @@ The rule in force, option A (block 1100 decision B):
 - nife's root `[patch.crates-io]` keeps applying to nife's whole graph, this crate included.
 - `redoxfs` carries its own patch file, as the step 9 appendix of milestone 1017 rules.
 - When a `talc` release carries the fix, the crate bumps and the README sentence goes.
-- If upstream stays silent past the next monthly `script/vendor-watch` report, the question
-  returns as a request to fork. A fork under `nifeos` needs its own approval.
+- nife reconsiders a fork only if a 32-bit target arrives or its maintainer declares upstream abandoned. A fork under
+  `nifeos` needs its own approval. Ruled 2026-11-25 (UTC): no fork now.
 
 The evidence, background, prior art and the options not taken are in
 [the appendix](1100-memory-region-heap-outside-review/talc-decision.md).
@@ -279,9 +280,6 @@ The evidence, background, prior art and the options not taken are in
   `user_mode_runtime` have repositories, checked in `crates/memory_region_heap/Cargo.toml`. The move drops the fuzz
   workspace's `[patch.crates-io]` line for the vendored talc, and the template's `coverage` job
   then measures the host tests for the first time.
-- **Outstanding.** Whether to fork `talc` if upstream stays silent, the open decision above. It
-  arises only once a monthly `script/vendor-watch` report passes with upstream pull request 57
-  still unanswered, checked in `crates/memory_region_heap/Cargo.toml`.
 
 ## Done when
 
