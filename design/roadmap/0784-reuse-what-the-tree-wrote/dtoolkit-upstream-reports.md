@@ -10,10 +10,10 @@ calef approved all three on 2026-10-25 (UTC), and the maintainers filed each on 
 `4a7faf2e7`; the filed issues carry a self-contained Rust reproduction in place of the probe.
 
 State upstream: google/dtoolkit#104, which adds `Fdt::with_options`, completed and closed [#101](https://github.com/google/dtoolkit/issues/101).
-[#102](https://github.com/google/dtoolkit/issues/102) and [#103](https://github.com/google/dtoolkit/issues/103) are open. A contribution for [#102](https://github.com/google/dtoolkit/issues/102) is open as
 [google/dtoolkit#108](https://github.com/google/dtoolkit/pull/108), which adds `Fdt::events`, a flat
-single-pass iterator over the structure block. We read the comparison again once [#102](https://github.com/google/dtoolkit/issues/102) and [#103](https://github.com/google/dtoolkit/issues/103)
-resolve ([the decision](dtoolkit-against-device-tree-blob.md#the-decision)).
+single-pass iterator over the structure block, merged and closed [#102](https://github.com/google/dtoolkit/issues/102).
+[#103](https://github.com/google/dtoolkit/issues/103) is open and stays as it is. nife keeps
+`device_tree_blob` and makes no switch ([the decision](dtoolkit-against-device-tree-blob.md#the-decision)).
 
 [dtoolkit-probe.sh](dtoolkit-probe.sh) reproduces each, in the mode named under it, through
 `dtoolkit`'s public API alone.
@@ -40,7 +40,7 @@ Validate names only on the write side, or make read-side name validation opt-in
 (for example `Fdt::new_strict`), so a reader accepts what `dtc` and Linux accept. If validation stays
 on by default, a length limit that matches what Linux trees contain would be enough for this case.
 
-## R2. Visiting every node through `children()` takes time quadratic in depth ([#102](https://github.com/google/dtoolkit/issues/102), open; pull request [#108](https://github.com/google/dtoolkit/pull/108))
+## R2. Visiting every node through `children()` takes time quadratic in depth ([#102](https://github.com/google/dtoolkit/issues/102), closed upstream by [#108](https://github.com/google/dtoolkit/pull/108))
 
 `FdtChildIter::next` finds the next sibling with `next_sibling_offset`, which walks
 the whole subtree of the previous child. A depth-first visit of every node therefore costs the sum

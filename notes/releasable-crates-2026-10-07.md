@@ -72,7 +72,7 @@ evidence behind each row.
 |---|---|---|---|---|---|
 | `paging` | A | 2,464 | 37 | contribute: `x86_64` (rust-osdev), `aarch64-paging` (Google) | `x86_64` already runs Kani in CI; our x86_64 4-level harnesses fit it. The riscv Sv39 and Sv48 harnesses have no host |
 | `elf` | A | 1,198 | 8 | contribute: `elf` (cole14) | Same scope, `no_std`, fuzzed in CI. Quiet for six months, so the offer may sit |
-| `device_tree_blob` | A | 763 | 4 | contribute: `dtoolkit` (Google) | Young, fuzzed, CONTRIBUTING, our license. `fdt` is MPL-2.0 with one author |
+| `device_tree_blob` | A | 763 | 4 | publish (ruled 2026-11-25 UTC); `dtoolkit` (Google) was weighed and not taken | `dtoolkit` is young, fuzzed, has a CONTRIBUTING and our license, but moves slowly and adds ten crates to the kernel graph. `fdt` is MPL-2.0 with one author |
 | `domain_name_system` | A | 578 | 3 | contribute: `domain` (NLnet Labs) | Most outside merges of the DNS crates and a `no_std` path |
 | `network_time_protocol` | A | 684 | 7 | contribute: `ntp-proto` (Pendulum) | Security-minded, fuzzed, takes outside work. `sntpc` is the `no_std` second choice |
 | `calendar` | A | 1,091 | 11 | fork 8: no code or proofs to `time`; bug reports only. Revisit in its review | 951M downloads and no proofs, but `time` wants a person's words. `hifitime` runs Kani but is MPL-2.0 and another scope |

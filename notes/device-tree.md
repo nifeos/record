@@ -210,18 +210,17 @@ failure, so every limitation here is a limitation on the boot path specifically.
   that declares nothing decodes `reg` with whatever its parent said. Where the tree is silent, a
   spec-following reader such as `dtoolkit` returns a different region and neither reports an error.
   The walkers ignore a declaration that is not exactly one cell.
-- nife reads device trees with its own parser, and Google's `dtoolkit` lacks five things nife needs.
-  Two are bugs that nife's fuzzing found, each with an issue and a fix open upstream.
-  `FdtNodeMut::add_property` panics on an unreferenced invalid string in the strings block
-  (google/dtoolkit#109, fix [#111](https://github.com/google/dtoolkit/pull/111)). `Fdt::new` does not check that the structure block ends
-  within `size_dt_struct` ([#110](https://github.com/google/dtoolkit/issues/110), fix [#112](https://github.com/google/dtoolkit/pull/112)). The quadratic `children()` walk is the third. Issue [#102](https://github.com/google/dtoolkit/issues/102)
-  is open, and calef's pull request google/dtoolkit#108 answers it with `Fdt::events`. The fourth
-  is a reader that accepts what `dtc` and Linux accept: `Fdt::with_options` ([#104](https://github.com/google/dtoolkit/pull/104)) covers long
-  property names only. The fifth is `add_child` on the mutable tree, which has no upstream issue.
-  Switching nife to `dtoolkit` after a release ships these needs its own architect yes under §46
-  (thin primitives or whole subsystems). Until then nife retires nothing.
+- nife reads device trees with its own parser, `device_tree_blob` (`partsfoundry/device_tree_blob`),
+  and does not switch to Google's `dtoolkit` (ruled 2026-11-25 UTC). `dtoolkit` does not read every
+  firmware tree that `dtc` and Linux accept (`Fdt::with_options`,
+  [#104](https://github.com/google/dtoolkit/pull/104), covers long property names only), has no
+  `add_child` on the mutable tree, and would add `zerocopy`, `zerocopy-derive` and `thiserror` to the
+  kernel's graph. The fixes nife sent upstream went in: [#108](https://github.com/google/dtoolkit/pull/108)
+  (`Fdt::events`, a linear walk), [#111](https://github.com/google/dtoolkit/pull/111) and
+  [#112](https://github.com/google/dtoolkit/pull/112).
   [The comparison](../design/roadmap/0784-reuse-what-the-tree-wrote/dtoolkit-against-device-tree-blob.md)
-  holds the reasoning.
+  holds the measurements and [milestone 1085](../design/roadmap/1085-device-tree-blob-outside-review.md#keep-device_tree_blob-and-release-it)
+  the ruling.
   [The reports](../design/roadmap/0784-reuse-what-the-tree-wrote/dtoolkit-upstream-reports.md)
   hold the upstream issues.
 - **A `reg` shorter than one address and size pair yields no region rather than an error.** The
