@@ -13,11 +13,13 @@ later removal would start from it.
 
 ## Revisit
 
-- **Condition.** The ext4 measurement through `rsext4` (the proposal
-  `ext4-through-rsext4-under-the-crash-injector`) passes the injector of milestone 37 (Prove RedoxFS's crash consistency), and an ext4 server
-  then boots the composed image, takes `jig` installs and holds the installed-programs table on
-  aarch64, riscv64 and x86_64. That removal would be a milestone of its own, minted from this
-  inventory.
+- **Condition.** `rsext4` replaces RedoxFS in nife once partsfoundry/rsext4 meets the bar of §46
+  (thin primitives or whole subsystems; we write everything in between) and the done-when of
+  milestone 190 (ext4, read and write). We ask for the adoption ruling at that point (2026-11-25
+  UTC). RedoxFS is not a viable long-term store, and no benchmark can compare it with Linux on
+  filesystem operations. The removal is a milestone of its own, minted from this inventory. In it
+  an ext4 server takes over the launch store's duties: it boots the composed image, takes `jig`
+  installs and holds the installed-programs table on aarch64, riscv64 and x86_64.
 
 ## What would leave the tree
 
@@ -48,5 +50,6 @@ its own base, and that search, not this list, is the inventory.
 ## Index row
 
 The removal of RedoxFS behind a proven replacement launch store. Refused 2026-10-31: RedoxFS stays
-the launch store, and UFS2 is not built. It reopens if ext4 through `rsext4` passes milestone 37's
-injector and then meets the launch store's bar; the inventory of what would leave stays here.
+the launch store, and UFS2 is not built. It reopens once partsfoundry/rsext4 meets §46's bar and
+milestone 190's done-when (2026-11-25): we ask for the adoption ruling then, and `rsext4` replaces
+RedoxFS. The inventory of what would leave stays here.

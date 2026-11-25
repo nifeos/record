@@ -3,10 +3,8 @@
 Item 8 of [milestone 190](../../0190-ext4-read-write.md)'s upstream round: an issue, then the pull
 request that links it. The slug is provisional. The issue is upstream as
 [rcore-os/tgoskits#2838](https://github.com/rcore-os/tgoskits/issues/2838), with the title and
-Chinese body below. The pull request waits. GitHub refused to create it ("calef does not have the
-correct permissions to execute `CreatePullRequest`") while calef had five open pull requests on the
-repository, most likely a cap on open pull requests per contributor. The branch is on calef's fork,
-and the body below goes up when one of those five closes.
+Chinese body below, and the pull request as
+[rcore-os/tgoskits#2840](https://github.com/rcore-os/tgoskits/pull/2840).
 
 - Repository and base: rcore-os/tgoskits, branch `dev`, commit
   `0353572d1e2cca79e25a2805deeff4521449a5c1`, the head of `dev` at filing. The patch dates from the
@@ -89,7 +87,7 @@ the `u32` seconds 4294880896, with no nanoseconds. The components affected are `
 - Environment: x86_64 Linux, `cargo xtask test`, e2fsprogs.
 ```
 
-## Pull request body (Chinese, to file)
+## Pull request body (Chinese, as drafted)
 
 ```markdown
 ## 当前问题
