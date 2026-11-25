@@ -86,7 +86,7 @@ The version stays 1 through part one, and the pinned list does not move.
    defined-bits masks, which step 9 needs. Effort: M. Lands alone, in `moho_abi`.
 2. What a program author needs, in `moho_abi` (finding 14). The trap instruction, the clobbered
    registers and how a program starts, per architecture, in the crate's own documentation. It may
-   land any time; after step 1 the register table comes from the method table. Effort: S. Lands
+   land any time. Effort: S. Lands
    alone.
 3. nife adopts the generated wrappers. The pin moves to step 1. `user_mode_runtime`'s hand
    wrappers become the generated ones or call them, with their names kept, so no caller changes.
@@ -216,9 +216,6 @@ Every step passes `script/lint` and the repository's own CI. Beyond those:
 | 14 | basalt's gate, which runs `script/ci-build test` on all three architectures |
 | 15 | as 9 to 12, for the methods it adds |
 
-The Kani prove shards run on a pull request that adds or changes a harness, and the other heavy
-gates run in the merge queue.
-
 ## Risks
 
 - The fastpath. Step 10 puts a kind check and an undefined-bits check on every send and call,
@@ -250,9 +247,8 @@ gates run in the merge queue.
 
 ## Open decisions
 
-Seven questions the rulings leave open, each with background, options and a recommendation, are in
-[the open-decisions appendix](1128-moho-rulings-implementation-plan/open-decisions.md), with the
-prior art. In short:
+[The open-decisions appendix](1128-moho-rulings-implementation-plan/open-decisions.md) gives each
+question the rulings leave open its background, options and recommendation, with the prior art.
 
 1. Whether 2.0 may change between nife commits before it is whole. It blocks steps 9 to 13.
 2. What a call with an undefined method number answers. It blocks step 10.
