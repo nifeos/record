@@ -22,8 +22,9 @@ under §46. Items (a), (d), (e), (f2), (g) and (i) are built, on calef's approva
 `httparse` (2026-10-18 UTC), `r-efi` and `pulldown-cmark` (both 2026-10-20 UTC), `talc` and
 `object` (both 2026-10-21 UTC), and `uuid` (2026-10-22 UTC). Items (c1) to (c4), (f) and (h) are
 refused.
-The `device_tree_blob` row stays ours for now: we revisit the comparison with `dtoolkit` after its open
-issues 102 and 103 resolve.
+The `device_tree_blob` row stays ours: ruled 2026-11-25 (UTC), nife keeps `device_tree_blob`, releases
+it on its own and stops working toward `dtoolkit`
+([1085](1085-device-tree-blob-outside-review.md#keep-device_tree_blob-and-release-it)).
 
 ## Method, and what the numbers mean
 

@@ -4,7 +4,7 @@
 own file because the packages together outgrow the page.*
 
 The architect cleared this package on 2026-11-20 (UTC): the go to create
-`nifeos/device_tree_blob`, as item 4 of
+the repository now at `partsfoundry/device_tree_blob`, as item 4 of
 [milestone 857 (crates released on their own)](../../design/roadmap/0857-crates-released-on-their-own.md).
 It describes the crate as `main` leaves it. The findings behind it are in
 [milestone 1085 (what an outside maintainer would fix before it leaves)](../../design/roadmap/1085-device-tree-blob-outside-review.md);
@@ -212,14 +212,10 @@ The new repository carries `publish = false`, no tag and no publish.
 
 ## The `dtoolkit` position
 
-Ruled 2026-11-19 (UTC): nife waits for a `dtoolkit` release that carries
-[google/dtoolkit #111](https://github.com/google/dtoolkit/pull/111) and
-[#112](https://github.com/google/dtoolkit/pull/112), then rules the switch against the dependency
-bar as a decision of its own. Both are open with changes requested, and release 0.5.0 of
-2026-11-03 carries neither. Upstream merged [#108](https://github.com/google/dtoolkit/pull/108). This lane files nothing upstream. Until the
-switch, `device_tree_blob` boots every nife machine, so the move does not wait. If the switch
-comes first, P0-1, P1-5 and the README half of P2-9 lapse, and the kernel keeps the fixes either way.
-The comparison is
+Ruled 2026-11-25 (UTC): nife keeps `device_tree_blob`, releases it on its own under the standing
+publishing hold, and does not switch to `dtoolkit`. P0-1, P1-5 and the README half of P2-9 are the
+release's own. [Milestone 1085](../../design/roadmap/1085-device-tree-blob-outside-review.md#keep-device_tree_blob-and-release-it)
+holds the ruling and its reasons. The comparison is
 [dtoolkit against device_tree_blob](../../design/roadmap/0784-reuse-what-the-tree-wrote/dtoolkit-against-device-tree-blob.md).
 
 ## What still blocks the move
@@ -239,4 +235,4 @@ The comparison is
 
 ## Recommendation
 
-Cleared to move (2026-11-20 UTC, no tag, no publish). The move does not wait for the `dtoolkit` switch.
+Cleared to move (2026-11-20 UTC, no tag, no publish).
