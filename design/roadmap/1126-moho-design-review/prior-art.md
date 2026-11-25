@@ -72,11 +72,13 @@ edition 26.05. The WASI files are the `v0.2.0` tags.
 
 ## What the comparison settles
 
-Three patterns recur in every system that reached outside users. The status never shares a
-register with a peer's data, or the system documents the forgery as Hubris does. A request the
-object does not understand gets one uniform refusal: `UnknownRequest`, `kt+2`,
-`UndefinedOperation`. And a single definition file generates both sides. Moho has none of the
-three yet.
+Three patterns recur in the systems that reached outside users. Zircon keeps the status apart
+from a peer's data. seL4 shares one field between them but gives a receive no error return for a
+peer to imitate, and Hubris documents the forgery. A request the object does not understand gets
+one uniform refusal: `UnknownRequest`, `kt+2`, `UndefinedOperation`. And a single definition
+file generates both sides. Moho answers `BadMethod` for an unknown method on the right object,
+but it has no refusal for a method aimed at the wrong object, and it has neither of the other
+two patterns yet.
 
 Two things Moho took from the field hold up. A one-shot reply that cannot move matches KeyKOS,
 EROS and seL4. Generational names in place of a derivation tree match EROS, where "if the version

@@ -67,7 +67,7 @@ stability, and P2 can follow.
 | 8 | P1 | two-way | No blocking call takes a deadline, and no rendezvous call can decline to block |
 | 9 | P1 | one-way | `GRANT` carries four powers, and a borrower's `REVOKE` deletes the lender's capability |
 | 10 | P1 | one-way | Four message shapes, and a receiver must guess which receive matches the sender |
-| 11 | P1 | one-way | Seven numbers the crate itself calls provisional sit in the pinned set |
+| 11 | P1 | one-way | Eight numbers the crate itself calls provisional sit in the pinned set |
 | 12 | P1 | one-way | Supervision rides on a reserved slot whose index derives from the table's size |
 | 13 | P1 | two-way | Argument shapes live only in doc comments; no file a tool can read defines them |
 | 14 | P1 | two-way | The crate alone does not tell an author how to trap or how a program starts |
@@ -89,10 +89,12 @@ root's table). `rendezvous::RECEIVE` and `RECEIVE_CAPABILITY` put the sender's f
 `notification::WAIT` puts the signal word there, and `rendezvous::CALL` puts the server's `r0`
 there. The crate lists the first two under `BUGS`.
 
-Others: seL4 returns an invocation's error in the message tag and the message in its own
-registers ([manual](https://sel4.systems/Info/Docs/seL4-manual-latest.pdf), section 10.1). Zircon
-forbids a payload in the status: "use an out parameter"
-([rubric](https://fuchsia.dev/fuchsia-src/development/api/system)). Hubris shares Moho's shape and
+Others: Zircon is the clean example: it forbids a payload in the status, "use an out parameter"
+([rubric](https://fuchsia.dev/fuchsia-src/development/api/system)). seL4 does not separate them.
+The kernel returns "an error code in the message tag", and on IPC between programs the tag's
+label "is not interpreted by the kernel and is passed unmodified", so one field carries both
+([manual](https://sel4.systems/Info/Docs/seL4-manual-latest.pdf), section 10.1). It avoids
+forgery because a receive has no error return for a peer to imitate. Hubris shares Moho's shape and
 says so: a server can "fake a dead task" by replying in the dead-code range
 ([reference](https://hubris.oxide.computer/reference/)).
 
@@ -153,8 +155,10 @@ word with `as u32` and drops bits it does not know. `address_wait` alone refuses
 not define. `survey::record::STATE` records how the rest fares: callers happened to pass 0 in
 a then-unused word, which is the only reason a selector could later live there.
 
-Others: Zircon refuses an unknown option bit call by call, and its rubric keeps an options
-word so calls can grow ([rubric](https://fuchsia.dev/fuchsia-src/development/api/system)). Hubris
+Others: Zircon refuses an unknown option bit call by call: `zx_vmo_create` answers
+`ZX_ERR_INVALID_ARGS` when "options contains an unsupported combination of flags"
+([vmo_create](https://fuchsia.dev/fuchsia-src/reference/syscalls/vmo_create)). Its rubric also
+asks for room for future flags ([rubric](https://fuchsia.dev/fuchsia-src/development/api/system)). Hubris
 faults a task on "any use of undefined attribute bits"
 ([syscalls](https://github.com/oxidecomputer/hubris/blob/969bac2bf47c98710842eb232fdd4a9c54e7dd7f/doc/syscalls.adoc)).
 Capsicum fails a widening request with `ENOTCAPABLE`
@@ -191,8 +195,8 @@ The other eleven serve every other refusal:
 Others: seL4 has ten errors, among them `InvalidArgument`, `RangeError`, `DeleteFirst` and
 `RevokeFirst`, and adds the argument number or the bounds
 ([errors.h](https://github.com/seL4/seL4/blob/78b0c34efe12ddfe6e7dd616e8538ce49ebf2890/libsel4/include/sel4/errors.h)).
-Zircon separates `NO_MEMORY` from `NO_RESOURCES` and `INVALID_ARGS` from `OUT_OF_RANGE`, by
-whether a retry can succeed ([errors](https://fuchsia.dev/fuchsia-src/concepts/kernel/errors)).
+Zircon separates `NO_MEMORY` from `NO_RESOURCES` and `INVALID_ARGS` from `OUT_OF_RANGE`, and its errors page groups the codes by
+category: general, parameter, precondition and state ([errors](https://fuchsia.dev/fuchsia-src/concepts/kernel/errors)).
 WASI gives each interface its own error enumeration.
 
 Deliberate: yes for one code. §119 (splitting `OutOfMemory`'s three causes is declined for

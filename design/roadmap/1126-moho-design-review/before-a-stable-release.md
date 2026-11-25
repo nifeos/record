@@ -163,7 +163,7 @@ Effort: L. Door: one-way (layouts).
 
 ## 11. Provisional numbers in the pinned set
 
-Moho: the crate marks seven numbers provisional: `SYSTEM_CALL_EXIT_THREAD`,
+Moho: the crate marks eight numbers provisional: `SYSTEM_CALL_EXIT_THREAD`,
 `object_type::PROCESS`, `process::DESTROY`, `address_space::WAIT` and `WAKE`,
 `thread_control_block::SET_THREAD_POINTER`, `reply::REPLY_CAPABILITY` and `reboot::REBOOT`.
 `pinned-at-version-1.txt` pins them all.
@@ -177,7 +177,7 @@ Deliberate: the marks are; publishing them is not yet weighed.
 Example: an outside program pins the published crate and calls `REBOOT`. The architect then
 rules a different number. The crate's own rule makes that a version bump for every program.
 
-Fix: rule the seven, or put them behind a Cargo feature that is off by default.
+Fix: rule the eight, or put them behind a Cargo feature that is off by default.
 
 Effort: S. Door: one-way (wire numbers).
 
