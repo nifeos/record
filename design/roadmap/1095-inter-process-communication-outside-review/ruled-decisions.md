@@ -76,7 +76,7 @@ type).
 Prior art: `generational_table` left before the kernel pinned it, and the kernel pins
 `extensible_host_controller_interface` by revision. Nife differs in nothing; this is the same step
 one level down. Example: after the move the manifest line reads
-`intrusive_queue = { version = "0.1.0", git = "https://github.com/nifeos/intrusive_queue", rev = "<full sha>" }`.
+`intrusive_queue = { version = "0.1.0", git = "https://github.com/partsfoundry/intrusive_queue", rev = "<full sha>" }`.
 
 Decided by the maintainer on 2026-11-19 (UTC), provisional: a two-way door, which the architect may
 revisit. `intrusive_queue` leaves first (milestone 1097 (`intrusive_queue`: what an outside

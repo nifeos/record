@@ -24,7 +24,7 @@ RedoxFS.
 Reuse: `rsext4` 0.9.2 on crates.io (Apache-2.0, `no_std` with `alloc`, depending on `bitflags` and
 `thiserror`), developed in `rcore-os/tgoskits` under `fs/rsext4`. The `Starry-OS/rsext4`
 repository that its manifest names has not moved since 2026-04-02 and is not where work happens.
-nife uses [nifeos/rsext4](https://github.com/nifeos/rsext4), 0.9.2 with our fixes on top, which
+nife uses [nifeos/rsext4](https://github.com/partsfoundry/rsext4), 0.9.2 with our fixes on top, which
 its `CHANGES.md` lists.
 e2fsprogs 1.47 and a Linux kernel are the host-side oracles. The other candidates and the
 reason each lost are in [the survey](0190-ext4-read-write/survey.md).

@@ -44,7 +44,7 @@ and the release steps.
   `time_zone`, `locale`, `terminal_type`, `is_known_*` and `Unknown*`, each accessor with its POSIX
   alias, ratified 2026-11-19 UTC.
 - Item 5 (P1), no Kani proof: Done,
-  [nifeos/environment_contract#2](https://github.com/nifeos/environment_contract/pull/2). Two
+  [nifeos/environment_contract#2](https://github.com/partsfoundry/environment_contract/pull/2). Two
   harnesses, each with its falsification patch: `field_bytes_never_panics_for_any_length_byte` and
   `an_accessor_answers_only_the_member_its_field_holds`, which takes a fully symbolic page. The
   round trip is the host test `every_member_round_trips_through_the_safe_reader`, which writes and
@@ -65,7 +65,7 @@ and the release steps.
 - Item 10 (P2), five documentation sentences: Done,
   [#3566](https://github.com/nifeos/nife/pull/3566).
 - Item 11 (P2), a safe reader over borrowed bytes: Done,
-  [nifeos/environment_contract#2](https://github.com/nifeos/environment_contract/pull/2).
+  [nifeos/environment_contract#2](https://github.com/partsfoundry/environment_contract/pull/2).
   `ConfigurationView::new` takes `&[u8; PAGE_CONTENT_BYTES]` and needs no `unsafe`, a provisional
   name; `ConfigurationPage` keeps its address constructor and reads through it.
 - Item 12 (P2), the curated lists have no growth path: Done,

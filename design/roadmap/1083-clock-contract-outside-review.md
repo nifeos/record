@@ -33,15 +33,15 @@ Read against nifeos/clock_contract `main` at `0aa2107` and nife `main`.
   [#3640](https://github.com/nifeos/nife/pull/3640),
   [#3727](https://github.com/nifeos/nife/pull/3727),
   [#3784](https://github.com/nifeos/nife/pull/3784) and
-  [nifeos/clock_contract#1](https://github.com/nifeos/clock_contract/pull/1). The renames, the
+  [nifeos/clock_contract#1](https://github.com/partsfoundry/clock_contract/pull/1). The renames, the
   expanded acronyms, the badge row and the private `take_claim` are in the source, and
   `.github/accepted-words` keeps `cmos`, `pl` and `unix` with their reasons.
 - P0-2, clippy `doc_markdown` outside nife: Done,
   [#3640](https://github.com/nifeos/nife/pull/3640). The crate's `clippy.toml` adds `VisionFive`
   to `doc-valid-idents`.
 - P1-3, mutation exemptions and loom: Done,
-  [nifeos/clock_contract#4](https://github.com/nifeos/clock_contract/pull/4) and
-  [nifeos/clock_contract#5](https://github.com/nifeos/clock_contract/pull/5). The survivors the
+  [nifeos/clock_contract#4](https://github.com/partsfoundry/clock_contract/pull/4) and
+  [nifeos/clock_contract#5](https://github.com/partsfoundry/clock_contract/pull/5). The survivors the
   first `mutation` run named carry reasons in `.github/mutants-exempts`, and the template's
   `proofs / loom` job runs loom under `--cfg loom`.
 - P1-4, the manifest outside nife: Done,
@@ -80,8 +80,8 @@ Read against nifeos/clock_contract `main` at `0aa2107` and nife `main`.
 - The move: Done, [#3781](https://github.com/nifeos/nife/pull/3781). The crate lives at
   `nifeos/clock_contract`, with `publish = false` and no tag, and nife pins it by commit.
 - Stranger test: Done,
-  [nifeos/clock_contract#2](https://github.com/nifeos/clock_contract/pull/2) and
-  [nifeos/clock_contract#3](https://github.com/nifeos/clock_contract/pull/3). The record is
+  [nifeos/clock_contract#2](https://github.com/partsfoundry/clock_contract/pull/2) and
+  [nifeos/clock_contract#3](https://github.com/partsfoundry/clock_contract/pull/3). The record is
   `docs/stranger-test.md` in the crate's repository.
 
 ## Goal

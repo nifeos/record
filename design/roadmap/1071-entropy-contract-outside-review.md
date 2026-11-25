@@ -54,7 +54,7 @@ otherwise; `entropy_contract#N` is nifeos/entropy_contract. Line numbers in the 
 - P1-3, the README fails the passive-voice gate: Done, [#3512](https://github.com/nifeos/nife/pull/3512).
 - P1-4, no badge row and no path from a clone to a proof: Done,
   [#3558](https://github.com/nifeos/nife/pull/3558),
-  [entropy_contract#10](https://github.com/nifeos/entropy_contract/pull/10). The README carries the
+  [entropy_contract#10](https://github.com/partsfoundry/entropy_contract/pull/10). The README carries the
   badge row, the install lines, the Kani install's cost, the measured proof time and memory, one
   harness, one falsification patch with its undo, the alarming output and the minimum-version check.
 - P1-5, `fill_with` folds two failures together: Done, [#3558](https://github.com/nifeos/nife/pull/3558).
@@ -75,7 +75,7 @@ otherwise; `entropy_contract#N` is nifeos/entropy_contract. Line numbers in the 
   with `reply`.
 - P2-10, `#[must_use]` on the pure functions: Done, [#3558](https://github.com/nifeos/nife/pull/3558).
 - P2-11, `request` and `bring_up_failure` accept values past their fields: Done (decision 4),
-  [entropy_contract#5](https://github.com/nifeos/entropy_contract/pull/5). Both return `Err` in
+  [entropy_contract#5](https://github.com/partsfoundry/entropy_contract/pull/5). Both return `Err` in
   every build, with a harness and a patch.
 - P2-12, the readiness proof's bound is below every draw: Done,
   [#3531](https://github.com/nifeos/nife/pull/3531).
@@ -94,10 +94,10 @@ otherwise; `entropy_contract#N` is nifeos/entropy_contract. Line numbers in the 
 - Decision 3, the names `Refusal`, `NoService`, `ShortReply` and `reply`: Done (maintainer,
   provisional), [#3558](https://github.com/nifeos/nife/pull/3558).
 - Decision 4, a release build refuses an out-of-range opcode or step: Done (maintainer,
-  provisional), [entropy_contract#5](https://github.com/nifeos/entropy_contract/pull/5).
+  provisional), [entropy_contract#5](https://github.com/partsfoundry/entropy_contract/pull/5).
 - The move: Done, [#3627](https://github.com/nifeos/nife/pull/3627).
-- The stranger run: Done, [entropy_contract#7](https://github.com/nifeos/entropy_contract/pull/7),
-  [entropy_contract#10](https://github.com/nifeos/entropy_contract/pull/10).
+- The stranger run: Done, [entropy_contract#7](https://github.com/partsfoundry/entropy_contract/pull/7),
+  [entropy_contract#10](https://github.com/partsfoundry/entropy_contract/pull/10).
 - The pre-release tag `v0.1.0-pre.1`: Waiting on the maintainer's tag (ruled 2026-11-19 UTC). The
   release workflow's dry run on nifeos/entropy_contract@5c9f8eb comes first, then the tag on that
   commit.
