@@ -32,7 +32,6 @@ of step 1.
 Every ruling of the review is in force in `moho_abi` and in nife, and basalt pins a nife commit
 that carries it. The interface's version moves once for the whole set, from 1 to the pair 2.0.
 Each commit on each `main` builds and boots on all three architectures.
-The plan publishes no number.
 
 ## The rulings, grouped by what they touch
 
@@ -47,11 +46,11 @@ The plan publishes no number.
 | Slots and rights | 6, the table-size ruling, 9, 12, 4's retype defect | process creation, every capability-installing method |
 | Additions after 2.0 | 7, 8, 15 (all provisional) | new numbers behind the `unstable` feature |
 
-Findings 17, 18 and 19 are two-way and unruled, and this plan does not schedule them.
+Findings 17 to 19 are two-way and unruled, and this plan does not schedule them.
 
 ## The census
 
-The lane measured it at `nifeos/nife@6bed50566`, `nifeos/moho_abi@1e99eed` and
+It was measured at `nifeos/nife@6bed50566`, `nifeos/moho_abi@1e99eed` and
 `partsfoundry/capability_table@968a16f`. The full count, with the commands, is in
 [the census appendix](1128-moho-rulings-implementation-plan/census.md). In short:
 
@@ -82,16 +81,17 @@ The version stays 1 through part one, and the pinned list does not move.
    refusals and its rights. A generator writes the constants, their doc comments, the typed
    wrappers and the pinned list from it. The lane commits the output as source, not as `build.rs` output,
    because `cargo xtask std-src` copies the crate into `std` file by file. A test regenerates and
-   compares, so a hand edit to generated code fails. The table also emits each method's
+   compares, so a hand edit fails. The table also emits each method's
    defined-bits masks, which step 9 needs. Effort: M. Lands alone, in `moho_abi`.
 2. What a program author needs, in `moho_abi` (finding 14). The trap instruction, the clobbered
-   registers and how a program starts, per architecture, in the crate's own documentation. It may
+   registers and how a program starts, per architecture, in the crate's own documentation. The
+   program-start section documents four start words, the fourth being the version pair. It may
    land any time. Effort: S. Lands
    alone.
 3. nife adopts the generated wrappers. The pin moves to step 1. `user_mode_runtime`'s hand
    wrappers become the generated ones or call them, with their names kept, so no caller changes.
-   The `std` overlay picks up the generated module through `cargo xtask std-src`, and its own trap
-   and `invoke` in `rt.rs` give way to the generated ones, so that step 11 changes one trap. Size:
+   The `std` overlay takes the generated module through `cargo xtask std-src`, and its own trap
+   and `invoke` in `rt.rs` give way to the generated ones, so step 11 changes one trap. Size:
    the 1,171 lines of the three trap files and the 272 of `rt.rs`. Effort: M. Lands alone. Its proof is that `script/bench --check`
    moves no row.
 4. The naming pass, in `moho_abi` (finding 16, names only). One pass under the four rules, in
@@ -113,18 +113,19 @@ The version stays 1 through part one, and the pinned list does not move.
 
 ### Part two: the breaking set, which becomes 2.0
 
-Each step is one `moho_abi` pull request, then one nife pull request that moves the pin and moves
-the kernel, `user_mode_runtime`, the `std` overlay, `system_tests` and the fixtures together. The
-kernel and every program must agree on the interface, so neither half lands alone in nife. The
-version moves once, in step 9, and the steps after it change 2.0 before any publish. The first
-open decision asks whether that is acceptable.
+Each step is one `moho_abi` pull request, then one nife pull request that moves the pin, the
+kernel, `user_mode_runtime`, the `std` overlay, `system_tests` and the fixtures together, since
+the kernel and every program must agree. The
+version moves once, in step 9, and the steps after it change 2.0 before any publish. The
+maintainer ruled that acceptable (provisional, first open decision).
 
 8. The version pair, in `partsfoundry/interfaces_note`. Each record in the `INTERFACES` note
-   carries one `u32` version today. It learns the pair, in a new descriptor version, and keeps
-   reading version 1. Effort: S. Lands alone, in partsfoundry. It may land any time in part one.
+   carries one `u32` version today. It learns the pair as one `u32` of two 16-bit halves, breaking part high, in a new
+   descriptor version, and keeps reading version 1. Effort: S. Lands alone, in partsfoundry. It may land any time in part one.
 9. The version becomes 2.0 (finding 5). `moho_abi` replaces `ABI_VERSION` with the pair: a
    breaking part, which must be equal, and an additions part, which must be at most the kernel's.
-   The kernel hands its pair to the first program. The start check in
+   Both are the halves of one `u32`, breaking part high. The kernel hands that word to the first
+   program in a fourth start register, so start takes four words on every architecture. The start check in
    `system_initializer` (`serves_declared_abi`) compares by the pair against the kernel's pair, not
    the crate's. The pinned list for version 1 retires, and the one for 2.0 stays open until step
    13. `ABI_VERSION` appears on 22 lines in 16 files. Effort: M.
@@ -133,13 +134,16 @@ open decision asks whether that is acceptable.
       on the wrong kind answers `WrongObject`. The implementing lane assigns the numbers, keeps the
       six that finding 11 rules stable at their assigned values, and shows them in its diff.
     - An undefined argument word, flag or rights bit faults the caller, read from the table's masks.
-      `writable` takes 0 or 1.
+      `writable` takes 0 or 1. An undefined method number faults the same way, and `std` drops its
+      probe on method `0xffff` and reads the version pair.
+    - The fault is a new kind, the argument fault (name provisional), carrying the method number
+      and which word was wrong, zero for an undefined method number.
     - The four new codes arrive, each refusal moves to its code, the words after the status on a
       refusal are zero, and the four reboot codes move into word 1 of the reboot call's answer.
     - Reboot goes behind the off-by-default `unstable` feature, which `user_mode_runtime` enables.
-    - Size: the method constants `BADGE` (39 lines, 19 files), `SPLIT` (77, 25),
-      `RETYPE_OBJECT` (91, 33), `SLICE` (29, 13) and `CAPABILITY_INSERT` (30, 15) change value,
-      not spelling, so their callers recompile and do not change. The refusals callers test do
+    - Size: the constants `BADGE` (39 lines, 19 files), `SPLIT` (77, 25), `RETYPE_OBJECT` (91,
+      33), `SLICE` (29, 13) and `CAPABILITY_INSERT` (30, 15) change value, not spelling, so
+      callers recompile unchanged. The refusals callers test do
       change: `Error::NotPermitted` (144 lines, 43 files), `Error::OutOfMemory` (46, 21),
       `Error::WrongObject` (39, 21), `Error::BadPointer` (38, 15), `Error::BadMethod` (30, 13) and
       `reboot::` (13, 10). The probes that call method `0xffff` and expect `-1` break in four
@@ -198,7 +202,7 @@ open decision asks whether that is acceptable.
     alone, in any order, at effort M.
     - Finding 7: a method that copies a capability in place under a rights mask, and a rights mask
       on any message that carries a capability, since step 11 leaves no separate
-      reply-with-capability call.
+      reply call for one.
     - Finding 8: a non-blocking send and a poll. `address_space::WAIT` gains an absolute deadline,
       which ends `std`'s spinning in `Condvar::wait_timeout` and `park_timeout`. Deadlines on
       message passing wait for the speed measurement.
@@ -206,7 +210,7 @@ open decision asks whether that is acceptable.
 
 ## Gates
 
-Every step passes `script/lint` and the repository's own CI. Beyond those:
+Every step passes `script/lint` and the repository's CI. Beyond those:
 
 | step | gates |
 |---|---|
@@ -239,29 +243,21 @@ Every step passes `script/lint` and the repository's own CI. Beyond those:
   `rt.rs`, probes with a method number that every step from 10 on gives a new meaning, and assumes
   the kernel's codes in `fs`. Step 3 retires the overlay's own trap; if it cannot, step 11 changes
   two.
-- The falsification patches. 23 in `system_tests`, two in xtask and two in `capability_plan`
-  name `moho_abi` or `user_mode_runtime` in their context, and three name the fastpath. A step that
-  changes that context regenerates them in the same commit.
+- The falsification patches. 27 name `moho_abi` or `user_mode_runtime` in their context, and
+  three name the fastpath. A step that changes that context regenerates them in the same commit.
 - The measurement block's baselines ([nifeos/record#37](https://github.com/nifeos/record/pull/37)). Its items 1 and 4 may start against today's interface. Steps 10
   to 12 move the very rows they measure, so each of its measurements names the nife commit it ran
   on.
 - Lanes in flight. A nife lane that names a receive variant, a raw word or a slot constant
-  breaks on its merge of `main` after steps 10 to 12. Each step's pull request body gives the
-  mechanical change.
+  breaks on its merge of `main` after steps 10 to 12; each pull request body gives the change.
 
 ## Open decisions
 
 [The open-decisions appendix](1128-moho-rulings-implementation-plan/open-decisions.md) gives each
 question the rulings leave open its background, options and recommendation, with the prior art.
 
-Four stay open for calef:
-
-1. What a call with an undefined method number answers. It blocks step 10.
-2. Which fault finding 3 raises, and what the supervisor reads. It blocks step 10.
-3. How the version pair travels: one word or two. It blocks steps 8 and 9.
-4. How the kernel hands its pair to the first program. It blocks step 9.
-
-The appendix also holds three the maintainer ruled provisionally.
+All seven are ruled (the first, sixth and seventh provisionally, by the maintainer). Each
+ruling sits in its step; the appendix keeps the rule in force.
 
 ## The outward steps
 

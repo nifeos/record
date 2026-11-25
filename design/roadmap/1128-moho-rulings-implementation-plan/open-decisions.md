@@ -22,62 +22,32 @@ the publish.
 
 ## What a call with an undefined method number answers
 
-Background. Finding 3 rules that an undefined argument word, flag or rights bit faults the caller.
-It does not say whether an undefined method number is the same kind of mistake. `std` probes the
-kernel by calling method `0xffff` and reading `-1` in four files, and that probe must change in
-step 10 either way.
+Ruled on 2026-11-25 (UTC): A. An undefined method number faults the caller, as an undefined argument
+word, flag or rights bit does under finding 3. `std` stops probing method `0xffff` and reads the
+version pair. Step 10 carries it.
 
-Recommendation: A.
-
-- A. An undefined method number faults, as an undefined bit does, and `std` stops probing.
-- B. It answers `BadMethod`, and `std` keeps a probe with a number the table reserves for it.
-
-Door: one-way once published.
-
-Blocks: step 10.
+Reason: the version pair now does the probe's job, and one rule for undefined input is simpler than two.
 
 ## Which fault finding 3 raises, and what the supervisor reads
 
-Background. The ruling says the supervisor reads the fault. The fault message today carries a kind
-and an address for memory faults. An argument fault needs a kind of its own, and perhaps the
-method number and the word that was wrong.
+Ruled on 2026-11-25 (UTC): A. A new fault kind, the argument fault (name provisional), carries the
+method number and which word was wrong, zero for an undefined method number. Step 10 carries it.
 
-Recommendation: A.
-
-- A. A new fault kind that carries the method number and the index of the first undefined word.
-- B. A new fault kind with no detail; the supervisor reads the caller's registers if it needs more.
-
-Door: one-way once published.
-
-Blocks: step 10.
+Reason: the kernel has both in hand when it faults, and the supervisor cannot reliably recover them later.
 
 ## How the version pair travels
 
-Background. The pair has two parts. They can share one 32-bit word (16 bits each) or take two words,
-in the `INTERFACES` note and in what the kernel hands the first program.
+Ruled on 2026-11-25 (UTC): A. The pair is two 16-bit halves of one `u32`, breaking part high and
+additions part low, so comparing whole words orders versions. Steps 8 and 9 carry it.
 
-Recommendation: A.
-
-- A. Two 16-bit halves of one `u32`, so a version stays one word everywhere it travels today.
-- B. Two `u32` words, at the cost of a wider record in the note.
-
-Door: one-way once published.
-
-Blocks: steps 8 and 9.
+Reason: a version stays one word everywhere it travels today, and 16 bits leave far more room than the interface needs.
 
 ## How the kernel hands its pair to the first program
 
-Background. Finding 5 rules that the kernel hands its pair to the first program, and that start
-checks use it. The first program receives its start arguments in registers today.
+Ruled on 2026-11-25 (UTC): A. A fourth start register carries the pair, documented in step 2's
+program-start section, and the start call takes four words on every architecture. Step 9 carries it.
 
-Recommendation: A.
-
-- A. One more start register, documented in step 2's program-start section.
-- B. A word in a page the kernel maps for the first program.
-
-Door: one-way once published.
-
-Blocks: step 9.
+Reason: one word does not justify a new page; a page or tagged list can be added later without changing the register.
 
 ## The largest table a creator may ask for
 
