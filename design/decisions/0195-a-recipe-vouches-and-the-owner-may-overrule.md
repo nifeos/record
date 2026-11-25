@@ -210,7 +210,8 @@ with no person when checks stand in for its review) holds the detail and the rea
    no longer applies.
 3. A source may set a hold, a number of days a release must age before its change may merge.
    basalt's is 7 days, provisional, and the maintainer's to change.
-4. Clauses 2 to 4 are unchanged. On the owner's machine, updating on a schedule stays off unless
-   the owner turns it on for a source, as §250's amendment of 2026-10-07 already requires.
+4. Clauses 2 to 4 stand. On the owner's machine, updating on a schedule stays off unless
+   the owner turns it on for a source, as §250 (an image names its distribution's package index)'s amendment of 2026-10-07
+   already requires.
 
-The workflow, check and key names are provisional, in basalt where they are built.
+The workflow, check and key names stay provisional, in basalt where it builds them.
