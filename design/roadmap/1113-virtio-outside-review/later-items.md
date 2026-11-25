@@ -12,7 +12,7 @@ nifefs::NAME_LEN)`, or a `&[u8; N]` parameter. Effort: S. Two-way.
 13. `disk_size_bytes` multiplies without a bound and ignores the configuration generation. DONE (the size saturates, and the driver reads the capacity inside one generation; the kernel's mediated PCI transport answers 0 for the generation, a BUGS entry at `CONFIGURATION_GENERATION`).
 `(sectors * 512) as i64` (`:1165`) overflows past 2^55 sectors and goes negative past 2^54, which
 the FS server would read as an error code. The code reads the two 32-bit halves of the 64-bit
-capacity without the `ConfigGeneration` register (virtio-mmio `0x0fc`; unverified offset), and that register
+capacity without the `ConfigGeneration` register (virtio-mmio `0x0fc`, virtio 1.2 table 4.1), and that register
 makes a multi-word configuration read consistent. No QEMU disk reaches either. The fix: `checked_mul`
 with a saturating fallback, and a generation-bracketed read when the direct grant lands. Effort:
 S. Two-way.
@@ -36,7 +36,10 @@ wakeups (`:803`) and reports `0xE9`; the disk loops forever (`:488`). A one-shot
 device that never completes hangs the suite past the watchdog instead of reporting. The fix, with
 item 7's single `complete`, is one bound for both. Effort: S. Two-way.
 
-17. The register map has no check against a second driver. Open. Before anyone cuts the library that
+17. The register map has no check against a second driver. Open (read against `virtio-drivers`
+0.13 and the virtio 1.2 tables: the MMIO and PCI common-configuration offsets, status bits,
+feature bits, descriptor flags, device IDs, block request types and GPU commands all agree; the
+recording-transport test is not built). Before anyone cuts the library that
 holds the name `virtio`, check nife's virtio register offsets, feature bits and device configuration
 layouts against rcore-os/virtio-drivers 0.13 (MIT). The constants live in `moho_abi::virtual_io`,
 `components/src/block_driver_roles.rs`, `components/src/virtual_io_net_transport.rs` and
