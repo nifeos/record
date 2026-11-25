@@ -78,7 +78,10 @@ stability, and P2 can follow.
 | 19 | P2 | two-way | Revocation reaches a region or a frame, never one delegation |
 
 The P1 findings are in [the appendix](1126-moho-design-review/before-a-stable-release.md), and the
-P2 findings in [the appendix](1126-moho-design-review/later-findings.md).
+P2 findings in [the appendix](1126-moho-design-review/later-findings.md). A primer on the eight
+properties of a good kernel ABI, with one outside example each, is in
+[the appendix](1126-moho-design-review/what-makes-an-abi-good.md) and
+[its second part](1126-moho-design-review/abi-further-properties-and-evidence.md).
 
 ## P0: before any publish
 
