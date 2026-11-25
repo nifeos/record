@@ -103,7 +103,7 @@ rendering carries a 2026-02-22 stamp on the same v1.0.1 version number, so the b
    is not.** The K3 is RVA23 and uses AIA: APLIC and IMSIC, and this kernel's riscv64
    `arch::interrupt_controller` resolves to `drivers::plic` with nothing else behind it. A PLIC node
    was not found in
-   the upstream K3 device tree. ([K3 DT series](https://patchew.org/linux/20260115-k3-basic-dt-v5-0-6990ac9f4308@riscstar.com/))
+   the upstream K3 device tree. ([K3 DT series](https://lore.kernel.org/all/20260115-k3-basic-dt-v5-0-6990ac9f4308@riscstar.com/))
 
 **What could not be established, said plainly.** The K3 datasheet is an image-only PDF and did not
 yield text, so the IOMMU, PCIe and MMU claims here rest on the kernel patches and press coverage

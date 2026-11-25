@@ -244,6 +244,6 @@ forever, by design, exactly like real hardware. So every interactive run must be
   riscv64 guests are unaffected. Measured in
   [host-reordering-under-tcg](benchmarks/host-reordering-under-tcg.md). A fix is on qemu-devel and
   in no release: LIU Zhiwei's series
-  ["Fix RCsc store->load ordering of release stores"](https://patchew.org/QEMU/20260821064032.49556-1-zhiwei._5Fliu@linux.alibaba.com/)
+  ["Fix RCsc store->load ordering of release stores"](https://lore.kernel.org/qemu-devel/20260821064032.49556-1-zhiwei_liu@linux.alibaba.com/)
   (2026-08-21 UTC). Bump the QEMU pin past the release that carries it, then rerun the store
   buffering litmus to retire this entry.
