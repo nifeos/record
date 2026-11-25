@@ -29,7 +29,7 @@ depends on it). Milestone 1034 (a runbook for moving a crate out of nife) owns t
 findings that should land inside that path, and the two findings against the move tool that the
 lane will hit first.
 
-Reuse: `script/crate-move`, the template `nifeos/crate-workflows` at its newest release and at head,
+Reuse: `script/crate-move`, the template `partsfoundry/crate-workflows` at its newest release and at head,
 `helpers/falsify.py`, `helpers/standalone.py`, the template's naming helpers, cargo-mutants' recorded
 rows, Kani, and the crate's own harness builder (`any_small_capability_table`). No new tool.
 

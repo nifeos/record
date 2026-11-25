@@ -19,7 +19,7 @@ the extraction and the release path; this block owns the findings that land insi
 The review package settles the crate name, the version `0.1.0`, the dual license and every name it
 records as ratified. It clears the move, and neither the tag nor publication.
 
-Reuse: the shared crate workflows `nifeos/crate-workflows`, `cargo-mutants`, Kani, `cargo-fuzz`
+Reuse: the shared crate workflows `partsfoundry/crate-workflows`, `cargo-mutants`, Kani, `cargo-fuzz`
 and the crate's harness shapes. No new tool.
 
 ## Goal
@@ -222,7 +222,7 @@ five. Two-way. XS.
 
 #### P1-13. The template pin predates the mutation stack, and the ruleset does not require it
 
-Every caller workflow (`.github/workflows/ci.yml` and the six others) pins `nifeos/crate-workflows`
+Every caller workflow (`.github/workflows/ci.yml` and the six others) pins `partsfoundry/crate-workflows`
 at `4e5b07dd`, 68 commits past the newest release of the template and 68 behind its head, so the
 lag job passes. The head adds a `mutation.yml` caller, `check / mutation-diff` on every pull request, and a release
 gate that wants a green full mutation run at the released commit. The `main` ruleset requires nine checks, and

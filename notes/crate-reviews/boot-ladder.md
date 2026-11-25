@@ -62,7 +62,7 @@ Run from this lane's worktree on the head named in the pull request.
 | `cargo test -p boot_ladder` | 19 unit tests and the README's 2 examples pass |
 | `cargo clippy -p boot_ladder --all-targets -- -D warnings` | no warning |
 | `cargo doc -p boot_ladder --no-deps` with warnings denied | no warning |
-| the template's naming checks (`spelled_out`, `unit_symbols`, `register_names`, `british_spelling`, `service_model`, `contract_names`), run from a `nifeos/crate-workflows` checkout at `d760537` over `src/*.rs` | 330 names judged, 0 refused, each |
+| the template's naming checks (`spelled_out`, `unit_symbols`, `register_names`, `british_spelling`, `service_model`, `contract_names`), run from a `partsfoundry/crate-workflows` checkout at `d760537` over `src/*.rs` | 330 names judged, 0 refused, each |
 | the template's `question_shape` | 0 refused; the private comparison is `strings_are_equal` |
 | the template's `abbreviations`, report only | 331 names judged, 0 components that are not words |
 | `script/names boot_ladder` and `python3 helpers/name_release.py --draft boot_ladder` | the crate name ratified; the rest listed in Names below |

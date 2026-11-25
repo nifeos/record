@@ -25,7 +25,7 @@ in the chip crate. Pull request
 provisional name, and two new crates (`jh7110_clock_and_reset_contract`,
 `jh7110_clock_and_reset_devices`) become its callers. The review read that diff; it did not build it.
 
-Reuse: the template `nifeos/crate-workflows` and its helpers, Kani, cargo-mutants, cargo-llvm-cov,
+Reuse: the template `partsfoundry/crate-workflows` and its helpers, Kani, cargo-mutants, cargo-llvm-cov,
 the crate's own harness helpers (`any_domain`, `ungates_before_releasing`, `system_provider`) and
 the pinned Linux and vendor U-Boot sources the crate cites. No new tool.
 

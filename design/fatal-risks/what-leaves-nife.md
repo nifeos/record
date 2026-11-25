@@ -64,7 +64,7 @@ A proof counts only if both hold:
 
 ### The bar for a crate nife would build on
 
-A crate nife depends on, whoever maintains it, should meet the gates `nifeos/crate-workflows`
+A crate nife depends on, whoever maintains it, should meet the gates `partsfoundry/crate-workflows`
 encodes: Kani with every harness falsified (`proofs / falsify`), a mutation baseline
 (`weekly / mutation`), semver checks (`weekly / semver`), a pinned minimum Rust version
 (`weekly / msrv`), and a stranger who has built and proved it from its README (`weekly / stranger`).

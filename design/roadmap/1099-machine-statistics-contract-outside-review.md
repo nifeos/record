@@ -24,7 +24,7 @@ checkable versions)) and the fixed address stand. The fixed address follows the 
 is `_VIRTUAL_ADDRESS` in every location. Every public name now carries a `Name:` block that reads
 ratified.
 
-Reuse: the template `nifeos/crate-workflows` and its helpers, `script/crate-move --dry-run`,
+Reuse: the template `partsfoundry/crate-workflows` and its helpers, `script/crate-move --dry-run`,
 `script/crate-standalone`, `helpers/name_release.py`, Kani, Miri, cargo-llvm-cov, and
 `block_roster_contract`'s `verification` module and `falsifications/` directory as the pattern.
 No new tool.

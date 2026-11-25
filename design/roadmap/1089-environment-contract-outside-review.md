@@ -21,7 +21,7 @@ name, `KNOWN_TIME_ZONES`, `KNOWN_LOCALES`, `KNOWN_TERMINAL_TYPES`, `MAXIMUM_TIME
 each spells its words and its unit out. The decision the crate implements, §111 (inert configuration
 is a read-only page, and each declared key is validated against a closed domain), is not reopened.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `script/crate-standalone`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `script/crate-standalone`,
 `script/crate-move`, Kani with the falsification-patch shape `block_roster_contract` carries,
 cargo-mutants. No new tool.
 

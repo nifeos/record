@@ -21,7 +21,7 @@ The lane ran or read every claim in this section on a host; nothing here ran on 
   crate does not.
 - The source holds no `unsafe`, no dependency, no contraction in prose, and no mention of the
   parent project beyond the organization and App names the workflows need.
-- The template pin `d332215` sits on `nifeos/crate-workflows` `main`, 57 commits behind it. Since the pin the template has moved the full mutation run into its own `mutation.yml`. It has made
+- The template pin `d332215` sits on `partsfoundry/crate-workflows` `main`, 57 commits behind it. Since the pin the template has moved the full mutation run into its own `mutation.yml`. It has made
   `check / mutation-diff` a required check on every crate repository's `main`. It has also taught the release gate to refuse a release without a green full mutation run at the release commit.
 - The newest weekly run (`42658233510`) failed in `weekly / mutation`: the verdict step found
   `0 of 1 shards left an outcomes.json` after the shard itself passed in 55 seconds. The weekly

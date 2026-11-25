@@ -3,7 +3,7 @@
 An appendix to [the milestone](../1087-domain-name-system-outside-review.md).
 
 Verified firsthand, on a fresh shallow clone of `nifeos/nife` at `main` and a clone of
-`nifeos/crate-workflows`, on one Linux host with stable Rust 1.99.1:
+`partsfoundry/crate-workflows`, on one Linux host with stable Rust 1.99.1:
 
 - `cargo test -p domain_name_system`: 40 integration tests and 4 documentation tests pass.
   `cargo clippy --all-targets -- -D warnings` and `cargo doc` with `RUSTDOCFLAGS=-D warnings` are

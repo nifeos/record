@@ -21,7 +21,7 @@ program image starts), option D). It also includes the placement of this crate a
 milestone 1017 (the contract crates leave in this order), after the linker-script test moves. Every other name in the crate is
 provisional by its own `Name:` block or carries none.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, Kani, cargo-mutants, the template's
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, Kani, cargo-mutants, the template's
 name helpers, and the move shape `jh7110_entropy` and `file_allocation_table` already took. No new
 tool.
 

@@ -22,7 +22,7 @@ milestone 1017 (the contract crates leave in this order), after the contract cra
 of those is reopened here. One ratified-name check: no later rule (units, standard-library
 spellings) contradicts `SyncOnly` or `bind_sync_only`.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `script/crate-move`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `script/crate-move`,
 `script/crate-review-packet`, Kani, cargo-mutants. No new tool.
 
 ## Goal
@@ -42,7 +42,7 @@ the crate's own reasons.
   the hard-cases prose of `notes/walk-cost.md`.
 - P0-3, the dependency on `file_system_contract` has nowhere to point: Waiting on
   `file_system_contract`'s repository (milestone 1017 step 2). The template half
-  landed in [nifeos/crate-workflows#66](https://github.com/nifeos/crate-workflows/pull/66), so
+  landed in [partsfoundry/crate-workflows#66](https://github.com/partsfoundry/crate-workflows/pull/66), so
   `deny.toml` admits git sources on the organization; the `git` and `rev` pin needs the repository,
   and the contract crates leave in the order milestone 1017 gives.
 - P1-4, `landing` answers `EINVAL` for `EISDIR`: Done,
@@ -138,12 +138,12 @@ name or behavior, a dependency); everything else is two-way and the maintainer d
    bounds". `fs_subtree_caretaker` goes.
    Door: two-way. Effort: M.
 
-3. The dependency on `file_system_contract` has nowhere to point yet. PARTIAL: the template's rule landed (nifeos/crate-workflows#66). LEFT: `file_system_contract`'s repository, then the pin.
+3. The dependency on `file_system_contract` has nowhere to point yet. PARTIAL: the template's rule landed (partsfoundry/crate-workflows#66). LEFT: `file_system_contract`'s repository, then the pin.
    Finding: the only dependency is `file_system_contract` by path. The runbook's bottom-up rule
    (`notes/crate-move.md`, "A crate leaves only when nothing it depends on is still in this
    tree") holds the move until `file_system_contract` has its own repository, which step 2 of
    milestone 1017 schedules. The scaffold's `deny.toml` admits git sources on the organization
-   (nifeos/crate-workflows#66), and the maintainers hold publishing to crates.io, so the
+   (partsfoundry/crate-workflows#66), and the maintainers hold publishing to crates.io, so the
    dependency takes a `git` and `rev` pin. This is the first moved crate to depend on another
    nifeos crate.
    Evidence: `crates/subtree_scope/Cargo.toml` line 13; `crate-workflows/scaffold/deny.toml`

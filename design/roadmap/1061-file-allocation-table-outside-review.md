@@ -92,7 +92,7 @@ One line per finding, in the review's order. Each state was read against
 - P2-2, untailed alias: Done, `nifeos/file_allocation_table#32`.
 - P2-3, lenient open: Done, `nifeos/file_allocation_table#31`.
 - P2-4, fuzz seeds: Done, `nifeos/file_allocation_table#20` (seeds under `fuzz/seeds/<target>/`)
-  and `nifeos/crate-workflows#58` (the weekly job reads them).
+  and `partsfoundry/crate-workflows#58` (the weekly job reads them).
 - P2-5, `mtools`: Done, `nifeos/file_allocation_table#30`.
 - P2-6, memory footprint: Done, `nifeos/file_allocation_table#26`.
 - P2-7, `slot_location` walk: Done, `nifeos/file_allocation_table#28`.
@@ -126,7 +126,7 @@ reasoned line in `.github/mutants-exempts` for each. Two-way. S to M.
 
 #### P0-2. The template pin predates the one-shard verdict fix
 
-Every caller pins `nifeos/crate-workflows` at `57f2d528`. The template commit `ced625f4` fixes the
+Every caller pins `partsfoundry/crate-workflows` at `57f2d528`. The template commit `ced625f4` fixes the
 mutation verdict for a run of one shard, which failed every one-shard repository because
 `actions/download-artifact` extracts a lone artifact one level up. This crate's census is about 150
 mutants against a 200-per-shard default, so it runs as one shard, and P0-1 cannot go green at the

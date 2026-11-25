@@ -18,7 +18,7 @@ from milestone 1017 (the contract crates leave in this order), step 9 and its ap
 `talc` goes, and from the vendoring record in `vendor/README.md` and `vendor/talc.pin`. It raises none of the decisions those settle. Those are the algorithm (`talc` 5.1.1's core, `Manual` source), the geometric growth with a floor of eight pages and the one contiguous heap. They also include the untyped slot as part of the program's capability contract, and the step at which the crate leaves. The review package is
 [`notes/crate-reviews/memory-region-heap.md`](../../notes/crate-reviews/memory-region-heap.md).
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `script/crate-standalone`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `script/crate-standalone`,
 `script/crate-review-packet`, `helpers/name_release.py`, cargo-mutants, Kani, and the std farm's
 copied-file list (`xtask/src/farm/copied.rs`). No new tool.
 

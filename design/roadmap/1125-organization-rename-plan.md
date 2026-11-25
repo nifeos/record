@@ -78,11 +78,11 @@ Read-only calls on 2026-11-24 found these:
 
 - Every crate repository sets its allowed actions to `selected`, with one pattern,
   `taiki-e/install-action@*`. That allows reusable workflows from its own organization and nothing
-  else, so a crate in `partsfoundry` cannot call `nifeos/crate-workflows`. The settings file holds a
+  else, so a crate in `partsfoundry` cannot call `partsfoundry/crate-workflows`. The settings file holds a
   table of values per owner, merged over the shared ones by `helpers/settings_owner.py`
-  ([nifeos/crate-workflows#92](https://github.com/nifeos/crate-workflows/pull/92), landed at
+  ([partsfoundry/crate-workflows#92](https://github.com/partsfoundry/crate-workflows/pull/92), landed at
   11d6d6b). Its `partsfoundry` row adds the pattern
-  `nifeos/crate-workflows/.github/workflows/*@*`, the team organization, the App and the tags
+  `partsfoundry/crate-workflows/.github/workflows/*@*`, the team organization, the App and the tags
   bypass, so a crate in `nifeos` sees no change and a crate in `partsfoundry` gets these values.
 - Callers pass their secrets by name (`SETTINGS_TOKEN`, `NIFE_SMELTER_APP_ID`,
   `NIFE_SMELTER_PRIVATE_KEY`), never through `secrets: inherit`. A named secret comes from the
@@ -108,7 +108,7 @@ except the last transfer, which may be one-way (see the risks).
    since the owner table applies only after a crate arrives. Effort: S.
 1. The trial: calef transfers rsext4 (done). The lane runs `script/apply-settings`,
    measures what survived (the verification list), and runs its `check`, `proofs`, weekly and
-   dry-run release workflows, still calling `nifeos/crate-workflows`. Effort: S.
+   dry-run release workflows, still calling `partsfoundry/crate-workflows`. Effort: S.
 2. The other 29 crate repositories, one transfer at a time, in any order (done). moho_abi stays
    in `nifeos` (provisional), and crate-workflows-test moves with crate-workflows at step 3, since
    its canary adoption mints its token in the organization that owns crate-workflows-test. Each
@@ -120,12 +120,12 @@ except the last transfer, which may be one-way (see the risks).
      lands: the names of the repository itself (README badges, code owners, the manifest's
      `repository`, cargo-deny's allowed organization). The `check / standalone` badge check reads
      the current owner, so that draft is red before the transfer and green after it.
-   - Its `uses:` lines keep calling `nifeos/crate-workflows`, so it stays green. They are the
+   - Its `uses:` lines keep calling `partsfoundry/crate-workflows`, so it stays green. They are the
      second half of its draft, which waits for step 3.
    Effort: S in all.
 3. crate-workflows-test and crate-workflows, last, under their own ask. From this moment every caller's `uses:` line fails until its draft lands.
 4. crate-workflows' own draft
-   ([nifeos/crate-workflows#91](https://github.com/nifeos/crate-workflows/pull/91)) lands first,
+   ([partsfoundry/crate-workflows#91](https://github.com/partsfoundry/crate-workflows/pull/91)) lands first,
    then each crate's second draft, its `uses:` lines (one per repository, all titled "crate
    transfer"), grant_plan's among the first. Each draft's pull request runs its new `uses:` lines, so it can pass while `main` is
    red. Effort: S.
@@ -136,7 +136,7 @@ except the last transfer, which may be one-way (see the risks).
    source together, because one repository under two URLs is two sources to cargo. At its present
    pin, grant_plan's manifest names three crates under `nifeos`. Effort: S.
 7. The `partsfoundry` row of the owner table becomes the shared values, its
-   `nifeos/crate-workflows` pattern leaves, and `script/apply-settings` runs against every crate.
+   `partsfoundry/crate-workflows` pattern leaves, and `script/apply-settings` runs against every crate.
 
 ## Where the transfers stand
 
@@ -151,7 +151,7 @@ universal_serial_bus.
 
 Each lost what the trial lost: the team arrived at read, secret scanning and push protection came
 back off, the tags ruleset lost its bypass actor, and the allowlist lacked the
-`nifeos/crate-workflows` pattern. `script/apply-settings` restored it, and `script/check-settings`
+`partsfoundry/crate-workflows` pattern. `script/apply-settings` restored it, and `script/check-settings`
 matches on all thirty. Beyond the trial's list:
 
 - Private vulnerability reporting was off on clock_contract, domain_name_system, device_tree_blob
@@ -166,7 +166,7 @@ matches on all thirty. Beyond the trial's list:
   text needs a follow-up.
 
 Each crate's own-names draft is ready or landed. Its `uses:` draft is held on
-[nifeos/crate-workflows#91](https://github.com/nifeos/crate-workflows/pull/91). grant_contract and
+[partsfoundry/crate-workflows#91](https://github.com/partsfoundry/crate-workflows/pull/91). grant_contract and
 grant_plan fetch their git dependencies from `partsfoundry`, so nife's draft can move every cargo
 source together without locking one crate twice.
 
@@ -226,7 +226,7 @@ names.
 ## Risks
 
 - The last transfer may be one-way. crate-workflows has far more than 100 Actions uses a week, so
-  GitHub retires `nifeos/crate-workflows`. Nobody has measured whether a retired name blocks a
+  GitHub retires `partsfoundry/crate-workflows`. Nobody has measured whether a retired name blocks a
   transfer back.
 - A stale draft. A pull request that lands before cutover may add a line naming `nifeos` for a
   moving repository. The tool's `--check` mode finds it, and the lane runs the rewrite again.

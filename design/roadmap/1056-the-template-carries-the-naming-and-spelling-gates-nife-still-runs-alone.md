@@ -13,7 +13,7 @@ needs_person: no
 Raised by lane/record-follow-on-items.
 
 Reuse: the template's Rust lexer and word list (`helpers/rust_names.py` and
-`helpers/naming_words.toml` in `nifeos/crate-workflows`), and nife's vendoring of them at a pinned
+`helpers/naming_words.toml` in `partsfoundry/crate-workflows`), and nife's vendoring of them at a pinned
 revision (`helpers/vendored_name_gates.py`, `vendor/crate-workflows.pin`). The checks themselves
 exist in nife and move; the lane writes none from scratch.
 

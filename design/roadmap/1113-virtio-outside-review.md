@@ -20,7 +20,7 @@ to take. The one ruling it takes as settled is the crate name: `virtio` is ratif
 name (the specification's own) and this review does not reopen it. Everything else below is open.
 
 Reuse: `script/crate-review-packet`, `script/crate-standalone`, `script/names`,
-`helpers/name_release.py`, the template `nifeos/crate-workflows`, and the crates.io API for the
+`helpers/name_release.py`, the template `partsfoundry/crate-workflows`, and the crates.io API for the
 prior-art figures. No new tool.
 
 ## Goal

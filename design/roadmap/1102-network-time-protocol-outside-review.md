@@ -19,7 +19,7 @@ so this review had no settled package to inherit. The baseline it takes instead,
 reopened below, as the release-review rule allows: `UNIX_MINIMUM` carries no unit, and
 `UNSYNCHRONISED` is a British spelling the cited source does not use.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, its naming helpers, Kani, cargo-mutants
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, its naming helpers, Kani, cargo-mutants
 and cargo-fuzz. No new tool.
 
 ## Goal

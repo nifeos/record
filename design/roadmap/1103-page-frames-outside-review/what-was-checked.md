@@ -3,7 +3,7 @@
 An appendix to [the milestone](../1103-page-frames-outside-review.md).
 
 Verified firsthand on a fresh shallow clone of `nifeos/nife` at `75bb255a`, with the template
-`nifeos/crate-workflows` at `b84ada0` for the helpers and at its `v7` release for the dry run:
+`partsfoundry/crate-workflows` at `b84ada0` for the helpers and at its `v7` release for the dry run:
 
 - `cargo test -p page_frames`: 17 integration tests and 2 documentation tests, all green on the
   pinned nightly. Eight throwaway edge-case tests written for this review (never committed) also

@@ -184,7 +184,7 @@ pull requests, each citing the nife commit it copies:
 - nifeos/record: copy `helpers/issue_claim.py` beside the copied `script/claim`, extend the
   `claim_copy` lint to cover it, and add the workflow.
 - nifeos/partsfoundry.org: add the workflow and the helper.
-- nifeos/crate-workflows: offer the workflow to every crate repository from the template, written
+- partsfoundry/crate-workflows: offer the workflow to every crate repository from the template, written
   with no mention of nife, so each partsfoundry crate gets it at its next template sync.
 - nifeos/basalt: add the workflow and the helper.
 

@@ -27,7 +27,7 @@ Two rulings touch `src/socket_frame.rs`: a send's length rides in the `CALL` arg
 (#3517), and `ACCEPT`'s second reply word carries the peer. The items below hold under both, which
 change only documentation and one example in this crate.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `script/crate-standalone`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `script/crate-standalone`,
 `script/crate-move --dry-run`, the template's name and prose gates, cargo-llvm-cov, cargo-mutants.
 No new tool.
 

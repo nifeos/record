@@ -21,7 +21,7 @@ and not a later rule: `paging` is taken on crates.io (Decision 1, ruled). Every 
 (`design/naming.md`: spelled-out words, units spelled out, standard-library spellings, kept foreign
 names carry an alias) are applied as written.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, its helpers (`standalone.py`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, its helpers (`standalone.py`,
 `spelled_out.py`, `unit_symbols.py`, `falsify.py`), cargo-mutants, Kani, cargo-llvm-cov. No new
 tool.
 

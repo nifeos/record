@@ -15,7 +15,7 @@ milestone 1017 (the contract crates leave in this order). No review package exis
 `notes/crate-reviews/`, so this block has no settled baseline to defer to: the crate's ruled name,
 `moho_abi` (§323), and the sixteen ratified item names stand, and everything else below is open.
 
-Reuse: `script/crate-move --dry-run`, the template `nifeos/crate-workflows` and its helpers,
+Reuse: `script/crate-move --dry-run`, the template `partsfoundry/crate-workflows` and its helpers,
 `helpers/lint_externalized_crates.py`, `helpers/format_values_check.py`, `helpers/name_release.py`,
 cargo-mutants' recorded census, the crates.io API. No new tool.
 

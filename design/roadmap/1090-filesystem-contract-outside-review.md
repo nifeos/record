@@ -31,7 +31,7 @@ crates leave in this order), paired there with `file_system_fixture`. The manife
 dependencies of any kind, and the README says where the fixture's tests went. The two crates share
 one workspace repository, ruled 2026-11-14 (UTC); the fixture never publishes.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, its helpers (`standalone.py`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, its helpers (`standalone.py`,
 `falsify.py`, `coverage-floor.sh`, the name gates), Kani, cargo-mutants, cargo-llvm-cov, the
 classification of equivalent mutants already in `notes/mutation-testing/`. No new tool.
 

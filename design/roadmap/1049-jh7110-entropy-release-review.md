@@ -14,7 +14,7 @@ lane read `nifeos/jh7110_entropy` at `98c211e` as an outside maintainer would me
 could on a host, and wrote this block. It changed nothing in any repository.
 
 Reuse: the crate's own Kani harnesses and falsification patches, the shared template
-`nifeos/crate-workflows` and its `scaffold/`, cargo-mutants, cargo-semver-checks, and the review
+`partsfoundry/crate-workflows` and its `scaffold/`, cargo-mutants, cargo-semver-checks, and the review
 packet of milestone 1017. No new tool.
 
 ## Goal

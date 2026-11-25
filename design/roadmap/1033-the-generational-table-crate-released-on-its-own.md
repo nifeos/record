@@ -39,7 +39,7 @@ Reuse: none exists that fits. Searched crates.io and read twelve candidates from
 ## The soak
 
 - The crate lives in `nifeos/generational_table`, on the shared template of milestone 887 (crate
-  repositories share one CI template) with its callers pinned at `nifeos/crate-workflows`
+  repositories share one CI template) with its callers pinned at `partsfoundry/crate-workflows`
   `965f58a`. `script/apply-settings` applied the settings there: both rulesets, the `crates-io`
   environment with calef as reviewer, the labels, the team and private vulnerability reporting. The manifest
   keeps `publish = false`, and the caller sets `allow-unpublished` for the soak. No tag exists.

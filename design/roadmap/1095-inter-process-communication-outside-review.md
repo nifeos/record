@@ -20,7 +20,7 @@ is the crate's own (§154 (the acronym test is whether the phrase is spoken)). E
 name carries a `provisional` block. Nothing below reopens the crate name. Everything else is open,
 and the first item says so.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, its name gates
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, its name gates
 (`helpers/spelled_out.py`, `question_shape.py`, `register_names.py`, `british_spelling.py`,
 `standalone.py`, `abbreviations.py`), `typos`, Kani, cargo-mutants, cargo-llvm-cov, and the
 crate's own harness helpers (`seed`, `mint`, `any_timers`). No new tool.

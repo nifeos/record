@@ -63,7 +63,7 @@ All commands ran in this lane's worktree, at `main` with this lane's edits to do
 | `cargo clippy -p terminal_contract --all-targets -- -D warnings` | no warning |
 | `cargo doc -p terminal_contract --no-deps` with warnings denied | no warning |
 | `script/names terminal_contract` and `python3 helpers/name_release.py --draft terminal_contract` | `NOTE_NOT_ABSORBED` ratified; the crate and 12 items provisional; 20 items with no block |
-| the template's gating name checks (`spelled_out`, `unit_symbols`, `register_names`, `british_spelling`, `service_model`, `contract_names`, `question_shape`, and `service_model --prose`), from `nifeos/crate-workflows` at `56437de` | all pass, 52 names judged |
+| the template's gating name checks (`spelled_out`, `unit_symbols`, `register_names`, `british_spelling`, `service_model`, `contract_names`, `question_shape`, and `service_model --prose`), from `partsfoundry/crate-workflows` at `56437de` | all pass, 52 names judged |
 | the template's `abbreviations` report | 14 components: `readline`, `intrcount`, `rawmode`, `readraw`, `stdin`, `quiesced`, `ctl` (three names), `handoff` (two), `req`, `eof`, and `proto` in a test name |
 
 Not run, and so not claimed: the stranger test (there is no README), `cargo-mutants`, Kani (no
