@@ -27,8 +27,9 @@ meets the bar of §46 (thin primitives or whole subsystems; we write everything 
 done-when of milestone 190 (ext4, read and write). That done-when includes the power-cut sweeps of
 milestone 997 (ext4 through rsext4, under milestone 37's crash injector). They put `rsext4` behind
 the injector of milestone 37 (Prove RedoxFS's crash consistency) and judge each fault by
-`e2fsck -fn` after Linux replays the journal. A fault point those sweeps find is work for the fork, not a reason
-for RedoxFS to stay. Until that ruling, RedoxFS stays the primary filesystem and the launch store.
+`e2fsck -fn` after Linux replays the journal. A fault point those sweeps find is work for the
+fork, not a reason for RedoxFS to stay. Until that ruling, RedoxFS stays the primary filesystem and
+the launch store.
 
 On adoption, one ext4 server becomes both the launch store and the reader of Linux drives that
 milestone 190 wants. RedoxFS then leaves through a milestone of its own, minted from the inventory
