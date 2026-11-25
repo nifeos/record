@@ -94,12 +94,13 @@ It touches the 294 `github.com/nifeos` lines, the 22 Cargo pins, basalt's `pins.
 repositories, and the domain, and through the domain every image (§250).
 
 Ruled 2026-11-14 (UTC), ruling 3: the organization stays `nifeos` until the library takes a name.
-Ruling 4, the same day, gives it the library's name (layer 2), with the domain that name plus
-`.org`. Ruled 2026-11-15 (UTC): the name is `partsfoundry` (Parts Foundry), and the domain is
-`partsfoundry.org`. Layer 2 holds the checks and the candidates that lost. The organization is
-still `nifeos` today. Creating `partsfoundry` on GitHub and moving repositories from `nifeos`
-each wait for a separate go, before the first crates.io publish. The options below were the
-candidates for that one name.
+Ruling 4, the same day, gives the library and its organization one name (layer 2), with the
+domain that name plus `.org`. Ruled 2026-11-15 (UTC): the name is `partsfoundry` (Parts Foundry),
+and the domain is `partsfoundry.org`. Layer 2 holds the checks and the candidates that lost. Ruled
+2026-11-24 (UTC): `nifeos` stays and keeps `nife`, `basalt` and Moho, and the library crates move
+to a new, separate GitHub organization, `partsfoundry`. Ruled 2026-11-25 (UTC): the design record
+and the website stay in `nifeos`, and the website is served at `nifeos.org`. The options below
+were the candidates for that one name.
 
 | option | what it says | checks | weakness |
 |---|---|---|---|
@@ -120,17 +121,16 @@ It touches almost nothing in code. Crates take the name of what they do (`file_a
 rule. So the library's name lives in the website, the organization profile and README text. It is
 not a platform: the binary interface is.
 
-Ruled 2026-11-14 (UTC), ruling 4: the library and the organization share one name, the
-organization expects to take it, and the domain is that name plus `.org`. The architect chooses the
-name before the first crates.io publish, after its checks. Crate names stay descriptive, and the
+Ruled 2026-11-14 (UTC), ruling 4: the library and its organization share one name, and the domain
+is that name plus `.org`. Crate names stay descriptive, and the
 page contracts, which every binary interface shares, take no common prefix. The project can add a
 prefix later, but it cannot take one away.
 
 Ruled 2026-11-15 (UTC): the name is `partsfoundry` (Parts Foundry), with the domain
-`partsfoundry.org`. The ruling records the name only. `nife`, `basalt` and Moho keep their names,
-and `basalt.nifeos.org` stays valid for installed images (§250). Creating the GitHub organization,
-moving repositories from `nifeos`, registering the domain and building the website each wait for a
-separate go from the architect, all before the first crates.io publish.
+`partsfoundry.org`. `nife`, `basalt` and Moho keep their names, and `basalt.nifeos.org` stays
+valid for installed images (§250). The `partsfoundry` GitHub organization holds every library
+crate repository, and `partsfoundry.org` is verified as its domain; it does not serve the design
+record. Building the website is the step still waiting, before the first crates.io publish.
 
 The checks ran on 2026-11-15. `partsfoundry` and its variants (`parts_foundry`, `parts-foundry`,
 `partfoundry`) are free on crates.io, on GitHub and as `.org`, `.io` and `.net` domains. `.dev` is
