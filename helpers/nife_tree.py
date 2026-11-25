@@ -6,6 +6,7 @@
     helpers/nife_tree.py history           print a git directory holding nife's history to that commit
     helpers/nife_tree.py overlay <root>    link into <root> every nife path <root> lacks
     helpers/nife_tree.py unoverlay <root>  remove the links `overlay` made
+    helpers/nife_tree.py --selftest        prove the overlay hides, isolates and removes its links
 
 The record names code that lives in nife: a roadmap block's `**Recorded.**` line names
 `script/lint`, a citation names `xtask/src/host.rs`, a counted claim counts the kernel's harnesses.
@@ -30,8 +31,10 @@ detection or a content read would otherwise fetch blobs one at a time over the n
 `overlay` is what lets the record's checks, written when the record was half of nife's tree, run
 unchanged: for each path nife tracks and the record does not, it puts a symbolic link in the
 record's working tree, and names each link in the repository's `info/exclude` between two marker
-lines, so git (status, grep, ls-files) never sees them. A path the record has is never shadowed.
-`unoverlay` removes exactly the links listed there and the block. `script/lint` makes the overlay at
+lines (one block per worktree, since worktrees share the file), so git (status, grep, ls-files)
+never sees them. A path the record has is never shadowed.
+`unoverlay` removes the links listed there and the block, and any other untracked link in the tree
+that points into a nife tree (what a run killed outright leaves). `script/lint` makes the overlay at
 its start and removes it at its end, including on failure or interruption.
 """
 
@@ -144,7 +147,18 @@ def _exclude_file(root):
     return _git("-C", root, "rev-parse", "--path-format=absolute", "--git-path", "info/exclude")
 
 
-def _read_block(exclude):
+def _markers(root):
+    """The two marker lines of this worktree's block.
+
+    The exclude file lives in the repository's common directory, so every worktree of the record
+    shares one. Each worktree therefore gets a block of its own, named by its root, and one run
+    never rewrites or drops another's.
+    """
+    return f"{BEGIN} [{root}]", f"{END} [{root}]"
+
+
+def _read_block(exclude, root):
+    begin, end = _markers(root)
     try:
         with open(exclude) as f:
             lines = f.read().split("\n")
@@ -152,9 +166,9 @@ def _read_block(exclude):
         return [], []
     keep, block, inside = [], [], False
     for line in lines:
-        if line == BEGIN:
+        if line == begin:
             inside = True
-        elif line == END:
+        elif line == end:
             inside = False
         elif inside:
             block.append(line)
@@ -163,18 +177,53 @@ def _read_block(exclude):
     return keep, block
 
 
+def _nife_roots():
+    """Directories a link made by an overlay can point into, without fetching anything."""
+    roots = [os.path.realpath(qualified_paths._cache_dir())]
+    if os.environ.get("NIFE_TREE"):
+        roots.append(os.path.realpath(os.environ["NIFE_TREE"]))
+    return roots
+
+
+def _sweep(root):
+    """Remove every untracked link in <root> that points into a nife tree, whatever pin or run.
+
+    A run that was killed outright (SIGKILL, a power cut) never ran its cleanup, and its block may
+    have been lost with the exclude file. The links are recognizable by where they point, and an
+    untracked link that points there is never the record's own.
+    """
+    out = subprocess.run(["git", "-C", root, "ls-files", "-o", "-z"],
+                         capture_output=True, text=True).stdout
+    roots = _nife_roots()
+    for rel in out.split("\0"):
+        p = os.path.join(root, rel)
+        if rel and os.path.islink(p):
+            target = os.path.realpath(p)
+            if any(target == r or target.startswith(r + os.sep) for r in roots):
+                os.unlink(p)
+
+
+def _write_exclude(exclude, root, keep, links):
+    begin, end = _markers(root)
+    text = "\n".join(keep).rstrip("\n") + "\n"
+    if links is not None:
+        text += begin + "\n" + "".join("/" + rel + "\n" for rel in sorted(links)) + end + "\n"
+    with open(exclude, "w") as f:
+        f.write(text)
+
+
 def unoverlay(root):
     root = os.path.abspath(root)
     exclude = _exclude_file(root)
-    keep, block = _read_block(exclude)
+    keep, block = _read_block(exclude, root)
     for entry in block:
         rel = entry.lstrip("/")
         p = os.path.join(root, rel)
         if rel and os.path.islink(p):
             os.unlink(p)
+    _sweep(root)
     if os.path.exists(exclude):
-        with open(exclude, "w") as f:
-            f.write("\n".join(keep).rstrip("\n") + "\n")
+        _write_exclude(exclude, root, keep, None)
 
 
 def overlay(root):
@@ -199,16 +248,93 @@ def overlay(root):
                 break
     exclude = _exclude_file(root)
     os.makedirs(os.path.dirname(exclude), exist_ok=True)
-    keep, _ = _read_block(exclude)
-    with open(exclude, "w") as f:
-        f.write("\n".join(keep).rstrip("\n") + "\n" + BEGIN + "\n")
-        for rel in sorted(links):
-            f.write("/" + rel + "\n")
-        f.write(END + "\n")
+    keep, _ = _read_block(exclude, root)
+    _write_exclude(exclude, root, keep, links)
     for rel in sorted(links):
         os.symlink(os.path.join(nife, rel), os.path.join(root, rel))
     print(f"nife_tree: {len(links)} nife paths linked into the record's tree from "
           f"{commit()[:12]}, basalt main's nife pin")
+
+
+def selftest():
+    """Two worktrees of a scratch repository and a fake nife tree: the overlay hides its links,
+    two worktrees never disturb each other, and unoverlay removes every link even after a lost
+    block."""
+    import contextlib
+    import io
+    import shutil
+    import tempfile
+
+    global commit
+    work = os.path.realpath(tempfile.mkdtemp(prefix="nife-tree-selftest."))
+    saved = {k: os.environ.get(k) for k in ("NIFE_TREE", "NIFE_PINNED_TREES")}
+    real_commit = commit
+    ident = {"GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@t",
+             "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@t"}
+
+    def git(*a, cwd):
+        subprocess.run(["git", *a], cwd=cwd, check=True, capture_output=True,
+                       env={**os.environ, **ident})
+
+    def status(where):
+        return subprocess.run(["git", "-C", where, "status", "--porcelain"],
+                              capture_output=True, text=True).stdout
+
+    def fail(msg):
+        sys.exit(f"nife_tree selftest: {msg}")
+
+    try:
+        fake = os.path.join(work, "nife")
+        os.makedirs(os.path.join(fake, "dir"))
+        for f in ("only_in_nife.txt", "dir/deep.txt", "shared.txt"):
+            open(os.path.join(fake, f), "w").write("x")
+        git("init", "-q", cwd=fake)
+        git("add", "-A", cwd=fake)
+        git("commit", "-qm", "x", cwd=fake)
+        commit_id = _git("-C", fake, "rev-parse", "HEAD")
+        record = os.path.join(work, "record")
+        os.makedirs(record)
+        git("init", "-q", cwd=record)
+        open(os.path.join(record, "shared.txt"), "w").write("own")
+        git("add", "-A", cwd=record)
+        git("commit", "-qm", "x", cwd=record)
+        other = os.path.join(work, "other")
+        git("worktree", "add", "-q", "-b", "o", other, cwd=record)
+        os.environ["NIFE_TREE"] = fake
+        os.environ["NIFE_PINNED_TREES"] = os.path.join(work, "cache")
+        commit = lambda: commit_id  # noqa: E731
+        for where in (record, other):
+            with contextlib.redirect_stdout(io.StringIO()):
+                overlay(where)
+            if not os.path.islink(os.path.join(where, "only_in_nife.txt")):
+                fail("the overlay linked nothing")
+            if os.path.islink(os.path.join(where, "shared.txt")):
+                fail("the overlay shadowed a record file")
+            if status(where):
+                fail(f"git sees the overlay's links in {where}: {status(where)!r}")
+        unoverlay(other)
+        if os.path.lexists(os.path.join(other, "dir")) or status(other):
+            fail("unoverlay left something in the second worktree")
+        if not os.path.islink(os.path.join(record, "dir")) or status(record):
+            fail("another worktree's unoverlay disturbed the first one")
+        # A killed run: the block is gone, the links remain.
+        open(_exclude_file(record), "w").close()
+        if "only_in_nife.txt" not in status(record):
+            fail("the stale links were not visible to git, so the test proves nothing")
+        with contextlib.redirect_stdout(io.StringIO()):
+            overlay(record)
+        unoverlay(record)
+        if status(record) or os.path.lexists(os.path.join(record, "only_in_nife.txt")):
+            fail("unoverlay left a stale link behind")
+    finally:
+        commit = real_commit
+        for k, v in saved.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+        shutil.rmtree(work, ignore_errors=True)
+    print("nife_tree selftest: ok")
 
 
 def main(argv):
@@ -222,6 +348,8 @@ def main(argv):
         overlay(argv[1])
     elif argv[:1] == ["unoverlay"] and len(argv) == 2:
         unoverlay(argv[1])
+    elif argv == ["--selftest"]:
+        selftest()
     else:
         sys.exit(__doc__.split("\n\n")[1])
 
