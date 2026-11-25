@@ -203,8 +203,7 @@ name or magic may spell nife.
 ## The library and its organization are partsfoundry
 
 Ruled 2026-11-14 (UTC) that the organization and the library share one name, and ruled 2026-11-15
-(UTC) that the name is `partsfoundry` (Parts Foundry). Rulings 3 and 4 below give the later
-rulings on the organizations.
+(UTC) that the name is `partsfoundry` (Parts Foundry).
 
 - The library and its GitHub organization take the name `partsfoundry`, written Parts Foundry in
   prose. The library's domain is `partsfoundry.org`, and it does not serve the design record.
@@ -217,9 +216,8 @@ rulings on the organizations.
 - `nife`, `basalt` and Moho keep their names. `basalt.nifeos.org` stays valid for installed
   images, as §250 (an image names its distribution's package index) requires.
 
-The `partsfoundry` organization exists, and `partsfoundry.org` is its verified domain. Building
-and deploying the website is the step still waiting, before the first crates.io publish. The
-rulings rename nothing else.
+Building and deploying the website is the step still waiting, before the first crates.io publish.
+The rulings rename nothing else.
 
 The checks, run 2026-11-15 (UTC). `partsfoundry` and its variants (`parts_foundry`,
 `parts-foundry`, `partfoundry`) are free on crates.io and on GitHub, and free as `.org`, `.io` and
