@@ -1,14 +1,14 @@
 # The P1 findings: before a stable release
 
 An appendix to [the milestone](../1126-moho-design-review.md). Each finding keeps the main page's
-shape: what Moho does, what others do, whether the difference was chosen, an example, a fix, the
+shape: what Moho does, what others do, whether somebody chose the difference, an example, a fix, the
 effort and the door.
 
 ## 5. One version number, compared by the spawner
 
 Moho: `ABI_VERSION` is one number, and "a new number owes nothing" (`src/lib.rs`). The check is
-`serves_declared_abi` in the progenitor: it compares the program's note with the copy of the
-constant the progenitor was built with, by equality, and passes a program with no note. The
+`serves_declared_abi` in the progenitor: it compares the program's note with the progenitor's
+own build-time copy of the constant, by equality, and passes a program with no note. The
 kernel reports no version, and no call asks which methods it serves.
 
 Others: a WASI component imports each interface by version, and a host that provides 0.2.6
@@ -20,7 +20,7 @@ revisions"
 and `zx_system_get_features` answers at run time. seL4 and Hubris build kernel and programs from
 one definition and negotiate nothing; Hubris exposes an image identifier.
 
-Deliberate: half. Equality at spawn and no dual serving are ruled, beside `ABI_VERSION`. The
+Deliberate: half. The crate states equality at spawn and no dual serving beside `ABI_VERSION`. The
 missing level for additions follows from "a new number owes nothing" and no decision weighs it.
 
 Example: a program built against a later crate calls a method added after its kernel shipped.
@@ -37,8 +37,8 @@ Effort: M. Door: one-way (the note's meaning).
 ## 6. A full capability table loses memory, drops a capability or parks a caller
 
 Moho: a table has `CAPABILITY_TABLE_SLOTS` (64) slots. When it is full,
-`memory_region::RETYPE` answers `OutOfMemory` and "the run is spent". A delegation that arrives
-is dropped, and the receiver reads `NO_CAPABILITY`. A `CALL` whose Reply does not fit leaves the
+`memory_region::RETYPE` answers `OutOfMemory` and "the run is spent". The kernel drops a delegation that
+arrives, and the receiver reads `NO_CAPABILITY`. A `CALL` whose Reply does not fit leaves the
 caller parked until a teardown, as §12 (call/reply IPC: a one-shot reply capability) accepts.
 Placement differs by method: `RETYPE_OBJECT` takes a `floor`, `CAPABILITY_INSERT` takes a target
 written as the slot plus one, and `RETYPE`, `SPLIT`, `BADGE`, `SLICE` and both receives take the
@@ -50,15 +50,15 @@ will result"; a receiver names its one receive slot before it waits
 Zircon reports `ZX_ERR_NO_RESOURCES` apart from `ZX_ERR_NO_MEMORY`, and its handle table has no
 fixed size (the size is from memory). KeyKOS gives a domain sixteen key slots.
 
-Deliberate: the size and the parked caller are recorded; the three placement conventions are
-not a decision.
+Deliberate: the record holds the size and the parked caller; the three placement conventions
+are not a decision.
 
 Example: a server holds 63 capabilities when a client calls. The Reply has no slot. The server
 reads `NO_CAPABILITY` and has nothing to answer through, and the client waits until somebody
 destroys it. §255 (each socket is its own capability) makes 63 open sockets an ordinary load.
 
 Fix: let every method that installs a capability take the destination slot, with one encoding,
-and refuse before it spends anything when that slot is taken. Let a receive name the slot its
+and refuse before it spends anything when that slot is full. Let a receive name the slot its
 capability lands in, so the server reserves room for the Reply before it waits.
 
 Effort: L. Door: one-way (argument layouts).
@@ -130,7 +130,7 @@ Example: a compositor lends a client a frame with `GRANT`, so the client may pas
 decoder. The client calls `REVOKE`. The compositor's own capability and mapping go, and it
 faults on its next write.
 
-Fix: a sixth right for revocation, kept by the lender, so a capability can be passed on without
+Fix: a sixth right for revocation, kept by the lender, so a holder can pass a capability on without
 the power to take it from everyone.
 
 Effort: S. Door: one-way (a rights bit and what `REVOKE` needs).
@@ -147,7 +147,8 @@ registers ([manual](https://sel4.systems/Info/Docs/seL4-manual-latest.pdf), sect
 Zircon channel message is bytes and handles. KeyKOS and EROS send a code, a string and four keys
 every time.
 
-Deliberate: yes, three times: §12, §245 and §246 (a plain `RECEIVE` never takes a capability).
+Deliberate: yes, three times: §12, §245 (a `CALL` server tells a Reply from a delegation) and
+§246 (a plain `RECEIVE` never takes a capability).
 Each ruling fixed one case. The cohesion argument for reopening them is that a program author now
 learns six rules where one message shape would need none.
 
@@ -184,8 +185,8 @@ Effort: S. Door: one-way (wire numbers).
 
 Moho: `fault::FAULT_RENDEZVOUS_SLOT` is the table's last slot. A spawner inserts a rendezvous
 there, and at `START` the kernel reads it, records it and clears it. The slot's index derives
-from the table's size, so a larger table is a version bump. The name is ratified; this finding
-is about the mechanism.
+from the table's size, so a larger table is a version bump. The name has its ratification; this
+finding is about the mechanism.
 
 Others: seL4 passes the fault endpoint as an argument when it configures a thread (from memory). Zircon creates
 an exception channel on the task ([call](https://fuchsia.dev/fuchsia-src/reference/syscalls/task_create_exception_channel)).
@@ -203,7 +204,7 @@ Effort: M. Door: one-way (a slot convention programs build against).
 ## 13. No definition a tool can read
 
 Moho: the crate is constants and prose. Which word holds which argument, which right a method
-needs and which errors it answers exist only in doc comments. Each wrapper is written by hand.
+needs and which errors it answers exist only in doc comments. Somebody writes each wrapper by hand.
 
 Others: seL4 generates the kernel's decoder and the library's stubs from one XML file. CloudABI
 generates headers, documentation and Rust bindings from

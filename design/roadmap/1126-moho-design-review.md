@@ -27,7 +27,7 @@ Every one-way door in the interface has a ruling before the crate publishes. A w
 register layout, the meaning of an error code and a published name are such doors. Each
 finding below names its door, so the rulings can come one at a time.
 
-## What was checked, and how
+## What the review checked, and how
 
 The trees, the kernel functions read and what was not run are in
 [the appendix](1126-moho-design-review/what-was-checked.md).
@@ -82,7 +82,7 @@ P2 findings in [the appendix](1126-moho-design-review/later-findings.md).
 
 ## P0: before any publish
 
-### 1. Word 0 carries the kernel's status and a sender's data
+### Finding 1: word 0 carries the kernel's status and a sender's data
 
 Moho: every call returns a result or a negative `Error` in word 0 (`src/lib.rs`, the crate
 root's table). `rendezvous::RECEIVE` and `RECEIVE_CAPABILITY` put the sender's first word there,
@@ -110,7 +110,7 @@ word 0 and the signal word in word 1. `reply::REPLY` refuses an `r0` inside the 
 
 Effort: M. Door: one-way (a register layout).
 
-### 2. A method number means a different operation on each object
+### Finding 2: a method number means a different operation on each object
 
 Moho: each module numbers its methods from 0. Method 0 is `rendezvous::SEND`,
 `memory_region::MAP`, `process::DESTROY`, `reboot::REBOOT`, `timer::ARM` and
@@ -141,7 +141,7 @@ another kind. The modules keep their names; only the values move.
 
 Effort: M. Door: one-way (every wire number).
 
-### 3. Nothing refuses an undefined word, flag or bit
+### Finding 3: nothing refuses an undefined word, flag or bit
 
 Moho: the doc comments mark unused arguments with `_`, and the kernel never reads them.
 `page_frame::MAP` takes any nonzero `writable` as read and write. The kernel converts a rights
@@ -165,11 +165,11 @@ value in that register. On the new kernel its wait ends at a deadline it never a
 only cure is a new method number for every call that grows.
 
 Fix: one rule for the whole interface. An argument word, flag or rights bit the method does
-not define is zero, or the call is refused. `writable` takes 0 or 1.
+not define is zero, or the kernel refuses the call. `writable` takes 0 or 1.
 
 Effort: M. Door: one-way (what a call means). The rule can only loosen later.
 
-### 4. Fifteen codes carry about forty refusals
+### Finding 4: fifteen codes carry about forty refusals
 
 Moho: `Error` has fifteen variants (`src/lib.rs`). Four belong to one method, `reboot::REBOOT`.
 The other eleven serve every other refusal:
@@ -195,9 +195,9 @@ Deliberate: in part. The crate splits `Gone` from `NoSuchSlot` because a writer 
 them, and it merges into `NotSupervised` on purpose. It never applied the same test to the
 five codes above.
 
-Example: `memory_region::RETYPE` answers `OutOfMemory`. If the region is spent, the program
+Example: `memory_region::RETYPE` answers `OutOfMemory`. If the region has no pages left, the program
 needs a larger budget. If the table is full, it needs to delete a capability. The code does not
-say which, and in the second case the pages are already spent.
+say which, and in the second case the pages are already gone.
 
 Fix: add `InvalidArgument`, `TableFull` and `WrongState`, and move each refusal above to the
 code a program can act on. Move the four `Reset` codes into the second word of `REBOOT`'s
@@ -233,7 +233,7 @@ first. Findings 7, 8, 13, 14, 15, 17, 18 and 19 are two-way, and the maintainer 
 
 ## BUGS
 
-- Nothing was run. Each kernel claim comes from reading the functions the appendix names, at a
+- The review ran nothing. Each kernel claim comes from reading the functions the appendix names, at a
   nife commit 24 behind `main`.
 - The lint refuses line-number citations, so a finding names a symbol and its file, never a line.
 - The count of "about forty" refusals in finding 4 is a hand count of the doc comments.
@@ -241,4 +241,4 @@ first. Findings 7, 8, 13, 14, 15, 17, 18 and 19 are two-way, and the maintainer 
 
 ## Index row
 
-A design review compared Moho with seL4, Zircon, Genode, Capsicum, CloudABI, WASI, KeyKOS, EROS, Coyotos and Hubris. The object model holds up. The calling convention has four defects to fix before any publish: the status word shares a register with a sender's data, a method number means a different operation on each object, nothing refuses an undefined word or bit, and fifteen error codes carry about forty refusals. Ten further findings wait for the first stable release and five can follow.
+A design review compared Moho with seL4, Zircon, Genode, Capsicum, CloudABI, WASI, KeyKOS, EROS, Coyotos and Hubris. The object model holds up. The calling convention has four defects to fix before any publish. The status word shares a register with a sender's data. A method number means a different operation on each object. Nothing refuses an undefined word or bit. Fifteen error codes carry about forty refusals. Ten further findings wait for the first stable release and five can follow.

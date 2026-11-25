@@ -28,7 +28,7 @@ Effort: S. Door: two-way (an addition).
 
 ## 16. Names disagree across modules
 
-Moho: the modules were named one at a time.
+Moho: each module took its names alone.
 
 - `WAIT` means three things: `notification::WAIT` takes a word, `interrupt::WAIT` takes an
   interrupt and `address_space::WAIT` parks on an address.
@@ -48,7 +48,7 @@ Others: seL4 prefixes every invocation with its object (`seL4_TCB_Configure`), a
 call with its noun (`zx_futex_wait`, `zx_port_wait`), so one verb never stands alone.
 
 Deliberate: no. All but a few of these names read provisional
-(`notes/crate-reviews/moho-abi.md`). `MAP_READ_ONLY` and `MAP_READ_WRITE` are ratified, and this
+(`notes/crate-reviews/moho-abi.md`). `MAP_READ_ONLY` and `MAP_READ_WRITE` hold a ratification, and this
 finding does not reopen them: it asks that `page_frame::MAP` take them.
 
 Example: an author who learned `notification::BIND` assumes it needs `rights::BIND`, narrows a
@@ -63,7 +63,7 @@ Effort: M. Door: one-way at publish (published names).
 ## 17. A fault ends in a death message
 
 Moho: a fault or an exit sends one message to the supervision rendezvous, and the thread is a
-corpse (`src/fault.rs`). Word 4 is reserved for a reply protocol that does not exist. A death
+corpse (`src/fault.rs`). The crate reserves word 4 for a reply protocol that does not exist. A death
 read by `RECEIVE_CAPABILITY` loses the faulting program counter.
 
 Others: in seL4 "replying to the exception message restarts the thread"

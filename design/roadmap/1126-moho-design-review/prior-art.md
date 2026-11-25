@@ -88,10 +88,10 @@ numbers do not match, the capability is invalid".
   configuration argument, and its debug-only identify call are from memory.
 - Zircon's `zx_object_get_info` and its unbounded handle table are from memory. Four Fuchsia
   pages returned 404, among them the exception object's page.
-- Zircon's and Capsicum's lack of revocation, and Genode's lack of a session version, are
-  inferred from absence.
+- Zircon's and Capsicum's lack of revocation, and Genode's lack of a session version, rest on
+  absence alone.
 - The EROS and Coyotos sites no longer answer. The Coyotos specification is an archived copy of
   2016, its source a third party's mirror, and the EROS object reference was not reachable.
 - The Hubris reference marks its RISC-V registers "TBD".
-- Each "none" in a table cell for CloudABI, KeyKOS and EROS is inferred from absence in the
+- Each "none" in a table cell for CloudABI, KeyKOS and EROS rests on absence in the
   documents read.
