@@ -109,13 +109,9 @@ Example: a log server loops on `RECEIVE` and exits when the answer is `Gone`. An
 holds `WRITE` sends -11 as its first word. The server reads `Gone` and exits, and every other
 client loses the service.
 
-Fix: make a kernel refusal unforgeable on all three paths. The kernel writes word 4 on every
-return from a receive, a refusal included, and a refusal carries a third tag. Today a receive
-that answers `Gone` returns before it writes word 4, so the caller reads back its own input. A
-wrapper tests the tag, never the sign. `notification::WAIT` returns 0 in word 0 and the signal
-word in word 1. `reply::REPLY` refuses an `r0` inside the kernel's range. The alternative is
-stricter and costs every receiver a layout change: word 0 is always the kernel's status, and
-each data word moves down one register.
+Fix: word 0 is always the kernel's status, and each data word moves down one register. A
+receiver changes its layout once, and the forgery is gone by construction, not by a check that
+each path must remember.
 
 Effort: M. Door: one-way (a register layout).
 
@@ -216,7 +212,8 @@ system-wide table is full, nothing the program does locally helps. The code does
 
 Fix: add `InvalidArgument`, `WrongState`, `TableFull` for the caller's own table and a separate
 code for a full system-wide registry, the `ENFILE` case. Move each refusal above to the code a
-program can act on. Move the four `Reset` codes into the second word of `REBOOT`'s answer. A new
+program can act on. Move the four `Reset` codes into the second word of `REBOOT`'s answer. The
+words after the status on a refusal are zero. A new
 number owes no version change; a moved meaning does. A second defect sits beside this one and is
 a two-way fix of its own: `RETYPE` and `RETYPE_OBJECT` spend pages before they find the table
 full, where `SPLIT` leaves the parent as it was.
@@ -237,25 +234,52 @@ Effort: M. Door: one-way (what a code means).
 - A corpse persists and `rendezvous::SURVEY` lists it, so a lister needs no cooperating parent.
 - A Reply is one-shot and cannot move, as in EROS and KeyKOS, and the kernel guarantees it.
 
-## Decisions for the architect
+## Rulings
 
-Each P0 finding and findings 5, 6, 9, 10, 11, 12 and 16 open a one-way door. The four P0 findings
-have rulings, below. Findings 5, 6, 9, 10, 11, 12 and 16 have none, and the maintainer brings them
-one at a time, in the table's order, each with its background first. Findings 7, 8, 13, 14, 15, 17,
-18 and 19 are two-way, and the maintainer decides them.
+Every one-way finding (1 to 6, 9, 10, 11, 12 and 16, and the capability table's size) has a ruling.
+The maintainer decided the two-way findings, provisionally.
 
-Rules in force:
+Rules in force, all of 2026-11-25 (UTC):
 
-- Finding 1, ruled 2026-11-25 (UTC): word 0 is always the kernel's status, and every data word
-  moves down one register.
-- Finding 2, ruled 2026-11-25 (UTC): method numbers are unique across the interface, with the
-  object kind in the high bits. A call on the wrong kind of object answers `WrongObject`.
-- Finding 3, ruled 2026-11-25 (UTC): an argument word, flag or rights bit that a method does not
-  define ends the calling program with a fault its supervisor can read. It is not an error return.
-- Finding 4, ruled 2026-11-25 (UTC): the interface gains `InvalidArgument`, `WrongState`,
-  `TableFull` and a code for a full system-wide table (names provisional). Each refusal moves to
-  the code a program can act on. The reboot codes move into the second word of the reboot call's
-  own answer. On a refusal, the words after the status are zero.
+- Finding 1: word 0 always holds the kernel's status, and every data word moves down one register.
+- Finding 2: method numbers are unique across the interface, with the object kind in the high
+  bits, and a wrong kind answers `WrongObject`.
+- Finding 3: a call that sets an undefined argument word, flag or rights bit ends the calling
+  program with a fault its supervisor can read.
+- Finding 4: new codes `InvalidArgument`, `WrongState`, `TableFull` and one for a full
+  system-wide table (names provisional). The reboot codes move into its answer's second word.
+  After the status, a refusal returns zeros.
+- Finding 5: two version parts. The first changes on a breaking change and must match. The
+  second counts additions, and a program runs when its second part is at most the kernel's. The
+  kernel hands its pair to the first program, and start checks use it.
+- Finding 6: every method that installs a capability takes the destination slot as its index and
+  refuses before it spends anything if the slot has an owner. A receive names its landing slot.
+- Capability table: one flat table, no tree of tables. The creator sets the size when it creates
+  the process, and a table never shrinks. `CAPABILITY_TABLE_SLOTS` leaves the interface. An index
+  past the size answers `InvalidArgument`, not a fault.
+- Finding 9: revoking a page needs a sixth right, revoke, which grant no longer implies.
+  Revocation stays per page.
+- Finding 10: one message and one receive: an information word the kernel writes, the data words
+  and an optional capability.
+- Finding 11: six numbers are stable under finding 2's renumbering: thread exit, address wait,
+  address wake, set thread pointer, the process object type and process destroy. Reboot sits
+  behind a Cargo feature, off by default (name provisional: `unstable`), and a later number
+  starts there.
+- Finding 12: the start call takes the supervision rendezvous as a slot index in the supervisor's
+  own table, plus a flag bit. The child's table reserves no slot.
+- Finding 16: one naming pass by the implementing lane. A verb never means two acts. A right and a
+  method share a name only when the method needs that right. The three maps share an argument
+  order and the ratified `MAP_` modes. The documentation uses the names' own vocabulary. The
+  release review ratifies the new names.
+
+Provisional rulings of the maintainer:
+
+- Findings 7, 13 and 14: accept as proposed.
+- Finding 8: non-blocking send and poll variants now. Deadlines wait for a measurement of
+  message-passing speed.
+- Finding 15: a query for a capability's rights only, with no query for its object kind.
+- Findings 17 and 18: deferred.
+- Finding 19: follows finding 9.
 
 ## Done when
 

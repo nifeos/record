@@ -29,8 +29,9 @@ the program's work, where the author has no way to offer a fallback at start.
 
 Fix: split the number in two. The first part moves on a breaking change and must be equal. The
 second counts additions, and a program runs when its second part is at most the kernel's. Have
-the kernel hand its pair to the first program, so the spawner checks the kernel's number and
-not its own copy.
+the kernel hand its pair to the first program it starts, so start checks use the kernel's number
+and not the spawner's copy. A query for a single method is not added now; it can arrive later as
+an addition.
 
 Effort: M. Door: one-way (the note's meaning).
 
@@ -57,9 +58,11 @@ Example: a server holds 63 capabilities when a client calls. The Reply has no sl
 reads `NO_CAPABILITY` and has nothing to answer through, and the client waits until somebody
 destroys it. §255 (each socket is its own capability) makes 63 open sockets an ordinary load.
 
-Fix: let every method that installs a capability take the destination slot, with one encoding,
-and refuse before it spends anything when that slot is full. Let a receive name the slot its
-capability lands in, so the server reserves room for the Reply before it waits.
+Fix: every method that installs a capability takes the destination slot as its index and
+refuses before it spends anything when that slot has an owner. A receive names its landing slot,
+so the server reserves room for the Reply before it waits. No form means "any free slot". The
+table stays one flat table. The creator of a process sets its size as an argument at creation, and
+a table never shrinks. An index past the size answers `InvalidArgument`.
 
 Effort: L. Door: one-way (argument layouts).
 
@@ -107,8 +110,9 @@ that signals a notification. The address wait's gap is a recorded bug.
 Example: a server pushes an event to a client with `SEND`. The client never receives. The
 server's only thread stays blocked, and every other client waits behind it.
 
-Fix: give `address_space::WAIT` an absolute deadline in word 5. Add a non-blocking send. Both
-are additions once finding 3 reserves the words.
+Fix: add a non-blocking send and a polling receive now. Deadlines, including one on
+`address_space::WAIT`, wait for a measurement of message-passing speed. Each arrives as an
+addition once finding 3 reserves the words. The maintainer ruled this provisionally.
 
 Effort: M. Door: two-way.
 
@@ -130,8 +134,9 @@ Example: a compositor lends a client a frame with `GRANT`, so the client may pas
 decoder. The client calls `REVOKE`. The compositor's own capability and mapping go, and it
 faults on its next write.
 
-Fix: a sixth right for revocation, kept by the lender, so a holder can pass a capability on without
-the power to take it from everyone.
+Fix: a sixth right, revoke, which revoking a page needs and `GRANT` no longer allows. The full
+rights set includes it and the spend-only set does not. A lender passes `GRANT` without revoke, so
+a borrower can lend further but cannot take back. Revocation stays per page.
 
 Effort: S. Door: one-way (a rights bit and what `REVOKE` needs).
 
@@ -156,8 +161,9 @@ Example: a client calls a server that receives with plain `RECEIVE`. The server 
 words and acts on them. The client reads `Gone` and retries elsewhere. The request ran once more
 than the client believes.
 
-Fix: one message (a kernel-written information word, words, an optional capability) and one
-receive. Failing that, refuse a `CALL` that meets a plain `RECEIVE` before it delivers.
+Fix: one message and one receive. The message holds an information word that the kernel writes
+(word count, capability present, reply awaited), the data words and an optional capability. Send,
+call and reply share that shape, and the receive takes any of them into the slot it named.
 
 Effort: L. Door: one-way (layouts).
 
@@ -177,7 +183,10 @@ Deliberate: the marks are; publishing them is not yet weighed.
 Example: an outside program pins the published crate and calls `REBOOT`. The architect then
 rules a different number. The crate's own rule makes that a version bump for every program.
 
-Fix: rule the eight, or put them behind a Cargo feature that is off by default.
+Fix: rule the six that the standard library and program start depend on, as stable at their
+values under finding 2's renumbering, and put `reboot::REBOOT` behind a Cargo feature that is off
+by default (name provisional: `unstable`). The number of `reply::REPLY_CAPABILITY` goes with
+finding 10. A number added later starts behind the feature and leaves it when ruled.
 
 Effort: S. Door: one-way (wire numbers).
 
@@ -197,7 +206,9 @@ Deliberate: yes, to add no method. The coupling to the table's size is a side ef
 Example: a builder fills a child's table with first-free inserts and reaches the last slot
 with an ordinary rendezvous. The kernel takes it as the supervision target and clears it.
 
-Fix: pass the supervision rendezvous as an argument of `START` or of a method of its own.
+Fix: `START` takes the supervision rendezvous as an argument: a slot index in the supervisor's
+own table, in finding 6's encoding, plus a flag bit for whether the child is supervised. The
+child's table reserves no slot. A method that sets the supervisor may follow as an addition.
 
 Effort: M. Door: one-way (a slot convention programs build against).
 

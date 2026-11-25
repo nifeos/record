@@ -39,8 +39,8 @@ Several of the eight properties below exist only to keep those two cheap kinds o
 ## Eight properties of a good kernel ABI
 
 Each property has a plain statement, one example from a real system, and then where Moho stands and
-which finding of the review addresses it. For findings 1 to 4 the paragraphs state the rule in
-force. The others remain proposals.
+which finding of the review addresses it. For every one-way finding the paragraphs state the rule
+in force. For the two-way findings they state the maintainer's provisional ruling.
 
 ### Property 1 (finding 1): the kernel's answer cannot be forged
 
@@ -86,9 +86,9 @@ and `rdi`, `rsi`, `rdx`, `r10`, `r8` on x86_64. The badge is a number the kernel
 sender's capability so a server can tell its clients apart. The "today" rows are from the crate's
 own documentation and the review's reading of the kernel.
 
-The alternative the review proposed kept every existing layout and made word 4, which only the
-kernel writes, the place to look. It was not chosen. The ruled layout is safe even for a careless
-wrapper, and costs one data register on every message.
+The review also weighed keeping every existing layout and making word 4, which only the kernel
+writes, the place to look. It was not chosen. The ruled layout is safe even for a careless wrapper,
+and costs one data register on every message.
 
 ### Property 2 (findings 2 and 10): one operation number has one meaning, and an unknown request gets one refusal
 
@@ -121,12 +121,14 @@ What finding 2 ruled (2026-11-25 UTC): method numbers are unique across the inte
 object kind in the high bits. A call on the wrong kind of object answers `WrongObject`. The names
 stay and the values move.
 
-What finding 10 adds, still a proposal: Moho has four message shapes and two kinds of receive, and a
-mismatch between them is not refused either. A `CALL` that meets a plain `RECEIVE` delivers its
+What finding 10 ruled (2026-11-25 UTC): Moho had four message shapes and two kinds of receive, and a
+mismatch between them was not refused either. A `CALL` that meets a plain `RECEIVE` delivers its
 words and then tells the caller `Gone`, so the request ran and the caller believes it did not. seL4
 has one message shape: a tag of four fields (a label, a length, a count of capabilities and a field
-describing how they arrived), then the words. The review proposes one message and one receive, or at
-least a refusal before the kernel delivers anything.
+describing how they arrived), then the words. The ruling is one message and one receive: a
+kernel-written information word (word count, whether a capability came, whether a reply is
+awaited), the data words and an optional capability. Send, call and reply take that shape, and the
+one receive accepts any of them into the slot it named.
 
 ### Property 3 (finding 3): unused inputs must be zero, and are refused otherwise
 

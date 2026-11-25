@@ -21,8 +21,8 @@ Example: a server receives a capability by `RECEIVE_CAPABILITY` from a client it
 trust. It expects a frame. It has no safe way to check before it maps, and the refusal it would
 read depends on what the client sent.
 
-Fix: one method number that every object answers with its type, rights and badge, once finding
-2 makes a shared number possible.
+Fix: one method number that every object answers with its rights, once finding 2 makes a shared
+number possible. It reports no object kind. The maintainer ruled this provisionally.
 
 Effort: S. Door: two-way (an addition).
 
@@ -54,9 +54,10 @@ finding does not reopen them: it asks that `page_frame::MAP` take them.
 Example: an author who learned `notification::BIND` assumes it needs `rights::BIND`, narrows a
 capability to that right, and reads `NotPermitted`.
 
-Fix: one naming pass before the publish: a shared cursor sentinel at the crate root, one
-argument order for the three maps, a second word for `address_space::WAIT`, and one vocabulary
-in the prose.
+Fix: the implementing lane makes one naming pass before the publish. A verb never means two
+acts. A right and a method share a name only when the method needs that right. The three maps
+share one argument order and the ratified `MAP_` modes. The prose uses the names' own vocabulary.
+Every new name stays provisional until the release review ratifies the list.
 
 Effort: M. Door: one-way at publish (published names).
 
@@ -78,8 +79,8 @@ word.
 Example: a debugger cannot stop a thread at a breakpoint, show its state and let it run on,
 and a pager cannot supply a missing page.
 
-Fix: none now. Before the publish, state in the crate that the reserved word is where a reply
-protocol will arrive, so that its arrival is an addition.
+Fix: none now. The maintainer deferred this finding. Before the publish, the crate states that
+the reserved word is where a reply protocol will arrive, so that its arrival is an addition.
 
 Effort: S for the statement. Door: two-way.
 
@@ -100,8 +101,8 @@ would fix before the move) already questioned `CycleMeaning`.
 Example: a second kernel that serves Moho on a board with another interrupt controller, or
 with 256-entry queues, cannot claim version 1.
 
-Fix: mark which modules every Moho kernel serves and which belong to one platform, as two
-feature sets or two crates.
+Fix: deferred by the maintainer. The open question is which modules every Moho kernel serves and
+which belong to one platform, as two feature sets or two crates.
 
 Effort: M. Door: two-way until a second kernel exists.
 
@@ -123,7 +124,8 @@ derivation tree, and calls the tree a later addition.
 Example: a server wants to cut off one misbehaving client of forty. It can stop answering that
 badge, but the client still holds the capability and can still block in `CALL`.
 
-Fix: none now. A forwarder object, as in EROS, fits §16's model without a derivation tree and
-can arrive as a new object type.
+Fix: none now. Finding 9 keeps revocation per page. A forwarder object, as in EROS, fits §16's
+model without a derivation tree and can arrive as a new object type. A revoke scoped to one
+derivation may also come later.
 
 Effort: L. Door: two-way (an addition).

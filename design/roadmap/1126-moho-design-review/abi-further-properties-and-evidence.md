@@ -43,11 +43,11 @@ reports no version. Because the crate rules that "a new number owes nothing", a 
 against a later crate passes the check on an older kernel and then meets `BadMethod` in the middle
 of its work.
 
-What finding 5 proposes: split the number in two. The first part moves on a breaking change and must
-be equal. The second counts additions, and a program runs when its second part is at most the
-kernel's. The kernel hands its own pair to the first program. Finding 11 is the companion: the crate
-marks eight numbers as provisional and still pins them. They need rulings, or an opt-in switch as
-WASI has with `@unstable`.
+What finding 5 ruled (2026-11-25 UTC): the number splits in two. The first part moves on a breaking
+change and must be equal. The second counts additions, and a program runs when its second part is at
+most the kernel's. The kernel hands its pair to the first program, and start checks use it. Finding
+11 is the companion: six of the eight provisional numbers stay stable, and reboot sits behind a
+Cargo feature that is off by default, as WASI does with `@unstable`.
 
 ### Property 6 (finding 13): one machine-readable definition generates both sides
 
@@ -83,10 +83,9 @@ needs and which errors it answers exist only in documentation comments. The revi
 mapping calls take `(address, writable, region slot)` and `(address, frame slot, mode)`. A wrapper
 that swaps two words compiles, and only a boot test finds it.
 
-What finding 13 proposes: a table in the crate with one row per method: words in, words out, the
-right needed, the refusals. A tool generates the documentation and a typed wrapper from it. This is
-a two-way door, so the maintainer may decide it, but it is the best insurance for the one-way doors:
-properties 2, 3 and 4 become things a tool can check on every change.
+The maintainer accepted finding 13 provisionally: a table in the crate with
+one row per method: words in, words out, the right needed, the refusals. A tool generates the documentation and a typed wrapper from it. Properties 2, 3
+and 4 then become things a tool can check on every change.
 
 ### Property 7 (findings 6 and 8): behavior is predictable on exhaustion, with deadlines
 
@@ -126,19 +125,19 @@ drops a delegated capability and the receiver reads "no capability". A `CALL` wh
 capability does not fit leaves the caller blocked until somebody destroys the callee. Where a new
 capability lands follows three different conventions.
 
-What finding 6 proposes: every method that installs a capability takes the destination slot, in one
-encoding, and refuses before it spends anything. A receive names the slot its capability will land
-in, so a server reserves room for the reply before it waits.
+What finding 6 ruled (2026-11-25 UTC): every method that installs a capability takes the destination
+slot as its index and refuses before it spends anything if the slot has an owner. A receive names
+its landing slot, so a server reserves room for the reply before it waits. The table stays flat,
+and the creator of a process sets its size.
 
 Moho today, waiting: no blocking call takes a deadline, and only the notification poll declines to
 block. The address wait has no timeout, so the standard library cannot offer `park_timeout` or a
 timed condition-variable wait. A server that sends an event to a client that never receives stays
 blocked, and every other client waits behind it.
 
-What finding 8 proposes: an absolute deadline on the address wait, and a non-blocking send for a
-server answering a client it does not trust. Both are additions, and therefore two-way, once finding
-3's rule guarantees that the words they need are zero today. The review does not ask for deadlines
-on message passing itself.
+What finding 8 became (a provisional ruling of the maintainer): non-blocking send and poll
+variants now, for a server answering a client it does not trust. Deadlines wait for a measurement
+of message-passing speed. Each is an addition once finding 3 keeps the words they need at zero.
 
 ### Property 8 (finding 16): the interface is small and consistently named
 
@@ -161,8 +160,9 @@ needs a different right. Three calls map a page with three argument orders. The 
 vocabulary (endpoint, untyped, TCB) and the names another (rendezvous, memory region, thread control
 block).
 
-What finding 16 proposes: one naming pass before the publish: one argument order for the three maps,
-a second word for the address wait's name, one vocabulary in the prose.
+What finding 16 ruled (2026-11-25 UTC): the implementing lane makes one naming pass before the
+publish. A verb never means two acts, the three maps share one argument order, and the prose uses
+the names' own vocabulary. The release review ratifies the new names.
 
 ## The strongest examples, and what each leads on
 
@@ -175,14 +175,12 @@ No system leads on all eight properties. Four are worth knowing, each for a diff
 | WASI 0.2 and the component model | Definition and evolution tooling. WIT definitions with per-item `@since` and `@unstable` marks, semantic versions on each interface, typed results with an error list per interface, bindings generated for many languages. | It is not a kernel. It defines calls between a WebAssembly program and its host, and says nothing about traps, registers, scheduling or page tables.  The review also reports that a freed handle index is reused with no generation check. |
 | KeyKOS and EROS | Clean capability semantics. The EROS paper: "All capabilities take the same arguments at the trap interface", four data words, a string and four capabilities every time. A reply capability is consumed on use, "ensuring an at-most-once reply". A capability whose version number no longer matches its object "is invalid and conveys no authority". | Neither is a living platform to learn deployment lessons from. The review found the EROS and Coyotos sites offline and worked from archived copies. Neither has interface versioning or kernel timeouts, by the review's tables. KeyKOS dates from the 1980s and EROS was a research system (from memory). |
 
-Read as a set: take the object model from KeyKOS and EROS, the discipline of one message and a
-generated interface from seL4, the rubric and versioning from Zircon, and the evolution marks from
-WIT.
+Read as a set: the object model comes from KeyKOS and EROS, one message and a generated interface
+from seL4, the rubric and versioning from Zircon, and the evolution marks from WIT.
 
 ## What Moho already does better
 
-The review lists eight places where Moho is ahead of the systems it compared. They are worth
-protecting while the fixes land.
+The review lists eight places where Moho leads. Protect them while the fixes land.
 
 - "Gone" is a different answer from "nothing there". A capability whose object died keeps
   its slot and says so. A writer whose reader has exited can stop, while a program that was never
@@ -234,7 +232,7 @@ a layout decision such as the one ruled under property 1, which gives up a data 
 
 ### The generated definition actually built
 
-Finding 13 proposes the table. Best in class means the kernel's decoder, the program-side wrappers
+Finding 13 accepted the table. Best in class means the kernel's decoder, the program-side wrappers
 and the documentation are all produced from it in the normal build, so that the three cannot
 disagree. A table that only the documentation reads does not reach that bar.
 
