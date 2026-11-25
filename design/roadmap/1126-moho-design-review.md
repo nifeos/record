@@ -104,9 +104,13 @@ Example: a log server loops on `RECEIVE` and exits when the answer is `Gone`. An
 holds `WRITE` sends -11 as its first word. The server reads `Gone` and exits, and every other
 client loses the service.
 
-Fix: make a kernel refusal unforgeable on all three paths. A receive that fails writes a third
-tag in word 4, and a wrapper tests the tag, never the sign. `notification::WAIT` returns 0 in
-word 0 and the signal word in word 1. `reply::REPLY` refuses an `r0` inside the kernel's range.
+Fix: make a kernel refusal unforgeable on all three paths. The kernel writes word 4 on every
+return from a receive, a refusal included, and a refusal carries a third tag. Today a receive
+that answers `Gone` returns before it writes word 4, so the caller reads back its own input. A
+wrapper tests the tag, never the sign. `notification::WAIT` returns 0 in word 0 and the signal
+word in word 1. `reply::REPLY` refuses an `r0` inside the kernel's range. The alternative is
+stricter and costs every receiver a layout change: word 0 is always the kernel's status, and
+each data word moves down one register.
 
 Effort: M. Door: one-way (a register layout).
 
@@ -191,17 +195,23 @@ Zircon separates `NO_MEMORY` from `NO_RESOURCES` and `INVALID_ARGS` from `OUT_OF
 whether a retry can succeed ([errors](https://fuchsia.dev/fuchsia-src/concepts/kernel/errors)).
 WASI gives each interface its own error enumeration.
 
-Deliberate: in part. The crate splits `Gone` from `NoSuchSlot` because a writer branches on
-them, and it merges into `NotSupervised` on purpose. It never applied the same test to the
-five codes above.
+Deliberate: yes for one code. §119 (splitting `OutOfMemory`'s three causes is declined for
+want of a customer) weighed `OutOfMemory` on `SPLIT` and `RETYPE_OBJECT`: a spent budget, a full
+table, or the system-wide region table full. It deferred the split and left guidance that favors
+new variants, on the line POSIX draws between `EMFILE` and `ENFILE`. This finding reopens that
+deferral. The customer it waited for is the publish: after it, moving a refusal to another code
+is a version change. No decision weighs the other four codes.
 
-Example: `memory_region::RETYPE` answers `OutOfMemory`. If the region has no pages left, the program
-needs a larger budget. If the table is full, it needs to delete a capability. The code does not
-say which, and in the second case the pages are already gone.
+Example: `memory_region::RETYPE` answers `OutOfMemory`. If the region has no pages left, the
+program needs a larger budget. If the table is full, it needs to delete a capability. If the
+system-wide table is full, nothing the program does locally helps. The code does not say which.
 
-Fix: add `InvalidArgument`, `TableFull` and `WrongState`, and move each refusal above to the
-code a program can act on. Move the four `Reset` codes into the second word of `REBOOT`'s
-answer. A new number owes no version change; a moved meaning does.
+Fix: add `InvalidArgument`, `WrongState`, `TableFull` for the caller's own table and a separate
+code for a full system-wide registry, the `ENFILE` case. Move each refusal above to the code a
+program can act on. Move the four `Reset` codes into the second word of `REBOOT`'s answer. A new
+number owes no version change; a moved meaning does. A second defect sits beside this one and is
+a two-way fix of its own: `RETYPE` and `RETYPE_OBJECT` spend pages before they find the table
+full, where `SPLIT` leaves the parent as it was.
 
 Effort: M. Door: one-way (what a code means).
 
@@ -233,8 +243,8 @@ first. Findings 7, 8, 13, 14, 15, 17, 18 and 19 are two-way, and the maintainer 
 
 ## BUGS
 
-- The review ran nothing. Each kernel claim comes from reading the functions the appendix names, at a
-  nife commit 24 behind `main`.
+- The review ran nothing. Each kernel claim comes from reading the functions the appendix names,
+  confirmed against nife's `main` at `f04f8b4c9`.
 - The lint refuses line-number citations, so a finding names a symbol and its file, never a line.
 - The count of "about forty" refusals in finding 4 is a hand count of the doc comments.
 - The appendix marks five comparator claims as from memory or as inferred from an absence.

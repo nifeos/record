@@ -9,8 +9,9 @@ An appendix to [the milestone](../1126-moho-design-review.md).
   version string of `Cargo.toml` and `Cargo.lock`. The review read every file under `src/` whole except
   the two test files, and also `README.md`, `CHANGELOG.md` and the head of
   `pinned-at-version-1.txt`.
-- `nifeos/nife` at `b89e42872f2181f2651acd3e9e836a42318d071b`, which was 24 commits behind `main`
-  when read. The kernel pins `moho_abi` at `c8d556ec`, the repository's root commit.
+- `nifeos/nife` at `b89e42872f2181f2651acd3e9e836a42318d071b`, and again at `main`, `f04f8b4c9`.
+  Between the two, one line changed in the files named below, a comment in
+  `kernel/src/capability_object.rs`, and an independent pass confirmed each claim at `f04f8b4c9`. The kernel pins `moho_abi` at `c8d556ec`, the repository's root commit.
 - `nifeos/record` at `f62bc01d2`, the base of this lane.
 
 ## What the review read in nife, and what each reading settled
@@ -23,7 +24,8 @@ An appendix to [the milestone](../1126-moho-design-review.md).
 - `kernel/src/arch/x86_64/exceptions.rs`, `TrapFrame::arg` and `TrapFrame::set_arg`. Word 0
   returns in `rdi`, as the crate's table says, and never in `rax` (finding 14).
 - `kernel/src/system_call/rendezvous.rs`, `rendezvous_receive_capability` and
-  `rendezvous_send_capability`. The receive writes the sender's word into word 0 with no status
+  `rendezvous_send_capability`, and `rendezvous_receive`. A receive that answers `Gone` returns
+  before it writes words 1 to 4. The receive writes the sender's word into word 0 with no status
   beside it (finding 1), and the delegation converts the rights word with `as u32` (finding 3).
 - `kernel/src/sched/rendezvous.rs`, the collect arm of
   `inter_process_communication_receive_capability` and `strand_reply_caller`. A Reply that does
@@ -45,6 +47,8 @@ The decisions, each read whole unless the last section says otherwise:
   delegation) and §246 (a plain `RECEIVE` never takes a capability).
 - §13 (capability revocation and untyped reclamation) and §16 (object revocation) with its five
   amendments.
+- §119 (splitting `OutOfMemory`'s three causes is declined for want of a customer), which
+  finding 4 reopens.
 - §101 (notification objects) and §230 (badged endpoint capabilities).
 - §124 (ratify the x86_64 system call ABI) and §276 (the thread system calls as built).
 - §323 (the binary interface, and the names of the layers).
@@ -70,8 +74,6 @@ confirmed.
 - The user-mode runtime (`crates/user_mode_runtime`) and the `std` port were not read beyond a
   search for callers. A finding that says what a wrapper would do describes the crate's contract,
   not the runtime's present code.
-- The 24 commits of nife's `main` past the commit read were not checked for a change to any
-  function named here.
 - The riscv64 and aarch64 trap entries were not read. The register table for those two is the
   crate's own.
 - The review took §269 (how threads share a process), §223 (the process view is the supervision
