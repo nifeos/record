@@ -13,19 +13,26 @@ calef's ext4 drives hold the family's borg repositories. They were formatted by 
 `mke2fs` defaults, `metadata_csum` among them, and they will not be reformatted. So nife reads and
 writes ext4 as Linux wrote it. The requirement is standing and has no deadline.
 
-The implementation is the Rust crate `rsext4`. We bring it up to the bar of §46 (thin primitives
-or whole subsystems; we write everything in between) by contributing to it upstream, and take it
-from nifeos/rsext4, a fork that carries each contribution until an upstream release does. We test it here
-against libext2fs and against Linux itself, under §136 (a mature foreign implementation earns its
-place as an oracle, not as a dependency). This is the ext4 row of milestone 140 (mount a drive this
-system did not create). It does not change 140's order for FAT32 or ext2, and it does not touch
-RedoxFS.
+The goal is a functional ext4 implementation for nife that meets the bar of §46 (thin primitives
+or whole subsystems; we write everything in between) and this block's done-when. The
+implementation is the Rust crate `rsext4`, and there is no alternative to it. Every contribution
+is offered upstream to `rcore-os/tgoskits`. Whatever upstream does not take, partsfoundry/rsext4
+carries and maintains indefinitely, so the fork is the shipping source, not a stopgap (2026-11-25
+UTC). We test it here against libext2fs and against Linux itself, under §136 (a mature foreign
+implementation earns its place as an oracle, not as a dependency). This is the ext4 row of
+milestone 140 (mount a drive this system did not create). It does not change 140's order for FAT32
+or ext2.
+
+RedoxFS is not a viable long-term store, and it cannot be benchmarked against Linux on filesystem
+operations. `rsext4` replaces RedoxFS in nife once the fork meets the bar, and the adoption ruling
+below is asked at that point (2026-11-25 UTC). Milestone 982 (Retire RedoxFS once a launch store
+proves itself) holds the inventory of what leaves.
 
 Reuse: `rsext4` 0.9.2 on crates.io (Apache-2.0, `no_std` with `alloc`, depending on `bitflags` and
 `thiserror`), developed in `rcore-os/tgoskits` under `fs/rsext4`. The `Starry-OS/rsext4`
 repository that its manifest names has not moved since 2026-04-02 and is not where work happens.
-nife uses [nifeos/rsext4](https://github.com/partsfoundry/rsext4), 0.9.2 with our fixes on top, which
-its `CHANGES.md` lists.
+nife uses [partsfoundry/rsext4](https://github.com/partsfoundry/rsext4), 0.9.2 with our fixes on
+top, which its `CHANGES.md` lists.
 e2fsprogs 1.47 and a Linux kernel are the host-side oracles. The other candidates and the
 reason each lost are in [the survey](0190-ext4-read-write/survey.md).
 
@@ -74,7 +81,9 @@ public API:
   `*mut Ext4GroupDesc` with no `SAFETY` comment and no proof of alignment. In the fork the casts
   are gone and each CRC32C use states its argument (item 5).
 - Fuzzing and proofs. 0.9.2 has no fuzz targets and no Kani harnesses. The fork carries item 4's
-  fuzz targets in `fuzz/`; it has no harnesses yet.
+  fuzz targets in `fuzz/`, which its `fuzz` workflow runs weekly. It carries eight Kani harnesses
+  in six `verification.rs` modules, each with a falsification patch in `falsifications/`, and its
+  `proofs` workflow runs both and passes.
 - Targets. It builds unchanged for nife's three targets, measured by milestone 997 (ext4
   through rsext4, under milestone 37's crash injector). Nothing has run it under nife.
 
@@ -86,12 +95,12 @@ and performance.
 
 §46's four conditions, as amended:
 
-| condition | `rsext4` as nife takes it, from nifeos/rsext4 | what closes it |
+| condition | `rsext4` as nife takes it, from partsfoundry/rsext4 | what closes it |
 |---|---|---|
-| a safety argument on every use of `unsafe` | the casts are gone, and each CRC32C use states one | the review below, in the `rsext4` release nife uses |
-| proofs that match ours | none upstream; eight Kani harnesses here | the harnesses below, upstream or in nifeos/rsext4 |
+| a safety argument on every use of `unsafe` | the casts are gone, and each CRC32C use states one | the review below, at the commit nife pins |
+| proofs that match ours | eight Kani harnesses in the fork, passing in its `proofs` workflow; none upstream | met in the fork |
 | aarch64, riscv64 and x86_64 | builds for all three; hardware CRC32C on two, a software path on riscv64 | the oracle suite passing on each |
-| maintained | upstream is active in `tgoskits`, at least 24 commits by six people from 2026-08-04 to 2026-11-08 | met by nifeos/rsext4 while it carries unreleased fixes |
+| maintained | upstream is active in `tgoskits`, at least 24 commits by six people from 2026-08-04 to 2026-11-08 | met by partsfoundry/rsext4, maintained indefinitely |
 
 ## What we contribute upstream
 
@@ -100,36 +109,47 @@ own `AGENTS.md` and `CLAUDE.md`, so its maintainers work with agents themselves.
 agent-written submissions is read, and followed, before the first one.
 
 1. The `i_blocks` fix, with its reproducer as a test in the crate: grow a directory to 300
-   entries, unmount, and require `e2fsck -fn` to exit 0.
+   entries, unmount, and require `e2fsck -fn` to exit 0. Upstream fixed it in
+   `rcore-os/tgoskits@dde4020be`, which the fork does not carry.
 2. The truncate fix, with its reproducer: the failing seeds as fixed inputs, a check that
    truncation of a depth-2 tree succeeds, and a check that a failed truncation leaves the file's
-   bytes as they were.
+   bytes as they were. Item 2a is merged, `rcore-os/tgoskits#2827`. Item 2b is open,
+   `rcore-os/tgoskits#2829`, and `rcore-os/tgoskits#2845`, stacked on it, commits a shrink's new
+   size before zeroing its tail, which replaces 2b's undo copy.
 3. The recovery-flag order. The journal's start is reset before `needs_recovery` is cleared,
-   with the power-cut point that showed it as a test.
+   with the power-cut point that showed it as a test. Upstream fixed it in the same
+   `rcore-os/tgoskits@dde4020be`, which the fork does not carry.
 4. Fuzz targets: mount and walk an arbitrary image; parse a superblock, a group descriptor
    table, an extent tree, a directory block and an htree index; and replay an arbitrary journal.
-   Each target runs under `cargo fuzz` with a seed corpus of small images `mke2fs` made.
+   Each target runs under `cargo fuzz` with a seed corpus of small images `mke2fs` made. Merged,
+   `rcore-os/tgoskits#2835`.
 5. The `unsafe` review: a `SAFETY` comment on each CRC32C use, naming the CPU feature it needs
    and where it is detected, and the group-descriptor casts replaced by decoding each field from
-   its bytes, at both descriptor sizes.
+   its bytes, at both descriptor sizes. Both halves are merged: 5a as `rcore-os/tgoskits#2831`,
+   which takes hardware CRC32C availability from the environment instead of detecting it, and 5b
+   as `rcore-os/tgoskits#2833`. The fork does not yet carry 5a as merged
+   (`partsfoundry/rsext4#8`, a draft).
 6. Kani harnesses that match ours. Decoding a superblock, a group descriptor, an extent header or
    entry, or a directory entry reads only inside its slice, for every input up to a stated bound.
    A directory block walk ends inside its block. The software CRC32C equals the bitwise definition.
+   Offered in `rcore-os/tgoskits#2836`, which has no answer. A pull request offering them is being
+   prepared. They run in the fork.
 7. Mount reports why it refused, rather than mapping every error from `read_superblock` to a bare
-   `Io`.
-8. `InodeInfo` reports whole times: nanoseconds, times before 1970 and times past 2106.
+   `Io`. Merged, `rcore-os/tgoskits#2839`.
+8. `InodeInfo` reports whole times: nanoseconds, times before 1970 and times past 2106. Open,
+   `rcore-os/tgoskits#2840`.
 9. The inode bitmap's padding (bug 3), set as `e2fsck` requires when a group `mke2fs` left
-   `INODE_UNINIT` gets its first inode, with the crate's own allocation test strengthened.
+   `INODE_UNINIT` gets its first inode, with the crate's own allocation test strengthened. Merged,
+   `rcore-os/tgoskits#2825`.
 
 **Every issue and pull request text is shown to the architect before it is filed.** An upstream
 submission is an outward step, and the review is of the exact text, not of the idea. A fuzz finding
 in `rsext4` is reported the same way. Upstream merge is the goal of every contribution, not a
-gate: nifeos/rsext4 carries each fix until an upstream release does.
+gate: partsfoundry/rsext4 carries every fix, and keeps carrying whatever upstream does not take.
 
-No contribution is consumed from a branch. §305 (git dependencies are allowed on `nifeos/*` only,
-pinned to a landed commit) rules out a git dependency on `tgoskits`. A fix counts once it is in the
-`rsext4` release nife uses: a crates.io release of upstream's, or a commit on nifeos/rsext4's main
-that nife pins by `rev` under §305.
+No contribution is consumed from a branch. §305 (git dependencies are allowed on `nifeos/*` and
+`partsfoundry/*` only, pinned to a landed commit) rules out a git dependency on `tgoskits`. A fix
+counts once it is on partsfoundry/rsext4's main at the commit nife pins by `rev` under §305.
 
 ## What we test on our side
 
@@ -172,8 +192,9 @@ server holding it is confined so that a parser bug costs one server.
 
 ## The adoption ruling it still needs
 
-Each dependency is an architect's ruling, and `rsext4` is not yet ruled. The proposal is its own
-pull request, which carries `needs-architect` and shows, for the version it pins:
+Each dependency is an architect's ruling, and `rsext4` is not yet ruled. It is asked once the fork
+meets the bar and every other condition of the done-when below, and `rsext4` then replaces RedoxFS
+(2026-11-25 UTC). The proposal is its own pull request, which carries `needs-architect` and shows, for the version it pins:
 
 - each condition of the bar, with the commit or test that meets it;
 - the crate's `unsafe`, counted and located, with what checks each use;
@@ -188,19 +209,19 @@ nife image until it is given.
 
 The rule in force for the oracle, ruled 2026-11-16 (UTC) on pull request #3639: `rsext4` is a
 host-only dependency of `tools/ext4_oracle`, in a workspace and lockfile of its own. It is pinned to
-nifeos/rsext4 at one commit by `rev`, under the 2026-11-23 (UTC) ruling to fork. It never enters a nife image, kernel, program or the lockfile of a shipping package. deny.toml
+partsfoundry/rsext4 at one commit by `rev`, under the 2026-11-23 (UTC) ruling to fork. It never enters a nife image, kernel, program or the lockfile of a shipping package. deny.toml
 refuses the crate anywhere else, and the oracle is a `test` package, so no shipping package may link
 it. That ruling is not the adoption ruling above, which stays open.
 
 ## Done when
 
-- Bugs 1 to 3 and the recovery-flag order are fixed in the `rsext4` release nife uses (upstream's
-  crates.io release, or nifeos/rsext4 at a pinned `rev`), each with its reproducer as a test.
-- Every use of `unsafe` in that release carries a safety argument, and the group-descriptor casts
+- Bugs 1 to 3 and the recovery-flag order are fixed in partsfoundry/rsext4 at the commit nife
+  pins, each with its reproducer as a test.
+- Every use of `unsafe` at that commit carries a safety argument, and the group-descriptor casts
   are gone.
-- The Kani harnesses above pass, upstream or in nifeos/rsext4.
-- Fuzz targets are upstream or in nifeos/rsext4, and nife's rotation runs them and `ext4_server`'s
-  with no open finding.
+- The Kani harnesses above pass in partsfoundry/rsext4.
+- Fuzz targets are in partsfoundry/rsext4, and nife's rotation runs them and `ext4_server`'s with
+  no open finding.
 - The oracle passes in CI on aarch64, riscv64 and x86_64, every image in the corpus included.
 - The write-reordering and power-cut sweeps recover every point to a clean volume under Linux
   replay.
@@ -213,8 +234,8 @@ it. That ruling is not the adoption ruling above, which stays open.
 - Whether nife hosts borg repositories or makes borg archives. Hosting needs only this milestone.
   Making them needs a borg client, and no Rust implementation of the repository format exists. That
   is a separate, larger block, minted only if calef wants nife to make backups.
-- Whether ext4 replaces RedoxFS as the launch store. Milestone 997 measures that, and its result
-  does not change this milestone's plan.
+- When RedoxFS leaves the tree. That is a milestone of its own, minted from milestone 982's
+  inventory once `rsext4` is adopted.
 - FAT32 and ext2, which keep milestone 140's order.
 
 ## BUGS
@@ -247,42 +268,49 @@ it. That ruling is not the adoption ruling above, which stays open.
 
 - **Done.** The plan: this block and its survey appendix name the crate, the measurements, the
   upstream work, our own tests and the conditions above.
-- **Outstanding.** The upstream round: [the two truncate fixes](0190-ext4-read-write/upstream/README.md),
-  [safety arguments](0190-ext4-read-write/upstream/5a-crc32c-safety-arguments.md),
-  [cast replacement](0190-ext4-read-write/upstream/5b-group-descriptor-decode.md) and
-  [Kani harnesses](0190-ext4-read-write/upstream/6-kani-harnesses.md) (drafted). Each text goes to
-  the architect before anyone files it. `rcore-os/tgoskits@dde4020be` fixes bug 1 and the
-  recovery-flag order.
-- **Outstanding.** Filing the pull requests of
-  [item 7](0190-ext4-read-write/upstream/7-mount-refusal-reason.md) and
-  [item 8](0190-ext4-read-write/upstream/8-whole-inode-times.md).
+- **Done.** Upstream merged items 2a, 4, 5a, 5b, 7 and 9: `rcore-os/tgoskits#2827`, `#2835`,
+  `#2831`, `#2833`, `#2839` and `#2825`.
+- **Outstanding.** Upstream review of item 2b (`rcore-os/tgoskits#2829`), the shrink commit stacked
+  on it (`#2845`) and item 8 (`#2840`).
+- **Outstanding.** Item 6: `rcore-os/tgoskits#2836` has no answer, and a pull request offering the
+  harnesses is being prepared. Its text goes to the architect before anyone files it.
 - **Done.** The read oracle's corpus and its `debugfs` side, in `tools/ext4_oracle/`, and its first
   measurement, in [the read-oracle appendix](0190-ext4-read-write/read-oracle.md).
 - **Done.** The oracle's `rsext4` side in the tree, its expected outcomes, the reproducer of the
   sector-size report as a test, and the CI job `ext4-read-oracle` on an x86_64 host.
 - **Done.** The oracle's write half in `tools/ext4_oracle/` and the `ext4-read-oracle` job, bugs
   1 to 3 held as expected outcomes.
-- **Outstanding.** [Item 9's draft](0190-ext4-read-write/upstream/9-inode-bitmap-padding.md), for
-  bug 3, awaits the architect.
-- **Done.** The oracle takes `rsext4` from nifeos/rsext4 at a pinned `rev`, and its expected
+- **Done.** The oracle takes `rsext4` from partsfoundry/rsext4 at a pinned `rev`, and its expected
   outcomes describe the fork.
-- **Outstanding.** nifeos/rsext4 does not carry upstream's fix for bug 1 and the recovery-flag
-  order (`rcore-os/tgoskits@dde4020be`); the write oracle still holds bug 1 as expected.
-- **Outstanding.** In nifeos/rsext4: the Kani harnesses, fuzzing in its CI, and the crate-standard
-  gates upstream's code fails.
-- **Outstanding.** Our side: the oracle on aarch64 and riscv64 hosts, the kernel as a
-  second read oracle, a volume over 1 GiB, the write-reordering and power-cut sweeps,
-  hostile-image fuzzing, and `ext4_server` itself.
-- **Outstanding.** Upstream review of items 2a and 2b, `rcore-os/tgoskits#2827` and `#2829`.
-- **Outstanding.** The adoption ruling under §46 (thin primitives or whole subsystems), which no lane can give.
+- **Done.** In partsfoundry/rsext4: the Kani harnesses, six `verification.rs` modules with a
+  falsification patch for each of their eight harnesses, passing in its `proofs` workflow; and the
+  fuzz targets, which its `fuzz` workflow runs weekly.
+- **Outstanding.** partsfoundry/rsext4 does not carry upstream's fix for bug 1 and the
+  recovery-flag order (`rcore-os/tgoskits@dde4020be`); the write oracle still holds bug 1 as
+  expected.
+- **Outstanding.** partsfoundry/rsext4 does not yet carry item 5a as upstream merged it
+  (`partsfoundry/rsext4#8`).
+- **Outstanding.** partsfoundry/rsext4's weekly run fails three jobs. Miri stops at the inline
+  assembly of the hardware CRC32C path. The crates.io badges check misfires for a fork: it finds
+  upstream's `rsext4` on crates.io and asks for its badges. The stranger test has never been run,
+  so the stranger cadence fails closed.
+- **Outstanding.** partsfoundry/rsext4 carries 108 crate-standard exemptions for upstream code it
+  keeps as written: 54 function lengths, 47 acronyms and 7 file lengths.
+- **Outstanding.** Our side: the oracle on aarch64 and riscv64 hosts, the kernel as a second read
+  oracle, a volume over 1 GiB, the write-reordering and power-cut sweeps, hostile-image fuzzing in
+  nife's rotation, and `ext4_server` reading and writing a drive under QEMU.
+- **Outstanding.** The adoption ruling under §46 (thin primitives or whole subsystems), asked once
+  the fork meets the bar. No lane can give it.
 
 ## Index row
 
 calef's ext4 drives hold the family's borg repositories, so nife reads and writes the format Linux
-wrote. The implementation is `rsext4`, from nifeos/rsext4, a fork that carries our fixes until
-upstream releases them. Contributing upstream brings it to the bar of §46: write-path
-bug fixes with reproducers, fuzz targets, safety arguments and a sound replacement for
-two unchecked casts, and Kani harnesses. Here, a differential oracle against libext2fs and Linux
-judges four phases: read-only, the oracle itself, write, and jbd2 with Linux replay, plus write
-reordering and hostile-image fuzzing. Every upstream text is shown to the architect before it is
-filed, and adopting the crate still needs an architect's ruling.
+wrote. The implementation is `rsext4`, and there is no alternative. nife takes it from
+partsfoundry/rsext4, a fork that offers every fix upstream and carries indefinitely whatever
+upstream does not take, so the fork is the shipping source. Contributing upstream and work in the
+fork bring it to the bar of §46: write-path bug fixes with reproducers, fuzz targets, safety
+arguments and a sound replacement for two unchecked casts, and Kani harnesses. Here, a differential
+oracle against libext2fs and Linux judges four phases: read-only, the oracle itself, write, and
+jbd2 with Linux replay, plus write reordering and hostile-image fuzzing. Every upstream text is
+shown to the architect before it is filed. Once the fork meets the bar, the adoption ruling is
+asked, and `rsext4` replaces RedoxFS.

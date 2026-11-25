@@ -49,7 +49,7 @@ together.
 
 ## What it measured
 
-The writer is the `rsext4` the read oracle names: nifeos/rsext4, upstream's 0.9.2 with the fixes
+The writer is the `rsext4` the read oracle names: partsfoundry/rsext4, upstream's 0.9.2 with the fixes
 its `CHANGES.md` lists. Measured on a Linux host with e2fsprogs 1.47.2, against 0.9.2 on 2026-11-22
 (UTC) and against the fork on 2026-11-23. A run takes 100 seconds on a developer machine, about
 five minutes of processor time.
