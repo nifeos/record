@@ -21,7 +21,7 @@ the missing-note rule. None of those is reopened here. Step 3 of
 [milestone 1017 (the contract crates leave in this order)](1017-the-contract-crates-leave-in-this-order.md)
 puts this crate last in its step and says it leaves like any leaf.
 
-Reuse: `script/crate-move`, the template `nifeos/crate-workflows` and its scaffold, Kani,
+Reuse: `script/crate-move`, the template `partsfoundry/crate-workflows` and its scaffold, Kani,
 cargo-mutants, cargo-fuzz. No new tool.
 
 ## Finding status

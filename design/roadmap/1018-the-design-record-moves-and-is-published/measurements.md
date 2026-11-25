@@ -251,7 +251,7 @@ Sorted 2026-11-10 (UTC) by reading each script, helper, lint section and workflo
 The sort is provisional. **R** goes to `nifeos/record`. **W** goes to `nifeos/partsfoundry.org`, the
 website. **C** stays with code. **S-each** runs in every repository on its own files. **S-cross**
 splits, and one side needs the other's data: code at basalt's pins, or the record's number index
-that open question 7 asks about. **T** goes to the template (`nifeos/crate-workflows`) or the fleet
+that open question 7 asks about. **T** goes to the template (`partsfoundry/crate-workflows`) or the fleet
 repository, under the forks of milestone 902 (nife's tooling, sorted by who needs it, before any
 of it moves).
 

@@ -35,7 +35,7 @@ block for any public item but the crate itself (`script/names --provisional` lis
 Item 5 is that gap. Milestone 820 (`extensible_host_controller_interface`: proven xHCI logic,
 released on its own) owns the move and the tag; this block owns what should land inside that path.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, its naming helpers
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, its naming helpers
 (`spelled_out.py`, `register_names.py`, `standalone.py`), Kani, cargo-mutants and cargo-fuzz. No
 new tool.
 

@@ -43,7 +43,7 @@ layout, a license); everything else is two-way and the maintainer decides it.
    Door: two-way. Effort: S.
 
 4. The template pin is current, and the next template release brings the mutation stack.
-   Finding: every caller pins `nifeos/crate-workflows` at `e0c1fcad`, which is ahead of the
+   Finding: every caller pins `partsfoundry/crate-workflows` at `e0c1fcad`, which is ahead of the
    template's newest release, so the `lag` job passes. The template's head is 31 commits further on, all unreleased. They add what this repository does not yet have. One is a `mutation.yml` caller
    (the full run moves out of `weekly.yml`). One is `check / mutation-diff` on every pull request as
    a required check. One is a release gate that refuses a release without a green full mutation run

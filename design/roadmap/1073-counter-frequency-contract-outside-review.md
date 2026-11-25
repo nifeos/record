@@ -27,7 +27,7 @@ citations, and the machine and tree names in the doc comments. The package's ope
 with the maintainer and is not reopened. Where a later rule contradicts the baseline, the item
 says so; one does (item 7, the `#[doc(alias)]` sentence).
 
-Reuse: the template `nifeos/crate-workflows` and its helpers, `script/crate-move --dry-run`,
+Reuse: the template `partsfoundry/crate-workflows` and its helpers, `script/crate-move --dry-run`,
 `script/crate-standalone`, Kani, cargo-llvm-cov, Miri and the sibling contract crates' tests as
 patterns. No new tool.
 

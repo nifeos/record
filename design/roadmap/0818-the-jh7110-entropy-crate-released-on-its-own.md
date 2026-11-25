@@ -137,7 +137,7 @@ harness.
 
 ## The soak, started 2026-10-31 (UTC)
 
-- The crate moved to `nifeos/jh7110_entropy` on the shared template at `nifeos/crate-workflows`,
+- The crate moved to `nifeos/jh7110_entropy` on the shared template at `partsfoundry/crate-workflows`,
   whose current `main` (`4e5b07d`) its workflows pin, after `script/apply-settings` ran against it: both rulesets, the
   `crates-io` environment with calef as reviewer, the labels and the team. The manifest keeps
   `publish = false`; the caller sets `allow-unpublished` for the soak.

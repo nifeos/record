@@ -10,7 +10,7 @@ needs_person: yes
 # 1105. `pci`: what an outside maintainer would fix before it leaves
 
 Raised by a read-only review of `crates/pci_configuration_space` as a stranger to this tree would meet it, on a fresh
-shallow clone of `main` and a checkout of `nifeos/crate-workflows`. It changes nothing; it lists
+shallow clone of `main` and a checkout of `partsfoundry/crate-workflows`. It changes nothing; it lists
 what the next lanes change, and the one decision the architect must take before a repository
 exists.
 
@@ -27,7 +27,7 @@ Milestone 1034 (a runbook for moving a crate out of nife) owns the move itself. 
 enumeration leaves the kernel) says the crate "moves with the server"; the crate leaves first, as
 the held item below records.
 
-Reuse: `script/crate-move`, `script/crate-standalone`, the template `nifeos/crate-workflows` and
+Reuse: `script/crate-move`, `script/crate-standalone`, the template `partsfoundry/crate-workflows` and
 its name gates, Kani, cargo-mutants and the crate's own fake configuration spaces (`FakeCfg`,
 `BridgedCfg`). No new tool.
 

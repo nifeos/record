@@ -22,7 +22,7 @@ the four harnesses, the dual license, `publish = false` through the soak, and th
 No later rule in [design/naming.md](../naming.md) contradicts any ratified name. Every quantity ends
 in its unit, the rules spell out every abbreviation they list, and `fill_with` takes std's shape.
 
-Reuse: the template `nifeos/crate-workflows`, Kani, cargo-mutants and the crate's own harnesses.
+Reuse: the template `partsfoundry/crate-workflows`, Kani, cargo-mutants and the crate's own harnesses.
 
 ## Goal
 

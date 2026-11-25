@@ -20,7 +20,7 @@ governs the pin. Nothing moves that pin today when a producer tags a new release
 falls behind until someone edits it by hand.
 
 Reuse: the tree's dependency bot (`.github/dependabot.yml`, three `cargo` entries) and the shared
-crate template in `nifeos/crate-workflows`. It proposes no new dependency.
+crate template in `partsfoundry/crate-workflows`. It proposes no new dependency.
 
 ## The question
 

@@ -25,7 +25,7 @@ The crate is on `crates/externalization-list.txt`, in step 6 of milestone 1017 (
 crates leave in this order): after `machine_statistics_contract`,
 `domain_name_resolution_contract` and `grant_plan`.
 
-Reuse: `script/crate-move --dry-run`, the template `nifeos/crate-workflows` and its scaffold and
+Reuse: `script/crate-move --dry-run`, the template `partsfoundry/crate-workflows` and its scaffold and
 helpers, Kani, cargo-fuzz, the crate's own encoders as seed writers. No new tool.
 
 ## Finding status

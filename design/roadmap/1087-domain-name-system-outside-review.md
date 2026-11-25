@@ -24,7 +24,7 @@ crates leave in this order) places this crate in step 5 with the `process-tools`
 none of those except where a later rule contradicts a ratified name, and says so where it does
 (items 6 and 7).
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `script/crate-standalone`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `script/crate-standalone`,
 `script/crate-review-packet`, `helpers/name_release.py`, Kani, cargo-mutants, cargo-fuzz. No new
 tool.
 

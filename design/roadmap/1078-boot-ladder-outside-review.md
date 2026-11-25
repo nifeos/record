@@ -22,7 +22,7 @@ crate's own `Name:` block with four refusals, and it does not reopen it. Every o
 in the crate is unratified (`script/names boot_ladder` and `helpers/name_release.py --draft`
 list eight items with no `Name:` block and two marked provisional).
 
-Reuse: the crate template `nifeos/crate-workflows` and its scaffold, `script/crate-standalone`,
+Reuse: the crate template `partsfoundry/crate-workflows` and its scaffold, `script/crate-standalone`,
 `script/crate-review-packet`, `cargo kani`. No new tool.
 
 ## Goal

@@ -12,7 +12,7 @@ needs_person: yes
 
 Raised by a read-only review of `crates/program_argument_contract` as a stranger to this tree would
 meet it, in a fresh shallow clone of `nifeos/nife` at the head of `main` and a clone of
-`nifeos/crate-workflows` at the head of its `main`. It changes nothing; it lists what the next
+`partsfoundry/crate-workflows` at the head of its `main`. It changes nothing; it lists what the next
 lanes change before the crate moves to a repository of its own (milestone 1017 (the contract crates
 leave in this order), step 5).
 
@@ -21,7 +21,7 @@ The settled baseline this review takes instead has three parts. The first is the
 other public name in the crate is provisional by the crate's own manifest, and this block proposes
 the ones the template's gates refuse.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, its name helpers
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, its name helpers
 (`spelled_out.py`, `standalone.py`, `unsafe_scan.py`), Kani, cargo-mutants, and the sibling page
 contracts (`environment_contract`, `counter_frequency_contract`) as the shapes to match. No new
 tool.

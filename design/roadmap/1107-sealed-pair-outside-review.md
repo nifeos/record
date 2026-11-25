@@ -18,7 +18,7 @@ this crate. The only record is `notes/sealed-pair.md` plus the `Name:` block at 
 `seal`). Nothing below reopens those refusals. Every name in the crate is unratified, so every
 naming item here is a proposal for the architect and not a rename a lane may perform.
 
-Reuse: the template `nifeos/crate-workflows` and its helpers, `script/crate-review-packet`,
+Reuse: the template `partsfoundry/crate-workflows` and its helpers, `script/crate-review-packet`,
 `script/names`, `helpers/name_checks.py`, the mutation census series. No new tool.
 
 ## Goal

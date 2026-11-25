@@ -11,7 +11,7 @@ needs_person: no
 # 1084. `current_cpu_contract`: what an outside maintainer would fix before it leaves
 
 Raised by a read-only review lane that met `crates/current_cpu_contract` as a stranger would: the
-crate, every caller in the tree, the naming rules, the standalone gate and the `nifeos/crate-workflows`
+crate, every caller in the tree, the naming rules, the standalone gate and the `partsfoundry/crate-workflows`
 template. It changes nothing; it lists what the lanes that move the crate change, and the two
 one-way doors that need the architect.
 

@@ -22,7 +22,7 @@ are listed at the end.
 
 ## Q1. Is #2379's confidence bar a gate, a goal, or only for crates nife publishes?
 
-Pull request #2379 proposes that any crate nife builds on meet `nifeos/crate-workflows`' gates. The
+Pull request #2379 proposes that any crate nife builds on meet `partsfoundry/crate-workflows`' gates. The
 bar has five parts: Kani with every harness falsified, a mutation baseline, semver checks, a tested
 minimum Rust version, and a stranger build.
 

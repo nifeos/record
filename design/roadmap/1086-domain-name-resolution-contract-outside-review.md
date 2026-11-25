@@ -28,7 +28,7 @@ a release review rechecks names ratified before a later naming rule applies here
 `DATA_MAXIMUM` in the `socket_contract` package.
 
 Reuse: `script/crate-move --dry-run`, `helpers/lint_externalized_crates.py`, the template
-`nifeos/crate-workflows` and its helpers (`standalone.py`, `spelled_out.py`, `register_names.py`,
+`partsfoundry/crate-workflows` and its helpers (`standalone.py`, `spelled_out.py`, `register_names.py`,
 `abbreviations.py`, `prose_acronyms.py`), cargo-mutants' recorded census, Kani and cargo-fuzz for
 the proofs this block asks for. No new tool.
 
@@ -54,7 +54,7 @@ nife `main`; the crate has not yet left.
   `domain_name_system` is a `git` dependency pinned at its `v0.1.0-pre.1` tag.
 - Item 4 (P1), the limits and offsets break the current rules: Done,
   [#3641](https://github.com/nifeos/nife/pull/3641),
-  [nifeos/crate-workflows#76](https://github.com/nifeos/crate-workflows/pull/76) and
+  [partsfoundry/crate-workflows#76](https://github.com/partsfoundry/crate-workflows/pull/76) and
   [#3865](https://github.com/nifeos/nife/pull/3865). The template's `spelled_out`,
   `register_names`, `unit_symbols` and `question_shape` judge 319 names in the crate and refuse
   none.

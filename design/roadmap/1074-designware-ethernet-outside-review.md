@@ -19,7 +19,7 @@ Motorcomm alias sets (built in #3319). Where a later rule or a later template ga
 ratified name, the item says so and leaves the rename to the release review that the rules provide
 for.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `helpers/crate_move.py`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `helpers/crate_move.py`,
 cargo-mutants, Kani, the crate's own `simulator`. No new tool.
 
 ## Goal

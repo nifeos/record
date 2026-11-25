@@ -8,7 +8,7 @@ what couples the portable sections to nife, sketches the interface a shared tool
 recommends where and when to build one. No code moves here.
 
 What drives the question: milestone 887 (crate repositories share one CI template, adapted from
-nife's gates) put a gate set in `nifeos/crate-workflows`, and jh7110_entropy runs it. Milestone 756
+nife's gates) put a gate set in `partsfoundry/crate-workflows`, and jh7110_entropy runs it. Milestone 756
 (`process-tools`, `core-tools` and `disk-tools` are the first code to leave this repository) will
 add repositories that need the same gates. Nothing builds the shared tool yet.
 

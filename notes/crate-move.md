@@ -24,7 +24,7 @@ The rules every step keeps:
   literal (bytes already on a wire or in built programs, such as an owner string) may keep the
   word on a line that ends `// wire literal`; the lint lists those lines. Prose never names nife.
 - The naming gates run in the crate repository, through the shared template
-  `nifeos/crate-workflows` pinned at a release commit.
+  `partsfoundry/crate-workflows` pinned at a release commit.
 - The owned runners never run fork code. A crate repository runs on GitHub-hosted runners only,
   and a fork's pull request waits for a maintainer's approval before any workflow runs.
 - A pin cites a landed commit. nife depends on `nifeos/<crate>` by `rev`, at the commit of a

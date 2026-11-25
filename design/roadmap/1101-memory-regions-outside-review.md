@@ -24,7 +24,7 @@ system call word, the `MIT OR Apache-2.0` license, and the pin of `generational_
 crate name. Every quantity in the crate is a count of pages or of objects and names the thing, so
 the unit rule has nothing to say; `len`, `is_empty`, `get` and `with` take std's spellings.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `script/crate-move --dry-run`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `script/crate-move --dry-run`,
 Kani, loom, cargo-mutants, and the crate's own harness helpers (`Run::any`, `Run::for_every_depth`,
 `RegionSnapshot`). No new tool.
 
@@ -51,10 +51,10 @@ for the crate's own reasons.
 - P1-4, a second release of one object: Done, [#3532](https://github.com/nifeos/nife/pull/3532).
 - P1-5, the loom harnesses at the move: At the move. The template's `proofs` workflow runs a crate's
   loom models when its manifest depends on loom, from
-  [v8](https://github.com/nifeos/crate-workflows/pull/65); the README's split of what loom checks
+  [v8](https://github.com/partsfoundry/crate-workflows/pull/65); the README's split of what loom checks
   and what Kani proves is written with the README.
 - P1-6, gates of the template: At the move. (a) landed in the template in
-  [nifeos/crate-workflows#80](https://github.com/nifeos/crate-workflows/pull/80), (b) and (c) in
+  [partsfoundry/crate-workflows#80](https://github.com/partsfoundry/crate-workflows/pull/80), (b) and (c) in
   [#3567](https://github.com/nifeos/nife/pull/3567), and (d) in
   [#3521](https://github.com/nifeos/nife/pull/3521). (e) is the move's, which pins the template at
   `v9` or later.

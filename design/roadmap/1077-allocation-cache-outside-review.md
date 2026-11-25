@@ -23,7 +23,7 @@ ruling, because none exists for this crate. The review used `script/crate-review
 `std` overlay (`patches/std-nife/overlay/std/src/sys/alloc/nife/`), reached through the file the
 `std` farm copies (`xtask/src/farm/copied.rs`), not through any `Cargo.toml`.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `helpers/crate_move.py`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `helpers/crate_move.py`,
 cargo-mutants, Miri, Kani, and the crate's own talc-backed host test. No new tool.
 
 ## Goal

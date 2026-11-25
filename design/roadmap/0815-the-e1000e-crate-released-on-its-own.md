@@ -187,7 +187,7 @@ names until the ratification pass, so this section keeps the links it carried.
 ## The soak
 
 - The crate lives in `nifeos/e1000e`, on the shared template of milestone 887 (crate repositories
-  share one CI template) with its callers pinned at `nifeos/crate-workflows` `e0c1fca`.
+  share one CI template) with its callers pinned at `partsfoundry/crate-workflows` `e0c1fca`.
   `script/apply-settings` applied the settings there: both rulesets, the `crates-io` environment
   with calef as reviewer, the labels, the team and private vulnerability reporting. The manifest
   keeps `publish = false`, and the caller sets `allow-unpublished` for the soak. No tag exists.

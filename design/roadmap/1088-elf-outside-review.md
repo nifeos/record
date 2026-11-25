@@ -21,7 +21,7 @@ did take is [milestone 784 (reuse what the tree wrote: which first-party code an
 That comparison measured fit, hostile input, proofs, cost and upkeep. It ended in the ruling that the crate
 stays ours. The baseline also takes the order in which milestone 857 (crates released on their own) moves it.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, `script/crate-review-packet`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, `script/crate-review-packet`,
 `script/crate-standalone`, Kani, cargo-mutants, cargo-fuzz, the crate's falsification patches,
 and milestone 784's probe script. No new tool.
 

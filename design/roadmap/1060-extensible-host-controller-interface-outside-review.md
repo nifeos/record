@@ -183,7 +183,7 @@ true`, which the standing rule allows for a crate with no `unsafe`. Two-way. XS.
 
 #### P1-10. The next template release brings the mutation stack
 
-Every caller pins `nifeos/crate-workflows` at `cd1b484`, at or past release `v7`, so the `lag` job
+Every caller pins `partsfoundry/crate-workflows` at `cd1b484`, at or past release `v7`, so the `lag` job
 passes. The template's unreleased `main` adds a `mutation.yml` caller, `check / mutation-diff` as a
 required check, and a release gate that wants a green full run.
 

@@ -22,7 +22,7 @@ commits in 30 days, 120 of them crossing, 227 breaking API items in four weeks).
 the crate in step 6. Where a name below is already ratified, this block does not reopen it unless a later rule
 (units spelled out, standard-library spellings) contradicts it, and says so where it does.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold and helpers (`standalone.py`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold and helpers (`standalone.py`,
 `spelled_out.py`, `register_names.py`, `british_spelling.py`), cargo-mutants, Kani, and the crate's
 own `test_support::plan_line`. No new tool.
 

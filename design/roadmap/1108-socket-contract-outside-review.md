@@ -24,7 +24,7 @@ package, it says so at the item. The bind-time version check belongs to
 [milestone 1000 (message contracts carry bind-time version checks)](1000-message-contracts-carry-bind-time-version-checks.md)
 and is not repeated here.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, Kani, cargo-mutants, the crate's
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, Kani, cargo-mutants, the crate's
 own tests and falsification patches. No new tool, no new dependency.
 
 ## Goal

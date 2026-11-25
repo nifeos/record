@@ -104,7 +104,7 @@ inline Kani module meets this on its first weekly run; that is work for the temp
 
 #### P1-1. The CI wiring predates the template's mutation stack
 
-Every caller pins `nifeos/crate-workflows` at `cd1b484`. That commit is not behind release `v7`, so
+Every caller pins `partsfoundry/crate-workflows` at `cd1b484`. That commit is not behind release `v7`, so
 the lag check passes, but `main` of the template is 33 commits ahead and carries `mutation.yml`,
 `check / mutation-diff` and the mutation requirement of the release gate. The repository has no
 `.github/workflows/mutation.yml` caller. Change, once the template cuts its next release: bump

@@ -20,7 +20,7 @@ Milestone 1033 (`generational_table`: the
 fixed-capacity, proved slotmap, released on its own) owns the tag, the soak and the publication.
 This block owns the findings that should land inside that path.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, cargo-mutants, Kani, cargo-fuzz, and
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, cargo-mutants, Kani, cargo-fuzz, and
 the crate's own harness helpers (`any_reachable_table`, `any_operation`). No new tool.
 
 ## Goal
@@ -112,7 +112,7 @@ license and the crate name. This block does not reopen them.
 
 ## BUGS
 
-- Item 5 was the template's to fix, and `nifeos/crate-workflows#50` fixed it; the release gate
+- Item 5 was the template's to fix, and `partsfoundry/crate-workflows#50` fixed it; the release gate
   reads the mutation verdict, which is green on `main`.
 - Item 2 came from reading, not from a build for a 16-bit target. The fix is cheap enough to
   land without one. A `#[cfg(target_pointer_width = "16")]` test would need a toolchain this
@@ -148,7 +148,7 @@ Read against `nifeos/generational_table` `main` at `8328360`, the merge of
   `nifeos/generational_table#18` and `nifeos/generational_table#20`. The callers pin template
   release `v8`, `mutation.yml` is a caller with the repository's cron, `check / mutation-diff` is a
   required check on `main`, and mutation run 44468076120 is green at `8328360`.
-- Item 5 (P1), the single-shard mutation verdict: Done, `nifeos/crate-workflows#50`.
+- Item 5 (P1), the single-shard mutation verdict: Done, `partsfoundry/crate-workflows#50`.
 - Item 6 (P1), the five methods: Done, `nifeos/generational_table#10`, with the spellings of
   `nifeos/generational_table#21`: `insert`, `contains_key`, `iter_mut`, `slot_count` and `clear`,
   each in the README's method list.

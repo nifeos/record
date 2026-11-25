@@ -18,7 +18,7 @@ The crate has no review package under `notes/crate-reviews/`; the accepted basel
 (the naming page, the units rule, the standard-library-names rule) bears on the crate, the item says
 so; the template's name checks refuse nothing in it.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, Kani, Miri, cargo-llvm-cov,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, Kani, Miri, cargo-llvm-cov,
 cargo-mutants. No new tool.
 
 ## Finding status

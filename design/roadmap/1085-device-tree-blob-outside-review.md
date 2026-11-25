@@ -24,7 +24,7 @@ records. nife keeps this crate as its device-tree parser and does not switch to 
 is a release candidate of its own, so the correctness items below (P1-1 to P1-4) sit in the kernel's
 path and in what the release publishes.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, its naming and standalone helpers,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, its naming and standalone helpers,
 cargo-mutants, Kani, cargo-fuzz and the crate's own `Blob` builder in `tests/hostile.rs`. No new
 tool.
 

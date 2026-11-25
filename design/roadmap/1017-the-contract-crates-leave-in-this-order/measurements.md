@@ -119,7 +119,7 @@ path range from 5 (`byte_glob`) to 36 (`user_mode_runtime`).
 
 `nifeos/jh7110_entropy` at `9b8769f`: its `Cargo.toml` has 31 lines and no path or `git` dependency.
 `git grep` finds `nifeos/nife` only in its README and two documents, and its workflows call
-`nifeos/crate-workflows` at a pinned commit.
+`partsfoundry/crate-workflows` at a pinned commit.
 
 ## The landing durations
 

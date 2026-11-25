@@ -21,7 +21,7 @@ exists, so every public item name was provisional until the ratification of 2026
 they meet [design/naming.md](../naming.md). Two of them fail a rule there and are one-way doors
 after a release (Decisions 1 and 2).
 
-Reuse: the template `nifeos/crate-workflows`, `script/crate-move --dry-run`, Kani, cargo-mutants and
+Reuse: the template `partsfoundry/crate-workflows`, `script/crate-move --dry-run`, Kani, cargo-mutants and
 the crate's own harness pattern (a symbolic 8-frame bitmap built without `new`).
 
 ## Goal

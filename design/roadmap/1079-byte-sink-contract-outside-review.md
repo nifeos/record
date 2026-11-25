@@ -23,7 +23,7 @@ linked interfaces carry checkable versions). It also includes the standing rulin
 crate carries no `Name:` block and mentions neither nife nor a nife program. None of those is reopened here, except where a later
 naming rule contradicts a name, and the text says so where it does.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold and helpers, Kani, cargo-mutants,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold and helpers, Kani, cargo-mutants,
 `helpers/lint_externalized_crates.py`, and the existing in-tree consumers as the regression suite
 (the kernel-side `sink_tests`, `system_log`, the shell's pipeline reader, std's PAL). No new tool.
 

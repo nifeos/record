@@ -11,7 +11,7 @@ needs_person: yes
 # 1083. `clock_contract`: what an outside maintainer would fix before it leaves
 
 Raised by a read-only review of `crates/clock_contract` as a stranger to this tree would meet it,
-on a fresh clone of `main` at `cf1328af` with the template `nifeos/crate-workflows` at `2e651d8`.
+on a fresh clone of `main` at `cf1328af` with the template `partsfoundry/crate-workflows` at `2e651d8`.
 It changes nothing; it lists what the next lanes change.
 
 The review took its baseline from

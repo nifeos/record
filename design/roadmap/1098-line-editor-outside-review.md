@@ -24,7 +24,7 @@ root splits into module files). No review package existed for this crate under
 `notes/crate-reviews/` when the review ran, so the baseline is thinner than other crates'.
 Three names #2797 ratified, `LINE_MAXIMUM`, `PROMPT_MAXIMUM` and `RAW_QUEUE_MAXIMUM`, are reopened here. The later unit rule (design/naming.md, "Units": a limit opens `MAXIMUM_` and ends with its unit) contradicts them. The rule in force is that a release review rechecks a name ratified before a later rule.
 
-Reuse: the template `nifeos/crate-workflows` and its helpers (`spelled_out.py`,
+Reuse: the template `partsfoundry/crate-workflows` and its helpers (`spelled_out.py`,
 `abbreviations.py`, `standalone.py`), cargo-fuzz, Kani, cargo-mutants. No new tool.
 
 ## Finding status

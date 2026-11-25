@@ -21,5 +21,5 @@ calling the old name, and the shared repository moves last.
 
 An example from the plan: a crate repository's `.github/workflows/ci.yml` writes
 `uses: partsfoundry/crate-workflows/.github/workflows/check.yml@<sha>` where it writes
-`uses: nifeos/crate-workflows/...` today. Its CI fails from the transfer of crate-workflows until
+`uses: partsfoundry/crate-workflows/...` today. Its CI fails from the transfer of crate-workflows until
 that line lands.

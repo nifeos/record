@@ -17,7 +17,7 @@ Verified firsthand on the clone (the review's report holds `hostname`, not this 
 - `helpers/lint_externalized_crates.py --count`: 18 hits, exactly at the crate's ceiling. By hand:
   ten are the word `nife` (seven in prose, three in data literals). Eight are program names (`fs_subtree_caretaker` four times, `redoxfs_server` twice, `fs_nameset_caretaker` and `swish`
   once each).
-- The template's own gates, run by hand from a clone of `nifeos/crate-workflows` with the arguments
+- The template's own gates, run by hand from a clone of `partsfoundry/crate-workflows` with the arguments
   the `standalone` job passes: `spelled_out` 8 refusals, `register_names` 2, `prose_acronyms` 10.
   `unit_symbols`, `question_shape`, `british_spelling`, `contract_names`, `history_phrases`,
   `prose_figures`, `readme_sections`, `readme_acronyms` and `inflated_wording` are clean.

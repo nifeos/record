@@ -26,7 +26,7 @@ built any of it, and every per-crate block from 813 to 821 said so in its `BUGS`
 
 ## What this builds
 
-1. A template repository, `nifeos/crate-workflows`, holding reusable workflows
+1. A template repository, `partsfoundry/crate-workflows`, holding reusable workflows
    (`on: workflow_call`), one per row group below: `check`, `proofs`, `weekly` and `release`. A
    crate repository's own workflow files are a few lines each that call them, pinned by commit SHA,
    as nife pins every action today.
@@ -113,14 +113,14 @@ calef ruled the names on 2026-10-17 (UTC):
 
 | Name | His reply |
 |---|---|
-| The repository `nifeos/crate-workflows` | *"Keep"* |
-| The canary repository `nifeos/crate-workflows-test`, over `crate-workflows-canary` | *"Keep test"* |
+| The repository `partsfoundry/crate-workflows` | *"Keep"* |
+| The canary repository `partsfoundry/crate-workflows-test`, over `crate-workflows-canary` | *"Keep test"* |
 | The seven callable workflow filenames: check, proofs, weekly, release, hold, label and ruled | *"Keep"* |
 | The team `crates-io` becomes `crate-maintainers`; its crates.io owner string is `github:nifeos:crate-maintainers` | *"crate-maintainers"* |
 | The required checks: `check / fmt`, `check / clippy`, `check / tests`, `check / coverage`, `check / standalone`, `check / supply-chain`, `proofs / kani`, `proofs / falsify` and `hold / architect hold` | *"Per your suggestion"* |
 
-The `crates-io` environment keeps its name. Template release `v6` (`d5ad709`, nifeos/crate-workflows
-[#9](https://github.com/nifeos/crate-workflows/pull/9)) carries the check names, and the canary's `main` ruleset requires all nine. The team
+The `crates-io` environment keeps its name. Template release `v6` (`d5ad709`, partsfoundry/crate-workflows
+[#9](https://github.com/partsfoundry/crate-workflows/pull/9)) carries the check names, and the canary's `main` ruleset requires all nine. The team
 `crate-maintainers` exists. No `Name:` block in nife carries these names, so `script/names` has
 nothing to ratify.
 
@@ -138,7 +138,7 @@ answered *"B"* to this option for how the first publish happens:
 He declined publishing v1 by hand. The `release` workflow decides by the crate's
 presence on crates.io, never by the secret's: an existing crate publishes through trusted
 publishing only, with no fallback to the token. A missing secret on an absent crate fails naming
-it. Built in nifeos/crate-workflows [#8](https://github.com/nifeos/crate-workflows/pull/8) and released in `v6`. The secret is
+it. Built in partsfoundry/crate-workflows [#8](https://github.com/partsfoundry/crate-workflows/pull/8) and released in `v6`. The secret is
 `CRATES_IO_FIRST_PUBLISH_TOKEN`, a provisional name.
 
 A first publish waits on its soak (milestone 818 (`jh7110_entropy`: proven JH7110 TRNG logic, released on its own) is the pilot).
@@ -207,13 +207,13 @@ roadmap or merge queue; each row applies that test.
 Taken, not written: GitHub's reusable workflows, `rust-lang/crates-io-auth-action` (RFC 3691),
 Dependabot, `cargo-semver-checks` and `taiki-e/install-action`. Kani is the exception to taking an action: the template installs it with
 `cargo install` at the version in `.kani-version`, so the Actions allowlist names no Kani action. A
-weekly template job proposes the version bump as one pull request (crate-workflows [#5](https://github.com/nifeos/crate-workflows/pull/5)). Prior art for
+weekly template job proposes the version bump as one pull request (crate-workflows [#5](https://github.com/partsfoundry/crate-workflows/pull/5)). Prior art for
 the shape: rust-embedded's and RustCrypto's shared workflows, read for structure rather than
 copied. The workflows themselves are written, since none publishes a falsification job.
 
 ## Exit
 
-A crate repository, `nifeos/crate-workflows-test`, calls every reusable workflow from releases v1
+A crate repository, `partsfoundry/crate-workflows-test`, calls every reusable workflow from releases v1
 and v2. Built 2026-10-16 (UTC). The same day, calef ruled that it
 stands as the template's release canary, adopting each release before a crate depends on it. It
 has adopted release v6 (commit d5ad7091019cae8122b0c673fd790936039485ea) through its pull request
@@ -243,7 +243,7 @@ being on the list, and `helpers/ci_job_times.py` reads a crate repository by arg
   before the commit (`helpers/semver_baseline.py` in the template), and falls back to the last
   published version when no tag exists. A crate with neither has no baseline, and the rule reads
   that as nothing major. The tool has no JSON output, so `semver_major.py` reads its text summary
-  (nifeos/crate-workflows#19). `helpers/publish-rehearsal.sh` runs the first-publish dry run by
+  (partsfoundry/crate-workflows#19). `helpers/publish-rehearsal.sh` runs the first-publish dry run by
   hand with no credential; the real first publish stays behind the `crates-io` environment.
 - `needs_person` is `yes`: the stranger cadence's first run is a person's.
 - The settings-drift check's security rows and ruleset read want an administration-scoped token;

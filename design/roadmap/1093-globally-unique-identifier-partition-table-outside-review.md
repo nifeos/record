@@ -23,7 +23,7 @@ now ruled below: where the two nife type GUIDs live, and whether `lba` and `mbr`
 open questions: a totality harness for `parse`, and whether `VERSION` stays. Where this block touches a name the package lists, it says
 so and adds only what the package did not see.
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold, Kani, cargo-mutants, cargo-fuzz, the
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold, Kani, cargo-mutants, cargo-fuzz, the
 crate's own `testing::sample_disk` and its two real fixtures. No new tool. The one new dependency
 is this tree's own `master_boot_record`, which holds the protective-MBR code.
 

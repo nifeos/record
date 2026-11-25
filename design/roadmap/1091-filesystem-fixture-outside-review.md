@@ -29,7 +29,7 @@ still leave together, for a different reason: Decision 1 puts them in one reposi
 workspace, where the fixture links the contract by path. The README and crate-root `BUGS` that say
 the contract leaves first and this crate then pins it by revision are stale (item 2).
 
-Reuse: the template `nifeos/crate-workflows` and its scaffold and helpers; `script/crate-standalone`,
+Reuse: the template `partsfoundry/crate-workflows` and its scaffold and helpers; `script/crate-standalone`,
 `script/crate-review-packet`, `helpers/lint_externalized_crates.py` and `helpers/name_release.py`
 in this tree; cargo-mutants' recorded census. No new tool.
 
@@ -42,9 +42,9 @@ items 13 to 18 in [the later-items appendix](1091-filesystem-fixture-outside-rev
 then the three decisions.
 
 - Item 1 (P0), the template's cargo-deny refuses a nifeos git dependency: Done,
-  [nifeos/crate-workflows#66](https://github.com/nifeos/crate-workflows/pull/66) allows git sources
+  [partsfoundry/crate-workflows#66](https://github.com/partsfoundry/crate-workflows/pull/66) allows git sources
   on the organization and
-  [nifeos/crate-workflows#64](https://github.com/nifeos/crate-workflows/pull/64) supports a
+  [partsfoundry/crate-workflows#64](https://github.com/partsfoundry/crate-workflows/pull/64) supports a
   repository of several crates.
 - Item 2 (P0), the order and pairing are stale: Done, [#3909](https://github.com/nifeos/nife/pull/3909).
   The README and the crate root say the dependency on `file_system_contract` is a path inside one
@@ -133,7 +133,7 @@ Ruled 2026-11-14 (UTC): `file_system_fixture` gets no repository of its own. It 
 repository with `file_system_contract`, as two crates in one Cargo workspace, and keeps
 `publish = false`. The two move together at milestone 1017's step 2, after items 1 to 5 have
 landed. Before the move a lane checks that the template handles a two-crate workspace, which
-[crate-workflows#64](https://github.com/nifeos/crate-workflows/pull/64) added.
+[crate-workflows#64](https://github.com/partsfoundry/crate-workflows/pull/64) added.
 
 Why. The test of whether a crate leaves is that it is publishable or used by more than one
 repository. This crate never publishes (it is test data, and the template's `allow-unpublished`
