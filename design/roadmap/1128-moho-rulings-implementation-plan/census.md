@@ -5,7 +5,7 @@ An appendix to [the milestone](../1128-moho-rulings-implementation-plan.md).
 Measured at `nifeos/nife@6bed50566`, `nifeos/moho_abi@1e99eed` and
 `partsfoundry/capability_table@968a16f`. Every nife count is `git grep -c -E <pattern>` over
 `'*.rs' ':!vendor'`, summed: lines, not occurrences. A wrapper's count also leaves out
-`crates/user_mode_runtime`, where the wrapper is defined.
+`crates/user_mode_runtime`, which defines the wrapper.
 
 ## Wrapper call sites
 
@@ -77,7 +77,7 @@ lines in 5 files, and `NO_SUCH_METHOD` on 8 lines in 4 files. `rt.rs` is 272 lin
 ## Elsewhere
 
 - `moho_abi`: 125 public constants; `pinned-at-version-1.txt` is 116 lines.
-- `moho_abi` is named in 17 nife manifests, 16 of them pinned by commit. 212 Rust files outside
+- 17 nife manifests name `moho_abi`, 16 of them pinned by commit. 212 Rust files outside
   `user_mode_runtime` name `user_mode_runtime`.
 - Falsification patches naming `moho_abi` or `user_mode_runtime`: 23 under `system_tests`, two
   under `xtask`, two under `crates/capability_plan`. Three name `ipc_send` or `ipc_call_reply`.
