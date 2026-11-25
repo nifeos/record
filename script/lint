@@ -23,8 +23,9 @@
 # resolve in nife at the commit basalt's `main` pins, which is the rule `nifeos/<repo>:<path>`
 # citations already follow (helpers/qualified_paths.py). Before the first section, lint links every
 # path nife has and the record lacks into this tree (`helpers/nife_tree.py overlay`), names each
-# link in the repository's `info/exclude` so git never sees it, and removes them all at the end,
-# on failure and on an interrupt too. A path the record has is never shadowed. While a run is in
+# link in the repository's `info/exclude` (a block per worktree) so git never sees it, and removes
+# them all at the end, on failure and on an interrupt too. A later run first removes the links an
+# earlier one left. A path the record has is never shadowed. While a run is in
 # progress, do not edit or copy through those links: the checkout they point at is read-only, so
 # a write fails instead of changing what the next run reads. `NIFE_TREE` names a checkout of nife at
 # the pinned commit instead of the cached one (CI sets it).
@@ -37,8 +38,8 @@ cd "$(dirname "$0")/.."
 
 SECTIONS="claim_copy replay_line conflict_markers todo_markers roadmap reviews decisions journeys
 four_digits citations citations_ratchet citations_moved fatal_risks script_docs counted_claims
-naming_conventions naming_rules audits_selftest audits repeat_watch environment_names tracked_ignored
-markdown_links prose_ratchet removed_index module_block_ratchet comment_block_ratchet parent_index
+naming_conventions naming_rules nife_tree_selftest audits_selftest audits repeat_watch
+environment_names tracked_ignored markdown_links prose_ratchet removed_index module_block_ratchet comment_block_ratchet parent_index
 house_style history line_citations outsider_pass exception_markers em_dashes spelling"
 
 section_claim_copy() {
@@ -429,6 +430,12 @@ section_line_citations() {
     python3 helpers/line_citations.py --check
 }
 
+section_nife_tree_selftest() {
+    echo "==> the nife-tree overlay hides, isolates and removes its links"
+    # lint-scope: record
+    python3 helpers/nife_tree.py --selftest
+}
+
 section_outsider_pass() {
     echo "==> the outsider-pass floor checker and launcher selftests"
     # lint-scope: record
@@ -497,10 +504,11 @@ if ! python3 -c 'import tomllib' >/dev/null 2>&1; then
     exit 1
 fi
 
-python3 helpers/nife_tree.py overlay . || exit 1
+# The traps come first, so an overlay that fails or is interrupted part way is still removed.
 trap 'python3 helpers/nife_tree.py unoverlay .' EXIT
 trap 'exit 130' INT
 trap 'exit 143' TERM
+python3 helpers/nife_tree.py overlay . || exit 1
 
 failed=""
 for id in $run; do
