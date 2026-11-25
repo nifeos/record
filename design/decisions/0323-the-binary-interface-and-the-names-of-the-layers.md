@@ -192,12 +192,12 @@ sale, and another party holds `moho.dev`. Moho, the animation software, is well 
 searches found no operating system, kernel, ABI or Rust target named Moho. Nobody has yet checked
 the rustc target list, LLVM or the Linux sources.
 
-What moves, and when. The tree still spells the capability binary interface `nife` in `target_os =
-"nife"`, the `unknown-nife` triples and the `std-nife` port. Renaming them waits on a separate plan
-lane, which sets their order. The names inside binaries stay as they are: the ELF note owner `nife`,
-section names such as `.note.nife.manifest`, and magics such as `NIFESLOT` and `NIFESTK1`. They fall
-under the wire-literal exemption, ruled 2026-11-14 (UTC): a marked owner string, section name or
-magic may spell nife.
+What moves, and when. The tree still spells the capability binary interface `nife` in
+`target_os = "nife"`, the `unknown-nife` triples and the `std-nife` port. Renaming them waits on a
+separate plan lane, which sets their order. The names inside binaries stay as they are: the ELF note
+owner `nife`, section names such as `.note.nife.manifest`, and magics such as `NIFESLOT` and
+`NIFESTK1`. They fall under the wire-literal exemption, ruled 2026-11-14 (UTC): a marked owner
+string, section name or magic may spell nife.
 
 ## The library and its organization are partsfoundry
 
