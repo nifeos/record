@@ -108,7 +108,7 @@ No nife type appears in a signature. What a stranger may find surprising:
   UTC, 1078 option A). The names in `verdict` were outside that ruling and go to this release name
   review.
 - The review is cleared (the architect, 2026-11-21 UTC, option A). The crate moves to
-  nifeos/boot_ladder with `publish = false`, no tag and no publication, carrying only the console
+  partsfoundry/boot_ladder with `publish = false`, no tag and no publication, carrying only the console
   lines. `kernel_half` and `self_test_program` stay in nife as `self_test_contract` (a provisional
   name), with `kernel_half::MAGIC`.
 

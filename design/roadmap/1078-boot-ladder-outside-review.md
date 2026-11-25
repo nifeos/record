@@ -136,7 +136,7 @@ knows without the `BUGS` entry that it is not waiting for a `$ `.
 
 ### The review clears, and the crate carries only the console lines
 
-Ruled 2026-11-21 (UTC), option A. The crate moves to nifeos/boot_ladder with `publish = false`, no
+Ruled 2026-11-21 (UTC), option A. The crate moves to partsfoundry/boot_ladder with `publish = false`, no
 tag and no publication. It carries the heads, the check names and the verdict's grammar. The pages
 and slots the kernel, the progenitor and the self-test program agree on (`kernel_half` and
 `self_test_program`) stay in nife as `self_test_contract`, so their names are nife's to rule.
@@ -157,18 +157,18 @@ The checks are in [the appendix](1078-boot-ladder-outside-review/done-when.md).
 
 ## Finding status
 
-Read against nifeos/boot_ladder `main` at `6f2dfda` and nife `main`.
+Read against partsfoundry/boot_ladder `main` at `6f2dfda` and nife `main`.
 
 - P0-1, the manifest stands alone: Done, [#3655](https://github.com/nifeos/nife/pull/3655) and the
   move ([#3894](https://github.com/nifeos/nife/pull/3894)). `license`, `rust-version`,
   `description`, `repository`, `readme` and the template's lints are literals, and the `publish`
   line carries the one-sentence comment.
-- P0-2, the files a stranger needs: Done, nifeos/boot_ladder#1 and nifeos/boot_ladder#2. The
+- P0-2, the files a stranger needs: Done, partsfoundry/boot_ladder#1 and partsfoundry/boot_ladder#2. The
   README, both licenses, `CHANGELOG.md` and `_typos.toml` exist, [#1](https://github.com/partsfoundry/boot_ladder/pull/1) gave the README its proof
   steps, and `docs/stranger-test.md` records a passing stranger run.
 - P0-3, shipped text points into this tree: Done, [#3565](https://github.com/nifeos/nife/pull/3565),
   [#3655](https://github.com/nifeos/nife/pull/3655) and the move
-  ([#3894](https://github.com/nifeos/nife/pull/3894)). No doc comment in nifeos/boot_ladder names a
+  ([#3894](https://github.com/nifeos/nife/pull/3894)). No doc comment in partsfoundry/boot_ladder names a
   nife path, a milestone, a pull request or a person.
 - P1-4, one verdict code for the writer and the readers: Done,
   [#3655](https://github.com/nifeos/nife/pull/3655). The self-test program prints through
@@ -200,7 +200,7 @@ Read against nifeos/boot_ladder `main` at `6f2dfda` and nife `main`.
   record the item allows. Milestone 972 (the boot stick's shared names are code) and the two
   hoists in
   `notes/bugs-without-milestones/drivers-boot-and-install-1.md` (soak markers, job-mix field names)
-  each land in nifeos/boot_ladder after the move and then move nife's pin.
+  each land in partsfoundry/boot_ladder after the move and then move nife's pin.
 - P2-13, the banner's tail: Done, [#3565](https://github.com/nifeos/nife/pull/3565) and
   [#3586](https://github.com/nifeos/nife/pull/3586). The crate states that the tail is free text
   and a reader takes the architecture from the machine line.

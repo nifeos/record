@@ -106,7 +106,7 @@ source text stays as written.
 record's own tree. A repository basalt's `pins.toml` names resolves at its pin. Any other, such
 as a crate, resolves at every revision a pinned component's `Cargo.lock` names for it at that
 component's pin, provisionally, since that is what the image builds. Milestone 159 (a real
-hardware entropy source: the JH7110's TRNG) names `nifeos/jh7110_entropy:src/lib.rs` this way,
+hardware entropy source: the JH7110's TRNG) names `partsfoundry/jh7110_entropy:src/lib.rs` this way,
 for the crate milestone 818 (`jh7110_entropy`: proven JH7110 TRNG logic, released on its own)
 moved out.
 

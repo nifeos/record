@@ -95,7 +95,7 @@ row left with `serve` on 2026-10-25: its harness is `designware_mobile_storage::
 
 1. The name is settled before anything leaves (857's Fork 5 as calef amended it on 2026-10-11 UTC).
    `script/names designware_mobile_storage` reports it ratified, crates.io answers 404 for it (or it
-   is already ours), and `nifeos/designware_mobile_storage` does not exist yet.
+   is already ours), and `partsfoundry/designware_mobile_storage` does not exist yet.
    `script/crate-standalone` checks the first.
 2. Make the cut above. `cargo tree -p designware_mobile_storage` then lists no nife crate, and the
    tests read only fixtures inside the package.
@@ -106,7 +106,7 @@ row left with `serve` on 2026-10-25: its harness is `designware_mobile_storage::
    and its source divides by purpose) has milestone 610 (the interface's stability is
    measured weekly)'s per-package co-change column, and the soak (step 6) is how the second is
    measured. When the soak exits, calef adds it to the lint-checked publish allowlist. The
-   `nifeos/designware_mobile_storage` repository is created when the crate moves, on the shared CI
+   `partsfoundry/designware_mobile_storage` repository is created when the crate moves, on the shared CI
    template (milestone 887), through reusable workflows: Kani through `kani-github-action`, lint,
    release. Its release workflow refuses to publish unless the proof job is green. No harness here
    reads `target_arch`, so stock Kani proves them. The patched Kani of §218 (carry a Kani patch so
@@ -116,7 +116,7 @@ row left with `serve` on 2026-10-25: its harness is `designware_mobile_storage::
    proposal; §305 (git dependencies are allowed on `nifeos/*` only, pinned to a landed commit)).
    Milestone 818 (`jh7110_entropy`: proven JH7110 TRNG logic, released on its own) is the pilot and
    soaks first. Before publication the crate is moved, not copied: it leaves this tree, and nife
-   depends on `nifeos/designware_mobile_storage` by `rev`. A copy left behind does not count. The
+   depends on `partsfoundry/designware_mobile_storage` by `rev`. A copy left behind does not count. The
    soak ends on evidence, not a duration, when all five hold:
    1. nife builds and passes CI against the repository at a pinned commit, with no path dependency
       left.
@@ -198,7 +198,7 @@ work, and the lane that renames a name drops its line.
 
 A check proves it. In nife, `cargo tree --locked -i designware_mobile_storage` resolves to `v0.1.x`
 from crates.io with a checksum in `Cargo.lock`, `crates/designware_mobile_storage` no longer exists,
-and the tree builds for all three targets. In `nifeos/designware_mobile_storage`, the run that
+and the tree builds for all three targets. In `partsfoundry/designware_mobile_storage`, the run that
 published 0.1.0 shows the Kani job green ahead of the publish job, and every harness's falsification
 patch makes its proof fail. The five soak criteria of release step 6 hold before it publishes.
 
@@ -253,7 +253,7 @@ names until the ratification pass, so this section keeps the links it carried.
 
 - **Outstanding.** The crate's repository exists and nife builds against its pinned commit. What
   remains is the tag `v0.1.0`, the soak's end conditions, the publication and nife consuming the
-  release by semantic version. Checked by `gh api repos/nifeos/designware_mobile_storage/tags`,
+  release by semantic version. Checked by `gh api repos/partsfoundry/designware_mobile_storage/tags`,
   which lists no tag, and by `cargo tree --locked -i designware_mobile_storage`, which resolves to
   the git pin and not to crates.io.
 - **Recorded.** Publishing to crates.io waits on the maintainers' hold and an architect's approval,

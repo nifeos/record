@@ -9,7 +9,7 @@ needs_person: yes
 ---
 # The standalone crates spell out unit symbols in their comments, if the rule covers prose
 
-Raised by lane/maintainer-follow-ups, at the maintainer's request: milestone 1053 (a sweep spells out the unit symbols in names) covered the crates in this tree, and nobody scanned `nifeos/e1000e` or `nifeos/designware_mobile_storage`.
+Raised by lane/maintainer-follow-ups, at the maintainer's request: milestone 1053 (a sweep spells out the unit symbols in names) covered the crates in this tree, and nobody scanned `partsfoundry/e1000e` or `partsfoundry/designware_mobile_storage`.
 
 Name: provisional. The lane mints no name.
 
@@ -19,8 +19,8 @@ Reuse: `helpers/vendored_name_gates.py unit --list` and `unit --unclear`, run wi
 
 The lane cloned both repositories read-only at their default branch and scanned them with that milestone's rules: the template's `[units]` table, Rust identifiers only, and it skips comments and strings.
 
-- `nifeos/e1000e`: 29 Rust files, 0 identifiers that carry a unit symbol, 0 listed by `--unclear`.
-- `nifeos/designware_mobile_storage`: 16 Rust files, 0 identifiers, 0 listed by `--unclear`.
+- `partsfoundry/e1000e`: 29 Rust files, 0 identifiers that carry a unit symbol, 0 listed by `--unclear`.
+- `partsfoundry/designware_mobile_storage`: 16 Rust files, 0 identifiers, 0 listed by `--unclear`.
 
 So no name in either repository needs a rename. What both hold is unit symbols in comments and documentation, the way the sources they cite spell them (`ms`, `us`, `MHz`, `kHz`, `KiB`, `GiB`, `GB`):
 

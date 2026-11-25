@@ -44,7 +44,7 @@ for the crate's own reasons.
   `parse_then_serialize_is_the_identity`.
 - P0-6, acronyms at first use: Done, [#3841](https://github.com/nifeos/nife/pull/3841). The crate-root documentation expands each acronym where
   it first appears, and the template's `prose_acronyms` reports none. Each RFC citation is a code
-  span, as `nifeos/domain_name_system` writes them, because that gate drops "for" as a small word
+  span, as `partsfoundry/domain_name_system` writes them, because that gate drops "for" as a small word
   and so never reads "Request for Comments" as an expansion of RFC.
 - P0-7, the dependency on `clock_contract`: Done, [#3804](https://github.com/nifeos/nife/pull/3804), by Decision 1. The crate keeps a private
   `NANOSECONDS_PER_SECOND` and has no dependencies.
@@ -125,7 +125,7 @@ Door: one-way. Creating a public repository and moving the crate are outward ste
 Prior art. `sntpc` and `ntp-proto` each live in their own repository and publish on their own
 cadence. nife differs in reviewing a whole crate once, before its first publish.
 Concrete example: the architect cleared `generational_table` on 2026-11-08 (UTC), and its
-repository, `nifeos/generational_table`, dates from that day.
+repository, `partsfoundry/generational_table`, dates from that day.
 
 Blocks: the move.
 

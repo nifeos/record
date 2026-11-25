@@ -82,7 +82,7 @@ then the three decisions.
 - Decision 2, the names: Done, [#3910](https://github.com/nifeos/nife/pull/3910).
 - Decision 3, the review package and clearance: Done, [#4009](https://github.com/nifeos/nife/pull/4009). Ruled 2026-11-22
   UTC: `file_system_fixture` is cleared as the second crate of the shared repository
-  `nifeos/file_system_contract`, `publish = false`.
+  `partsfoundry/file_system_contract`, `publish = false`.
 
 ## Open decisions
 

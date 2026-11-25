@@ -20,7 +20,7 @@ costs under `BUGS`. It points users who need growth to `slotmap` and `thunderdom
 
 ## What exists
 
-- `nifeos/generational_table`: `Table<T, N>` and `EntryName<T>` with its `to_bits`, `from_bits` and
+- `partsfoundry/generational_table`: `Table<T, N>` and `EntryName<T>` with its `to_bits`, `from_bits` and
   `NEVER_MINTED`, every name ratified, about 820 lines with tests and
   harnesses, no dependencies and `#![forbid(unsafe_code)]`. Its mechanism is in Generational names (`nifeos/nife:notes/generational-names.md`).
 - Five Kani harnesses, each with a falsification patch under that repository's
@@ -38,12 +38,12 @@ Reuse: none exists that fits. Searched crates.io and read twelve candidates from
 
 ## The soak
 
-- The crate lives in `nifeos/generational_table`, on the shared template of milestone 887 (crate
+- The crate lives in `partsfoundry/generational_table`, on the shared template of milestone 887 (crate
   repositories share one CI template) with its callers pinned at `partsfoundry/crate-workflows`
   `965f58a`. `script/apply-settings` applied the settings there: both rulesets, the `crates-io`
   environment with calef as reviewer, the labels, the team and private vulnerability reporting. The manifest
   keeps `publish = false`, and the caller sets `allow-unpublished` for the soak. No tag exists.
-- nife keeps no copy. `kernel` and `memory_regions` depend on `nifeos/generational_table` by `rev`
+- nife keeps no copy. `kernel` and `memory_regions` depend on `partsfoundry/generational_table` by `rev`
   (§305 (git dependencies are allowed on `nifeos/*` only, pinned to a landed commit)), at `759c8f7`,
   a commit on its `main`. The verify table, the Kani reach list, the Kani peaks table and the mutation
   triage no longer list it; the repository's own `proofs / kani` and `proofs / falsify` jobs
@@ -53,7 +53,7 @@ Reuse: none exists that fits. Searched crates.io and read twelve candidates from
   (`docs/stranger-test.md` there reads `Last run: none`), and 5 on four weeks from the tag nife
   pins.
 - A bump of the pin is a separate pull request citing the landed commit as
-  `nifeos/generational_table@<sha>`.
+  `partsfoundry/generational_table@<sha>`.
 
 ## What remains
 
@@ -69,7 +69,7 @@ The crate takes the third slot, after `file_allocation_table` (milestone
 
 ## BUGS
 
-- The `nife-smelter` app is not installed on `nifeos/generational_table`, and the repository holds
+- The `nife-smelter` app is not installed on `partsfoundry/generational_table`, and the repository holds
   none of the organization secrets `NIFE_SMELTER_APP_ID`, `NIFE_SMELTER_PRIVATE_KEY` and
   `SETTINGS_TOKEN`. `script/apply-settings` refused the app (the API wants an organization owner).
   The release workflow's tag job and the weekly settings-drift job need them, so both wait on
@@ -85,7 +85,7 @@ The crate takes the third slot, after `file_allocation_table` (milestone
 ## Follow-on
 
 - **Outstanding.** The tag `v0.1.0`, the pin moved to its commit, the soak's end conditions 2 to 5
-  and the publication. Checked by `gh api repos/nifeos/generational_table/tags`, which lists no
+  and the publication. Checked by `gh api repos/partsfoundry/generational_table/tags`, which lists no
   tag, and `docs/stranger-test.md` there, which reads `Last run: none`.
 - **Recorded.** An organization owner installs the `nife-smelter` app and grants the three secrets;
   see *BUGS* above.

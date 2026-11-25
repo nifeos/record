@@ -1,6 +1,6 @@
 # The sink protocol: one way to write bytes somewhere
 
-*Milestone 50, the protocol lane. `nifeos/byte_sink_contract`, `fixtures/src/sink.rs`, the std PAL's
+*Milestone 50, the protocol lane. `partsfoundry/byte_sink_contract`, `fixtures/src/sink.rs`, the std PAL's
 `sys/stdio/nife.rs`, and `moho_abi::Error::Gone`.*
 
 ## The problem, which was not the one anybody expected
@@ -107,7 +107,7 @@ So the protocol needs to tell two failures apart:
 ### The kernel could not tell them apart, and that was the actual finding
 
 Both arrived as `moho_abi::Error::NoSuchSlot`. A destroyed endpoint leaves the holder's capability in
-place (endpoints are named generationally, `nifeos/generational_table`), and the failure surfaces
+place (endpoints are named generationally, `partsfoundry/generational_table`), and the failure surfaces
 when `sched::take_ipc_aborted` is set; `system_call.rs` mapped that to `NoSuchSlot`, the same value an
 empty slot returns. The only available behavior was therefore the wrong one for a pipeline, and no
 amount of userspace protocol design could have recovered the distinction, because the fact lives in

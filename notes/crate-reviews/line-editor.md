@@ -6,7 +6,7 @@ together outgrow the page. Its twin is [`terminal_contract`](terminal-contract.m
 the cut took out of this crate.*
 
 The architect cleared this package on 2026-11-22 (UTC), with `publish = false`, no tag and no
-publish: the clearance is the go to create `nifeos/line_editor`, and the move waits on the work
+publish: the clearance is the go to create `partsfoundry/line_editor`, and the move waits on the work
 under What still blocks the move. It describes the crate as `main` holds it once [#3965](https://github.com/nifeos/nife/pull/3965) lands; the checks under
 "What was run" ran at `97d16ae8b`, before the renames. The findings and their statuses are in
 [milestone 1098 (`line_editor`: what an outside maintainer would fix before it leaves)](../../design/roadmap/1098-line-editor-outside-review.md);
@@ -156,7 +156,7 @@ landed. What remains is the move's own work.
 
 ## Rulings
 
-- The clearance (2026-11-22 UTC): cleared, the go to create `nifeos/line_editor` with
+- The clearance (2026-11-22 UTC): cleared, the go to create `partsfoundry/line_editor` with
   `publish = false`, no tag and no publish. The move waits on its own remaining work.
 
 ## Decisions for the architect

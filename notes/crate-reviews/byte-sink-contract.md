@@ -108,7 +108,7 @@ The other P1 and P2 items:
 
 | item | state |
 |---|---|
-| P0-1, the crate stands alone | done; the move commit in nifeos/byte_sink_contract carries the README, both licenses, literal `license`, `lints` and `rust-version`, and the scaffold, with no `Name:` block ([#3900](https://github.com/nifeos/nife/pull/3900)) |
+| P0-1, the crate stands alone | done; the move commit in partsfoundry/byte_sink_contract carries the README, both licenses, literal `license`, `lints` and `rust-version`, and the scaffold, with no `Name:` block ([#3900](https://github.com/nifeos/nife/pull/3900)) |
 | P0-2, `VERSION` text | done |
 | P1-4, `moho_abi` dev-dependency | done; the crate has no dependency |
 | P1-5, proofs | done, six harnesses each with a patch that fails it |
@@ -118,7 +118,7 @@ The other P1 and P2 items:
 | P2-11, narrow `usize` | done; `unpack` compares the count as `u64` |
 | P2-12, `first_word` typed parameters | done (ruled 2026-11-21 UTC); `first_word` takes a `u8` opcode and a `u32` length, and the opcodes are `u8` |
 | P2-13, a words struct for `pack` | done (ruled 2026-11-21 UTC); `pack` returns `(MessageWords, taken)` and `unpack` takes the struct |
-| P2-14, mutant exemptions | done (nifeos/byte_sink_contract#1); the four survivors the repository's mutation run names are exempted with their reasons |
+| P2-14, mutant exemptions | done (partsfoundry/byte_sink_contract#1); the four survivors the repository's mutation run names are exempted with their reasons |
 | P2-15, severity on any first word | done |
 
 ## Names
@@ -143,7 +143,7 @@ The std copy (`sys/pal/nife/sinkproto.rs`) is copied from `src/lib.rs` by `cargo
 
 ## The move
 
-The crate lives in nifeos/byte_sink_contract, and nife depends on it by `git` and `rev`
+The crate lives in partsfoundry/byte_sink_contract, and nife depends on it by `git` and `rev`
 ([#3900](https://github.com/nifeos/nife/pull/3900)). The repository's `check` and `proofs` workflows
 pass on its main branch.
 

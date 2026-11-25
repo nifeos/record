@@ -62,7 +62,7 @@ The P1 items are in [the appendix](1079-byte-sink-contract-outside-review/before
 Each gives the background, then the recommendation, then prior art and one concrete example.
 A and B are two-way before the first tag, and the maintainer has decided them, provisionally.
 C and D have their rulings. The review was cleared on 2026-11-21 (UTC), and the crate lives in
-nifeos/byte_sink_contract.
+partsfoundry/byte_sink_contract.
 
 ### A. Does the byte-sink contract ever get a wire version operation?
 
@@ -171,7 +171,7 @@ The checks are in [the appendix](1079-byte-sink-contract-outside-review/done-whe
 ## Finding status
 
 - P0-1, the crate stands alone: Done, [#3900](https://github.com/nifeos/nife/pull/3900). The move
-  commit nifeos/byte_sink_contract@8a6c4599 carries the README in the template's section order, both
+  commit partsfoundry/byte_sink_contract@8a6c4599 carries the README in the template's section order, both
   licenses, a literal `license`, `rust-version` and lints, the scaffold, no `Name:` block and no
   reference into this tree; the crate-root specification landed in
   [#3565](https://github.com/nifeos/nife/pull/3565).
@@ -194,7 +194,7 @@ The checks are in [the appendix](1079-byte-sink-contract-outside-review/done-whe
   `first_word` takes `operation: u8` and `len: u32`.
 - P2-13, `pack` returns a bare four-tuple: Done, [#3880](https://github.com/nifeos/nife/pull/3880).
   `pack` and `unpack` take and return `MessageWords`, whose name waits for the release review.
-- P2-14, equivalent mutants: Done, nifeos/byte_sink_contract#1. The repository's
+- P2-14, equivalent mutants: Done, partsfoundry/byte_sink_contract#1. The repository's
   `.github/mutants-exempts` lists the four survivors its mutation run names, each with its reason,
   and its mutation configuration skips the Kani module.
 - P2-15, severity bits on any first word: Done, [#3565](https://github.com/nifeos/nife/pull/3565).
@@ -205,7 +205,7 @@ The checks are in [the appendix](1079-byte-sink-contract-outside-review/done-whe
 - Decision D, the names: Done, [#3873](https://github.com/nifeos/nife/pull/3873) and
   [#3880](https://github.com/nifeos/nife/pull/3880).
 - The review clearance and the move: Done, [#3900](https://github.com/nifeos/nife/pull/3900). nife
-  depends on nifeos/byte_sink_contract by `rev`, with `publish = false`, no tag and no publish.
+  depends on partsfoundry/byte_sink_contract by `rev`, with `publish = false`, no tag and no publish.
 
 ## Follow-on
 
@@ -226,4 +226,4 @@ The checks are in [the appendix](1079-byte-sink-contract-outside-review/done-whe
 An outside review of `byte_sink_contract` before it leaves found two findings that block the move. The crate does not stand alone, and its `VERSION` text specifies a wire operation that does not and cannot exist. It found eight to land before the first release. They are the fixture module in the public API, the `abi` dev-dependency, no proofs, a kind byte the decoder ignores, a British spelling, undefined end-of-stream words, names a later rule reopens, and a zero-count contradiction. It found five for later.
 Four decisions: the architect ruled the end-of-stream words reserved and the names, and the
 maintainer decided, provisionally, no wire version operation and `fixture` out of the published
-crate. The crate lives in nifeos/byte_sink_contract, and every finding has landed.
+crate. The crate lives in partsfoundry/byte_sink_contract, and every finding has landed.

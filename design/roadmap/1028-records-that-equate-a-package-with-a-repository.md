@@ -29,7 +29,7 @@ members all leave in its one repository. It does not fit a package whose member 
 repository of their own. `packages/contracts.package.toml` sets `home = { repo = "contracts" }`.
 Milestone 1017 (the contract crates leave in this order) gives each of its 17 crates a repository
 named after the crate. `packages/drivers.package.toml` says in a comment, not a field, that
-`jh7110_entropy` lives in `nifeos/jh7110_entropy`.
+`jh7110_entropy` lives in `partsfoundry/jh7110_entropy`.
 
 The format wants one of two shapes. One gives a `home` to each member crate that leaves alone. The
 other lets a package's `home` name a repository per crate by rule. A lane picks one under milestone

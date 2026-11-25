@@ -25,8 +25,8 @@ the API the provisional rulings below leave it, and of the version, tag and repo
 | item | value |
 |---|---|
 | crate | `file_allocation_table`, ratified on #1806 (FAT spelled out); crates.io answers 404 for it |
-| version and tag | `0.1.0` in the manifest; the tag `v0.1.0` goes on the move commit, as `nifeos/jh7110_entropy`'s did |
-| repository | `nifeos/file_allocation_table`, the crate's own name, as the pilot's is; it exists |
+| version and tag | `0.1.0` in the manifest; the tag `v0.1.0` goes on the move commit, as `partsfoundry/jh7110_entropy`'s did |
+| repository | `partsfoundry/file_allocation_table`, the crate's own name, as the pilot's is; it exists |
 | edition, `rust-version` | 2024, 1.88 |
 | license | `MIT OR Apache-2.0`, both texts at the crate root |
 | `publish` | `false`; `crates/publish-allowlist.txt` lists no crate |
@@ -289,4 +289,4 @@ open.
    pins it by `rev` with the version beside it. The pilot's repository carries the crate's own
    name, underscores included.
    Recommendation: `0.1.0`, the tag `v0.1.0` on the move commit once the answers above have landed,
-   and `nifeos/file_allocation_table`.
+   and `partsfoundry/file_allocation_table`.

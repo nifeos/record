@@ -35,7 +35,7 @@ rows, Kani, and the crate's own harness builder (`any_small_capability_table`). 
 
 ## Finding status
 
-The crate lives in nifeos/capability_table, which the kernel pins. Each line states what that repository's
+The crate lives in partsfoundry/capability_table, which the kernel pins. Each line states what that repository's
 `main` and nife's show.
 
 - P0-1, the manifest stands alone: Done, [#3888](https://github.com/nifeos/nife/pull/3888). The
@@ -79,7 +79,7 @@ The crate lives in nifeos/capability_table, which the kernel pins. Each line sta
 - P2-15, notes beside the crate have drifted: Done,
   [#3565](https://github.com/nifeos/nife/pull/3565),
   [#3656](https://github.com/nifeos/nife/pull/3656).
-- P2-16, `Option<Capability<O>>` has no niche: Done, nifeos/capability_table#2, which keeps a
+- P2-16, `Option<Capability<O>>` has no niche: Done, partsfoundry/capability_table#2, which keeps a
   marker bit in a `NonZeroU32` so a 64-slot table of `u64` objects is 1,040 bytes, not 1,552. The
   kernel pins its merge commit, and the kernel's table is unchanged, because its `Object` enum
   already gave `Option` a niche.
@@ -88,17 +88,17 @@ The crate lives in nifeos/capability_table, which the kernel pins. Each line sta
 - D2, the five names: Done, [#3777](https://github.com/nifeos/nife/pull/3777), ruled 2026-11-19
   (UTC), option A. `delegate`, `GrantRequired`, `SlotOccupied`, `capacity` and `iter` stand as built.
 - The move: Done, [#3897](https://github.com/nifeos/nife/pull/3897),
-  `nifeos/capability_table#1`, cleared 2026-11-21 (UTC), option A. The kernel depends on
-  nifeos/capability_table at a pinned revision; `Reap`, `reap_decision` and `survey_includes` stay
+  `partsfoundry/capability_table#1`, cleared 2026-11-21 (UTC), option A. The kernel depends on
+  partsfoundry/capability_table at a pinned revision; `Reap`, `reap_decision` and `survey_includes` stay
   in `kernel/src/sched/region_reaping.rs` with their four proofs.
 
 ## Open decisions
 
 None. The clearance below has its ruling.
 
-### Clear the review, which creates nifeos/capability_table
+### Clear the review, which creates partsfoundry/capability_table
 
-Ruled 2026-11-21 (UTC), option A. The crate moves to nifeos/capability_table with `publish =
+Ruled 2026-11-21 (UTC), option A. The crate moves to partsfoundry/capability_table with `publish =
 false`, no tag and no publish. It carries the table, the rights algebra and `Capability::delegate`.
 `Reap`, `reap_decision` and `survey_includes`, with their Kani harnesses and falsification patches,
 stay in nife, wired into `script/verify` and `script/falsifications`, with no change of behavior.
@@ -121,7 +121,7 @@ crate from the first day; moving back is a second move.
 Prior art (recalled, not read): the Rust project moved `libc` out of the compiler's tree into a
 repository of its own, and the compiler consumes it back by version. Where nife differs: a review
 package checks that the crate stands alone before it leaves, not after. Example:
-`jh7110_entropy`, whose review the architect cleared on 2026-11-01 (UTC), lives in nifeos/jh7110_entropy,
+`jh7110_entropy`, whose review the architect cleared on 2026-11-01 (UTC), lives in partsfoundry/jh7110_entropy,
 and nife depends on it at a pinned revision.
 
 What it blocks: the move, and so the first tag and the first publish.

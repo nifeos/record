@@ -33,7 +33,7 @@ tool.
 Items 1 to 4 are under [P0](#p0-blocks-the-move), 5 to 9 in [the before-the-tag
 appendix](1087-domain-name-system-outside-review/before-the-tag.md), and 10 to 16 in [the later
 items](1087-domain-name-system-outside-review/later-items.md). The crate lives in
-`nifeos/domain_name_system`, tagged `v0.1.0-pre.1`.
+`partsfoundry/domain_name_system`, tagged `v0.1.0-pre.1`.
 
 - Item 1 (P0), unratified public names: Done, [#3728](https://github.com/nifeos/nife/pull/3728),
   which ratified every public name as built.
@@ -41,7 +41,7 @@ items](1087-domain-name-system-outside-review/later-items.md). The crate lives i
   [#3658](https://github.com/nifeos/nife/pull/3658).
 - Item 3 (P0), the files a stranger needs are absent: Done,
   [#3658](https://github.com/nifeos/nife/pull/3658) for the README and both license files, the move
-  commit for the scaffold files and caller workflows, and nifeos/domain_name_system#3 for
+  commit for the scaffold files and caller workflows, and partsfoundry/domain_name_system#3 for
   `docs/stranger-test.md` and the stranger run.
 - Item 4 (P0), shipped text points into nife: Done,
   [#3608](https://github.com/nifeos/nife/pull/3608).
@@ -53,11 +53,11 @@ items](1087-domain-name-system-outside-review/later-items.md). The crate lives i
   [#3608](https://github.com/nifeos/nife/pull/3608).
 - Item 7 (P1), names that need the specification, and the `address` gate: Done, parts a, c and d in
   [#3608](https://github.com/nifeos/nife/pull/3608) and
-  [#3668](https://github.com/nifeos/nife/pull/3668), and part b in nifeos/domain_name_system#1,
+  [#3668](https://github.com/nifeos/nife/pull/3668), and part b in partsfoundry/domain_name_system#1,
   which names the binding and the test names as IPv4. `check / standalone` is green on the crate's
   `main` with no `tcp` or `udp` line in `.github/accepted-words`.
 - Item 8 (P1), a TTL with its high bit set: Done, [#3559](https://github.com/nifeos/nife/pull/3559).
-- Item 9 (P1), the equivalent mutants: Done, nifeos/domain_name_system#4, which exempts the six
+- Item 9 (P1), the equivalent mutants: Done, partsfoundry/domain_name_system#4, which exempts the six
   survivors the first full run named, and `mutation / mutation` is green on the crate's `main`.
 - Item 10 (P2), `Display` and `FromStr`: Done, [#3608](https://github.com/nifeos/nife/pull/3608).
 - Item 11 (P2), type sizes: Done, [#3608](https://github.com/nifeos/nife/pull/3608).
@@ -226,7 +226,7 @@ move does not wait for the resolver contract, whose names have settled. Creating
 is an outward step, so the clearance itself stays the architect's. Prior art:
 `file_allocation_table` and `e1000e` each cleared from a written package before their repository
 existed. Example: the architect clears the package, and `script/crate-move domain_name_system`
-creates `nifeos/domain_name_system` with the three mutant exemptions and the fuzz target staged.
+creates `partsfoundry/domain_name_system` with the three mutant exemptions and the fuzz target staged.
 
 ## Done when
 
@@ -235,7 +235,7 @@ The checks are in [the appendix](1087-domain-name-system-outside-review/done-whe
 ## Follow-on
 
 - **Done.** Every finding, by the pull requests under [Finding status](#finding-status). The crate
-  lives in `nifeos/domain_name_system`, and its later work is that repository's.
+  lives in `partsfoundry/domain_name_system`, and its later work is that repository's.
 
 ## BUGS
 

@@ -67,7 +67,7 @@ then clears once decisions 1 and 2 are ruled, with no tag and no publication. B,
 
 Prior art. `generational_table`, `block_roster` and `file_allocation_table` each moved on a cleared
 review with no tag. Where nife differs: nothing outside nife links the crate. Example: under A, the
-kernel and `inter_process_communication` both pin `nifeos/intrusive_queue` by revision.
+kernel and `inter_process_communication` both pin `partsfoundry/intrusive_queue` by revision.
 
 Door: one-way: a repository that exists has a name others link to.
 

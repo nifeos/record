@@ -87,7 +87,7 @@ Piece 1 is complete and independent of this.
   the userspace clock service reads the CMOS through it. `rtc_region()` stays `None` on x86_64
   because the CMOS has no page.
 - **Recorded.** `clock_contract` (spelled clock_proto when this was written, and now at
-  `nifeos/clock_contract`) carries the new `rtc` kind, shipped as a provisional name like every
+  `partsfoundry/clock_contract`) carries the new `rtc` kind, shipped as a provisional name like every
   name a lane mints. `CMOS` is unlike its siblings in kind. `PL031` and `GOLDFISH`
   name a register layout the clock service reads through a mapping, while `CMOS` names two I/O ports
   it reads through a `PortRange`.

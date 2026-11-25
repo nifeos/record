@@ -174,6 +174,6 @@ maintainer ruled that provisionally, and it is a two-way door.
 ## Recommendation
 
 Cleared. The architect ruled on 2026-11-20 (UTC) that the seven public names stand as built, with
-`cost_bound` renamed `step_bound`, and cleared `byte_glob` for `nifeos/byte_glob` with `publish =
+`cost_bound` renamed `step_bound`, and cleared `byte_glob` for `partsfoundry/byte_glob` with `publish =
 false`, no tag and no publish. The move lane starts once the prove shard is green and the
 `step_bound` rename has landed. Its list above is mechanical.

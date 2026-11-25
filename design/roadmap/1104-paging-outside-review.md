@@ -166,7 +166,7 @@ Door: one-way. Creating a public repository and moving the crate are outward ste
 Prior art. `aarch64-paging` and `page_table_multiarch` each live in their own repository and
 publish on their own cadence. nife differs in reviewing a whole crate once, before its first
 publish. Concrete example: the architect cleared `generational_table` on 2026-11-08 (UTC), and its
-repository, `nifeos/generational_table`, dates from that day.
+repository, `partsfoundry/generational_table`, dates from that day.
 
 Ruled: A on 2026-11-20 (UTC). The architect clears the review and approves `nifeos/page_tables` with `publish = false`, no tag and no publish. The move lane takes items 1, 3, 4, 9 and 11.
 

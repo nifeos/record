@@ -60,7 +60,7 @@ With every finding Done, the review counts as built.
 - P0-3, 30 names the template gates refuse: Done,
   [#3614](https://github.com/nifeos/nife/pull/3614).
 - P1-4, README, license files, changelog, scaffold files and stranger test: Done, [#3828](https://github.com/nifeos/nife/pull/3828), which moved
-  them into the repository `nifeos/universal_serial_bus`.
+  them into the repository `partsfoundry/universal_serial_bus`.
 - P1-5, review package and index row: Done,
   [#3614](https://github.com/nifeos/nife/pull/3614)
   ([the package](../../notes/crate-reviews/universal-serial-bus.md)).
@@ -243,7 +243,7 @@ returns `Result<DeviceDescriptor, Refusal>`, and `BootReport::parse` keeps `Opti
 
 ## Follow-on
 
-- **Milestone 820.** A tag of `nifeos/universal_serial_bus` needs its own approval. No publish.
+- **Milestone 820.** A tag of `partsfoundry/universal_serial_bus` needs its own approval. No publish.
 
 ## Done when
 

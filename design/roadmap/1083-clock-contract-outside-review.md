@@ -27,21 +27,21 @@ Reuse: the template and its scaffold, loom, Kani, cargo-mutants, cargo-llvm-cov.
 
 ## Finding status
 
-Read against nifeos/clock_contract `main` at `0aa2107` and nife `main`.
+Read against partsfoundry/clock_contract `main` at `0aa2107` and nife `main`.
 
 - P0-1, template naming and prose gates: Done,
   [#3640](https://github.com/nifeos/nife/pull/3640),
   [#3727](https://github.com/nifeos/nife/pull/3727),
   [#3784](https://github.com/nifeos/nife/pull/3784) and
-  [nifeos/clock_contract#1](https://github.com/partsfoundry/clock_contract/pull/1). The renames, the
+  [partsfoundry/clock_contract#1](https://github.com/partsfoundry/clock_contract/pull/1). The renames, the
   expanded acronyms, the badge row and the private `take_claim` are in the source, and
   `.github/accepted-words` keeps `cmos`, `pl` and `unix` with their reasons.
 - P0-2, clippy `doc_markdown` outside nife: Done,
   [#3640](https://github.com/nifeos/nife/pull/3640). The crate's `clippy.toml` adds `VisionFive`
   to `doc-valid-idents`.
 - P1-3, mutation exemptions and loom: Done,
-  [nifeos/clock_contract#4](https://github.com/partsfoundry/clock_contract/pull/4) and
-  [nifeos/clock_contract#5](https://github.com/partsfoundry/clock_contract/pull/5). The survivors the
+  [partsfoundry/clock_contract#4](https://github.com/partsfoundry/clock_contract/pull/4) and
+  [partsfoundry/clock_contract#5](https://github.com/partsfoundry/clock_contract/pull/5). The survivors the
   first `mutation` run named carry reasons in `.github/mutants-exempts`, and the template's
   `proofs / loom` job runs loom under `--cfg loom`.
 - P1-4, the manifest outside nife: Done,
@@ -78,10 +78,10 @@ Read against nifeos/clock_contract `main` at `0aa2107` and nife `main`.
 - Review clearance: Done, [#3779](https://github.com/nifeos/nife/pull/3779) (ruled 2026-11-19
   UTC), as [Decision 4](#decision-4-the-review-is-cleared-and-the-crate-moves) records.
 - The move: Done, [#3781](https://github.com/nifeos/nife/pull/3781). The crate lives at
-  `nifeos/clock_contract`, with `publish = false` and no tag, and nife pins it by commit.
+  `partsfoundry/clock_contract`, with `publish = false` and no tag, and nife pins it by commit.
 - Stranger test: Done,
-  [nifeos/clock_contract#2](https://github.com/partsfoundry/clock_contract/pull/2) and
-  [nifeos/clock_contract#3](https://github.com/partsfoundry/clock_contract/pull/3). The record is
+  [partsfoundry/clock_contract#2](https://github.com/partsfoundry/clock_contract/pull/2) and
+  [partsfoundry/clock_contract#3](https://github.com/partsfoundry/clock_contract/pull/3). The record is
   `docs/stranger-test.md` in the crate's repository.
 
 ## Goal
@@ -221,7 +221,7 @@ spelling.
 Ruled 2026-11-19 (UTC), option A: the review of `clock_contract` clears on the condition that
 [the review package](../../notes/crate-reviews/clock-contract.md) names the landed renames and no
 longer says it waits on the names. The package does. The clearance approves creating
-`nifeos/clock_contract` and moving the crate there. It approves no tag and no publish; each is a
+`partsfoundry/clock_contract` and moving the crate there. It approves no tag and no publish; each is a
 separate question.
 
 A crate leaves nife for its own repository in the `nifeos` organization only once its review
@@ -242,7 +242,7 @@ The checks are in [the appendix](1083-clock-contract-outside-review/done-when.md
 
 ## Follow-on
 
-- **Recorded.** A pre-release tag for `nifeos/clock_contract` is a separate question, not asked
+- **Recorded.** A pre-release tag for `partsfoundry/clock_contract` is a separate question, not asked
   yet.
 
 ## BUGS
@@ -263,4 +263,4 @@ The checks are in [the appendix](1083-clock-contract-outside-review/done-when.md
 
 ## Index row
 
-An outside review of `clock_contract` before it leaves. Two required checks are red on the first commit (the template's naming and prose gates, and clippy without nife's `clippy.toml`). Seven items land before the move finishes, and six wait for later. The page's layout and identity are fixed: two copies so a reader never waits on a writer, frozen as interface 8, version 1, magic `CLOCKv01`. The public names stand as built, and the review clears the crate for the move to `nifeos/clock_contract`, with no tag and no publish.
+An outside review of `clock_contract` before it leaves. Two required checks are red on the first commit (the template's naming and prose gates, and clippy without nife's `clippy.toml`). Seven items land before the move finishes, and six wait for later. The page's layout and identity are fixed: two copies so a reader never waits on a writer, frozen as interface 8, version 1, magic `CLOCKv01`. The public names stand as built, and the review clears the crate for the move to `partsfoundry/clock_contract`, with no tag and no publish.

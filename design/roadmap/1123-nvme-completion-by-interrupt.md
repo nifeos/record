@@ -12,7 +12,7 @@ needs_person: no
 The number, title and slug are provisional. The branch that wrote this block is
 `roadmap/tgoskits-prior-art`.
 
-Today both halves of the NVMe path poll. The `nifeos/non_volatile_memory_express` crate leaves the
+Today both halves of the NVMe path poll. The `partsfoundry/non_volatile_memory_express` crate leaves the
 wait to its caller, and its `Command::create_io_completion_queue` writes `IEN=0` and vector 0. The
 user-space driver in `components/src/non_volatile_memory_express_data_plane.rs` spins on the phase
 tag of the completion ring for up to `SPIN_BOUND` polls, and its admin twin does the same. Each
@@ -117,7 +117,7 @@ calls `ACKNOWLEDGE`.
 
 1. The architect rules the four decisions above.
 2. The crate takes the interrupt-enable flag and the vector in `create_io_completion_queue`, and
-   names `INTMS` and `INTMC`. The work lands in `nifeos/non_volatile_memory_express` through its own
+   names `INTMS` and `INTMC`. The work lands in `partsfoundry/non_volatile_memory_express` through its own
    queue, and nife's pin moves after it.
 3. The kernel routes the NVMe function's interrupts: as many MSI-X entries as the ruling allows,
    or INTx where the machine has no MSI. It grants the result in the capabilities the ruling chose.

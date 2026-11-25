@@ -19,7 +19,7 @@ the VisionFive 2's serial adapter and shares its local network:
 
 ## What this decides, and what it does not
 
-The crate `nifeos/jh7110_entropy` holds the JH7110 TRNG's register map and the function that
+The crate `partsfoundry/jh7110_entropy` holds the JH7110 TRNG's register map and the function that
 decides whether a generation succeeded. Its README records which commit has run on a board.
 This session runs a commit on one: a small bare-metal payload, built against one commit of the
 crate, performs the register sequences below and prints one checksummed line per result, and a
@@ -74,8 +74,8 @@ The commit under test is the one the release will tag: the tip of the crate's `m
 request that changes what the checks exercise has merged.
 
 ```
-gh pr list -R nifeos/jh7110_entropy --state open
-gh api repos/nifeos/jh7110_entropy/commits/main --jq .sha
+gh pr list -R partsfoundry/jh7110_entropy --state open
+gh api repos/partsfoundry/jh7110_entropy/commits/main --jq .sha
 ```
 
 If an open pull request changes `src/`, stop and ask whether to wait for it. Otherwise record the

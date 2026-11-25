@@ -127,7 +127,7 @@ its place in step 6 of milestone 1017, after `machine_statistics_contract`,
 Prior art: the Rust project moved `libc` out of the compiler's tree into a repository of its own,
 and the compiler consumes it back by version. Where nife differs: a review package checks that the
 crate stands alone before it leaves. Example: `jh7110_entropy`, cleared on 2026-11-01 (UTC), lives
-in nifeos/jh7110_entropy, and nife depends on it at a pinned revision.
+in partsfoundry/jh7110_entropy, and nife depends on it at a pinned revision.
 
 ### The `_BYTES` names
 

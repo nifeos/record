@@ -39,7 +39,7 @@ milestone reaches delivery.
   [`notes/crate-reviews/inter-process-communication.md`](../../notes/crate-reviews/inter-process-communication.md)
   is the package, with a row in the index.
 - P0-2, the one dependency has not left and appears in no plan: Done, [#3892](https://github.com/nifeos/nife/pull/3892). `intrusive_queue`
-  left first (D3), and the crate takes `nifeos/intrusive_queue` by `rev`.
+  left first (D3), and the crate takes `partsfoundry/intrusive_queue` by `rev`.
 - P0-3, the crate does not stand alone: At the move. The move strips every `Name:` block and the
   citations, and gives the manifest its own `license`, `lints` and `rust-version` in place of
   `license.workspace` and `[lints]`, which `Cargo.toml` still inherits.
@@ -66,7 +66,7 @@ milestone reaches delivery.
   against the new code.
 - P2-12a, `Futexes<T, 0>` panics: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
 - P2-12b, `Futexes` as a stranger reads it: Done, [#3963](https://github.com/nifeos/nife/pull/3963)
-  and nifeos/intrusive_queue#2, which adds the read-only `Queue::iter` that lets
+  and partsfoundry/intrusive_queue#2, which adds the read-only `Queue::iter` that lets
   `AddressWaitTable::waiter_count` take `&self`. [#3824](https://github.com/nifeos/nife/pull/3824) built the names (D5),
   [#3874](https://github.com/nifeos/nife/pull/3874) spelled the type out as `AddressWaitTable`,
   and [#3883](https://github.com/nifeos/nife/pull/3883) ratified them.
@@ -192,7 +192,7 @@ The rules in force, with their background and prior art, are in
 ## Follow-on
 
 - **Recorded.** Every finding marked At the move under "Finding status" lands with the move, each
-  checked against the crate's sources on main and `nifeos/intrusive_queue`.
+  checked against the crate's sources on main and `partsfoundry/intrusive_queue`.
 - **Recorded.** `crates/externalization-list.txt` does not name this crate; milestone 1017's list
   records the pair, `intrusive_queue` first.
 

@@ -73,7 +73,7 @@ three bare-metal targets, both fuzz targets build and run over their corpus, all
 prove, and each of the five falsification patches turns its harness red. On a desktop the five
 proofs take about 7 minutes and peak near 2.2 gigabytes of memory.
 
-Repository. `nifeos/universal_serial_bus`, with `publish = false`, no tag and no publish. The
+Repository. `partsfoundry/universal_serial_bus`, with `publish = false`, no tag and no publish. The
 cleared review approved it on 2026-11-19 (UTC). `components` depends on it by git revision.
 
 Recommendation. Cleared to move; the repository exists.

@@ -55,7 +55,7 @@ release steps.
   six records name `falsifications/...`; the `proofs` workflow is green on the repository's main.
 - P1-3, mutation testing would reach the inline proof module: Done,
   [#3566](https://github.com/nifeos/nife/pull/3566) split the file, and
-  [nifeos/byte_glob#1](https://github.com/partsfoundry/byte_glob/pull/1) excludes `src/verification.rs`
+  [partsfoundry/byte_glob#1](https://github.com/partsfoundry/byte_glob/pull/1) excludes `src/verification.rs`
   in the repository's `.cargo/mutants.toml`.
 - P1-4, no `forbid(unsafe_code)`: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
 - P1-5, the `/` caveat is missing: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
@@ -72,7 +72,7 @@ release steps.
 - P2-4, no fuzz target: Done, [partsfoundry/byte_glob#2](https://github.com/partsfoundry/byte_glob/pull/2),
   a target against a separately written reference matcher, opted in to the weekly run.
 - P2-5, two harnesses fix one dot rule: Will not fix in full, ruled 2026-11-20 by the maintainer as
-  a two-way call in [nifeos/byte_glob#1](https://github.com/partsfoundry/byte_glob/pull/1).
+  a two-way call in [partsfoundry/byte_glob#1](https://github.com/partsfoundry/byte_glob/pull/1).
   [#3566](https://github.com/nifeos/nife/pull/3566) gave both harnesses a symbolic dot rule and
   `any_lengths()`. The cost harness keeps it. The no-magic harness states its claim under
   `LeadingDot::Ordinary` again, because the symbolic rule took 567 seconds of the 20-minute proofs
@@ -85,12 +85,12 @@ release steps.
 - Decision 1, the registry name: Done, [#3578](https://github.com/nifeos/nife/pull/3578).
 - Decision 2, the seven names: Done, [#3790](https://github.com/nifeos/nife/pull/3790) and
   [#3832](https://github.com/nifeos/nife/pull/3832).
-- Decision 3, ratify the seven names and create `nifeos/byte_glob`: Done,
+- Decision 3, ratify the seven names and create `partsfoundry/byte_glob`: Done,
   [#3836](https://github.com/nifeos/nife/pull/3836). The repository exists with `publish = false`
   and no tag, and nife pins it by commit.
 - R1, the review package: Done, [#3790](https://github.com/nifeos/nife/pull/3790), at
   [notes/crate-reviews/byte-glob.md](../../notes/crate-reviews/byte-glob.md).
-- R2, ratify the seven names and clear `nifeos/byte_glob`: Done,
+- R2, ratify the seven names and clear `partsfoundry/byte_glob`: Done,
   [#3832](https://github.com/nifeos/nife/pull/3832).
 
 ## Open decisions
@@ -196,10 +196,10 @@ Ruled 2026-11-20 (UTC): `matches`, `matches_with`, `has_magic`, `literal`, `matc
 `literal` is a noun for an `Option` value. `step_bound` sits beside `match_steps` and states the
 unit. The tuple return of `match_steps` stays the maintainer's provisional call, a two-way door.
 
-### Decision 3. Ratify the seven names and create `nifeos/byte_glob`
+### Decision 3. Ratify the seven names and create `partsfoundry/byte_glob`
 
 Ruled 2026-11-20 (UTC), option A: the architect cleared the review package. The repository
-`nifeos/byte_glob` has the go, with `publish = false`, no tag and no publish. The move
+`partsfoundry/byte_glob` has the go, with `publish = false`, no tag and no publish. The move
 (milestone 1017, step 5) starts once the prove shard is green and the `step_bound` rename has
 landed. The package is [notes/crate-reviews/byte-glob.md](../../notes/crate-reviews/byte-glob.md).
 
@@ -231,7 +231,7 @@ The checks are in [the appendix](1092-glob-outside-review/done-when.md).
 
 ## Follow-on
 
-- **Recorded.** The crate lives at `nifeos/byte_glob` with `publish = false` and no tag, and nife
+- **Recorded.** The crate lives at `partsfoundry/byte_glob` with `publish = false` and no tag, and nife
   pins it by commit. The stranger test is a separate lane's. The module names `tests` and
   `verification` ship provisional.
 
@@ -241,5 +241,5 @@ An outside reading of `byte_glob` before it leaves. The crate name is `byte_glob
 README, the manifest fields and the split proof module are in, and the test that linked two staying
 crates lives in `grant_plan`. `Dot` is `LeadingDot` and `cost_bound` is `step_bound` (Decision 2), and the architect cleared the review package and
 ratified the seven names (Decision 3). The move is done: the crate lives at
-`nifeos/byte_glob`, and nife pins it by commit. The later items landed. The matcher itself checks out. Publishing
+`partsfoundry/byte_glob`, and nife pins it by commit. The later items landed. The matcher itself checks out. Publishing
 stays held.

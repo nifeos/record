@@ -115,6 +115,6 @@ nife, three of them dev-dependencies that the move rewrites.
 ## Recommendation
 
 Cleared to move. The architect cleared this review together with `grant_contract`'s on 2026-11-22
-(UTC), which approves creating `nifeos/grant_plan` with `publish = false`, no tag and no
+(UTC), which approves creating `partsfoundry/grant_plan` with `publish = false`, no tag and no
 publication. The proofs (P1-5) and the first mutation run (P1-14) happen in the new repository
 before any tag.
