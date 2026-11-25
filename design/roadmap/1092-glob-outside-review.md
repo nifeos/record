@@ -55,7 +55,7 @@ release steps.
   six records name `falsifications/...`; the `proofs` workflow is green on the repository's main.
 - P1-3, mutation testing would reach the inline proof module: Done,
   [#3566](https://github.com/nifeos/nife/pull/3566) split the file, and
-  [nifeos/byte_glob#1](https://github.com/nifeos/byte_glob/pull/1) excludes `src/verification.rs`
+  [nifeos/byte_glob#1](https://github.com/partsfoundry/byte_glob/pull/1) excludes `src/verification.rs`
   in the repository's `.cargo/mutants.toml`.
 - P1-4, no `forbid(unsafe_code)`: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
 - P1-5, the `/` caveat is missing: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
@@ -72,7 +72,7 @@ release steps.
 - P2-4, no fuzz target: Done, [partsfoundry/byte_glob#2](https://github.com/partsfoundry/byte_glob/pull/2),
   a target against a separately written reference matcher, opted in to the weekly run.
 - P2-5, two harnesses fix one dot rule: Will not fix in full, ruled 2026-11-20 by the maintainer as
-  a two-way call in [nifeos/byte_glob#1](https://github.com/nifeos/byte_glob/pull/1).
+  a two-way call in [nifeos/byte_glob#1](https://github.com/partsfoundry/byte_glob/pull/1).
   [#3566](https://github.com/nifeos/nife/pull/3566) gave both harnesses a symbolic dot rule and
   `any_lengths()`. The cost harness keeps it. The no-magic harness states its claim under
   `LeadingDot::Ordinary` again, because the symbolic rule took 567 seconds of the 20-minute proofs

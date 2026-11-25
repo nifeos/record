@@ -178,10 +178,10 @@ The checks are in [the done-when appendix](1073-counter-frequency-contract-outsi
 - The move to its own repository: Done. The crate lives at `nifeos/counter_frequency_contract`,
   and nife pins it by the commit of its tag.
 - The stranger test: Done,
-  [nifeos/counter_frequency_contract#2](https://github.com/nifeos/counter_frequency_contract/pull/2)
-  and [nifeos/counter_frequency_contract#3](https://github.com/nifeos/counter_frequency_contract/pull/3).
+  [nifeos/counter_frequency_contract#2](https://github.com/partsfoundry/counter_frequency_contract/pull/2)
+  and [nifeos/counter_frequency_contract#3](https://github.com/partsfoundry/counter_frequency_contract/pull/3).
 - A pre-release tag: Done. The release workflow made `v0.1.0-pre.1` after
-  [nifeos/counter_frequency_contract#4](https://github.com/nifeos/counter_frequency_contract/pull/4).
+  [nifeos/counter_frequency_contract#4](https://github.com/partsfoundry/counter_frequency_contract/pull/4).
 - Publishing to crates.io: Won't fix. A contract crate never publishes, and the tag is its release;
   ruled 2026-11-19 (UTC), under "The pre-release tag" above.
 

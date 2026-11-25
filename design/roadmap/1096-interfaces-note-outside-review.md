@@ -47,13 +47,13 @@ milestone reaches delivery.
   of the old spellings.
 - Item 10 (P1), `Declared` names a state: Done, [#3823](https://github.com/nifeos/nife/pull/3823). The type is `DeclaredInterface`.
 - Item 11 (P2), no fuzz target: Done,
-  [nifeos/interfaces_note#2](https://github.com/nifeos/interfaces_note/pull/2). A decoder target
+  [nifeos/interfaces_note#2](https://github.com/partsfoundry/interfaces_note/pull/2). A decoder target
   encodes each accepted list back and compares, and the weekly run is opted in (decision 6).
 - Item 12 (P2), the proof runs one direction: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
 - Item 13 (P2), a test name the abbreviation report flags: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
 - Item 14 (P2), `iter` yields by value: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
 - Item 15 (P2), the triaged timeouts travel nowhere: Done,
-  [nifeos/interfaces_note#3](https://github.com/nifeos/interfaces_note/pull/3). The three rows are
+  [nifeos/interfaces_note#3](https://github.com/partsfoundry/interfaces_note/pull/3). The three rows are
   in `.github/mutants-exempts`, since the template's gate fails an unexempted timeout.
 - Decision 1, the owner string: Done, [#3575](https://github.com/nifeos/nife/pull/3575).
 - Decision 2, ratifying the twenty public names: Done, [#3823](https://github.com/nifeos/nife/pull/3823) for the four renames and [#3835](https://github.com/nifeos/nife/pull/3835)
@@ -63,7 +63,7 @@ milestone reaches delivery.
   [notes/crate-reviews/interfaces-note.md](../../notes/crate-reviews/interfaces-note.md) and
   approved `nifeos/interfaces_note`, with `publish = false`, no tag and no publish.
 - Decision 6, the fuzz crate's dependency hold: Done,
-  [nifeos/interfaces_note#2](https://github.com/nifeos/interfaces_note/pull/2), ruled 2026-11-22 (UTC).
+  [nifeos/interfaces_note#2](https://github.com/partsfoundry/interfaces_note/pull/2), ruled 2026-11-22 (UTC).
 
 ## Open decisions
 

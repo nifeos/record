@@ -153,7 +153,7 @@ name or behavior, a dependency); everything else is two-way and the maintainer d
    depend on a sibling by `git` and `rev` during the soak, with the rule written beside it; this
    block names the dependency on the blocked side. In the crate, once `file_system_contract` has
    its tag: `file_system_contract = { version = "0.1.0", git =
-   "https://github.com/nifeos/file_system_contract", rev = "<commit of the tag>" }`. The
+   "https://github.com/partsfoundry/file_system_contract", rev = "<commit of the tag>" }`. The
    alternative cuts the dependency by making `walk` generic over a rights trait. This review does
    not recommend it. The walk's one job is the contract's rights arithmetic, and a second spelling
    of `DESCEND` would be a second place for it to be wrong.

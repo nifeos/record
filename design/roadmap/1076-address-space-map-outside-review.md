@@ -94,7 +94,7 @@ The P1 items are in [the appendix](1076-address-space-map-outside-review/before-
 Twenty-seven manifests depend on the crate by `path`, all but `jig/Cargo.toml` with
 `version = "0.1.0"`; `page_tables` as a development dependency. Under §305 (git dependencies on `nifeos/*` only, pinned to a
 landed commit) each becomes
-`address_space_layout = { version = "0.1.0", git = "https://github.com/nifeos/address_space_layout", rev = "<landed commit>" }`,
+`address_space_layout = { version = "0.1.0", git = "https://github.com/partsfoundry/address_space_layout", rev = "<landed commit>" }`,
 the form `components/Cargo.toml` already uses for `jh7110_entropy` and `e1000e`. Milestone 1017 rules
 one revision per contract per image, so all twenty-seven move in one pull request, and recommends a
 root `[workspace.dependencies]` entry so the next bump touches one line. For `memory_region_heap`
