@@ -2,7 +2,8 @@
 
 An appendix to [the milestone](../1129-crate-interfaces-best-in-class.md).
 
-Each source below was fetched and read on 2026-11-25 (UTC), except where a line says "recalled".
+The lane that wrote this block fetched and read each source below on 2026-11-25 (UTC), except
+where a line says "recalled".
 
 | project | what it did | what this block takes | where this block differs |
 |---|---|---|---|
@@ -13,5 +14,5 @@ Each source below was fetched and read on 2026-11-25 (UTC), except where a line 
 | embedded-hal 1.0, released in January 2024 (the date recalled) ([the announcement](https://blog.rust-embedded.org/embedded-hal-v1/)) | In the works since 2020. It removed traits that generic drivers could not use, notably timers, and moved serial traits to `embedded-io`. Every error exposes a kind from one fixed set, with `Other` for the rest, and every error type implements `Debug`. Async, bus sharing and `nb` went to companion crates. | The error-kind convention as one candidate for the shared error decision. Removing what cannot be made right before 1.0, rather than shipping it. | It is one trait crate with many implementers; these are many crates with one maintainer each. |
 | The Fuchsia API Council ([its charter](https://fuchsia.dev/fuchsia-src/contribute/governance/api_council)) | Every change to the API surface needs an API-Review+1 from a council member before merge, beside code review; a larger change starts as an RFC. An API joins the SDK only with a ready customer and after calibration. The area's member decides, the council as a whole is final, by rough consensus. | One reviewer who did not write the code signs off on every interface change. A published interface needs a customer: here, the measured demand. | The council is standing; this block is a review run once before the first publish of each crate. |
 
-Not used: rustls's preparation for a stable release. No source describing a pre-1.0 interface
-review there was read for this block, so nothing here rests on it.
+Not used: rustls's preparation for a stable release. This block read no source on a pre-1.0
+interface review there, so nothing here rests on it.

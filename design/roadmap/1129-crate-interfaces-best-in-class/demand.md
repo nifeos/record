@@ -6,8 +6,8 @@ Measured on 2026-11-25 (UTC) from the crates.io API: `/api/v1/crates/<name>` for
 total downloads and the downloads in the last 90 days (`recent_downloads`), and
 `/api/v1/crates/<name>/reverse_dependencies?per_page=1` for the count of reverse dependencies
 (`meta.total`). "Updated" is the crate's `updated_at` date. The comparators here are the ones that
-set the order. Each review lane chooses its own by the rule in the milestone, measures them again,
-and may find a stronger one.
+set the order. Each review lane chooses its own by the rule in the milestone. It measures them again,
+and it may find a stronger one.
 
 A crate ranks by its leading comparator: the most-downloaded crate in the last 90 days that solves
 the same problem. A neighbor solves a nearby problem and does not rank. An integration target is a
@@ -63,8 +63,8 @@ crate the reviewed crate might implement or accept, not a rival.
 | 14 | `jh7110_entropy` | none found as a standalone crate | | | | | | |
 | | | `rand_core` | integration target | 0.10.1 | 2,312,469,600 | 689,686,442 | 2,827 | 2026-09-02 |
 
-`stm32-eth` ranks for `designware_ethernet` because the Ethernet controller in STM32 parts is a
-Synopsys DesignWare core; that is recalled, not checked, and lane D checks it. From rank 13 on, no
+`stm32-eth` ranks for `designware_ethernet` because STM32 parts carry a Synopsys DesignWare
+Ethernet controller. This block recalls that and did not check it. Lane D checks it. From rank 13 on, no
 leading comparator draws 10,000 downloads a quarter, so those reviews also name the system outside
 Rust that sets the bar, such as the Linux and OpenBSD drivers or SPDK.
 

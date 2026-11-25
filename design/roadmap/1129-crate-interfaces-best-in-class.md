@@ -12,16 +12,16 @@ needs_person: yes
 The number, title and slug are provisional. The branch that wrote this block is
 `milestone/1129-crate-interfaces-best-in-class`.
 
-The publishing hold names a review that no block defines. Milestone 1050's Goal holds every
-partsfoundry crate back from crates.io until every outside review milestone is delivered "and the
-combine review has decided what the crates share", and step 11a of
+The publishing hold names a review that no block defines. Milestone 1050 (`designware_mobile_storage`: the outside review's findings land before its first
+release) holds every partsfoundry crate back from crates.io until the last outside review lands
+"and the combine review has decided what the crates share". Step 11a of
 [the crate move](../../notes/crate-move.md) says the combine review checks each crate's outside
 review. A search of the record on 2026-11-25 (UTC) for "combine review" finds those two places and
 [1050's prior-art appendix](1050-designware-mobile-storage-outside-review/prior-art.md), which
 lists four questions for it, and nothing else. This block is that review.
 
-It is also wider than the hold asks. The outside reviews (milestones 1048 to 1113) set a floor: a
-stranger builds, tests and proves the crate from its README, the documents match the code, the
+It is also wider than the hold asks. The outside reviews (milestones 1048 to 1113) set a floor. A
+stranger builds, tests and proves the crate from its README, and the documents match the code. The
 names follow [design/naming.md](../naming.md), and nothing one-way ships that a later release must
 take back. They did not ask whether the interface is the best one in its space. This block asks
 that of every crate, against the strongest existing crate or system doing the same job, because
@@ -67,9 +67,9 @@ each with its outside review as the baseline:
 | `environment_contract` | 1089 | `extensible_host_controller_interface` | 1060 |
 | `file_allocation_table` | 1061 | | |
 
-Three are outside it. `file_system_fixture` is test data that never publishes. `rsext4` is a fork
-of a published crate: its interface belongs to its upstream, so a finding against it becomes an
-upstream submission, which the architect reads in full before it is filed. A crate that moves to
+Three are outside it. `file_system_fixture` is test data that never publishes. `rsext4` forks a
+published crate, and its interface belongs to its upstream. A finding against it becomes an
+upstream submission, which the architect reads in full before anyone files it. A crate that moves to
 partsfoundry later joins at its move, in its place in the order below.
 
 `grant_contract` and `terminal_contract` split out of the crates that 1094 and 1098 reviewed and
@@ -79,8 +79,8 @@ reviews set.
 ## The baseline, and the release-review rule
 
 The outside reviews and the names they ratified are the starting point, and this block re-raises
-neither. One rule reopens a name: a name ratified before a later naming rule is checked against the
-rules in force at release ([notes/crate-reviews.md](../../notes/crate-reviews.md)). This review is
+neither. One rule reopens a name: the release review checks a name ratified before a later naming rule
+against the rules in force at release ([notes/crate-reviews.md](../../notes/crate-reviews.md)). This review is
 that release review, so it lists each such name with a recommended replacement. Every other
 ratified name stays, and a finding that would rename one says so as a one-way door, with the
 comparator evidence, for the architect.
@@ -132,7 +132,7 @@ the crate on each axis below that applies, saying for each which side is better 
    first call, against the comparator's.
 9. Measured performance, where the interface shapes it: a benchmark of the crate and its leading
    comparator on the same input and the same machine, with the command, the machine type, both
-   numbers and what each includes. A measurement not run is marked not run, never estimated.
+   numbers and what each includes. The review marks a measurement it did not run as not run, and never estimates one.
 
 ### Write the findings
 
@@ -145,7 +145,7 @@ with a recommendation, so the architect rules them one at a time. It carries a p
 its comparators with the numbers above, and a section on what the crate does better than each.
 Text filed into a crate's own repository never names nife.
 
-Each finding states whether it was verified in the source or inferred. A possible vulnerability
+Each finding states whether the reviewer verified it in the source or inferred it. A possible vulnerability
 goes to the maintainer alone and stays out of the block.
 
 ## Across crates: what they share
@@ -165,8 +165,8 @@ census in step 1 recounts it.
 | Contract crates | about a dozen crates hold a page layout or request words | one layout: magic, version, interface identity, the request builder, the decoder and its refusals, in the same places and spellings |
 | Simulators | `designware_mobile_storage` ships one as a feature | whether every driver ships its test double, and under one feature name |
 
-Each question becomes one decision, brought once the crates it touches have been reviewed, with
-those reviews as its evidence. A crate reviewed before a shared decision gets a finding that follows
+Each question becomes one decision. The maintainer brings it once lanes have reviewed the crates
+it touches, with those reviews as its evidence. A crate reviewed before a shared decision gets a finding that follows
 it. A shared shape that becomes its own crate is a new name and a new repository, and each is the
 architect's call.
 
@@ -180,8 +180,9 @@ layout.
 
 Each lane reviews three crates, and two lanes run at a time. Each lane is a fresh-context agent the
 maintainer launches on the most capable model available. It is never a lane that wrote,
-extracted or reviewed the crate before, and it does not read the crate's own lanes' reports. Its
-pass is read-only on the crate repositories: no push, no pull request, no issue, no tag.
+extracted or reviewed the crate before, and it does not read the crate's own lanes' reports. It
+reads the crate repositories and writes nothing to them: no push, no pull request, no issue, no
+tag.
 
 1. The census, one lane, before any review: every shape in the table above, counted in each crate
    at a named commit, with the command that counted it.
@@ -190,7 +191,7 @@ pass is read-only on the crate repositories: no push, no pull request, no issue,
 4. Lane C: `file_allocation_table`, `device_tree_blob`, `e1000e`.
 5. Lane D: `extensible_host_controller_interface`, `designware_ethernet`,
    `universal_serial_bus`.
-6. The first shared decisions, once lanes A to D are done: errors, DMA regions, doorbells and
+6. The first shared decisions, once lanes A to D finish: errors, DMA regions, doorbells and
    tails, register access, byte sinks, feature names and simulators.
 7. Lane E: `non_volatile_memory_express`, `jh7110_entropy`, `capability_table`.
 8. Lane F: `interfaces_note`, `address_space_layout`, `boot_ladder`.
@@ -198,7 +199,7 @@ pass is read-only on the crate repositories: no push, no pull request, no issue,
 10. Lane H: `block_roster_contract`, `byte_sink_contract`, `clock_contract`.
 11. Lane I: `counter_frequency_contract`, `entropy_contract`, `environment_contract`.
 12. Lane J: `file_system_contract`, `terminal_contract`.
-13. The contract-crate layout decision, once lanes F to J are done.
+13. The contract-crate layout decision, once lanes F to J finish.
 
 Each lane measures its crates' comparators again on the day it runs. A crate whose demand moved it
 past a later lane's crates keeps its place; the order is for scheduling, not a ranking to maintain.
@@ -207,9 +208,9 @@ past a later lane's crates keeps its place; the order is for scheduling, not a r
 
 Provisional (maintainer, 2026-11-25 UTC):
 
-- It blocks each crate's first crates.io publish, as the hold already does, until that crate's
-  block has every P0 finding Done and every one-way door ruled, and every shared decision that
-  touches the crate is ruled.
+- It blocks each crate's first crates.io publish, as the hold already does. The publish waits
+  until that crate's block has every P0 finding Done and every one-way door ruled. It also waits
+  for a ruling on every shared decision that touches the crate.
 - It blocks each crate's 0.1.0 interface the same way: a crate's tag at 0.1.0 waits for its P0
   findings. Pre-release tags (`0.1.0-pre.N`) do not wait.
 - It does not block implementation work behind an unchanged interface: a fix, a proof, a test or a
@@ -218,10 +219,10 @@ Provisional (maintainer, 2026-11-25 UTC):
 ## Prior art
 
 How other projects review an interface before they promise it is in
-[the prior-art appendix](1129-crate-interfaces-best-in-class/prior-art.md). In short: the Rust
-library team's 2017 blitz evaluated sixteen crates against the API Guidelines before their 1.0s,
-one crate at a time with a lead and a public write-up; Tokio shipped 0.3 as a 1.0 beta and took
-pre-1.0 dependencies out of its public interface; embedded-hal 1.0 removed the traits generic
+[the prior-art appendix](1129-crate-interfaces-best-in-class/prior-art.md). In short, the Rust
+library team's 2017 blitz evaluated sixteen crates against the API Guidelines before their 1.0s.
+It took one crate at a time, with a lead and a public write-up. Tokio shipped 0.3 as a 1.0 beta and
+took pre-1.0 dependencies out of its public interface. embedded-hal 1.0 removed the traits generic
 drivers could not use and gave every error a kind from one fixed set. This block takes the
 blitz's shape (a checklist, one crate at a time, findings filed as discrete items), Tokio's rule on
 public dependencies, and embedded-hal's error convention as one candidate for the shared decision.
@@ -239,13 +240,13 @@ It differs in measuring each crate against named comparators, which none of them
 5. Each block lists its one-way doors apart, each with a recommendation.
 6. Every shared question in the table above has a decision recorded, and each crate it touches has
    a finding that follows it.
-7. `script/review-status` shows no open P0 in any of the 29 blocks, and every one-way door they list
-   is ruled.
+7. `script/review-status` shows no open P0 in any of the 29 blocks, and the architect has ruled
+   every one-way door they list.
 
 ## BUGS
 
 - The demand measure counts downloads of the leading comparator, which measures the space, not the
-  crate's chance in it. A crate in a crowded space may rank high and still be adopted less than one
+  crate's chance in it. A crate in a crowded space may rank high and still find fewer users than one
   in an empty space.
 - Downloads include continuous integration traffic, so they overstate users. Reverse dependencies
   count published crates only.
@@ -254,9 +255,9 @@ It differs in measuring each crate against named comparators, which none of them
 
 ## Index row
 
-The combine review that the publishing hold names, widened to a best-in-class bar. Each crate's
-interface is compared with its strongest comparators, chosen by measured downloads, on the API
+The combine review that the publishing hold names, widened to a best-in-class bar. A lane compares each
+crate's interface with its strongest comparators, chosen by measured downloads, on the API
 Guidelines and the axes that matter, and its findings land as a release review block with one-way
-doors apart. The shapes the crates share (errors, DMA regions, register access, feature names,
-contract layout) are decided once. Lanes of three crates run in order of measured demand, and the
+doors apart. The maintainer and the architect decide once the shapes the crates share: errors, DMA
+regions, register access, feature names and contract layout. Lanes of three crates run in order of measured demand, and the
 review blocks each crate's first publish and 0.1.0 interface, provisionally.
