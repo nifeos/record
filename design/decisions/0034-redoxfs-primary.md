@@ -9,7 +9,7 @@ ratified_by: calef
 
 **Decided 2026-07-29 (UTC); its launch-store role reaffirmed 2026-10-31 (UTC), on #2927; its
 replacement by ext4 decided 2026-11-25 (UTC).** RedoxFS is the primary on-disk filesystem and the
-launch store until `rsext4` is adopted: the writable volume the image boots into, that `jig`
+launch store until nife adopts `rsext4`: the writable volume the image boots into, that `jig`
 installs packages onto, and that holds the installed-programs table under `activation/`. On
 adoption, ext4 through `rsext4` replaces it in both roles, as the next section sets out. RedoxFS is
 not yet the *root* filesystem, and §34.3 below is why that is a separate piece of work rather than
@@ -23,13 +23,13 @@ writes ext4 with `metadata_csum` and a jbd2 journal, and there is no alternative
 it from partsfoundry/rsext4, which offers every fix upstream to `rcore-os/tgoskits` and carries
 whatever upstream does not take.
 
-The replacement waits on the adoption ruling, and that ruling is asked once partsfoundry/rsext4
+The replacement waits on the adoption ruling, and we ask for that ruling once partsfoundry/rsext4
 meets the bar of §46 (thin primitives or whole subsystems; we write everything in between) and the
 done-when of milestone 190 (ext4, read and write). That done-when includes the power-cut sweeps of
-milestone 997 (ext4 through rsext4, under milestone 37's crash injector), judged by `e2fsck -fn`
-after Linux replays the journal. A fault point those sweeps find is work for the fork, not a reason
-for RedoxFS to stay. Until the ruling is given, RedoxFS stays the primary filesystem and the launch
-store.
+milestone 997 (ext4 through rsext4, under milestone 37's crash injector), which put `rsext4` behind
+the injector of milestone 37 (Prove RedoxFS's crash consistency) and judge each fault by
+`e2fsck -fn` after Linux replays the journal. A fault point those sweeps find is work for the fork, not a reason
+for RedoxFS to stay. Until that ruling, RedoxFS stays the primary filesystem and the launch store.
 
 On adoption, one ext4 server becomes both the launch store and the reader of Linux drives that
 milestone 190 wants. RedoxFS then leaves through a milestone of its own, minted from the inventory
