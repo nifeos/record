@@ -1,5 +1,5 @@
 ---
-status: NOT-STARTED
+status: PARTIAL
 raised: 2026-11-24
 milestone_dependencies: none
 decision_dependencies: 323
@@ -109,8 +109,10 @@ except the last transfer, which may be one-way (see the risks).
 1. The trial: calef transfers rsext4 (done). The lane runs `script/apply-settings`,
    measures what survived (the verification list), and runs its `check`, `proofs`, weekly and
    dry-run release workflows, still calling `nifeos/crate-workflows`. Effort: S.
-2. The other 30 crate repositories, then crate-workflows-test, one transfer at a time, in any
-   order. Each crate follows the trial's steps:
+2. The other 29 crate repositories, one transfer at a time, in any order (done). moho_abi stays
+   in `nifeos` (provisional), and crate-workflows-test moves with crate-workflows at step 3, since
+   its canary adoption mints its token in the organization that owns crate-workflows-test. Each
+   crate follows the trial's steps:
    - Before it transfers, it pins crate-workflows at 11d6d6b or later, the first commit that holds
      the owner table. An older pin's weekly settings check reads the shared values alone and
      reports drift in `partsfoundry`.
@@ -121,7 +123,7 @@ except the last transfer, which may be one-way (see the risks).
    - Its `uses:` lines keep calling `nifeos/crate-workflows`, so it stays green. They are the
      second half of its draft, which waits for step 3.
    Effort: S in all.
-3. crate-workflows, last. From this moment every caller's `uses:` line fails until its draft lands.
+3. crate-workflows-test and crate-workflows, last, under their own ask. From this moment every caller's `uses:` line fails until its draft lands.
 4. crate-workflows' own draft
    ([nifeos/crate-workflows#91](https://github.com/nifeos/crate-workflows/pull/91)) lands first,
    then each crate's second draft, its `uses:` lines (one per repository, all titled "crate
@@ -135,6 +137,40 @@ except the last transfer, which may be one-way (see the risks).
    pin, grant_plan's manifest names three crates under `nifeos`. Effort: S.
 7. The `partsfoundry` row of the owner table becomes the shared values, its
    `nifeos/crate-workflows` pattern leaves, and `script/apply-settings` runs against every crate.
+
+## Where the transfers stand
+
+Thirty crate repositories live in `partsfoundry`. Besides rsext4, the trial, they are address_space_layout,
+block_roster_contract, boot_ladder, byte_glob, byte_sink_contract, capability_table, clock_contract,
+counter_frequency_contract, designware_ethernet, designware_mobile_storage, device_tree_blob,
+domain_name_system, e1000e, entropy_contract, environment_contract,
+extensible_host_controller_interface, file_allocation_table, file_system_contract,
+generational_table, grant_contract, grant_plan, interfaces_note, intrusive_queue, jh7110_entropy,
+line_editor, non_volatile_memory_express, program_argument_contract, terminal_contract and
+universal_serial_bus.
+
+Each lost what the trial lost: the team arrived at read, secret scanning and push protection came
+back off, the tags ruleset lost its bypass actor, and the allowlist lacked the
+`nifeos/crate-workflows` pattern. `script/apply-settings` restored it, and `script/check-settings`
+matches on all thirty. Beyond the trial's list:
+
+- Private vulnerability reporting was off on clock_contract, domain_name_system, device_tree_blob
+  and interfaces_note before the move; `script/apply-settings` turned it on.
+- The required checks of block_roster_contract, non_volatile_memory_express and
+  file_allocation_table differed from the template before the move; `script/apply-settings` set
+  the template's list.
+- `script/apply-settings` writes the template's description, which still calls the crate "a
+  standalone nifeos crate", over a repository's own. The own descriptions of
+  block_roster_contract, designware_mobile_storage, e1000e and extensible_host_controller_interface
+  came back by hand, and `script/check-settings` does not read the description. The template's
+  text needs a follow-up.
+
+Each crate's own-names draft is ready or landed. Its `uses:` draft is held on
+[nifeos/crate-workflows#91](https://github.com/nifeos/crate-workflows/pull/91). grant_contract and
+grant_plan fetch their git dependencies from `partsfoundry`, so nife's draft can move every cargo
+source together without locking one crate twice.
+
+Still in `nifeos`: crate-workflows-test and crate-workflows (step 3), and moho_abi, which stays.
 
 The preparation list for calef:
 
@@ -202,7 +238,10 @@ names.
 
 ## Follow-on
 
-- **None.**
+- **Outstanding.** The transfer of crate-workflows-test and crate-workflows (step 3), under its own ask, then steps
+  4 to 7.
+- **Outstanding.** The template's description text, which names `nifeos`, and a description check in
+  `script/check-settings`.
 
 ## BUGS
 
