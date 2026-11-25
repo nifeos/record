@@ -13,8 +13,9 @@ packages onto, and that holds the installed-programs table. On adoption, ext4 th
 replaces it in both roles, and one ext4 server becomes both the launch store and the reader of Linux
 drives that milestone 190 (ext4, read and write) wants. The adoption ruling waits for
 partsfoundry/rsext4 to meet the bar of §46 (thin primitives or whole subsystems; we write everything
-in between) and milestone 190's done-when, which includes the power-cut sweeps of milestone 997
-(ext4 through rsext4, under milestone 37's crash injector). A fault point those sweeps find is work
+in between) and milestone 190's done-when. That done-when includes the power-cut sweeps of milestone
+997 (ext4 through rsext4), which put `rsext4` behind the injector of milestone 37 (Prove RedoxFS's
+crash consistency). A fault point those sweeps find is work
 for the fork, not a reason for RedoxFS to stay. nife does not build a UFS2 server (§34 refuses
 milestone 981 (UFS2, read and write)), and milestone 982 (Retire RedoxFS once a launch store proves
 itself) keeps the inventory the removal of RedoxFS starts from. The rest of this note is the
