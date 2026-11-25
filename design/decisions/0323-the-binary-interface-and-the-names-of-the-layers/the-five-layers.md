@@ -121,10 +121,10 @@ It touches almost nothing in code. Crates take the name of what they do (`file_a
 rule. So the library's name lives in the website, the organization profile and README text. It is
 not a platform: the binary interface is.
 
-Ruled 2026-11-14 (UTC), ruling 4: the library and its organization share one name, and the domain
-is that name plus `.org`. Crate names stay descriptive, and the
-page contracts, which every binary interface shares, take no common prefix. The project can add a
-prefix later, but it cannot take one away.
+Ruled 2026-11-14 (UTC), ruling 4: the library and its organization share one name, and the domain is
+that name plus `.org`. Crate names stay descriptive, and the page contracts, which every binary
+interface shares, take no common prefix. The project can add a prefix later, but it cannot take one
+away.
 
 Ruled 2026-11-15 (UTC): the name is `partsfoundry` (Parts Foundry), with the domain
 `partsfoundry.org`. `nife`, `basalt` and Moho keep their names, and `basalt.nifeos.org` stays

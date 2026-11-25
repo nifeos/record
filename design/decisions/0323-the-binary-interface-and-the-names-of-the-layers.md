@@ -288,4 +288,5 @@ names stay open.
   so a `getrandom` backend needs it. Both capability kernels share it.
 - Building and deploying the website, before the first crates.io publish. Milestone 1018 (the
   design record moves to `nifeos/record` and is published as a website) holds the build, and the
-  website is `nifeos/nifeos.org`, at `nifeos.org`. The rule that a leaving crate never mentions nife (now the name of one kernel) stays as it was.
+  website is `nifeos/nifeos.org`, at `nifeos.org`. The rule that a leaving crate never mentions
+  nife (now the name of one kernel) stays as it was.
