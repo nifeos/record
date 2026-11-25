@@ -233,7 +233,7 @@ names.
 
 ## Open decisions
 
-- **None.** The App is partsfoundry-smelter, a second App owned by `partsfoundry`, and every other
+- **None.** The release App is partsfoundry-smelter (provisional), a second App owned by `partsfoundry`, and every other
   step follows the 2026-11-24 ruling.
 
 ## Follow-on
