@@ -284,7 +284,7 @@ iterator) and `Refused` becomes `PushRefused` (the name says what it refuses).
 ### The repository
 
 Ruled by the architect, 2026-11-14 (UTC), who cleared the review. A lane creates the repository
-`partsfoundry/program_argument_contract` after the three renames above and milestone 994 land.
+`partsfoundry/program_argument_contract` after the three renames above and milestone 994 (the cross-repository pair is tested where the pin is) land.
 It takes the tag `v0.1.0-pre.1` after the move check and a release dry run, with `publish = false`.
 
 ## Follow-on
