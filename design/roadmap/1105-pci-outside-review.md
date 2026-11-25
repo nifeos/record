@@ -112,7 +112,7 @@ took option A provisionally on 2026-11-19 (UTC), a two-way door the architect ma
 architect cleared the package on 2026-11-20 (UTC), which approves the repository. The architect ruled the names on
 2026-11-20 (UTC), the names decision taken as option B: the whole table ratified as built, with one change, the struct `Bdf`
 becomes `BusDeviceFunction` and the specification spellings ride as aliases. The virtio to `virtual_io`
-sweep, [#3854](https://github.com/nifeos/nife/pull/3854), has merged, so the move is unblocked; the P2 move steps above travel
+sweep, [#3854](https://github.com/nifeos/nife/pull/3854), has merged, so nothing blocks the move; the P2 move steps above travel
 with it.
 
 Recommendation: A, taken provisionally.

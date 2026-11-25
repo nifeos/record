@@ -38,7 +38,7 @@ logic is testable on the host, and its names pass `design/naming.md`.
   `components/src/block_driver_roles.rs` (Decision 1, ruled 2026-11-16 UTC, option A).
 - P0-2, no test runs outside QEMU and no proof exists: Done, [#3613](https://github.com/nifeos/nife/pull/3613).
 - P1-3, the ring layout is an unchecked copy of the proved layout: Open. Its blocker, milestone 1075 item 11
-  (the version gate), is done in [#3942](https://github.com/nifeos/nife/pull/3942). Decision 2 ruled the move (maintainer, provisional, 2026-11-14
+  (the version gate), landed in [#3942](https://github.com/nifeos/nife/pull/3942). Decision 2 ruled the move (maintainer, provisional, 2026-11-14
   UTC), and it is not built: `QUEUE_ENTRIES` and the ring offsets are literals under a BUGS entry in
   `block_driver_roles.rs`, and `moho_abi::virtual_io` holds no ring constant. The `moho_abi` review has not
   settled how a change to a pinned value meets an `ABI_VERSION` bump once the crate leaves nife.
@@ -66,7 +66,7 @@ logic is testable on the host, and its names pass `design/naming.md`.
 - P2-17, the register map unchecked against a second driver: Open.
 - Decision 1, fold the roles into `block_driver`: Done, [#3662](https://github.com/nifeos/nife/pull/3662) (ruled 2026-11-16 UTC, A).
 - Decision 2, the ring layout moves to `moho_abi::virtual_io`: Open. Milestone 1075 (what an
-  outside maintainer would fix before the move) item 11 is done in [#3942](https://github.com/nifeos/nife/pull/3942). Ruled (maintainer, provisional, 2026-11-14
+  outside maintainer would fix before the move) item 11 landed in [#3942](https://github.com/nifeos/nife/pull/3942). Ruled (maintainer, provisional, 2026-11-14
   UTC) and not built; P1-3 is the work.
 - Decision 3, the kernel checks `Version` and the driver does not: Done, [#3628](https://github.com/nifeos/nife/pull/3628) (maintainer,
   provisional, 2026-11-15 UTC).
@@ -245,7 +245,7 @@ The kernel's scan does not offer the slot, so nothing starts a driver for it.
 
 ## Follow-on
 
-- **Outstanding.** P1-3 and Decision 2. Their blocker, milestone 1075 item 11, is done in
+- **Outstanding.** P1-3 and Decision 2. Their blocker, milestone 1075 item 11, landed in
   [#3942](https://github.com/nifeos/nife/pull/3942).
 - **Milestone 1062.** The shared library that holds the name `virtio`, ruled 2026-11-16 UTC.
   Whether and when to cut it waits on milestone 1062 (the device control planes leave the kernel),

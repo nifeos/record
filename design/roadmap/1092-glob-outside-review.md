@@ -241,5 +241,5 @@ An outside reading of `byte_glob` before it leaves. The crate name is `byte_glob
 README, the manifest fields and the split proof module are in, and the test that linked two staying
 crates lives in `grant_plan`. `Dot` is `LeadingDot` and `cost_bound` is `step_bound` (Decision 2), and the architect cleared the review package and
 ratified the seven names (Decision 3). The move is done: the crate lives at
-`nifeos/byte_glob`, and nife pins it by commit. The later items are done. The matcher itself checks out. Publishing
+`nifeos/byte_glob`, and nife pins it by commit. The later items landed. The matcher itself checks out. Publishing
 stays held.
