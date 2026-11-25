@@ -196,7 +196,8 @@ proc macros, ten crates in all) to a kernel graph that holds four crates and no 
 issue nife opened upstream, [google/dtoolkit #103](https://github.com/google/dtoolkit/issues/103),
 stays as it is.
 
-Door: two-way, since a later ruling under §46 can still take `dtoolkit`; the release that publishes
+Door: two-way, since a later ruling under §46 (thin primitives, whole subsystems and everything in
+between) can still take `dtoolkit`; the release that publishes
 the crate is the one-way step. Prior art:
 Linux, U-Boot and FreeBSD each vendor libfdt (`scripts/dtc/libfdt`, `sys/contrib/libfdt`; recalled,
 unverified) rather than keep their own parser. nife differs by keeping a parser held to its own bar

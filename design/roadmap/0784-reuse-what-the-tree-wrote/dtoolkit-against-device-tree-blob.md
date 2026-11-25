@@ -242,10 +242,10 @@ seeds, and a CI job for its fuzz target.
 
 Ruled 2026-11-25 (UTC): nife keeps its own `device_tree_blob`, releases it on its own (under the
 standing publishing hold, from `partsfoundry/device_tree_blob`), and stops working toward
-`dtoolkit` as its device-tree dependency. Upstream moves too slowly and has not shown that it wants
-what nife needs (lenient reading of firmware trees that do not conform, adding a child while editing
-in place), and the graph cost measured above stands: `zerocopy`, `zerocopy-derive` and `thiserror`,
-two proc macros and ten crates, against a kernel graph of four. The measurements on this page stay as
+`dtoolkit` as its device-tree dependency. Upstream moves too slowly, and it has not shown that it
+wants what nife needs: lenient reading of firmware trees that do not conform, and adding a child
+while editing in place. The graph cost measured above stands too: `zerocopy`, `zerocopy-derive` and
+`thiserror`, two proc macros and ten crates, against a kernel graph of four. The measurements on this page stay as
 the record of what was compared. [Milestone
 1085](../1085-device-tree-blob-outside-review.md#keep-device_tree_blob-and-release-it) holds the
 ruling.

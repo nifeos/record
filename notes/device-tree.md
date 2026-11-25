@@ -219,8 +219,9 @@ failure, so every limitation here is a limitation on the boot path specifically.
   (`Fdt::events`, a linear walk), [#111](https://github.com/google/dtoolkit/pull/111) and
   [#112](https://github.com/google/dtoolkit/pull/112).
   [The comparison](../design/roadmap/0784-reuse-what-the-tree-wrote/dtoolkit-against-device-tree-blob.md)
-  holds the measurements and [milestone 1085](../design/roadmap/1085-device-tree-blob-outside-review.md#keep-device_tree_blob-and-release-it)
-  the ruling.
+  holds the measurements, and [milestone 1085 (`device_tree_blob`: what an outside maintainer would
+  fix before it leaves)](../design/roadmap/1085-device-tree-blob-outside-review.md#keep-device_tree_blob-and-release-it)
+  holds the ruling.
   [The reports](../design/roadmap/0784-reuse-what-the-tree-wrote/dtoolkit-upstream-reports.md)
   hold the upstream issues.
 - **A `reg` shorter than one address and size pair yields no region rather than an error.** The
