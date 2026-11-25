@@ -1,5 +1,6 @@
 ---
-status: PARTIAL
+status: BUILT
+built: 2026-11-25
 raised: 2026-11-11
 milestone_dependencies: 1017
 decision_dependencies: none
@@ -66,10 +67,9 @@ release steps.
 - P2-2, `.*` matches `.` and `..`: Done, [#3962](https://github.com/nifeos/nife/pull/3962). The
   matcher's doc and README state it, and `grant_plan`'s `Expander::offer` says that no listing it
   sees carries either name, with a test that a listing which did makes `.*` refuse.
-- P2-3, `match_steps` returns a tuple: Waiting on
-  [nifeos/byte_glob#2](https://github.com/nifeos/byte_glob/pull/2), which returns a
+- P2-3, `match_steps` returns a tuple: Done, [partsfoundry/byte_glob#2](https://github.com/partsfoundry/byte_glob/pull/2), which returns a
   `#[non_exhaustive]` `Outcome { matched, steps }`, the name provisional.
-- P2-4, no fuzz target: Waiting on [nifeos/byte_glob#2](https://github.com/nifeos/byte_glob/pull/2),
+- P2-4, no fuzz target: Done, [partsfoundry/byte_glob#2](https://github.com/partsfoundry/byte_glob/pull/2),
   a target against a separately written reference matcher, opted in to the weekly run.
 - P2-5, two harnesses fix one dot rule: Will not fix in full, ruled 2026-11-20 by the maintainer as
   a two-way call in [nifeos/byte_glob#1](https://github.com/nifeos/byte_glob/pull/1).
@@ -80,7 +80,7 @@ release steps.
 - P2-6, stale solver times: Done, [#3566](https://github.com/nifeos/nife/pull/3566). The shipped
   text gives no per-harness seconds.
 - P2-7, `Elem` is an abbreviation: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P2-8, no benchmark: Waiting on [nifeos/byte_glob#2](https://github.com/nifeos/byte_glob/pull/2),
+- P2-8, no benchmark: Done, [partsfoundry/byte_glob#2](https://github.com/partsfoundry/byte_glob/pull/2),
   a standard-library `benches/matching.rs` over the three blowup shapes and one ordinary pattern.
 - Decision 1, the registry name: Done, [#3578](https://github.com/nifeos/nife/pull/3578).
 - Decision 2, the seven names: Done, [#3790](https://github.com/nifeos/nife/pull/3790) and
@@ -234,8 +234,6 @@ The checks are in [the appendix](1092-glob-outside-review/done-when.md).
 - **Recorded.** The crate lives at `nifeos/byte_glob` with `publish = false` and no tag, and nife
   pins it by commit. The stranger test is a separate lane's. The module names `tests` and
   `verification` ship provisional.
-- **Outstanding.** Every finding that Finding status above marks Waiting, each with what it waits
-  on.
 
 ## Index row
 
@@ -243,5 +241,5 @@ An outside reading of `byte_glob` before it leaves. The crate name is `byte_glob
 README, the manifest fields and the split proof module are in, and the test that linked two staying
 crates lives in `grant_plan`. `Dot` is `LeadingDot` and `cost_bound` is `step_bound` (Decision 2), and the architect cleared the review package and
 ratified the seven names (Decision 3). The move is done: the crate lives at
-`nifeos/byte_glob`, and nife pins it by commit. Finding status names what the later items wait on. The matcher itself checks out. Publishing
+`nifeos/byte_glob`, and nife pins it by commit. The later items landed. The matcher itself checks out. Publishing
 stays held.
