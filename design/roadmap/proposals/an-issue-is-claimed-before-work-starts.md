@@ -7,7 +7,7 @@ machine_requirements: none
 specific_machine: none
 needs_person: no
 ---
-# An issue is claimed before work starts on it
+# Claim an issue before work starts on it
 
 Raised by lane lane/issue-claims. Name: provisional, like every name below: the slug, the
 `/claim` and `/release` commands, `script/claim --issue`, `helpers/issue_claim.py`, the
@@ -24,25 +24,25 @@ workflow both call.
 
 ## Recommendation
 
-An issue is held when any one of three things is true: a standing claim comment written by the
+An issue counts as held when any one of three things is true: a standing claim comment written by the
 claim mechanism, any assignee at all, or an open pull request whose description closes it. A held
 issue refuses a second claim. Nothing moves a claim from one holder to another except a release.
 
-- **A lane** claims with `script/claim <branch> --new-work --issue N` (`owner/repo#N` for another
+- A lane claims with `script/claim <branch> --new-work --issue N` (`owner/repo#N` for another
   repository). The command checks the issue before it touches git, posts the claim comment, reads
   the comments back, and gives way if an earlier claim won the race. It then cuts the worktree,
   opens the draft with `Closes #N`, and writes the draft's address into the claim comment. If it
   stops before the draft opens, it deletes its claim comment.
-- **An outsider** claims by commenting `/claim` on a line of its own. The `issue claim` workflow
+- An outsider claims by commenting `/claim` on a line of its own. The `issue claim` workflow
   assigns them, which GitHub allows because they commented, and replies with the claim comment.
   `/release` gives the claim back. An outsider holds one open claim at a time.
-- **What the issue shows**: an assignee, and a claim comment naming the holder, the lane and branch
+- What the issue shows: an assignee, and a claim comment naming the holder, the lane and branch
   for a lane, and the draft pull request. The comment carries a hidden marker, and the marker is
   the record the tools read.
-- **How a claim ends**: the closing pull request merges and GitHub closes the issue; or the holder
+- How a claim ends: the closing pull request merges and GitHub closes the issue; or the holder
   releases it; or the daily sweep releases a claim that has stood 14 days with no open pull request
   closing the issue. An open closing pull request keeps a claim alive however long review takes.
-- **A second attempt** gets a reply naming the holder and is refused. A lane prints the same reason
+- A second attempt gets a reply that names the holder and refuses it. A lane prints the same reason
   and stops; it never steals and never works the issue unclaimed.
 
 The design is not chosen for effort. At equal cost the refusing rule would still win, for the
@@ -62,13 +62,13 @@ It also said that once outside contributors need to file things, issues are the 
 pull requests, and an outsider who wants to work an issue cannot run `script/claim`.
 
 Two facts shape everything below. First, every agent acts through one person's GitHub account, so
-an assignee cannot tell two lanes apart; only the comment can name the lane. Second, GitHub lets an
-outsider be assigned only after they comment on the issue, or once they hold write access. The
+an assignee cannot tell two lanes apart; only the comment can name the lane. Second, GitHub assigns an
+outsider only after they comment on the issue, or once they hold write access. The
 `/claim` comment is that comment, so the assignment it triggers succeeds.
 
 ## Prior art, read
 
-Each was read at its source on 2026-11-25 (UTC).
+This lane read each at its source on 2026-11-25 (UTC).
 
 **rustbot** (rust-lang/triagebot, `src/handlers/assign.rs`, and the forge page on issue
 assignment). `@rustbot claim` assigns the commenter. When GitHub refuses the assignment, because
@@ -78,7 +78,7 @@ member, and only team members may assign someone else. A claim on an issue someo
 reassigns it: nothing refuses. There is no stale rule and no link to a pull request.
 
 **zulipbot** (zulip/zulipbot, its README and Zulip's contributing guide). `@zulipbot claim` works
-only on issues labelled "help wanted" that nobody else holds, and refuses otherwise. A first-time
+only on issues labeled "help wanted" that nobody else holds, and refuses otherwise. A first-time
 contributor gets read access as a collaborator so GitHub will assign them, and may hold one claim
 until a first pull request merges. `@zulipbot abandon` gives it up. After 7 days with no activity
 the bot posts a reminder, and after 3 more days with no reply it unassigns and removes the
@@ -118,8 +118,8 @@ sweep, and an owner can release one sooner by commenting `/release`.
 
 ### The first claim wins, and a pasted marker counts for nothing
 
-The record is a marker comment, read in order: the first claim after the last release holds, and a
-later claim is ignored. Only markers written by the workflow's bot or by the project's owners,
+The record is a marker comment, read in order: the first claim after the last release holds, and the
+helper ignores a later claim. Only markers written by the workflow's bot or by the project's owners,
 members and collaborators count, so an outsider who pastes a release marker into a comment changes
 nothing. rustbot keeps its record in the issue body, which anyone with triage rights can edit; a
 comment keeps its author.
@@ -134,8 +134,8 @@ None of the three bots needed this, since each of their claimers is one person.
 
 zulipbot reminds after 7 days and releases after 10; Zulip's guide says two weeks; Kubernetes
 follows up after 30. 14 days matches the guide a contributor would read, and the clock stops while
-any open pull request closes the issue, so slow review never costs a contributor the claim. The
-reminder step is left out: it is a second state to reason about, and the claim comment already
+any open pull request closes the issue, so slow review never costs a contributor the claim. This
+leaves out the reminder step: it is a second state to reason about, and the claim comment already
 states the deadline. Adding a reminder later breaks nobody.
 
 ### One open claim per outsider, and none for members
@@ -147,7 +147,7 @@ The limit counts open issues assigned to the outsider, so an assignment made by 
 ### No "help wanted" gate, but held labels refuse
 
 zulipbot claims only on "help wanted". This project has no such triage today, and a gate that
-nobody keeps would refuse every claim. An issue labelled `needs-architect` refuses a claim, since
+nobody keeps would refuse every claim. An issue labeled `needs-architect` refuses a claim, since
 it waits on a ruling and nobody can finish it.
 
 ### A lane checks before git, claims, then reads back
@@ -155,7 +155,7 @@ it waits on a ruling and nobody can finish it.
 A lane checks, posts its claim, and reads the comments back before it cuts a worktree. If an earlier
 claim won, it deletes its own comment and stops, so a lost race costs one command. Comment claims
 run one at a time per issue, through the workflow's concurrency group, so two `/claim` comments in
-one second are decided in order.
+one second get decided in order.
 
 ## The workflow is safe to run on a stranger's comment
 
@@ -166,7 +166,7 @@ one second are decided in order.
   runs. The job skips comments on pull requests, which share the event.
 - The comment body never reaches a shell line. The helper reads GitHub's event file and matches a
   line that is exactly `/claim` or `/release`.
-- A bot's comment is ignored, so the workflow cannot answer itself.
+- The helper ignores a bot's comment, so the workflow cannot answer itself.
 
 ## How the record repositories follow
 
