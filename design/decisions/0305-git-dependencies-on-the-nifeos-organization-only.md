@@ -27,8 +27,8 @@ A dependency of this tree may be a git dependency when all three hold:
 The partsfoundry organization holds the library crate repositories, which transfer to it from
 nifeos one at a time (2026-11-24 UTC); nife and basalt stay in nifeos. The advance approval of our
 own crates as dependencies covers the same crates at their partsfoundry address (2026-11-25 UTC),
-so a crate is first-party in either organization and its move changes nothing about how it may be
-depended on.
+so a crate is first-party in either organization, and its move does not change the rules for
+depending on it.
 
 `deny.toml` enforces the first: `[sources.allow-org]` admits the organizations above on GitHub and
 `unknown-git = "deny"` refuses every other git source. cargo-deny does not check the second, so the
