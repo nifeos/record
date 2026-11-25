@@ -47,11 +47,6 @@ milestone 74 (cycle counters), which reads the PMU; and `script/stranger-test` f
 5. The design review's checklist runs again against the fixed interface, and each remaining gap
    is fixed or recorded with its reason.
 
-## Follow-on
-
-- **Outstanding.** Items 1 and 4 against today's interface, as the baseline. Neither waits on
-  1126.
-
 ## BUGS
 
 - The board seL4's numbers came from is not in hand (milestone 127). Until it is, item 1 runs on
