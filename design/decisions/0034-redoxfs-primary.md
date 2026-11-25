@@ -18,15 +18,14 @@ a relabelling.
 ## What replaces it, and what will not
 
 ext4 through `rsext4` replaces RedoxFS. RedoxFS is not a viable long-term store, and no benchmark
-can compare it with Linux on filesystem operations. `rsext4` is the one Rust implementation that
-writes ext4 with `metadata_csum` and a jbd2 journal, and there is no alternative to it. nife takes
+can compare it with Linux on filesystem operations. There is no alternative to `rsext4`. nife takes
 it from partsfoundry/rsext4, which offers every fix upstream to `rcore-os/tgoskits` and carries
 whatever upstream does not take.
 
 The replacement waits on the adoption ruling, and we ask for that ruling once partsfoundry/rsext4
 meets the bar of §46 (thin primitives or whole subsystems; we write everything in between) and the
 done-when of milestone 190 (ext4, read and write). That done-when includes the power-cut sweeps of
-milestone 997 (ext4 through rsext4, under milestone 37's crash injector), which put `rsext4` behind
+milestone 997 (ext4 through rsext4, under milestone 37's crash injector). They put `rsext4` behind
 the injector of milestone 37 (Prove RedoxFS's crash consistency) and judge each fault by
 `e2fsck -fn` after Linux replays the journal. A fault point those sweeps find is work for the fork, not a reason
 for RedoxFS to stay. Until that ruling, RedoxFS stays the primary filesystem and the launch store.
