@@ -9,14 +9,17 @@ ratified_by: calef
 
 *Amended 2026-10-10 (UTC) by calef, on #1884: basalt holds long-lived root keys (clause 4), and an image carries its root, amending §220 too. See the amendment at the end.*
 
+*Amended 2026-11-25 (UTC) by calef, on nifeos/record#41: checks may stand in for the person who reviews a recipe change (clause 1), as §328 (a recipe may change with no person when checks stand in for its review) rules. See the amendment at the end.*
+
 calef, 2026-09-19 (21:51 UTC), after reading the prior art with the maintainer:
 Homebrew's shape, with the owner-vouches escape hatch. *(Section number provisional until the
 merge queue lands it.)*
 
 What that means, and each clause is load-bearing:
 
-1. A package's digest lives in a version-controlled recipe, changed by human review, and the
-   machine trusts the recipes of the sources it was given. The boot image's own measurement
+1. A package's digest lives in a version-controlled recipe, changed by review, and the machine
+   trusts the recipes of the sources it was given. The review is a person's or the checks §328 names
+   (amended 2026-11-25; see the end). The boot image's own measurement
    table (milestone 104) becomes the first source rather than a special case, which is how T1 stops
    being an answer and becomes an entry.
 2. Trust is scoped per source the owner opted into, never one global key. Every system read
@@ -193,3 +196,21 @@ key, is provisional in the milestone that builds the default line. Also open is 
 the grants added since §220 named its three. They are the machine and job views of
 §225 (`free` sees the machine and your share) and the reboot object of
 §251 (restarting the machine is a kernel object the progenitor hands out).
+
+## Amendment, 2026-11-25 (UTC): checks may stand in for a recipe's reviewer
+
+Ruled by calef on nifeos/record#41, option A. It amends clause 1, and §328 (a recipe may change
+with no person when checks stand in for its review) holds the detail and the reasons.
+
+1. Clause 1's "changed by human review" becomes "changed by review": a person's, or the checks
+   §328 names. A recipe change merges with no person when the package builds and reproduces, the
+   boot tests pass, every patch applies, the license stays the same and the endowment stays the
+   same or narrows.
+2. A person reviews a recipe change only when its endowment widens, its license changes or a patch
+   no longer applies.
+3. A source may set a hold, a number of days a release must age before its change may merge.
+   basalt's is 7 days, provisional, and the maintainer's to change.
+4. Clauses 2 to 4 are unchanged. On the owner's machine, updating on a schedule stays off unless
+   the owner turns it on for a source, as §250's amendment of 2026-10-07 already requires.
+
+The workflow, check and key names are provisional, in basalt where they are built.

@@ -1,22 +1,21 @@
 ---
-status: PROPOSED
+status: DECIDED
 raised: 2026-11-25
+decided: 2026-11-25
+ratified_by: calef
 ---
 
 # 328. A recipe may change with no person when checks stand in for its review
 
-*(The section number and title are provisional until the merge lands them. Every key, check and
-workflow name below is provisional until ruled.)*
+*(The section number is provisional until the merge lands it. Every key, check and workflow name
+below is provisional, and so is basalt's 7-day hold.)*
 
-Raised 2026-11-25 (UTC) by the maintainer. It proposes an amendment to clause 1 of §195 (a reviewed
-recipe vouches for a package, and the owner may overrule it). It is a file of its own because
-nobody has ruled on it, and a decided file states only what is in force (§298 (a document states
-what is in force now)). On a yes, §195 gains an amendment that states the new clause 1 and points
-here, and this file becomes DECIDED. On a no, this file records the refusal and §195 stays as it
-reads.
+Ruled 2026-11-25 (UTC) by calef on nifeos/record#41: option A. It amends clause 1 of §195 (a
+reviewed recipe vouches for a package, and the owner may overrule it), whose amendment of
+2026-11-25 states the new clause and points here. This file holds the rule's detail and its reasons.
 
 The survey reads `nifeos/basalt@9b9e4b842` and the nife commit it pins, `nifeos/nife@6bed50566`.
-The prior art, read on 2026-11-25 (UTC), follows the proposal.
+The prior art, read on 2026-11-25 (UTC), follows the rule.
 
 ## Background
 
@@ -53,9 +52,9 @@ Partly, and the part that is not true is the precedent.
   for the network installs with no question to the owner. The recipe review is the only place a
   person sees it.
 
-## The proposal: option A
+## The rule
 
-Clause 1 becomes: a package's digest lives in a version-controlled recipe that a review changes,
+Clause 1 of §195 reads: a package's digest lives in a version-controlled recipe that a review changes,
 and the review is a person's or the checks below. The machine still trusts the recipes of the
 sources it was given.
 
@@ -84,8 +83,8 @@ sources it was given.
    `jig rollback` undoes an update in one line by pointing the installed programs one generation
    back (§208 (installing a package is granting it, and the installed programs are versioned)).
 6. An optional hold. A source may set a number of days a new upstream release must age before its
-   pull request may merge. It is a setting per source, not a fixed number. basalt's value is the
-   maintainer's to set and change, as a two-way door.
+   pull request may merge. It is a setting per source, not a fixed number. basalt's value is 7
+   days, provisional: the maintainer sets and changes it, as a two-way door.
 
 A recipe may also opt out with a reason, as Homebrew's `no_autobump!` does.
 
@@ -114,10 +113,10 @@ the lockfile diff, and nothing holds on it.
 
 ## A worked example: ripgrep 14.1.1 to 15.0.0
 
-Checked against the crates on 2026-11-25 (UTC). The bot does not exist yet, so this is what it would
-do.
+Checked against the crates on 2026-11-25 (UTC), with basalt's 7-day hold. The bot is not built
+yet, so this is what it will do.
 
-1. crates.io's index gives ripgrep 15.0.0 the SHA-256 `db22b6e9...f946`. With a 7-day hold, its pull
+1. crates.io's index gives ripgrep 15.0.0 the SHA-256 `db22b6e9...f946`. With the hold, its pull
    request could merge no earlier than 2025-10-23. The bot changes `version` to `15.0.0` and
    `sha256` to the new digest.
 2. 15.0.0's `Cargo.lock` takes `ignore` 0.4.24, not 0.4.23. The bot rewrites the `[[patch]]` entry's
@@ -213,14 +212,14 @@ diff, and both decide at the user.
 
 | | What it is | Why it wins or loses |
 |---|---|---|
-| **A. Checks stand in for review** | the proposal above; a person only on a widening, a license change or a failed patch | Recommended. It spends the person where nife's design puts the risk, in what a program may reach. |
+| **A. Checks stand in for review** | the rule above; a person only on a widening, a license change or a failed patch | Chosen. It spends the person where nife's design puts the risk, in what a program may reach. |
 | B. Keep clause 1 | every recipe change waits for a person | ripgrep sits four releases behind under it today. A person reading an upstream's whole diff would not catch xz either, so the review mostly repeats A's checks by hand. |
 | C. The bot opens, people merge (nixpkgs, Homebrew) | A's step 1 and its checks, with a person on every merge | Better than B and the common practice. It loses because, with nobody reading the upstream's code, the person adds a click and not a check, and the click is what is missing today. |
 | D. Automate fully, widening included | A without the widening trigger in step 3 | A widening is the one change confinement cannot bound, and basalt's ceiling would not stop it on the machine. This removes the only person who would see it. |
 | E. A, plus the owner's consent on a widening (Chrome) | `jig` refuses or asks when an update's note grants more than the installed one's | Not refused, and not part of this ruling. It changes the install rule of §208 and §220, which A leaves alone, and deserves its own proposal. |
 
-**The recommendation is A.** It is not about effort: B costs the least to build, since it builds
-nothing. Would we still choose A if both cost the same? Yes, because A spends its person on the one
+**A was chosen.** It is not about effort: B costs the least to build, since it builds
+nothing. Would A still win if both cost the same? Yes, because A spends its person on the one
 change nothing else bounds.
 
 ## What it costs
@@ -247,8 +246,8 @@ runs on that owner's machine. `jig rollback` takes it out of the installed progr
 what it did while it ran. The endowment bounds that cost, which is why the endowment check is the
 one that keeps a person.
 
-## What is blocked, and what happens on a no
+## What it unblocks
 
-Blocked until ruled: the basalt bot and the two new checks. Nothing else waits. On a no, clause 1
-stands, recipes keep waiting for a person, and option C stays open as a basalt change, since it
-keeps a person on every merge.
+The basalt bot, the license and endowment checks, and the hold, each a basalt change through
+basalt's queue. Until they land, recipe changes still wait for a person, because nothing yet stands
+in for one.
