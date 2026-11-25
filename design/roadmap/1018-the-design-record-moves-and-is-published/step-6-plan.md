@@ -45,7 +45,7 @@ The readers whose behavior changes:
 | `xtask/src/manual.rs` and `xtask/src/disk.rs` | seven notes installed in the disk image | stay; the seven notes re-sort as package documentation that stays |
 | `metrics.yml` | regenerates lines of `notes/project-metrics.md` | stays; the page moves with the record, so the workflow writes it into `nifeos/record` by pull request, and the data under `notes/project-metrics/` stays in nife |
 | `script/stranger-test`, `stranger-cadence.yml` | the run record under `notes/stranger-test/` | stay, since the test builds the system; the run record lands in the record by pull request |
-| `record-site.yml`, `site/`, `script/site` | the whole record | leave nife in the removal pull request; step 8 builds in `nifeos/partsfoundry.org` |
+| `record-site.yml`, `site/`, `script/site` | the whole record | leave nife in the removal pull request; step 8 builds in `nifeos/nifeos.org` |
 | `script/lint` | 9 `record` sections, 36 `both` | the record's driver runs the 9 and its half of the 36; nife keeps the rest |
 
 Two findings change the order of work, and a third holds already.

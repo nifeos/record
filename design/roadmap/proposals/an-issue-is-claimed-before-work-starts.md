@@ -54,7 +54,7 @@ reason in "Refuse, never move" below.
 
 Today a draft pull request claims a branch, §90 (the claim is a draft pull request; the status flip
 is a gate), and `script/claim` makes that claim in one command. Nothing claims an issue.
-nifeos/partsfoundry.org#7 shows the gap: pull request #8 closed it, the issue had no assignee and
+nifeos/nifeos.org#7 shows the gap: pull request #8 closed it, the issue had no assignee and
 no comment saying anyone held it, and its timeline names only the account that every agent here
 acts through. A second lane briefed on #7 that afternoon would have found nothing to stop it.
 
@@ -183,7 +183,7 @@ pull requests, each citing the nife commit it copies:
 
 - nifeos/record: copy `helpers/issue_claim.py` beside the copied `script/claim`, extend the
   `claim_copy` lint to cover it, and add the workflow.
-- nifeos/partsfoundry.org: add the workflow and the helper.
+- nifeos/nifeos.org: add the workflow and the helper.
 - partsfoundry/crate-workflows: offer the workflow to every crate repository from the template, written
   with no mention of nife, so each partsfoundry crate gets it at its next template sync.
 - nifeos/basalt: add the workflow and the helper.
