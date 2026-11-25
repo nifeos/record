@@ -94,7 +94,7 @@ ruled. Verified. Two-way change to a one-way license statement. S.
 
 #### P0-4. No tag, so the semver gate has no baseline
 
-Status: Waiting on [nifeos/crate-workflows#84](https://github.com/nifeos/crate-workflows/pull/84). The tags `v0.1.0-pre.1` (`473b19c`) and `v0.1.0-pre.2` (`4c8dad4`) exist, but the template takes no pre-release tag as a semver baseline, so the labeler held nothing on [nifeos/designware_mobile_storage#33](https://github.com/nifeos/designware_mobile_storage/pull/33), which removed a public module.
+Status: Done, [nifeos/crate-workflows#84](https://github.com/nifeos/crate-workflows/pull/84), released in template `v10`. The tags `v0.1.0-pre.1` (`473b19c`) and `v0.1.0-pre.2` (`4c8dad4`) exist, and the template now takes a pre-release tag as the semver baseline. The crate pins the template at `11d6d6b`, which holds the change, and `weekly / semver` on `partsfoundry/designware_mobile_storage` (run 45239529544) chose a tag baseline and ran `cargo-semver-checks` against it.
 
 `git tag` is empty and the repository has no release (verified). The `weekly / semver` job of the
 template and the per-pull-request semver rule of the labeler compare against the newest `v*` tag.
@@ -268,8 +268,8 @@ claims none of the hardware steps.
 - P0-1, `Identity.firmware` as a positional array: Done, [nifeos/designware_mobile_storage#9](https://github.com/nifeos/designware_mobile_storage/pull/9).
 - P0-2, a visibility rule for the public surface: Done, [nifeos/designware_mobile_storage#2](https://github.com/nifeos/designware_mobile_storage/pull/2).
 - P0-3, the ISC notice only in a doc comment: Done, [nifeos/designware_mobile_storage#3](https://github.com/nifeos/designware_mobile_storage/pull/3).
-- P0-4, no semver baseline: Waiting on [nifeos/crate-workflows#84](https://github.com/nifeos/crate-workflows/pull/84), then the pin bump to the
-  template release that carries it.
+- P0-4, no semver baseline: Done, [nifeos/crate-workflows#84](https://github.com/nifeos/crate-workflows/pull/84), released in `v10`;
+  the crate pins a template commit that holds it.
 - P1-1, no recovery after a failed data phase: Waiting on a board run; code in [nifeos/designware_mobile_storage#5](https://github.com/nifeos/designware_mobile_storage/pull/5).
 - P1-2, fixed deadlines at the ceiling of the specification: Waiting on a board run; code in
   [nifeos/designware_mobile_storage#5](https://github.com/nifeos/designware_mobile_storage/pull/5).
@@ -295,14 +295,13 @@ claims none of the hardware steps.
   its own trait ([the open decisions appendix](1050-designware-mobile-storage-outside-review/open-decisions.md)).
 - Done when, the 50 megahertz card-interface clock against a scope: Waiting on a board run; it
   follows the first release (ruled 2026-11-19 UTC).
-- Done when, the semver rule holding a breaking pull request: Waiting on [nifeos/crate-workflows#84](https://github.com/nifeos/crate-workflows/pull/84).
+- Done when, the semver rule holding a breaking pull request: Done, [nifeos/crate-workflows#84](https://github.com/nifeos/crate-workflows/pull/84); the baseline is the newest pre-release tag.
 - Release, the first crates.io release: Waiting on the publishing hold.
 
 ## Follow-on
 
 - **Done.** Every P0, P1 and P2 item in code, by the pull requests each finding's status names.
 - **Outstanding.** P1-1 and P1-2 on the board: the blockers for delivery and for the first release.
-- **Outstanding.** P0-4: [nifeos/crate-workflows#84](https://github.com/nifeos/crate-workflows/pull/84), then a template release and the crate's pin bump to it.
 - **Outstanding.** The release review of the first DMA-region driver to publish rechecks the
   provisional answer on a shared trait.
 

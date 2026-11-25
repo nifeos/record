@@ -190,9 +190,10 @@ run 44924529336 are green.
   are crate-relative, and `proofs / falsify` replays all eleven red.
 - P0 item 3, the manifest does not stand alone: Done, #3659.
 - P1 item 4, documentation addressed to a reader inside nife: Done, #3659.
-- P1 item 5, no README, licenses, changelog or scaffold: Waiting on
-  `nifeos/address_space_layout#2`, which records the first stranger run and closes the five README
-  gaps it found. #3659, #3886 and #3895 brought the rest.
+- P1 item 5, no README, licenses, changelog or scaffold: Done,
+  [partsfoundry/address_space_layout#2](https://github.com/partsfoundry/address_space_layout/pull/2),
+  which records the first stranger run and closes the five README gaps it found. #3659, #3886 and
+  #3895 brought the rest.
 - P1 item 6, parameter and helper names the template refuses: Done, #3659.
 - P1 item 7, address and length constants: Done, #3886; names ratified 2026-11-21 UTC.
 - P1 item 8, the crate's name: Done, #3593; ruled 2026-11-14 UTC.
@@ -222,7 +223,9 @@ None.
 ## Follow-on
 
 - **Done.** The crate lives in `nifeos/address_space_layout`, and nife pins it by `rev`.
-- **Outstanding.** Item 5's stranger run, `nifeos/address_space_layout#2`.
+- **Outstanding.** The first full `mutation` run on `main`, which the done-when list asks for. The
+  one scheduled run so far deferred itself and ran no mutants. Only the publishing hold stands
+  behind it.
 
 ## BUGS
 

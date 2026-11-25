@@ -33,12 +33,12 @@ milestone reaches delivery.
 
 - P0-1, split the catalog from the planner: Done, [#3584](https://github.com/nifeos/nife/pull/3584).
 - P0-2, the documentation does not build with warnings denied: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P0-3, the manifest and the repository root are the workspace's: At the move. The tests plan
+- P0-3, the manifest and the repository root are the workspace's: Done. The tests plan
   against rows of their own and the `program_table` dev-dependency is gone ([#3961](https://github.com/nifeos/nife/pull/3961)); `ISOLATION_WORD`
-  lives in `program_table`. `Cargo.toml` still inherits `license` and `[lints]`, and the move
-  writes the crate's own manifest, a README and a LICENSE.
+  lives in `program_table`. Both repositories carry a literal manifest with `rust-version`, a
+  README and both license files.
 - P1-4, the tokenizer drops a seventeenth token: Done, [#3559](https://github.com/nifeos/nife/pull/3559).
-- P1-5, no proof: At the move. Neither `grant_plan` nor `grant_contract` has a Kani harness. By
+- P1-5, no proof: Open. Neither `grant_plan` nor `grant_contract` has a Kani harness yet. By
   the 2026-11-22 (UTC) ruling ([#3977](https://github.com/nifeos/nife/pull/3977)), a lane writes one per claim in each new repository before
   any tag; the two `job_windows` patches in `program_table` replay host tests.
 - P1-6, limits carry their unit, and four fields named `len`: Done (ruled by the maintainer,
@@ -52,9 +52,9 @@ milestone reaches delivery.
   `COOPERATIVE_GRACE_POLLS`, `RIGHTS_BITS_DO_NOT_OVERLAP` and `program_id` follow. The names are
   provisional until the architect ratifies them from the review packages.
 - P1-8, British spellings: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
-- P1-9, documentation for a stranger: At the move. [#3566](https://github.com/nifeos/nife/pull/3566) and [#3961](https://github.com/nifeos/nife/pull/3961) close the `missing_docs`
-  worklists of all three crates; the move strips the citations, the quotations and the `Name:`
-  lines.
+- P1-9, documentation for a stranger: Done. [#3566](https://github.com/nifeos/nife/pull/3566) and [#3961](https://github.com/nifeos/nife/pull/3961) close the `missing_docs`
+  worklists of all three crates; both repositories carry a README with an examples section and
+  hold no citation, quotation or `Name:` line.
 - P1-9b, `missing_docs` in the split crates: Done, [#3961](https://github.com/nifeos/nife/pull/3961). Neither `grant_contract`
   nor `program_table` allows `missing_docs`.
 - P1-10, numbers in refusal sentences: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
@@ -65,7 +65,7 @@ milestone reaches delivery.
 - P1-13, an undeclared widening option: Done, [#3566](https://github.com/nifeos/nife/pull/3566) and [#3961](https://github.com/nifeos/nife/pull/3961). A `const` assertion in
   `program_table` checks every row with `Manifest::is_well_formed`, and the note decoder already
   refuses an undeclared subtree letter.
-- P1-14, the mutation record predates the split: At the move. By the 2026-11-22 (UTC) ruling
+- P1-14, the mutation record predates the split: Open. By the 2026-11-22 (UTC) ruling
   ([#3977](https://github.com/nifeos/nife/pull/3977)), the first mutation run of `grant_plan` and `grant_contract` happens in their own
   repositories before any tag, and gives the figure the release gate asks for.
 - P2-15, `NameSet`'s `Debug`: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
@@ -247,8 +247,6 @@ The checks are in [the appendix](1094-grant-plan-outside-review/done-when.md).
   no tag and no publish.
 - **Outstanding.** Every finding marked Open or Waiting on under "Finding status", each checked
   against the three crates' sources on main.
-- **Outstanding.** Creating `nifeos/grant_plan` and `nifeos/grant_contract`, cleared on
-  2026-11-22 (UTC); `grant_contract` waits on a repository for `program_argument_contract`.
 - **Done.** `crates/externalization-list.txt` names both crates that leave ([#3961](https://github.com/nifeos/nife/pull/3961));
   `program_table` stays in nife and needs no row.
 

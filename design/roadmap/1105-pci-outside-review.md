@@ -111,8 +111,9 @@ clearance. This crate's package is
 took option A provisionally on 2026-11-19 (UTC), a two-way door the architect may revisit. The
 architect cleared the package on 2026-11-20 (UTC), which approves the repository. The architect ruled the names on
 2026-11-20 (UTC), the names decision taken as option B: the whole table ratified as built, with one change, the struct `Bdf`
-becomes `BusDeviceFunction` and the specification spellings ride as aliases. The move waits on the
-virtio to `virtual_io` sweep (draft #3854) and on the P2 move steps above.
+becomes `BusDeviceFunction` and the specification spellings ride as aliases. The virtio to `virtual_io`
+sweep, [#3854](https://github.com/nifeos/nife/pull/3854), has merged, so the move is unblocked; the P2 move steps above travel
+with it.
 
 Recommendation: A, taken provisionally.
 
