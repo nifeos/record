@@ -104,10 +104,11 @@ The version stays 1 through part one, and the pinned list does not move.
 6. A table sized at creation, in `partsfoundry/capability_table`. Today the size is a
    const parameter and the free slots are one 64-bit word, so no table can exceed 64 slots. The
    crate learns a size chosen at creation that never shrinks, a free-slot set wider than one word,
-   and a sixth right, `REVOKE` (finding 9). Its 12 Kani proofs move to a bounded runtime size.
+   and a sixth right, `REVOKE` (finding 9). The right exists in the crate from this step, and no
+   program can hold or ask for it until step 12. Its 12 Kani proofs move to a bounded runtime size.
    Effort: M. Lands alone, in partsfoundry.
 7. The kernel moves to that crate. The pin moves to step 6. Every process still gets 64 slots,
-   so the interface does not change. Effort: S. Lands alone. Its gates are the kernel's Kani proofs
+   and no capability carries `REVOKE`, so the interface does not change. Effort: S. Lands alone. Its gates are the kernel's Kani proofs
    and `script/bench --check`, since a slot lookup sits on the fastpath.
 
 ### Part two: the breaking set, which becomes 2.0
@@ -192,13 +193,17 @@ open decision asks whether that is acceptable.
 
 ### Part three: additions
 
-15. The additions (findings 7, 8 and 15, provisional). Copying or narrowing a capability in
-    place with a rights mask on `REPLY_CAPABILITY`, non-blocking variants of the blocking calls,
-    and a rights query. Each takes a new number behind `unstable` (finding 11), as one `moho_abi`
-    pull request and one nife pull request. Finding 7's mask is an addition because, after step
-    10, a program that sets the word it uses faults, so no 2.0 program sets it. A deadline waits for
-    a later milestone. Effort: M each.
-    Each lands alone, in any order.
+15. The additions (findings 7, 8 and 15, provisional). Each takes a new number behind
+    `unstable` (finding 11), as one `moho_abi` pull request and one nife pull request. Each lands
+    alone, in any order, at effort M.
+    - Finding 7: a method that copies a capability in place under a rights mask, and a rights mask
+      on any message that carries a capability. After step 11 no separate reply-with-capability
+      call exists. The mask is an addition because, after step 10, a program that sets the word it
+      uses faults, so no 2.0 program sets it.
+    - Finding 8: a non-blocking send and a poll. `address_space::WAIT` gains an absolute deadline,
+      which ends `std`'s spinning in `Condvar::wait_timeout` and `park_timeout`. Deadlines on
+      message passing wait for the speed measurement.
+    - Finding 15: a rights query.
 
 ## Gates
 
@@ -250,13 +255,16 @@ Every step passes `script/lint` and the repository's own CI. Beyond those:
 [The open-decisions appendix](1128-moho-rulings-implementation-plan/open-decisions.md) gives each
 question the rulings leave open its background, options and recommendation, with the prior art.
 
-1. Whether 2.0 may change between nife commits before it is whole. It blocks steps 9 to 13.
-2. What a call with an undefined method number answers. It blocks step 10.
-3. Which fault finding 3 raises, and what the supervisor reads. It blocks step 10.
-4. How the version pair travels: one word or two. It blocks steps 8 and 9.
-5. How the kernel hands its pair to the first program. It blocks step 9.
-6. The largest table a creator may ask for. It blocks step 12.
-7. Whether a method behind `unstable` moves the additions part. It blocks step 15.
+Four stay open for calef:
+
+1. What a call with an undefined method number answers. It blocks step 10.
+2. Which fault finding 3 raises, and what the supervisor reads. It blocks step 10.
+3. How the version pair travels: one word or two. It blocks steps 8 and 9.
+4. How the kernel hands its pair to the first program. It blocks step 9.
+
+The maintainer ruled three on 2026-11-25 (UTC), provisionally, and the appendix states each as
+the rule in force: 2.0 may change between nife commits until step 13, the table crate bounds a
+table's size, and a number moves the additions part when it leaves `unstable`.
 
 ## The outward steps
 
