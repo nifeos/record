@@ -34,7 +34,7 @@ dependency) rules on citations across repositories. Its section 4 says a record 
 `nifeos/<repo>@<sha>`, code does not cite records, and the numbering namespace stayed with nife until the ruling of 2026-11-01 (UTC) below.
 
 On 2026-11-10 (UTC) the architect ruled question 1 below. The record lives in a repository of its
-own, `nifeos/record`. The website is a separate repository, `nifeos/partsfoundry.org`, a consumer
+own, `nifeos/record`. The website is a separate repository, `nifeos/nifeos.org`, a consumer
 of the record. At build time it pulls the record, a page for each crate from that crate's own repository,
 and the planned tutorial on building a RISC-V operating system, a class. None of them is copied
 into the website's repository. The same day ruled the name, `nifeos/record`, over `nifeos/project`
@@ -60,7 +60,7 @@ history. Every other move then lands its record edits in a repository that is wi
 Move the record to `nifeos/record` by a path-filtered extraction, so every commit that touched a
 record file keeps its message, author and date. The record keeps its numbers, and the numbering
 namespace moves with it. `nifeos/record` runs the record's checks on every pull request.
-`nifeos/partsfoundry.org` builds the website: it pulls the record, the crate pages and the tutorial
+`nifeos/nifeos.org` builds the website: it pulls the record, the crate pages and the tutorial
 at build time and publishes a static site with one stable address per record number, search, and a
 link check. What describes a single crate or carries a tool's data stays with that code, as the
 Background states.
@@ -137,7 +137,7 @@ working.
 - Search across 3.6 million words, built at generation time with no server.
 - A link check: internal links fail the build, and external links run on a schedule outside the
   merge gate, since a remote outage should not block a merge.
-- A build in `nifeos/partsfoundry.org` that pulls the record at basalt's `[record]` pin, and a
+- A build in `nifeos/nifeos.org` that pulls the record at basalt's `[record]` pin, and a
   deploy when the pin or the builder moves.
 
 The generator is Eleventy, with Pagefind for search, approved on 2026-11-04 (UTC) as CI-only
@@ -147,9 +147,10 @@ record, also worked; Jekyll lost on build speed, and mdBook fits poorly with add
 number alone.
 
 Hosting, ruled 2026-11-01 (UTC): GitHub Pages, deployed from Actions in the website's repository,
-with the project's own domain as the custom domain. The organization and library are named Parts
-Foundry (ruled 2026-11-15 UTC), so the domain is partsfoundry.org, registered 2026-11-24 (UTC), and the repository is `nifeos/partsfoundry.org`, a name the maintainer
-chose provisionally. The domain is ours, so the host
+with the site's own domain as the custom domain. The record and the site stay in the nifeos
+organization (ruled 2026-11-25 UTC): the domain is nifeos.org and the repository is
+`nifeos/nifeos.org`. The domain partsfoundry.org is left for the partsfoundry library and does not
+serve the record. The domain is ours, so the host
 stays reversible: a later move changes DNS only. Page addresses derive from the record's kind and
 number alone, and no address names the host. Enabling Pages and setting the custom domain each
 wait for the architect's approval, and changing DNS is a person's step (step 8).
@@ -205,7 +206,7 @@ Each step lands alone. Steps 1 to 5 land in this repository.
    `.github/workflows/record-site.yml` runs it on each pull request that touches them and uploads
    the site as an artifact, deployed nowhere. Its step summary reports build time, index size and
    broken citations and links, and it never blocks a merge. The builder left nife in
-   nifeos/nife#4068 and lives in `nifeos/partsfoundry.org` (step 8).
+   nifeos/nife#4068 and lives in `nifeos/nifeos.org` (step 8).
 4. Built: `packages/homes.toml` sorts each record into moves or stays, under the ruling on
    question 4, and `helpers/record_links.py` counts the sort. 36 notes are about one crate alone
    and stay with it, and 260 links from a record name a path that stays; each becomes a qualified
@@ -224,12 +225,12 @@ Each step lands alone. Steps 1 to 5 land in this repository.
    requests and records a dry run of the extraction.
 7. Turn on `nifeos/record`'s CI: the record checks, limited to the record's directories, with the
    record halves of the `both` sections and the tooling that runs them.
-8. Once step 7 runs the record's CI in `nifeos/record`, create `nifeos/partsfoundry.org`. Build
+8. Once step 7 runs the record's CI in `nifeos/record`, create `nifeos/nifeos.org`. Build
    there, pulling the record, the crate pages and the tutorial, and deploy from Actions to GitHub
    Pages. The build fetches the record at basalt's `[record]` pin, which basalt's record-pin-bump
    workflow moves after each record merge, and fails on a broken internal link. Three tasks belong to a person, since no lane holds the registrar's credentials. They
-   are setting the DNS records that point partsfoundry.org at Pages, setting auto-renew on the
-   registration or a longer term, and verifying partsfoundry.org as the organization's Pages
+   are setting the DNS records that point nifeos.org at Pages, setting auto-renew on the
+   registration or a longer term, and verifying nifeos.org as the organization's Pages
    domain. A lane prepares the workflow and the exact record values and stops there.
 
 ## Prior art
@@ -257,12 +258,12 @@ verify](1018-the-design-record-moves-and-is-published/measurements.md#what-the-p
 One decision each, recommendation first. Ask them one at a time.
 
 1. Ruled 2026-11-10 (UTC): the record lives in its own repository, `nifeos/record`, and
-   `nifeos/partsfoundry.org` is the website, which pulls the record, the crate pages and the
+   `nifeos/nifeos.org` is the website, which pulls the record, the crate pages and the
    tutorial at build time, as the Background states. The name `nifeos/record` is ruled the same day.
 2. Ruled 2026-11-01 (UTC), as recommended: the number stays the identity and its namespace moves
    with the record, under the citation forms above. §201 section 4 says so, and its revisit
    condition stays armed.
-3. Ruled 2026-11-01 (UTC): GitHub Pages, deployed from `nifeos/partsfoundry.org`, as the website
+3. Ruled 2026-11-01 (UTC): GitHub Pages, deployed from `nifeos/nifeos.org`, as the website
    section states; step 8 names the person-only tasks.
 4. Ruled 2026-11-01 (UTC), as recommended, with the contents of `nifeos/record` ruled 2026-11-10
    (UTC): the division the Background states, with a crate's notes moving with the crate under
@@ -284,7 +285,7 @@ One decision each, recommendation first. Ask them one at a time.
    slow.
 
 8. Ruled 2026-11-11 (UTC): `nifeos/record` and the website's repository, now
-   `nifeos/partsfoundry.org`, are created, each at its step. Steps 6 and 8 state when. Setting DNS,
+   `nifeos/nifeos.org`, are created, each at its step. Steps 6 and 8 state when. Setting DNS,
    auto-renew and the organization's verified domain stay a person's steps.
 
 
@@ -292,7 +293,7 @@ One decision each, recommendation first. Ask them one at a time.
 
 - **Done.** Step 2, carried by `helpers/qualified_paths.py` and `script/roadmap`.
 - **Done.** Step 4, carried by `packages/homes.toml` and `helpers/record_links.py`.
-- **Outstanding.** Step 8's deploy and its person's steps. `nifeos/partsfoundry.org` builds and
+- **Outstanding.** Step 8's deploy and its person's steps. `nifeos/nifeos.org` builds and
   checks the site in CI and deploys nowhere yet.
 - **Outstanding.** Two comments in `ci.yml` and the header of `empty-diff.yml` call
   `merge_group.base_sha` the base branch's tip; the appendix's runs log the entry ahead. The skip

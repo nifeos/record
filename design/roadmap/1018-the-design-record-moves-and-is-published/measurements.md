@@ -248,7 +248,7 @@ should.
 ## Where each script goes
 
 Sorted 2026-11-10 (UTC) by reading each script, helper, lint section and workflow at `8e597457a`.
-The sort is provisional. **R** goes to `nifeos/record`. **W** goes to `nifeos/partsfoundry.org`, the
+The sort is provisional. **R** goes to `nifeos/record`. **W** goes to `nifeos/nifeos.org`, the
 website. **C** stays with code. **S-each** runs in every repository on its own files. **S-cross**
 splits, and one side needs the other's data: code at basalt's pins, or the record's number index
 that open question 7 asks about. **T** goes to the template (`partsfoundry/crate-workflows`) or the fleet
