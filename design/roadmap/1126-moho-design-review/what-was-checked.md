@@ -1,0 +1,74 @@
+# What was checked, and how
+
+An appendix to [the milestone](../1126-moho-design-review.md).
+
+## The trees read
+
+- `nifeos/moho_abi` at `1ac97ce486e18623a8d022b8c1f33bc1f73f3196`, the head of its
+  `prepare-0.1.0-pre.1` branch. It differs from that repository's `main` (`364f59c9`) only in the
+  version string of `Cargo.toml` and `Cargo.lock`. Every file under `src/` was read whole except
+  the two test files, and so were `README.md`, `CHANGELOG.md` and the head of
+  `pinned-at-version-1.txt`.
+- `nifeos/nife` at `b89e42872f2181f2651acd3e9e836a42318d071b`, which was 24 commits behind `main`
+  when read. The kernel pins `moho_abi` at `c8d556ec`, the repository's root commit.
+- `nifeos/record` at `f62bc01d2`, the base of this lane.
+
+## What was read in nife, and what each reading settled
+
+- `kernel/src/system_call.rs`, the functions `dispatch` and `invoke`. The kernel picks the method
+  table by the object the slot holds and then matches the method number, so method 0 means a
+  different operation on each object (finding 2). `invoke` passes each object only the argument
+  words its methods name, and nothing reads the others (finding 3). An unknown method answers
+  `BadMethod`.
+- `kernel/src/arch/x86_64/exceptions.rs`, `TrapFrame::arg` and `TrapFrame::set_arg`. Word 0
+  returns in `rdi`, as the crate's table says, and never in `rax` (finding 14).
+- `kernel/src/system_call/rendezvous.rs`, `rendezvous_receive_capability` and
+  `rendezvous_send_capability`. The receive writes the sender's word into word 0 with no status
+  beside it (finding 1), and the delegation converts the rights word with `as u32` (finding 3).
+- `kernel/src/sched/rendezvous.rs`, the collect arm of
+  `inter_process_communication_receive_capability` and `strand_reply_caller`. A Reply that does
+  not fit the server's table leaves the caller parked, and only a teardown frees it (finding 6).
+- `kernel/src/system_call/object_methods.rs`, `process_invoke`, `reboot_invoke` and
+  `rendezvous_survey`'s caller. None of them reads an argument word its doc comment marks unused.
+- `crates/system_initializer/src/image_request.rs`, `serves_declared_abi`, and
+  `interfaces_note::InterfaceList::check_served` in `partsfoundry/interfaces_note`. The progenitor
+  compares the program's declared version with the copy of `ABI_VERSION` it was built with, by
+  equality, and a program with no note passes (finding 5).
+- `kernel/src/capability_object.rs`, the two compile-time assertions on the rights masks.
+
+## What was read in the record
+
+§10 (process model: capability-based, microkernel), §12 (call/reply IPC: a one-shot reply
+capability), §13 (capability revocation and untyped reclamation), §15 (the native ABI), §16
+(object revocation) with its five amendments, §101 (notification objects), §124 (ratify the x86_64
+system call ABI), §230 (badged endpoint capabilities), §245 (a `CALL` server tells a Reply from a
+delegation), §246 (a plain `RECEIVE` never takes a capability), §276 (the thread system calls as
+built), §323 (the binary interface, and the names of the layers), §325 (the services' wire error
+vocabulary) and §326 (the names and numbers of the services' wire error codes). Also
+`design/naming.md`, `notes/crate-reviews/moho-abi.md` for the ratified names,
+`notes/address-wait.md` for its `BUGS`, and milestone 1075 (`abi`: what an outside maintainer
+would fix before the move) with its five appendices, so that no item here repeats one of its
+twenty-one.
+
+## What the outside sources are
+
+Three research agents fetched the comparators' own documents on 2026-11-25 (UTC) and returned
+each fact with its address and, where the page allowed, a short quotation.
+[The prior-art appendix](prior-art.md) lists every source and marks the claims no fetch
+confirmed.
+
+## What was not done
+
+- Nothing was built or run. No test, no kernel boot and no QEMU session backs a finding. Each
+  claim about kernel behavior comes from reading the functions named above.
+- The user-mode runtime (`crates/user_mode_runtime`) and the `std` port were not read beyond a
+  search for callers. A finding that says what a wrapper would do describes the crate's contract,
+  not the runtime's present code.
+- The 24 commits of nife's `main` past the commit read were not checked for a change to any
+  function named here.
+- The riscv64 and aarch64 trap entries were not read. The register table for those two is the
+  crate's own.
+- §269 (how threads share a process), §164 (whether the kernel resolves a tid a supervisor holds),
+  §185 (composing a process from two capabilities), §223 (the process view is the supervision
+  domain) and §255 (each socket is its own capability) were read by heading and by search, not
+  whole.
