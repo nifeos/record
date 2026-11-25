@@ -112,5 +112,5 @@ crate (B) was the alternative.
 Prior art. `generational_table` and `block_roster_contract` recorded the same hold as a false
 positive when their fuzz targets landed. Where nife differs: nothing; the rule is the template's.
 
-Example. [nifeos/interfaces_note#2](https://github.com/nifeos/interfaces_note/pull/2) adds
+Example. [nifeos/interfaces_note#2](https://github.com/partsfoundry/interfaces_note/pull/2) adds
 `fuzz/Cargo.toml` with those two dependencies and landed on this ruling.

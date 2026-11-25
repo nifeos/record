@@ -2,7 +2,7 @@
 
 The measurement behind phase 1 of [milestone 190 (ext4, read and write: a Rust implementation
 with libext2fs as the host-side oracle)](../0190-ext4-read-write.md). The reader is the `rsext4`
-that `tools/ext4_oracle/Cargo.toml` pins: nifeos/rsext4, which is upstream's 0.9.2 with the fixes
+that `tools/ext4_oracle/Cargo.toml` pins: partsfoundry/rsext4, which is upstream's 0.9.2 with the fixes
 its `CHANGES.md` lists. Measured on a Linux host with e2fsprogs 1.47.2, against 0.9.2 on 2026-11-16
 (UTC) and against the fork on 2026-11-23. Every image was generated there; no real drive was read.
 

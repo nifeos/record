@@ -187,7 +187,7 @@ Prior art. Fuchsia publishes its handle and rights types as `fuchsia-zircon`, a 
 Rust's convention for a taken name is a qualifier, not a prefix (`cap-std`, `cap-primitives`).
 
 Concrete example. The kernel's line is `capability_table = { version = "0.1.0",
-git = "https://github.com/nifeos/capability_table", rev = "<tag commit>" }` once the repository
+git = "https://github.com/partsfoundry/capability_table", rev = "<tag commit>" }` once the repository
 exists, and the two kernel files that name the crate (`kernel/src/capability_object.rs` and
 `kernel/src/sched/region_reaping.rs`, 17 lines) say `capability_table::`; `capability_object.rs` keeps
 its alias `pub(crate) type CapabilityTable = capability_table::CapabilityTable<Object,

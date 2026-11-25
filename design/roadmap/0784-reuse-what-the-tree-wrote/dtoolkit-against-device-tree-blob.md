@@ -223,8 +223,9 @@ The test is calef's of 2026-10-22: release our crate only where no maintained up
 deserves our proofs, and contribute where one does. `dtoolkit` deserves them. Google maintains it and
 Arm uses it. It agrees with ours on every query over every QEMU and JH7110 tree, it survived the
 same fuzzing, and our four properties hold on its code. Its whole parse is no easier to
-prove than ours, so the proofs do not favor either crate. 857 should therefore not publish
-`device_tree_blob`, and "contribute" stands.
+prove than ours, so the proofs do not favor either crate. By that test alone, contributing was the
+answer, and nife contributed ([the reports](dtoolkit-upstream-reports.md)). The rule in force is
+[the decision](#the-decision) below: nife keeps `device_tree_blob` and releases it.
 
 What contributing means changes. As measured here, `dtoolkit` 0.4.1 cannot replace ours in the kernel.
 It refuses real Linux trees over a name's length and walks a deep tree in quadratic time. It would
@@ -239,8 +240,12 @@ seeds, and a CI job for its fuzz target.
 
 ## The decision
 
-nife keeps its own `device_tree_blob` crate for now, and nothing is retired. The comparison above is
-revisited after google/dtoolkit#102 and [#103](https://github.com/google/dtoolkit/issues/103) are resolved. If `dtoolkit` adopts the work and covers
-nife's needs (long property names read, a linear walk, no panic in `Display`, an API that holds
-still), retiring `device_tree_blob` in favor of `dtoolkit` becomes an architect's call under §46.
-Even then the policy stays ours, about 300 lines. This page proposes no retirement.
+Ruled 2026-11-25 (UTC): nife keeps its own `device_tree_blob`, releases it on its own (under the
+standing publishing hold, from `partsfoundry/device_tree_blob`), and stops working toward
+`dtoolkit` as its device-tree dependency. Upstream moves too slowly, and it has not shown that it
+wants what nife needs: lenient reading of firmware trees that do not conform, and adding a child
+while editing in place. The graph cost measured above stands too: `zerocopy`, `zerocopy-derive` and
+`thiserror`, two proc macros and ten crates, against a kernel graph of four. The measurements on this page stay as
+the record of what was compared. [Milestone
+1085](../1085-device-tree-blob-outside-review.md#keep-device_tree_blob-and-release-it) holds the
+ruling.

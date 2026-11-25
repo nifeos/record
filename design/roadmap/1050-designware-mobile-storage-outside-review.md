@@ -51,7 +51,7 @@ P0 blocks the baseline tag and any publish. P1 lands before the first release. P
 
 #### P0-1. `Identity.firmware` is a positional array of five unrelated registers
 
-Status: Done: [nifeos/designware_mobile_storage#9](https://github.com/nifeos/designware_mobile_storage/pull/9).
+Status: Done: [nifeos/designware_mobile_storage#9](https://github.com/partsfoundry/designware_mobile_storage/pull/9).
 
 `Identity` (`src/host_controller.rs`) declares `pub firmware: [u32; 5]`, and `HostController::new`
 fills it with `CONTROL_REGISTER`, `PWREN`, `CLKDIV`, `CLKENA` and `CTYPE` in that order. A reader of
@@ -63,7 +63,7 @@ name (`CTRL`, `PWREN`, `CLKDIV`, `CLKENA`, `CTYPE`). Verified in the source. One
 
 #### P0-2. The visibility of the public surface follows no stated rule
 
-Status: Done: [nifeos/designware_mobile_storage#2](https://github.com/nifeos/designware_mobile_storage/pull/2).
+Status: Done: [nifeos/designware_mobile_storage#2](https://github.com/partsfoundry/designware_mobile_storage/pull/2).
 
 Three command-register bits in `src/registers.rs` (`COMMAND_START`, `COMMAND_SEND_INITIALIZATION`,
 `COMMAND_RESPONSE_EXPECT`) are public only because a doctest uses them, while the other command
@@ -81,7 +81,7 @@ it there. Verified. One-way door (removing `pub` after a publish is a break). S.
 
 #### P0-3. The ISC notice travels only inside a doc comment
 
-Status: Done: [nifeos/designware_mobile_storage#3](https://github.com/nifeos/designware_mobile_storage/pull/3) (`LICENSE-ISC`, the README and `CONTRIBUTING.md`). 
+Status: Done: [nifeos/designware_mobile_storage#3](https://github.com/partsfoundry/designware_mobile_storage/pull/3) (`LICENSE-ISC`, the README and `CONTRIBUTING.md`). 
 
 The crate root `src/lib.rs` carries the notice of OpenBSD for the adapted `dwmmc.c` as rustdoc
 text. The root of the repository has `LICENSE-MIT` and `LICENSE-APACHE` and no `LICENSE-ISC` or
@@ -108,7 +108,7 @@ One-way door (a tag is permanent). S.
 
 #### P1-1. Nothing recovers a card after a failed data phase
 
-Status: Done in code: [nifeos/designware_mobile_storage#5](https://github.com/nifeos/designware_mobile_storage/pull/5) sends `CMD12` after a failed multi-block data phase, with a harness. Bench: the board has not confirmed it.
+Status: Done in code: [nifeos/designware_mobile_storage#5](https://github.com/partsfoundry/designware_mobile_storage/pull/5) sends `CMD12` after a failed multi-block data phase, with a harness. Bench: the board has not confirmed it.
 
 `src/command.rs` defines `STOP_TRANSMISSION`, and no code path sends it; a search over `src/` finds
 it only in the register-word test. A multi-block read or write can end in `Error::Data` or
@@ -124,7 +124,7 @@ reading, not re-read. Two-way. M.
 
 #### P1-2. The deadlines are constants, and the busy deadline sits at the ceiling of the specification
 
-Status: Done in code: [nifeos/designware_mobile_storage#5](https://github.com/nifeos/designware_mobile_storage/pull/5) (`Deadlines`, `HostController::set_deadlines`). Bench: busy durations not yet measured on a board.
+Status: Done in code: [nifeos/designware_mobile_storage#5](https://github.com/partsfoundry/designware_mobile_storage/pull/5) (`Deadlines`, `HostController::set_deadlines`). Bench: busy durations not yet measured on a board.
 
 `COMMAND_DEADLINE_MICROSECONDS` is 100 ms and `DATA_DEADLINE_MICROSECONDS` 500 ms
 (`src/host_controller.rs`). The wait for a card to finish programming after a write uses the data
@@ -135,7 +135,7 @@ setter, and a busy default of at least one second. Verified in the source; the s
 
 #### P1-3. The two traits state no contract
 
-Status: Done: a `# Contract` section on each trait and the README section, [nifeos/designware_mobile_storage#3](https://github.com/nifeos/designware_mobile_storage/pull/3) and [nifeos/designware_mobile_storage#15](https://github.com/nifeos/designware_mobile_storage/pull/15).
+Status: Done: a `# Contract` section on each trait and the README section, [nifeos/designware_mobile_storage#3](https://github.com/partsfoundry/designware_mobile_storage/pull/3) and [nifeos/designware_mobile_storage#15](https://github.com/partsfoundry/designware_mobile_storage/pull/15).
 
 `RegisterWindowAndClock` says "read the register" and "microseconds since some fixed point". It says
 nothing about volatile access or about merging and elision, although each read of the FIFO offset
@@ -149,7 +149,7 @@ case. Verified in the source. Two-way. S.
 
 #### P1-4. Forty-nine mutation survivors wait for triage, and the first weekly run did not finish
 
-Status: Done: [nifeos/designware_mobile_storage#16](https://github.com/nifeos/designware_mobile_storage/pull/16) and [nifeos/designware_mobile_storage#18](https://github.com/nifeos/designware_mobile_storage/pull/18); `weekly` and the full mutation run pass on `main`.
+Status: Done: [nifeos/designware_mobile_storage#16](https://github.com/partsfoundry/designware_mobile_storage/pull/16) and [nifeos/designware_mobile_storage#18](https://github.com/partsfoundry/designware_mobile_storage/pull/18); `weekly` and the full mutation run pass on `main`.
 
 `.github/mutants-exempts` carries a census row (caught 661, missed 49, timeout 4) and lists no
 survivor. In the first `weekly` run all six mutation shards ended in a runner shutdown (exit 143 in
@@ -164,7 +164,7 @@ each real one. Verified from the run logs and the file. Two-way. M.
 
 #### P1-5. The stranger test has never run
 
-Status: Done: [nifeos/designware_mobile_storage#14](https://github.com/nifeos/designware_mobile_storage/pull/14); the README gaps it found closed in [nifeos/designware_mobile_storage#15](https://github.com/nifeos/designware_mobile_storage/pull/15).
+Status: Done: [nifeos/designware_mobile_storage#14](https://github.com/partsfoundry/designware_mobile_storage/pull/14); the README gaps it found closed in [nifeos/designware_mobile_storage#15](https://github.com/partsfoundry/designware_mobile_storage/pull/15).
 
 `docs/stranger-test.md` reads `Last run: none`, and the weekly `stranger cadence` job fails closed
 on it (verified in the run log). Recommended: one run by the four steps of the file, the date
@@ -172,7 +172,7 @@ recorded, each README finding fixed. Two-way. S.
 
 #### P1-6. The README is not the front page of the crate on docs.rs, and nothing compiles its example
 
-Status: Done: the README is the crate root's doc and its example compiles as a doctest, [nifeos/designware_mobile_storage#3](https://github.com/nifeos/designware_mobile_storage/pull/3).
+Status: Done: the README is the crate root's doc and its example compiles as a doctest, [nifeos/designware_mobile_storage#3](https://github.com/partsfoundry/designware_mobile_storage/pull/3).
 
 `src/lib.rs` does not include the README. The README example compiles (the reviewer ran it under
 `rustdoc --test`), but no job does. The README also lacks the line that adds the dependency (a git
@@ -182,7 +182,7 @@ Verified. Two-way. S.
 
 #### P1-7. Two error attributions mislead
 
-Status: Done: `InitializationError::TransferClock` and the timeout mask mapped to `DataTimeout`, [nifeos/designware_mobile_storage#5](https://github.com/nifeos/designware_mobile_storage/pull/5).
+Status: Done: `InitializationError::TransferClock` and the timeout mask mapped to `DataTimeout`, [nifeos/designware_mobile_storage#5](https://github.com/partsfoundry/designware_mobile_storage/pull/5).
 
 Configuration reports a failed clock change as `Configure(CMD8, ...)` for an eMMC and
 `Configure(CMD16, ...)` for an SD card (`src/sd.rs`), naming a command that did not fail. The
@@ -193,7 +193,7 @@ new variant is compatible. Verified. Two-way. S.
 
 #### P1-8. The weekly caller builds the host only
 
-Status: Done: [nifeos/designware_mobile_storage#4](https://github.com/nifeos/designware_mobile_storage/pull/4).
+Status: Done: [nifeos/designware_mobile_storage#4](https://github.com/partsfoundry/designware_mobile_storage/pull/4).
 
 `.github/workflows/weekly.yml` passes no `targets`, so `drift` and `msrv` never build the three
 bare-metal targets that `.github/workflows/ci.yml` names. Recommended: the same `targets` line in
@@ -201,7 +201,7 @@ both callers. Verified. Two-way. S.
 
 #### P1-9. `sd::Card::block_address_argument` states no precondition
 
-Status: Done, by a different fix: `block_address_argument` returns `Option<u32>` from a checked multiply, [nifeos/designware_mobile_storage#15](https://github.com/nifeos/designware_mobile_storage/pull/15).
+Status: Done, by a different fix: `block_address_argument` returns `Option<u32>` from a checked multiply, [nifeos/designware_mobile_storage#15](https://github.com/partsfoundry/designware_mobile_storage/pull/15).
 
 The method (`src/sd.rs`) casts the logical block address to `u32` for a block-addressed card, and
 for a byte-addressed card multiplies it by 512 in `u64` before the cast. An address at or past
@@ -216,11 +216,11 @@ source. Two-way. S.
 1. The baseline tag (P0-4). Ruled and placed: `v0.1.0-pre.1` on `473b19c`.
 2. Where the JH7110 facts live. Ruled: the crate knows no chip. The JH7110 facts live in nife's
    `crates/machine_discovery/src/jh7110/designware_mobile_storage.rs`, and the crate has no
-   `jh7110` module. Landed in [nifeos/designware_mobile_storage#31](https://github.com/nifeos/designware_mobile_storage/pull/31) and nifeos/nife#3729.
+   `jh7110` module. Landed in [nifeos/designware_mobile_storage#31](https://github.com/partsfoundry/designware_mobile_storage/pull/31) and nifeos/nife#3729.
 3. Where the master boot record parser lives. Ruled: the `partition` module (`MasterBootRecord`,
    `PartitionEntry`, `scratch_sector_range`) leaves for a new crate `master_boot_record`, staged in
    nife first. Landed: the staged crate in [#3731](https://github.com/nifeos/nife/pull/3731), the removal in
-   [nifeos/designware_mobile_storage#33](https://github.com/nifeos/designware_mobile_storage/pull/33), and the pin bump in [#3757](https://github.com/nifeos/nife/pull/3757).
+   [nifeos/designware_mobile_storage#33](https://github.com/partsfoundry/designware_mobile_storage/pull/33), and the pin bump in [#3757](https://github.com/nifeos/nife/pull/3757).
 4. A shared DMA region trait across the organization's drivers. Provisional, option A: the crate
    keeps its own `DirectMemoryAccessRegion` for its first release (below).
 5. When the first release goes. Ruled 2026-11-19 (UTC): the first release of
@@ -265,31 +265,31 @@ claims none of the hardware steps.
 
 ## Finding status
 
-- P0-1, `Identity.firmware` as a positional array: Done, [nifeos/designware_mobile_storage#9](https://github.com/nifeos/designware_mobile_storage/pull/9).
-- P0-2, a visibility rule for the public surface: Done, [nifeos/designware_mobile_storage#2](https://github.com/nifeos/designware_mobile_storage/pull/2).
-- P0-3, the ISC notice only in a doc comment: Done, [nifeos/designware_mobile_storage#3](https://github.com/nifeos/designware_mobile_storage/pull/3).
+- P0-1, `Identity.firmware` as a positional array: Done, [nifeos/designware_mobile_storage#9](https://github.com/partsfoundry/designware_mobile_storage/pull/9).
+- P0-2, a visibility rule for the public surface: Done, [nifeos/designware_mobile_storage#2](https://github.com/partsfoundry/designware_mobile_storage/pull/2).
+- P0-3, the ISC notice only in a doc comment: Done, [nifeos/designware_mobile_storage#3](https://github.com/partsfoundry/designware_mobile_storage/pull/3).
 - P0-4, no semver baseline: Done, [nifeos/crate-workflows#84](https://github.com/nifeos/crate-workflows/pull/84), released in `v10`;
   the crate pins a template commit that holds it.
-- P1-1, no recovery after a failed data phase: Waiting on a board run; code in [nifeos/designware_mobile_storage#5](https://github.com/nifeos/designware_mobile_storage/pull/5).
+- P1-1, no recovery after a failed data phase: Waiting on a board run; code in [nifeos/designware_mobile_storage#5](https://github.com/partsfoundry/designware_mobile_storage/pull/5).
 - P1-2, fixed deadlines at the ceiling of the specification: Waiting on a board run; code in
-  [nifeos/designware_mobile_storage#5](https://github.com/nifeos/designware_mobile_storage/pull/5).
-- P1-3, the two traits state no contract: Done, [nifeos/designware_mobile_storage#3](https://github.com/nifeos/designware_mobile_storage/pull/3) and [nifeos/designware_mobile_storage#15](https://github.com/nifeos/designware_mobile_storage/pull/15).
-- P1-4, forty-nine untriaged mutation survivors: Done, [nifeos/designware_mobile_storage#16](https://github.com/nifeos/designware_mobile_storage/pull/16) and [nifeos/designware_mobile_storage#18](https://github.com/nifeos/designware_mobile_storage/pull/18).
-- P1-5, the stranger test never ran: Done, [nifeos/designware_mobile_storage#14](https://github.com/nifeos/designware_mobile_storage/pull/14) and [nifeos/designware_mobile_storage#15](https://github.com/nifeos/designware_mobile_storage/pull/15).
-- P1-6, the README is not the docs.rs front page: Done, [nifeos/designware_mobile_storage#3](https://github.com/nifeos/designware_mobile_storage/pull/3).
-- P1-7, two misleading error attributions: Done, [nifeos/designware_mobile_storage#5](https://github.com/nifeos/designware_mobile_storage/pull/5).
-- P1-8, the weekly caller builds the host only: Done, [nifeos/designware_mobile_storage#4](https://github.com/nifeos/designware_mobile_storage/pull/4).
-- P1-9, `block_address_argument` states no precondition: Done, [nifeos/designware_mobile_storage#15](https://github.com/nifeos/designware_mobile_storage/pull/15).
-- P2-1, no fuzz target: Done, [nifeos/designware_mobile_storage#10](https://github.com/nifeos/designware_mobile_storage/pull/10) and [nifeos/designware_mobile_storage#19](https://github.com/nifeos/designware_mobile_storage/pull/19).
-- P2-2, the simulator is not available to users: Done, [nifeos/designware_mobile_storage#12](https://github.com/nifeos/designware_mobile_storage/pull/12).
-- P2-3, card presence read once: Waiting on a board run. `is_card_present` is in [nifeos/designware_mobile_storage#5](https://github.com/nifeos/designware_mobile_storage/pull/5).
+  [nifeos/designware_mobile_storage#5](https://github.com/partsfoundry/designware_mobile_storage/pull/5).
+- P1-3, the two traits state no contract: Done, [nifeos/designware_mobile_storage#3](https://github.com/partsfoundry/designware_mobile_storage/pull/3) and [nifeos/designware_mobile_storage#15](https://github.com/partsfoundry/designware_mobile_storage/pull/15).
+- P1-4, forty-nine untriaged mutation survivors: Done, [nifeos/designware_mobile_storage#16](https://github.com/partsfoundry/designware_mobile_storage/pull/16) and [nifeos/designware_mobile_storage#18](https://github.com/partsfoundry/designware_mobile_storage/pull/18).
+- P1-5, the stranger test never ran: Done, [nifeos/designware_mobile_storage#14](https://github.com/partsfoundry/designware_mobile_storage/pull/14) and [nifeos/designware_mobile_storage#15](https://github.com/partsfoundry/designware_mobile_storage/pull/15).
+- P1-6, the README is not the docs.rs front page: Done, [nifeos/designware_mobile_storage#3](https://github.com/partsfoundry/designware_mobile_storage/pull/3).
+- P1-7, two misleading error attributions: Done, [nifeos/designware_mobile_storage#5](https://github.com/partsfoundry/designware_mobile_storage/pull/5).
+- P1-8, the weekly caller builds the host only: Done, [nifeos/designware_mobile_storage#4](https://github.com/partsfoundry/designware_mobile_storage/pull/4).
+- P1-9, `block_address_argument` states no precondition: Done, [nifeos/designware_mobile_storage#15](https://github.com/partsfoundry/designware_mobile_storage/pull/15).
+- P2-1, no fuzz target: Done, [nifeos/designware_mobile_storage#10](https://github.com/partsfoundry/designware_mobile_storage/pull/10) and [nifeos/designware_mobile_storage#19](https://github.com/partsfoundry/designware_mobile_storage/pull/19).
+- P2-2, the simulator is not available to users: Done, [nifeos/designware_mobile_storage#12](https://github.com/partsfoundry/designware_mobile_storage/pull/12).
+- P2-3, card presence read once: Waiting on a board run. `is_card_present` is in [nifeos/designware_mobile_storage#5](https://github.com/partsfoundry/designware_mobile_storage/pull/5).
 - P2-4, an eMMC runs 1-bit at 25 MHz: Waiting on a board run. The bus-width and high-speed switches
-  are in [nifeos/designware_mobile_storage#11](https://github.com/nifeos/designware_mobile_storage/pull/11); no eMMC module is fitted.
-- P2-5, `reset` leaves the IDMAC registers alone: Done, [nifeos/designware_mobile_storage#5](https://github.com/nifeos/designware_mobile_storage/pull/5) and [nifeos/designware_mobile_storage#19](https://github.com/nifeos/designware_mobile_storage/pull/19).
-- P2-6, stale repository facts: Done, [nifeos/designware_mobile_storage#4](https://github.com/nifeos/designware_mobile_storage/pull/4).
-- P2-7, user-facing text says "queue" for the FIFO: Done, [nifeos/designware_mobile_storage#3](https://github.com/nifeos/designware_mobile_storage/pull/3).
-- Decision 2, where the JH7110 facts live: Done, [nifeos/designware_mobile_storage#31](https://github.com/nifeos/designware_mobile_storage/pull/31) and [#3729](https://github.com/nifeos/nife/pull/3729).
-- Decision 3, where the master boot record parser lives: Done, [#3731](https://github.com/nifeos/nife/pull/3731), [nifeos/designware_mobile_storage#33](https://github.com/nifeos/designware_mobile_storage/pull/33) and
+  are in [nifeos/designware_mobile_storage#11](https://github.com/partsfoundry/designware_mobile_storage/pull/11); no eMMC module is fitted.
+- P2-5, `reset` leaves the IDMAC registers alone: Done, [nifeos/designware_mobile_storage#5](https://github.com/partsfoundry/designware_mobile_storage/pull/5) and [nifeos/designware_mobile_storage#19](https://github.com/partsfoundry/designware_mobile_storage/pull/19).
+- P2-6, stale repository facts: Done, [nifeos/designware_mobile_storage#4](https://github.com/partsfoundry/designware_mobile_storage/pull/4).
+- P2-7, user-facing text says "queue" for the FIFO: Done, [nifeos/designware_mobile_storage#3](https://github.com/partsfoundry/designware_mobile_storage/pull/3).
+- Decision 2, where the JH7110 facts live: Done, [nifeos/designware_mobile_storage#31](https://github.com/partsfoundry/designware_mobile_storage/pull/31) and [#3729](https://github.com/nifeos/nife/pull/3729).
+- Decision 3, where the master boot record parser lives: Done, [#3731](https://github.com/nifeos/nife/pull/3731), [nifeos/designware_mobile_storage#33](https://github.com/partsfoundry/designware_mobile_storage/pull/33) and
   [#3757](https://github.com/nifeos/nife/pull/3757).
 - Decision 4, a shared DMA region trait: Done, provisional option A, in this block: the crate keeps
   its own trait ([the open decisions appendix](1050-designware-mobile-storage-outside-review/open-decisions.md)).

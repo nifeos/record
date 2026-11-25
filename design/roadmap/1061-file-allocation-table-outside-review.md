@@ -11,7 +11,7 @@ needs_person: yes
 
 Raised by the lane `milestone/1061-file-allocation-table-outside-review`. A reviewer with no prior
 exposure to this project read `nifeos/file_allocation_table` at commit `8622b02` (`main`, after its
-pull request [#16](https://github.com/nifeos/file_allocation_table/pull/16)), against [the review package](../../notes/crate-reviews/file-allocation-table.md)
+pull request [#16](https://github.com/partsfoundry/file_allocation_table/pull/16)), against [the review package](../../notes/crate-reviews/file-allocation-table.md)
 and [its public API appendix](../../notes/crate-reviews/file-allocation-table-public-api.md). This
 block cites files and symbols at that commit. Its `Finding status` is the one record of where every
 finding stands. Every item below is work for a lane
@@ -306,8 +306,8 @@ The checks are in [the done-when appendix](1061-file-allocation-table-outside-re
 
 Pull request numbers are in `nifeos/file_allocation_table` unless named otherwise.
 
-- **Done.** Every finding except P0-3, as `Finding status` lists. The second stranger run is [#50](https://github.com/nifeos/file_allocation_table/pull/50),
-  with its gaps closed in [#51](https://github.com/nifeos/file_allocation_table/pull/51). nife's callers build against `v0.1.0-pre.2` through
+- **Done.** Every finding except P0-3, as `Finding status` lists. The second stranger run is [#50](https://github.com/partsfoundry/file_allocation_table/pull/50),
+  with its gaps closed in [#51](https://github.com/partsfoundry/file_allocation_table/pull/51). nife's callers build against `v0.1.0-pre.2` through
   `nifeos/nife#3568`. `main` at `faaf13f` has `check` run 44400592122 and
   `proofs` run 44400592156 green.
 - **Outstanding.** P0-3, the first-publish token: ruled not yet, and the `crates-io` environment
@@ -316,7 +316,7 @@ Pull request numbers are in `nifeos/file_allocation_table` unless named otherwis
   milestone closes; the repository's tags are `v0.1.0-pre.1` and `v0.1.0-pre.2`.
 - **Outstanding.** At the release commit, once tagged: rerun `cargo test`, clippy, docs, the
   bare-metal builds, `cargo package`, `proofs` and a full `mutation` run (the last full run is at
-  `6f8aa1d`, before [#54](https://github.com/nifeos/file_allocation_table/pull/54)'s pin bump), and move nife's pins from `v0.1.0-pre.2` to the release.
+  `6f8aa1d`, before [#54](https://github.com/partsfoundry/file_allocation_table/pull/54)'s pin bump), and move nife's pins from `v0.1.0-pre.2` to the release.
 
 ## Index row
 

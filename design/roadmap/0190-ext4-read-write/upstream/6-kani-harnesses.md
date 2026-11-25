@@ -8,10 +8,9 @@ Chinese body below.
 - Repository: `rcore-os/tgoskits`, branch `dev`, package `fs/rsext4` (0.9.2).
 - Base commit: `0353572d1e2cca79e25a2805deeff4521449a5c1`, the head of `dev` at filing. Its only
   change under `fs/rsext4` since `6e80b940d` is in `src/ext4/alloc.rs`, which no harness reads.
-- The harnesses:
-  `nifeos/nife:tools/ext4_oracle/tests/parser_proofs.rs`,
-  in nife, against the crate's public API. There is no patch beside this file, because the
-  submission is an issue, not a pull request.
+- The harnesses: in partsfoundry/rsext4, six `verification.rs` modules under `src/`, each behind
+  `#[cfg(kani)]`, with a falsification patch per harness in `falsifications/`. There is no patch
+  beside this file, because the submission is an issue, not a pull request.
 - Issue settings, which upstream's contributing guide (section 3.7) requires in the sidebar:
   Assignees `calef`, labels `task` and `q4`, Type `Task`, Milestone `2026Q4`. GitHub dropped these
   at creation, because the filing account has no triage permission on the repository; the guide asks
@@ -25,38 +24,23 @@ that means adopting a new verification tool in its CI, which is upstream's desig
 A pull request would ask for that decision by surprise. The issue asks it plainly and offers the
 harnesses either way.
 
-Until upstream answers, the harnesses stay in nife, where `script/verify` runs them. If
-upstream wants them, the follow-up is a pull request that moves them into `fs/rsext4` under
-`#[cfg(kani)]` with a CI job; its text goes to the architect for review before filing, like this
-one.
+Upstream has not answered. The harnesses run in partsfoundry/rsext4, and a pull request offering
+them upstream is being prepared. It moves them into `fs/rsext4` under `#[cfg(kani)]` with a CI job,
+and its text goes to the architect for review before filing, like this one.
 
-## How nife runs them without `rsext4` in a shipping lockfile
+## Where the harnesses run
 
-The 2026-11-16 ruling on #3639 allows `rsext4` only as a host-only dependency of
-`tools/ext4_oracle`, pinned at `=0.9.2`, in a workspace of its own. The harnesses keep to that:
-
-- They are an integration test of that same workspace (`tools/ext4_oracle/tests/parser_proofs.rs`),
-  so they add no new package, no new dependency and no new lockfile. The `kani` crate is the one
-  Kani provides at verification time, and the file is `#![cfg(kani)]`, so an ordinary `cargo test`
-  builds an empty test binary.
-- deny.toml's `wrappers = ["ext4_oracle"]` entry for `rsext4` still holds: the only package that
-  depends on `rsext4` is `ext4_oracle`.
-- `script/verify` runs them as its `ext4_oracle` row, with
-  `cargo kani -p ext4_oracle --manifest-path tools/ext4_oracle/Cargo.toml --tests -Z stubbing`.
-  `helpers/rust_source.py` lists `tools/ext4_oracle` in `PROVED_WORKSPACES`, so the three
-  harness counts (`script/lint`, `script/falsifications --count` and the text count) include the
-  workspace, and the lint that requires every harness file to have a `script/verify` row sees it.
-- Each harness carries an `attested` falsification record with its by-hand replay: apply the
-  named change to a copy of `rsext4` 0.9.2, point a local `[patch]` at it, and run the harness.
-  `script/falsifications` sweeps only the nife workspace, so it cannot replay them itself.
+partsfoundry/rsext4 keeps each harness in a `verification.rs` module beside the code it proves,
+behind `#[cfg(kani)]`, so an ordinary build never compiles them; its `Cargo.toml` declares the
+`kani` cfg under `[lints.rust]`. Its `proofs` workflow runs `cargo kani` over them and replays
+each falsification patch, and both jobs pass.
 
 ## The harnesses
 
 Each bound below is the size of the arbitrary input. A bound marked "exactly" covers that one
 length; every other harness covers each length from zero up to its bound.
-The two CRC32C harnesses stub `__cpuid` to report no features, so the software path runs: Kani does
-not model inline assembly, and the hardware path is one instruction per step, not code a prover
-reads.
+The two CRC32C harnesses call the software path, `crc32c_update`, directly: Kani does not model
+inline assembly, and the hardware path is one instruction per step, not code a prover reads.
 
 | harness | the claim | bound | time |
 |---|---|---|---|
@@ -155,9 +139,8 @@ Method: `cargo kani --tests -Z stubbing` (Kani 0.68.0); each proof finishes with
 
 ## Test evidence
 
-Each harness passes against `rsext4` 0.9.2 from crates.io. Each fails against a copy with the
-change its falsification record names, reached through an uncommitted `[patch.crates-io]` in
-`tools/ext4_oracle/Cargo.toml`:
+Each harness passes in partsfoundry/rsext4's `proofs` workflow, and fails with the change its
+falsification patch makes:
 
 | harness | change in the copy | how it failed |
 |---|---|---|
@@ -169,6 +152,3 @@ change its falsification record names, reached through an uncommitted `[patch.cr
 | `extent_node_parse_is_total` | `max > capacity` and the `entry_truncated` test both dropped | a slice index |
 | `directory_entry_parse_is_total` | `data.len() < 8 + name_len` dropped | a slice index |
 | `directory_block_walk_ends_inside_its_block` | `rec_len as usize > remaining.len()` dropped | a slice index |
-
-Outside Kani, `cargo clippy --locked --manifest-path tools/ext4_oracle/Cargo.toml --all-targets --
--D warnings` passes, and the lockfile of `tools/ext4_oracle` is unchanged by this work.

@@ -9,26 +9,30 @@ beside it holds the `git format-patch` output. Nobody files a draft until the ar
 reviewed its text and given a separate go.
 
 - [`2a-free-empty-extent-index.md`](2a-free-empty-extent-index.md): upstream item 2's first
-  defect, a depth-2 truncate that fails with `extent:empty_index`.
+  defect, a depth-2 truncate that fails with `extent:empty_index`; merged as
+  rcore-os/tgoskits#2827.
 - [`2b-restore-truncate-tail.md`](2b-restore-truncate-tail.md): item 2's second defect, a failed
-  truncate that leaves the file's tail zeroed; it files after 2a and moves onto it once 2a lands.
+  truncate that leaves the file's tail zeroed; open as rcore-os/tgoskits#2829, with
+  rcore-os/tgoskits#2845 stacked on it.
 - [`4-fuzz-targets.md`](4-fuzz-targets.md): upstream item 4, seven `cargo fuzz` targets over the
-  parsers, mount and journal replay, with an `mke2fs` seed corpus; filed as
-  rcore-os/tgoskits#2834 and [#2835](https://github.com/rcore-os/tgoskits/pull/2835).
+  parsers, mount and journal replay, with an `mke2fs` seed corpus; merged as
+  [rcore-os/tgoskits#2835](https://github.com/rcore-os/tgoskits/pull/2835).
 - [`5a-crc32c-safety-arguments.md`](5a-crc32c-safety-arguments.md): upstream item 5, first half,
-  a safety argument at each CRC32C `unsafe` use.
+  a safety argument at each CRC32C `unsafe` use; merged as rcore-os/tgoskits#2831, which takes
+  hardware CRC32C availability from the environment.
 - [`5b-group-descriptor-decode.md`](5b-group-descriptor-decode.md): upstream item 5, second half,
-  group descriptors decoded instead of cast from the table bytes.
+  group descriptors decoded instead of cast from the table bytes; merged as
+  rcore-os/tgoskits#2833.
 - [`6-kani-harnesses.md`](6-kani-harnesses.md): upstream item 6, an Issue offering Kani harnesses
-  for the on-disk parsers; it has no `.patch`, and the harnesses run in nife meanwhile.
+  for the on-disk parsers, rcore-os/tgoskits#2836, which has no answer; it has no `.patch`, and the
+  harnesses run in partsfoundry/rsext4.
 - [`7-mount-refusal-reason.md`](7-mount-refusal-reason.md): upstream item 7, a refused mount
-  reports its reason instead of a bare `Io`; Issue rcore-os/tgoskits#2837 filed, its pull request
-  waiting for upstream room.
+  reports its reason instead of a bare `Io`; merged as rcore-os/tgoskits#2839.
 - [`8-whole-inode-times.md`](8-whole-inode-times.md): upstream item 8, `InodeInfo` reports whole
-  times, nanoseconds and epoch bits included; Issue rcore-os/tgoskits#2838 filed, its pull
-  request waiting for upstream room.
+  times, nanoseconds and epoch bits included; open as rcore-os/tgoskits#2840.
 - [`9-inode-bitmap-padding.md`](9-inode-bitmap-padding.md): upstream item 9, the first inode
-  allocated in an `INODE_UNINIT` group leaving its inode bitmap's padding clear.
+  allocated in an `INODE_UNINIT` group leaving its inode bitmap's padding clear; merged as
+  rcore-os/tgoskits#2825.
 
 *Name: provisional. For the drafts the parent's upstream round cites. calef names directories.*
 

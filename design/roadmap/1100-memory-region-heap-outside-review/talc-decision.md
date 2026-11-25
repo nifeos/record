@@ -35,9 +35,9 @@ which is the shape nife's `[patch]` has today.
 
 Concrete example. The crate repository's `check` runs its host tests (item 8) against the unpatched
 5.1.1 and passes, because the wrapped-address case needs a gap that ends within a chunk of the top
-of a 64-bit address space. basalt's image, built in nife's workspace, links the patched source. If
-upstream stays silent past the next monthly `script/vendor-watch` report, the question returns as a
-fork request, which this block does not make.
+of a 64-bit address space. basalt's image, built in nife's workspace, links the patched source. nife
+reconsiders a fork only if a 32-bit target arrives or its maintainer declares upstream abandoned (ruled 2026-11-25
+UTC: no fork now).
 
 Not taken. A git pin on upstream at a revision carrying the fix (there is none; the pull request has
 not merged). A fork under `nifeos` (refused in the step 9 appendix as needing its own approval). A

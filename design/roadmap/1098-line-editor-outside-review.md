@@ -66,7 +66,7 @@ milestone reaches delivery.
   [#3972](https://github.com/nifeos/nife/pull/3972), ruled 2026-11-22 (UTC), A.
 
 - The move: Done, [#4001](https://github.com/nifeos/nife/pull/4001). The crate lives in
-  [nifeos/line_editor](https://github.com/nifeos/line_editor), and nife depends on it by git and
+  [nifeos/line_editor](https://github.com/partsfoundry/line_editor), and nife depends on it by git and
   `rev`, a commit on its `main`, with `version = "0.1.0"`. It keeps `publish = false`; no tag
   exists, and crates.io holds no release.
 

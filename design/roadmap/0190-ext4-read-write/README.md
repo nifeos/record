@@ -18,6 +18,9 @@ main page's prose budget has no room for.
   [`2a-free-empty-extent-index.md`](upstream/2a-free-empty-extent-index.md) and
   [`2b-restore-truncate-tail.md`](upstream/2b-restore-truncate-tail.md), the two truncate fixes, and
   [`4-fuzz-targets.md`](upstream/4-fuzz-targets.md), the fuzz targets. Then come
+  [`5a-crc32c-safety-arguments.md`](upstream/5a-crc32c-safety-arguments.md), the CRC32C safety
+  arguments, [`5b-group-descriptor-decode.md`](upstream/5b-group-descriptor-decode.md), the group
+  descriptor decode, [`6-kani-harnesses.md`](upstream/6-kani-harnesses.md), the Kani harnesses,
   [`7-mount-refusal-reason.md`](upstream/7-mount-refusal-reason.md), the mount's refusal reason,
   [`8-whole-inode-times.md`](upstream/8-whole-inode-times.md), whole inode times, and
   [`9-inode-bitmap-padding.md`](upstream/9-inode-bitmap-padding.md), the inode bitmap's padding.

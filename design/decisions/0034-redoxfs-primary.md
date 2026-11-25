@@ -7,20 +7,46 @@ ratified_by: calef
 
 # 34. RedoxFS is the primary filesystem, on three conditions
 
-**Decided 2026-07-29 (UTC); its launch-store role reaffirmed 2026-10-31 (UTC), on #2927.** RedoxFS
-is the primary on-disk filesystem and the launch store: the writable volume the image boots into,
-that `jig` installs packages onto, and that holds the installed-programs table under `activation/`.
-It is not yet the *root* filesystem, and §34.3 below is why that is a separate piece of work rather
-than a relabelling.
+**Decided 2026-07-29 (UTC); its launch-store role reaffirmed 2026-10-31 (UTC), on #2927; its
+replacement by ext4 decided 2026-11-25 (UTC).** RedoxFS is the primary on-disk filesystem and the
+launch store until nife adopts `rsext4`: the writable volume the image boots into, that `jig`
+installs packages onto, and that holds the installed-programs table under `activation/`. On
+adoption, ext4 through `rsext4` replaces it in both roles, as the next section sets out. RedoxFS is
+not yet the *root* filesystem, and §34.3 below is why that is a separate piece of work rather than
+a relabelling.
 
-## What could replace it, and what will not
+## What replaces it, and what will not
 
-The next measurement is ext4 through `rsext4` (Starry-OS, Apache-2.0, `no_std`, two dependencies),
-under the injector of milestone 37 (Prove RedoxFS's crash consistency), judged by `e2fsck -fn` after
-Linux replays the journal. The proposal `ext4-through-rsext4-under-the-crash-injector` carries it.
-If it passes, one ext4 server may become both the launch store and the reader of Linux drives that
-milestone 190 (ext4, read and write) wants, and RedoxFS then leaves through a milestone of its own.
-If it fails, RedoxFS stays.
+ext4 through `rsext4` replaces RedoxFS. RedoxFS is not a viable long-term store, and no benchmark
+can compare it with Linux on filesystem operations. There is no alternative to `rsext4`. nife takes
+it from partsfoundry/rsext4, which offers every fix upstream to `rcore-os/tgoskits` and carries
+whatever upstream does not take.
+
+The replacement waits on the adoption ruling, and we ask for that ruling once partsfoundry/rsext4
+meets the bar of §46 (thin primitives or whole subsystems; we write everything in between) and the
+done-when of milestone 190 (ext4, read and write). That done-when includes the power-cut sweeps of
+milestone 997 (ext4 through rsext4, under milestone 37's crash injector). They put `rsext4` behind
+the injector of milestone 37 (Prove RedoxFS's crash consistency) and judge each fault by
+`e2fsck -fn` after Linux replays the journal. A fault point those sweeps find is work for the
+fork, not a reason for RedoxFS to stay. Until that ruling, RedoxFS stays the primary filesystem and
+the launch store.
+
+On adoption, one ext4 server becomes both the launch store and the reader of Linux drives that
+milestone 190 wants. RedoxFS then leaves through a milestone of its own, minted from the inventory
+of milestone 982 (Retire RedoxFS once a launch store proves itself). In it the ext4 server takes
+over the launch store's duties on aarch64, riscv64 and x86_64: it boots the composed image, takes
+`jig` installs and holds the installed-programs table under `activation/`.
+
+This section does not decide:
+
+- the adoption ruling itself, which milestone 190 asks for in a pull request of its own;
+- the milestone at which the cut-over happens, its order against other work, or whether the ext4
+  server becomes the launch store and RedoxFS leaves in one step or two;
+- whether a nonzero count in milestone 997's lying-device sweep still passes, which that block
+  leaves to the architect with the numbers in hand;
+- whether the extended-attribute layer below carries over to ext4 or gives way to ext4's own
+  extended attributes;
+- the *root* filesystem question, which stays separate as above.
 
 nife does not build a UFS2 server (milestone 981 (UFS2, read and write), refused). UFS2 would need a writer, an `fsck` and
 a crash mechanism nife does not have, and it reads few drives other systems made. The measurement
@@ -33,8 +59,8 @@ Two measurements from 2026-10-31 (UTC) stand behind this. nife's whole divergenc
 with `metadata_csum` on.
 
 Prior art: Redox OS roots on RedoxFS. SerenityOS roots on an ext2 implementation it wrote itself.
-Fuchsia moved devices from minfs to Fxfs in place once Fxfs had proven itself, the shape an ext4 swap
-would take here. A concrete example: `jig install` writes `activation/current.next` and renames it
+Fuchsia moved devices from minfs to Fxfs in place once Fxfs had proven itself, the shape the ext4
+swap takes here. A concrete example: `jig install` writes `activation/current.next` and renames it
 over `current` in one RedoxFS transaction, and milestone 37's injector cuts power inside exactly
 that kind of commit.
 
@@ -70,8 +96,9 @@ nobody wrote down is a decision nobody can revisit.
 2. Throughput must be measured (milestone 38). `fs_read` reports the whole-path cost of a real
    read (~204 us under HVF, device-dominated, with `relay_rtt` putting the isolation tax three orders
    of magnitude below it), and it is deliberately ungated because the path is interrupt-driven. What
-   does not exist is any MB/s figure, or any comparison against ext4 or APFS. The phrase "primary
-   filesystem" invites a comparison we currently cannot make.
+   does not exist is any MB/s figure, or any comparison against ext4 or APFS. No benchmark can
+   compare RedoxFS with Linux on filesystem operations, so this condition is not met for RedoxFS,
+   and that is one reason ext4 replaces it.
 3. The write path must be honestly complete, which is `CREATE` and `TRUNCATE` (milestone 31 phase
    two, in flight). §27 records why `TRUNCATE` is not merely a feature: a write that half-works reads
    as a write that failed, and that sharp edge cost a day and produced three wrong root causes.
@@ -97,8 +124,7 @@ filesystem are different jobs, and the initrd wants exactly what nifefs is. It s
   crash-consistent CoW filesystem is a large, subtle project that proves nothing the thesis needs.
 - ext2. Simple, well documented, Rust implementations exist, and it buys real interop (mount the
   image on Linux). Rejected for a *root*: no journaling, so power loss means `fsck` and possible loss,
-  which is a step down from CoW. ext4 has no serious no_std Rust write implementation, and writing one
-  correctly is its own multi-month project.
+  which is a step down from CoW. ext4 is the replacement, through `rsext4`, as set out above.
 - FAT32 / exFAT. `fatfs` is mature and no_std. Rejected for a root on semantics: no crash
   consistency at all, no permissions, no symlinks. It is the right answer for a future *boot* partition
   where interop is the point, and wrong for anything that must survive a power cut.

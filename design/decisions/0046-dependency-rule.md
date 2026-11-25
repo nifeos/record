@@ -69,8 +69,11 @@ The worked case is the kernel's device tree parser. Milestone 784 (reuse what th
 measured our `device_tree_blob` against Google's `dtoolkit`. The four properties we prove hold on
 `dtoolkit`'s code, and it survived our corpus and fuzzing. It fell short on a name-length refusal, a
 quadratic walk and a panic in `Display`, so we filed the three reports and opened a contribution for
-the walk. Retiring `device_tree_blob` for `dtoolkit` is an architect's ruling once `dtoolkit` meets
-the bar.
+the walk, which upstream merged with two more of our fixes. Ruled 2026-11-25 (UTC), nife keeps
+`device_tree_blob` and does not take `dtoolkit`. Upstream moves too slowly, and it has not shown it
+wants what nife needs: lenient reading of firmware trees that do not conform, and adding a child
+while editing in place. Taking it would also add `zerocopy`, `zerocopy-derive` and `thiserror` (two
+proc macros, ten crates) to a kernel graph of four.
 
 ### Stated reasons to write
 

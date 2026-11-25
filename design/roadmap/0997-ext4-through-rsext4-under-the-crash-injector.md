@@ -11,12 +11,14 @@ needs_person: no
 # 997. ext4 through rsext4, under milestone 37's crash injector
 
 Raised 2026-10-31 (UTC) by lane `lane/981-ufs2-read-only-server`, from the ruling recorded on
-#2927: RedoxFS stays the launch store, and the next measurement is ext4 through `rsext4`. If it
-passes, one ext4 server may become both the launch store and the reader of Linux drives that
-milestone 190 (ext4, read and write) wants. If it fails, RedoxFS stays.
+#2927: the next measurement is ext4 through `rsext4`. Its sweeps are the power-cut half of the
+done-when of milestone 190 (ext4, read and write). `rsext4` replaces RedoxFS once
+partsfoundry/rsext4 meets that block's bar (2026-11-25 UTC), and one ext4 server then serves as
+both the launch store and the reader of Linux drives. A fault point this measurement finds is work
+for the fork.
 
-Reuse: `rsext4` 0.9.2 (Starry-OS, Apache-2.0, `no_std`, depending only on `bitflags` and
-`thiserror`), which writes ext4 with `metadata_csum` and carries a jbd2 journal. The injector, the
+Reuse: `rsext4` from partsfoundry/rsext4, upstream's 0.9.2 (Apache-2.0, `no_std`, depending only
+on `bitflags` and `thiserror`) with the fixes milestone 190 lists, which writes ext4 with `metadata_csum` and carries a jbd2 journal. The injector, the
 workload and the outcome classes of milestone 37 (Prove RedoxFS's crash consistency). e2fsprogs as
 the host-side oracle under §136 (a mature foreign implementation earns its place as an oracle, not
 as a dependency). The lane writes only the harness glue that puts `rsext4`
@@ -61,9 +63,9 @@ RedoxFS's, and the fork above has a ruling.
 
 - Nothing here runs `rsext4` under nife; the builds are link-only.
 - `rsext4` is developed in `rcore-os/tgoskits` under `fs/rsext4`; the `Starry-OS/rsext4` repository
-  that crates.io names is not where its releases come from. Milestone 190 (ext4, read and write)
-  holds the plan for working with that upstream.
+  that crates.io names is not where its releases come from. nife takes it from partsfoundry/rsext4,
+  and milestone 190 (ext4, read and write) holds the plan for working with that upstream.
 
 ## Index row
 
-RedoxFS stays the launch store unless ext4 through rsext4 survives the same crash injection. The measurement decides whether one ext4 server serves as the launch store and as the reader of Linux drives.
+ext4 through rsext4 under milestone 37's crash injector, judged by Linux replay and e2fsck. Its sweeps are part of milestone 190's done-when; once partsfoundry/rsext4 meets that bar, rsext4 replaces RedoxFS and one ext4 server serves as the launch store and as the reader of Linux drives.

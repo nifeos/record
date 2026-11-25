@@ -203,7 +203,7 @@ then measures a period with no change the tool calls breaking; nobody has set th
 | item | owner |
 |---|---|
 | Clear this package: confirm or change the provisional rulings on questions 1 to 6, and rule on question 7. | architect |
-| `repository = "https://github.com/nifeos/file_allocation_table"` in the manifest. | move lane |
+| `repository = "https://github.com/partsfoundry/file_allocation_table"` in the manifest. | move lane |
 | The `lamfat` exception in the new repository's `deny.toml`. | move lane |
 | nife's three consumers (`components`, `xtask`, `fuzz`) move from the path dependency to `git` and `rev` with `version = "0.1.0"`. | move lane |
 
