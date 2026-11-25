@@ -31,17 +31,19 @@ issue refuses a second claim. Nothing moves a claim from one holder to another e
 - A lane claims with `script/claim <branch> --new-work --issue N` (`owner/repo#N` for another
   repository). The command checks the issue before it touches git, posts the claim comment, reads
   the comments back, and gives way if an earlier claim won the race. It then cuts the worktree,
-  opens the draft with `Closes #N`, and writes the draft's address into the claim comment. If it
-  stops before the draft opens, it deletes its claim comment.
+  opens the draft with `Closes #N`, and writes the draft's address into the claim comment's
+  marker. If it stops before the draft opens, it deletes its claim comment. A token that cannot
+  name its account, such as an App installation token, makes it refuse before it posts.
 - An outsider claims by commenting `/claim` on a line of its own. The `issue claim` workflow
-  assigns them, which GitHub allows because they commented, and replies with the claim comment.
-  `/release` gives the claim back. An outsider holds one open claim at a time.
+  replies with the claim comment, reads the comments back as a lane does, and assigns them, which
+  GitHub allows because they commented. `/release` gives the claim back. An outsider holds one open claim at a time.
 - What the issue shows: an assignee, and a claim comment naming the holder, the lane and branch
   for a lane, and the draft pull request. The comment carries a hidden marker, and the marker is
   the record the tools read.
 - How a claim ends: the closing pull request merges and GitHub closes the issue; or the holder
   releases it; or the daily sweep releases a claim that has stood 14 days with no open pull request
-  closing the issue. An open closing pull request keeps a claim alive however long review takes.
+  closing the issue. An open closing pull request keeps a claim alive however long review takes,
+  and so does the open draft a lane's marker names, even after an edit drops `Closes #N`.
 - A second attempt gets a reply that names the holder and refuses it. A lane prints the same reason
   and stops; it never steals and never works the issue unclaimed.
 
@@ -142,7 +144,11 @@ states the deadline. Adding a reminder later breaks nobody.
 
 Taken from zulipbot, with no exception after a first merge: a contributor who wants a second issue
 finishes or releases the first. Members are exempt, since a lane holds one issue per draft already.
-The limit counts open issues assigned to the outsider, so an assignment made by hand counts too.
+The limit counts open issues assigned to the outsider, read from the REST issues list rather than
+search, which lags and allows about 30 calls a minute. An assignment made by hand counts too. Two
+`/claim` comments on two issues in the same second can both pass that count, so each run counts
+again after it assigns, and the claim outside the oldest one withdraws. Every run orders the
+claims by age the same way, so a burst keeps exactly one.
 
 ### No "help wanted" gate, but held labels refuse
 
@@ -150,12 +156,14 @@ zulipbot claims only on "help wanted". This project has no such triage today, an
 nobody keeps would refuse every claim. An issue labeled `needs-architect` refuses a claim, since
 it waits on a ruling and nobody can finish it.
 
-### A lane checks before git, claims, then reads back
+### Every claim posts, then reads back
 
 A lane checks, posts its claim, and reads the comments back before it cuts a worktree. If an earlier
-claim won, it deletes its own comment and stops, so a lost race costs one command. Comment claims
-run one at a time per issue, through the workflow's concurrency group, so two `/claim` comments in
-one second get decided in order.
+claim won, it deletes its own comment and stops, so a lost race costs one command. The workflow
+does the same and rewrites a losing comment into a refusal, so a lane and an outsider never both
+hold one issue. A concurrency group would not do: GitHub keeps one pending run per group and
+cancels the one before, so any later comment on the issue could cancel a waiting `/claim` and
+leave it with no reply. Only the sweep has a group of its own.
 
 ## The workflow is safe to run on a stranger's comment
 
@@ -188,4 +196,5 @@ pull requests, each citing the nife commit it copies:
 - The outsider limit counts issues assigned to the outsider. A claim recorded in a comment when the
   assignment failed does not count toward it.
 - A lane whose command dies between the draft and the link step leaves a claim comment that says
-  its draft is to follow. The draft still says `Closes #N`, so the claim holds and ends correctly.
+  its draft is to follow and names no pull request. The draft still says `Closes #N`, so the claim
+  holds while that line stays in its body.
