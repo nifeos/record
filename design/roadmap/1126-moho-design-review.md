@@ -176,7 +176,8 @@ value in that register. On the new kernel its wait ends at a deadline it never a
 only cure is a new method number for every call that grows.
 
 Fix: one rule for the whole interface. An argument word, flag or rights bit the method does
-not define is zero, or the kernel refuses the call. `writable` takes 0 or 1.
+not define ends the calling program with a fault its supervisor can read, and the call returns
+no error. `writable` takes 0 or 1.
 
 Effort: M. Door: one-way (what a call means). The rule can only loosen later.
 
@@ -238,9 +239,23 @@ Effort: M. Door: one-way (what a code means).
 
 ## Decisions for the architect
 
-Each P0 finding and findings 5, 6, 9, 10, 11, 12 and 16 open a one-way door. None has a
-ruling. The maintainer brings them one at a time, in the table's order, each with its background
-first. Findings 7, 8, 13, 14, 15, 17, 18 and 19 are two-way, and the maintainer decides them.
+Each P0 finding and findings 5, 6, 9, 10, 11, 12 and 16 open a one-way door. The four P0 findings
+have rulings, below. Findings 5, 6, 9, 10, 11, 12 and 16 have none, and the maintainer brings them
+one at a time, in the table's order, each with its background first. Findings 7, 8, 13, 14, 15, 17,
+18 and 19 are two-way, and the maintainer decides them.
+
+Rules in force:
+
+- Finding 1, ruled 2026-11-25 (UTC): word 0 is always the kernel's status, and every data word
+  moves down one register.
+- Finding 2, ruled 2026-11-25 (UTC): method numbers are unique across the interface, with the
+  object kind in the high bits. A call on the wrong kind of object answers `WrongObject`.
+- Finding 3, ruled 2026-11-25 (UTC): an argument word, flag or rights bit that a method does not
+  define ends the calling program with a fault its supervisor can read. It is not an error return.
+- Finding 4, ruled 2026-11-25 (UTC): the interface gains `InvalidArgument`, `WrongState`,
+  `TableFull` and a code for a full system-wide table (names provisional). Each refusal moves to
+  the code a program can act on. The reboot codes move into the second word of the reboot call's
+  own answer. On a refusal, the words after the status are zero.
 
 ## Done when
 
