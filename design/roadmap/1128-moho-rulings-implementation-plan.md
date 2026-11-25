@@ -197,9 +197,8 @@ open decision asks whether that is acceptable.
     `unstable` (finding 11), as one `moho_abi` pull request and one nife pull request. Each lands
     alone, in any order, at effort M.
     - Finding 7: a method that copies a capability in place under a rights mask, and a rights mask
-      on any message that carries a capability. After step 11 no separate reply-with-capability
-      call exists. The mask is an addition because, after step 10, a program that sets the word it
-      uses faults, so no 2.0 program sets it.
+      on any message that carries a capability, since step 11 leaves no separate
+      reply-with-capability call.
     - Finding 8: a non-blocking send and a poll. `address_space::WAIT` gains an absolute deadline,
       which ends `std`'s spinning in `Condvar::wait_timeout` and `park_timeout`. Deadlines on
       message passing wait for the speed measurement.
@@ -262,9 +261,7 @@ Four stay open for calef:
 3. How the version pair travels: one word or two. It blocks steps 8 and 9.
 4. How the kernel hands its pair to the first program. It blocks step 9.
 
-The maintainer ruled three on 2026-11-25 (UTC), provisionally, and the appendix states each as
-the rule in force: 2.0 may change between nife commits until step 13, the table crate bounds a
-table's size, and a number moves the additions part when it leaves `unstable`.
+The appendix also holds three the maintainer ruled provisionally.
 
 ## The outward steps
 
