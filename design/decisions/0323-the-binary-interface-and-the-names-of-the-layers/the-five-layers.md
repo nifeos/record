@@ -127,10 +127,10 @@ interface shares, take no common prefix. The project can add a prefix later, but
 away.
 
 Ruled 2026-11-15 (UTC): the name is `partsfoundry` (Parts Foundry), with the domain
-`partsfoundry.org`. `nife`, `basalt` and Moho keep their names, and `basalt.nifeos.org` stays
-valid for installed images (§250). The `partsfoundry` GitHub organization holds every library
-crate repository, and `partsfoundry.org` is verified as its domain; it does not serve the design
-record. Building the website is the step still waiting, before the first crates.io publish.
+`partsfoundry.org`. `nife`, `basalt` and Moho keep their names, and `basalt.nifeos.org` stays valid
+for installed images (§250). The `partsfoundry` GitHub organization holds every library crate
+repository, and `partsfoundry.org` is its domain; it does not serve the design record. Building the
+website is the step still waiting, before the first crates.io publish.
 
 The checks ran on 2026-11-15. `partsfoundry` and its variants (`parts_foundry`, `parts-foundry`,
 `partfoundry`) are free on crates.io, on GitHub and as `.org`, `.io` and `.net` domains. `.dev` is

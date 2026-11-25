@@ -192,13 +192,12 @@ sale, and another party holds `moho.dev`. Moho, the animation software, is well 
 searches found no operating system, kernel, ABI or Rust target named Moho. Nobody has yet checked
 the rustc target list, LLVM or the Linux sources.
 
-What moves, and when. The tree still spells the capability binary interface `nife` in
-`target_os = "nife"`, the `unknown-nife` triples, the `std-nife` port and the `abi` crate
-(`crates/abi`). Renaming them waits on a separate plan lane, which sets their order and the rename
-of `crates/abi` to `moho_abi`. The names inside binaries stay as they are: the ELF note owner
-`nife`, section names such as `.note.nife.manifest`, and magics such as `NIFESLOT` and `NIFESTK1`.
-They fall under the wire-literal exemption, ruled 2026-11-14 (UTC): a marked owner string, section
-name or magic may spell nife.
+What moves, and when. The tree still spells the capability binary interface `nife` in `target_os =
+"nife"`, the `unknown-nife` triples and the `std-nife` port. Renaming them waits on a separate plan
+lane, which sets their order. The names inside binaries stay as they are: the ELF note owner `nife`,
+section names such as `.note.nife.manifest`, and magics such as `NIFESLOT` and `NIFESTK1`. They fall
+under the wire-literal exemption, ruled 2026-11-14 (UTC): a marked owner string, section name or
+magic may spell nife.
 
 ## The library and its organization are partsfoundry
 
@@ -281,11 +280,11 @@ names stay open.
 
 ## What waits on these rulings
 
-- The rename of `crates/abi` to `moho_abi`, decision A of milestone 1075 (`abi`: what an outside
-  maintainer would fix before the move), with `target_os`, the triples and the `std` port. Ruling 2
-  settles the name, and the rename in code (1,784 uses in 238 files, none in basalt) waits on the
-  plan lane above. The crate has to publish, because a crates.io crate cannot depend on a git crate,
-  so a `getrandom` backend needs it. Both capability kernels share it.
+- The rename of `target_os`, the triples and the `std` port, which waits on the plan lane above. The
+  ABI crate is `moho_abi`, in its own repository `nifeos/moho_abi`, as ruling 2 and decision A of
+  milestone 1075 (`abi`: what an outside maintainer would fix before the move) set. The crate has to
+  publish, because a crates.io crate cannot depend on a git crate, so a `getrandom` backend needs
+  it. Both capability kernels share it.
 - Building and deploying the website, before the first crates.io publish. Milestone 1018 (the
   design record moves to `nifeos/record` and is published as a website) holds the build, and the
   website is `nifeos/nifeos.org`, at `nifeos.org`. The rule that a leaving crate never mentions
