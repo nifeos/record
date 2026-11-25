@@ -236,7 +236,7 @@ Effort: M. Door: one-way (what a code means).
 
 ## Rulings
 
-Every one-way finding (1 to 6, 9, 10, 11, 12 and 16, and the capability table's size) has a ruling.
+Every one-way finding (1 to 6, 9 to 12 and 16, and the table size) has a ruling.
 The maintainer decided the two-way findings, provisionally.
 
 Rules in force, all of 2026-11-25 (UTC):
@@ -275,8 +275,8 @@ Rules in force, all of 2026-11-25 (UTC):
 Provisional rulings of the maintainer:
 
 - Findings 7, 13 and 14: accept as proposed.
-- Finding 8: non-blocking send and poll variants now. Deadlines wait for a measurement of
-  message-passing speed.
+- Finding 8: non-blocking send and poll variants, and an address-wait deadline, now. Message-passing
+  deadlines wait for a speed measurement.
 - Finding 15: a query for a capability's rights only, with no query for its object kind.
 - Findings 17 and 18: deferred.
 - Finding 19: follows finding 9.

@@ -136,8 +136,8 @@ timed condition-variable wait. A server that sends an event to a client that nev
 blocked, and every other client waits behind it.
 
 What finding 8 became (a provisional ruling of the maintainer): non-blocking send and poll
-variants now, for a server answering a client it does not trust. Deadlines wait for a measurement
-of message-passing speed. Each is an addition once finding 3 keeps the words they need at zero.
+variants now, for a server answering a client it does not trust, and an address-wait deadline.
+Message-passing deadlines wait for a speed measurement. Each is an addition once finding 3 keeps the words they need at zero.
 
 ### Property 8 (finding 16): the interface is small and consistently named
 
@@ -180,7 +180,7 @@ from seL4, the rubric and versioning from Zircon, and the evolution marks from W
 
 ## What Moho already does better
 
-The review lists eight places where Moho leads. Protect them while the fixes land.
+The review lists eight places where Moho leads. Protect them.
 
 - "Gone" is a different answer from "nothing there". A capability whose object died keeps
   its slot and says so. A writer whose reader has exited can stop, while a program that was never

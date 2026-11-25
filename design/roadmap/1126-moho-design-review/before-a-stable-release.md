@@ -110,9 +110,10 @@ that signals a notification. The address wait's gap is a recorded bug.
 Example: a server pushes an event to a client with `SEND`. The client never receives. The
 server's only thread stays blocked, and every other client waits behind it.
 
-Fix: add a non-blocking send and a polling receive now. Deadlines, including one on
-`address_space::WAIT`, wait for a measurement of message-passing speed. Each arrives as an
-addition once finding 3 reserves the words. The maintainer ruled this provisionally.
+Fix: add a non-blocking send and a polling receive now, and give `address_space::WAIT` an
+absolute deadline in word 5 now, since its missing timeout is a recorded bug. Deadlines on
+message passing wait for a measurement of its speed. Each arrives as an addition once finding 3
+reserves the words. The maintainer ruled this provisionally.
 
 Effort: M. Door: two-way.
 
