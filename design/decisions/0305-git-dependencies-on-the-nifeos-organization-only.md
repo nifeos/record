@@ -5,7 +5,7 @@ decided: 2026-10-17
 ratified_by: calef
 ---
 
-# 305. Git dependencies are allowed on `nifeos/*` only, pinned to a landed commit
+# 305. Git dependencies are allowed on `nifeos/*` and `partsfoundry/*` only, pinned to a landed commit
 
 Raised by the soak for the crates nife publishes itself (milestones 813 to 821). calef agreed on
 2026-10-17 (UTC), replying "Agrred" (sic) to the maintainer's proposal that each such crate first operates
@@ -17,16 +17,23 @@ cut are settled. A crate that has left this tree is a dependency of nife that no
 
 A dependency of this tree may be a git dependency when all three hold:
 
-1. The URL is `https://github.com/nifeos/<repository>`. No other host and no other organization.
+1. The URL is `https://github.com/nifeos/<repository>` or
+   `https://github.com/partsfoundry/<repository>`. No other host and no other organization.
 2. It is pinned by `rev` to a full commit that has landed on that repository's main. Never a
    branch, never a tag, never a commit on an unmerged branch.
 3. The repository is a component or a crate of this project, not a mirror or a fork of someone
    else's code.
 
-`deny.toml` enforces the first: `[sources.allow-org]` admits the `nifeos` organization on GitHub
-and `unknown-git = "deny"` refuses every other git source. cargo-deny does not check the second,
-so the pull request that adds or bumps the pin cites the landed commit as `nifeos/<repo>@<sha>`
-and review checks it.
+The partsfoundry organization holds the library crate repositories, which transfer to it from
+nifeos one at a time (2026-11-24 UTC); nife and basalt stay in nifeos. The advance approval of our
+own crates as dependencies covers the same crates at their partsfoundry address (2026-11-25 UTC),
+so a crate is first-party in either organization, and its move does not change the rules for
+depending on it.
+
+`deny.toml` enforces the first: `[sources.allow-org]` admits the organizations above on GitHub and
+`unknown-git = "deny"` refuses every other git source. cargo-deny does not check the second, so the
+pull request that adds or bumps the pin cites the landed commit as `<org>/<repo>@<sha>` and review
+checks it.
 
 This is the same rule basalt applies to its pins and the workspace's cross-repository rule applies
 to a bump: land in the repository that owns the code first, then bump the pin in a separate pull
