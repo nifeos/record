@@ -121,7 +121,7 @@ fn that would be unsound if the sentence were false.
 code); [kani-gate.md](unsafe-obligations/kani-gate.md) records what the gate found. `cfg(kani)` is set by the model checker and by nothing else, so
 `script/lint` never compiled those modules and neither lint could fire in them. The tree has 12
 `unsafe {}` blocks under `#[cfg(kani)]`, all in `crates/inter_process_communication`; the
-repository `nifeos/intrusive_queue` has two more, and both carry SAFETY comments. **Eleven
+repository `partsfoundry/intrusive_queue` has two more, and both carry SAFETY comments. **Eleven
 of `inter_process_communication`'s twelve do not**, and the gate had never said so. A real fix is a
 gate rather than a pass of comments (a clippy invocation with `--cfg kani`, or `-D warnings` on the
 `script/verify` build); adding the comments alone leaves nothing to stop the next harness from

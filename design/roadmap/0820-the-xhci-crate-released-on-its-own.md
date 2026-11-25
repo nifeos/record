@@ -30,7 +30,7 @@ calef's rulings, quoted from the maintainer comments on #1806 of 2026-10-07 (UTC
 
 ## What exists, checked 2026-10-07 (UTC)
 
-- `nifeos/extensible_host_controller_interface`: 1,191 code lines (1,817 with comments), written by
+- `partsfoundry/extensible_host_controller_interface`: 1,191 code lines (1,817 with comments), written by
   milestone 242 (USB host and HID, because on commodity hardware the keyboard is not a UART), which
   is PARTIAL. It is everything a USB host controller driver computes and nothing it touches:
   capability and operational registers, device and endpoint contexts, the rings, port status and
@@ -64,7 +64,7 @@ rust-osdev to revive it, and calef ruled no offer, since nife does not depend on
 Each row is a property this crate must prove before it publishes. The harness cell names the Kani
 harness that proves it, or says `none yet`; every named harness carries a falsification patch that
 makes it fail at its own assertion. Each patch is at
-`falsifications/` in the `nifeos/extensible_host_controller_interface` repository. The window and handoff rows left with their code
+`falsifications/` in the `partsfoundry/extensible_host_controller_interface` repository. The window and handoff rows left with their code
 for `driver_process_contract`, which does not publish, so the crate proves 3 of 3.
 
 | property | harness |
@@ -83,7 +83,7 @@ and port decoders (`context`, `port`). The report words left with the handoff fo
 
 1. The name is settled before anything leaves (857's Fork 5 as calef amended it on 2026-10-11 UTC).
    `script/names extensible_host_controller_interface` reports it ratified, crates.io answers 404
-   for it (or it is already ours), and `nifeos/extensible_host_controller_interface` does not exist
+   for it (or it is already ours), and `partsfoundry/extensible_host_controller_interface` does not exist
    yet. `script/crate-standalone` checks the first.
 2. In the tree, `script/verify` proves the harnesses and `Cargo.toml` says `publish = false`.
 3. The package is 0.1.0 with its own semver, states `rust-version` (#1806's note built it on stable
@@ -92,7 +92,7 @@ and port decoders (`context`, `port`). The report words left with the handoff fo
    and its source divides by purpose) has milestone 610 (the interface's stability is
    measured weekly)'s per-package co-change column, and the soak (step 5) is how the second is
    measured. When the soak exits, calef adds it to the lint-checked publish allowlist. The
-   `nifeos/extensible_host_controller_interface` repository is created when the crate moves, on the
+   `partsfoundry/extensible_host_controller_interface` repository is created when the crate moves, on the
    shared CI template (milestone 887), through reusable workflows: Kani through
    `kani-github-action`, lint, release. Its release workflow refuses to publish unless the proof job
    is green. No harness here reads `target_arch`, so stock Kani proves them. The patched Kani of
@@ -102,7 +102,7 @@ and port decoders (`context`, `port`). The report words left with the handoff fo
    proposal; §305 (git dependencies are allowed on `nifeos/*` only, pinned to a landed commit)).
    Milestone 818 (`jh7110_entropy`: proven JH7110 TRNG logic, released on its own) is the pilot and
    soaks first. Before publication the crate is moved, not copied: it leaves this tree, and nife
-   depends on `nifeos/extensible_host_controller_interface` by `rev`. A copy left behind does not
+   depends on `partsfoundry/extensible_host_controller_interface` by `rev`. A copy left behind does not
    count. The soak ends on evidence, not a duration, when all five hold:
    1. nife builds and passes CI against the repository at a pinned commit, with no path dependency
       left.
@@ -151,7 +151,7 @@ ratification pass. With Kani, every harness proves and every falsification patch
 A check proves it. In nife, `cargo tree --locked -i extensible_host_controller_interface` resolves
 to `v0.1.x` from crates.io with a checksum in `Cargo.lock`,
 `crates/extensible_host_controller_interface` no longer exists, and the tree builds for all three
-targets. In `nifeos/extensible_host_controller_interface`, the run that published 0.1.0 shows the
+targets. In `partsfoundry/extensible_host_controller_interface`, the run that published 0.1.0 shows the
 Kani job green ahead of the publish job, and every harness's falsification patch makes its proof
 fail. The five soak criteria of release step 5 hold before it publishes.
 
@@ -185,7 +185,7 @@ names until the ratification pass, so this section keeps the links it carried.
 
 ## The soak
 
-- The crate lives in `nifeos/extensible_host_controller_interface`, on the shared template of
+- The crate lives in `partsfoundry/extensible_host_controller_interface`, on the shared template of
   milestone 887 (crate repositories share one CI template). `script/apply-settings` applied the
   settings there. The manifest keeps `publish = false`, and the caller sets `allow-unpublished`
   for the soak. No tag exists.
@@ -197,7 +197,7 @@ names until the ratification pass, so this section keeps the links it carried.
   first weekly run, 3 on a release dry run, 4 on a recorded stranger run, and 5 on four weeks from
   the tag nife pins.
 - A bump of the pin is a separate pull request citing the landed commit as
-  `nifeos/extensible_host_controller_interface@<sha>`.
+  `partsfoundry/extensible_host_controller_interface@<sha>`.
 
 ## What remains
 
@@ -221,7 +221,7 @@ names until the ratification pass, so this section keeps the links it carried.
 ## Follow-on
 
 - **Outstanding.** The tag `v0.1.0`, the pin moved to that tag's commit, the soak's end conditions
-  1 to 5 and the publication. Checked by `gh api repos/nifeos/extensible_host_controller_interface/tags`,
+  1 to 5 and the publication. Checked by `gh api repos/partsfoundry/extensible_host_controller_interface/tags`,
   which lists no tag.
 - **Recorded.** The crate's mutation baseline row stays in `.cargo/mutants-baseline.txt` until the
   repository's first weekly mutation run names each survivor.

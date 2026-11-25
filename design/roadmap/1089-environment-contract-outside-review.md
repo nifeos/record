@@ -44,7 +44,7 @@ and the release steps.
   `time_zone`, `locale`, `terminal_type`, `is_known_*` and `Unknown*`, each accessor with its POSIX
   alias, ratified 2026-11-19 UTC.
 - Item 5 (P1), no Kani proof: Done,
-  [nifeos/environment_contract#2](https://github.com/partsfoundry/environment_contract/pull/2). Two
+  [partsfoundry/environment_contract#2](https://github.com/partsfoundry/environment_contract/pull/2). Two
   harnesses, each with its falsification patch: `field_bytes_never_panics_for_any_length_byte` and
   `an_accessor_answers_only_the_member_its_field_holds`, which takes a fully symbolic page. The
   round trip is the host test `every_member_round_trips_through_the_safe_reader`, which writes and
@@ -65,7 +65,7 @@ and the release steps.
 - Item 10 (P2), five documentation sentences: Done,
   [#3566](https://github.com/nifeos/nife/pull/3566).
 - Item 11 (P2), a safe reader over borrowed bytes: Done,
-  [nifeos/environment_contract#2](https://github.com/partsfoundry/environment_contract/pull/2).
+  [partsfoundry/environment_contract#2](https://github.com/partsfoundry/environment_contract/pull/2).
   `ConfigurationView::new` takes `&[u8; PAGE_CONTENT_BYTES]` and needs no `unsafe`, a provisional
   name; `ConfigurationPage` keeps its address constructor and reads through it.
 - Item 12 (P2), the curated lists have no growth path: Done,
@@ -82,7 +82,7 @@ and the release steps.
 - Name ratification: Done. The architect ratified every public name in the review package's Names
   table as built on 2026-11-19 UTC.
 - Review clearance: Done, [#3827](https://github.com/nifeos/nife/pull/3827). The architect cleared
-  the review on 2026-11-19 UTC, `nifeos/environment_contract` exists, and nife pins its `main`.
+  the review on 2026-11-19 UTC, `partsfoundry/environment_contract` exists, and nife pins its `main`.
 
 ## Open decisions
 
@@ -161,7 +161,7 @@ refusal mean something to a reader outside this tree.
 
 Ruled 2026-11-19 (UTC): option A. A lane writes the review package, which carries the ratification
 of the provisional names. The architect ratifies the eleven names from it and clears the review,
-asked once the package exists; that clearance is the go to create `nifeos/environment_contract` as
+asked once the package exists; that clearance is the go to create `partsfoundry/environment_contract` as
 a `publish = false` repository.
 
 Ruled 2026-11-19 (UTC), option A on the names: the architect ratified every public name in the
@@ -177,7 +177,7 @@ public name with its ruling. The architect ratified these names:
 - `Refused::UnknownTimeZone`, `UnknownLocale` and `UnknownTerminalType`.
 - `PageBuilder`, `new`, `build`, `Refused`, the module `domain` and the module `verification`.
 
-The architect cleared the review on 2026-11-19 UTC. The repository is `nifeos/environment_contract`,
+The architect cleared the review on 2026-11-19 UTC. The repository is `partsfoundry/environment_contract`,
 with `publish = false`, no tag and no publication, and nife pins the commit of its `main`.
 
 Background. `environment_contract` is the agreement between the program that writes a process's

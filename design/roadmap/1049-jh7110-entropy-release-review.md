@@ -10,7 +10,7 @@ needs_person: yes
 # 1049. `jh7110_entropy` is ready to publish: the release review's findings
 
 Raised by the review lane for step 0 of milestone 1017 (the contract crates leave in this order). The
-lane read `nifeos/jh7110_entropy` at `98c211e` as an outside maintainer would meet it, ran what it
+lane read `partsfoundry/jh7110_entropy` at `98c211e` as an outside maintainer would meet it, ran what it
 could on a host, and wrote this block. It changed nothing in any repository.
 
 Reuse: the crate's own Kani harnesses and falsification patches, the shared template
@@ -31,7 +31,7 @@ What the review ran or read on a host, and what it did not run, is in the
 
 ## Finding status
 
-Each line was checked against `nifeos/jh7110_entropy` at `2bf731c`, the head of its `main`.
+Each line was checked against `partsfoundry/jh7110_entropy` at `2bf731c`, the head of its `main`.
 
 - Item 1 (P0), the publishing hold: Waiting on the publishing hold, which lasts until every outside
   review milestone is delivered. 0.3.0 is the first published version.
@@ -40,28 +40,28 @@ Each line was checked against `nifeos/jh7110_entropy` at `2bf731c`, the head of 
   removes it and `allow-unpublished: true`.
 - Item 3 (P0), the first-publish token: Waiting on the publishing hold. A person creates the token
   and approves the `crates-io` environment once the hold lifts.
-- Item 4 (P0), the published tree on the board: Done, `nifeos/jh7110_entropy#22`, `#23` and `#25`,
+- Item 4 (P0), the published tree on the board: Done, `partsfoundry/jh7110_entropy#22`, `#23` and `#25`,
   with [#3701](https://github.com/nifeos/nife/pull/3701).
-- Item 5 (P1), the template pin: Done, `nifeos/jh7110_entropy#26`, `#27`, `#30` and `#33`. The
+- Item 5 (P1), the template pin: Done, `partsfoundry/jh7110_entropy#26`, `#27`, `#30` and `#33`. The
   ruleset on `main` requires `check / mutation-diff` and `proofs / loom`.
-- Item 6 (P1), the output width: Done, `nifeos/jh7110_entropy#19`.
-- Item 7 (P1), work in flight: Done, `nifeos/jh7110_entropy#19`.
-- Item 8 (P1), `Pool` copied and printed: Done, `nifeos/jh7110_entropy#19`.
-- Item 9 (P1), `Pool`'s names and answer shape: Done, `nifeos/jh7110_entropy#19`.
-- Item 10 (P1), proofs of `Pool`: Done, `nifeos/jh7110_entropy#19` and `#29`.
-- Item 11 (P1), package contents: Done, `nifeos/jh7110_entropy#20`.
-- Item 12 (P1), crates.io metadata: Done, `nifeos/jh7110_entropy#20`.
-- Item 13 (P1), changelog order: Done, `nifeos/jh7110_entropy#19`.
-- Item 14 (P2), README shape: Done, `nifeos/jh7110_entropy#20`.
-- Item 15 (P2), the two private alarm bits: Done, `nifeos/jh7110_entropy#21`.
-- Item 16 (P2), the build registers and the reseed-state field: Done, `nifeos/jh7110_entropy#21`.
+- Item 6 (P1), the output width: Done, `partsfoundry/jh7110_entropy#19`.
+- Item 7 (P1), work in flight: Done, `partsfoundry/jh7110_entropy#19`.
+- Item 8 (P1), `Pool` copied and printed: Done, `partsfoundry/jh7110_entropy#19`.
+- Item 9 (P1), `Pool`'s names and answer shape: Done, `partsfoundry/jh7110_entropy#19`.
+- Item 10 (P1), proofs of `Pool`: Done, `partsfoundry/jh7110_entropy#19` and `#29`.
+- Item 11 (P1), package contents: Done, `partsfoundry/jh7110_entropy#20`.
+- Item 12 (P1), crates.io metadata: Done, `partsfoundry/jh7110_entropy#20`.
+- Item 13 (P1), changelog order: Done, `partsfoundry/jh7110_entropy#19`.
+- Item 14 (P2), README shape: Done, `partsfoundry/jh7110_entropy#20`.
+- Item 15 (P2), the two private alarm bits: Done, `partsfoundry/jh7110_entropy#21`.
+- Item 16 (P2), the build registers and the reseed-state field: Done, `partsfoundry/jh7110_entropy#21`.
 - Item 17 (P2), a rand_core adapter: Won't fix. An optional feature nobody uses is API without
   evidence, and the contract layer reaches the interface through `getrandom`. Ruled 2026-11-09.
-- Item 18 (P2), fuzz or say why not: Done, `nifeos/jh7110_entropy#21`.
-- Item 19 (P2), the minimum Rust version: Done, `nifeos/jh7110_entropy#27`.
+- Item 18 (P2), fuzz or say why not: Done, `partsfoundry/jh7110_entropy#21`.
+- Item 19 (P2), the minimum Rust version: Done, `partsfoundry/jh7110_entropy#27`.
 - The twelve names added since the last ratification: Done,
   [#3769](https://github.com/nifeos/nife/pull/3769).
-- The measured poll times in the README: Done, `nifeos/jh7110_entropy#34`.
+- The measured poll times in the README: Done, `partsfoundry/jh7110_entropy#34`.
 - Whether a reseed clears `LFSR_LOCKUP`: Waiting on a board run. No lockup appeared in either run.
 - `STATUS_SEEDED`, `LAST_RESEED` and `BCONF` bit 3 at the silicon's reset state: Waiting on a board
   run. Both runs read the state the bootloader leaves. The same read settles which value of

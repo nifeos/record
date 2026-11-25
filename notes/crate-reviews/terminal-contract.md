@@ -6,7 +6,7 @@ the packages together outgrow the page. Its twin is [`line_editor`](line-editor.
 this crate's protocol serves.*
 
 The architect cleared this package on 2026-11-22 (UTC), with `publish = false`, no tag and no
-publish: the clearance was the go to create `nifeos/terminal_contract`. The crate now lives there,
+publish: the clearance was the go to create `partsfoundry/terminal_contract`. The crate now lives there,
 and nife depends on it by rev ([#4015](https://github.com/nifeos/nife/pull/4015)). It describes the crate as `main` leaves it at `97d16ae8b`,
 with the interface identity and the reserved-bit refusal built since. The crate came out of `line_editor` by decision 1 of
 [milestone 1098 (`line_editor`: what an outside maintainer would fix before it leaves)](../../design/roadmap/1098-line-editor-outside-review.md),
@@ -147,7 +147,7 @@ What remains belongs to the repository and to later lanes:
 ## Recommendation
 
 Cleared 2026-11-22 (UTC). The crate is a dependency-free leaf with no `unsafe` and no nife type in
-a signature, and the template's gating name checks pass. It moved to `nifeos/terminal_contract`
+a signature, and the template's gating name checks pass. It moved to `partsfoundry/terminal_contract`
 the same day.
 
 ## Open questions
@@ -162,7 +162,7 @@ the same day.
 - The reserved bits (2026-11-22 UTC): a terminal refuses a first word with any of bits 55 to 32
   set, answering `BAD_REQUEST`, and both servers decode through one crate function that checks
   them, with a host test that pins the refusal.
-- The clearance (2026-11-22 UTC): cleared, the go to create `nifeos/terminal_contract` with
+- The clearance (2026-11-22 UTC): cleared, the go to create `partsfoundry/terminal_contract` with
   `publish = false`, no tag and no publish.
 
 ## Decisions for the architect

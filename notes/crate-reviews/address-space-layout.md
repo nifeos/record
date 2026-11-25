@@ -117,7 +117,7 @@ page-table window.
 - The review clearance of 2026-11-21 UTC ratifies the whole-window check `window`. The three
   one-page functions wrap it.
 - The review is cleared (option A, ruled 2026-11-21 UTC): the crate moves to
-  `nifeos/address_space_layout` with `publish = false`, no tag and no publish, and the names of
+  `partsfoundry/address_space_layout` with `publish = false`, no tag and no publish, and the names of
   items 7, 9, 15 and 17 are ratified as proposed.
 
 ## Names

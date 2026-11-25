@@ -5,7 +5,7 @@
 page.*
 
 The architect reads this to clear the crate's review; its names are ratified. Clearing is the go to
-create `nifeos/environment_contract` as a `publish = false` repository, as part of step 8 of
+create `partsfoundry/environment_contract` as a `publish = false` repository, as part of step 8 of
 [milestone 1017 (the contract crates leave in this order)](../../design/roadmap/1017-the-contract-crates-leave-in-this-order.md).
 The outside review's findings are in
 [milestone 1089 (`environment_contract`: what an outside maintainer would fix before it leaves)](../../design/roadmap/1089-environment-contract-outside-review.md).
@@ -178,5 +178,5 @@ None.
 ## Recommendation
 
 Ready for the review clearance, which is the architect's and is the go to create
-`nifeos/environment_contract` as a `publish = false` repository. The names are ratified. The crate is a leaf with no
+`partsfoundry/environment_contract` as a `publish = false` repository. The names are ratified. The crate is a leaf with no
 reference back into nife and a frozen identity.

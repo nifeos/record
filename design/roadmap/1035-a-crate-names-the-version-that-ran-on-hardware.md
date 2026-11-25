@@ -23,7 +23,7 @@ definition below, because no existing tool knows the definition.
 
 ## Background
 
-`jh7110_entropy` lives in its own repository, `nifeos/jh7110_entropy`. Its tag `v0.3.0-pre.1` names
+`jh7110_entropy` lives in its own repository, `partsfoundry/jh7110_entropy`. Its tag `v0.3.0-pre.1` names
 commit `497d3ec4f0b4d7fc36634dee47d1afd56eb22485`, and nife pins exactly that commit, with
 `version = "0.3.0-pre.1"`, in three manifests: `kernel/Cargo.toml`, `components/Cargo.toml` and
 `crates/machine_discovery/Cargo.toml`. Milestone 1049 (`jh7110_entropy` is ready to publish) rules
@@ -55,7 +55,7 @@ A hardware run of `jh7110_entropy` version V is all of these:
 
 1. A build of nife comes from a commit whose three manifests pin the crate at the commit of tag `vV`
    and state `version = "V"`. Its own pull request bumps a pin and cites
-   `nifeos/jh7110_entropy@<sha>`, so the commit exists on `main` before the run.
+   `partsfoundry/jh7110_entropy@<sha>`, so the commit exists on `main` before the run.
 2. That build boots on a VisionFive 2 by the procedure in `bench-procedure.md`, twice.
 3. On each boot the tour's `true_random_number_generator` self-test line is `ok`: the entropy service served both 32-byte
    draws to a client, and the second draw differs from the first. The line ends with the crate
@@ -99,7 +99,7 @@ The "Hardware evidence" section opens with:
 > reset must be ungated and released first, as the first item under BUGS says.
 
 Its "Not established" bullet on other commits then names both trees that ran, 0.3.0-pre.1 and `ee0bde8`.
-The bullet on randomness quality stays. A draft pull request in `nifeos/jh7110_entropy` holds the
+The bullet on randomness quality stays. A draft pull request in `partsfoundry/jh7110_entropy` holds the
 edit, unarmed until a run passes.
 
 ## Which version runs first
@@ -166,7 +166,7 @@ Today's claims under it:
    [`bench-steps.md`](1035-a-crate-names-the-version-that-ran-on-hardware/bench-steps.md) on a
    VisionFive 2, commit the transcripts under `bench/`, and record each boot's `true_random_number_generator` line, the nife
    commit and the crate version in this block.
-2. In `nifeos/jh7110_entropy`, after step 1, make the README edit above.
+2. In `partsfoundry/jh7110_entropy`, after step 1, make the README edit above.
 3. Write the rule into milestone 857 (crates released on their own), beside the release rules, so
    every crate's review reads it.
 4. Bring the `e1000e` sentence under the rule before that crate moves: it names the version that
@@ -204,7 +204,7 @@ claim, so loosening it later breaks nobody.
   self-test       : true_random_number_generator ok      JH7110 TRNG at 0x1600c000 (tree says disabled): report 0x524e475550, STAT 0x00040308 (256-bit: all eight RAND words are the answer), draws 32/32 bytes, first 625b4bc8.., differ true; bring-up 1637 us, 64 bytes in 102 us (627450 bytes/s); crate jh7110_entropy 0.3.0-pre.1 at 497d3ec4f0b4d7fc36634dee47d1afd56eb22485
   self-test       : true_random_number_generator ok      JH7110 TRNG at 0x1600c000 (tree says disabled): report 0x524e475550, STAT 0x00040308 (256-bit: all eight RAND words are the answer), draws 32/32 bytes, first 7bb8b233.., differ true; bring-up 1629 us, 64 bytes in 103 us (616867 bytes/s); crate jh7110_entropy 0.3.0-pre.1 at 497d3ec4f0b4d7fc36634dee47d1afd56eb22485
   ```
-- **Done.** Step 2: the README sentence is on `nifeos/jh7110_entropy`'s main (nifeos/jh7110_entropy#25,
+- **Done.** Step 2: the README sentence is on `partsfoundry/jh7110_entropy`'s main (partsfoundry/jh7110_entropy#25,
   merge commit `df37dc91383c`).
 - **Done.** Step 3: the rule is in milestone 857's extraction checklist,
   `design/roadmap/0857-crates-released-on-their-own/what-nife-does-at-each-extraction.md`.

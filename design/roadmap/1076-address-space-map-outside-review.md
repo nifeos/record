@@ -156,7 +156,7 @@ state, including the provisional names of items 7, 9, 15 and 17. This decision i
 that package.
 
 Decision, option A, 2026-11-21 (UTC): the architect cleared the review. That approves creating
-`nifeos/address_space_layout` and moving the crate with `publish = false`, no tag and no publish.
+`partsfoundry/address_space_layout` and moving the crate with `publish = false`, no tag and no publish.
 The clearance ratifies the names of items 7, 9, 15 and 17 as the package proposed them, `window`
 included; `VERSION` and `INTERFACE_ID` stay provisional.
 
@@ -181,7 +181,7 @@ The checks are in [the appendix](1076-address-space-map-outside-review/done-when
 ## Finding status
 
 One line per finding, in the review's order. Each state was read against
-`nifeos/address_space_layout` at `02d497b`, its `main`, where `check` run 44924529322 and `proofs`
+`partsfoundry/address_space_layout` at `02d497b`, its `main`, where `check` run 44924529322 and `proofs`
 run 44924529336 are green.
 
 - P0 item 1, the host test reads a file outside the crate: Done, #3659; the test lives in
@@ -222,7 +222,7 @@ None.
 
 ## Follow-on
 
-- **Done.** The crate lives in `nifeos/address_space_layout`, and nife pins it by `rev`.
+- **Done.** The crate lives in `partsfoundry/address_space_layout`, and nife pins it by `rev`.
 - **Outstanding.** The first full `mutation` run on `main`, which the done-when list asks for. The
   one scheduled run so far deferred itself and ran no mutants. Only the publishing hold stands
   behind it.

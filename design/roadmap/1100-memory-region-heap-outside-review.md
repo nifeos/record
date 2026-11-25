@@ -138,7 +138,7 @@ Prior art. The Rust library team reviews a new std interface through an API chan
 before it stabilizes, and Fuchsia's API council reviews a library before it enters the SDK (both
 recalled, not re-read). nife differs in reviewing a whole crate once, before its first publish.
 Concrete example: the architect cleared `generational_table` on 2026-11-08 (UTC), and its
-repository `nifeos/generational_table` dates from that day.
+repository `partsfoundry/generational_table` dates from that day.
 
 Blocks: the move.
 

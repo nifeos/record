@@ -81,7 +81,7 @@ section number, a milestone or a person in another repository.
   [#3978](https://github.com/nifeos/nife/pull/3978), with P0-4 and P1-5.
 - Ruling, the remaining names: Done, [#3885](https://github.com/nifeos/nife/pull/3885).
 - The move: Done as a pin, [#4007](https://github.com/nifeos/nife/pull/4007).
-  nifeos/program_argument_contract exists with `proofs` green on its first run, and nife depends
+  partsfoundry/program_argument_contract exists with `proofs` green on its first run, and nife depends
   on it at commit 764e0e55a238252391b1c06135e228ef6b9436c8 (`version = "0.1.0"`,
   `publish = false`). No tag and no publish; a pre-release tag moves the pin later.
 
@@ -284,7 +284,7 @@ iterator) and `Refused` becomes `PushRefused` (the name says what it refuses).
 ### The repository
 
 Ruled by the architect, 2026-11-14 (UTC), who cleared the review. A lane creates the repository
-`nifeos/program_argument_contract` after the three renames above and milestone 994 land.
+`partsfoundry/program_argument_contract` after the three renames above and milestone 994 land.
 It takes the tag `v0.1.0-pre.1` after the move check and a release dry run, with `publish = false`.
 
 ## Follow-on
@@ -294,7 +294,7 @@ It takes the tag `v0.1.0-pre.1` after the move check and a release dry run, with
   every merge group, and 994 in basalt.
 - **Done.** The numbered magic, [#3982](https://github.com/nifeos/nife/pull/3982).
 - **Recorded.** The repository (ruled 2026-11-14 UTC): a lane creates
-  `nifeos/program_argument_contract`, runs the move check and a dry run, and tags `v0.1.0-pre.1`
+  `partsfoundry/program_argument_contract`, runs the move check and a dry run, and tags `v0.1.0-pre.1`
   with no publish, after the renames and milestone 994.
 
 ## Done when

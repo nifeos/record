@@ -13,7 +13,7 @@ thread table and its object tables in it. It is `no_std` with no allocator, no `
 dependency, and five Kani harnesses prove the safety claims. The architect ruled that it publishes,
 third in the order of milestone 857 (crates released on their own), as milestone 1033
 (`generational_table`: the fixed-capacity, proved slotmap, released on its own) records. Its
-repository, `nifeos/generational_table`, carries its own manifest values with the `repository` key,
+repository, `partsfoundry/generational_table`, carries its own manifest values with the `repository` key,
 a README whose example a doctest runs, and both license files.
 
 ## Identity

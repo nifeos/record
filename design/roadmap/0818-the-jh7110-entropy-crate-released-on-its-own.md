@@ -28,7 +28,7 @@ calef's rulings, quoted from the maintainer comments on #1806 of 2026-10-07 (UTC
 
 ## What exists, checked 2026-10-07 (UTC)
 
-- `nifeos/jh7110_entropy` (moved from `crates/jh7110_entropy`; see *The soak* below): 516 code lines (1,247 with comments), written by milestone 159 (a real
+- `partsfoundry/jh7110_entropy` (moved from `crates/jh7110_entropy`; see *The soak* below): 516 code lines (1,247 with comments), written by milestone 159 (a real
   hardware entropy source: the JH7110's TRNG), which is BUILT. It holds the StarFive JH7110 true
   random number generator's register layout, the decision whether a generation attempt succeeded,
   failed or is still running, and the device-tree query that finds it.
@@ -58,7 +58,7 @@ projects nife depends on.
 
 Each row is a property this crate must prove before it publishes. The harness cell names the Kani
 harness that proves it, or says `none yet`; every named harness carries a falsification patch that
-makes it fail at its own assertion. Each patch is at `falsifications/` in `nifeos/jh7110_entropy`.
+makes it fail at its own assertion. Each patch is at `falsifications/` in `partsfoundry/jh7110_entropy`.
 All four prove.
 
 | property | harness |
@@ -76,7 +76,7 @@ out.
 
 1. The name is settled before anything leaves (857's Fork 5 as calef amended it on 2026-10-11 UTC).
    `script/names jh7110_entropy` reports it ratified, crates.io answers 404 for it (or it is already
-   ours), and `nifeos/jh7110_entropy` does not exist yet. `script/crate-standalone` checks the
+   ours), and `partsfoundry/jh7110_entropy` does not exist yet. `script/crate-standalone` checks the
    first.
 2. Make the cut above. `cargo tree -p jh7110_entropy` then lists no nife crate, and the tests read
    only fixtures inside the package.
@@ -87,7 +87,7 @@ out.
    and its source divides by purpose) has milestone 610 (the interface's stability is
    measured weekly)'s per-package co-change column, and the soak (step 6) is how the second is
    measured. When the soak exits, calef adds it to the lint-checked publish allowlist. The
-   `nifeos/jh7110_entropy` repository is created when the crate moves, on the shared CI template
+   `partsfoundry/jh7110_entropy` repository is created when the crate moves, on the shared CI template
    (milestone 887), through reusable workflows: Kani through `kani-github-action`, lint, release.
    Its release workflow refuses to publish unless the proof job is green. No harness here reads
    `target_arch`, so stock Kani proves them. The patched Kani of §218 (carry a Kani patch so riscv64
@@ -97,7 +97,7 @@ out.
    proposal; §305 (git dependencies are allowed on `nifeos/*` only, pinned to a landed commit)).
    This crate is the pilot and soaks first: it is the smallest crate with a real cut, and the cut is
    where refactor lessons show up. Before publication the crate is moved, not copied: it leaves this
-   tree, and nife depends on `nifeos/jh7110_entropy` by `rev`. A copy left behind does not count.
+   tree, and nife depends on `partsfoundry/jh7110_entropy` by `rev`. A copy left behind does not count.
    The soak ends on evidence, not a duration, when all five hold:
    1. nife builds and passes CI against the repository at a pinned commit, with no path dependency
       left.
@@ -137,12 +137,12 @@ harness.
 
 ## The soak, started 2026-10-31 (UTC)
 
-- The crate moved to `nifeos/jh7110_entropy` on the shared template at `partsfoundry/crate-workflows`,
+- The crate moved to `partsfoundry/jh7110_entropy` on the shared template at `partsfoundry/crate-workflows`,
   whose current `main` (`4e5b07d`) its workflows pin, after `script/apply-settings` ran against it: both rulesets, the
   `crates-io` environment with calef as reviewer, the labels and the team. The manifest keeps
   `publish = false`; the caller sets `allow-unpublished` for the soak.
 - `crates/jh7110_entropy` no longer exists here. `kernel`, `components` and `machine_discovery`
-  depend on `nifeos/jh7110_entropy` by `rev` `cfdbeb7` (§305), the commit of its tag `v0.2.0`. The
+  depend on `partsfoundry/jh7110_entropy` by `rev` `cfdbeb7` (§305), the commit of its tag `v0.2.0`. The
   verify table, the Kani reach list and the trust-boundary table no longer list it; the repository's
   own `proofs / kani` and `proofs / falsify` jobs prove the four harnesses.
 - End condition 1 holds: nife builds against the repository at that commit and its `main` is green.
@@ -151,7 +151,7 @@ harness.
   `release` workflow's gate and rehearse jobs passed at `522b98b` on 2026-11-11 (UTC), run
   42997968584. Condition 5 counts four weeks from `v0.1.1`, so it ends no earlier than 2026-11-29.
 - A bump of the pin is a separate pull request citing the landed commit as
-  `nifeos/jh7110_entropy@<sha>`.
+  `partsfoundry/jh7110_entropy@<sha>`.
 
 ## The architect's review and the tags
 
@@ -161,7 +161,7 @@ first so reviewed, the pilot of the review as of the mechanics. It moved on 2026
 before that ruling, so the review reads its repository, and it comes before any contract crate
 leaves. The ruling's second item needs a tagged release whose
 commit carries the Cargo version, so that `cargo-semver-checks --baseline-rev` has a baseline.
-`nifeos/jh7110_entropy` carries the tags `v0.1.0`, `v0.1.1` and `v0.2.0`, and nife's three pins
+`partsfoundry/jh7110_entropy` carries the tags `v0.1.0`, `v0.1.1` and `v0.2.0`, and nife's three pins
 state `version = "0.2.0"` beside the revision. The architect cleared this crate's review on 2026-11-01
 (UTC).
 
@@ -175,7 +175,7 @@ state `version = "0.2.0"` beside the revision. The architect cleared this crate'
 
 A check proves it. In nife, `cargo tree --locked -i jh7110_entropy` resolves to `v0.1.x` from
 crates.io with a checksum in `Cargo.lock`, `crates/jh7110_entropy` no longer exists, and the tree
-builds for all three targets. In `nifeos/jh7110_entropy`, the run that published 0.1.0 shows the
+builds for all three targets. In `partsfoundry/jh7110_entropy`, the run that published 0.1.0 shows the
 Kani job green ahead of the publish job, and every harness's falsification patch makes its proof
 fail. The five soak criteria of release step 6 hold before it publishes.
 
@@ -225,12 +225,12 @@ names until the ratification pass, so this section keeps the links it carried.
 
 ## BUGS
 
-- An organization owner has to install the `nife-smelter` app on `nifeos/jh7110_entropy`;
+- An organization owner has to install the `nife-smelter` app on `partsfoundry/jh7110_entropy`;
   `script/apply-settings` could not (the API wants an owner). The release workflow's tag job needs
   it, so a dry run past the gate waits on calef installing the app. The weekly drift job reads the
   organization's `SETTINGS_TOKEN` secret.
 - Before the 0.1.0 release tag job can run, a person with an `admin:org` token adds
-  `nifeos/jh7110_entropy` (id 1441110094) to the selected-repositories lists of
+  `partsfoundry/jh7110_entropy` (id 1441110094) to the selected-repositories lists of
   `NIFE_SMELTER_APP_ID` and `NIFE_SMELTER_PRIVATE_KEY`. Ruled 2026-11-01 UTC; the extraction
   checklist of milestone 857 (crates released on their own) has the command.
 - Steps 5 and 6 wait on milestone 887 (crate repositories share one CI template),
@@ -251,7 +251,7 @@ names until the ratification pass, so this section keeps the links it carried.
   (UTC): conditions 1 to 4 hold (*The soak* above), the four weeks of condition 5 end no earlier
   than 2026-11-29, and nothing has published.
 - **Recorded.** Ruled 2026-11-02 UTC: until `jh7110_entropy` reaches crates.io, nife depends on
-  `nifeos/jh7110_entropy` at the commit of its tag `v0.1.1` (`rev = "53b022b55b42a6dfc7eb670c438f0d3463da8db5"`, with `version = "0.1.1"`).
+  `partsfoundry/jh7110_entropy` at the commit of its tag `v0.1.1` (`rev = "53b022b55b42a6dfc7eb670c438f0d3463da8db5"`, with `version = "0.1.1"`).
   A crates.io version replaces the pin after the soak release dry run.
 - **Recorded.** Ruled 2026-11-01 (UTC): the `needs-architect` hold on a semver break applies on
   wire-identity changes only for contract crates. `jh7110_entropy` is not one, so its hold on

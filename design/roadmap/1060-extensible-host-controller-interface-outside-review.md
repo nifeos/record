@@ -10,7 +10,7 @@ needs_person: yes
 # 1060. `extensible_host_controller_interface`: the outside review's findings land before its first release
 
 Raised by the lane `milestone/1060-extensible-host-controller-interface-outside-review`. A reviewer
-with no prior exposure to this project read `nifeos/extensible_host_controller_interface` at commit
+with no prior exposure to this project read `partsfoundry/extensible_host_controller_interface` at commit
 `bea0257` (`main`, after its pull request [#1](https://github.com/partsfoundry/extensible_host_controller_interface/pull/1)), against
 [the review package](../../notes/crate-reviews/extensible-host-controller-interface.md). The findings
 cite files and symbols at that commit. The finding status list below reads the repository's current
@@ -237,47 +237,47 @@ with a builder for Event Data TRBs. Two-way (documentation). XS.
 
 ## Finding status
 
-- P0-1, publish-facing manifest fields: Done, nifeos/extensible_host_controller_interface#7 and [#8](https://github.com/partsfoundry/extensible_host_controller_interface/pull/8).
-- P1-1, red weekly mutation verdict: Done, nifeos/extensible_host_controller_interface#5.
-- P1-2, stranger run and README commands: Done, nifeos/extensible_host_controller_interface#2, [#4](https://github.com/partsfoundry/extensible_host_controller_interface/pull/4),
+- P0-1, publish-facing manifest fields: Done, partsfoundry/extensible_host_controller_interface#7 and [#8](https://github.com/partsfoundry/extensible_host_controller_interface/pull/8).
+- P1-1, red weekly mutation verdict: Done, partsfoundry/extensible_host_controller_interface#5.
+- P1-2, stranger run and README commands: Done, partsfoundry/extensible_host_controller_interface#2, [#4](https://github.com/partsfoundry/extensible_host_controller_interface/pull/4),
   [#20](https://github.com/partsfoundry/extensible_host_controller_interface/pull/20) and [#23](https://github.com/partsfoundry/extensible_host_controller_interface/pull/23).
-- P1-3, endpoint type kept to its field: Done, nifeos/extensible_host_controller_interface#11 and
+- P1-3, endpoint type kept to its field: Done, partsfoundry/extensible_host_controller_interface#11 and
   [#20](https://github.com/partsfoundry/extensible_host_controller_interface/pull/20).
 - P1-4, read and write order on a weakly ordered machine: Done,
-  nifeos/extensible_host_controller_interface#9.
-- P1-5, ring sizes a controller refuses: Done, nifeos/extensible_host_controller_interface#11 and
+  partsfoundry/extensible_host_controller_interface#9.
+- P1-5, ring sizes a controller refuses: Done, partsfoundry/extensible_host_controller_interface#11 and
   [#20](https://github.com/partsfoundry/extensible_host_controller_interface/pull/20).
-- P1-6, a producer ring has no notion of full: Done, nifeos/extensible_host_controller_interface#9.
-- P1-7, the 64 kibibyte buffer rule: Done, nifeos/extensible_host_controller_interface#9.
+- P1-6, a producer ring has no notion of full: Done, partsfoundry/extensible_host_controller_interface#9.
+- P1-7, the 64 kibibyte buffer rule: Done, partsfoundry/extensible_host_controller_interface#9.
 - P1-8, public names for every code handed back: Done,
-  nifeos/extensible_host_controller_interface#12.
-- P1-9, no `unsafe`, stated: Done, nifeos/extensible_host_controller_interface#8.
+  partsfoundry/extensible_host_controller_interface#12.
+- P1-9, no `unsafe`, stated: Done, partsfoundry/extensible_host_controller_interface#8.
 - P1-10, the template release with the mutation stack: Done,
-  nifeos/extensible_host_controller_interface#3 and [#21](https://github.com/partsfoundry/extensible_host_controller_interface/pull/21).
+  partsfoundry/extensible_host_controller_interface#3 and [#21](https://github.com/partsfoundry/extensible_host_controller_interface/pull/21).
 - P1-11, port 0 alias and unbounded port offsets: Done,
-  nifeos/extensible_host_controller_interface#13.
-- P1-12, two `Option<bool>` tri-states: Done, nifeos/extensible_host_controller_interface#13.
+  partsfoundry/extensible_host_controller_interface#13.
+- P1-12, two `Option<bool>` tri-states: Done, partsfoundry/extensible_host_controller_interface#13.
 - P1-13, a fake controller and a refusing enqueue: Done,
-  nifeos/extensible_host_controller_interface#14.
-- P1-14, the Event Data bit: Done, nifeos/extensible_host_controller_interface#13.
-- P2-1, dead interrupt interval clamps: Done, nifeos/extensible_host_controller_interface#15.
-- P2-2, five missing proofs: Done, nifeos/extensible_host_controller_interface#10.
-- P2-3, code on the crate's front page: Done, nifeos/extensible_host_controller_interface#15 and
+  partsfoundry/extensible_host_controller_interface#14.
+- P1-14, the Event Data bit: Done, partsfoundry/extensible_host_controller_interface#13.
+- P2-1, dead interrupt interval clamps: Done, partsfoundry/extensible_host_controller_interface#15.
+- P2-2, five missing proofs: Done, partsfoundry/extensible_host_controller_interface#10.
+- P2-3, code on the crate's front page: Done, partsfoundry/extensible_host_controller_interface#15 and
   [#20](https://github.com/partsfoundry/extensible_host_controller_interface/pull/20).
-- P2-4, the busy bit on the dequeue pointer: Done, nifeos/extensible_host_controller_interface#15.
-- P2-5, one interrupter: Done, nifeos/extensible_host_controller_interface#15.
-- P2-6, the Supported Protocol capability: Done, nifeos/extensible_host_controller_interface#15.
+- P2-4, the busy bit on the dequeue pointer: Done, partsfoundry/extensible_host_controller_interface#15.
+- P2-5, one interrupter: Done, partsfoundry/extensible_host_controller_interface#15.
+- P2-6, the Supported Protocol capability: Done, partsfoundry/extensible_host_controller_interface#15.
 - P2-7, named constants for the driver's waits: Done,
-  nifeos/extensible_host_controller_interface#15.
+  partsfoundry/extensible_host_controller_interface#15.
 - P2-8, one driver's direct memory access layout: Done,
-  nifeos/extensible_host_controller_interface#15.
-- P2-9, `doc(alias)` on the bit constants: Done, nifeos/extensible_host_controller_interface#15.
-- P2-10, small text fixes: Done, nifeos/extensible_host_controller_interface#15, with the repository
+  partsfoundry/extensible_host_controller_interface#15.
+- P2-9, `doc(alias)` on the bit constants: Done, partsfoundry/extensible_host_controller_interface#15.
+- P2-10, small text fixes: Done, partsfoundry/extensible_host_controller_interface#15, with the repository
   description and topics set.
 - P2-11, `rust-version` above what the code needs: Done,
-  nifeos/extensible_host_controller_interface#15.
+  partsfoundry/extensible_host_controller_interface#15.
 - The hardware checks of the done-when appendix: Waiting on a board run.
-  nifeos/extensible_host_controller_interface#23 names each one in the README's BUGS as unrun on
+  partsfoundry/extensible_host_controller_interface#23 names each one in the README's BUGS as unrun on
   silicon, and none has a bench record.
 - Publishing: Waiting on the last outside-review milestone (ruled 2026-11-18 UTC); `publish = false`
   stays.
@@ -294,7 +294,7 @@ Ruled, and in force:
    codes with `completion::name`, `DebounceVerdict`, `TransferType`, `try_enqueue`, `complete` and
    `examples/fake_controller.rs`.
 3. The crate takes the pre-release tag `v0.1.0-pre.3` after a green dry run on `main`, with nothing
-   published (ruled 2026-11-19). Done: `nifeos/extensible_host_controller_interface` [#22](https://github.com/partsfoundry/extensible_host_controller_interface/pull/22) merged and
+   published (ruled 2026-11-19). Done: `partsfoundry/extensible_host_controller_interface` [#22](https://github.com/partsfoundry/extensible_host_controller_interface/pull/22) merged and
    the tag exists.
 4. No crate publishes until every outside review milestone is delivered (ruled 2026-11-18).
    `publish = false` stays.
@@ -333,11 +333,11 @@ The checks, and the hardware steps the review claims none of, are in
 
 ## Follow-on
 
-- **Done.** Every P0, P1 and P2 item, in `nifeos/extensible_host_controller_interface` [#2](https://github.com/partsfoundry/extensible_host_controller_interface/pull/2) to [#15](https://github.com/partsfoundry/extensible_host_controller_interface/pull/15),
+- **Done.** Every P0, P1 and P2 item, in `partsfoundry/extensible_host_controller_interface` [#2](https://github.com/partsfoundry/extensible_host_controller_interface/pull/2) to [#15](https://github.com/partsfoundry/extensible_host_controller_interface/pull/15),
   [#20](https://github.com/partsfoundry/extensible_host_controller_interface/pull/20) and [#21](https://github.com/partsfoundry/extensible_host_controller_interface/pull/21); the finding status list names each one's pull request. The bounds of P1-5 and the rule
   of P1-7 come from the specification text (xHCI 1.2 section 4.9.2.2, Table 6-1, section 6.4.1),
   not from the reviewer's memory.
-- **Done.** `nifeos/extensible_host_controller_interface` [#23](https://github.com/partsfoundry/extensible_host_controller_interface/pull/23) names
+- **Done.** `partsfoundry/extensible_host_controller_interface` [#23](https://github.com/partsfoundry/extensible_host_controller_interface/pull/23) names
   every hardware check of the done-when appendix in the README's BUGS as unrun on silicon.
 - **Done.** The `v0.1.0-pre.3` tag, by [#22](https://github.com/partsfoundry/extensible_host_controller_interface/pull/22). Read from the tags.
 - **Outstanding.** The hardware checks of

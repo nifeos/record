@@ -14,8 +14,8 @@ does settle that the QEMU half is not a months-sized job. The stack is about 4,2
 
 | Piece | Lines (with comments) |
 |---|---|
-| `nifeos/extensible_host_controller_interface` (logic, host tests, Kani) | 1,940 |
-| `nifeos/universal_serial_bus` (descriptors, requests, boot reports) | 1,001 |
+| `partsfoundry/extensible_host_controller_interface` (logic, host tests, Kani) | 1,940 |
+| `partsfoundry/universal_serial_bus` (descriptors, requests, boot reports) | 1,001 |
 | `components/src/usb_keyboard_driver.rs` (the EL0 driver) | 899 |
 | `kernel/src/extensible_host_controller_interface.rs` and `kernel/src/user/usb_keyboard_service.rs` | 410 |
 

@@ -35,4 +35,4 @@ paths (Linux's `kernel/printk/`) or paths quoted in a dated run log, so the true
 - A path that names another project, or one quoted in a dated log, takes a marker on its line, so
   the exemption is visible where the reader meets it.
 - The fixes themselves are ordinary lanes, most of them qualifying the path (`nifeos/moho_abi:`,
-  `nifeos/grant_plan:`) or naming the crate's present home.
+  `partsfoundry/grant_plan:`) or naming the crate's present home.

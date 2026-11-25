@@ -22,8 +22,8 @@ section states the coherent and the non-coherent case, and the driver does no ca
 its own.
 
 Why now. The review recommended one trait per crate "until a third consumer exists". That trigger
-has passed: three organization crates now define a trait of the same name. `nifeos/e1000e` and
-`nifeos/designware_ethernet` (both `src/data_plane.rs`, read on `main`) define the same four
+has passed: three organization crates now define a trait of the same name. `partsfoundry/e1000e` and
+`partsfoundry/designware_ethernet` (both `src/data_plane.rs`, read on `main`) define the same four
 methods with `u64` offsets and 64-bit words, no bus address or length, and put `barrier` on a
 separate `Tails` trait beside the two tail-pointer writes. They also refuse a device whose DMA is
 not coherent, where this crate allows it. Once published, a shared trait is a public contract that

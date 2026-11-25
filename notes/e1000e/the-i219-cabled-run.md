@@ -1,7 +1,7 @@
 # The I219 cabled run: a runbook for one bench session on xenon
 
 *Name: provisional, minted by lane `lane/i219-cabled-run`, for the stem `the-i219-cabled-run`.
-The session that `nifeos/e1000e` issue 10 asks for, written so that a person at xenon, or an agent
+The session that `partsfoundry/e1000e` issue 10 asks for, written so that a person at xenon, or an agent
 session on the build machine beside that person, can run it from this page alone.*
 
 **Nothing on this page has run on silicon with a cable.** The bench boot it uses has run under
@@ -98,7 +98,7 @@ The commit under test is `main` of nife, with the `e1000e` pin it carries. Recor
 
 ```sh
 git log -1 --format=%H
-grep 'nifeos/e1000e' kernel/Cargo.toml
+grep 'partsfoundry/e1000e' kernel/Cargo.toml
 ```
 
 The first is row R1, the crate revision in the second is row R2. Work in a worktree of that commit,
@@ -204,7 +204,7 @@ with anything changed on xenon's firmware or the NIC.
 | you see | it means | next |
 |---|---|---|
 | no `network-bench:` line within two minutes of power | the stick was not booted, or the kernel did not start | the person checks the boot menu; [notes/x86-uefi-boot.md](../x86-uefi-boot.md), "If it does not", has the table |
-| `FAILED: no NIC this driver claims is on the bus` | the card's id is not one `nifeos/e1000e` claims | record the PCI survey's class `020000` line |
+| `FAILED: no NIC this driver claims is on the bus` | the card's id is not one `partsfoundry/e1000e` claims | record the PCI survey's class `020000` line |
 | `refused at bring-up: Pch(...)` | a pass stopped; the last `pass N` line names it | record the error and every `e1000e:` line; a lane reads them |
 | a hang after a `pass N of 3` line | that pass did not return | photograph the screen; the person power-cycles; a lane |
 | `link NOT UP` | no autonegotiation in 3 s | the cable, the switch port's light and the switch first; one more boot with another port is the person's call |
@@ -230,7 +230,7 @@ Rows R1 to R4 are the run; the rest are what it printed. A row that did not run 
 | row | what | value | verdict |
 |---|---|---|---|
 | R1 | nife commit | | |
-| R2 | `nifeos/e1000e` revision | | |
+| R2 | `partsfoundry/e1000e` revision | | |
 | R3 | image SHA-256 | | |
 | R4 | how xenon came up | | |
 | 1 | pass 1 observations (`e1000e:` lines) | | PASS / FAIL / UNRUN |

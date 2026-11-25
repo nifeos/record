@@ -60,7 +60,7 @@ stay as they are, because a title is the milestone's name.
 `components/src/jh7110_entropy.rs`, `notes/entropy.md` and `notes/entropy/jh7110-trng.md` each
 said the TRNG's register layout and device-tree query are in `crates/jh7110_entropy`. The crate is
 its own repository now, and `components/Cargo.toml` takes it by git revision. All three name the
-crate and its repository (`nifeos/jh7110_entropy`).
+crate and its repository (`partsfoundry/jh7110_entropy`).
 
 ### 3. FIXED: the kernel mutation census mutated neither runtime half
 

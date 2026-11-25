@@ -36,7 +36,7 @@ proofs, since it holds data rather than algorithms beyond four small helpers.
 | edition, `rust-version` | 2024, 1.88 |
 | license | `MIT OR Apache-2.0`, literal in the manifest |
 | `publish` | `false`, for good (Decision 1); the comment beside it says the crate is test data |
-| `repository` | `https://github.com/nifeos/file_system_contract`, the shared repository |
+| `repository` | `https://github.com/partsfoundry/file_system_contract`, the shared repository |
 | dependencies | `file_system_contract = { version = "0.1.0", path = "../file_system_contract" }`; nothing else |
 | size | `src/lib.rs` 1,428 lines, `src/tests.rs` 378 lines; 6 tracked files |
 | harnesses | none |
@@ -129,7 +129,7 @@ Ruled 2026-11-22 UTC (#4009, option A), with item 1 of
 [the contract's package](filesystem-contract.md#decisions-for-the-architect):
 
 1. The architect cleared `file_system_fixture` as the second crate of the shared repository
-   `nifeos/file_system_contract`, `publish = false`.
+   `partsfoundry/file_system_contract`, `publish = false`.
 2. The architect ratified the crate name `file_system_fixture`.
 3. The identity pair `INTERFACE_ID` 16 at `VERSION` 1 stays frozen.
 4. The architect ratified the item names as built.

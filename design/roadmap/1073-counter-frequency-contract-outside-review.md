@@ -100,7 +100,7 @@ The architect froze the identity: magic `TIMEBAS1`, version 1, interface 9 (rule
 ### Clearing the review package
 
 Ruled 2026-11-19 (UTC): the architect clears the review of `counter_frequency_contract`. The
-clearance approves creating `nifeos/counter_frequency_contract` and moving the crate there. The review
+clearance approves creating `partsfoundry/counter_frequency_contract` and moving the crate there. The review
 package is [the review package](../../notes/crate-reviews/counter-frequency-contract.md). It
 states the crate, its thirteen ratified names, its frozen identity (`TIMEBAS1`, version 1,
 interface 9) and what the move changes.
@@ -175,13 +175,13 @@ The checks are in [the done-when appendix](1073-counter-frequency-contract-outsi
   [#3626](https://github.com/nifeos/nife/pull/3626) and
   [#3635](https://github.com/nifeos/nife/pull/3635).
 - Clearance of the review package: Done, [#3773](https://github.com/nifeos/nife/pull/3773).
-- The move to its own repository: Done. The crate lives at `nifeos/counter_frequency_contract`,
+- The move to its own repository: Done. The crate lives at `partsfoundry/counter_frequency_contract`,
   and nife pins it by the commit of its tag.
 - The stranger test: Done,
-  [nifeos/counter_frequency_contract#2](https://github.com/partsfoundry/counter_frequency_contract/pull/2)
-  and [nifeos/counter_frequency_contract#3](https://github.com/partsfoundry/counter_frequency_contract/pull/3).
+  [partsfoundry/counter_frequency_contract#2](https://github.com/partsfoundry/counter_frequency_contract/pull/2)
+  and [partsfoundry/counter_frequency_contract#3](https://github.com/partsfoundry/counter_frequency_contract/pull/3).
 - A pre-release tag: Done. The release workflow made `v0.1.0-pre.1` after
-  [nifeos/counter_frequency_contract#4](https://github.com/partsfoundry/counter_frequency_contract/pull/4).
+  [partsfoundry/counter_frequency_contract#4](https://github.com/partsfoundry/counter_frequency_contract/pull/4).
 - Publishing to crates.io: Won't fix. A contract crate never publishes, and the tag is its release;
   ruled 2026-11-19 (UTC), under "The pre-release tag" above.
 

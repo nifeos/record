@@ -53,7 +53,7 @@ whose input this system produced is a correctness question. A parser whose input
 produced is a security question, and it is the one where a panic has a consequence a user notices.
 
 Fifteen parser targets, fewer than one per crate; the FAT crate fuzzes its own in its
-repository, `nifeos/file_allocation_table`. A fuzz target that finds nothing
+repository, `partsfoundry/file_allocation_table`. A fuzz target that finds nothing
 because it fuzzes a total function is worse than no target: it costs CI time on every commit and it
 implies coverage the project does not have.
 

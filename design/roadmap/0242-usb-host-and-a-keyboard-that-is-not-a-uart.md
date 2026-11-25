@@ -75,8 +75,8 @@ by `system_initializer`).
 | Take it from the firmware (USB Legacy Support), draw the register window, refuse without IOMMU confinement, confine the DMA region | `kernel/src/extensible_host_controller_interface.rs` |
 | The `Spawn` literal: what the driver holds and is refused | `kernel/src/user/usb_keyboard_service.rs` |
 | Halt, reset, rings, port reset, Enable Slot, Address Device, descriptors, Evaluate Context, `SET_CONFIGURATION`, `SET_PROTOCOL`, `SET_IDLE`, Configure Endpoint, interrupt reads, stall recovery, hot-plug | `components/src/usb_keyboard_driver.rs` |
-| Descriptor walk, setup packets, boot-report diffing, usage to evdev | `nifeos/universal_serial_bus` (19 host tests, 3 Kani harnesses) |
-| Register window, handoff, TRBs, rings, contexts, `PORTSC`, the report words | `nifeos/extensible_host_controller_interface` (21 host tests, 3 Kani harnesses) |
+| Descriptor walk, setup packets, boot-report diffing, usage to evdev | `partsfoundry/universal_serial_bus` (19 host tests, 3 Kani harnesses) |
+| Register window, handoff, TRBs, rings, contexts, `PORTSC`, the report words | `partsfoundry/extensible_host_controller_interface` (21 host tests, 3 Kani harnesses) |
 | Control chords (`^C` from a keyboard) | `video_terminal::keymap`, shared with the virtio keyboard |
 | The attach handshake | `crates/system_initializer` step 3b, `components/src/progenitor.rs` slot 27 |
 | The gate | `script/swish-check`'s fourth boot, `xtask/src/swish_check.rs` `usb_keyboard_boot` |
@@ -91,7 +91,7 @@ page is ever in the mask). The kernel refuses to start it on a machine whose IOM
 the controller's requester id. That refusal is stricter than NVMe's, which runs unconfined on a
 machine with no IOMMU, and the reason is that this process names every ring.
 
-The descriptor parsing is the untrusted-input surface, and it is `nifeos/universal_serial_bus`: total parsers
+The descriptor parsing is the untrusted-input surface, and it is `partsfoundry/universal_serial_bus`: total parsers
 that check every length before reading through it. Kani proves the configuration walk panic-free
 and that anything it accepts is a real interrupt IN endpoint, for every configuration of up to 24
 bytes. The host tests cover QEMU's keyboard byte for byte, composite keyboards, a keyboard behind a
@@ -151,8 +151,8 @@ Needs xenon, its monitor on the display port, a USB keyboard plugged into a rear
   and QEMU models no low-speed device. Full speed and MSI-only are modeled, because those are what
   xenon's keyboard and controller are.
 - Root ports only, one controller, one keyboard. A hub, or a keyboard with one inside, is not
-  found. `nifeos/extensible_host_controller_interface`'s and the driver's BUGS.
-- No key repeat, no Caps Lock, no LEDs. `nifeos/universal_serial_bus`'s BUGS.
+  found. `partsfoundry/extensible_host_controller_interface`'s and the driver's BUGS.
+- No key repeat, no Caps Lock, no LEDs. `partsfoundry/universal_serial_bus`'s BUGS.
 
 - This block does not price it in hours, and should not: xHCI is the largest single driver this
   project would have written, and the honest first step is a survey rather than an estimate.
@@ -173,9 +173,9 @@ Needs xenon, its monitor on the display port, a USB keyboard plugged into a rear
   `main`'s scan runs before the ports re-detect and prints `0 of 26`. Step 3's monitor waits on
   pull request #2528.
 - **Recorded.** Hubs: a keyboard behind a hub, or with one built in, is not found. In
-  `nifeos/extensible_host_controller_interface`'s and `components/src/usb_keyboard_driver.rs`'s
+  `partsfoundry/extensible_host_controller_interface`'s and `components/src/usb_keyboard_driver.rs`'s
   `BUGS`.
-- **Recorded.** Typematic repeat, Caps Lock and the keyboard LEDs. In `nifeos/universal_serial_bus`'s `BUGS`.
+- **Recorded.** Typematic repeat, Caps Lock and the keyboard LEDs. In `partsfoundry/universal_serial_bus`'s `BUGS`.
 - **Recorded.** A second xHCI controller, and a second keyboard. In
   `kernel/src/extensible_host_controller_interface.rs`'s and the driver's `BUGS`.
 - **Recorded.** radon, and any machine whose IOMMU does not own the controller, gets a refusal and

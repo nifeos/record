@@ -59,14 +59,14 @@ milestone reaches delivery.
   ruled 2026-11-19 (UTC), A, in [#3796](https://github.com/nifeos/nife/pull/3796).
 - Decision 6, review clearance and the repositories: At the move. The architect cleared both
   `notes/crate-reviews/line-editor.md` and `notes/crate-reviews/terminal-contract.md` on
-  2026-11-22 (UTC). `terminal_contract` lives in `nifeos/terminal_contract`, and nife depends on
+  2026-11-22 (UTC). `terminal_contract` lives in `partsfoundry/terminal_contract`, and nife depends on
   it by rev ([#4015](https://github.com/nifeos/nife/pull/4015)). The move of `line_editor` waits on
   its own remaining work.
 - Decision 7, the reserved bits of the terminal's first request word: Done,
   [#3972](https://github.com/nifeos/nife/pull/3972), ruled 2026-11-22 (UTC), A.
 
 - The move: Done, [#4001](https://github.com/nifeos/nife/pull/4001). The crate lives in
-  [nifeos/line_editor](https://github.com/partsfoundry/line_editor), and nife depends on it by git and
+  [partsfoundry/line_editor](https://github.com/partsfoundry/line_editor), and nife depends on it by git and
   `rev`, a commit on its `main`, with `version = "0.1.0"`. It keeps `publish = false`; no tag
   exists, and crates.io holds no release.
 
@@ -141,8 +141,8 @@ The P2 items are in [the appendix](1098-line-editor-outside-review/later-items.m
   the cut, and `line_editor` depends on nothing. Item 8: a `const` assertion in the `line_editor`
   program holds the two `QUIESCED` values equal. Items 3 and 4 and decisions 2, 3 and 5: the
   engine's names and the crate root's ratification are built.
-- **Done.** The move to `nifeos/terminal_contract`, [#4015](https://github.com/nifeos/nife/pull/4015).
-- **Recorded.** The move to `nifeos/line_editor`, with item 1 and the rest of its review package's
+- **Done.** The move to `partsfoundry/terminal_contract`, [#4015](https://github.com/nifeos/nife/pull/4015).
+- **Recorded.** The move to `partsfoundry/line_editor`, with item 1 and the rest of its review package's
   "What still blocks the move".
 - **Recorded.** The externalization list: `crates/externalization-list.txt` names
   `line_editor` and not `terminal_contract`, checked in that file on main.
@@ -296,7 +296,7 @@ and `terminal_contract` leave; `line_editor_component` stays in nife.
 
 Prior art. In this tree `generational_table`, `block_roster` and `file_allocation_table` each moved
 on a cleared review with no tag. Where nife differs: nothing outside nife links either crate.
-Example: under A, the shell pins `nifeos/line_editor` by revision.
+Example: under A, the shell pins `partsfoundry/line_editor` by revision.
 
 Decided by the maintainer on 2026-11-19 (UTC), provisional: a one-way door at repository creation,
 and the clearance itself stays the architect's. Rule A: one review package covers `line_editor` and
@@ -304,8 +304,8 @@ and the clearance itself stays the architect's. Rule A: one review package cover
 both from the package, with no tag and no publication.
 
 Cleared 2026-11-22 (UTC): both packages, `notes/crate-reviews/line-editor.md` and
-`notes/crate-reviews/terminal-contract.md`, as the go to create `nifeos/line_editor` and
-`nifeos/terminal_contract` with `publish = false`, no tag and no publish. Each move waits on its own
+`notes/crate-reviews/terminal-contract.md`, as the go to create `partsfoundry/line_editor` and
+`partsfoundry/terminal_contract` with `publish = false`, no tag and no publish. Each move waits on its own
 remaining work.
 
 ## Done when

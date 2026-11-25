@@ -90,26 +90,26 @@ One file each, in `notes/crate-reviews/`. The step is journey 5's.
 | [`page_tables`](crate-reviews/page-tables.md) | milestone 1104 (`paging`: what an outside maintainer would fix before the move) | cleared to move (2026-11-20 UTC, repository `nifeos/page_tables` approved, `publish = false`, no tag, no publish); names ratified; the move follows this lane |
 | [`subtree_scope`](crate-reviews/subtree-scope.md) | step 9 | cleared to move (2026-11-20 UTC, `publish = false`, no tag, no publish); names ratified; the move waits on P0-3's pin |
 | [`network_time_protocol`](crate-reviews/network-time-protocol.md) | 1102 | cleared 2026-11-20; names ratified; move lane next |
-| [`intrusive_queue`](crate-reviews/intrusive-queue.md) | 10 | cleared to move (2026-11-20 UTC, no tag, no publish); repository `nifeos/intrusive_queue` exists |
+| [`intrusive_queue`](crate-reviews/intrusive-queue.md) | 10 | cleared to move (2026-11-20 UTC, no tag, no publish); repository `partsfoundry/intrusive_queue` exists |
 | [`current_cpu_contract`](crate-reviews/current-cpu-contract.md) | contract | cleared to move |
 | [`domain_name_resolution_contract`](crate-reviews/domain-name-resolution-contract.md) | 6 | ready for review |
 | [`socket_contract`](crate-reviews/socket-contract.md) | contract | cleared to move (2026-11-21 UTC, repository `nifeos/socket_contract` approved, `publish = false`, no tag, no publish); the move lane first proves the `std` farm builds from the pinned checkout |
 | [`machine_statistics_contract`](crate-reviews/machine-statistics-contract.md) | contract | cleared to move (2026-11-20 UTC, no tag, no publish); the move waits for `current_cpu_contract` |
-| [`address_space_layout`](crate-reviews/address-space-layout.md) | 3 | cleared 2026-11-21 (UTC); moved to `nifeos/address_space_layout`, pinned by `rev`, `publish = false`, no tag, no publish |
+| [`address_space_layout`](crate-reviews/address-space-layout.md) | 3 | cleared 2026-11-21 (UTC); moved to `partsfoundry/address_space_layout`, pinned by `rev`, `publish = false`, no tag, no publish |
 | [`user_mode_runtime`](crate-reviews/user-mode-runtime.md) | 3 | cleared to move (2026-11-21 UTC, `publish = false`, no tag, no publish); the move waits for `moho_abi`, `address_space_layout`, `current_cpu_contract` and `socket_contract` to leave the tree; thin machine checks recorded as a limitation |
 | [`memory_region_heap`](crate-reviews/memory-region-heap.md) | 9 | cleared to move (2026-11-20 UTC, no tag, no publish); the move waits for `moho_abi`, `address_space_layout` and `user_mode_runtime` to get repositories |
 | [`environment_contract`](crate-reviews/environment-contract.md) | contract | clearance for the architect (names ratified) |
 | [`page_frames`](crate-reviews/page-frames.md) | kernel | cleared to move (2026-11-20 UTC, names ratified, `publish = false`, no tag, no publish) |
 | [`inter_process_communication`](crate-reviews/inter-process-communication.md) | - | cleared to move (2026-11-21 UTC, no tag, no publish), names ratified; the move waits for `intrusive_queue` (milestone 1097 (`intrusive_queue`: what an outside maintainer would fix before its first release)) |
 | [`globally_unique_identifier_partition_table`](crate-reviews/globally-unique-identifier-partition-table.md) | 2 | cleared to move (2026-11-20 UTC, no tag, no publish); a bounded `parse` totality harness, or a recorded reason it cannot finish, is due before its first tag |
-| [`byte_glob`](crate-reviews/byte-glob.md) | contract | cleared and moved (2026-11-20 UTC, no tag, no publish); nife pins `nifeos/byte_glob` by commit |
+| [`byte_glob`](crate-reviews/byte-glob.md) | contract | cleared and moved (2026-11-20 UTC, no tag, no publish); nife pins `partsfoundry/byte_glob` by commit |
 | [`device_tree_blob`](crate-reviews/device-tree-blob.md) | 4 | cleared to move (2026-11-20 UTC, no tag, no publish) |
 | [`test_and_set_lock`](crate-reviews/test-and-set-lock.md) | 1109 | cleared to move (2026-11-20 UTC, `publish = false`, no tag, no publish); the first tag waits for a litmus run on real Arm and RISC-V hardware |
 | [`boot_ladder`](crate-reviews/boot-ladder.md) | 1078 | ready for review |
 | [`capability_table`](crate-reviews/capability-table.md) | kernel | cleared to move (2026-11-21 UTC, no tag, no publish); milestone 1081 (`capability_table`: what an outside maintainer would fix before it leaves) tracks the move |
 | [`file_system_contract`](crate-reviews/filesystem-contract.md) | 2 | ready for review; one clearance of the repository shared with `file_system_fixture`, and the names |
 | [`file_system_fixture`](crate-reviews/filesystem-fixture.md) | 2 | ready for review with `file_system_contract`; the item names wait for the rename lane of milestone 1091 (`file_system_fixture`: what an outside maintainer would fix before it leaves) |
-| [`byte_sink_contract`](crate-reviews/byte-sink-contract.md) | contract | cleared and moved (no tag, no publish); nife pins `nifeos/byte_sink_contract` by commit, and every finding of milestone 1079 (`byte_sink_contract`: what an outside maintainer would fix before it leaves) has landed |
+| [`byte_sink_contract`](crate-reviews/byte-sink-contract.md) | contract | cleared and moved (no tag, no publish); nife pins `partsfoundry/byte_sink_contract` by commit, and every finding of milestone 1079 (`byte_sink_contract`: what an outside maintainer would fix before it leaves) has landed |
 | [`line_editor`](crate-reviews/line-editor.md) | 1098 | cleared to move (2026-11-22 UTC, `publish = false`, no tag, no publish); the move waits on its own remaining work |
-| [`terminal_contract`](crate-reviews/terminal-contract.md) | contract | cleared and moved (2026-11-22 UTC, `publish = false`, no tag, no publish); nife pins `nifeos/terminal_contract` by commit |
+| [`terminal_contract`](crate-reviews/terminal-contract.md) | contract | cleared and moved (2026-11-22 UTC, `publish = false`, no tag, no publish); nife pins `partsfoundry/terminal_contract` by commit |
 | [`moho_abi`](crate-reviews/moho-abi.md) | contract | cleared to move, with step 3 of milestone 1121 (the Moho rename: the order in which the binary interface takes its name) landed (ruled 2026-11-22 UTC, `publish = false`, no tag, no publish); six size names ratified |

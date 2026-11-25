@@ -109,7 +109,7 @@ Done in #3523).
 - Remove the notes pointers, the DECISIONS citation and the `Name:` blocks from `src/lib.rs`, and
   split the comment block the dry run names, over the 40-line cap.
 - Share one test node (item 13), and decide item 9 (`remove`) before the first release.
-- Pin `nifeos/intrusive_queue` by `rev` in `kernel` and `inter_process_communication`, drop the
+- Pin `partsfoundry/intrusive_queue` by `rev` in `kernel` and `inter_process_communication`, drop the
   workspace member, and update the files listed above in the nife-side pull request.
 
 ## Open questions
@@ -119,7 +119,7 @@ None. Item 9's surface question is two-way and the maintainer's.
 ## Recommendation
 
 Cleared to move (2026-11-20 UTC, no tag, no publish). Decisions 1 to 3 of milestone 1097 are ruled.
-The clearance is the go to create `nifeos/intrusive_queue` with `publish = false`. The move lane is
+The clearance is the go to create `partsfoundry/intrusive_queue` with `publish = false`. The move lane is
 item 10 of milestone 1017 and also serves `inter_process_communication`. An outside-crate
 comparison (`intrusive-collections`, `cordyceps`, `embed-slist`) found none with matching proofs, so
 the crate stays and moves.
