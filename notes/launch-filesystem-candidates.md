@@ -7,15 +7,19 @@ candidate.*
 
 ## What this survey decided
 
-RedoxFS stays nife's launch store (§34 (RedoxFS is the primary filesystem, on three conditions),
-ruled 2026-10-31 UTC on #2927): the writable filesystem the image boots into, that `jig` installs
-packages onto, and that holds the installed-programs table. nife does not build a UFS2 server
-(§34 refuses milestone 981 (UFS2, read and write), and milestone 982 (Retire RedoxFS once a launch
-store proves itself) with it). The next measurement is ext4 through `rsext4` under the injector of
-milestone 37 (Prove RedoxFS's crash consistency), carried by the proposal
-`ext4-through-rsext4-under-the-crash-injector`. If it passes, one ext4 server may become both the
-launch store and the reader of Linux drives that milestone 190 (ext4, read and write) wants; if it fails, RedoxFS stays. The rest of
-this note is the evidence: the license pass, each candidate, and the four routes compared.
+RedoxFS stays nife's launch store until nife adopts `rsext4` (§34 (RedoxFS is the primary
+filesystem, on three conditions)): the writable filesystem the image boots into, that `jig` installs
+packages onto, and that holds the installed-programs table. On adoption, ext4 through `rsext4`
+replaces it in both roles, and one ext4 server becomes both the launch store and the reader of Linux
+drives that milestone 190 (ext4, read and write) wants. The adoption ruling waits for
+partsfoundry/rsext4 to meet the bar of §46 (thin primitives or whole subsystems; we write everything
+in between) and milestone 190's done-when. That done-when includes the power-cut sweeps of milestone
+997 (ext4 through rsext4), which put `rsext4` behind the injector of milestone 37 (Prove RedoxFS's
+crash consistency). A fault point those sweeps find is work
+for the fork, not a reason for RedoxFS to stay. nife does not build a UFS2 server (§34 refuses
+milestone 981 (UFS2, read and write)), and milestone 982 (Retire RedoxFS once a launch store proves
+itself) keeps the inventory the removal of RedoxFS starts from. The rest of this note is the
+evidence: the license pass, each candidate, and the four routes compared.
 
 ## Why the question opened
 
@@ -163,12 +167,12 @@ mechanism, it stores times to two seconds between 1980 and 2107, and it folds ca
 
 ## The ranking
 
-1. **RedoxFS**, the launch store. It meets every requirement above today, and it is the only
+1. **RedoxFS**, the launch store until nife adopts `rsext4`. It meets every requirement above today, and it is the only
    candidate measured against milestone 37's injector (186 lying-device cases, 112 recovered, 74
    refused, 0 silently wrong). Its weaknesses: nothing but RedoxFS reads it, so no independent
    oracle exists, and its `Disk` trait has no flush.
-2. **ext4 through `rsext4`**, the next measurement. One server could hold the launch store and read
-   Linux drives for milestone 190.
+2. **ext4 through `rsext4`**, RedoxFS's replacement in both roles once nife adopts it. One server
+   then holds the launch store and reads Linux drives for milestone 190.
 3. **UFS2.** Refused for the launch store (milestone 981). It has the best oracle, and it would need
    a writer, an `fsck` and a crash mechanism of nife's own, for little interop.
 4. **HAMMER2.** No implementation to reuse and no extended attributes.
@@ -178,10 +182,10 @@ mechanism, it stores times to two seconds between 1980 and 2107, and it folds ca
 
 ## What comes next
 
-The proposal `ext4-through-rsext4-under-the-crash-injector` puts `rsext4` behind milestone 37's
-write log and runs its three sweeps, judged by `e2fsck -fn` after the journal replays. The launch
-volume keeps the first installed-programs table as files under `activation/` (ruled 2026-10-30
-UTC, on #2894), on RedoxFS.
+Milestone 997 (ext4 through rsext4, under milestone 37's crash injector) puts `rsext4` behind
+milestone 37's write log and runs its three sweeps, judged by `e2fsck -fn` after the journal
+replays. The launch volume keeps the first installed-programs table as files under `activation/`
+(ruled 2026-10-30 UTC, on #2894), on RedoxFS until ext4 replaces it.
 
 ## BUGS
 

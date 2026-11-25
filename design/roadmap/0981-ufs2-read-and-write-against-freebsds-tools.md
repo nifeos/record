@@ -7,9 +7,9 @@ refused_by: §34
 # 981. UFS2, read and write: a Rust server with FreeBSD's tools as the oracle
 
 Refused 2026-10-31 (UTC) on #2927, by §34 (RedoxFS is the primary filesystem, on three conditions).
-RedoxFS stays the launch store, and nife does not build a UFS2 server. The next measurement for the
-launch store is ext4 through `rsext4` under milestone 37's injector, which the proposal
-`ext4-through-rsext4-under-the-crash-injector` carries. This branch's name still says UFS2 because
+nife does not build a UFS2 server. RedoxFS stays the launch store until nife adopts `rsext4`, and
+ext4 through `rsext4` then replaces it in both roles. Milestone 997 (ext4 through rsext4, under
+milestone 37's crash injector) carries the power-cut sweeps that adoption waits for. This branch's name still says UFS2 because
 the pull request that holds it predates the refusal.
 
 ## What it proposed
@@ -35,17 +35,20 @@ The four-route comparison on #2927 priced UFS2 against RedoxFS, ext2 and ext4, a
 [the launch filesystem's candidates](../../notes/launch-filesystem-candidates.md) keeps its result.
 UFS2 needed a writer, an on-device `fsck` and a crash mechanism that no Rust implementation has. No
 data block carries a checksum, so a lying device can never reach milestone 37's zero silently wrong.
-And few drives other systems made are UFS2. RedoxFS already meets the launch store's requirements,
-and the pin bump that reopened the question applies without a conflict.
+And few drives other systems made are UFS2. RedoxFS meets the launch store's requirements until
+ext4 through `rsext4` replaces it, so UFS2 has no role to fill, and the pin bump that reopened the
+question applies without a conflict.
 
 ## Revisit
 
-- **Condition.** The ext4 measurement through `rsext4` fails, and a RedoxFS pin bump starts to
-  cost more than a few lines, so that nife would have to own the engine outright.
+- **Condition.** §34 changes so that ext4 through `rsext4` no longer replaces RedoxFS, and a
+  RedoxFS pin bump starts to cost more than a few lines, so that nife would have to own the engine
+  outright. A fault point milestone 997's sweeps find is work for the rsext4 fork, not this
+  condition.
 
 ## Index row
 
 A Rust UFS2 server as the launch store, judged by FreeBSD's tools. Refused 2026-10-31: RedoxFS
-stays the launch store, and ext4 through `rsext4` is the next measurement. Phase 1's builds live in
-notes/ufs2-builds-2026-10-31.md. It reopens if that measurement fails and RedoxFS stops being
-bumpable.
+stays the launch store until nife adopts `rsext4`, and ext4 then replaces it. Phase 1's builds live
+in notes/ufs2-builds-2026-10-31.md. It reopens only if §34 stops replacing RedoxFS with ext4 and
+RedoxFS stops being bumpable.

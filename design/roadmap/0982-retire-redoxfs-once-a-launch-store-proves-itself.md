@@ -7,7 +7,7 @@ refused_by: §34
 # 982. Retire RedoxFS once a launch store proves itself
 
 Refused 2026-10-31 (UTC) on #2927, by §34 (RedoxFS is the primary filesystem, on three conditions):
-RedoxFS stays the launch store. This block was the removal that would follow a UFS2 server
+RedoxFS stays the launch store until nife adopts `rsext4`. This block was the removal that would follow a UFS2 server
 (milestone 981 (UFS2, read and write)), and §34 refuses it the same day. The inventory below stays because a
 later removal would start from it.
 
@@ -49,7 +49,7 @@ its own base, and that search, not this list, is the inventory.
 
 ## Index row
 
-The removal of RedoxFS behind a proven replacement launch store. Refused 2026-10-31: RedoxFS stays
-the launch store, and UFS2 is not built. It reopens once partsfoundry/rsext4 meets §46's bar and
+The removal of RedoxFS behind a proven replacement launch store. Refused 2026-10-31: UFS2 is not
+built, and RedoxFS stays the launch store until nife adopts `rsext4`. It reopens once partsfoundry/rsext4 meets §46's bar and
 milestone 190's done-when (2026-11-25): we ask for the adoption ruling then, and `rsext4` replaces
 RedoxFS. The inventory of what would leave stays here.

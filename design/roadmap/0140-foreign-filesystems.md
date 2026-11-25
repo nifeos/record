@@ -28,15 +28,15 @@ need all of these some day and we deliver them all eventually.
 
 | filesystem | why | when |
 |---|---|---|
-| **RedoxFS** | the backup volume. Vendored, working, and the only store here with crash-consistency evidence (186 injected lying-device cases: 112 recovered, 74 refused, **0 silently wrong**) | **kept**, and this milestone does not touch it |
+| **RedoxFS** | the backup volume. Vendored, working, and the only store here with crash-consistency evidence (186 injected lying-device cases: 112 recovered, 74 refused, **0 silently wrong**) | **kept** until nife adopts `rsext4`, when ext4 replaces it (§34 (RedoxFS is the primary filesystem, on three conditions)); this milestone does not touch it |
 | **FAT32** | **USB sticks.** The format removable media actually arrives in, so it is the one a person meets first | first |
 | **ext2** | Linux-native, simple, and a real interop story for a data volume. **Not a backup volume**: ext2 is ext3 without the journal, and that is the property a backup cannot give up | second |
-| **ext4** | what a Linux drive is actually formatted as today | **milestone 190** (ext4, read and write) |
+| **ext4** | what a Linux drive is actually formatted as today, and RedoxFS's replacement once nife adopts `rsext4` | **milestone 190** (ext4, read and write) |
 | **ZFS** | what a serious storage box runs | some day |
 
 RedoxFS was chosen because it could be vendored, which let the project skip building a
-filesystem and get a working one immediately. That decision stands and this block does not reopen
-it. What it says is that a vendored store solved one requirement and the others were never asked.
+filesystem and get a working one immediately. That decision stands until nife adopts `rsext4`, when
+ext4 replaces RedoxFS (§34), and this block does not reopen it. What it says is that a vendored store solved one requirement and the others were never asked.
 
 The FAT32 stratum depends on milestone 813 (`file_allocation_table`: a proven FAT crate, released
 on its own), calef's ruling of 2026-10-07 (UTC) on #1806: that crate is the format, and this
@@ -231,6 +231,6 @@ Recorded here so a later lane does not rediscover them per filesystem:
 ## Index row
 
 Minted by calef on 2026-08-18. An operating system mounts media it did not format, and this one
-cannot: `fs_server` is bound to RedoxFS at the type level. RedoxFS stays as the backup volume;
-FAT32 comes first because that is what a USB stick is, then ext2, then ext4 and ZFS some day. The
+cannot: `fs_server` is bound to RedoxFS at the type level. RedoxFS stays as the backup volume until
+nife adopts `rsext4`, when ext4 replaces it (§34); FAT32 comes first because that is what a USB stick is, then ext2, then ext4 and ZFS some day. The
 seam is deliberately the SECOND increment, not the first.
