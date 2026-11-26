@@ -46,8 +46,7 @@ on. A true `--release` icount bench matches rel on every row of all three archit
 0.23 percent, so rel stands for the shipped profile.
 
 The levels ran one at a time, each alone on the host. Other users raised the host's load to about
-30 at times, during the O2 and O3 cold suites in particular. Wall times are single runs and carry
-that noise; icount rows carry none.
+30 at times. Wall times are single runs and carry that noise; icount rows carry none.
 
 ### The gating benchmark
 
@@ -72,11 +71,13 @@ Findings:
 1. At opt-level 0 the bench counts mostly the compiler's unoptimized code. Eight to nine
    instructions in ten on every IPC row do not run in the shipped kernel.
 2. The rows do not move together, so an opt-level 0 regression does not predict a shipped one.
-3. O1 leaves 16 to 45 percent more IPC instructions than O2, and 3.8 times O2's
-   `tss_iomap_switch`.
-4. O2 and O3 are equal on every IPC row and differ on CoreMark. Both hold 20 to 30 percent more
-   IPC instructions than rel, which is what debug assertions and the other dev settings cost.
-5. The shipped profile spends 3.3 times O3's instructions on `tss_iomap_switch`, deterministically.
+3. O1 leaves 17 to 41 percent more IPC instructions than O2, 47 percent on `sink_throughput`, and
+   3.9 times O2's `tss_iomap_switch`.
+4. O2 and O3 agree within 1.5 percent on aarch64 and x86_64 IPC rows; on riscv64 O3 runs 1.3 to 5
+   percent more. They differ on CoreMark. Both hold 21 to 32 percent more kernel IPC instructions
+   than rel, and 15 to 17 percent more on the EL0 rows. Debug assertions are the likely cause, but
+   nobody has bisected the five settings.
+5. The shipped profile spends 3.4 times O3's instructions on `tss_iomap_switch`, deterministically.
    Nothing explains it yet, and only a release bench sees it.
 6. On main, `bench --release` boots a dev kernel on riscv64 and x86_64 (nifeos/nife#4122).
 7. Cargo changed its dev debuginfo default from full to line tables only between nightly
@@ -98,16 +99,15 @@ pin. The largest move of any row, per interval and architecture:
 
 Holding debuginfo fixed separates the causes. Nightly 2026-11-17 with full debuginfo against line
 tables moves O0 by all of its 17 to 18 change. With debuginfo held, the compiler moves O0 by 0.00
-percent from 17 to 18, and O2 by up to 5.4 percent. From 18 to 25 the compiler moves riscv64 at
-every level; main re-recorded the O0 row in nifeos/nife@f47aabfde3.
+percent from 17 to 18, and O2 by up to 5.4 percent (nifeos/nife#4108 has the method). From 18 to 25
+the compiler moves riscv64 at every level; main re-recorded the O0 row in nifeos/nife@f47aabfde3.
 
-The toolchain-bump workflow restamps only when every row moves under 0.5 percent. Of the six pairs
-above, four cross that bound at O0, three at O1, O2 and O3, and two at rel. Optimized moves are
-smaller but cross about as often. Two intervals give no rate of re-saves.
+The toolchain-bump workflow restamps only when every row moves under 0.5 percent, so a move of 0.5
+or more crosses. Of the six pairs above, four cross at O0 and three at every other level. Optimized
+moves are smaller but cross about as often. Two intervals give no rate of re-saves.
 
-The 2026-11-18 re-save, nifeos/nife@1547eb2af9, attributes its move to code generation; it was the
-debuginfo default. The review inferred O1 moves of 12 percent over 18 to 25 from two worktrees.
-One tree shows none on aarch64.
+The 2026-11-18 re-save, nifeos/nife@1547eb2af9, blames code generation; it was the debuginfo
+default.
 
 ### The test suite
 
@@ -131,7 +131,7 @@ on opt-level 0 or on debug assertions:
 5. A real hang, nifeos/nife#4129. On riscv64,
    `a_driver_killed_mid_write_leaves_the_device_and_transport_sane` hung in O1's cold suite with a
    lost-wakeup report. Repeated 90 times per level, it passed every run at O0 and O1 and hung once
-   at O2. Optimized timing exposes a race that opt-level 0 hides.
+   at O2. Zero of 90 against one of 90 is not significant, so this does not show that O0 hides it.
 
 With items 1 and 3 patched and item 2 printed, O1, O2 and O3 pass the whole suite on all three
 architectures apart from item 5; O1's cold rerun passed. At rel the kernel and system legs pass.
@@ -154,10 +154,11 @@ O1's cold figures are from its rerun:
 | the edit, rebuild and aarch64 legs | 270 | 200 | 209 | 204 | 190 |
 | user programs, cold, per architecture | 6 to 7 | 8 to 9 | 7 to 9 | 7 to 8 | 7 to 8 |
 
-The kernel legs run about 30 percent faster optimized; most of a leg is timer waits, device
-emulation and image builds. O1, O2 and O3 are within noise of each other, and O3 builds no slower
-than O2. The edit loop, the original reason for dev, rebuilds 10 seconds slower at O3 and finishes
-66 seconds sooner. The std programs build in release in their own workspace, so the dev profile
+The kernel legs run about 30 percent faster optimized. Differences among O1, O2, O3 and rel are
+within the noise of single runs under load: the edit row at O0 (270) even comes in below the aarch64
+legs alone (271). Whether O3 builds slower than O2 (92 against 89 seconds cold), single runs cannot
+settle. The edit loop, the original reason for dev, rebuilds 10 seconds slower at O3 and finishes
+about a minute sooner. The std programs build in release in their own workspace, so the dev profile
 does not reach them.
 
 ### What else moves
@@ -178,17 +179,16 @@ does not reach them.
   | full | O0 | names, lines, arguments | both lines | in full |
   | full | O1 to O3 | names, lines, most arguments | first line only | partly optimized out |
 
-  With the default, O0 shows no argument or local either. nifeos/nife@4a807473a9 now builds
-  `xtask gdb` with full debuginfo. Optimized, the backtrace resolves every frame, and values
-  vanish after their last use.
+  nifeos/nife@4a807473a9 now builds `xtask gdb` with full debuginfo, at the dev opt-level.
 - Mutation testing. coremark and capability_manifest_note ran `script/mutation` at O0 and at O2.
   Both levels generate the same mutants with the same outcomes. O2 costs 12 and 19 percent more
   wall time, from each mutant's rebuild: coremark's builds take 27 percent longer, and
   capability_manifest_note's viable mutants 66 percent longer.
 - Mutation and the entries. Holding `script/mutation` at O0 conflicts with deleting the entries.
   With them deleted, globally_unique_identifier_partition_table's host tests take 50 seconds at O0
-  and 7 at O2, network_time_protocol's 22 and 3. Eleven other packages take 2 seconds or less.
-  Each of their mutants would pay the O0 time, so mutation should follow the dev profile.
+  and 7 at O2, network_time_protocol's 22 and 3. Eleven other packages take 2 seconds or less. Each
+  of their mutants would pay the O0 time, so mutation should follow the profile the suite uses.
+  nifeos/nife#4108 has the frame, program and mutation figures above and how the lane took them.
 
 ### What option C costs beyond a baseline save
 
@@ -203,40 +203,52 @@ nifeos/nife@a64a709eb2 strips. Nothing else blocks C.
 
 ## Options
 
-Costs are measured unless marked unmeasured.
-
-- A. Keep dev at opt-level 0. No work. The gate counts mostly unoptimized code, never runs a
-  release-only path, and hides #4129. With debuginfo now set, its drift is like the optimized
-  levels'.
+- A. Keep dev at opt-level 0. No work. The gate counts mostly unoptimized code and never runs a
+  release-only path.
 - B1, B2, B3. Dev at opt-level 1, 2 or 3, with assertions, overflow checks and debuginfo kept. Fix
   the symbol comparisons and the loader fixture, delete the entries, and save one baseline per
   architecture. Each first needs #4129 fixed and `ipc_stack_depth` reworked; neither fix exists,
-  and their cost is unmeasured. Board numbers move. B1 counts 16 to 45 percent more IPC
-  instructions than B2. B2 and B3 cost the same to build and run, and B3 is the shipped opt-level.
+  and their cost is unmeasured. Board numbers move, and gdb loses locals unless `xtask gdb` keeps
+  O0. B1 counts 17 to 41 percent more IPC instructions than B2. Wall time here does not separate
+  B2 and B3, and B3 is the shipped opt-level.
 - R. A release suite leg in the merge queue: the kernel and system legs on a release build, 173 to
-  373 seconds per architecture warm here. It needs item 4 gated and `ipc_stack_depth`'s release
-  branch fixed. It alone tests paths that exist only in the shipped build, such as `heal_self_pop`
-  in `sched/switch.rs`.
+  373 seconds per architecture warm here, about 750 seconds per queue run for all three. It needs
+  item 4 gated and `ipc_stack_depth`'s release branch fixed. It alone tests paths that exist only in
+  the shipped build, such as `heal_self_pop` in `sched/switch.rs`.
 - C. The gating bench on a release build, the suite unchanged. Fix #4122 and pay the costs above. It
   counts what ships, sees `tss_iomap_switch`, and is immune to the debuginfo default.
 - D. B2, then C. Two baseline saves and two breaks in `attributions.tsv`, and C throws the O2
-  baseline away. Holding the bench at O0 until C instead means keeping three entries for it,
-  since any B option moves the EL0 rows.
-- E. C, then B3, then R. One baseline save, since a release bench does not follow the dev profile.
+  baseline away.
+- F. A named CI cargo profile, opt-level 3 with debug assertions, overflow checks and none of the
+  21 entries, for `script/test` and `script/mutation`. Dev stays at O0 with its entries for the edit
+  loop and gdb. Mutation on the CI profile pays the 12 to 19 percent rebuild cost, not the O0
+  host-test times, which settles the conflict above. It needs B3's fixes and its own target
+  directory; board images keep their dev user space.
+- E. Bisect `tss_iomap_switch`, then C, then F (or B3), then R. One baseline save, since a release
+  bench does not follow the dev profile.
 
 ## Recommendation
 
-E. Move the gating bench to release now. Move the suite to opt-level 3 once #4129 and
-`ipc_stack_depth` are fixed, and add the release leg to the merge queue after that.
+E with F. Bisect `tss_iomap_switch` over the five settings first, so C does not publish floors that
+hold an unexplained 3.4 times. Then move the gating bench to release. Move the suite to the CI
+profile once #4129 and `ipc_stack_depth` are fixed, and add the release leg to the queue after that.
+F gives the suite the shipped opt-level without slowing the edit rebuild or costing gdb.
 
-The order follows blockers, not effort. C waits only on #4122. B3 and R wait on fixes of unknown
-cost. Doing C first means B3 never touches a baseline.
+The order follows blockers, not effort. C waits on the bisect and #4122. F and R wait on fixes of
+unknown cost.
+
+One-way doors, for calef: C and the release floors it publishes, which workflows and notes then act
+on; gating on release, which makes release the definition of the shipped artifact; and the overlap
+with milestone 797. Two-way doors, provisional with the maintainer: F, B3 or B2 and the 21
+deletions; R; gating the debug_assert test; the mutation profile; the #4122 fix; and `xtask gdb`
+keeping O0.
 
 The seven questions:
 
 1. What else did this consider? A keeps a gate that counts a build nobody runs. B1 counts more code
-   that does not ship. B2 costs what B3 costs and is further from what ships. D saves two baselines
-   where E saves one. C alone leaves the suite hiding #4129.
+   that does not ship. B2 is further from what ships at no measured saving. B3 slows the edit rebuild
+   and costs gdb its locals; F does neither. D saves two baselines where E saves one. C alone leaves the suite at a
+   level that does not ship.
 2. What does this tree do in the analogous case? fastpath-footprint and build-is-reproducible build
    the shipped profile because that is what they check. Milestone 750 put overflow checks in
    release to check what ships.
@@ -255,23 +267,14 @@ The seven questions:
    calls its debug build unsuitable for performance testing.
    [rustc-perf](https://github.com/rust-lang/rustc-perf/blob/463fb3a255f7/collector/README.md#L65-L68)
    counts instructions of the artifacts built from merged commits. None benchmarks an unoptimized
-   build. The precedent is to test at the shipped level, which for nife is 3, and to bench the
-   shipped build.
+   build.
 4. Is the premise true? Yes, with two corrections: three of the 21 entries are at opt-level 1, and
    board images ship a dev user space.
 5. What does each cost? In Options.
-6. How reversible? B3 and R are two-way doors: a profile is two lines and a leg is one job. C is
-   less so, because workflows and notes act on its numbers.
+6. How reversible? As split above: a profile is a few lines and a leg is one job, while workflows
+   and notes act on C's numbers.
 7. Would we still choose it at equal cost? Yes. At equal cost one would test at the shipped level
    with assertions on, test the shipped build, and bench it. That is E.
-
-The review's open questions, answered where a measurement could:
-
-- The edit loop at O2 or O3 rebuilds in 25 or 21 seconds against 11, and finishes sooner.
-- The shipped x86_64 kernel showed no bug; the hang was the measurement's.
-- Board user space and milestone 797 move under any B option.
-- No reason for O2 over the shipped level survives; O3 costs the same.
-- An optimized baseline needs re-saving about as often as an O0 one, over two intervals.
 
 ## What remains unmeasured
 
@@ -287,8 +290,9 @@ The review's open questions, answered where a measurement could:
 
 - **Recorded.** The choice among the options is calef's, in Options and Recommendation above.
 - **Recorded.** Filed: nifeos/nife#4122 and nifeos/nife#4129. nifeos/nife#4125 is closed.
-- **Recorded.** On E, a C lane fixes #4122 and moves the bench. A B3 lane follows #4129 and an
-  `ipc_stack_depth` rework, and carries the test fixes from #4108. An R lane follows the rework.
+- **Recorded.** On E, a lane bisects `tss_iomap_switch`, then a C lane fixes #4122 and moves the
+  bench. An F lane follows #4129 and an `ipc_stack_depth` rework, and carries the test fixes from
+  #4108. An R lane follows the rework.
 
 ## Index row
 
