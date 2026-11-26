@@ -61,8 +61,9 @@ red when replayed with `script/test --arch x86_64 --no-host --test <name>` on 20
 
 ## BUGS
 
-- `script/stack-depth-check` does not measure the IST stacks. They are the size of the per-CPU
-  interrupt stack, which carries the same panic path and is measured.
+- `script/stack-depth-check` does not measure the IST stacks;
+  [the interrupt stack table note](../../notes/x86-port/cpu-state.md#the-interrupt-stack-table)
+  says why their size is safe.
 - The IST stacks cost 480 KiB of address space for eight seats whether or not the cores exist,
   like the interrupt and secondary stacks beside them.
 - Recovery from a correctable machine check is not built; every machine check panics.

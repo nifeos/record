@@ -37,9 +37,9 @@ workflows already measure stands between it and a first release. The weekly run 
 wording of the tree it left. The three API changes ruled below land before any tag, while they cost
 two call sites and no version bump.
 
-Publishing stays held. No crate from this organization publishes to crates.io until the
-maintainers have extracted several crates and a review has decided whether any of them combine.
-Nothing in this block lifts that hold, and no tag follows the rename (decision 6).
+Publishing stays held, under the hold that
+[milestone 1050](1050-designware-mobile-storage-outside-review.md) states. Nothing in this block
+lifts that hold, and no tag follows the rename (decision 6).
 
 ## What the review covered
 

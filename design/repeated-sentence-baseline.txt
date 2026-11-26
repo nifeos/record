@@ -174,9 +174,7 @@
 
 171cc331a5e9 notes/shell-navigation.md
 
-181380389d58 design/roadmap/0401-a-gate-that-selects-the-set-it-judges.md
 
-181380389d58 notes/empty-selectors.md
 
 
 
@@ -188,9 +186,7 @@
 
 18afcfe2356d notes/rented-metal/aarch64.md
 
-18da2302fead design/roadmap/0401-a-gate-that-selects-the-set-it-judges.md
 
-18da2302fead notes/empty-selectors.md
 
 
 
@@ -237,11 +233,8 @@
 
 1c6061285383 design/roadmap/0884-the-shell-logic-crate-is-split-along-its-seams.md
 
-1cf40702ac17 design/roadmap/0579-constitution-carry-vs-brief/classification.md
 
-1cf40702ac17 design/roadmap/0579-constitution-carry-vs-brief/roles.md
 
-1cf40702ac17 design/roadmap/0579-constitution-carry-vs-brief/skills.md
 
 
 
@@ -517,13 +510,9 @@
 
 372c5d3e3e6c notes/uefi-boot-two-core-rate.md
 
-37322d4cbf9c design/roadmap/0448-a-refusal-gets-a-number.md
 
-37322d4cbf9c design/roadmap/0461-an-sse-enabled-x86-64-userspace-target.md
 
-374ec21a02a4 design/roadmap/1057-e1000e-outside-review.md
 
-374ec21a02a4 design/roadmap/1059-block-roster-contract-outside-review.md
 
 3809eabe65e3 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
@@ -555,9 +544,7 @@
 
 39416dc83b70 design/roadmap/1027-leaving-the-central-program-table/decisions.md
 
-398dc3bd814a design/roadmap/0579-constitution-carry-vs-brief.md
 
-398dc3bd814a design/roadmap/0579-constitution-carry-vs-brief/skills.md
 
 39949b1d9ce0 design/roadmap/0526-a-riscv64-host-that-hands-us-acpi.md
 
@@ -625,9 +612,7 @@
 
 
 
-4478818b4720 design/roadmap/0915-nmi-double-fault-and-machine-check-run-on-their-own-stacks.md
 
-4478818b4720 notes/x86-port/cpu-state.md
 
 45a5d8c34f28 design/roadmap/1094-grant-plan-outside-review/ruled-decisions.md
 
@@ -761,9 +746,7 @@
 
 53c8a6c6f050 notes/packages-and-divisions.md
 
-541a6e769fbe design/roadmap/0523-the-job-mix-supervisor-in-userspace/what-provoked-it.md
 
-541a6e769fbe design/roadmap/0563-a-seal-check-that-reads-bytes-cannot-see-a-check-that-was-dropped.md
 
 5448d1a7f01d design/roadmap/0187-x86-64-arch-audit/method.md
 
@@ -944,9 +927,7 @@
 
 
 
-692cf387ebb5 design/roadmap/1111-usb-outside-review.md
 
-692cf387ebb5 notes/crate-reviews/universal-serial-bus.md
 
 6965bce6028a design/roadmap/0897-sqlite-is-packaged-in-basalt.md
 
@@ -1008,9 +989,7 @@
 
 73bc8a1ce93c notes/crate-reviews/jh7110-clock-and-reset.md
 
-7639375a7269 design/roadmap/0186-architecture-list-derivation.md
 
-7639375a7269 notes/architecture-list-sweep.md
 
 767d28e30fed design/roadmap/1087-domain-name-system-outside-review/what-was-checked.md
 
@@ -1112,9 +1091,7 @@
 
 
 
-80dbd9025b3d design/roadmap/0307-which-assertion-fires.md
 
-80dbd9025b3d notes/confinement-claims/which-assertion-fires.md
 
 8154a34d0ae6 notes/load-sensitive-assertions/caretaker-teardown-wait.md
 
@@ -1163,9 +1140,7 @@
 
 88fb002ece54 design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
-8b264d4e4304 design/roadmap/0583-citations-across-lines.md
 
-8b264d4e4304 notes/citations/bugs.md
 
 8c2a46c0192a design/roadmap/0867-a-fifth-outsider-pass-attacks-the-confinement-claim.md
 
@@ -1192,9 +1167,7 @@
 
 91fbaa3e6bcf notes/confinement-claims/unstated-claims.md
 
-930e83c166c1 design/roadmap/0401-a-gate-that-selects-the-set-it-judges.md
 
-930e83c166c1 notes/empty-selectors.md
 
 
 
@@ -1209,9 +1182,7 @@
 
 95a1a2ede1fc design/roadmap/0517-survivor-growth-on-the-lines-a-diff-touched/replays.md
 
-95a3c6d65aac design/roadmap/0401-a-gate-that-selects-the-set-it-judges.md
 
-95a3c6d65aac notes/empty-selectors.md
 
 95cd38199e3a design/roadmap/0447-vector-registers-are-a-thread-s-own/target-flip.md
 
@@ -1233,9 +1204,7 @@
 
 97efab5b6043 notes/jh7110-entropy-board-check.md
 
-986e8c54a8dc design/roadmap/0579-constitution-carry-vs-brief/classification.md
 
-986e8c54a8dc design/roadmap/0579-constitution-carry-vs-brief/roles.md
 
 997f4768f643 design/roadmap/1102-network-time-protocol-outside-review.md
 
@@ -1331,9 +1300,7 @@ a0184ae48880 notes/crate-reviews/user-mode-runtime.md
 
 
 
-a0e4a8e7de68 design/roadmap/0263-can-a-timer-be-a-capability.md
 
-a0e4a8e7de68 notes/timer-capability.md
 
 
 
@@ -1409,9 +1376,7 @@ aff8ab1af64e notes/x86-port/ring-3.md
 
 
 
-b1eb6160a423 design/roadmap/0049-users-and-attribution.md
 
-b1eb6160a423 design/roadmap/0049-users-and-attribution/build.md
 
 b23d755b70c4 design/fatal-risks/1-only-software-written-for-nife.md
 
@@ -1499,9 +1464,7 @@ bc501bc89ce0 design/roadmap/1060-extensible-host-controller-interface-outside-re
 
 bc501bc89ce0 design/roadmap/1061-file-allocation-table-outside-review.md
 
-bc577cd89fbc design/roadmap/0401-a-gate-that-selects-the-set-it-judges.md
 
-bc577cd89fbc notes/empty-selectors.md
 
 bdc3ddffad81 design/roadmap/0518-the-per-crate-census-nobody-wrote-down.md
 
@@ -1622,9 +1585,7 @@ cb31c429ffd1 design/roadmap/0806-concurrent-login-sessions.md
 
 
 
-cec5b37aa8a6 design/roadmap/0250-an-unviable-mutant-is-a-hole-that-reads-as-a-pass.md
 
-cec5b37aa8a6 design/roadmap/0354-the-mutants-nobody-counts.md
 
 cefd74a62ac7 design/roadmap/1090-filesystem-contract-outside-review.md
 
@@ -1644,9 +1605,7 @@ d08b72cf5fca design/roadmap/0887-crate-repositories-share-one-ci-template.md
 
 
 
-d1a0aac9754b design/roadmap/0579-constitution-carry-vs-brief/classification.md
 
-d1a0aac9754b design/roadmap/0579-constitution-carry-vs-brief/roles.md
 
 d22e90d25e59 design/roadmap/0067-swish-language.md
 
@@ -1872,21 +1831,13 @@ e69ca03261a9 design/roadmap/0913-an-eighth-outsider-pass-attacks-the-confinement
 
 
 
-e902f0b85794 design/roadmap/0142-a-text-display-worth-living-in/dependency.md
 
-e902f0b85794 design/roadmap/0142-a-text-display-worth-living-in/determinism.md
 
-e902f0b85794 design/roadmap/0142-a-text-display-worth-living-in/palette.md
 
-e902f0b85794 design/roadmap/0142-a-text-display-worth-living-in/rich-text.md
 
-e902f0b85794 design/roadmap/0142-a-text-display-worth-living-in/scanout.md
 
-e902f0b85794 design/roadmap/0142-a-text-display-worth-living-in/type.md
 
-e95481b328c0 design/roadmap/0186-architecture-list-derivation.md
 
-e95481b328c0 notes/architecture-list-sweep.md
 
 
 e9c0a6bfa099 notes/scheduler.md
@@ -1926,9 +1877,7 @@ ebee1a65f0f0 notes/crate-reviews/e1000e.md
 
 
 
-edc012806cae design/roadmap/0135-loom-region-claim.md
 
-edc012806cae notes/interleaving/limitations.md
 
 ef8e18db8e10 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 

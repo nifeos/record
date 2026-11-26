@@ -19,8 +19,8 @@ each guarded site now guarantees are in [notes/empty-selectors.md](../../notes/e
 This block was written around one instance: `script/lint`'s contract-crate check, which globbed
 `crates/*proto` until milestone 265 renamed every one of those crates to `*_protocol`. The block
 says the glob then matched nothing, the loop ran zero times, and **the check passed by checking
-nothing**. Replayed against the tree at `51fee8248^`, the commit immediately before 265's sweep
-landed, that is false.
+nothing**. [The note's replay](../../notes/empty-selectors.md) against `51fee8248^` shows that is
+false.
 
 POSIX `sh` leaves an unmatched glob in place as a literal word. `basename` then yields the string
 `*proto`, which does not match the `*_proto` arm of the `case`, so it falls to the failure branch:
@@ -67,9 +67,8 @@ Guarded, with the full table in the note:
 
 Already guarded, and left alone: `script/vendor-verify` and `script/vendor-watch` both exit on an
 empty `vendor/*.pin`; `script/mutation-census` exits on a run with no outcome artifacts.
-`script/fatal-risks`' `no-history` check fires when a shallow clone makes its own check unable to
-fail, on the stated ground that a check which cannot fail is worse than one that is absent. That
-comment is this block's argument, written by a gate about itself.
+So does `script/fatal-risks`' `no-history` check, on a ground the note quotes, and that ground is
+this block's argument.
 
 **Judged not to need one:** `script/lint`'s `git grep` finders (the TODO-milestone scan, the
 `daemon` scan, the conflict-marker scan) look for bad things rather than selecting a set to judge.
@@ -78,10 +77,8 @@ distinction, finder against selector, is the thing a lint for this could not mak
 
 ## BUGS
 
-- **A non-empty assertion is not a correct selector.** A glob matching three of fifteen crates passes
-  every assertion added here and still covers a fifth of its subject. Catching that needs the right
-  count, which is the hand-kept list `script/verify` and `script/falsifications` both moved away
-  from.
+- **A non-empty assertion is not a correct selector.** The note's
+  [BUGS](../../notes/empty-selectors.md#bugs) gives the example.
 - Nothing gates the convention. A selector added tomorrow gets no assertion unless its author
   reads the note. This is rung three deliberately: a lint would have to tell a selector from a finder
   in someone else's shell, and the two are the same syntax.
@@ -89,9 +86,7 @@ distinction, finder against selector, is the thing a lint for this could not mak
   `--exclude` silently and `.cargo/mutants.toml`'s exclusion globs are not an error when they match
   nothing. A non-empty test says nothing about an exclusion, because a stale exclusion still covers
   everything else.
-- The tell is the durable half and no machine can check it. A gate that passed before your change
-  and passes after it, on a change that is exactly what the gate is about, has probably stopped
-  looking.
+- The tell is the durable half and no machine can check it; the note's BUGS states it.
 
 ## Follow-on
 
