@@ -147,8 +147,7 @@ commit corrects each in place:
 
 - [design/roadmap/0412-the-uefi-boot-gate-asserts-two-cores-that-do-not-always-start.md](../design/roadmap/0412-the-uefi-boot-gate-asserts-two-cores-that-do-not-always-start.md):
   the block this page serves
-- [notes/load-sensitive-assertions.md](load-sensitive-assertions.md): the measurement recipe, the
-  host-load line, and the register of the assertion family
+- [notes/load-sensitive-assertions.md](load-sensitive-assertions.md): the recipe and the register
 - [notes/uefi-test-exit-rate.md](uefi-test-exit-rate.md): the sibling measurement, and the
   load-gradient precedent this page followed
 - [design/roadmap/0316-x86-smp-two-cores.md](../design/roadmap/0316-x86-smp-two-cores.md): the

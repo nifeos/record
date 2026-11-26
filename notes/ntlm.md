@@ -302,8 +302,8 @@ Guest tests (`kernel::user::credential_tests`, on aarch64 and riscv64, same asse
   `credentialer::Record`'s encoding is versioned (version 2 carries the NTLM half) so the question has a
   starting point, and nothing in the tree writes one to a disk.
 - The provisioner holds every password in the clear. Provisioning takes a password, not a
-  derived key, because the service derives both halves itself. Today that is a test program with
-  the strings compiled in, which is fine for a test and is not a deployment.
+  derived key, because the service derives both halves itself. It is the test program
+  [credentials](credentials.md) describes.
 - SMB3 needs more than this. Signing is AES-CMAC, encryption is AES-CCM or GCM, and SMB 3.1.1
   preauth integrity is SHA-512. None of them is here. What is here is authentication and the key the rest would hang off.
 - **`crates/ntlm` is not constant-time and does not need to be**: its inputs are either public or

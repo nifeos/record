@@ -1,12 +1,10 @@
 # The guard-page faults of 2026-08-16, which were not overflows
 
-*An appendix to `nifeos/nife:notes/stack.md`, which explains the stack and is the page to read.
-This file holds the account of the 2026-08-16 guard-page faults, which were not overflows. It moved
-here on 2026-09-25 (UTC) under §212 (a prose budget). The move then edited it only to meet §213
-(writing standards), splitting long sentences and dropping bold, with the meaning unchanged. The
-five appendices were one file until then, in the order the main page's table lists them, so "above",
-"below" and "this file" in them mean that whole sequence. The directory `notes/stack/` and this
-file's stem are provisional names; naming is calef's.*
+*An appendix to `nifeos/nife:notes/stack.md`, which explains the stack and is the page to read. This
+file holds the account of the 2026-08-16 guard-page faults, which were not overflows. [The directory
+index](README.md) says how the five read together. The directory `notes/stack/` and this file's stem
+are provisional names; naming is calef's.*
+
 
 
 Two more guard-page faults, one per architecture, in the same test

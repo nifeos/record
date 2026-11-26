@@ -55,7 +55,7 @@ taking all of it. The stranger can see that only by running `env`.
 4. It reads `CONTRIBUTING.md` before `AGENTS.md`, and opens `AGENTS.md` late or not at all, as run 5
    did.
 
-## Run 6, 2026-09-19: a different model, a program in two edits, and a stranger that provisioned the machine
+## What run 6 found
 
 ### The cadence is not what started it
 

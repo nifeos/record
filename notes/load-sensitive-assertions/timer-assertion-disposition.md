@@ -77,10 +77,8 @@ Measured on both ISAs, with the injection reverted afterwards:
 | aarch64 `deadline_delta` over 64 ticks | 40,000,000 of 40,000,000 | **40,004,032**, red |
 | riscv64 `deadline_delta` over 64 ticks | 6,400,000 of 6,400,000 | **6,400,231**, red |
 
-The excess is the arrival latency, once per tick. On aarch64, 4,032 counter ticks over 64 is 63 per
-tick, which is 1,008 instructions: the arrival figure printed in the same run. On riscv64, 231 over
-64 is 3.6 counter ticks, or ~360 instructions, against a printed arrival of 300 to 400. The
-instrument does not merely notice the defect; it prices it.
+The excess is the arrival latency, once per tick, on both architectures: [the instruction
+clock](../instruction-clock.md) does the arithmetic. The instrument does not merely notice the defect; it prices it.
 
 ### `ticks_arrive_at_the_configured_rate`: the law stays, the budget stops failing
 

@@ -9,7 +9,7 @@ names the finding that answers it.
 | C-CASE | met | conventional case throughout |
 | C-CONV | met | `to_bits` is a cheap `Copy` conversion, `from_bits` its inverse |
 | C-GETTER | met | `len`, `slot_count`, `get`, `get_mut`; no `get_` prefix on a plain field |
-| C-ITER | met | `iter`, `iter_mut`, `values`, `values_mut` |
+| C-ITER | not met | item 4: `iter` and `iter_mut` exist, but no `IntoIterator` |
 | C-ITER-TY | not met | item 3: every iterator is `impl Iterator` |
 | C-FEATURE | not applicable | no Cargo feature |
 | C-WORD-ORDER | met | the nineteen ratified names follow the standard library's order |
@@ -18,7 +18,7 @@ names the finding that answers it.
 | C-COLLECT | not applicable | a fixed table cannot promise to take every item, so no `FromIterator` |
 | C-SERDE | not applicable | left out on purpose, with no dependency; `to_bits` serves a caller that stores names |
 | C-SEND-SYNC | met | automatic; `PhantomData<fn() -> T>` keeps `EntryName` `Send` and `Sync` for every `T` |
-| C-GOOD-ERR | not applicable | no error type; item 1 returns the refused value, not an error |
+| C-GOOD-ERR | not applicable | no error type yet; door 1 gives the refusal one |
 | C-NUM-FMT | not applicable | `EntryName` is not a number to a caller |
 | C-RW-VALUE | not applicable | no reader or writer |
 | C-EVOCATIVE | not applicable | no macro |

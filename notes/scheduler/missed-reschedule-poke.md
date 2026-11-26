@@ -5,8 +5,8 @@
 An appendix to [notes/scheduler.md](../scheduler.md), moved there on 2026-10-11 (UTC) under §212
 (a prose budget). It is the full record of the missed-SGI bug of 2026-08-28: the dump, the fix and the proof.
 
-**`spawn_on` asked "is this target my own core?" twice, on either side of a window in which a steal
-can move the asking thread onto a different core.** When the two answers disagreed the placement
+**`spawn_on` asked "is this target my own core?" twice, across the steal window [the main
+page](../scheduler.md) describes.** When the two answers disagreed the placement
 went into a remote core's inbox and the spawn skipped the reschedule SGI that makes an inbox get
 drained, so the thread sat `Ready` forever beside four idle cores. Found 2026-08-28 on the generic
 `rv64` CPU-matrix leg of PR #574's run 33147291785, whose diff is a shell script, a baseline file

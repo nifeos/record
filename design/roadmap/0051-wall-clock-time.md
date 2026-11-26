@@ -62,8 +62,7 @@ Keep the split the code already has. `Instant` stays the raw monotonic counter, 
 one instruction (see the §10 exception recorded in `arch/aarch64/timer.rs` and its riscv twin).
 Wall-clock time becomes counter + offset, and the clock service owns the offset.
 
-The payoff is that adjusting the wall clock cannot perturb monotonic time, by construction rather
-than by discipline. Unix needs `adjtime` slewing partly because stepping the clock backwards breaks
+§43 (reading the clock is a page, setting it is a page you may write) states the payoff. Unix needs `adjtime` slewing partly because stepping the clock backwards breaks
 things that assumed it only moves forward; here `Instant` never sees the adjustment, so a step is
 just an offset write. Whether to *also* slew for the benefit of wall-clock readers is then a policy
 choice the service can make, not a correctness requirement.

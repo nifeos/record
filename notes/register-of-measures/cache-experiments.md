@@ -164,16 +164,14 @@ a similar size.
 
 ## The full commands
 
-The register's Dated table keeps a short form of each command. These are the cells in full, as the
-table carried them before the split.
+The register's Dated table keeps a short form of some cells. These are those cells in full, as the
+table carried them before the split; E1 and E2 the register carries whole.
 
 | measure | last taken | the command that re-takes it |
 |---|---|---|
-| E1: IPC round trip against thread count | 2026-09-04 (radon, 6 boots); 2026-08-22 (dev Mac) | `cargo xtask bench --real` (`ipc_scale_*` rows); on radon, `script/board-image --bench` and notes/footprint-perturbation.md |
-| E2: thread census on the customer path | 2026-08-22 | `cargo xtask test`, the "E2 thread census" line in `a_host_process_connects_to_the_guest_and_is_answered` (both ISAs) |
 | E3: IPC fastpath footprint doubled, and the latency it costs | retired by calef, 2026-10-20; last read 2026-09-04 (radon, 6 boots), confounded, see the radon section; 2026-08-22 (dev Mac) | `script/fastpath-footprint --features fastpath_pad [--layout]` (both ISAs); `cargo xtask bench --real --extra-features fastpath_pad` against `cargo xtask bench --real`; on radon, eight images over `NIFE_FASTPATH_PAD`/`NIFE_FASTPATH_SHIFT` (the layout control, 2026-09-19) built by `script/board-image --bench --extra-features fastpath_pad`, procedure in notes/footprint-perturbation.md |
-| E4: application working-set displacement under IPC traffic, at typical (8-pair) and high (48-pair, E1's-knee) background load | 2026-09-04 (radon, 6 boots); 2026-08-23 (dev Mac) | `cargo xtask bench --real` (`appdisp_*_ipc`/`appdisp_*_ipc96` rows); on radon, `script/board-image --bench` and notes/footprint-perturbation.md |
-| per-IPC kernel stack depth, per shape and role (milestone 134) | 2026-10-20 (riscv64 release, QEMU and radon at one commit); 2026-09-19 (QEMU, all three ISAs, debug and release) | debug: `script/test`, the `ipc-stack-depth:` lines of `one_ipc_reaches_a_measured_depth_into_its_kernel_stack`; release: a `bench,ipc_stack_depth` kernel booted on one hart (notes/stack-high-water.md, "Per-IPC depth") |
+| E4: application working-set displacement under IPC traffic, at typical (8-pair) and high (48-pair, E1's-knee) background load | 2026-09-04 (radon, 6 boots); 2026-08-23 (dev Mac) | as the register gives it |
+| per-IPC kernel stack depth, per shape and role (milestone 134) | as the register gives it | debug: `script/test`, the `ipc-stack-depth:` lines of `one_ipc_reaches_a_measured_depth_into_its_kernel_stack`; release: a `bench,ipc_stack_depth` kernel booted on one hart (notes/stack-high-water.md, "Per-IPC depth") |
 
 ## BUGS
 

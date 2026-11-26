@@ -3,9 +3,8 @@
 *Name: ratified 2026-10-18 (calef, convention-rulings Rule 3).*
 
 An appendix to [notes/shared-page-audit.md](../shared-page-audit.md), the tree's second security
-audit (2026-08-04). The parent states the lens and its four questions: (a) the window, (b) what can
-land in it, (c) the corrupted state, (d) whether it is reachable. Its honest summary has every
-finding's disposition.
+audit (2026-08-04). The parent states the lens, its four questions and every finding's
+disposition.
 
 ## 1. The FS service's one shared frame is mapped read-write into every client the boot ever wired
 

@@ -19,8 +19,7 @@ termd`.
 
 Why it matters. The rule and its argument are DECISIONS §39. The short version: a `-d` suffix
 tells every reader "this is a daemon" before they see a line of code, and a Unix daemon is defined by
-the ambient authority this OS deliberately lacks. `netd` holds five explicit capabilities, cannot name
-its own callers, is supervised, and can be reaped by something that lacks the authority to build it.
+the ambient authority this OS deliberately lacks. §39 (a component is named for what it is) lists what `netd` holds and what it cannot do.
 The name is a false claim, which is the same defect as a stale comment except that every reader is
 guaranteed to read it. `linedisc` failed the second half of the same test: it is the correct Unix term
 of art, and the person who built this system did not recognize it.

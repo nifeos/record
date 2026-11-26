@@ -33,9 +33,7 @@ remaining target and declined to take it. 836 lines over firmware-supplied lengt
 counts. Its volatile half reads raw pointers into the direct map. It called finding that seam a
 design question rather than a mechanical one, and was right.
 
-**Milestone 319 changed the size of the question rather than answering it.** With
-`crates/machine_discovery` proved, every decision about what those bytes *mean* now lives in a crate
-Kani reaches. What is left on the kernel side is one operation repeated. Read N bytes at a physical
+**Milestone 319 changed the size of the question rather than answering it.** §192 says what milestone 319's proof moved out of the kernel. What is left on the kernel side is one operation repeated. Read N bytes at a physical
 address through the direct map and hand them to a parser. The 836 lines are mostly the walk's
 sequencing, and the part that is a trust boundary is a single accessor.
 
@@ -44,9 +42,7 @@ sequencing, and the part that is a trust boundary is a single accessor.
 **Does that accessor take a bound, and what does it do when the bound is exceeded?**
 
 Today each read is a raw pointer plus a length the table itself supplied. An RSDT whose `length`
-field says 64 KiB is a 64 KiB read at whatever physical address the RSDP pointed at. Nothing
-between the firmware's number and the dereference says how much of the direct map is legitimately
-readable.
+field says 64 KiB is a 64 KiB read at whatever physical address the RSDP pointed at. §192 states the gap.
 
 The analogous question is answered on the other two architectures. `dtb::Dtb::from_ptr` takes the
 blob's own length, validates the header before anything else is read. Every reader below it is

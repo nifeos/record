@@ -5,8 +5,7 @@
 An appendix to [notes/shared-page-audit.md](../shared-page-audit.md), which lists these in one
 paragraph.
 
-Recorded because "we looked and it is fine" is the other half of an audit, and because each is a
-place a future change could break something.
+Recorded for the reason [the untrusted-input audit](../untrusted-input-audit.md) gives for its own.
 
 ## The FS server's whole request decode
 

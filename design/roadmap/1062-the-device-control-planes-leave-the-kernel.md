@@ -179,8 +179,7 @@ confines, which takes all three of these:
 - the function offers `VIRTIO_F_ACCESS_PLATFORM`;
 - none of its structure pages shares a page with its MSI-X table or pending-bit array.
 
-Every other function gets the mediated grant, and so does every virtio-mmio device. The validator
-runs in every mediated grant, and on a machine without an IOMMU nife claims no confinement from it.
+Every other function gets the mediated grant, and so does every virtio-mmio device. §23 says where the validator runs and what it claims without an IOMMU.
 The rule lives in the starter, never in the kernel.
 
 ### Prior art

@@ -87,8 +87,8 @@ The unit address and requester id above are predictions, not readings: `0xfed910
 
 What a figure counts: one command in flight of 4096 bytes, polled completion, and two context
 switches per block, since the kernel's boot thread `CALL`s the EL0 server once per block.
-That is a lower bound on the device and an honest measure of this driver, not comparable to `fio` at
-queue depth 32. The `ipc floor` line lets whoever quotes a figure subtract the IPC share. The
+[notes/bench-boots.md](bench-boots.md) says what such a figure measures and which figures it does not
+match. The `ipc floor` line lets whoever quotes a figure subtract the IPC share. The
 server's measurement is checked against the archive's table before it runs, since this boot
 replaces the hand-over that would.
 
