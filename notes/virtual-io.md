@@ -27,7 +27,7 @@ The kernel reads three standardized registers of each slot (magic, device-id, ve
 block device and route it to a driver. That is bus enumeration: the same thing firmware does
 walking a PCI bus, and it is the smallest amount of virtio knowledge that lets the kernel say
 "the block device is in slot 31, its interrupt is INTID 79." It does not set up a queue, negotiate
-a feature, or move a byte. Everything else is the driver's, at EL0.
+a feature, or move a byte.
 
 The kernel hands the driver, and nothing more:
 
@@ -49,8 +49,7 @@ works out physical addresses as `direct_memory_access_phys + offset`.
 
 On real hardware there is a second concern: cache coherence between the CPU and a DMA-capable
 device. QEMU's DMA is coherent, so we get away with just compiler/CPU ordering (`dmb ish`) around
-publishing descriptors and reading results. A real driver would add cache maintenance. The note is
-here so the gap is on the record.
+publishing descriptors and reading results. A real driver would add cache maintenance.
 
 ## The virtqueue, and a read
 
@@ -107,7 +106,7 @@ notes/dma.md has the confinement itself and notes/pcie.md the transport seam.
 
 On riscv64 the virtio-mmio window is mapped only when the device tree names a `virtio,mmio` node.
 On the T-Head TH1520 the QEMU window's address is DRAM, and a probe there could mistake RAM for a
-device.
+device. A machine without the bus reports zero slots.
 
 Block devices share one ordering, the roster's row order: every
 virtio-mmio slot in slot order, then every modern virtio-pci function in bus:device.function order.
@@ -125,18 +124,20 @@ side effects of having asked.
 
 The PCI accessors `pread` and `pwrite` are safe functions over a module invariant rather than
 `unsafe fn`s. They are private, and every call site passes `common` plus a constant offset under
-0x40, `isr`, `notify_addr[q]`, or `device_config` plus an offset the capability's length bounds.
-All four are fields of `Transport::Pci`, set in one place, `Transport::pci`, from a BAR that
-`pci::PciVirtualIoDevice` mapped. One gap: `notify_addr[q]` is zero until `setup_queue` resolves it, so `notify` refuses a
+0x40, `isr`, `notify_addr[q]`, or `device_config` plus an offset the capability's length bounds. All
+four are fields of `Transport::Pci`, set in one place, `Transport::pci`, from a BAR that
+`pci::PciVirtualIoDevice` mapped. Twenty `unsafe` blocks restating one sentence would make nothing
+checkable. One gap: `notify_addr[q]` is zero until `setup_queue` resolves it, so `notify` refuses a
 queue whose doorbell is not ready rather than write through `phys_to_virt(0)`.
 
 A transport's slot comes back when its driver dies (§16 (object revocation)). The table is a
-`generational_table::Table`, so a released device's capability never names its successor. A starter binds the driver thread with
-`bind_to_current_thread`; its removal from the thread table runs `unregister`, which resets the
-device and frees the slot. The release skips its reset once another driver of the same hardware has reset
-the device, since a second one would wipe that driver's queues and its request in flight. An unbound device lives for the boot, which keeps
-`entropy_service::ensure`'s one service per device. BUGS: release leaves a PCIe IOMMU
-domain in place, so re-registering one leaks its page-table frames.
+`generational_table::Table`, so a released device's capability fails and never names its successor.
+A starter binds the driver thread with `bind_to_current_thread`; its removal from the thread table
+runs `unregister`, which resets the device and frees the slot. The release skips its reset once
+another driver of the same hardware has reset the device, since a second reset would wipe the newer
+driver's queues and request. An unbound device lives for the boot, which keeps
+`entropy_service::ensure`'s one service per device. BUGS: release leaves a PCIe IOMMU domain in
+place, so re-registering one leaks its page-table frames.
 
 Two test hooks go around the shadow ring to reach the hardware. `provoke_iommu_escape` points queue
 0's available ring at a frame the IOMMU domain does not include and kicks; the device's first read
