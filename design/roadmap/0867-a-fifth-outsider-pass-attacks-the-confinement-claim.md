@@ -12,7 +12,7 @@ needs_person: no
 
 *(Title, slug and every name below are provisional.)*
 
-**Reuse:** the counting rule, the report format and the refusal log are milestone 800's, unchanged,
+Reuse: the counting rule, the report format and the refusal log are milestone 800's, unchanged,
 so the passes compare row for row. This pass is by Claude (Opus 5.5), so it serves criterion (c)'s
 Anthropic half: it can be the first of the two consecutive clean passes, and the second must be a
 non-Anthropic model or a human.
@@ -56,6 +56,6 @@ See `notes/confinement-outsider-pass-5.md` for the full pass, the per-row table 
 
 ## Follow-on
 
-- **Milestone 198** (a package manager). The stronger form that
+- **Milestone 198.** The stronger form that
   [milestone 800](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#follow-on) names waits
-  on it.
+  on milestone 198 (a package manager).

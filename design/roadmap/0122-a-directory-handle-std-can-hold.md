@@ -7,7 +7,7 @@ built: 2026-08-18
 
 Built on 2026-08-18 (PR #320). Both options were built, in the order this block
 recommends, and both are proven end to end on both ISAs by the `std_exerciser` transcript. What the
-recommendation also asked for and this milestone did **not** do is measure A; see "What it did not
+recommendation also asked for and this milestone did not do is measure A; see "What it did not
 do" below, which also names the one contract question it turned up.
 
 ## The finding

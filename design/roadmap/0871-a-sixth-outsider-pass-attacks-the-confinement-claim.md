@@ -91,9 +91,9 @@ includes row 35, so it covers this pass's variant ground. See
 - **Milestone 936.** The table sweep and the variant work go to the tenth outsider pass, by GLM 5.3,
   in `design/roadmap/0936-a-tenth-outsider-pass-attacks-the-confinement-claim.md`. It waits
   on calef's GLM token allowance.
-- **Milestone 198** (a package manager). The stronger form that
+- **Milestone 198.** The stronger form that
   [milestone 800](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#follow-on) names waits
-  on it.
+  on milestone 198 (a package manager).
 - **Milestone 825.** The redoxfs name-window TOCTOU remains the open shipped-path refusal both
   passes declined to boot; its probe belongs to milestone 825 (a hostile client races the file
   server's name window), NOT-STARTED.

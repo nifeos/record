@@ -121,6 +121,6 @@ Risk 7's page and appendix cite the pass under §216, by lane `lane/pass-8-rulin
 
 ## Follow-on
 
-- **Milestone 198** (a package manager). The stronger form that
+- **Milestone 198.** The stronger form that
   [milestone 800](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#follow-on) names waits
-  on it.
+  on milestone 198 (a package manager).

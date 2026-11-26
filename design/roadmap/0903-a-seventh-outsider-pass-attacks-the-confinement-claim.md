@@ -85,6 +85,6 @@ tests.
 - **Recorded.** Unreached by this pass: The package fetch (no row until milestone 855 (the TLS graph enters the gated
   build)) and hostile clients of userspace servers. A later pass's targets, recorded in the note.
 
-- **Milestone 198** (a package manager). The stronger form that
+- **Milestone 198.** The stronger form that
   [milestone 800](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#follow-on) names waits
-  on it.
+  on milestone 198 (a package manager).

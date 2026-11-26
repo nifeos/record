@@ -93,7 +93,7 @@ currently 88 against a mixed density of 77) is a ceiling over the population thi
 two populations. If a ceiling is held against the split, kernel density (142 per 10,000) is the
 number it belongs on. It is the population a mixed number's blind spot actually lives in:
 unsafe code nothing confines. Userspace density (120) matters less for the same reason a bug there
-is a bug in one confined program rather than in the base. **This is a recommendation.** Changing
+is a bug in one confined program rather than in the base. This is a recommendation. Changing
 `script/lint`'s 88, or setting any ceiling on the new columns, is an architect's, not this
 milestone's. A ceiling started cold has no history of it moving deliberately the way 88 was
 cinched down six times (milestone 134 (the register of measures: every number this kernel owes
