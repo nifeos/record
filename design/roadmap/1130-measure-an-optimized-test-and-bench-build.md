@@ -20,7 +20,8 @@ on, which is the one thing the root `[profile.release]` sets. `script/test` and 
 `script/bench --check` build cargo's dev profile at opt-level 0, with seventeen packages raised to
 opt-level 2 one at a time in the root `Cargo.toml`. So the build that gates every merge is not the
 build anyone boots. This is a measurement, as milestone 744 (measure the kernel's overflow checks)
-was for milestone 750: it changes no profile, and the choice it prepares is calef's.
+was for milestone 750 (overflow checks in the shipped build): it changes no profile, and the
+choice it prepares is calef's.
 
 No milestone or decision chose dev for the gate on its own merits. Milestone 25 (cross-OS
 performance comparison) added `bench --release` in nifeos/nife@2ce5d1a97 on 2026-07-25, as a
