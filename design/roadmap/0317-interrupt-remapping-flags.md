@@ -28,10 +28,10 @@ The asymmetry is the finding. §86's survey covered two architectures and conclu
 unaskable; the third one has the mechanism sitting inside a structure this tree already programs.
 
 An MSI or MSI-X message is a memory write to an architecturally special address, so an IOMMU doing
-DMA remapping alone does not confine it. A component that can write a device's MSI-X table can aim
-an interrupt at a vector it was never given. VFIO refuses to hand a device to an untrusted
-userspace driver on a machine without interrupt remapping for this reason, and names its escape
-hatch `allow_unsafe_interrupts`.
+DMA remapping alone does not confine it. What a writer of a device's MSI-X table can do is one of
+[the six claims stated nowhere](../../notes/confinement-claims/unstated-claims.md). VFIO refuses to
+hand a device to an untrusted userspace driver on a machine without interrupt remapping for this
+reason, and names its escape hatch `allow_unsafe_interrupts`.
 
 §86 found that no boot this tree runs could exercise the question even if a claim existed, and
 `notes/confinement-claims.md` carries it as a claim stated nowhere. Two runner flags were named as

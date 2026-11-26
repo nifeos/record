@@ -74,8 +74,7 @@ something it was handed.
 
 On Linux the answer comes from `/proc`, which is ambient. Any process reads it with no grant from
 anyone, so `ps aux` prints every command line on the machine, including the ones with secrets in
-`argv`. Nobody defends that design; they live with it, and `hidepid` exists because enough people
-stopped wanting to.
+`argv`. [The process view note](../../notes/process-view.md) says how Linux lives with it.
 
 `procps` (upstream `procps-ng`) is Priority: important, so it is on essentially every Ubuntu
 install. As the unit the distribution ships, it tests whether the approach generalizes; a port that

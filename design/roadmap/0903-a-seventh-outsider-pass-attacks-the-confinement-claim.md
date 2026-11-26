@@ -12,8 +12,8 @@ needs_person: no
 
 *(Title, slug and every name below are provisional.)*
 
-Reuse: the counting rule, the report format and the refusal log are milestone 800 (a
-non-Anthropic model attacks the confinement claim)'s, unchanged, so the passes compare row for row.
+Reuse: the counting rule, the report format and the refusal log of milestone 800 (a
+non-Anthropic model attacks the confinement claim), unchanged.
 The isolation is milestone 633 (an outside agent attacks the confinement claim)'s, not 800's: this
 pass is blind.
 
@@ -25,11 +25,12 @@ the standing refusal log.
 
 ## Why
 
-Risk 7 (the confinement claim is false) is AMBER. Its criterion (c) for green is two consecutive
-independent attacks with no escape on a shipped path, at least one by a non-Anthropic model or a
-human. The sixth pass (milestone 871) booted DNS rebinding in the package fetch, fixed in #1901, and
-the count restarted at zero. calef asked on 2026-10-12 (UTC) for the seventh pass, with the
-independence rule as the point: a fresh reviewer, briefed the way milestone 633 allows.
+Risk 7 (the confinement claim is false) is AMBER, and
+[its page](../fatal-risks/7-the-confinement-claim.md) states criterion (c) for green. The sixth
+pass, milestone 871 (a sixth outsider pass attacks the confinement claim), booted DNS rebinding in
+the package fetch, fixed in #1901, and the count restarted at zero. calef asked on 2026-10-12 (UTC)
+for the seventh pass, with the independence rule as the point: a fresh reviewer, briefed the way
+milestone 633 allows.
 
 ## The attack
 
@@ -70,8 +71,9 @@ tests.
 - Every claim has an attack, or a written reason it was not attacked.
 - Every escape is a failing test committed before any fix.
 - The pass-7 note exists with its refusal log, and is indexed in `notes/README/` and its area page.
-- Risk 7's appendix cites the pass through the maintainer under §216 (fatal-risk facts are
-  correctable, and verdicts are the architect's). Moving the color stays calef's.
+- Risk 7's appendix cites the pass, as
+  [milestone 800](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#where-the-results-go)
+  sets out. Moving the color stays calef's.
 
 ## Follow-on
 
@@ -83,6 +85,6 @@ tests.
 - **Recorded.** Unreached by this pass: The package fetch (no row until milestone 855 (the TLS graph enters the gated
   build)) and hostile clients of userspace servers. A later pass's targets, recorded in the note.
 
-- **Milestone 198.** A human review, or a public bounty once a stranger can install nife, is the
-  stronger form and waits on milestone 198 (a package manager, and the trivial install that makes a
-  second customer possible).
+- **Milestone 198.** The stronger form that
+  [milestone 800](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#follow-on) names waits
+  on milestone 198 (a package manager).

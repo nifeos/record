@@ -19,17 +19,13 @@ went red, and the shape of those nine is the result rather than the count:
   "rarer by orders" and has been corrected in place. That instrument now exists, which is what turns
   these eight reds from a wait into a decision. The perfect ISA symmetry is what says these are
   properties of the assertions rather than of either architecture.
-- The ninth was a real kernel bug: a double free of a frame during `DESTROY`'s reclaim of a
-  region whose resident was blocked in `recv` (riscv64, one occurrence). Recorded in the BUGS section
-  of notes/object-revocation.md. *It got its own lane, and it is fixed: PR #316* (2026-08-18).
-  It was not riscv64-only, which is the correction worth carrying rather than the fix: the
-  ownership defect reproduces deterministically on aarch64, and riscv64 is merely where the timing
-  exposed it. Two ingredients were needed. `user_aspace_create` builds an address space inside a
-  region the caller already holds an `Untyped` to, where `AddressSpace::new` carves its own. Both
-  stored a bare `u64` whose `Drop` called `untyped::destroy` unconditionally. That is two names for one
-  run of memory, with a pin argument that holds only for a drop under `SCHED`, which
-  `sched::finish_switch` releases before dropping. And `untyped::destroy` released the `REGIONS`
-  lock between deciding and removing the slot, so two callers could both pass the refusal check.
+- The ninth was a real kernel bug: a double free of a frame during `DESTROY`'s reclaim of a region
+  whose resident was blocked in `recv` (riscv64, one occurrence). Recorded in the BUGS section of
+  notes/object-revocation.md. *It got its own lane, and it is fixed: PR #316* (2026-08-18). It was
+  not riscv64-only, which is the correction worth carrying rather than the fix: the ownership defect
+  reproduces deterministically on aarch64, and riscv64 is merely where the timing exposed it. The
+  two ingredients are in
+  [the first loaded acceptance run](../../../notes/load-sensitive-assertions/first-loaded-acceptance-run.md).
 
   So this run's ninth red is gone and the eight timing reds are the whole of it, which makes
   this block a pure disposition question with no correctness bug behind it. That is a better

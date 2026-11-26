@@ -23,9 +23,7 @@
 
 
 
-03f94ea73c90 design/roadmap/0122-a-directory-handle-std-can-hold.md
 
-03f94ea73c90 notes/std/fs-descent.md
 
 
 
@@ -104,9 +102,7 @@
 
 
 
-0ff5489f400e design/roadmap/0906-ioping-is-packaged-in-basalt.md
 
-0ff5489f400e design/roadmap/0907-hackbench-is-packaged-in-basalt.md
 
 
 
@@ -158,9 +154,7 @@
 
 15a99af7101a notes/benchmarks/five-blocks-per-request.md
 
-16ab6d4e3dec design/roadmap/0522-a-boundary-drawn-by-dependency-not-by-path.md
 
-16ab6d4e3dec notes/register-of-measures/unsafe-series.md
 
 170304ec4f97 design/roadmap/0531-no-gate-records-when-it-fires.md
 
@@ -201,35 +195,20 @@
 
 
 
-1c6061285383 design/roadmap/0842-the-grant-plan-crate-root-is-split-along-its-seams.md
 
-1c6061285383 design/roadmap/0843-the-system-initializer-crate-root-is-split-along-its-seams.md
 
-1c6061285383 design/roadmap/0844-the-shell-program-is-split-along-its-seams.md
 
-1c6061285383 design/roadmap/0845-the-filesystem-protocol-crate-root-is-split-along-its-seams.md
 
-1c6061285383 design/roadmap/0846-the-file-server-core-moves-its-tests-out.md
 
-1c6061285383 design/roadmap/0847-the-swish-check-harness-is-split-along-its-seams.md
 
-1c6061285383 design/roadmap/0873-the-catch-all-userspace-test-file-is-split-by-topic.md
 
-1c6061285383 design/roadmap/0874-the-terminal-engine-moves-its-palette-and-its-tests-out.md
 
-1c6061285383 design/roadmap/0875-the-acpi-table-parser-is-split-along-its-seams.md
 
-1c6061285383 design/roadmap/0876-the-kernel-crate-root-is-split-along-its-seams.md
 
-1c6061285383 design/roadmap/0877-the-timetable-crate-root-is-split-along-its-seams.md
 
-1c6061285383 design/roadmap/0878-the-line-editors-inline-modules-move-to-their-own-files.md
 
-1c6061285383 design/roadmap/0882-the-component-plan-crate-root-moves-its-proofs-out.md
 
-1c6061285383 design/roadmap/0883-the-three-longest-scripts-are-split-and-a-ruling-says-whether-scripts-have-a-ceiling.md
 
-1c6061285383 design/roadmap/0884-the-shell-logic-crate-is-split-along-its-seams.md
 
 1cf40702ac17 design/roadmap/0579-constitution-carry-vs-brief/classification.md
 
@@ -245,9 +224,7 @@
 
 1d0d8ee2c81b notes/crate-reviews/domain-name-resolution-contract.md
 
-1d69b914d32c design/roadmap/0867-a-fifth-outsider-pass-attacks-the-confinement-claim.md
 
-1d69b914d32c design/roadmap/0871-a-sixth-outsider-pass-attacks-the-confinement-claim.md
 
 1f1cb76c6eb8 design/fatal-risks/9-the-hal-is-a-fiction.md
 
@@ -338,15 +315,6 @@
 
 23d19552de22 notes/scheduled-execution/registration.md
 
-23fa2401dfc0 design/roadmap/0867-a-fifth-outsider-pass-attacks-the-confinement-claim.md
-
-23fa2401dfc0 design/roadmap/0871-a-sixth-outsider-pass-attacks-the-confinement-claim.md
-
-23fa2401dfc0 design/roadmap/0903-a-seventh-outsider-pass-attacks-the-confinement-claim.md
-
-23fa2401dfc0 design/roadmap/0913-an-eighth-outsider-pass-attacks-the-confinement-claim.md
-
-23fa2401dfc0 design/roadmap/0914-a-ninth-outsider-pass-attacks-the-confinement-claim.md
 
 
 
@@ -357,9 +325,11 @@
 
 
 
-26ed6385031c design/roadmap/0062-time-sensitive-tests/acceptance-run.md
 
-26ed6385031c notes/load-sensitive-assertions/first-loaded-acceptance-run.md
+
+
+
+
 
 
 
@@ -444,13 +414,9 @@
 
 
 
-2fed054fde5d design/roadmap/0225-run-the-soak-on-the-boards.md
 
-2fed054fde5d notes/bench-runbook.md
 
-301af8b3ea4b design/roadmap/0864-the-comment-block-sweep-continues-again.md
 
-301af8b3ea4b design/roadmap/0865-the-comment-block-sweep-continues-a-third-time.md
 
 
 
@@ -504,9 +470,7 @@
 
 
 
-381a68476f47 design/roadmap/0607-nife-is-built-and-updated-from-packages.md
 
-381a68476f47 notes/packages-and-divisions.md
 
 
 
@@ -518,9 +482,7 @@
 
 38f79ff7b244 design/roadmap/0982-retire-redoxfs-once-a-launch-store-proves-itself.md
 
-39416dc83b70 design/roadmap/1027-leaving-the-central-program-table.md
 
-39416dc83b70 design/roadmap/1027-leaving-the-central-program-table/decisions.md
 
 398dc3bd814a design/roadmap/0579-constitution-carry-vs-brief.md
 
@@ -619,13 +581,9 @@
 
 472f1fc81c95 design/roadmap/1103-page-frames-outside-review.md
 
-47785579fcef design/roadmap/0871-a-sixth-outsider-pass-attacks-the-confinement-claim.md
 
-47785579fcef design/roadmap/0903-a-seventh-outsider-pass-attacks-the-confinement-claim.md
 
-478710abf64a design/roadmap/0057-partitioning-and-xattrs/host-recovery.md
 
-478710abf64a notes/host-recovery.md
 
 492a889e84e2 design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
@@ -652,9 +610,7 @@
 
 4c509c25374e design/roadmap/1111-usb-outside-review/done-when.md
 
-4c86f8225dd4 design/roadmap/0267-the-tour-is-three-things-wearing-one-name.md
 
-4c86f8225dd4 design/roadmap/0267-the-tour-is-three-things-wearing-one-name/evidence.md
 
 4e362b072fc4 design/roadmap/0211-self-referential-harnesses.md
 
@@ -696,9 +652,7 @@
 
 
 
-527277078493 design/roadmap/0243-a-machine-with-no-serial-port-cannot-say-anything/the-fleet.md
 
-527277078493 notes/bench-runbook.md
 
 52ca8296da66 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
@@ -712,9 +666,7 @@
 
 52ca8296da66 design/roadmap/0190-ext4-read-write/upstream/8-whole-inode-times.md
 
-53c8a6c6f050 design/roadmap/0607-nife-is-built-and-updated-from-packages.md
 
-53c8a6c6f050 notes/packages-and-divisions.md
 
 541a6e769fbe design/roadmap/0523-the-job-mix-supervisor-in-userspace/what-provoked-it.md
 
@@ -737,11 +689,8 @@
 
 5816a8d1999a design/roadmap/0462-the-soft-aes-cost.md
 
-5857eab2f07e design/roadmap/0897-sqlite-is-packaged-in-basalt.md
 
-5857eab2f07e design/roadmap/0906-ioping-is-packaged-in-basalt.md
 
-5857eab2f07e design/roadmap/0907-hackbench-is-packaged-in-basalt.md
 
 
 
@@ -800,9 +749,7 @@
 
 60fd05cd4033 design/roadmap/0531-no-gate-records-when-it-fires/additions.md
 
-617763188d32 design/roadmap/0057-partitioning-and-xattrs.md
 
-617763188d32 design/roadmap/0057-partitioning-and-xattrs/extended-attributes.md
 
 
 
@@ -824,9 +771,7 @@
 
 
 
-640582c56056 design/roadmap/0050-pipes-and-redirection.md
 
-640582c56056 notes/sink-protocol.md
 
 644a60fc8b84 design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
@@ -878,11 +823,8 @@
 
 692cf387ebb5 notes/crate-reviews/universal-serial-bus.md
 
-6965bce6028a design/roadmap/0897-sqlite-is-packaged-in-basalt.md
 
-6965bce6028a design/roadmap/0906-ioping-is-packaged-in-basalt.md
 
-6965bce6028a design/roadmap/0907-hackbench-is-packaged-in-basalt.md
 
 
 
@@ -914,9 +856,7 @@
 
 6cbc51042904 design/decisions/0139-cycle-counter-authority/premise-checks.md
 
-6dede17756ba design/roadmap/0126-who-else-is-running.md
 
-6dede17756ba notes/process-view.md
 
 6f7e78d60d11 design/roadmap/1071-entropy-contract-outside-review.md
 
@@ -1004,19 +944,12 @@
 
 7a82a433223c design/roadmap/0149-hpc-benchmark-suite.md
 
-7b44b3957aca design/roadmap/0800-a-non-anthropic-model-attacks-the-confinement-claim.md
 
-7b44b3957aca design/roadmap/0867-a-fifth-outsider-pass-attacks-the-confinement-claim.md
 
-7b44b3957aca design/roadmap/0871-a-sixth-outsider-pass-attacks-the-confinement-claim.md
 
-7b44b3957aca design/roadmap/0903-a-seventh-outsider-pass-attacks-the-confinement-claim.md
 
-7b44b3957aca design/roadmap/0913-an-eighth-outsider-pass-attacks-the-confinement-claim.md
 
-7b44b3957aca design/roadmap/0914-a-ninth-outsider-pass-attacks-the-confinement-claim.md
 
-7b44b3957aca design/roadmap/0936-a-tenth-outsider-pass-attacks-the-confinement-claim.md
 
 
 
@@ -1046,9 +979,7 @@
 
 8154a34d0ae6 notes/load-sensitive-assertions/timer-assertion-disposition.md
 
-8187e9559b47 design/roadmap/0062-time-sensitive-tests/the-problem.md
 
-8187e9559b47 notes/semihosting.md
 
 
 
@@ -1058,9 +989,7 @@
 
 
 
-8343b3d43e8d design/roadmap/0057-partitioning-and-xattrs.md
 
-8343b3d43e8d design/roadmap/0057-partitioning-and-xattrs/extended-attributes.md
 
 
 
@@ -1093,13 +1022,9 @@
 
 8b264d4e4304 notes/citations/bugs.md
 
-8c2a46c0192a design/roadmap/0867-a-fifth-outsider-pass-attacks-the-confinement-claim.md
 
-8c2a46c0192a design/roadmap/0871-a-sixth-outsider-pass-attacks-the-confinement-claim.md
 
-8c9086a57f3d design/roadmap/0122-a-directory-handle-std-can-hold.md
 
-8c9086a57f3d notes/std/fs-descent.md
 
 
 
@@ -1112,9 +1037,7 @@
 
 91a7d03fdfe4 design/roadmap/0124-a-thread-is-born-where-it-lives.md
 
-91fbaa3e6bcf design/roadmap/0317-interrupt-remapping-flags.md
 
-91fbaa3e6bcf notes/confinement-claims/unstated-claims.md
 
 930e83c166c1 design/roadmap/0401-a-gate-that-selects-the-set-it-judges.md
 
@@ -1158,9 +1081,7 @@
 
 
 
-9a293f969797 design/roadmap/0906-ioping-is-packaged-in-basalt.md
 
-9a293f969797 design/roadmap/0907-hackbench-is-packaged-in-basalt.md
 
 9a46e9dcda5c notes/crate-reviews/environment-contract.md
 
@@ -1218,9 +1139,7 @@
 
 9f5c66f11924 design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
-9ffd355337b2 design/roadmap/1108-socket-contract-outside-review.md
 
-9ffd355337b2 notes/crate-reviews/socket-contract.md
 
 a003bcf1340e design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
@@ -1256,17 +1175,13 @@ a0e4a8e7de68 notes/timer-capability.md
 
 
 
-a4200cc077b6 design/roadmap/0215-x86-64-pci-interrupt-routing.md
 
-a4200cc077b6 notes/x86-port/acpi-and-pci.md
 
 a43807694db4 design/roadmap/0448-a-refusal-gets-a-number.md
 
 a43807694db4 design/tenets/reversibility.md
 
-a485a1e623ad design/roadmap/0906-ioping-is-packaged-in-basalt.md
 
-a485a1e623ad design/roadmap/0907-hackbench-is-packaged-in-basalt.md
 
 
 
@@ -1288,9 +1203,7 @@ a7556deab768 design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
 
 
-ac85b363ee37 design/roadmap/0872-the-kernels-user-mode-file-is-split-along-its-seams.md
 
-ac85b363ee37 design/roadmap/0873-the-catch-all-userspace-test-file-is-split-by-topic.md
 
 
 
@@ -1318,11 +1231,8 @@ ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/8-whole-inode-times.md
 
 
 
-af77803b4537 design/roadmap/0897-sqlite-is-packaged-in-basalt.md
 
-af77803b4537 design/roadmap/0906-ioping-is-packaged-in-basalt.md
 
-af77803b4537 design/roadmap/0907-hackbench-is-packaged-in-basalt.md
 
 aff8ab1af64e design/roadmap/0161-x86-64-kernel-port/ring-3.md
 
@@ -1537,9 +1447,7 @@ cefd74a62ac7 design/roadmap/1091-filesystem-fixture-outside-review.md
 
 
 
-cfda1f7303dd design/roadmap/0542-gates-that-mean-what-they-measure.md
 
-cfda1f7303dd notes/benchmarks/icount-drift-and-provenance.md
 
 d08b72cf5fca design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
@@ -1553,9 +1461,7 @@ d1a0aac9754b design/roadmap/0579-constitution-carry-vs-brief/classification.md
 
 d1a0aac9754b design/roadmap/0579-constitution-carry-vs-brief/roles.md
 
-d22e90d25e59 design/roadmap/0067-swish-language.md
 
-d22e90d25e59 notes/swish-language.md
 
 d2b5a0cca76b design/roadmap/1075-abi-outside-review/what-was-checked.md
 
@@ -1600,9 +1506,7 @@ d7bfd48688cf design/decisions/0253-concurrent-login-sessions.md
 
 d7bfd48688cf design/roadmap/0806-concurrent-login-sessions.md
 
-d7cbd3548074 design/roadmap/0542-gates-that-mean-what-they-measure.md
 
-d7cbd3548074 notes/benchmarks/icount-drift-and-provenance.md
 
 
 
@@ -1654,11 +1558,8 @@ daf0d37dca12 design/roadmap/0190-ext4-read-write/upstream/8-whole-inode-times.md
 
 
 
-dcf90396b17c design/roadmap/0897-sqlite-is-packaged-in-basalt.md
 
-dcf90396b17c design/roadmap/0906-ioping-is-packaged-in-basalt.md
 
-dcf90396b17c design/roadmap/0907-hackbench-is-packaged-in-basalt.md
 
 dd29600168ae design/roadmap/0068-code-quality-gates.md
 
@@ -1693,9 +1594,7 @@ e08ff0969b55 design/roadmap/1132-redoxfs-leaves-the-tree.md
 
 e08ff0969b55 design/roadmap/1133-filesystem-operations-on-one-ext4-volume-nife-and-linux.md
 
-e09e59bc8022 design/roadmap/0062-time-sensitive-tests.md
 
-e09e59bc8022 notes/load-sensitive-assertions/confirmation-run.md
 
 e13c0d68d198 design/decisions/0103-what-a-frame-names/frame-runs.md
 
@@ -1762,13 +1661,9 @@ e63e1ce4b018 design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
 e63e1ce4b018 design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
 
-e69ca03261a9 design/roadmap/0867-a-fifth-outsider-pass-attacks-the-confinement-claim.md
 
-e69ca03261a9 design/roadmap/0871-a-sixth-outsider-pass-attacks-the-confinement-claim.md
 
-e69ca03261a9 design/roadmap/0903-a-seventh-outsider-pass-attacks-the-confinement-claim.md
 
-e69ca03261a9 design/roadmap/0913-an-eighth-outsider-pass-attacks-the-confinement-claim.md
 
 
 
@@ -1793,9 +1688,7 @@ e9c0a6bfa099 notes/scheduler.md
 
 e9c0a6bfa099 notes/scheduler/reclaim-lost-wakeup.md
 
-e9f0428ae1e7 design/roadmap/0607-nife-is-built-and-updated-from-packages.md
 
-e9f0428ae1e7 design/roadmap/0990-the-base-images-first-installed-programs-table.md
 
 ea0f461623a5 notes/crate-reviews/block-roster-contract.md
 
@@ -1834,9 +1727,7 @@ ef8e18db8e10 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
 ef8e18db8e10 design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
 
-efad383c708b design/roadmap/0065-secrets-service.md
 
-efad383c708b notes/ntlm.md
 
 efce040cd9af design/decisions/0232-the-line-editor-swap-contract.md
 
@@ -1862,11 +1753,8 @@ f1a60642288b design/roadmap/0908-the-kernel-is-a-package-and-an-update-boots-it.
 
 f1a60642288b design/roadmap/0909-basalt-composes-the-bootable-image-from-its-packages.md
 
-f2092b9089e4 design/roadmap/0013-capability-revocation.md
 
-f2092b9089e4 design/roadmap/0014-kernel-objects-from-untyped.md
 
-f2092b9089e4 design/roadmap/0026-object-revocation.md
 
 
 

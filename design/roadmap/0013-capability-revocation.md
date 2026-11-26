@@ -39,9 +39,8 @@ until revocation lands. This milestone is that work, and the precondition is why
   as a considered terminal design rather than a way-station. Revoke-all-derivatives is the
   memory-safety-critical half and is exactly what reclamation wants. Nothing on the roadmap needs
   subtree revoke. If one ever does, the unmap side and the revoke-before-reclaim discipline are
-  reused unchanged with only the holders index rebuilt as a tree.
-  This refusal is milestone 456 (design/roadmap/0456-the-capability-derivation-tree.md), which
-  carries it with the condition that would change it.
+  reused unchanged with only the holders index rebuilt as a tree. This refusal is milestone 456
+  (design/roadmap/0456-the-capability-derivation-tree.md).
 
 ## Index row
 

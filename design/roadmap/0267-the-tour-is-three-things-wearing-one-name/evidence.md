@@ -49,8 +49,8 @@ the finding and it is worth stating without dressing: the compile-time exclusion
 its name suggests, and moving the narrative out cannot make it buy less, because what costs bytes is
 exactly what cannot leave.
 
-The consequences for the feature pair are in
-`design/roadmap/proposals/two-boot-mode-features-for-one-decision.md`. Nothing was retired here.
+[The tour block](../0267-the-tour-is-three-things-wearing-one-name.md) says where the feature pair's
+consequences are. Nothing was retired here.
 
 ## The `Reached(Tour)` consumers, since the block asked for them by name
 

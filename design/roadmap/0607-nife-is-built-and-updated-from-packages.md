@@ -12,11 +12,9 @@ needs_person: no
 The number is provisional: the integrator mints it at merge. calef asked for it on 2026-09-26
 (UTC). A design lane (`milestone/607-packages-and-divisions`) wrote the forks and built nothing.
 
-Four records touch the question and none joins the others. Milestone 39 (repository structure for a loosely-coupled OS) recorded a monorepo now and
-a split later. §151 (the goal of the repository split is independent release) made the split's goal independent release and third-party programs. Milestone
-198 installs programs and does not build the OS. Milestones 525 and 554 swap a whole image between
-two boot slots. This block asks how a package becomes part of the OS, and where the repository's
-seams are.
+Four records touch the question and none joins the others, as
+[the packages and divisions note](../../notes/packages-and-divisions.md#the-question) lists. This
+block asks how a package becomes part of the OS, and where the repository's seams are.
 
 ## What the design lane found
 
