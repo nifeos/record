@@ -171,9 +171,8 @@ describes the crate exactly. Change: add both. Verified in the manifest. Two-way
    mislead, because the type reports a failure too. Recommended: ratify `Outcome` as built.
 4. Which value a `Default` names. The crate documentation calls `Special` the default, and `matches`
    uses it. A `Default` that later disagrees with the plain function stays wrong until a major
-   release: `glob` 0.3.4's derived `Default` sets `case_sensitive` to `false` while
-   `MatchOptions::new()` sets it to `true`, and a FIXME beside `new` defers the fix to a major
-   release. Recommended: `Default` on the options struct only, defined as exactly what `matches`
+   release. `glob` 0.3.4's derived `Default` sets `case_sensitive` to `false` while
+   `MatchOptions::new()` sets it to `true`, and a FIXME beside `new` defers the fix that way. Recommended: `Default` on the options struct only, defined as exactly what `matches`
    does, with a test that the two agree. `LeadingDot` gets no `Default` at 0.1.0; adding one later
    is compatible, and changing one is not.
 5. `LeadingDot` is exhaustive. Its documentation says there are exactly two answers, and a caller
