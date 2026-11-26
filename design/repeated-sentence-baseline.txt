@@ -241,23 +241,14 @@
 
 1a6fdf7f54eb notes/crate-reviews/jh7110-clock-and-reset.md
 
-1c2ee3549604 design/roadmap/0813-a-proven-fat-crate-released-on-its-own.md
 
-1c2ee3549604 design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
-1c2ee3549604 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
-1c2ee3549604 design/roadmap/0816-the-designware-ethernet-crate-released-on-its-own.md
 
-1c2ee3549604 design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
 
-1c2ee3549604 design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
-1c2ee3549604 design/roadmap/0819-the-jh7110-clock-and-reset-crate-proven-and-released-on-its-own.md
 
-1c2ee3549604 design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
-1c2ee3549604 design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
 1c6061285383 design/roadmap/0842-the-grant-plan-crate-root-is-split-along-its-seams.md
 
@@ -1022,21 +1013,13 @@
 
 617763188d32 design/roadmap/0057-partitioning-and-xattrs/extended-attributes.md
 
-61b94bf81c54 design/roadmap/0813-a-proven-fat-crate-released-on-its-own.md
 
-61b94bf81c54 design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
-61b94bf81c54 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
-61b94bf81c54 design/roadmap/0816-the-designware-ethernet-crate-released-on-its-own.md
 
-61b94bf81c54 design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
 
-61b94bf81c54 design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
-61b94bf81c54 design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
-61b94bf81c54 design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
 623ef2e9d1a0 design/decisions/0027-filesystem-service.md
 
@@ -1247,23 +1230,14 @@
 
 7752e5534df4 design/roadmap/0622-the-fence-inventory-is-readjudicated.md
 
-77f38f08ccfd design/roadmap/0813-a-proven-fat-crate-released-on-its-own.md
 
-77f38f08ccfd design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
-77f38f08ccfd design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
-77f38f08ccfd design/roadmap/0816-the-designware-ethernet-crate-released-on-its-own.md
 
-77f38f08ccfd design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
 
-77f38f08ccfd design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
-77f38f08ccfd design/roadmap/0819-the-jh7110-clock-and-reset-crate-proven-and-released-on-its-own.md
 
-77f38f08ccfd design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
-77f38f08ccfd design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
 7820be4d1c69 design/roadmap/0813-a-proven-fat-crate-released-on-its-own.md
 
@@ -1277,21 +1251,13 @@
 
 78e811359751 design/naming/acronyms-and-abbreviations.md
 
-7a4fe45df09c design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
-7a4fe45df09c design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
-7a4fe45df09c design/roadmap/0816-the-designware-ethernet-crate-released-on-its-own.md
 
-7a4fe45df09c design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
 
-7a4fe45df09c design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
-7a4fe45df09c design/roadmap/0819-the-jh7110-clock-and-reset-crate-proven-and-released-on-its-own.md
 
-7a4fe45df09c design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
-7a4fe45df09c design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
 7a82a433223c design/roadmap/0066-vaultwarden.md
 
@@ -1649,21 +1615,13 @@ ac85b363ee37 design/roadmap/0872-the-kernels-user-mode-file-is-split-along-its-s
 
 ac85b363ee37 design/roadmap/0873-the-catch-all-userspace-test-file-is-split-by-topic.md
 
-ad1d8bd7f87f design/roadmap/0813-a-proven-fat-crate-released-on-its-own.md
 
-ad1d8bd7f87f design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
-ad1d8bd7f87f design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
-ad1d8bd7f87f design/roadmap/0816-the-designware-ethernet-crate-released-on-its-own.md
 
-ad1d8bd7f87f design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
 
-ad1d8bd7f87f design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
-ad1d8bd7f87f design/roadmap/0819-the-jh7110-clock-and-reset-crate-proven-and-released-on-its-own.md
 
-ad1d8bd7f87f design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
 ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
@@ -1739,23 +1697,14 @@ b3c1e40325bd design/roadmap/0188-ipc-fastpath/phase-4-evidence.md
 
 b3c1e40325bd design/roadmap/0188-ipc-fastpath/phases-1-to-3.md
 
-b40573a61cf7 design/roadmap/0813-a-proven-fat-crate-released-on-its-own.md
 
-b40573a61cf7 design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
-b40573a61cf7 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
-b40573a61cf7 design/roadmap/0816-the-designware-ethernet-crate-released-on-its-own.md
 
-b40573a61cf7 design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
 
-b40573a61cf7 design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
-b40573a61cf7 design/roadmap/0819-the-jh7110-clock-and-reset-crate-proven-and-released-on-its-own.md
 
-b40573a61cf7 design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
-b40573a61cf7 design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
 b45496756570 design/roadmap/1079-byte-sink-contract-outside-review.md
 

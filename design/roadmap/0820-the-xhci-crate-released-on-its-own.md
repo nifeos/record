@@ -9,8 +9,8 @@ needs_person: yes
 ---
 # 820. `extensible_host_controller_interface`: proven xHCI logic, released on its own
 
-*(From calef's rulings on pull request #1806; the title and slug are drafts. The FAT crate's block,
-milestone 813 (a proven FAT crate released on its own), is the shape this follows.)*
+*(From calef's rulings on pull request #1806; the title and slug are drafts. Milestone 813 (a proven
+FAT crate released on its own) is the shape this follows.)*
 
 calef's rulings, quoted from the maintainer comments on #1806 of 2026-10-07 (UTC):
 
@@ -61,11 +61,10 @@ rust-osdev to revive it, and calef ruled no offer, since nife does not depend on
 
 ## What is proven
 
-Each row is a property this crate must prove before it publishes. The harness cell names the Kani
-harness that proves it, or says `none yet`; every named harness carries a falsification patch that
-makes it fail at its own assertion. Each patch is at
-`falsifications/` in the `partsfoundry/extensible_host_controller_interface` repository. The window and handoff rows left with their code
-for `driver_process_contract`, which does not publish, so the crate proves 3 of 3.
+Each row is a property this crate must prove before it publishes. The harness cell reads as in
+milestone 813's table. Each patch is at `falsifications/` in the
+`partsfoundry/extensible_host_controller_interface` repository. The window and handoff rows left
+with their code for `driver_process_contract`, which does not publish, so the crate proves 3 of 3.
 
 | property | harness |
 |---|---|
@@ -128,10 +127,9 @@ ratification pass. With Kani, every harness proves and every falsification patch
 
 ## Review before release
 
-- The public API speaks the device's vocabulary, not nife's: no nife capability type, spawn
-  handoff or nife error enum in a public signature. A reviewer judges this; no script can.
-  `Handoff` and the `report` words, nife's spawn ABI and spawn report, left the crate on
-  2026-10-26 (#2737).
+- The public API speaks the device's vocabulary, by the test milestone 813 states. A reviewer judges
+  this; no script can. `Handoff` and the `report` words, nife's spawn ABI and spawn report, left the
+  crate on 2026-10-26 (#2737).
 
 ## Exit
 
@@ -142,18 +140,16 @@ targets. In `partsfoundry/extensible_host_controller_interface`, the run that pu
 Kani job green ahead of the publish job, and every harness's falsification patch makes its proof
 fail. The five soak criteria of release step 5 hold before it publishes.
 
-The name check of release step 1 passes first, so the repository, the package and every doc link
-carry a ratified name. Before the move, `script/crate-standalone
-extensible_host_controller_interface` exits 0 in nife, and every row of *What is proven* names a
-harness that stock Kani proves in the copy and whose falsification patch makes it fail. No crate
-publishes without Kani harnesses covering its hostile-input and state-machine surface, each carrying
-a falsification patch that makes it fail at its own assertion, replayable in the crate's own
-repository with stock Kani.
+The name check of release step 1 passes first, by Fork 5 of milestone 857. Before the move,
+`script/crate-standalone extensible_host_controller_interface` exits 0 in nife, and every row of
+*What is proven* names a harness that stock Kani proves in the copy and whose falsification patch
+makes it fail. No crate publishes without the proofs milestone 857 (crates released on their own)
+requires.
 
 ## What the crate no longer cites
 
-The crate's source cites nothing of this tree beyond its `Name:` blocks, which stay at their
-names until the ratification pass, so this section keeps the links it carried.
+The crate's source cites nothing of this tree beyond its `Name:` blocks. This section keeps the
+links it carried, by milestone 857's provenance rule.
 
 - `src/lib.rs`, the crate doc: the ring design is in notes/usb.md, "The rings and the cycle bit".
 - `src/window.rs`, `register_window`: notes/usb.md, "The register window". The function left the
