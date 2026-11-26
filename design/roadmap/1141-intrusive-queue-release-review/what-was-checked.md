@@ -27,17 +27,23 @@ Each `.crate` from crates.io at the version in the prior-art table, unpacked and
 
 ## The Miri experiments
 
-`cargo +nightly miri run`, Miri 0.1.0 (f9ceb4a4d4 2026-10-31), on two small programs. The first
-runs against the crate at the commit above; the second carries its own queue whose trait projects
-to the link by raw pointer, in the shape of `cordyceps`'s `Linked::links`. Each holds a shared
-reference to a node's `id` field across a `push_back` that relinks that node.
+`cargo +nightly miri test`, Miri 0.1.0 (f9ceb4a4d4 2026-10-31), on six small tests in two files,
+each run alone under each model. Four of them came from the independent review of this block and
+were rerun here. The first two run against the crate at the commit above. The others carry their
+own queue or link, in one of two shapes: a raw projection to a bare `Option<NonNull<Self>>` field,
+or a projection to an opaque `Link<T>` that wraps an `UnsafeCell`, as `cordyceps` 0.3.5's `Links`
+does.
 
-| program | Stacked Borrows (the default) | Tree Borrows (`MIRIFLAGS=-Zmiri-tree-borrows`) |
+| test | Stacked Borrows (the default) | Tree Borrows (`MIRIFLAGS=-Zmiri-tree-borrows`) |
 |---|---|---|
-| the crate's `Node` | undefined behavior: the reference is invalidated by the unique retag at `set_next` | passes |
-| the projection shape | passes | passes |
+| the crate's `Node`, `&id` held across a push | undefined behavior: invalidated by the unique retag at `set_next` | passes |
+| the crate's `Node`, no reference held | passes | passes |
+| bare `Option` projection, `&id` held across a push | passes | passes |
+| bare `Option` projection, `&mut id` held across a push | passes | passes |
+| bare `Option` link, a whole-node `&Job` held while the link is written | undefined behavior | undefined behavior |
+| opaque `Link<T>` around an `UnsafeCell`, a whole-node `&Job` held across a push | passes | passes |
 
-The first program:
+The crate's `Node`, with a field reference held:
 
 ```rust
 use core::ptr::NonNull;
@@ -47,63 +53,90 @@ unsafe impl Node for Job {
     fn next(&self) -> Option<NonNull<Self>> { self.next }
     fn set_next(&mut self, n: Option<NonNull<Self>>) { self.next = n; }
 }
-fn main() {
+#[test]
+fn shared_field_ref_across_push() {
     let a = Box::into_raw(Box::new(Job { id: 1, next: None }));
     let b = Box::into_raw(Box::new(Job { id: 2, next: None }));
     let mut q = Queue::new();
     unsafe {
         q.push_back(Unqueued::new(NonNull::new_unchecked(a)));
-        // A shared reference to a field of a queued node, held across a push that relinks it.
         let id: &u32 = &(*a).id;
         q.push_back(Unqueued::new(NonNull::new_unchecked(b)));
-        println!("{}", *id);
+        assert_eq!(*id, 1);
         while let Some(t) = q.pop_front() { drop(Box::from_raw(t.as_ptr())); }
     }
 }
 ```
 
-The second:
+The bare `Option` link with a whole-node reference held, where the write stands for the queue's
+relink through a raw projection:
 
 ```rust
-// The same sequence against a queue whose trait projects to the link by raw pointer, in the shape of
-// cordyceps 0.3.5 `Linked::links`, so the queue never forms a reference to the whole node.
 use core::ptr::NonNull;
-unsafe trait Node { unsafe fn link(this: NonNull<Self>) -> NonNull<Option<NonNull<Self>>>; }
-struct Queue<T: Node> { head: Option<NonNull<T>>, tail: Option<NonNull<T>> }
+struct Job { id: u32, next: Option<NonNull<Job>> }
+#[test]
+fn whole_node_shared_ref_across_push_raw() {
+    let a = Box::into_raw(Box::new(Job { id: 1, next: None }));
+    let b = Box::into_raw(Box::new(Job { id: 2, next: None }));
+    unsafe {
+        let whole: &Job = &*a;
+        (&raw mut (*a).next).write(Some(NonNull::new_unchecked(b)));
+        fn look(j: &Job) -> u32 { j.id }
+        assert_eq!(look(whole), 1);
+        drop(Box::from_raw(a)); drop(Box::from_raw(b));
+    }
+}
+```
+
+The opaque link:
+
+```rust
+use core::cell::UnsafeCell;
+use core::ptr::NonNull;
+pub struct Link<T>(UnsafeCell<Option<NonNull<T>>>);
+pub unsafe trait Node { unsafe fn link(this: NonNull<Self>) -> NonNull<Link<Self>> where Self: Sized; }
+pub struct Queue<T: Node> { head: Option<NonNull<T>>, tail: Option<NonNull<T>> }
 impl<T: Node> Queue<T> {
-    unsafe fn push_back(&mut self, n: NonNull<T>) {
+    unsafe fn set(n: NonNull<T>, v: Option<NonNull<T>>) { unsafe { *(*T::link(n).as_ptr()).0.get() = v } }
+    unsafe fn get(n: NonNull<T>) -> Option<NonNull<T>> { unsafe { *(*T::link(n).as_ptr()).0.get() } }
+    pub unsafe fn push_back(&mut self, n: NonNull<T>) {
         unsafe {
-            T::link(n).as_ptr().write(None);
-            match self.tail { Some(t) => T::link(t).as_ptr().write(Some(n)), None => self.head = Some(n) }
+            Self::set(n, None);
+            match self.tail { Some(t) => Self::set(t, Some(n)), None => self.head = Some(n) }
         }
         self.tail = Some(n);
     }
-    unsafe fn pop_front(&mut self) -> Option<NonNull<T>> {
+    pub unsafe fn pop_front(&mut self) -> Option<NonNull<T>> {
         let h = self.head?;
-        self.head = unsafe { T::link(h).as_ptr().read() };
+        self.head = unsafe { Self::get(h) };
         if self.head.is_none() { self.tail = None; }
         Some(h)
     }
 }
-struct Job { id: u32, next: Option<NonNull<Job>> }
+pub struct Job { pub id: u32, pub link: Link<Job> }
 unsafe impl Node for Job {
-    unsafe fn link(this: NonNull<Self>) -> NonNull<Option<NonNull<Self>>> {
-        unsafe { NonNull::new_unchecked(&raw mut (*this.as_ptr()).next) }
+    unsafe fn link(this: NonNull<Self>) -> NonNull<Link<Self>> {
+        unsafe { NonNull::new_unchecked(&raw mut (*this.as_ptr()).link) }
     }
 }
-fn main() {
-    let a = Box::into_raw(Box::new(Job { id: 1, next: None }));
-    let b = Box::into_raw(Box::new(Job { id: 2, next: None }));
+#[test]
+fn whole_node_shared_ref_across_push_cell() {
+    let a = Box::into_raw(Box::new(Job { id: 1, link: Link(UnsafeCell::new(None)) }));
+    let b = Box::into_raw(Box::new(Job { id: 2, link: Link(UnsafeCell::new(None)) }));
     let mut q = Queue { head: None, tail: None };
     unsafe {
         q.push_back(NonNull::new_unchecked(a));
-        let id: &u32 = &(*a).id;
+        let whole: &Job = &*a;
         q.push_back(NonNull::new_unchecked(b));
-        println!("{}", *id);
+        fn look(j: &Job) -> u32 { j.id }
+        assert_eq!(look(whole), 1);
         while let Some(t) = q.pop_front() { drop(Box::from_raw(t.as_ptr())); }
     }
 }
 ```
+
+The bare `Option` projection tests use the queue above with `link` returning
+`NonNull<Option<NonNull<Self>>>` and writing through it by `write` and `read`.
 
 ## The benchmark
 

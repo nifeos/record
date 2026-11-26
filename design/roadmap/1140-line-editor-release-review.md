@@ -28,9 +28,10 @@ The status words are those `script/review-status` reads.
 - P0-1, `restore` answers `Option<()>` and `Refusal` is not an error: Open.
 - P0-2, `Event::None` shadows `Option::None`: Open.
 - P0-3, `pop_up_to_eight` returns the host's reply shape: Open.
+- P0-4, the handoff publishes its encoding: Open.
 - P1-1, the host protocol's words in the crate's documentation: Open.
 - P1-2, four public types have no `Debug`: Open.
-- P1-3, no `dyn Sink` fits the sink parameter: Open.
+- P1-3, a `dyn Sink` cannot reach the sink parameter: Open.
 - P1-4, no failure sections and five items without an example: Open.
 - P2-1, the manifest has no `documentation` key: Open.
 - P2-2, an `embedded-io` adapter: Waiting on the byte-sink decision of milestone 1129.
@@ -39,7 +40,7 @@ The status words are those `script/review-status` reads.
 
 ## Open decisions
 
-The one-way doors below, D1 to D4, each for the architect.
+The one-way doors below, D1 to D6, each for the architect.
 
 ## Goal
 
@@ -106,8 +107,12 @@ Verified in source
 return `Option<()>`, so a caller learns that a blob failed and not why. `Refusal` implements
 neither `Display` nor `core::error::Error` and is not `#[non_exhaustive]`. `noline` 0.5.1 returns
 `NolineError` and `rustyline` 19 returns `ReadlineError`, both with `Display`.
-Change: `restore` returns `Result<(), Refusal>`. `Refusal` gains `Display`, `core::error::Error`
-and `#[non_exhaustive]`, and a variant for a field that does not fit. The shared errors decision of
+On `None` the editor may hold half of the old state and half of the new; its own documentation
+tells the caller to discard it.
+Change: `restore` becomes a constructor, `LineEditor::restore(&mut Reader) -> Result<LineEditor,
+Refusal>`, and the same for `RawQueue`, so a half-written editor never reaches the caller.
+`Refusal` gains `Display`, `core::error::Error` and `#[non_exhaustive]`, and a variant for a field
+that does not fit. The shared errors decision of
 milestone 1129 governs the shape. Door: one-way (D1). Effort: S.
 
 #### P0-2. `Event::None` shadows `Option::None`
@@ -117,8 +122,10 @@ Verified in source (`src/line_disc.rs`).
 `use Event::*` shadows the prelude's `None`, and `Event::None` beside an `Option` reads as a second
 kind of absence. No block ratifies the variant; the package lists it as part of the engine.
 `noline` 0.5.1 returns `Option<Output>` from its `advance`.
+`Event` is also not `#[non_exhaustive]`, so a sixth event, such as a key the editor learns to
+report, breaks every caller's `match`.
 Change: `feed` returns `Option<Event>` and the variant goes. The other five variants keep their
-names. Door: one-way (D2). Effort: S.
+names, and `Event` becomes `#[non_exhaustive]`. Door: one-way (D2). Effort: S.
 
 #### P0-3. `pop_up_to_eight` returns the host's reply shape
 
@@ -131,6 +138,17 @@ time.
 Change: replace it with a method that fills the caller's `&mut [u8]` and returns the count; the
 host packs its own registers. The name follows design/naming.md and is provisional until
 ratified. Door: one-way (D3). Effort: S.
+
+#### P0-4. The handoff publishes its encoding
+
+Verified in source (`src/handoff.rs`).
+`Writer` and `Reader` are public with their primitives (`bytes`, `u32`, `field`), and so are
+`MAGIC` and `LAYOUT`. A caller can write or read a blob piece by piece, so the order of its words
+becomes interface: any reordering breaks that caller even when `LAYOUT` moves with it. The only
+use the crate documents is to save an editor and a raw queue and restore them later.
+Change: the public surface is one save and one restore, over the caller's buffer, and the
+primitives, `MAGIC` and `LAYOUT` become private. The blob stays a format this crate alone reads
+and writes. Door: one-way (D5). Effort: S.
 
 ### P1: before the first release
 
@@ -150,15 +168,16 @@ Verified in source.
 Change: a `Debug` for each, printing lengths and positions rather than the line, and `Hash` on
 `Event`. Door: two-way. Effort: S.
 
-#### P1-3. No `dyn Sink` fits the sink parameter
+#### P1-3. A `dyn Sink` cannot reach the sink parameter
 
-Inferred from the signatures.
+Verified in the signatures (`src/line_disc.rs`, `src/output.rs`).
 Every method takes `out: &mut impl Sink`, whose implicit `Sized` bound refuses `&mut dyn Sink`
-(C-OBJECT), and `&mut S` does not implement `Sink`, so a caller cannot pass a sink by value
-(C-RW-VALUE).
-Change: the bound becomes `S: Sink + ?Sized`, and `Sink` gains a blanket implementation for
-`&mut S`. Door: two-way, since relaxing a bound and adding an implementation break no caller.
-Effort: S.
+(C-OBJECT). The methods already borrow the sink, so C-RW-VALUE holds without more.
+Change: the bound becomes `S: Sink + ?Sized`. Door: two-way, since a relaxed bound breaks no
+caller. Effort: S.
+A blanket `impl<S: Sink + ?Sized> Sink for &mut S` is a separate question and not two-way. A
+downstream crate may implement `Sink` for `&mut TheirType`, since `&mut` is a fundamental type,
+and a later blanket implementation would collide with it. It is door D6.
 
 #### P1-4. No failure sections, and five items without an example
 
@@ -208,17 +227,26 @@ would separate from the comparators'.
 
 Each for the architect, one at a time.
 
-- D1, the handoff's error shape (P0-1). Recommended: `restore` returns
-  `Result<(), Refusal>`, and `Refusal` is `#[non_exhaustive]` with `Display` and
-  `core::error::Error`, in the shape the shared errors decision picks. A non-exhaustive enum can
-  gain a refusal later; an `Option` cannot gain a reason.
-- D2, the event that means nothing happened (P0-2). Recommended: `feed` returns
-  `Option<Event>` and `Event::None` goes, as `noline` does.
+- D1, the handoff's error shape (P0-1). Recommended: the constructor
+  `LineEditor::restore(&mut Reader) -> Result<LineEditor, Refusal>`, and its twin for `RawQueue`,
+  with `Refusal` `#[non_exhaustive]` and carrying `Display` and `core::error::Error` in the shape
+  the shared errors decision picks. A constructor leaves no half-written editor to discard. The
+  in-place form, `restore(&mut self) -> Result<(), Refusal>`, keeps the hazard to save one move
+  of about 2.7 KB.
+- D2, the event that means nothing happened, and the event set (P0-2). Recommended: `feed`
+  returns `Option<Event>`, `Event::None` goes, as `noline` does, and `Event` is
+  `#[non_exhaustive]`. A later event then lands as a minor release.
 - D3, the raw queue's output (P0-3). Recommended: the caller's buffer and a count, with the
   register packing in the host.
 - D4, `Sink` stays the crate's own and infallible. Recommended: keep it. Echo that fails has no
   one to report to between keystrokes, and a caller's sink can record the failure. The byte-sink
   decision of milestone 1129 may add the adapter of P2-2, which leaves `Sink` as it is.
+- D5, the handoff's public surface (P0-4). Recommended: expose only save and restore, the
+  stricter choice. Opening the primitives later is an addition; closing them after 0.1.0 breaks
+  whoever used them.
+- D6, a blanket `Sink` implementation for `&mut S` (P1-3). Recommended: leave it out. Every
+  method borrows its sink, so no caller needs one, and a caller that does can write a
+  two-line wrapper type.
 
 ## Follow-on
 
@@ -228,7 +256,7 @@ Each for the architect, one at a time.
 ## Done when
 
 Every P0 and P1 finding reads Done, or Will not fix with its ruling, the architect has ruled D1
-to D4, and `script/review-status` shows the block BUILT.
+to D6, and `script/review-status` shows the block BUILT.
 
 ## BUGS
 
@@ -237,5 +265,5 @@ to D4, and `script/review-status` shows the block BUILT.
 
 ## Index row
 
-The release review of `line_editor` against `embedded-cli`, `noline` and the std editors: three
-one-way interface changes before 0.1.0, four two-way fixes before the release, four doors to rule.
+The release review of `line_editor` against `embedded-cli`, `noline` and the std editors:
+four one-way interface changes before 0.1.0, four two-way fixes before the release, six doors to rule.

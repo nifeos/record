@@ -56,7 +56,7 @@ verdict on each of the 54 items of the
 | C-DEBUG | not met | `HostController` and `InternalDirectMemoryAccess` (P1-4) |
 | C-DEBUG-NONEMPTY | met | the derived and written `Debug` output names each type |
 | C-SEALED | not applicable | both traits are for callers to implement |
-| C-STRUCT-PRIVATE | not met | five structs with public fields and no `#[non_exhaustive]` (P0-1) |
+| C-STRUCT-PRIVATE | not met | five structs with public fields and no `#[non_exhaustive]`, among them the hardware answers `Card` and `Identity` (P0-1) |
 | C-NEWTYPE-HIDE | met | the controller's state is private |
 | C-STRUCT-BOUNDS | not met | `HostController` and `InternalDirectMemoryAccess` (P2-7) |
 | C-STABLE | met | no dependencies |
