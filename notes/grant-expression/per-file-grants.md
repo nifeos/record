@@ -69,8 +69,9 @@ would have failed.
 The second run is what makes the first mean anything. A caretaker that refused every request would
 pass the read-only test, and so would a grant that reached nothing at all; it fails the writable
 one. Each accepted write is read straight back, for the reason
-[DECISIONS §27 (the filesystem service)](../../design/decisions/0027-filesystem-service.md#amendment-milestone-31-phase-2-2026-07-30-create-and-truncate-exist-and-a-per-file-grant-is-a-caretaker-process) gives. This is milestone 36's two-witness shape, and milestone 33's rule that
-an attacker must be pointed at a real neighbor rather than a fictional one.
+[DECISIONS §27 (the filesystem service)](../../design/decisions/0027-filesystem-service.md#amendment-milestone-31-phase-2-2026-07-30-create-and-truncate-exist-and-a-per-file-grant-is-a-caretaker-process) gives.
+This is the two-witness shape of milestone 36 (a foreign-language component, seam first), and the
+rule of milestone 33 (a compositor: one screen, mutually distrusting clients) that an attacker must be pointed at a real neighbor rather than a fictional one.
 
 ## At the interactive prompt (milestone 50 (pipes and redirection) wired it; milestone 31 (a capability shell) phase 3 finished it)
 

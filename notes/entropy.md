@@ -90,8 +90,8 @@ find out.
 
 ### Why the bytes ride in the reply and not in a shared page
 
-This contract departs on purpose from [§10](../design/decisions/0010-capability-microkernel.md)'s
-page-for-bulk rule, as
+This contract departs on purpose from the page-for-bulk rule of
+[§10 (process model: capability-based, microkernel)](../design/decisions/0010-capability-microkernel.md), as
 [DECISIONS §44 (entropy is a capability)](../design/decisions/0044-entropy-capability.md#the-bytes-ride-in-the-reply-not-in-a-shared-page)
 records. A page shared with a client is a place the bytes persist and a second
 party can read, and random bytes are the one payload whose entire value is that nobody else has seen
