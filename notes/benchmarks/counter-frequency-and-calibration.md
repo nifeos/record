@@ -1,9 +1,9 @@
 # Counter frequency and x86 calibration
 
-*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers and
-lets a reader act without opening this file. This one holds the riscv64 hardcoded counter rate and
-the x86 TSC calibration that was wrong by up to 12x, with the dates, tables and corrections behind
-them. Name: ratified 2026-09-24 (calef); [the naming record](README.md) holds it.*
+*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers. This
+one holds the riscv64 hardcoded counter rate and the x86 TSC calibration that was wrong by up to
+12x, with the dates, tables and corrections behind them. Name: ratified 2026-09-24 (calef); [the
+naming record](README.md) holds it.*
 
 ## The page and its bounds
 

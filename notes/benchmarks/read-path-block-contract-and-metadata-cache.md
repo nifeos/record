@@ -1,10 +1,9 @@
 # Milestone 138 (close the read gap), steps 4 and 2, and the comparisons not yet run
 
-*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers and
-lets a reader act without opening this file. This one holds the 16-block blk contract, the metadata
-cache, and the two controlled comparisons, with the dates, tables and corrections behind them. Name:
-ratified 2026-09-24 (calef), who refused `milestone-138-steps-4-and-2` for this file; [the naming
-record](README.md) says why.*
+*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers. This
+one holds the 16-block blk contract, the metadata cache, and the two controlled comparisons, with
+the dates, tables and corrections behind them. Name: ratified 2026-09-24 (calef), who refused
+`milestone-138-steps-4-and-2` for this file; [the naming record](README.md) says why.*
 
 ## Step 4 taken: the blk contract carries 16 blocks, and the win is smaller than the block count predicts (milestone 138, 2026-08-19)
 

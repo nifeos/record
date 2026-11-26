@@ -1,9 +1,9 @@
 # `spawn_el0`: a ceiling, and a page
 
-*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers and
-lets a reader act without opening this file. This one holds the 2026-08-27 occupancy bound and the
-2026-09-21 current-CPU page, with the dates, tables and corrections behind them. Name: ratified
-2026-09-24 (calef); [the naming record](README.md) holds it.*
+*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers. This
+one holds the 2026-08-27 occupancy bound and the 2026-09-21 current-CPU page, with the dates, tables
+and corrections behind them. Name: ratified 2026-09-24 (calef); [the naming record](README.md) holds
+it.*
 
 ## 2026-08-27: raising a ceiling made `spawn_el0` 16.5% slower, and the fix made it 41% faster than it had ever been
 

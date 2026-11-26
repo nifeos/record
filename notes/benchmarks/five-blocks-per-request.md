@@ -1,10 +1,9 @@
 # The fixed term: five blocks per request
 
-*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers and
-lets a reader act without opening this file. This one holds the 208 us identified, what option 2
-costs, and why 4 KiB was the only transfer size the system had, with the dates, tables and
-corrections behind them. Name: ratified 2026-09-24 (calef), who refused `the-fixed-term` for this
-file; [the naming record](README.md) says why.*
+*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers. This
+one holds the 208 us identified, what option 2 costs, and why 4 KiB was the only transfer size the
+system had, with the dates, tables and corrections behind them. Name: ratified 2026-09-24 (calef),
+who refused `the-fixed-term` for this file; [the naming record](README.md) says why.*
 
 These sections continue [the record-level sweep](record-level-sweep.md) of milestone 138 (close the read gap), all dated
 2026-08-18 unless marked.

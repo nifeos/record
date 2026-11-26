@@ -1,9 +1,9 @@
 # Every baseline save, audited
 
-*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers and
-lets a reader act without opening this file. This one holds the 2026-09-15 walk of every save for
-drift that accumulated under the tripwire, with the dates, tables and corrections behind them. Name:
-ratified 2026-09-24 (calef); [the naming record](README.md) holds it.*
+*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers. This
+one holds the 2026-09-15 walk of every save for drift that accumulated under the tripwire, with the
+dates, tables and corrections behind them. Name: ratified 2026-09-24 (calef); [the naming
+record](README.md) holds it.*
 
 ## 2026-09-15: every baseline save since the first, audited for what accumulated under the tripwire
 

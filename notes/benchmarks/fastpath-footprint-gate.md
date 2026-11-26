@@ -1,10 +1,9 @@
 # The fastpath footprint gate
 
-*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers and
-lets a reader act without opening this file. This one holds `script/fastpath-footprint`: what it
-measures, what it prints, the per-architecture numbers and milestone 188's corrections, with the
-dates, tables and corrections behind them. Name: ratified 2026-09-24 (calef); [the naming
-record](README.md) holds it.*
+*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers. This
+one holds `script/fastpath-footprint`: what it measures, what it prints, the per-architecture
+numbers and milestone 188's corrections, with the dates, tables and corrections behind them. Name:
+ratified 2026-09-24 (calef); [the naming record](README.md) holds it.*
 
 The target this gate measures against, 4 KiB of IPC fastpath in a 32 KB L1i, is derived in
 [the footprint appendix](kernel-footprint-and-caches.md), under "The target".

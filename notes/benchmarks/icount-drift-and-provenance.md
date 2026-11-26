@@ -1,9 +1,9 @@
 # icount drift, and what a baseline was read against
 
-*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers and
-lets a reader act without opening this file. This one holds why the tripwire is 10%, the toolchain
-and emulator stamps, and the 2026-07-28 `-smp 4` artifact, with the dates, tables and corrections
-behind them. Name: ratified 2026-09-24 (calef); [the naming record](README.md) holds it.*
+*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers. This
+one holds why the tripwire is 10%, the toolchain and emulator stamps, and the 2026-07-28 `-smp 4`
+artifact, with the dates, tables and corrections behind them. Name: ratified 2026-09-24 (calef);
+[the naming record](README.md) holds it.*
 
 ## What the icount instrument cannot see
 

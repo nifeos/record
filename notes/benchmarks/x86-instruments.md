@@ -1,10 +1,9 @@
 # x86_64 instruments: the icount leg, CR4, and two cores
 
-*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers and
-lets a reader act without opening this file. This one holds the x86 icount leg, why
-`CR4.PGE`/`PCIDE` escape measurement under TCG, and the two-core counters, with the dates, tables
-and corrections behind them. Name: ratified 2026-09-24 (calef); [the naming record](README.md) holds
-it.*
+*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers. This
+one holds the x86 icount leg, why `CR4.PGE`/`PCIDE` escape measurement under TCG, and the two-core
+counters, with the dates, tables and corrections behind them. Name: ratified 2026-09-24 (calef);
+[the naming record](README.md) holds it.*
 
 ## 2026-08-25: an icount leg for x86_64, and the "no icount leg" line was wrong
 

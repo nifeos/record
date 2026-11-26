@@ -854,49 +854,27 @@
 
 4f9ad19d266c design/roadmap/0902-tooling-sorted-by-who-needs-it/scripts.md
 
-50e6ae481aba notes/benchmarks/baseline-save-audit.md
 
-50e6ae481aba notes/benchmarks/calibration-against-sel4.md
 
-50e6ae481aba notes/benchmarks/counter-frequency-and-calibration.md
 
-50e6ae481aba notes/benchmarks/cross-os-primitives.md
 
-50e6ae481aba notes/benchmarks/drift-decomposition.md
 
-50e6ae481aba notes/benchmarks/fastpath-footprint-gate.md
 
-50e6ae481aba notes/benchmarks/filesystem-throughput.md
 
-50e6ae481aba notes/benchmarks/five-blocks-per-request.md
 
-50e6ae481aba notes/benchmarks/icount-drift-and-provenance.md
 
-50e6ae481aba notes/benchmarks/icount-tick-scales.md
 
-50e6ae481aba notes/benchmarks/kernel-footprint-and-caches.md
 
-50e6ae481aba notes/benchmarks/per-core-and-multi-hart.md
 
-50e6ae481aba notes/benchmarks/preemption-in-the-window.md
 
-50e6ae481aba notes/benchmarks/read-path-block-contract-and-metadata-cache.md
 
-50e6ae481aba notes/benchmarks/read-path-record-and-request-size.md
 
-50e6ae481aba notes/benchmarks/record-level-sweep.md
 
-50e6ae481aba notes/benchmarks/rfence-self-row.md
 
-50e6ae481aba notes/benchmarks/riscv-map-new-and-the-rfence-probe.md
 
-50e6ae481aba notes/benchmarks/service-path.md
 
-50e6ae481aba notes/benchmarks/spawn-el0.md
 
-50e6ae481aba notes/benchmarks/x86-instruments.md
 
-50e6ae481aba notes/benchmarks/x86-tss-iomap.md
 
 51f53cbf648a design/decisions/0268-the-cast-ratchet-does-not-count-a-64-bit-integer-cast-to-usize.md
 
