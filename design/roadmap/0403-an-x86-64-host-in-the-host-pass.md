@@ -33,22 +33,13 @@ that follows it needs no further ruling.
 
 ## What is not covered
 
-Every machine that has ever run this suite is aarch64: the development machine is Apple Silicon and
-CI is `ubuntu-24.04-arm`. Milestone 288 fixed the class where it could be made unrepresentable
+§184 records which machines have run this suite. Milestone 288 fixed the class where it could be made unrepresentable
 (`FOREIGN_MACHINES` is derived, a never-a-nife-machine number is checked in a `const`), but the
-residue is plain. **`b.e_machine = 183` still compiles on every host**, and so does any other literal
+residue is plain. `b.e_machine = 183` still compiles on every host, and so does any other literal
 standing in for a host-relative fact. Nothing in this repository would notice.
 
 The tree has now paid for this three times, in three different crates, each found by a stranger
-rather than by a gate:
-
-- `xtask`'s host pass stopped compiling on x86_64 when three crates took `user_rt` dependencies, and
-  *"nobody noticed, because CI moved to `ubuntu-24.04-arm` the same day"*. Found 2026-08-14 by
-  milestone 117's first run on a clean x86_64 checkout.
-- `crates/elf` failed 20 of 25 host tests on x86_64 from at least milestone 161 until milestone 288,
-  two milestones having filed it as a proposal before one closed it.
-- `fuzz/seeds/elf_parse/` seeded an empty corpus on x86_64, silently, because the note recording the
-  host dependence was written before x86_64 was a target.
+rather than by a gate. §184 lists the three.
 
 `script/stranger-test` is the mechanism already aimed at this class and it is the right place to
 start reading; whether it can reach a second host cheaply is the open question rather than an
@@ -80,9 +71,7 @@ cost, which is why this is a proposal with the numbers attached rather than a la
 
 ## Index row
 
-Every machine that has ever run this suite is aarch64: the development machine is Apple Silicon and
-CI is `ubuntu-24.04-arm`. Milestone 288 made the class unrepresentable where it could
-(`FOREIGN_MACHINES` is derived, a never-a-nife-machine number is checked in a `const`). The
+No host test pass has ever run on x86_64, and §184 says what milestone 288 could make unrepresentable. The
 residue is plain, because a machine literal standing in for a host-relative fact still compiles on
 every host and nothing here would notice. The tree has paid for this three times in three crates,
 each found by a stranger rather than by a gate. `xtask`'s host pass stopped compiling on x86_64 and

@@ -37,11 +37,7 @@ the whole sweep, and milestone 168 is still `PARTIAL` for the reason this block 
 line says it does not turn `BUILT` until `tasks=4` has a number, and it still does not have one. The
 interim this block recommends, option 4, is what 168's block now does.
 
-In brief. Milestone 168's sweep reports the best of three repeats per sweep point. At
-`tasks=4` the underlying distribution is wide enough that the best of three is itself a coin flip.
-Across five boots of an identical image the reported figure ranged from 766,361 to 991,671 jobs per
-minute, a 29.4% spread. Boot 3's three repeats *on their own* spanned 132,148 to 181,408
-ticks, which contains the whole boot-to-boot range. The variance is within a boot, so power cycling
+In brief. Milestone 168's sweep reports the best of three repeats per sweep point. §191 gives the spread at `tasks=4` across five boots and within one. The variance is within a boot, so power cycling
 does not reduce it.
 
 `tasks=4` is where `job_mix::ECHO_SERVERS = 2` first produces contention (2:1) with too few samples
@@ -50,9 +46,7 @@ point it bites.
 
 ## Why it is a decision rather than a patch
 
-**The cost is not symmetric across sweep points.** `tasks=32` already takes about 930,000 ticks per
-repeat and is stable at 2.7%; tripling its repeats buys nothing and lengthens every board session
-noticeably. `tasks=4` takes about 150,000 ticks and is the one that needs them. So the obvious fix
+The cost is not symmetric across sweep points. §191 gives the cost at `tasks=32`. `tasks=4` takes about 150,000 ticks and is the one that needs them. So the obvious fix
 is not "raise `REPEATS`" but "vary repeats by sweep point", and that turns one constant into a
 table, which is a different thing for a reader to hold and for `board_console` to recognize.
 

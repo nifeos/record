@@ -51,8 +51,7 @@ capabilities stop. Unix bounds `rm -rf /` with a permission check per file, whic
 be wrong and famously has been.
 
 `rm` is a program, not a builtin, and that is Unix's shape. `cd`, `pwd` and `ls` are builtins
-because the shell is rebinding what it already holds; `rm -r` is a destructive loop. A builtin would
-run with the shell's entire endowment, while a program takes an explicit attenuated grant. So
+because the shell is rebinding what it already holds; `rm -r` is a destructive loop. §49 says what a builtin would hold that a program does not. So
 `caps rm -r logs/` prints the subtree at risk before anything happens, and a bug in the recursion
 can only reach what it was handed. Globbing has the same shape
 ([touch-and-globbing.md](touch-and-globbing.md)): attenuate, then hand over.

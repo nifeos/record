@@ -58,8 +58,7 @@ Measured over non-test code, the note's scope:
 
 §61 (a lint is adopted on evidence from this tree) dropped `cast_possible_truncation` on
 2026-08-03, and `Cargo.toml` records why. Of 497 hits then, 199 were `u64` or `i64` to `usize`.
-Those warn about 32-bit pointers, and §19 (architectural parity is a tenet) names three 64-bit
-targets only. A gate more than half inapplicable trains a reader to skim.
+§268 says why those do not apply here. A gate more than half inapplicable trains a reader to skim.
 
 The ratio holds today: 340 of 844 hits are that class, and 143 of the kernel's 271. Clippy still
 has no setting for pointer width (read from `cargo clippy --explain` on this toolchain).

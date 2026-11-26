@@ -13,8 +13,8 @@ Premise re-read against the tree on 2026-09-19 and still true. `crates/measured_
 own prose that the entry name is provisional and that it "sits outside the four surfaces
 `script/names` enumerates", and `script/names` still enumerates exactly those four. Two figures
 moved: `--unratified` is 72 deep rather than 97, and the program surface is `components/` and
-`fixtures/` rather than `user/src/` since milestone 175. **The cheap half this block asks for first
-has a first answer**: `pub const <NAME>: &str` matches 77 times across `crates/`, `components/`,
+`fixtures/` rather than `user/src/` since milestone 175. The cheap half this block asks for first
+has a first answer: `pub const <NAME>: &str` matches 77 times across `crates/`, `components/`,
 `fixtures/` and `kernel/`, which is the order of magnitude that decides between a list in
 `design/naming.md` and a declared out-of-scope. It is an upper bound rather than the count,
 since not every one of the 77 is agreed between two binaries.
@@ -91,8 +91,7 @@ measured against.
 `script/names` enumerates four kinds of named thing (a crate, a program, a `script/` entry point and
 a Cargo package). Milestone 283 (one provenance block per file, in the spelling the parse reads)'s
 gate fired on a fifth, `measured_boot`'s `PROGRAM_MEASUREMENTS`, an archive entry name that nothing
-has ever listed. It is a string two programs agree on, which AGENTS.md puts in the expensive,
-hard-to-reverse category beside a wire format and an opcode number. Its name is provisional and
+has ever listed. §182 says where AGENTS.md puts such a string. Its name is provisional and
 `--unratified` has never listed it. The names with the least reversibility are the ones with no
 record. Three things must be decided first. Is a wire string a name for this purpose, or data? Where does
 its block live, given that the file header is the one 283 reserved? How is the set enumerated, since

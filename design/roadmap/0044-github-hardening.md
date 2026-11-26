@@ -58,13 +58,10 @@ That reasoning is right about sequencing, and this block is the eventual decisio
 - A key and a signing method. SSH signing is the cheap path (git supports it, GitHub verifies it,
   and the key already exists on the machine that pushes); GPG is the older path with more tooling
   around it.
-- Every automated committer signs too, or the rule blocks them. This tree merges lane work
-  constantly and takes Dependabot pull requests, and a required-signature rule applies to both. That
+- Every automated committer signs too, or the rule blocks them. §78 names the committers the rule reaches. That
   is the part to check before turning the setting on, because the failure mode is the same one the
   ruleset note already warns about: a requirement nothing can satisfy blocks every merge.
-- A statement of what it buys here. For a public repository with a security thesis, signatures
-  say the commits are from who they claim to be, which is a supply-chain property adjacent to
-  milestone 42's `cargo-audit`/`cargo-deny` work rather than a code-quality one. Say that plainly, or
+- A statement of what it buys here. §78 states it. Say that plainly, or
   it reads as ceremony.
 
 Sequence it after the ruleset lands and after the required checks are green, for exactly the reason

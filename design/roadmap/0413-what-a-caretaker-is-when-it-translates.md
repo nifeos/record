@@ -12,7 +12,7 @@ needs_person: no
 
 Promoted from the proposal `what-a-caretaker-is-when-it-translates`, filed
 2026-09-14 by the milestone 292 (three programs wearing one name) lane while naming the program that puts a file behind a byte sink.
-That program had been `ROLE_FILE` inside a three-role binary and so had never needed a name of its own.
+§189 says why that program had no name of its own.
 *(Number provisional until the merge queue lands it.)*
 
 The decision is
@@ -35,8 +35,7 @@ sentence still routes the inconsistency here. Nothing has been ratified since.
 
 ## The two definitions, both in the tree, both load-bearing
 
-Definition A, narrowing. A caretaker serves *the same protocol its client speaks*, and what it
-takes away is authority rather than vocabulary. `fixtures/src/sink.rs` stated it in as many words
+Definition A, narrowing. §189 states it. `fixtures/src/sink.rs` stated it in as many words
 before milestone 292 removed the file:
 
 > The `fs_file_caretaker` shape, one contract further out. `fs_file_caretaker` is a caretaker
@@ -59,8 +58,7 @@ ruling behind it and definition A has only prose. The prose is more precise.
 
 ## Why milestone 292 could not settle it
 
-The lane needed a name for the file-behind-a-sink program, and `file_sink_caretaker` was the
-consistency answer: the same adapter as `terminal_sink_caretaker`, for a different backend. It was
+The lane needed a name for the file-behind-a-sink program, and §189 gives the consistency answer. It was
 refused on collision instead, because `fs_file_caretaker` exists and is a different thing,
 and two names a reader must hold apart cost more than the consistency buys. That is a local answer
 to a global question, which is why it leaves this behind rather than closing it.

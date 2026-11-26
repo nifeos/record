@@ -66,9 +66,7 @@ and measurable:
 | x86_64 `yield_switch` | +9.94% | +9.94% | 0 |
 
 riscv64's `ctx_switch` is past the threshold the gate enforces, reached in steps none of which came
-close to it. `coremark`, pure compute with no context switches, is flat to four decimal places
-across every save on all three architectures, which is what says the rest is the kernel's switch and
-IPC paths rather than measurement noise.
+close to it. §190 gives the control that rules out measurement noise.
 
 Most of that accumulation is honest, disclosed in the commit that caused it, and a good part of
 it is whole-crate codegen churn the instrument cannot separate from real cost. The problem is not
@@ -126,8 +124,7 @@ later.
 Writing the attribution into the baseline file moves it to rung three, beside the thing a reader
 meets, which is milestone 115's shape. It also makes the wrong state visible rather than
 unrepresentable, and that is the honest limit: a lane can still write a false reason, as
-`44890a8a` did. What changes is that the false reason is then in the file the next reader opens,
-where the audit above would have found it in a grep instead of a bisect.
+`44890a8a` did. §190 says what changes.
 
 Cost: roughly the `--save` writer plus a flag, and the rows it already knows have changed. Small.
 

@@ -17,8 +17,7 @@ answered on 2026-09-26; see "What was ruled".
 
 ## What was ruled
 
-calef, 2026-09-26 (UTC): *"M2 is right."* A program's manifest travels inside its executable, as an
-ELF note found through a `PT_NOTE` program header. §197 has the ruling and its reasons.
+calef, 2026-09-26 (UTC): *"M2 is right."* §197 has the ruling and its reasons.
 
 calef, 2026-09-26 (UTC), answering the maintainer's three names with *"Yes"*:
 
