@@ -105,10 +105,9 @@ This is polkit's shape without its root daemon.
 
 ### Fork 3: Where sessions come from first
 
-**Ruled A, virtual terminals**, calef, 2026-10-06 (UTC). His intent, verbatim: "be able to switch
-between sessions at a single keyboard. I believe early linux with text mode had this when hitting
-the function keys to switch between different sessions. You would get a fresh login prompt, could
-sign in, and that session would continue running and you could switch between sessions."
+**Ruled A, virtual terminals**, calef, 2026-10-06 (UTC):
+[§253 (concurrent login sessions)](../decisions/0253-concurrent-login-sessions.md#the-rulings)
+holds his words, a switch between sessions at one keyboard as early Linux text consoles did.
 
 So: Alt+F*n* selects console *n*. Each console opens on a fresh greeter. A session on a console you
 have switched away from keeps running, and its output is held for when you come back. On silicon

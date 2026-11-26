@@ -81,9 +81,9 @@ The validation that is NOT new, and why that is the honest finding. `validate_an
 change. It bounds the *address* of every descriptor, `addr..addr+len` inside the driver's region,
 whichever way the device moves the bytes. Receive is where the *device writes into* driver memory
 (the driver posts an empty buffer, the device fills it with a packet). That is exactly the shape
-milestone 32's block write already leaned on: the validator "bounds addresses, never directions." A
-receive descriptor aimed at kernel memory would let the device *overwrite* the kernel with an inbound
-packet. A transmit descriptor aimed there would let it *exfiltrate* kernel memory onto the wire. Both
+milestone 32's block write already leaned on: the validator "bounds addresses, never directions."
+[DECISIONS §23 (multi-queue DMA confinement)](../../design/decisions/0023-multi-queue-dma-confinement.md)
+says what a receive descriptor aimed at kernel memory would cost. A transmit descriptor aimed there would let it *exfiltrate* kernel memory onto the wire. Both
 are refused by the one in-region check, before the device is ever rung. So the "second direction" is
 proved, not implemented. `the_validator_refuses_a_receive_descriptor_that_escapes_the_region` sets
 the device-writable flag and asserts the refusal is about the address, not the flag.

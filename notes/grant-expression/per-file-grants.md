@@ -31,8 +31,9 @@ what was attached to it. See [xattr.md](../xattr.md).
 
 ## Why the caretaker is a process and not a check inside the FS server
 
-The FS server receives on one endpoint. Serving a second, narrower one would need a receive over
-a *set* of endpoints, which this kernel does not offer. The way to add it is to give endpoint
+The FS server receives on one endpoint, and
+[DECISIONS §27 (the filesystem service)](../../design/decisions/0027-filesystem-service.md#amendment-milestone-31-phase-2-2026-07-30-create-and-truncate-exist-and-a-per-file-grant-is-a-caretaker-process) says why a second,
+narrower one is out of reach. The way to add it is to give endpoint
 capabilities a badge (seL4's answer), and that is a design fork, recorded rather than taken. The
 caretaker needs nothing new: it is an ordinary FS client above and an ordinary FS server below.
 
@@ -67,8 +68,8 @@ would have failed.
 
 The second run is what makes the first mean anything. A caretaker that refused every request would
 pass the read-only test, and so would a grant that reached nothing at all; it fails the writable
-one. Each accepted write is read straight back, because "the server accepted my write" and "my write
-landed" are different claims. This is milestone 36's two-witness shape, and milestone 33's rule that
+one. Each accepted write is read straight back, for the reason
+[DECISIONS §27 (the filesystem service)](../../design/decisions/0027-filesystem-service.md#amendment-milestone-31-phase-2-2026-07-30-create-and-truncate-exist-and-a-per-file-grant-is-a-caretaker-process) gives. This is milestone 36's two-witness shape, and milestone 33's rule that
 an attacker must be pointed at a real neighbor rather than a fictional one.
 
 ## At the interactive prompt (milestone 50 (pipes and redirection) wired it; milestone 31 (a capability shell) phase 3 finished it)

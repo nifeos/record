@@ -128,9 +128,10 @@ are two ways a test never finishes, and no single instrument sees both.
 | Blind to | Any loop that keeps doing IPC | Nothing that fails to terminate, but slow to react |
 | Scope | Anywhere, including before tests start | Only while a test is running |
 
-Why the ceiling had to join the heartbeat. The heartbeat credits a completed rendezvous as progress.
-The RedoxFS repeat-write livelock spins in an allocator commit *while still serving blk IPC*, so
-every rendezvous reset the heartbeat. A failure that had been a loud 60 s trip became an infinite
+Why the ceiling had to join the heartbeat. The heartbeat credits a completed rendezvous as progress,
+and the RedoxFS repeat-write livelock kept completing them, as
+[DECISIONS §28 (SMP placement)](../design/decisions/0028-smp-placement.md#implementation-amendment-2026-07-29-as-built)
+records. A failure that had been a loud 60 s trip became an infinite
 silent hang at about 400% CPU with no watchdog fire. A livelock that makes progress is
 indistinguishable from healthy work to a progress-only instrument. Turning a loud failure into a
 silent one is worse than the flake the heartbeat fixed, so both mechanisms are live now.

@@ -49,10 +49,10 @@ Treating it as one thing is what makes the question look hard. Measured in this 
 | **Status** | one word per block, read by gates | the same files | 11 distinct words, 215 `BUILT` | No. A gate cannot read a tracker offline (measured below) |
 | **Scheduling** | who is working on what, what is next | **already outside the tree**: `gh pr list --draft` | one draft per lane | It already is one. §90 (the claim is a draft pull request) decided this on 2026-08-16 |
 
-**The third row is the answer to most of the question.** DECISIONS §90 separated claiming from
-closing precisely because *"the two want opposite properties. A claim is ephemeral coordination
-state, true for two hours and then false forever, and it must be instant. A status is a durable
-record, and it should be slow, versioned and gated exactly like every other record here."* The
+**The third row is the answer to most of the question.**
+[DECISIONS §90 (the claim is a draft pull request)](../decisions/0090-claiming-and-closing.md#two-problems-that-look-like-one)
+separated claiming from closing because the two want opposite properties: a claim must be instant,
+and a status slow, versioned and gated. The
 scheduling layer moved out three years of commits ago in project time, and it moved to GitHub, just
 not to Issues. So "we could use issues" is not a proposal to change the roadmap. It is a proposal to
 change either the record (row 1) or the gate input (row 2). Those are the two rows a tracker cannot

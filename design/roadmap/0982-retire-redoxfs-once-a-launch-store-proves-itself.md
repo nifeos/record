@@ -16,8 +16,8 @@ later removal would start from it.
 - **Condition.** `rsext4` replaces RedoxFS in nife once partsfoundry/rsext4 meets the bar of §46
   (thin primitives or whole subsystems; we write everything in between) and the done-when of
   milestone 190 (ext4, read and write). We ask for the adoption ruling at that point (2026-11-25
-  UTC). RedoxFS is not a viable long-term store, and no benchmark can compare it with Linux on
-  filesystem operations. The removal is a milestone of its own, minted from this inventory. In it
+  UTC). [§34 (RedoxFS is the primary filesystem)](../decisions/0034-redoxfs-primary.md#what-replaces-it-and-what-will-not)
+  says why RedoxFS cannot stay. The removal is a milestone of its own, minted from this inventory. In it
   an ext4 server takes over the launch store's duties: it boots the composed image, takes `jig`
   installs and holds the installed-programs table on aarch64, riscv64 and x86_64.
 

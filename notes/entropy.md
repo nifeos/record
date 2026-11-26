@@ -7,8 +7,9 @@ argument are [DECISIONS §44 (entropy is a capability, `std::random` improves tr
 ## The thing this replaced
 
 `std::random` was splitmix64 seeded from the virtual counter, and the file said so in its
-first line: *"not cryptographic, and saying so is the point."* The counter is the ABI's one ambient
-readable, so the stream was predictable to anyone who could guess boot-relative time. Fine for a
+first line: *"not cryptographic, and saying so is the point."*
+[DECISIONS §44 (entropy is a capability)](../design/decisions/0044-entropy-capability.md) says why the stream was
+predictable. Fine for a
 `HashMap` seed. Useless for a key, a token, or a challenge.
 
 That is not a small caveat sitting in one file. It taints anything security-adjacent anywhere in the
@@ -69,8 +70,9 @@ security claim harder to state. So the claim stays one sentence long, and it is 
 
 What the service does keep is a 256-byte buffer, and the distinction from a pool matters. Byte
 *i* out is byte *i* in, unmodified, handed to exactly one client, and zeroed behind the cursor. It
-is a cache for round trips, not an entropy transformation, and it turns thirty-two device requests
-into one.
+is a cache for round trips, as
+[DECISIONS §44 (entropy is a capability)](../design/decisions/0044-entropy-capability.md#the-service-passes-bytes-through-and-computes-nothing)
+says.
 
 ### Short reads
 
@@ -88,8 +90,10 @@ find out.
 
 ### Why the bytes ride in the reply and not in a shared page
 
-[§10](../design/decisions/0010-capability-microkernel.md) says bulk rides in a page and control rides in the message, and this contract
-deliberately does not. A page shared with a client is a place the bytes persist and a second
+This contract departs on purpose from [§10](../design/decisions/0010-capability-microkernel.md)'s
+page-for-bulk rule, as
+[DECISIONS §44 (entropy is a capability)](../design/decisions/0044-entropy-capability.md#the-bytes-ride-in-the-reply-not-in-a-shared-page)
+records. A page shared with a client is a place the bytes persist and a second
 party can read, and random bytes are the one payload whose entire value is that nobody else has seen
 them. Registers and the client's own stack are a smaller footprint than a page both parties map.
 

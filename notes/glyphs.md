@@ -184,9 +184,9 @@ That split is DECISIONS §33 seen from the producing side:
   because it holds an input endpoint, and a client granted none has an empty capability table slot and is
   refused with `NoSuchSlot`, "there is nothing there".
 
-So focus never becomes ambient: there is no verb that grabs the keyboard, no message that names a
-recipient, and no page a client can write that would inject input. The parts that could be forged do
-not exist rather than being guarded.
+So focus never becomes ambient, for the reasons
+[DECISIONS §37 (text is a value)](../design/decisions/0037-text-as-a-value.md) lists. The parts that
+could be forged do not exist rather than being guarded.
 
 The keyboard rides PCIe, and here that is a choice rather than a constraint: both `virt` machines
 do offer a `virtio-keyboard-device` on the virtio-mmio bus. It rides PCIe so it lands in the same

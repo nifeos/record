@@ -22,8 +22,8 @@ libext2fs and Linux, under §136 (a mature foreign implementation earns its plac
 as a dependency). This is the ext4 row of milestone 140 (mount a drive this system did not create),
 and leaves 140's order for FAT32 and ext2.
 
-RedoxFS is not a viable long-term store, and no benchmark can compare it with Linux on filesystem
-operations. `rsext4` replaces RedoxFS once the fork meets the bar, and we ask for the adoption
+[§34 (RedoxFS is the primary filesystem)](../decisions/0034-redoxfs-primary.md#what-replaces-it-and-what-will-not)
+says why RedoxFS cannot stay. `rsext4` replaces RedoxFS once the fork meets the bar, and we ask for the adoption
 ruling then (2026-11-25 UTC). Milestone 982 (Retire RedoxFS once a launch store proves itself) holds
 the inventory of what leaves.
 

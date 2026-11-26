@@ -42,9 +42,9 @@ grantable; this tree has never granted them.
 
 And the grant can be per thread, because the tree now has the machinery.
 `design/decisions/0139-cycle-counter-authority.md` says, in its "what this tree already does"
-section, that `CNTKCTL_EL1.EL0VCTEN` and `scounteren.TM` are *"per-machine bits, set once at init.
-There is no precedent in this tree for a per-thread system-register bit maintained across a context
-switch. That is the one piece of machinery option 4 below needs and the tree does not have."*
+[section](../../design/decisions/0139-cycle-counter-authority.md#what-this-tree-already-does-in-the-analogous-case),
+that `CNTKCTL_EL1.EL0VCTEN` and `scounteren.TM` are per-machine bits, set once at init, and that
+option 4 needs a per-thread bit the tree did not yet have.
 
 That sentence is now stale, and its own decision is what made it stale. Milestones 229 and 237 built
 exactly that. A `cycle_counter_grant` bool on `Thread` is read in `sched::schedule` at a

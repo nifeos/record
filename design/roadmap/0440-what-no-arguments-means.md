@@ -26,8 +26,8 @@ Milestone 286 collapsed two enumerations of "the checks that gate a pull
 request" into one table inside `script/ci-build`. The table needs a way to say which checks a
 developer waits for before pushing and which only a runner waits for, and how that is spelled is
 calef's. It is a name a contributor meets in `CONTRIBUTING.md`, in `--list` output and in every
-row of the table. The mechanism is built and shipped under the recommendation below; only the
-spelling and the default are open.
+row of the table. §183 (what `script/ci-build` with no arguments means) says what is built and
+what is open.
 
 It was numbered 400 for four hours and is 440 because another session got there first. That
 session landed its own milestone 400 (the shell on the firmware screen) while this branch waited in

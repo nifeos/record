@@ -29,9 +29,7 @@
 
 
 
-04e8cc8e67fb design/decisions/0222-who-holds-a-users-schedule.md
 
-04e8cc8e67fb notes/scheduled-execution/registration.md
 
 071cc68dd34c notes/crate-reviews/line-editor.md
 
@@ -39,9 +37,7 @@
 
 
 
-08715953e991 design/decisions/0096-process-kernel-or-event-kernel.md
 
-08715953e991 notes/target-hardware.md
 
 0969fe242bd6 design/roadmap/0780-give-the-zero-kill-harnesses-a-property-a-wrong-value-breaks.md
 
@@ -61,9 +57,7 @@
 
 0a715bf6697b design/roadmap/0612-x86-iommu-first-dma.md
 
-0bff0d517bcd design/decisions/0037-text-as-a-value.md
 
-0bff0d517bcd notes/glyphs.md
 
 
 
@@ -377,9 +371,7 @@
 
 31ad9a2fba62 notes/stranger-test/run-4.md
 
-32c1bdf2f14c design/decisions/0250-images-name-one-package-index-and-the-bytes-may-live-anywhere.md
 
-32c1bdf2f14c design/roadmap/0858-lab-machines-update-themselves.md
 
 
 
@@ -407,13 +399,9 @@
 
 
 
-38f79ff7b244 design/decisions/0034-redoxfs-primary.md
 
-38f79ff7b244 design/journeys/06-boot-on-ext4-and-read-it-from-linux.md
 
-38f79ff7b244 design/roadmap/0190-ext4-read-write.md
 
-38f79ff7b244 design/roadmap/0982-retire-redoxfs-once-a-launch-store-proves-itself.md
 
 
 
@@ -469,9 +457,7 @@
 
 
 
-411917f2c393 design/decisions/0027-filesystem-service.md
 
-411917f2c393 notes/fs-server.md
 
 
 
@@ -617,15 +603,11 @@
 
 5a881bc5f72d notes/crate-reviews/clock-contract.md
 
-5af3b77be30b design/decisions/0044-entropy-capability.md
-
-5af3b77be30b notes/entropy.md
 
 
 
-5b5c325090f2 design/decisions/0028-smp-placement.md
 
-5b5c325090f2 notes/scheduler.md
+
 
 
 
@@ -662,9 +644,7 @@
 
 
 
-623ef2e9d1a0 design/decisions/0027-filesystem-service.md
 
-623ef2e9d1a0 notes/grant-expression/per-file-grants.md
 
 
 
@@ -1161,9 +1141,7 @@ be4b902ca259 design/roadmap/0819-the-jh7110-clock-and-reset-crate-proven-and-rel
 
 
 
-bec8c6c571de design/decisions/0139-cycle-counter-authority.md
 
-bec8c6c571de notes/timer-capability/specifications.md
 
 
 
@@ -1210,9 +1188,7 @@ c21e6f8ab53d design/roadmap/0483-the-console-server-on-the-sink-protocol.md
 
 
 
-c6cb1b0fd617 design/decisions/0023-multi-queue-dma-confinement.md
 
-c6cb1b0fd617 notes/dma/directions.md
 
 
 
@@ -1224,9 +1200,7 @@ c9a6d974c7cc notes/crate-reviews/globally-unique-identifier-partition-table.md
 
 
 
-cb31c429ffd1 design/decisions/0253-concurrent-login-sessions.md
 
-cb31c429ffd1 design/roadmap/0806-concurrent-login-sessions.md
 
 
 
@@ -1293,17 +1267,13 @@ d3fda964450d design/roadmap/0887-crate-repositories-share-one-ci-template.md
 
 
 
-d7bfd48688cf design/decisions/0253-concurrent-login-sessions.md
-
-d7bfd48688cf design/roadmap/0806-concurrent-login-sessions.md
 
 
 
 
 
-d844d4c04483 design/decisions/0044-entropy-capability.md
 
-d844d4c04483 notes/entropy.md
+
 
 
 
@@ -1344,9 +1314,7 @@ d96678cdcf14 notes/crate-reviews/domain-name-system.md
 
 
 
-dd7a792417a3 design/decisions/0031-foreign-language-seam.md
 
-dd7a792417a3 notes/c-seam.md
 
 
 
@@ -1377,13 +1345,9 @@ e13c0d68d198 design/decisions/0103-what-a-frame-names/large-frames.md
 
 e13c0d68d198 design/decisions/0103-what-a-frame-names/one-page-frames.md
 
-e1569a2eeb86 design/decisions/0090-claiming-and-closing.md
 
-e1569a2eeb86 design/roadmap/0533-the-roadmap-after-the-split.md
 
-e1cf2d26d099 design/decisions/0044-entropy-capability.md
 
-e1cf2d26d099 notes/entropy.md
 
 
 
@@ -1557,11 +1521,7 @@ fc83bc852473 design/roadmap/0483-the-console-server-on-the-sink-protocol.md
 
 
 
-fe31a8820b01 design/decisions/0027-filesystem-service.md
 
-fe31a8820b01 notes/grant-expression/per-file-grants.md
 
-feaf083d976e design/decisions/0183-what-no-arguments-means.md
 
-feaf083d976e design/roadmap/0440-what-no-arguments-means.md
 
