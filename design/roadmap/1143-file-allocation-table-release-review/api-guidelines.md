@@ -14,7 +14,7 @@ It rules on all 54 items of the
 | C-ITER-TY | met | the iterators are the named types `NamedEntries`, `Directory` and `Chain` |
 | C-FEATURE | met | `embedded-io-07`, with no `use-` or `with-` prefix |
 | C-WORD-ORDER | met | `VolumeFull`, `DirectoryNotEmpty`, `ShorterThanItsSize` |
-| C-COMMON-TRAITS | met | value and error types derive `Debug`, `Clone`, `Copy`, `PartialEq`, `Eq`; one lacks `Hash` (P2-5) |
+| C-COMMON-TRAITS | not met | value and error types derive `Debug`, `Clone`, `Copy`, `PartialEq` and `Eq`, and six lack `Hash` (P2-5) |
 | C-CONV-TRAITS | met | `From<ChainError<E>>` for `OpenError<E>` and `WriteError<E>` |
 | C-COLLECT | not applicable | no collection type |
 | C-SERDE | not applicable | the on-disk bytes are the format; no other serialized form |
@@ -62,4 +62,4 @@ It rules on all 54 items of the
 | C-STABLE | met | the only dependency, `embedded-io` 0.7, is optional and named by its version (D5) |
 | C-PERMISSIVE | met | MIT OR Apache-2.0 |
 
-Totals: 33 met, 8 not met, 13 not applicable.
+Totals: 32 met, 9 not met, 13 not applicable.

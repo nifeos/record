@@ -17,7 +17,7 @@ for `partsfoundry/e1000e` at `6f6d3f1c`. A finding named in a row is the block's
 | C-CONV-TRAITS | not applicable | no value type converts to another |
 | C-COLLECT | not applicable | no collection |
 | C-SERDE | not applicable | register words and descriptors have no serialized form here |
-| C-SEND-SYNC | met | no type holds a pointer, so every type is `Send` and `Sync` |
+| C-SEND-SYNC | met | every public type is `Send` and `Sync`; `DataPlane` holds its bus address as a `u64`, and P0-4 asks what that address requires |
 | C-GOOD-ERR | met | `Display`, `core::error::Error` and `#[non_exhaustive]` on all four error types; `sequence::Error` chains its inner error through `source` |
 | C-NUM-FMT | not applicable | no numeric type of its own |
 | C-RW-VALUE | not applicable | no reader or writer |
@@ -49,7 +49,7 @@ for `partsfoundry/e1000e` at `6f6d3f1c`. A finding named in a row is the block's
 | C-CUSTOM-TYPE | met | `ReceiveVerdict`, `EmptiedRings` and `AccessPath` where a `bool` or an integer would be ambiguous |
 | C-BITFLAG | met | the flags are constants of the register's width, combined with `\|` |
 | C-BUILDER | not applicable | no type with many optional parts |
-| C-VALIDATE | met | frame lengths, PHY pages, flash offsets and the region's base are checked before use |
+| C-VALIDATE | met | frame lengths, PHY pages and flash offsets are checked before use, and the base against the top of the address space; its tie to the region is a contract (P0-4) |
 | C-DTOR-FAIL | not applicable | no `Drop`; `SoftwareFlag::release` takes the flag by value |
 | C-DTOR-BLOCK | not applicable | no `Drop` |
 | C-DEBUG | met | every public type implements `Debug` |

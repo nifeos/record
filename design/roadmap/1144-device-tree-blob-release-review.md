@@ -31,16 +31,19 @@ Reuse: the prior-art table weighs each device tree reader a caller could take in
 - P0-1, a blob's acceptance depends on the lookup: Open.
 - P0-2, two rules for a short output slice: Open.
 - P0-3, the errors carry no location: Waiting on the errors decision of milestone 1129.
+- P0-4, `Region` has public fields and is not `#[non_exhaustive]`: Open.
+- P0-5, the lookups match a name prefix: Open.
 - P1-1, no general traversal: Open.
 - P1-2, the common traits are missing: Open.
 - P1-3, four of seventeen functions have an example: Open.
+- P1-4, the `from_pointer` safety contract is incomplete: Open.
 - P2-1, `Debug` prints the blob twice: Open.
 - P2-2, the package ships the repository's tooling: Open.
 - P2-3, every walk reads every property name: Open.
 
 ## Open decisions
 
-The one-way doors D1 to D4 below.
+The one-way doors D1 to D6 below.
 
 ## Goal
 
@@ -63,14 +66,14 @@ hands over, with no allocator. Ranks 2 and 3 follow the leading reader by what a
 compares it with, not by downloads: `dtoolkit` is the alternative the baseline weighed, and
 `fdt-rs` the other reader that needs no allocator.
 
-| crate or system | role | version read | total | 90 days | reverse dependencies | updated |
+| crate or system | role | version read | total | 90 days | reverse dependencies | version read released |
 |---|---|---|---|---|---|---|
-| `fdt` | ranked 1: a reader, no allocator | 0.1.5 | 1,710,541 | 468,200 | 7 | 2026-10-01 |
+| `fdt` | ranked 1: a reader, no allocator | 0.1.5 | 1,710,541 | 468,200 | 7 | 2023-02-05 |
 | `dtoolkit` | ranked 2: a reader, editor and writer | 0.5.0 | 11,389 | 7,525 | 3 | 2026-11-03 |
 | `fdt-rs` | ranked 3: a reader, no allocator | 0.4.5 | 115,343 | 4,130 | 1 | 2024-02-25 |
 | `device_tree` | measured and read: an owned tree, needs an allocator | 1.1.0 | 2,403,514 | 511,456 | 2 | 2016-06-28 |
 | `dtb-walker` | measured and read: a callback walker | 0.2.0-alpha.3 | 168,871 | 104,023 | 0 | 2022-07-19 |
-| `fdt-parser` | measured and read: a reader, needs an allocator | 0.5.1 | 191,083 | 34,583 | 10 | 2026-04-01 |
+| `fdt-parser` | measured and read: a reader, needs an allocator | 0.5.1 | 191,083 | 34,583 | 10 | 2025-11-08 |
 | `fdt-raw` | measured and read: a reader | 0.3.0 | 130,036 | 34,126 | 6 | 2026-03-09 |
 | `flat_device_tree` | measured and read: a fork of `fdt` | 3.1.1 | 15,251 | 1,333 | 2 | 2024-06-07 |
 | `vm-fdt` | neighbor: a writer only | 0.3.0 | 3,326,764 | 761,716 | 15 | 2023-11-15 |
@@ -83,7 +86,7 @@ release since 2016, so it ranks below the readers a no-allocator caller can take
 
 - Than `fdt`, it refuses a malformed blob with an error. `fdt` 0.1.5 checks only the magic and
   `totalsize` in `Fdt::new`. Its source holds 49 `unwrap`, `expect` or `panic!` sites outside its
-  tests. `chosen()` and `root()` `expect` a node, and `str_at_offset` `expect`s UTF-8. Its `reg()`
+  tests and pretty-printing. `chosen()` and `root()` `expect` a node, and `str_at_offset` `expect`s UTF-8. Its `reg()`
   returns `None` for more than two cells. Its `MemoryRegion` holds a `*const u8` and a `usize`
   size, so a 64-bit region does not fit it on a 32-bit caller. This crate returns `u64` regions and
   refuses a wrapping one. Its `Error` implements `core::error::Error`, which `fdt`'s `FdtError` does not.
@@ -139,7 +142,28 @@ carries `pos`. A firmware author reading the boot error cannot find the fault. C
 on each structural variant, in the shape the errors decision of milestone 1129 picks. Door:
 one-way (D3). Effort: S.
 
+#### P0-4. `Region` has public fields and is not `#[non_exhaustive]`
+
+Verified in source.
+`Region` (`src/lib.rs`, lines 15 to 22) has two public fields, `start` and `size_bytes`, and no
+`#[non_exhaustive]`, so a caller builds one with a struct literal, as every `out` array does, and
+a third field, such as the node a region came from, breaks each of them. `fdt`'s `MemoryRegion`
+has public fields too; `dtoolkit` returns its register entries through methods.
+Change: `#[non_exhaustive]`, with `Region::new` and the `Default` of P1-2 for building one. Door:
+one-way (D5). Effort: S.
+
+#### P0-5. The lookups match a name prefix
+
+Verified in source.
+`node_register_regions`, `node_property`, `node_property_inherited` and `node_properties` match the first node whose name starts with `prefix` (`starts_with`, at
+`src/lib.rs` lines 445, 654, 701 and 822), so `b"cpu"` matches a `cpus` node and `b"memory"` a
+`memory-controller@` node. `memory_regions` already matches the exact name or the name followed by
+`@` (line 382), the specification's unit-address rule. A caller who relies on the prefix behavior
+after 0.1.0 breaks if it narrows.
+Change: the rule of D6, documented on each lookup. Door: one-way (D6). Effort: S.
+
 ### P1: before the first release
+
 
 #### P1-1. No general traversal
 
@@ -177,7 +201,16 @@ lookup. `total_size`'s documentation speaks for one caller ("we are about to sta
 out"). Change: an example and an `# Errors` section on each, run against the fixtures, and
 `total_size` described for any caller. Door: two-way. Effort: S.
 
+#### P1-4. The `from_pointer` safety contract is incomplete
+
+Verified in source.
+The `# Safety` section of `from_pointer` (`src/lib.rs`, line 189) asks only that `pointer` point
+at a blob that stays valid for `'a`. The function then builds a `&'a [u8]` of `totalsize` bytes,
+so the contract must also require that those bytes are readable and that nothing modifies them
+for `'a`. Change: say both. Door: two-way. Effort: S.
+
 ### P2: may follow
+
 
 #### P2-1. `Debug` prints the blob twice
 
@@ -233,11 +266,16 @@ has, which visits every token. Parse is a header check in all three. The crate i
   ignores a count truncates in silence.
 - D3, error locations (P0-3). Recommended: an offset on each structural variant, decided once for
   every crate by the errors decision.
-- D4, the prefix lookups. The lookups ratified at milestone 1085 match the first node anywhere
-  whose name starts with `prefix`, so `b"memory"` also matches a `memory-controller@` node.
-  `fdt`, `dtoolkit` and libfdt select by path, and `dtoolkit`'s `child` matches a unit address
-  only when the caller gives one. Recommended: keep the ratified lookups as built, since their
-  documentation states the rule, and answer the path case with P1-1's `find_node`.
+- D4, path lookups. `fdt`, `dtoolkit` and libfdt select by path, and `dtoolkit`'s `child`
+  matches a unit address only when the caller gives one. Recommended: keep the lookups ratified at
+  milestone 1085 under their names, and answer the path case with P1-1's `find_node`.
+- D5, `Region`'s fields (P0-4). Option A: `#[non_exhaustive]` with `Region::new` and `Default`.
+  Option B: two public fields frozen for good, since a span is a start and a size. Recommended: A,
+  the stricter choice; dropping the attribute later breaks no caller.
+- D6, the name rule of the lookups (P0-5). Option A: the exact name, or the name followed by `@`
+  and a unit address, as `memory_regions` matches. Option B: keep the prefix rule as built and
+  documented. Recommended: A, the stricter choice, since a prefix rule can come later as a new
+  lookup and a narrowed rule breaks callers. The names ratified at milestone 1085 stay.
 
 ## Evidence for the shared decisions
 
@@ -266,7 +304,7 @@ has, which visits every token. Parse is a header check in all three. The crate i
 ## Done when
 
 Every P0 and P1 finding reads Done, or Will not fix with its ruling, the architect has ruled D1
-to D4, and `script/review-status` shows the block BUILT.
+to D6, and `script/review-status` shows the block BUILT.
 
 ## BUGS
 
@@ -276,5 +314,5 @@ to D4, and `script/review-status` shows the block BUILT.
 ## Index row
 
 The release review of `device_tree_blob` against `fdt`, `dtoolkit`, `fdt-rs` and libfdt. Before
-0.1.0: a `from_bytes` that accepts a blob some lookups then refuse, two rules for a short slice and errors without a location. Before the release: a general traversal.
-Four doors to rule.
+0.1.0: a `from_bytes` that accepts a blob some lookups then refuse, two rules for a short slice, errors without a location, an open `Region` and prefix matching.
+Before the release: a general traversal. Six doors to rule.

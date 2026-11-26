@@ -63,7 +63,10 @@ into its own empty directory before the lane unpacked and read it.
 ## The benchmark
 
 A scratch crate depends on this crate by path and on `fatfs = "=0.3.6"` with its default
-features. `cargo run --release --bin fat_bench` runs it.
+features, so it runs over std with `alloc` and `chrono` on. `fatfs` 0.3 has no sector cache, and
+its `DirEntry::file_name` (`src/dir_entry.rs`, line 512) returns a new `String` for each entry,
+which the list column calls. `taskset -c 7 cargo run --release --bin fat_bench` runs it pinned to
+one core.
 
 - The image is 64 MiB in memory, formatted as FAT32 with 512-byte sectors by `fatfs::format_volume`.
   It holds `big.bin`, 1 MiB of the pattern `(i * 7 + 3) as u8`. It also holds a directory `dir`
@@ -81,13 +84,16 @@ features. `cargo run --release --bin fat_bench` runs it.
   seven passes and reports the lowest, divided by the repetitions. Inputs and results pass through
   `black_box`.
 
-Three runs, in nanoseconds, this crate first:
+Three runs pinned to one core, in nanoseconds, this crate first:
 
 | workload | run 1 | run 2 | run 3 |
 |---|---|---|---|
-| open the volume | 60 / 154 | 69 / 172 | 63 / 155 |
-| open and read a 1 MiB file | 77,593 / 83,817 | 79,744 / 89,823 | 77,731 / 83,727 |
-| open and list a 128-file directory | 27,110 / 72,452 | 29,551 / 93,890 | 18,684 / 65,248 |
+| open the volume | 60 / 170 | 62 / 153 | 61 / 154 |
+| open and read a 1 MiB file | 76,123 / 80,516 | 74,300 / 81,735 | 73,648 / 83,489 |
+| open and list a 128-file directory | 18,472 / 64,363 | 18,447 / 65,022 | 18,703 / 64,027 |
+
+Seven unpinned runs on the shared host put the read at 76,269 to 79,744 against 82,468 to 89,823,
+and the listing at 18,684 to 29,551 against 64,246 to 93,890; both move with the host's load.
 
 ## What was not run
 

@@ -30,7 +30,7 @@ each of the 54 items of the
 | C-CRATE-DOC | not met | the crate page describes the format but holds no example (P1-3) |
 | C-EXAMPLE | not met | four of seventeen public functions have an example (P1-3) |
 | C-QUESTION-MARK | met | the examples use `?` with `Ok::<(), device_tree_blob::Error>(())` |
-| C-FAILURE | not met | no `# Errors` section; `from_pointer` has `# Safety` (P1-3) |
+| C-FAILURE | not met | no `# Errors` section (P1-3); the `# Safety` section of `from_pointer` is incomplete (P1-4) |
 | C-LINK | met | the documentation links `Error`, `Region` and the limits |
 | C-METADATA | met | description, license, repository, documentation, readme, keywords and categories |
 | C-RELNOTES | met | `CHANGELOG.md` |
@@ -56,10 +56,10 @@ each of the 54 items of the
 | C-DEBUG | met | every public type has `Debug`; its output is P2-1 |
 | C-DEBUG-NONEMPTY | met | the derived output is never empty |
 | C-SEALED | not applicable | no traits |
-| C-STRUCT-PRIVATE | met | `DeviceTreeBlob` keeps its fields private; `Region` is two public numbers of passive data |
+| C-STRUCT-PRIVATE | not met | `DeviceTreeBlob` keeps its fields private; `Region` has two public fields and is not `#[non_exhaustive]` (P0-4) |
 | C-NEWTYPE-HIDE | not applicable | no wrapped implementation type |
 | C-STRUCT-BOUNDS | met | no bounds on the declarations |
 | C-STABLE | met | no dependencies |
 | C-PERMISSIVE | met | MIT OR Apache-2.0 |
 
-Totals: 24 met, 5 not met, 25 not applicable.
+Totals: 23 met, 6 not met, 25 not applicable.

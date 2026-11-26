@@ -21,11 +21,9 @@ cleared package
 with [its interface listing](../../notes/crate-reviews/file-allocation-table-public-api.md).
 1061's open item, the first-publish token, stays its own. Three settled choices stay closed: the
 `embedded-io-07` feature, optional and off by default (ruled 2026-11-12 UTC); the crate stays
-standalone; and the names of 1061's P1-5 to P1-9, ratified as built (2026-11-16 UTC). Their ratification came after every naming rule now in force, so the release-review rule reopens none.
+standalone; and the names of 1061's P1-5 to P1-9, ratified as built (2026-11-16 UTC). No later naming rule reopens them.
 
-Reuse: the crate's tests and its `lamfat` comparison tests, and a scratch benchmark crate that
-[the appendix](1143-file-allocation-table-release-review/what-was-checked.md) describes. No new
-tool.
+Reuse: the crate's tests and a scratch benchmark crate; no new tool.
 
 ## Finding status
 
@@ -40,7 +38,7 @@ tool.
 - P2-2, block-device adapters: Waiting on the feature-name decision of milestone 1129.
 - P2-3, `BufRead` and an async reader: Waiting on the byte sinks and sources decision of milestone 1129.
 - P2-4, a sector buffer sized to the device: Open.
-- P2-5, `LayoutError` has no `Hash`: Open.
+- P2-5, six value types have no `Hash`: Open.
 - P2-6, `Attributes` has no operators: Open.
 - P2-7, creating entries in a large directory is quadratic: Open.
 
@@ -69,13 +67,13 @@ host tool that builds an image. The review read `fatfs` at 0.3.6, its published 
 main line is an unpublished 0.4 with its own I/O traits, which `lamfat` 0.4.3 republishes, so the
 review read that too.
 
-| crate | role | version read | total | 90 days | reverse dependencies | updated |
+| crate | role | version read | total | 90 days | reverse dependencies | version read released |
 |---|---|---|---|---|---|---|
 | `fatfs` | ranked 1: read and write, over `std::io` | 0.3.6 | 1,978,715 | 543,223 | 60 | 2023-01-17 |
 | `embedded-sdmmc` | ranked 2: an SD card over SPI with a FAT volume manager | 0.10.0 | 412,688 | 62,481 | 40 | 2026-08-10 |
 | `lamfat` | ranked 3: a republish of `fatfs`'s main line | 0.4.3 | 36,281 | 28,025 | 0 | 2026-10-15 |
 | `starry-fatfs` | measured, not ranked: another `fatfs` fork | 0.4.1-preview.2 | 48,458 | 12,931 | 3 | 2026-02-06 |
-| `hadris-fat` | measured, not ranked: FAT with an exFAT preview | 2.5.0 | 12,298 | 5,539 | 8 | 2026-11-22 |
+| `hadris-fat` | measured, not ranked: FAT with an exFAT preview | 2.5.0 | 12,298 | 5,539 | 8 | 2026-10-03 |
 | `fat-core` | neighbor: a forensic reader | 0.2.0 | 8,446 | 6,230 | 2 | |
 | `rust-fs-core` | neighbor: not FAT | 0.5.1 | 71,112 | 71,112 | 15 | |
 | `embedded-io` | integration: `Read`, `Write`, `Seek` | 0.7.1 | 203,586,087 | 93,397,838 | 352 | 2025-10-01 |
@@ -92,7 +90,7 @@ review read that too.
   features needs the `core_io` crate. A build for `x86_64-unknown-none` fails without it, since
   the compiler cannot find the crate, and with it, since the `core_io` build script fails. Its errors are
   typed enums a caller matches, where `fatfs` returns `io::Error` built from string messages
-  (`Error::new(ErrorKind::Other, "...")`). It lists a 128-file directory in about a third of the
+  (`Error::new(ErrorKind::Other, "...")`). It lists a 128-file directory in under a third of the
   time `fatfs` takes, as Measured performance shows below.
 - Than `embedded-sdmmc` 0.10.0: it is a file system alone, over any sector size of 512 to
   4,096 bytes. `embedded-sdmmc` binds its FAT code to its own 512-byte `Block` and takes
@@ -135,7 +133,8 @@ Verified in source.
 `Result<u32, _>`, `TableEntry::Next(u32)`, `ChainError::NotADataCluster(u32)` and
 `ChainError::Broken { cluster: u32, .. }`, and
 `FileSystemInformation::next_free_cluster() -> Option<u32>` all carry a cluster as `u32`. The same
-`u32` type carries sector counts and byte sizes, so nothing stops a size passing as a cluster. The
+`u32` type carries sector counts and byte sizes, so nothing stops a size passing as a cluster. The `u32` file positions and sizes
+(`set_position(u32)`, `size_bytes() -> u32`) are deliberate: a FAT file holds less than 4 GiB. The
 crate already has `DirectoryCluster(u32)` for directories (1061's P1-8), and `embedded-sdmmc`
 0.10.0 exports `ClusterId`, which its `DirEntry::cluster` field carries.
 Change: a cluster newtype (name provisional, for the naming authority) in every place above, with
@@ -232,11 +231,13 @@ a 512-byte card spends 3.5 KiB per value it does not use; `embedded-sdmmc` holds
 `Block` in its cache. Change: a const generic for the buffer size with 4,096 as its default.
 Door: two-way, since a defaulted parameter breaks no caller. Effort: M.
 
-#### P2-5. `LayoutError` has no `Hash`
+#### P2-5. Six value types have no `Hash`
 
 Verified in source (C-COMMON-TRAITS).
-The other fourteen public error types derive `Hash`; `LayoutError` (`src/volume.rs`) derives
-`Debug`, `Clone`, `Copy`, `PartialEq` and `Eq` only. Change: derive it. Door: two-way. Effort: S.
+`LayoutError`, `VolumeLayoutOptions` and `VolumeLayout` (`src/volume.rs`), `FormatOptions` and
+`FormatPlan` (`src/format.rs`) and `NamedEntry` (`src/named_entry.rs`) derive `Debug`, `Clone`,
+`Copy`, `PartialEq` and `Eq` but not `Hash`, which every other value type derives. Change: derive
+it on all six. Door: two-way. Effort: S.
 
 #### P2-6. `Attributes` has no operators
 
@@ -256,23 +257,27 @@ README gives the figures. Change: a scan that remembers the first free run betwe
 ### Measured performance
 
 On a Linux x86_64 host (Intel Xeon Platinum 8160 at 2.10 GHz, 80 threads), rustc 1.100.0, release
-profile, against `fatfs` 0.3.6 on the same 64 MiB FAT32 image in memory. Each figure is
-nanoseconds per operation, the lowest of seven passes; each workload includes opening the volume.
-The appendix gives the method and two further runs, which agree within 15 percent on reading and
-on opening.
+profile, pinned to one core, against `fatfs` 0.3.6 over std with its default features, on the same
+64 MiB FAT32 image in memory. Each figure is nanoseconds per operation, the lowest of seven passes;
+each workload includes opening the volume. The appendix gives the method and two further runs.
 
 | workload | `file_allocation_table` | `fatfs` 0.3.6 |
 |---|---|---|
-| open the volume | 60 | 154 |
-| open and read a 1 MiB file | 77,593 | 83,817 |
-| open and list a 128-file directory | 27,110 | 72,452 |
+| open the volume | 60 | 170 |
+| open and read a 1 MiB file | 76,123 | 80,516 |
+| open and list a 128-file directory | 18,472 | 64,363 |
 
-Reading a large file is within 10 percent of `fatfs`, since both copy whole sectors and the device
-copy dominates; listing is about 2.7 times faster across the three runs (2.4 to 3.5).
+Reading a large file is comparable: 5 to 13 percent faster pinned, since both copy whole sectors
+and the device copy dominates, and it moves with the host's load unpinned. Listing is about 3.5
+times faster across the pinned runs, in part because `fatfs`'s `file_name()` allocates a `String`
+for each entry; `fatfs` 0.3 also has no sector cache.
 
 ## One-way doors
 
-- D1, the raw attribute byte (P0-1). Recommended: crate-private, the stricter choice; a typed or raw getter can come later without breaking a caller.
+- D1, the raw attribute byte (P0-1), `NamedEntry::attributes()` and `ShortEntry::attributes()`
+  beside the typed `user_attributes()`. Option A: crate-private. Option B: a name that says it is
+  the stored bits, chosen by the naming authority. Option C: return a type for the whole stored
+  byte. Recommended: A, the stricter choice; B or C can come later without breaking a caller.
 - D2, the cluster type (P0-2). Recommended: a newtype, matching `DirectoryCluster` and
   `embedded-sdmmc`'s `ClusterId`; its name goes to the naming authority.
 - D3, sector widths and the `fill_sector` refusal (P0-3). Recommended: `u64` throughout and a
@@ -332,11 +337,11 @@ Will not fix with its ruling, and D1 to D6 carry the architect's rulings.
 
 - The benchmark reads from memory. It measures the file system's work and a copy per sector, not
   a card's latency.
-- `starry-fatfs` 0.4.1-preview.2 was measured, not read.
-- `hadris-fat` was read at 2.5.0 for its features and dependencies only, and not built.
+- The review measured `starry-fatfs` 0.4.1-preview.2 and did not read it, and read `hadris-fat`
+  2.5.0 for its features and dependencies only.
 
 ## Index row
 
 The release review of `file_allocation_table` against `fatfs`, `embedded-sdmmc`, `lamfat` and
 `hadris-fat`: four one-way type changes before 0.1.0, three documentation fixes before the
-release, and six doors to rule. It lists a directory about 2.7 times faster than `fatfs`.
+release, and six doors to rule. It lists a directory about 3.5 times faster than `fatfs`.
