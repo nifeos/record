@@ -27,8 +27,8 @@ calef's.
 No milestone or decision chose dev for the gate on its own merits. Milestone 25 (cross-OS
 performance comparison) added `bench --release` in nifeos/nife@2ce5d1a97 for magnitudes next to
 release Linux, and kept the rest on dev for fast rebuilds and debuginfo. `xtask/src/bench.rs` says
-release never runs under icount
-because it changes instruction counts. That gives no reason dev is the right thing to count.
+release never runs under icount because it changes instruction counts. That gives no reason dev is
+the right thing to count.
 
 Reuse: the measurement uses the suite's own `script/test`, `script/bench --check` and timing record,
 with cargo's profile environment overrides. No other optimized test path exists.
