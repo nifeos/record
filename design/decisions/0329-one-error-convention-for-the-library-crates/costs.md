@@ -106,10 +106,10 @@ outside:
 | crate | constructions | where |
 |---|---|---|
 | `device_tree_blob` | 72 | `tests/hostile.rs`, `tests/strings_block.rs` |
-| `domain_name_system` | 24, and 3 in doc tests | `tests/replies.rs`; `src/lib.rs:316`, `:514`, `:1181` |
+| `domain_name_system` | 24, and 3 in doc tests | `tests/replies.rs`; the examples of `Name::from_dotted`, `decode_name` and `TcpReply::feed` |
 | `file_allocation_table` | 11 | `tests/the_errors_display.rs` |
-| `address_space_layout` | 1 in a doc test | `src/lib.rs:346` |
-| `entropy_contract` | 1 in a doc test | `src/lib.rs:523` |
+| `address_space_layout` | 1 in a doc test | the example of `check_image` |
+| `entropy_contract` | 1 in a doc test | the example of `fill_with` |
 
 The other crates build none. `device_tree_blob`'s 72 change under any option that adds its offset,
 since the struct's fields are private and a test compares `kind()`. Each of the other 40 becomes a `matches!` with `{ .. }`, and a test of a
