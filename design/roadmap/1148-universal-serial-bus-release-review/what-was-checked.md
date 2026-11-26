@@ -31,9 +31,9 @@ A scratch binary depending on this crate by path and on `nusb` =0.2.9, built wit
 calls, after a warm-up of one million, with inputs and outputs passed through
 `std::hint::black_box`.
 
-- The configuration, 94 bytes: the header (three interfaces), interface 0 as mass storage with two
-  bulk endpoints, interface 1 as a vendor interface with a 5-byte class descriptor and alternate
-  settings 0 and 1 (one interrupt endpoint each), and interface 2 as a boot keyboard with its
+- The configuration, 94 bytes: the header (three interfaces) and interface 0 as mass storage with
+  two bulk endpoints. Interface 1 is a vendor interface with a 5-byte class descriptor and
+  alternate settings 0 and 1, one interrupt endpoint each. Interface 2 is a boot keyboard with its
   9-byte HID descriptor and endpoint 0x84, 8 bytes, interval 10. Both walks return interface 2,
   endpoint 0x84, 8 bytes, which the bench asserts before timing.
 - The `nusb` walk: `ConfigurationDescriptor::new`, then `interface_alt_settings()` filtered to
@@ -64,9 +64,9 @@ Each `.crate` from crates.io at the version in the prior-art table, unpacked and
   over borrowed bytes, with every field of each descriptor as a method. `DescriptorIter` stops at
   a length below 2 or past the buffer, logging a warning. The module uses std.
 - `usbh` 0.1.0: a no_std host stack over a `HostBus` trait, with a boot keyboard driver in
-  `src/driver/kbd.rs`. Its `InputReport` is cast from the slice with `unsafe`, `pressed_keys`
+  `src/driver/kbd.rs`. It casts its `InputReport` from the slice with `unsafe`, `pressed_keys`
   iterates the nonzero slots, and nothing computes releases or checks for a phantom report. Its
-  descriptor parser is written with `nom`.
+  descriptor parser uses `nom`.
 - `usb-host` 0.1.3: the `USBHost`, `Endpoint` and `Driver` traits, `repr(C)` descriptor structs
   and a typed `RequestType`; no configuration walk.
 - `usb-device` 0.3.2: the device side's `DescriptorWriter`, which writes the descriptors this
@@ -83,12 +83,12 @@ Each `.crate` from crates.io at the version in the prior-art table, unpacked and
 - OpenBSD, from the GitHub mirror at commit `c31f732c3135f73ec492f4793614fbe158ae4b4b`, whose
   files carry their own revisions: `sys/dev/usb/ukbd.c` 1.91, `sys/dev/hid/hidkbd.c` 1.15 and
   `sys/dev/usb/usb_subr.c` 1.169. `hidkbd_decode` ignores a report whose first slot is 0x01, then
-  emits modifier changes, releases and presses in that order, the order `changes` follows; a key
-  listed twice in the new report is added twice. `usbd_find_idesc` walks to `wTotalLength` and
+  emits modifier changes, releases and presses in that order, the order `changes` follows; it adds a
+  key twice when the new report lists it twice. `usbd_find_idesc` walks to `wTotalLength` and
   stops at a length of 0.
 - Linux v6.18: `drivers/hid/usbhid/usbkbd.c`, whose `usb_kbd_irq` reports the eight modifiers,
-  then for each slot a release and a press, skipping a slot that holds 0 to 3, and whose probe
-  takes an interface with exactly one interrupt `IN` endpoint; and `drivers/usb/core/config.c`,
+  then for each slot a release and a press, skipping a slot that holds 0 to 3. Its probe takes an
+  interface with exactly one interrupt `IN` endpoint. And `drivers/usb/core/config.c`,
   whose `usb_parse_configuration` logs a descriptor longer than what remains or shorter than 2 and
   skips the rest of the configuration.
 
@@ -97,6 +97,6 @@ for behavior only and copied no text.
 
 ## What was not run
 
-- Kani was not run; the harness count is from source.
-- The fuzz targets were not run.
-- No comparator's tests were run; `nusb` was built only as the bench's dependency.
+- Kani: the harness count is from source.
+- The fuzz targets.
+- Any comparator's tests; the bench built `nusb` only as its dependency.

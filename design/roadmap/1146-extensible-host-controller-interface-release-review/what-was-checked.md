@@ -11,8 +11,8 @@ An appendix to [the milestone](../1146-extensible-host-controller-interface-rele
 `src/event.rs`, `src/completion.rs`, `src/registers.rs`, `src/extended_capabilities.rs`,
 `src/context.rs`, `src/port.rs`, `src/direct_memory_access.rs`, `examples/fake_controller.rs`,
 `Cargo.toml`, `README.md`, `CHANGELOG.md` and `docs/stranger-test-run-2026-11-11.md`; `src/tests.rs`
-and `src/verification.rs` read for what they cover. The 13 Kani harnesses, the 13 falsification
-patches and the three fuzz targets were listed, not run.
+and `src/verification.rs` read for what they cover. The review listed the 13 Kani harnesses, the
+13 falsification patches and the three fuzz targets, and ran none of them.
 
 ## The commands
 
@@ -46,8 +46,8 @@ Each `.crate` from crates.io at the version in the prior-art table, unpacked and
   `#[non_exhaustive]` anywhere. Run in the benchmark.
 - `crab-usb` 0.12.1: a host stack over `xhci` 0.9, `dma-api` and `tock-registers`, with errors
   through `thiserror` and `anyhow`; `ConvertXhciError` maps completion codes to `TransferError`;
-  `TrbRing::enque_trb` and `next_index` in `src/backend/kmod/xhci/ring.rs` advance with no full
-  check. Read, not built.
+  the transfer ring's enqueue and `next_index` in `src/backend/kmod/xhci/ring.rs` advance with no
+  full check. Read, not built.
 - `usb-host` 0.1.3: the crates.io record only; it is host driver traits with no controller.
 
 ## The systems read

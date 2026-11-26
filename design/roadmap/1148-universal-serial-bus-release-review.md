@@ -12,15 +12,15 @@ needs_person: yes
 The release review of `partsfoundry/universal_serial_bus` at commit `4612f6b5`, version 0.1.0
 (unpublished), under milestone 1129 (the combine review), whose
 [block](1129-crate-interfaces-best-in-class.md) sets its form. The baseline is milestone 1111
-(the outside review's findings), [its block](1111-usb-outside-review.md) and the cleared package
+(what an outside maintainer would fix before its first release), [its block](1111-usb-outside-review.md) and the cleared package
 [`notes/crate-reviews/universal-serial-bus.md`](../../notes/crate-reviews/universal-serial-bus.md).
-1111's three decisions stand and nothing here reopens them: every public name was ratified on
-2026-11-19 with its specification alias, `changes` emits HID usages with the modifiers as 0xe0 to
-0xe7, `DeviceDescriptor::parse` returns a `Result` while `BootReport::parse` keeps its `Option`,
-and `Speed` has four variants. The one naming rule added since that ratification, the right and
+1111's three decisions stand and nothing here reopens them. The architect ratified every public
+name on 2026-11-19 with its specification alias. `changes` emits HID usages with the modifiers as
+0xe0 to 0xe7. `DeviceDescriptor::parse` returns a `Result` while `BootReport::parse` keeps its
+`Option`, and `Speed` has four variants. The one naming rule added since that ratification, the right and
 permission rule, touches no name in this crate, so the release-review rule reopens none. The
-usage-to-evdev table follows the standing rule for a keyboard table: it was written from the HID
-Usage Tables and the evdev header, with Linux's `hid_keyboard[]` as a test cross-check only.
+usage-to-evdev table follows the standing rule for a keyboard table: its source is the HID Usage
+Tables and the evdev header, with Linux's `hid_keyboard[]` as a test cross-check only.
 
 Reuse: the prior-art table weighs each host-side USB crate a caller could take instead, and the
 device-side crates a caller may already know the vocabulary from.
@@ -47,16 +47,16 @@ The one-way doors D1 to D5 below.
 ## Goal
 
 A stranger writing a host controller driver with no operating system picks this crate for the
-part of a keyboard driver that is about USB: it finds the keyboard's endpoint in bytes a device
-sent, builds the four requests that bring it up, and turns two boot reports into key events,
-without unsafe code, an allocator or a dependency. Its types can grow after 0.1.0 without breaking
+part of a keyboard driver that is about USB. It finds the keyboard's endpoint in bytes a device
+sent, builds the four requests that bring it up, and turns two boot reports into key events. It
+needs no unsafe code, no allocator and no dependency. Its types can grow after 0.1.0 without breaking
 that stranger's code, and its refusals print and compose with `?`.
 
 ## What the review read and ran
 
-The sources, the commands and the systems outside Rust are in
-[the appendix](1148-universal-serial-bus-release-review/what-was-checked.md), and the 54 API
-Guidelines items in [the guidelines table](1148-universal-serial-bus-release-review/api-guidelines.md).
+[The appendix](1148-universal-serial-bus-release-review/what-was-checked.md) names every source,
+command and system outside Rust that the review used, and
+[the guidelines table](1148-universal-serial-bus-release-review/api-guidelines.md) marks all 54 items.
 
 ## Prior art
 
@@ -98,22 +98,23 @@ reads OpenBSD and Linux, which do the same job in a kernel.
   the same 94 bytes this crate's walk to the keyboard's endpoint took 41.6 ns and `nusb`'s
   took 75.5 ns (Measured performance).
 - Than `usbh`: `usbh` 0.1.0's keyboard driver casts the report with `unsafe`, reports pressed keys
-  with no release events and no phantom check, and parses descriptors with `nom`. It has not been
-  updated since 2023.
+  with no release events and no phantom check, and parses descriptors with `nom`. Its last release
+  is from 2023.
 - Than `usb-host`: `usb-host` 0.1.3 is a trait set with `repr(C)` descriptor structs and no walk;
-  it has not been updated since 2022.
+  its last release is from 2022.
 - Than `usbd-hid` and `keycode`: they build reports on the device side or map key names; neither
   reads a report from a device. Their `KeyboardReport` and `KeyMap` types are the vocabulary a
   caller may already know, and this crate's `BootReport` holds the same eight bytes.
-- Than OpenBSD and Linux: it answers a bad descriptor length with a refusal naming its offset,
-  where Linux's `usb_parse_configuration` logs one and skips the rest of the configuration and
-  OpenBSD's `usbd_find_idesc` stops only at a length of 0; it drops a phantom report whole where Linux skips each slot holding 1 to 3; and it
-  reports a key listed twice in one report once, where OpenBSD's `hidkbd_decode` adds it twice.
+- Than OpenBSD and Linux: it answers a bad descriptor length with a refusal naming its offset.
+  Linux's `usb_parse_configuration` logs one and skips the rest of the configuration, and
+  OpenBSD's `usbd_find_idesc` stops only at a length of 0. It drops a phantom report whole, where
+  Linux skips each slot holding 1 to 3. It reports a key listed twice in one report once, where
+  OpenBSD's `hidkbd_decode` adds it twice.
 
 ## The items
 
-Effort is S (half a day), M (a day or two) or L (longer). One-way means a caller outside the
-repository acts on it once 0.1.0 is out, so each P0 lands in 0.1.0 or not at all.
+Effort is S (half a day), M (a day or two) or L (longer). A P0 change is one that a caller
+builds on from the day 0.1.0 appears, so it ships in 0.1.0 or never ships.
 
 ### P0: the 0.1.0 interface
 
@@ -167,7 +168,7 @@ later is additive. Door: two-way. Effort: S.
 Verified in source (C-FAILURE).
 `DeviceDescriptor::parse`, `ConfigurationHeader::parse` and `find_boot_keyboard` return `Result`,
 and `BootReport::parse` and `control_maximum_packet_bytes` return `Option`. None has an `# Errors`
-heading; the refusals are described in prose on some of them. Change: an `# Errors` section on
+heading; some of them describe their refusals in prose. Change: an `# Errors` section on
 each, naming the variants it can return or when it answers `None`. Door: two-way. Effort: S.
 
 #### P1-3. Two items have an example, and neither uses `?`
@@ -246,15 +247,15 @@ here; the numbers settle only that the refusals and the duplicate check cost ten
   their layouts are the specification's and cannot grow.
 - D3, how `changes` delivers events (P0-3). Recommended: an iterator of a typed `KeyChange`, since a
   callback is one `for_each` away from it and the reverse needs a buffer.
-- D4, one refusal type for the crate. `Refusal` is shared by the three descriptor parsers, so
-  `DeviceDescriptor::parse` is typed as able to return `NoBootKeyboard`, which it never does.
+- D4, one refusal type for the crate. The three descriptor parsers share `Refusal`, so
+  the type of `DeviceDescriptor::parse` admits `NoBootKeyboard`, which it never returns.
   Splitting it into a type per parser later breaks every caller. Recommended: keep the one enum,
   which is what `nusb` and `crab-usb` do, and let the errors decision of milestone 1129 confirm the
   shape.
 - D5, bare `u8` for the usage and the descriptor kind. `changes`, `evdev_code` and
   `SetupPacket::get_descriptor(kind, ...)` take a `u8` where a newtype would name it. Every one of the
   256 values is a valid usage id and a valid descriptor type (class descriptors such as 0x21 and
-  0x22 among them), so a newtype would exclude no state, and OpenBSD, Linux, `usbd-hid` and
+  0x22 among them). A newtype would exclude no state, and OpenBSD, Linux, `usbd-hid` and
   `keycode` all index by the number. Recommended: keep `u8`; P0-3's `KeyChange` names the field.
 
 ## Evidence for the shared decisions
@@ -288,22 +289,21 @@ here; the numbers settle only that the refusals and the duplicate check cost ten
 
 ## Done when
 
-Every P0 and P1 finding reads Done, or Will not fix with its ruling, the architect has ruled D1
-to D5, and `script/review-status` shows the block BUILT.
+Each P0 and P1 reads Done or Will not fix; D1 to D5 carry rulings; and `script/review-status`
+shows the block BUILT.
 
 ## BUGS
 
-- Kani was not run; the harness count is from source.
-- `rusb`, `usb`, `usb-if`, `usbd-human-interface-device`, `hidreport` and `hut` were measured and
-  not read.
+- The review did not run Kani; the harness count is from source.
+- The review measured `rusb`, `usb`, `usb-if`, `usbd-human-interface-device`, `hidreport` and
+  `hut` and did not read them.
 - The report-diff comparison is against a port of Linux's loop written for the bench, since no
   crate on crates.io diffs two boot reports.
-- The OpenBSD files were read from the GitHub mirror's main branch, which carries no release tags;
+- The review read the OpenBSD files from the GitHub mirror's main branch, which carries no release tags;
   the revisions in the table are the files' own.
 
 ## Index row
 
 The release review of `universal_serial_bus` against `crab-usb`, `nusb`, `usbh`, `usb-host`, the
-device-side crates, OpenBSD and Linux: three one-way changes before 0.1.0 (non-exhaustive enums and
-structs, and `changes` as an iterator of typed events), four smaller fixes before the release, and
-five doors to rule.
+device-side crates, OpenBSD and Linux: three one-way changes before 0.1.0, four smaller fixes
+before the release, and five doors to rule.
