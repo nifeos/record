@@ -12,10 +12,10 @@ needs_person: no
 
 *(The title and slug are provisional.)*
 
-`components/src/swish.rs` is 5,980 lines at `0435a9aeb`. Milestone 70 (`swish`'s remaining logic
-in a crate) measured it at 2,625 on 2026-08-02, and it was 3,899 on 2026-09-24. §266 (a Rust source
-file stays under 2,000 lines) sets the ceiling and a 2026-12-31 goal of no file over 4,000.
-Milestone 840 (the scheduler file is split along its seams) is the model.
+`components/src/swish.rs` is 5,980 lines at `0435a9aeb`. Milestone 70 (`swish`'s remaining logic in
+a crate) measured it at 2,625 on 2026-08-02, and it was 3,899 on 2026-09-24. §266 (a Rust source
+file stays under 2,000 lines) sets the ceiling and its dated goals. Milestone 840 (the scheduler
+file is split along its seams) is the model.
 
 The cut and every module name below are calef's call. A lane writes them up as a
 `status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request

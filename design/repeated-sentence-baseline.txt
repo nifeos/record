@@ -467,27 +467,16 @@
 
 29b098ada12a design/roadmap/1054-an-entry-that-conflicts-with-the-queue-is-caught-before-it.md
 
-29bf1ce0ac11 notes/scripts/analysis-and-supply-chain.md
 
-29bf1ce0ac11 notes/scripts/boards-and-boot-checks.md
 
-29bf1ce0ac11 notes/scripts/build-test-and-gate.md
 
-29bf1ce0ac11 notes/scripts/helpers-and-bootstrap.md
 
-29bf1ce0ac11 notes/scripts/load-and-reliability.md
 
-29bf1ce0ac11 notes/scripts/process-measures.md
 
-29bf1ce0ac11 notes/scripts/records-and-indexes.md
 
-29bf1ce0ac11 notes/stack/guard-page-faults-2026-08-16.md
 
-29bf1ce0ac11 notes/stack/interrupt-stack.md
 
-29bf1ce0ac11 notes/stack/kernel-stack-freed-under-its-owner.md
 
-29bf1ce0ac11 notes/stack/kernel-stack-overflows-2026-08-14.md
 
 2a2293bdf40d design/decisions/0189-what-a-caretaker-is-when-it-translates.md
 
@@ -889,19 +878,12 @@
 
 57220c24b67e notes/delegated-review/the-method.md
 
-580f77df5160 design/roadmap/0842-the-grant-plan-crate-root-is-split-along-its-seams.md
 
-580f77df5160 design/roadmap/0843-the-system-initializer-crate-root-is-split-along-its-seams.md
 
-580f77df5160 design/roadmap/0844-the-shell-program-is-split-along-its-seams.md
 
-580f77df5160 design/roadmap/0845-the-filesystem-protocol-crate-root-is-split-along-its-seams.md
 
-580f77df5160 design/roadmap/0846-the-file-server-core-moves-its-tests-out.md
 
-580f77df5160 design/roadmap/0847-the-swish-check-harness-is-split-along-its-seams.md
 
-580f77df5160 design/roadmap/0872-the-kernels-user-mode-file-is-split-along-its-seams.md
 
 5816a8d1999a design/roadmap/0461-an-sse-enabled-x86-64-userspace-target.md
 

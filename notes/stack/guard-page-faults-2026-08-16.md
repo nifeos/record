@@ -242,8 +242,9 @@ cannot see.
 
 ## What this file's numbers cite
 
-Glossed here because the split made this a file of its own, and `script/citations` asks each
-file to say once what a number cites. Each gloss is the record's own title.
+Glossed here by [the per-file
+rule](../citations.md#the-ratchet-a-citation-a-commit-adds-says-what-it-cites). Each gloss is the
+record's own title.
 
 - milestone 84 (Stack high-water: measure kernel stack depth)
 - milestone 108 (The drivers move onto frame capabilities)
