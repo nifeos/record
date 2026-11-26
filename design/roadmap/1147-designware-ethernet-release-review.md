@@ -25,24 +25,32 @@ section feeds milestone 1129's shared decisions.
 
 The status words are those `script/review-status` reads.
 
-- P0-1, six public structs with public fields and no `#[non_exhaustive]`: Open.
-- P0-2, the bring-up serves one physical layer device: Open.
+- P0-1, six public structs with public fields and no `#[non_exhaustive]`: Done,
+  partsfoundry/designware_ethernet#17.
+- P0-2, the bring-up serves one physical layer device: Done, partsfoundry/designware_ethernet#17.
 - P0-3, four error types with no `Display` and no `core::error::Error`: Waiting on the errors
   decision of milestone 1129.
-- P0-4, the bring-up answers a bare tuple and takes an unchecked station address: Open.
-- P0-5, the packed settings word is a public format: Open.
-- P0-6, safe functions take the physical address the device uses: Open.
-- P0-7, an inconclusive coherence probe passes the bring-up: Open.
-- P1-1, the README says the crate has run on a board, and the crate page says it has not: Open.
-- P1-2, a short receive buffer loses a good frame as a dropped one: Open.
+- P0-4, the bring-up answers a bare tuple and takes an unchecked station address: Done,
+  partsfoundry/designware_ethernet#17.
+- P0-5, the packed settings word is a public format: Done, partsfoundry/designware_ethernet#17.
+- P0-6, safe functions take the physical address the device uses: Waiting on the DMA regions
+  decision of milestone 1129.
+- P0-7, an inconclusive coherence probe passes the bring-up: Done,
+  partsfoundry/designware_ethernet#17.
+- P1-1, the README says the crate has run on a board, and the crate page says it has not: Done,
+  partsfoundry/designware_ethernet#17.
+- P1-2, a short receive buffer loses a good frame as a dropped one: Done,
+  partsfoundry/designware_ethernet#17.
 - P1-3, one failure section, few examples, four links to private items, and a README that is not
-  the crate page: Open.
-- P1-4, the probe deadline subtracts two clock readings unchecked: Open.
-- P2-1, the manifest has no `documentation` key and no `include` list: Open.
+  the crate page: Done, partsfoundry/designware_ethernet#17.
+- P1-4, the probe deadline subtracts two clock readings unchecked: Done,
+  partsfoundry/designware_ethernet#17.
+- P2-1, the manifest has no `documentation` key and no `include` list: Done,
+  partsfoundry/designware_ethernet#17.
 - P2-2, `smoltcp` and `embassy-net-driver` adapters and a borrowed frame: Waiting on the
   feature-names decision of milestone 1129.
 - P2-3, ring sizes the caller chooses: Open.
-- P2-4, the driver always programs one MDIO clock range: Open.
+- P2-4, the driver always programs one MDIO clock range: Done, partsfoundry/designware_ethernet#17.
 - P2-5, the simulator ships to callers: Waiting on the simulators decision of milestone 1129.
 
 ## Open decisions
