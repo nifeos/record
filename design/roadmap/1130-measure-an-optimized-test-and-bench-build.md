@@ -187,12 +187,30 @@ per architecture for the user programs, against more than five minutes saved in 
   steps show source lines at O0, O1 and O2. Optimized, the breakpoint lands one statement in, the
   first step goes back one line, and the `boot_info_pointer` argument is gone. A backtrace there ends
   at `kernel_main` at every level, as it is the first Rust frame.
-- Mutation testing. Not yet measured; a sample is set for the night-time window. The workflow
-  derives each mutant's timeout as five times its package's baseline test time, with a floor of 20
-  seconds. A package whose tests run under four seconds keeps the floor at every level, and a hang
-  stays a hang. The likely shift is small and downward: a slow mutant
-  that timed out at O0 may finish optimized and move to caught or missed. Each mutant build costs
-  more optimized.
+- Mutation testing. A sample of two host packages, coremark and capability_manifest_note, ran
+  `script/mutation -p <package>` at O0 (the tree as it is) and at O2 (every per-package entry
+  deleted), at the script's two jobs and four test threads:
+
+  | package | level | mutants | caught | missed | timeout | unviable | wall | mutant builds | mutant tests |
+  |---|---|---|---|---|---|---|---|---|---|
+  | coremark | O0 | 109 | 106 | 2 | 1 | 0 | 56 s | 44 s | 45 s |
+  | coremark | O2 | 109 | 106 | 2 | 1 | 0 | 63 s | 56 s | 45 s |
+  | capability_manifest_note | O0 | 463 | 311 | 4 | 3 | 145 | 345 s | 527 s | 147 s |
+  | capability_manifest_note | O2 | 463 | 311 | 4 | 3 | 145 | 411 s | 668 s | 136 s |
+
+  Build and test columns sum each phase over all mutants, so they exceed the wall time of a
+  two-job run. Optimization changes nothing that mutation testing finds here: both levels generate
+  the same mutants, and every mutant lands in the same outcome, caught, missed, timeout and
+  unviable alike. The timeouts are the same mutants at both levels (`-=` to `/=` in coremark's
+  `list_work`, `+=` to `*=` in three of capability_manifest_note's encoders); each runs out the
+  20-second floor, since both packages' baseline tests take under a second, so a hang stays a hang
+  at O2 as expected. O2 costs 12 and 19 percent more wall time, and the cause is the rebuild each
+  mutant pays: the mutated package and its test binary recompile at the profile's level, and those
+  builds take 27 percent longer at O2 in both packages (about 1.1 to 1.4 seconds a mutant for
+  capability_manifest_note). Test time does not offset it, because these tests are already short;
+  capability_manifest_note's tests ran 8 percent faster at O2, coremark's the same. A package whose
+  tests are long against its build would gain, and these two do not. Two packages are a sample, not
+  the census.
 
 ### What option C costs beyond a baseline save
 
@@ -218,7 +236,8 @@ Each option's cost is what this measurement found, not an estimate.
   Rework `ipc_stack_depth`'s margin so it keys on what it measures rather than on
   `debug_assertions`. Delete the 21 per-package entries. Save one bench baseline per architecture.
   Measured: kernel legs 34 to 38 percent faster, the cold suite 20 percent faster, toolchain drift
-  under a quarter of a percent.
+  under a quarter of a percent. Mutation testing finds the same results at 12 to 19 percent more
+  wall time, unless `script/mutation` holds its own build at opt-level 0.
 - C. The gating bench on a release build, the suite unchanged. Route the two bench paths through
   the profile, find why the x86_64 release kernel stalls under icount, and pay the costs above.
   O2 counts 20 to 30 percent more IPC instructions than it does, and only C sees the real
@@ -229,7 +248,10 @@ Each option's cost is what this measurement found, not an estimate.
 
 D, with B2 first. B2 alone takes most of the gain: the bench stops counting unoptimized code,
 toolchain drift drops from ten to twenty percent to under a quarter of a percent, and the suite
-runs faster. C then moves the bench onto the shipped profile, once its two blockers are fixed. The
+runs faster. Mutation testing finds the same mutants and outcomes at O2 and pays 12 to 19 percent
+more wall time for the rebuild each mutant makes; that cost does not change the recommendation,
+because the B2 lane can hold `script/mutation` at opt-level 0 with one cargo profile override,
+since the level does not change what it finds. C then moves the bench onto the shipped profile, once its two blockers are fixed. The
 seven questions:
 
 1. What else did this consider? A loses because the gate measures a build nobody runs and pays a
@@ -273,7 +295,9 @@ seven questions:
   true-release bench, and the two bench paths that ignore `--release` on main.
 - **Recorded.** Nothing explains the `tss_iomap_switch` difference between O3 and rel on x86_64
   yet. One icount run per setting bisects it over the five settings that separate the two.
-- **Recorded.** The mutation-timeout sample, coremark and capability_manifest_note at O0 and O2.
+- **Recorded.** Whether `script/mutation` follows the dev profile to O2 or holds opt-level 0 is the
+  B2 lane's to settle; the two-package sample shows no difference in outcomes and a 12 to 19
+  percent cost at O2.
 
 ## Index row
 
