@@ -1449,10 +1449,6 @@ efce040cd9af design/decisions/0233-a-region-retypes-a-run-of-pages.md
 
 efce040cd9af design/decisions/0234-the-prompt-shows-one-tree.md
 
-eff7722eac67 design/decisions/0040-no-reaper-of-last-resort.md
-
-eff7722eac67 design/decisions/0303-the-retention-declaration-says-nothing-about-the-region.md
-
 
 
 

@@ -43,7 +43,7 @@ needs neither.
 
 - The chain holds only if children are built from the supervisor's own region. A supervisor that
   builds a child out of a region delegated from elsewhere breaks it: destroying the supervisor does not
-  reclaim the child, and orphans are back. Decided 2026-10-15: forbidden
+  reclaim the child, and orphans are back. Decided 2026-10-16: forbidden
   ([§303 (the region)](0303-the-retention-declaration-says-nothing-about-the-region.md)). Children
   are built from budget you own: a region you created, a `SPLIT` child of your own region, or a
   root handed to you as your whole budget. The enforcement named there: `build_child` will require

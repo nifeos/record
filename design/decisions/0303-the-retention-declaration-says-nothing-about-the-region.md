@@ -29,9 +29,10 @@ Three things, ruled together:
    about it could be acted on.
 3. **Building a child from a retained, delegated region is forbidden.** [§40 (a supervisor's death
    is its subtree's death)](0040-no-reaper-of-last-resort.md)'s first caveat asked whether that is
-   forbidden or merely discouraged; the answer is forbidden. Children are built from budget you
-   own: a region you created, a `SPLIT` child of your own region, or a root handed to you as your
-   whole budget. The answer lives in §40's caveat, which this ruling closes.
+   forbidden or merely discouraged; the answer is forbidden. [§40 (a supervisor's death is its
+   subtree's death)](0040-no-reaper-of-last-resort.md#two-caveats-recorded-because-they-are-load-bearing)'s
+   first caveat states what counts as budget you own. The answer lives in §40's caveat, which this
+   ruling closes.
 
 The enforcement, named. The rule is prose until the check lands, and the record says so. The
 check, when it is built: `build_child` requires the caller to present the owning region's
