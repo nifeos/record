@@ -49,8 +49,8 @@ Each step lands on its own and leaves the installer working.
 6. Allocation, write, extend, truncate and delete, with FSInfo and the dirty bit, and the round-trip
    harness (property 3). Two pull requests.
 7. Make and remove directories, rename, and long-name creation with alias numbering.
-8. The general format for FAT12, FAT16 and FAT32, folding the `mkfs` in, with FAT12 and FAT16
-   oracle images.
+8. The general format, as stage 8 of
+   [milestone 813 (a proven FAT crate)](../0813-a-proven-fat-crate-released-on-its-own.md) scopes it.
 9. Timestamps, attributes and the label, then `script/crate-standalone` and the README for release.
 
 ## Which crate should publish first

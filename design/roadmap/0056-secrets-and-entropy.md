@@ -42,8 +42,7 @@ constant would be passed straight through. notes/entropy.md carries the full lis
 
 ## The credential half: BUILT, 2026-07-31 (notes/credentials.md)
 
-An identity, a secret, and a way to check the second against the first without ever being able to
-read it. `crates/credentialer` (Argon2id, the store, constant-time verification), `crates/credential_proto` (the
+`crates/credentialer` (Argon2id, the store, constant-time verification), `crates/credential_proto` (the
 wire contract), `components/src/credentialer.rs` (the service), `fixtures/src/credentialer_test_client.rs` (its provisioner,
 client, and attacker). Five kernel tests on both ISAs, 26 host tests, three Kani harnesses.
 

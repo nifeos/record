@@ -39,8 +39,8 @@ carried stale items too.
 
 ## The wrong sentences outside the roadmap
 
-Fixing a block repeatedly left a rustdoc, a module header or a note still saying the old thing,
-where no gate reads it. Ten of those are listed in
+[The parent's section](../follow-on-work.md) "The wrong sentence is rarely only in the roadmap"
+states the finding. Ten such sentences are listed in
 `design/roadmap/0333-claims-the-sweep-found-false-outside-the-roadmap.md`. Among them are a rustdoc
 that says the address-space object does not consult `ENUMERATE` yet, and a decision file that quotes
 a roadmap block saying nobody is building the decision. Six comments cite a type deleted four days

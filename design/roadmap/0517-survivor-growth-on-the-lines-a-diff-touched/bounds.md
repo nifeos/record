@@ -1,14 +1,14 @@
 # How far the 81.6% can be trusted: the cut date and the old lines
 
-An appendix to [milestone 517 (what fraction of survivor growth arrives on lines a pull request
+An appendix to [milestone 517 (survivor growth on lines a pull request
 touched)](../0517-survivor-growth-on-the-lines-a-diff-touched.md). The main page is complete without
 it. It holds the two checks on the fraction's edges. One is how the share moves with the cut date.
 The other is whether the survivors on lines older than the window were there when it opened.
 
 ## The bound on 81.6%, stated as a range
 
-It is 68% to 85% across the plausible boundaries, and 81.6% at the right one. The baseline run
-is dated 2026-08-03 with no hour recorded, so the cut is a day rather than an instant. The window's
+It is 68% to 85% across the plausible boundaries, and 81.6% at the right one. The main page says
+why the cut is a day rather than an instant. The window's
 first two days are unusually dense:
 
 | cut | in-window share |

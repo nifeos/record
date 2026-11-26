@@ -38,9 +38,8 @@ of it is worth carrying:
 - It was built on the retired framing. It grounded itself by quoting the project's goal as
   *"understanding how operating systems work, not running applications"*, which AGENTS.md names
   specifically and says to treat as stale wherever found.
-- **It asked to be updated and was not.** Its closing line said to add to it *"when a subsystem that
-  would move the needle (a writable FS, a POSIX shim, a net stack) actually gets built."* Two of the
-  three were built.
+- **It asked to be updated and was not.** Two of the three subsystems its closing line waited for
+  were built; [the note](../../notes/why-not-general-purpose.md) quotes the line.
 
 ## The distinction that scopes this, and it is not age
 
