@@ -150,20 +150,21 @@ goes to the maintainer alone and stays out of the block.
 
 ## Across crates: what they share
 
-Some shapes recur, and the crates share each one or differ on purpose, decided once. A grep of the
-29 crates on 2026-11-25 (UTC) shows how far they differ today. Each count is approximate, and the
-census in step 1 recounts it.
+Some shapes recur, and the crates share each one or differ on purpose, decided once. The counts
+below are from [the census](1129-crate-interfaces-best-in-class/census.md), which step 1 made on
+2026-11-26 (UTC) at a named commit of each crate's `main`. It gives each count's command, and a
+reading where a grep could not decide.
 
 | shape | today | the question |
 |---|---|---|
-| Errors | about nine crates implement `core::error::Error`; others return bare enums or `Option` | one convention: an enum per operation or per crate, `Display` and `core::error::Error` always, the input that failed carried or not |
-| DMA regions | three traits named `DirectMemoryAccessRegion`, in `designware_ethernet`, `designware_mobile_storage` and `e1000e`, with different offset widths and barrier placement | one trait or two, and whether it lives in its own crate (1050's appendix recommends two for now) |
-| Doorbells and tails | two `Tails` traits and two `Hardware` traits | one register-access shape for ring drivers, or each its own |
-| Register access | each driver reads and writes through its own trait | a shared shape, against `tock-registers` and `safe-mmio` |
-| Byte sinks and sources | `line_editor`'s `Sink`, `file_allocation_table`'s `SectorDevice` and optional `embedded-io-07` feature | which crates implement or accept `embedded-io` and `core::fmt::Write`, and under what feature name |
-| Feature names | `simulator`, `peak`, `embedded-io-07` | one naming rule for features, and for a feature that names a dependency's version |
-| Contract crates | about a dozen crates hold a page layout or request words | one layout: magic, version, interface identity, the request builder, the decoder and its refusals, in the same places and spellings |
-| Simulators | `designware_mobile_storage` ships one as a feature | whether every driver ships its test double, and under one feature name |
+| Errors | 17 crates have an error type. Of those, 8 implement `core::error::Error` on every one, 1 on two of its three, and 8 on none; the other 12 have no error type, and `file_system_contract` returns a raw `i32` | one convention: an enum per operation or per crate, `Display` and `core::error::Error` always, the input that failed carried or not |
+| DMA regions | three traits named `DirectMemoryAccessRegion`, in `designware_ethernet`, `designware_mobile_storage` and `e1000e`; offsets are `u64`, `u32` and `u64`, and the barrier is a method of the DMA trait in one crate and of `Tails` in the other two | one trait or two, and whether it lives in its own crate (1050's appendix recommends two for now) |
+| Doorbells and tails | two `Tails` traits and two `Hardware` traits, in `designware_ethernet` and `e1000e`; `non_volatile_memory_express` and `extensible_host_controller_interface` compute doorbell offsets with a function and declare no trait | one register-access shape for ring drivers, or each its own |
+| Register access | three crates declare a trait that reads and writes a register by offset (`designware_ethernet::Hardware`, `e1000e::Hardware` and `designware_mobile_storage::RegisterWindowAndClock`); none depends on `tock-registers` or `safe-mmio`, and none makes a volatile access in library code | a shared shape, against `tock-registers` and `safe-mmio` |
+| Byte sinks and sources | two crates declare a byte trait (`line_editor`'s `Sink`; `file_allocation_table`'s `SectorDevice` and `WritableSectorDevice`); one depends on `embedded-io`, through the optional `embedded-io-07` feature; none implements or accepts `core::fmt::Write` in library code | which crates implement or accept `embedded-io` and `core::fmt::Write`, and under what feature name |
+| Feature names | three crates declare features: `peak`, `simulator` and `embedded-io-07` (with an empty `default`); 26 declare none | one naming rule for features, and for a feature that names a dependency's version |
+| Contract crates | 12 crates export an `INTERFACE_ID`, and 5 of those also export a `MAGIC`, as a `u64` in two and a `[u8; 8]` in three; their encode and decode entry points have no common spelling | one layout: magic, version, interface identity, the request builder, the decoder and its refusals, in the same places and spellings |
+| Simulators | `designware_mobile_storage` is the one crate that exports one, as a feature; `designware_ethernet` and `e1000e` keep theirs behind `#[cfg(test)]`, and `extensible_host_controller_interface` has a fake in an example | whether every driver ships its test double, and under one feature name |
 
 Each question becomes one decision. The maintainer brings it once lanes have reviewed the crates
 it touches, with those reviews as its evidence. A crate reviewed before a shared decision gets a finding that follows
@@ -184,8 +185,9 @@ extracted or reviewed the crate before, and it does not read the crate's own lan
 reads the crate repositories and writes nothing to them: no push, no pull request, no issue, no
 tag.
 
-1. The census, one lane, before any review: every shape in the table above, counted in each crate
-   at a named commit, with the command that counted it.
+1. **Done.** [The census](1129-crate-interfaces-best-in-class/census.md), one lane, before any
+   review: every shape in the table above, counted in each crate at a named commit, with the
+   command that counted it.
 2. Lane A: `byte_glob`, `generational_table`, `domain_name_system`.
 3. Lane B: `line_editor`, `intrusive_queue`, `designware_mobile_storage`.
 4. Lane C: `file_allocation_table`, `device_tree_blob`, `e1000e`.
@@ -250,7 +252,7 @@ It differs in measuring each crate against named comparators, which none of them
   in an empty space.
 - Downloads include continuous integration traffic, so they overstate users. Reverse dependencies
   count published crates only.
-- The census counts in the shared-shapes table came from a grep, not a reading, and may be off.
+- The census counts are greps at one commit per crate, with a reading where a grep could not decide. A crate that changes afterward changes them, and a name the grep patterns do not match is missed.
 - `rsext4` stays outside the bar, so its interface is the upstream's whatever this review finds.
 
 ## Index row
