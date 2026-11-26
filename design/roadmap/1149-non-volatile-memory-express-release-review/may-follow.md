@@ -22,7 +22,7 @@ The wire format is little-endian. `Command` holds host `u32` values, `Completion
 takes them, and `physical_region_page_list` writes host `u64` values into the list, so a
 big-endian host puts the wrong bytes on the bus, and the caller converts each word.
 `tunnr-nvme` writes each list entry with `to_le_bytes` (`src/queues.rs`), and Linux declares every
-field `__le16`, `__le32` or `__le64`. Milestone 1146 raises the same finding as its P2-5.
+field `__le16`, `__le32` or `__le64`. Milestone 1146 (`extensible_host_controller_interface`: the release review's findings) raises the same finding as its P2-5.
 Change: `Command::to_le_bytes() -> [u8; 64]`, `Completion::from_le_bytes([u8; 16])`, and a
 statement on the list builder of the byte order it writes. Door: two-way (additions). Effort: S.
 
@@ -59,7 +59,7 @@ Verified in source.
 `examples/software_controller.rs` models a controller over two `Vec`s, and the README tells the
 caller to copy it. `tunnr-nvme` exports its `FakeNvme` under a `fake` feature, with power cuts and
 injected failures, and `nvme-driver` keeps its test registers private.
-Change: what the simulators decision of milestone 1129 picks. Door: two-way (an addition).
+Change: what the simulators decision of milestone 1129 (the combine review) picks. Door: two-way (an addition).
 Effort: M.
 
 ## P2-7. The manifest has no `documentation` key, and the README names a file the package omits
