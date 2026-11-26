@@ -9,7 +9,7 @@ needs_person: no
 ---
 # 403. An x86_64 host in the host pass
 
-Filed 2026-09-14 as an unnumbered proposal, left open by milestone 288,
+Filed 2026-09-14 as an unnumbered proposal, left open by milestone 288 (host tests that assume the host is aarch64),
 which fixed four instances of "a test that states a fact about the author's laptop" in `crates/elf`
 and could not stop a fifth; numbered 2026-09-19 by milestone 433's drain of the proposal pile.
 Premise re-read against the tree on 2026-09-19 and still true, with one clarification worth

@@ -48,7 +48,7 @@ exactly `window`'s authority. And a confined virtio-input keyboard driver (`user
 Three things are worth carrying forward from it. The picture is a value three witnesses compute
 independently (the terminal to draw, the kernel to predict the framebuffer, the host to grade QEMU's
 scanout), which is what replaces "it looked right" for text. The host checker's negative control is a
-screen with one letter changed. §37 records how the display contracts fared. And the authority to type is a mapping. The keyboard's
+screen with one letter changed. §37 (text is a value three witnesses compute, not a screenshot) records how the display contracts fared. And the authority to type is a mapping. The keyboard's
 power is the input ring no client maps, while the doorbell it rings carries nothing, so focus stays a
 capability from the producing side as well as the receiving one.
 

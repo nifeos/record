@@ -16,7 +16,7 @@ block's text and its work.
 
 Milestone 437 numbered the proposal `a-witness-bit-set-has-no-mechanism` when it merged on
 2026-09-19, and the promotion of every unnumbered proposal on 2026-09-20 numbered the same proposal
-a second time, here. The record links to milestone 437, from milestone 326's follow-ons, so that
+a second time, here. The record links to milestone 437, from the follow-ons of milestone 326 (nobody has been assigned to turn a mutation score upward), so that
 number is the one kept.
 
 ## Index row

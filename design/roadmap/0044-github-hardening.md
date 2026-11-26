@@ -58,7 +58,7 @@ That reasoning is right about sequencing, and this block is the eventual decisio
 - A key and a signing method. SSH signing is the cheap path (git supports it, GitHub verifies it,
   and the key already exists on the machine that pushes); GPG is the older path with more tooling
   around it.
-- Every automated committer signs too, or the rule blocks them. §78 names the committers the rule reaches. That
+- Every automated committer signs too, or the rule blocks them. §78 (signed commits: worth doing, and not as a side effect) names the committers the rule reaches. That
   is the part to check before turning the setting on, because the failure mode is the same one the
   ruleset note already warns about: a requirement nothing can satisfy blocks every merge.
 - A statement of what it buys here. §78 states it. Say that plainly, or
