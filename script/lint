@@ -40,7 +40,7 @@ SECTIONS="claim_copy replay_line conflict_markers todo_markers roadmap reviews d
 four_digits citations citations_ratchet citations_moved fatal_risks script_docs counted_claims
 naming_conventions naming_rules nife_tree_selftest audits_selftest audits repeat_watch
 environment_names tracked_ignored markdown_links prose_ratchet removed_index module_block_ratchet comment_block_ratchet parent_index
-house_style history line_citations outsider_pass exception_markers em_dashes spelling"
+house_style history repeated_sentences line_citations outsider_pass exception_markers em_dashes spelling"
 
 section_claim_copy() {
     echo "==> script/claim is nife's, byte for byte"
@@ -420,6 +420,14 @@ section_history() {
     # lint-scope: both
     python3 helpers/history_ratchet.py --selftest
     python3 helpers/history_ratchet.py --check
+}
+
+section_repeated_sentences() {
+    echo "==> one home for each rule or fact (a long sentence in two files is a copy; only listed copies pass)"
+    # design/tenets/documentation-standard.md ("One home for each rule or fact"), decided 2026-11-26 UTC.
+    # lint-scope: record
+    python3 helpers/repeated_sentences.py --selftest
+    python3 helpers/repeated_sentences.py --check
 }
 
 section_line_citations() {
