@@ -49,9 +49,9 @@ against three failure modes:
   `tcp`, `udp`, `ipv4`, QEMU, `MAC`, `GMAC` and `SD`. Spell `identifier` only where ID is one letter of a compound specification
   acronym (`address_space_identifier`). `io` stays whole inside an expansion too: SDIO becomes `SD_IO`,
   `mdio` becomes `management_data_io` and `virtio` becomes `virtual_io`.
-- A name that arrives across another project's interface keeps its owner's spelling, and only the
-  identifier the owner wrote keeps it. A concept nife names in its own code takes nife's spelling.
-  The foreign spelling stops at the boundary: past QEMU's `-initrd`, the tree says
+- A name someone else owns keeps its owner's spelling, by
+  [the rule for such names](naming/acronyms-and-abbreviations.md#a-name-someone-else-owns). The
+  foreign spelling stops at the boundary: past QEMU's `-initrd`, the tree says
   `initial_ramdisk`.
 - A kept foreign name's doc comment opens with its full name and the source, and the item carries
   `#[doc(alias = "<plain-English name>")]`. A specification's term of art that a reader searches for

@@ -243,8 +243,8 @@ one for a kiss.
 
 ## The tests, and what they do and do not prove
 
-The client's whole network authority is one endpoint capability, so the tests substitute the peer
-at that boundary. `fixtures/src/network_time_test_server.rs` speaks the socket contract on the other
+The tests substitute the peer at the client's one endpoint capability, as
+[`the-client-tests.md`](ntp/the-client-tests.md) explains. `fixtures/src/network_time_test_server.rs` speaks the socket contract on the other
 end of the client's slot 1 and is an NTP server behind it. There is no test-only branch anywhere in
 the client. `fixtures/src/unwritable_clock_witness.rs` gets the client's five slots and faults
 writing the clock page, and `spawn_with_client_endowment` endows both from one `grants` list, so the

@@ -34,12 +34,9 @@ uses the kernel, which pins an older commit of the crate than the one the releas
 
 ## Before anything else
 
-1. **Read the off-tree bench instructions.** The maintainers keep the bench's unit-specific details
-   in a private lab checkout, not in this repository: which serial device is the board's, which
-   outlet powers it, and which outlets and hubs must never lose power. Ask the person where that
-   checkout is, and read its `README.md` before touching any hardware. Follow its warnings over
-   anything here. Never quote it or name anything from it in public text: a commit, a pull
-   request, an issue or a note.
+1. **Read the off-tree bench instructions** for the board, as
+   [the bench runbook](bench-runbook.md#before-touching-any-machine) says, and follow their
+   warnings over anything here.
 2. **The rules for the whole session.**
    - Never switch any outlet, the board's included, and never unplug or power-cycle a USB hub.
      Every power cycle is the person's: ask in one sentence and wait.

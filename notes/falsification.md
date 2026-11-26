@@ -132,10 +132,8 @@ The first six records were chosen to embarrass the mechanism, and three findings
 
 The capability crate's central theorem was blind to the predicate underneath it. With
 `Rights::is_subset_of`'s operands swapped, ten of twelve harnesses stayed green.
-`derive_never_widens_rights` states its property *through the predicate it is testing*. It asserts
-`derived.rights.is_subset_of(src_rights)` while `derive` guards on
-`rights.is_subset_of(src.rights)`, so a consistently wrong `is_subset_of` satisfies both sides and
-the harness cannot see the break. Milestone 211 rewrote it (below).
+`derive_never_widens_rights` states its property *through the predicate it is testing*, so a
+consistently wrong `is_subset_of` passes it; the appendix shows both calls. Milestone 211 rewrote it (below).
 
 `subset_is_reflexive` can be turned red, but its red cases are a strict subset of
 `subset_matches_allows`'s, so it adds no discrimination.

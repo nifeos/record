@@ -63,11 +63,9 @@ other than zero, stop and report it before building anything.
 
 ## Before anything else
 
-1. **Read the off-tree bench instructions.** The maintainers keep the bench's unit-specific details
-   off-tree: which serial device is xenon's, which outlet powers it, and which outlets and hubs
-   must never lose power. Ask the person where that checkout is, and read its `README.md` before
-   touching any hardware. Follow its warnings over anything here. Never quote it or name anything
-   from it in public text: a commit, a pull request, an issue or a note.
+1. **Read the off-tree bench instructions** for xenon, as
+   [the bench runbook](../bench-runbook.md#before-touching-any-machine) says, and follow their
+   warnings over anything here.
 2. **The rules for the whole session.**
    - Never switch any outlet, and never unplug or power-cycle a USB hub. Every power cycle and
      every key at xenon's firmware is the person's: ask in one sentence and wait.

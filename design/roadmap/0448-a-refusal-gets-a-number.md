@@ -165,8 +165,8 @@ longer than it took to type.
 
 `REFUSED` is ratified (calef, 2026-09-20). The section name `## Revisit` and the three disposition
 words `Condition.`, `Nothing.` and `Unstated.` are this lane's, shipped provisionally and named as
-such, in the shape AGENTS.md asks for. A provisional name converts a naming decision from expensive
-to cheap by saying out loud that it is not settled.
+such, in the shape AGENTS.md asks for, which [the reversibility tenet](../tenets/reversibility.md)
+explains.
 
 ## Follow-on
 

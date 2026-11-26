@@ -191,11 +191,9 @@ date stops moving.** `script/roadmap --proposed` lists them oldest first and is 
 answers it.
 
 A rising line is still better than what it replaced. Without it this work lives in lane reports, which
-are read once, by one person, on the day they are written. `AGENTS.md` records the cost.
-Milestone 90 (a guard page under the per-CPU secondary stacks) exists only because calef happened to be at his
-desk the day a report named it. Milestone 94 (the untracked-work sweep, and the convention that ends
-the category) swept the tree for this category, then left its own inventory in a pull request body
-for twelve days. A count of 74 visible proposals (2026W36) is worse than 74 scheduled milestones.
+are read once, by one person, on the day they are written. [The routing
+tenet](../../design/tenets/routing-work-and-decisions.md) records the cost, with milestones 90 and 94
+as its cases. A count of 74 visible proposals (2026W36) is worse than 74 scheduled milestones.
 It is far better than 74 findings nobody can enumerate.
 
 ## Milestones by status

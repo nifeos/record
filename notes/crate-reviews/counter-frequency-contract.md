@@ -84,8 +84,8 @@ and 7 unviable. That census predates both harnesses and the out-of-band test, so
 tests that now catch mutants. A fresh run belongs in the 08:00 to 13:00 UTC window, over the dry
 run's staged copy:
 `systemd-run --user --scope -p MemoryMax=12G cargo mutants --manifest-path <staged>/Cargo.toml -j 2`.
-The move carries the row into the repository's `.github/mutants-exempts` as a comment, and the
-repository's first weekly run lists survivors.
+The move carries the row across, and the first weekly run names
+the survivors, as [the runbook](../crate-move.md#bugs) says.
 
 ## Names
 

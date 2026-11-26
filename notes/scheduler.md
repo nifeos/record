@@ -172,9 +172,7 @@ cover (the build before the guest's first line, and `--hvf`).
 
 ## CLOSED: the lost wakeup on `reclaim_frees_a_started_then_exited_childs_regions`
 
-A refused region reclaim killed the child the test was waiting for. One line of test code, no
-kernel defect, and not a RISC-V defect either: reproduced on aarch64 the moment the window was
-widened. Milestone 72, 2026-08-03.
+Milestone 72, 2026-08-03: a refused region reclaim killed the child the test was waiting for.
 
 The test probed `reclaim_region(tcb_region).is_err()` before waiting for the child's SEND. Since
 DECISIONS §16 (object revocation) was amended, a refused reclaim marks every live thread in the region `killed`, and

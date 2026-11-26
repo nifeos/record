@@ -10,6 +10,14 @@ spend an evening on, in what order, and what a result would mean. For the cross-
 reference columns, which operating systems an evening installs and which rows it takes are
 [cross-os-reference-columns.md](cross-os-reference-columns.md)'s.
 
+## Before touching any machine
+
+The maintainers keep each machine's unit-specific details in a private checkout, not in this
+repository: which serial device is a board's, which outlet powers it, and which outlets and hubs
+must never lose power. Ask the person where that checkout is, and read its `README.md` before
+touching any hardware. Follow its warnings over any runbook here. Never quote it or name anything
+from it in public text: a commit, a pull request, an issue or a note.
+
 ## The three machines, honestly
 
 | | what it is | has it booted nife? |

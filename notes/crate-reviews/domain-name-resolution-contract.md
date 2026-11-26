@@ -38,7 +38,7 @@ library's platform layer copies it verbatim. nife's boot-test data lives in
 | version | `0.1.0`; no tag |
 | edition, `rust-version` | 2024, 1.88 |
 | license | `MIT OR Apache-2.0` in the manifest; the two license texts are not yet at the crate root (the move adds them) |
-| `publish` | `false`; milestone 1017 keeps the moved contract crates unpublished under §305 (git dependencies on `nifeos/*` only, pinned to a landed commit) until their own release milestone |
+| `publish` | `false`, until its own release milestone ([milestone 1017](../../design/roadmap/1017-the-contract-crates-leave-in-this-order.md) says why) |
 | dependencies | `domain_name_system` 0.1.0, a path dependency until that crate leaves (step 5) |
 | size | 1,546 lines in `src/`: 899 of library (`wire` 216, `grants` 327, `control` 161, `endowment` 46, `messages` 60, `lib` 89), 513 of tests, 134 of Kani harnesses; a 144-line README and two falsification patches |
 

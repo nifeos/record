@@ -58,6 +58,9 @@ against itself.
   Each package lists the mentions that remain, each a small edit for the move lane.
 - Harnesses and patches. In every crate, each Kani harness has exactly one falsification patch
   (the packet pairs them), and `script/crate-standalone` ran each patch and saw its harness fail.
+- Parameter names. A parameter name is no part of a Rust signature's compatibility, so the
+  maintainer rules a package's parameter names provisionally, pending the architect, and no caller
+  changes.
 - Units in names. The rule of 2026-11-03 spells every unit out (`_HERTZ`, not `_HZ`). A release
   review re-opens a name ratified before a later rule.
 

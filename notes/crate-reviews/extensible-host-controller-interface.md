@@ -137,8 +137,8 @@ The prose acronyms the gate named (`USB`, `DCI`, `IOMMU`, `HC`, `BIOS`, `SMI`, `
 
 ### Parameter names of public functions
 
-Spelled out. They are provisional: a parameter name is no part of a Rust signature's
-compatibility, so the maintainer rules them, pending the architect, and no caller changes.
+Spelled out. They are provisional, for the reason
+[the index](../crate-reviews.md#what-is-the-same-for-all-of-them) gives.
 
 | parameter | of | now |
 |---|---|---|

@@ -95,7 +95,10 @@ the length the six-pager has.
 calef ruled on 2026-10-08 (UTC) that nife is measured with the field's standard benchmarks, run
 unmodified against Linux, and optimized toward. The ruling is §262 (nife is measured with the
 field's standard benchmarks), [in its own file](../decisions/0262-nife-is-measured-with-the-fields-standard-benchmarks.md).
-Each risk file lists its own under *Benchmarks that inform this risk*. None has produced a number yet.
+Each risk file lists its own under *Benchmarks that inform this risk*. Each is to run unmodified on
+nife and on Linux, and none has produced a number yet. A port does not wait on a C library, since
+milestone 835 (#1896) built one from relibc under §265 (a C library started from relibc). It waits
+on whatever that first stage lacks, such as threads or sockets.
 
 | risk | milestones |
 |---|---|

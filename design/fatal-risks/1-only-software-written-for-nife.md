@@ -109,9 +109,8 @@ moves Rust software that uses threads, `ripgrep`'s parallel walk among it, from 
 reachable. It does nothing for C software, which still waits on a C library with threads (milestone
 836 (a C library, stage 2: threads)), so the risk's status is unchanged. The "zero patches" above
 no longer holds for the whole tree: with threads, `rg` walks in parallel, and its `ignore`
-dependency needed a ten-line build-time patch for that on nife (calef, #1892). `ripgrep`'s own
-source is still untouched, and the patch is nife's to maintain until upstream fixes the bug
-([`notes/ripgrep-on-nife.md`](../../notes/ripgrep-on-nife.md)).
+dependency needed a ten-line build-time patch for that on nife (calef, #1892). [The
+appendix](somebody-elses-software.md) says what the patch leaves untouched and who keeps it.
 
 Fact, 2026-10-10 (UTC), from milestone 835 (a C library, stage 1: files, clock and memory)'s block
 and #1896: two programs that are neither Rust nor related to `ripgrep` now run unmodified here.

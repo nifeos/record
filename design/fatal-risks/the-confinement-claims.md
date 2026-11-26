@@ -203,10 +203,9 @@ Milestone 633 (An outside agent attacks the confinement claim) ran an adversaria
 with a different model, attacking the thirty claims in `notes/confinement-claims.md`. One escape
 was found and fixed: a plain `RECEIVE` collecting a `SEND_CAP` sender left the sender's `outgoing_cap`
 staged, and the sender's next plain `SEND` delivered it to a `RECEIVE_CAP` receiver on another endpoint.
-A capability granted to one endpoint reached a receiver on a different one, which is a process
-reaching an object it was not granted. Fixed in `sched::ipc_receive` with a test and a replayable
-falsification. The same class as #1494 and milestone 634, reached by a third mechanism (the
-successful-collect path, not an abort and not the mailbox slot). Every other claim it reached held, by reading and by host or kernel proof where cheap. Two were not attacked in that pass: row 25 (enforced by the compositor, not the kernel; milestone 719 (Compositor confinement claim 25 is attacked part by part) in PR #1536 attacked it part by part on aarch64 afterwards, 2026-10-03) and row 26 (an escape would hang the test rather than fail it, so it waits on milestone 417 (a usurper that reports instead of hanging)). Row 11 is proved on aarch64, riscv64 and x86_64 by milestone 718 (No page is both writable and executable, proved on every ISA), one Kani harness and one replayable falsification each. This does not support green;
+Fixed in `sched::ipc_receive` with a test and a replayable falsification;
+[milestone 633](../roadmap/0633-an-outside-agent-attacks-the-confinement-claim.md) records why it
+breaks the claim and how it relates to #1494 and milestone 634. Every other claim it reached held, by reading and by host or kernel proof where cheap. Two were not attacked in that pass: row 25 (enforced by the compositor, not the kernel; milestone 719 (Compositor confinement claim 25 is attacked part by part) in PR #1536 attacked it part by part on aarch64 afterwards, 2026-10-03) and row 26 (an escape would hang the test rather than fail it, so it waits on milestone 417 (a usurper that reports instead of hanging)). Row 11 is proved on aarch64, riscv64 and x86_64 by milestone 718 (No page is both writable and executable, proved on every ISA), one Kani harness and one replayable falsification each. This does not support green;
 the human-outsider half remains behind milestone 198.
 
 ### The fourth outsider pass (2026-10-07, milestone 800)

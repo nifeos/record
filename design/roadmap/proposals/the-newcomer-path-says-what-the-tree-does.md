@@ -49,9 +49,8 @@ stopped being true at merge; whether that counts as bookkeeping is the integrato
    together.
 6. `CONTRIBUTING.md` gives `AGENTS.md`'s real size. It says "about 40 KB" in two places; the
    file is 19 KB.
-7. Two decided sections drop their merge caveat. §321 (reclaiming a whole region subtree) and §322
-   are `status: DECIDED` and still say their number and title are provisional until the merge
-   lands them.
+7. Two decided sections drop their merge caveat: §321 (reclaiming a whole region subtree) and
+   §322, as the report's finding 8 gives it.
 8. The newcomer path states the rule in force, with no narration (§298 (a document states what
    is in force now), §267 (a comment states the constraint as it is now)). The places found:
    - `script/setup`'s comments on the dated toolchain and on a date that "used to" repeat.

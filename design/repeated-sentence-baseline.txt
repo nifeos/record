@@ -108,9 +108,7 @@
 
 
 
-12f1f555ddfb design/audit-reports/2026-09-29-names-and-numbers.md
 
-12f1f555ddfb design/roadmap/0622-the-fence-inventory-is-readjudicated.md
 
 134f29d7de5b design/roadmap/0057-partitioning-and-xattrs.md
 
@@ -124,37 +122,6 @@
 
 
 
-151b5b5752fc design/audit-reports/README.md
-
-151b5b5752fc notes/documentation-audit.md
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1a6fdf7f54eb notes/crate-reviews/designware-ethernet.md
-
-1a6fdf7f54eb notes/crate-reviews/jh7110-clock-and-reset.md
 
 
 
@@ -185,11 +152,35 @@
 
 
 
-1d0d8ee2c81b notes/crate-reviews/block-roster-contract.md
 
-1d0d8ee2c81b notes/crate-reviews/clock-contract.md
 
-1d0d8ee2c81b notes/crate-reviews/domain-name-resolution-contract.md
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -197,9 +188,7 @@
 
 1f1cb76c6eb8 design/fatal-risks/README.md
 
-1fe8e31239ba notes/fuzzing/finishing-the-setup.md
 
-1fe8e31239ba notes/fuzzing/the-fuzz-app.md
 
 
 
@@ -358,9 +347,7 @@
 
 
 
-2de2bc63c76f design/audit-reports/2026-11-17-the-newcomer-path.md
 
-2de2bc63c76f design/roadmap/proposals/the-newcomer-path-says-what-the-tree-does.md
 
 
 
@@ -634,9 +621,7 @@
 
 5af3b77be30b notes/entropy.md
 
-5b4d9dbd801c design/tenets/routing-work-and-decisions.md
 
-5b4d9dbd801c notes/register-of-measures/records-by-status.md
 
 5b5c325090f2 design/decisions/0028-smp-placement.md
 
@@ -746,19 +731,12 @@
 
 
 
-6a7d4637f8da notes/crate-reviews/counter-frequency-contract.md
 
-6a7d4637f8da notes/crate-reviews/current-cpu-contract.md
 
-6b04d7b98193 design/fatal-risks/the-confinement-claims.md
 
-6b04d7b98193 design/roadmap/0633-an-outside-agent-attacks-the-confinement-claim.md
 
-6b8c93dbe46e design/fatal-risks/4-the-per-crossing-cost.md
 
-6b8c93dbe46e design/fatal-risks/5-not-reliable-on-multicore.md
 
-6b8c93dbe46e design/fatal-risks/6-a-confined-driver-is-too-slow.md
 
 6bba6b22add9 notes/crate-reviews/environment-contract.md
 
@@ -817,9 +795,6 @@
 
 
 
-7752e5534df4 design/audit-reports/2026-09-29-names-and-numbers.md
-
-7752e5534df4 design/roadmap/0622-the-fence-inventory-is-readjudicated.md
 
 
 
@@ -834,9 +809,8 @@
 
 
 
-78e811359751 design/naming.md
 
-78e811359751 design/naming/acronyms-and-abbreviations.md
+
 
 
 
@@ -960,9 +934,7 @@
 
 97454dd4ec31 notes/confinement-claims/breaking-the-kernel-tests.md
 
-97efab5b6043 notes/e1000e/the-i219-cabled-run.md
 
-97efab5b6043 notes/jh7110-entropy-board-check.md
 
 
 
@@ -1041,9 +1013,7 @@ a0184ae48880 notes/crate-reviews/user-mode-runtime.md
 
 
 
-a43807694db4 design/roadmap/0448-a-refusal-gets-a-number.md
 
-a43807694db4 design/tenets/reversibility.md
 
 
 
@@ -1094,9 +1064,7 @@ a62d45e0972f design/roadmap/0481-terminal-multiplexing.md
 
 
 
-b23d755b70c4 design/fatal-risks/1-only-software-written-for-nife.md
 
-b23d755b70c4 design/fatal-risks/somebody-elses-software.md
 
 
 
@@ -1164,9 +1132,7 @@ b4ff48eec6d8 design/roadmap/0850-a-program-is-asked-to-give-memory-back.md
 
 
 
-b9ded129ea8e notes/falsification.md
 
-b9ded129ea8e notes/falsification/six-real-records.md
 
 
 
@@ -1323,9 +1289,7 @@ d3fda964450d design/roadmap/0887-crate-repositories-share-one-ci-template.md
 
 
 
-d623e036405a design/fatal-risks/the-confinement-claims.md
 
-d623e036405a design/roadmap/0633-an-outside-agent-attacks-the-confinement-claim.md
 
 
 
@@ -1347,9 +1311,7 @@ d85dee968a89 design/roadmap/1099-machine-statistics-contract-outside-review.md
 
 d85dee968a89 design/roadmap/1100-memory-region-heap-outside-review.md
 
-d93ccd8fa4a6 notes/ntp.md
 
-d93ccd8fa4a6 notes/ntp/the-client-tests.md
 
 
 
@@ -1483,9 +1445,7 @@ e63e1ce4b018 design/roadmap/0817-the-designware-mobile-storage-crate-released-on
 
 
 
-e9c0a6bfa099 notes/scheduler.md
 
-e9c0a6bfa099 notes/scheduler/reclaim-lost-wakeup.md
 
 
 
