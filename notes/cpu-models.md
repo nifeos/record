@@ -262,8 +262,8 @@ through SBI, so it works on both.
   notes/load-sensitive-assertions.md. Dropping a model is still not the fix.
 
   This job then became a merge blocker, on 2026-08-04, and that is what finished the family.
-  Three sites failed across four models in a handful of runs, on pull requests whose diffs could
-  not reach them (an `xargs` change failed a timer assertion). They were `arch/riscv64/timer.rs`'s
+  Three sites failed across four models, on pull requests whose diffs could not reach them
+  ([the load recipe](load-sensitive-assertions/measurement-windows-and-the-load-recipe.md)). They were `arch/riscv64/timer.rs`'s
   masking test on `rv64`, the control; `smp.rs`'s placement probe on `rva23s64` and `thead-c906`;
   `sched.rs`'s preemption test on `sifive-u54`. None was a timing budget either. Each measured
   across instructions outside the property, and contention widened the window until a race that had

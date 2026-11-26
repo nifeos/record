@@ -3,9 +3,8 @@
 *Name: ratified 2026-11-20, with `virtio` spelled `virtual_io` as every name in the tree spells it.*
 
 An appendix to [notes/shared-page-audit.md](../shared-page-audit.md), the tree's second security
-audit (2026-08-04). The parent states the lens and its four questions: (a) the window, (b) what can
-land in it, (c) the corrupted state, (d) whether it is reachable. Its honest summary has every
-finding's disposition.
+audit (2026-08-04). The parent states the lens, its four questions and every finding's
+disposition.
 
 ## 3. The console server takes an unbounded byte count from its client
 

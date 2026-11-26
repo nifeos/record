@@ -65,15 +65,8 @@ And five things that end a session early rather than waiting the clock out:
 | our own panic, with its message | `[PANIC] ` | `kernel/src/panic.rs` |
 | U-Boot relocating (a note, not a stage) | `Moving Image from` | triage ladder row 4, confirmed |
 
-The captures of 2026-09-01 turned this from a two-way question into a four-way one, and three of
-the four are things a board actually did.
-
-| outcome | what it looks like | exit |
-|---|---|---|
-| Success | the tour reaches `nife: the capability core runs on RISC-V.`, then the board goes quiet because the kernel halts in `wfi` | 0 |
-| U-Boot refused before the kernel ran | the image loads and relocates, then `### ERROR ### Please RESET the board ###` | 1 |
-| The kernel booted and then halted on purpose | `MEASURED BOOT REFUSED`, after the banner and most of a tour | 1 |
-| A genuine hang | it starts, says a few lines, and stops before the tour | 2 |
+The captures of 2026-09-01 turned this from a two-way question into the four-way one that [the
+main page](../board-console.md) tabulates, and three of the four are things a board actually did.
 
 Three of those four are traps for a naive recognizer, and each got a fix:
 

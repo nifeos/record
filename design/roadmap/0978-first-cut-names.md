@@ -18,8 +18,7 @@ package leaves as one repository, with the crates only it uses) rules the grain 
 calef's naming review, and calef ruled every question in it the same day, relayed by the maintainer
 on pull request #2870. What is in force now:
 
-- `process-tools`, `core-tools` and `disk-tools` stand as the package names and as the repository
-  names of the first cut.
+- The three package and repository names stand as §316 gives them.
 - `number_writer` stands as the crate's name. The review's other two coined names already carried
   ratified blocks in the tree before the review ran: `disk_surveyor` on 2026-08-03 (milestone 57
   (partitioning and formatting a real drive)) and `disk_partitioner` on 2026-09-13.

@@ -8,8 +8,8 @@ the roadmap's "112+" did, and the commands below are the re-derivation.
 
 ## The numbers, every one counted here
 
-Prose in this tree quotes "112+ harnesses" (the roadmap) and "over 100 across more than 20 crates"
-(`notes/fuzzing.md`, correctly hedged as a floor). Neither is the tree's number today. Every figure
+[The main page](../proof-retrospective.md) names the two counts the prose quotes. Neither is the
+tree's number today. Every figure
 below was taken from the merged worktree at base `f1f138a8` on 2026-08-30, with the command shown.
 
 | Quantity | Value | Command |

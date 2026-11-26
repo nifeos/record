@@ -12,7 +12,7 @@ items against `partsfoundry/domain_name_system` at `513558c`, and a "not met" po
 | C-ITER-TY | not applicable | no iterator |
 | C-FEATURE | not applicable | no Cargo feature |
 | C-WORD-ORDER | met | the ratified names pass every rule in force |
-| C-COMMON-TRAITS | not met | item 5: no `Debug` on `Reader` or `TcpReply`; item 7: no `Hash` on `Name` |
+| C-COMMON-TRAITS | not met | item 5: no `Debug` on `Reader` or `TcpReply`, no `PartialEq` or `Eq` on `Question`, `Record` or `Query`; item 7: no `Hash` on `Name` |
 | C-CONV-TRAITS | met | `FromStr` and `Display` on `Name` |
 | C-COLLECT | not applicable | no collection |
 | C-SERDE | not applicable | wire bytes are the serialized form |
@@ -46,7 +46,7 @@ items against `partsfoundry/domain_name_system` at `513558c`, and a "not met" po
 | C-OBJECT | not applicable | no trait |
 | C-NEWTYPE | met | `Name` wraps its bytes and its length |
 | C-CUSTOM-TYPE | met | no `bool` argument |
-| C-BITFLAG | met | `FLAG_` constants over a `u16`, chosen over a dependency |
+| C-BITFLAG | not met | door 4: `FLAG_` constants over a bare `u16`, not a flags type |
 | C-BUILDER | not applicable | no construction with options |
 | C-VALIDATE | met | every parser is total and refuses with a variant |
 | C-DTOR-FAIL | not applicable | no custom `Drop` |
@@ -54,7 +54,7 @@ items against `partsfoundry/domain_name_system` at `513558c`, and a "not met" po
 | C-DEBUG | not met | item 5 |
 | C-DEBUG-NONEMPTY | met | the root name prints `.` |
 | C-SEALED | not applicable | no trait |
-| C-STRUCT-PRIVATE | met | public fields only where the RFC fixes the layout; door 3 |
+| C-STRUCT-PRIVATE | met | public fields on `Header`, `Question` and `Record`; door 3 |
 | C-NEWTYPE-HIDE | met | `Answer` and `Name` keep their storage private |
 | C-STRUCT-BOUNDS | met | no bound on any struct definition |
 | C-STABLE | met | no dependency |

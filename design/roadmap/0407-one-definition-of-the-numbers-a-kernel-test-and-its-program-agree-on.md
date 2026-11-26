@@ -19,22 +19,17 @@ publishes all three. An independent re-count on 2026-09-19, over `ROLE_*`, `RPT_
 constant names**. That is a similar method rather than the same one, so it is not byte-comparable
 with the 19 pairs and 76 names below, and what it establishes is that the shape has not shrunk.
 Three crate names in the table have moved and the work has to read the current ones.
-`swap_proto` is `crates/hot_swap_contract`, `login_proto` is `crates/login_contract`, and
-`components/src/ntp.rs` was split into three programs by milestone 290, so that row's program side
-is now `network_time_client` and its siblings. *(Number provisional until the merge queue lands
+§187 gives their current names. *(Number provisional until the merge queue lands
 it.)*
 
 It is §187 (one crate)
 *(number
 provisional)*, written up 2026-09-19 by milestone 435's slice-c lane because this gate named no
-section. The sweep itself is mechanical and a lane could start it today. What it cannot
-settle is the crate names, and there is no useful half of this work that does not create one. See
+section. The sweep itself is mechanical and a lane could start it today. §187 says what it cannot settle. See
 "What a lane cannot decide" below, which prices the two shapes so the question arrives answered.
 
 In brief. AGENTS.md rule 7 says anything two binaries must agree on is a crate, never a copy.
-Seventy-six constants across nineteen file pairs are copies, each held in line by a `// must
-match` comment: role numbers, report tags, and report flag bits shared between a kernel test's
-wiring (`kernel/src/user/*_service.rs`, `*_tests.rs`) and the program it spawns
+§187 counts the copies, each held in line by a `// must match` comment and shared between a kernel test's wiring (`kernel/src/user/*_service.rs`, `*_tests.rs`) and the program it spawns
 (`fixtures/src/*.rs`, `components/src/*.rs`). `login_service.rs` and `login_test_client.rs` alone
 share fifteen.
 
@@ -58,9 +53,7 @@ Nineteen pairs, seventy-six names, zero shared definitions.
 
 ## Why a comment is not a mechanism
 
-It is rung four of AGENTS.md's ladder for a fact that has a rung-one answer sitting next to it. The
-failure it permits is silent and specific: a role number changed on one side spawns a *different*
-role, and a flag bit changed on one side makes a test assert against a bit nothing sets. Both read
+It is rung four of AGENTS.md's ladder for a fact that has a rung-one answer sitting next to it. The failures it permits, which §187 names, read
 as a bug in the code under test rather than as a mismatch, which is the same misdiagnosis
 `credential_contract::fixture`'s own module doc warns about for the SMB account.
 
@@ -105,9 +98,7 @@ a hotspot three other lanes were in would have been a partial fix in the worst p
 ## Index row
 
 AGENTS.md rule 7 says anything two binaries must agree on is a crate and never a copy.
-Seventy-six constants across nineteen file pairs are copies, each held in line by a `// must match`
-comment: role numbers, report tags and report flag bits shared between a kernel test's wiring and
-the program it spawns. `login_service.rs` and its test client share fifteen on their own. A
+§187 counts the copies, each held in line by a `// must match` comment. `login_service.rs` and its test client share fifteen on their own. A
 comment is rung four of the ladder for a fact with a rung-one answer sitting beside it, and the
 failure it permits is silent and specific. A role number changed on one side spawns a different
 role, and a flag bit changed on one side makes a test assert against a bit nothing sets. Both read

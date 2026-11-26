@@ -13,7 +13,7 @@ the checklist is marked met, not met, or not applicable, against `partsfoundry/b
 | C-ITER-TY | not applicable | no iterator |
 | C-FEATURE | not applicable | no Cargo feature |
 | C-WORD-ORDER | met | the seven names were ratified and pass every later rule |
-| C-COMMON-TRAITS | not met | item 1: no `Hash` on either type, no `Default` on `LeadingDot` |
+| C-COMMON-TRAITS | not met | item 1: no `Hash` on either type; door 4 places `Default` |
 | C-CONV-TRAITS | not applicable | no conversion between types |
 | C-COLLECT | not applicable | no collection |
 | C-SERDE | not applicable | a two-valued policy and a result hold nothing worth storing |

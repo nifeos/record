@@ -62,15 +62,8 @@ subsystem. And the cap in force, 40 lines, is met everywhere: no directory has a
 The rule is one rule. The stage order below is about effort and the merge queue, and exempts no
 directory.
 
-1. An item's doc comment is in the kernel-doc shape. It gives a summary sentence, then the
-   arguments, what it holds and returns or refuses, with a link to its note. A design argument goes
-   in the note. A `Context:` line (what locks it takes, whether it may run in interrupt context)
-   appears only on code that holds locks or runs in interrupt context.
-2. A comment inside a function body states a constraint the code cannot show: an ordering, a
-   `SAFETY` argument, a hardware quirk. Narrative, worked examples and "how this works" move to the
-   item's doc comment or the note.
-3. An invariant a comment states as "the caller must..." becomes an assertion or a type where one
-   fits, as `NameCopy` did for milestone 825 (a hostile client races the file server's name window).
+§267 states its three parts. The third, an invariant becoming an assertion or a type, is what
+`NameCopy` did for milestone 825 (a hostile client races the file server's name window).
 
 Everything else stays: §267's rules, `SAFETY` comments, and `missing_docs`. The newcomer test in
 `AGENTS.md` is met by the note a doc comment links to, which is where Linux meets it too.

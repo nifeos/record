@@ -55,8 +55,7 @@ program is not the copying program and the system introduces them anyway.
 - Scoped to a login session (milestone 49's identity model). A clipboard then exists per
   authenticated principal rather than machine-wide. Reading it costs the same proof anything else
   under that principal's subtree already costs. Closer to this tree's own grain.
-  It means a clipboard cannot exist at all until milestone 49's login-boot-wiring piece does, which today it
-  does not.
+  §169 says what that waits on.
 - **Not a clipboard at all, but a targeted transfer.** Some terminal emulators already do this for
   one narrow case (OSC 52, "copy to the host's real clipboard"). The copying program names its
   destination explicitly rather than writing to an ambient slot a third party reads later. This sidesteps

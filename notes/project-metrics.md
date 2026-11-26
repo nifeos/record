@@ -290,6 +290,16 @@ Each week is read from its own commit, so 2026W39 is the first correction, alrea
 the limit a new document meets ([definitions](register-of-measures/ratchet-debt.md#passive-voice)).
 
 
+## Repeated sentences
+
+![Copies of repeated sentences in the record](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/prose-duplication-copies.svg)
+
+Copies of the sentences of 100 or more characters that appear in two or more Markdown files under `design/` and `notes/`, each week of this repository's history. The 2026W38 spike was the roadmap index that a script wrote, which the record dropped on 2026-09-22.
+
+![Share of the record made of repeated sentences](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/prose-duplication-share.svg)
+
+The share of the record's characters that make up those repeated sentences, by the same rule as the repeated-sentence lint (`helpers/repeated_sentences.py`). The 2026W38 peak is the same roadmap index.
+
 ## Line-number citations
 
 ![Line-number citations](https://raw.githubusercontent.com/nifeos/nife/main/notes/project-metrics/line-citations.svg)
