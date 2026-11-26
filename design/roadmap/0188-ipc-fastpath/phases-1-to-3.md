@@ -1,9 +1,9 @@
 # What phases 1 to 3 measured, 2026-09-04
 
-An appendix of [milestone 188 (the IPC fastpath)](../0188-ipc-fastpath.md), moved out of it on
-2026-10-12 (UTC) under §212 (a prose budget). The main page is complete without it: it keeps the
-outcome of each phase and the after table. This file keeps the re-measurement, the before and after
-for every architecture, the control run and the cost.
+An appendix of [milestone 188 (the IPC fastpath)](../0188-ipc-fastpath.md), moved out under §212 (a
+prose budget). The main page is complete without it: it keeps the outcome of each phase and the
+after table. This file keeps the re-measurement, the before and after for every architecture, the
+control run and the cost.
 
 *Built 2026-09-04, one lane, pull request #732. Every figure here is from a release kernel in that
 lane's worktree; the control runs are named where one was needed.*

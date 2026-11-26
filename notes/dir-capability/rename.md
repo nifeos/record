@@ -2,9 +2,8 @@
 
 *Name: provisional, minted 2026-10-11 (UTC) by lane/third-ten-longest-notes, after the verb.*
 
-An appendix to [notes/dir-capability.md](../dir-capability.md), moved there on 2026-10-11 (UTC)
-under §212 (a prose budget). The main page keeps the wire and the rights; this is the
-rest of the verb's design.
+An appendix to [notes/dir-capability.md](../dir-capability.md), moved there under §212 (a prose
+budget). The main page keeps the wire and the rights; this is the rest of the verb's design.
 
 ## The two atomicities, stated apart (DECISIONS §42 (a filesystem declares what it offers))
 

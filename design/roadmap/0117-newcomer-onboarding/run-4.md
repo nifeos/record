@@ -1,10 +1,10 @@
 # Milestone 117 appendix: run 4 and what it handed off
 
-*An appendix to [milestone 117 (the stranger test)](../0117-newcomer-onboarding.md), moved out of
-that page on 2026-10-12 (UTC) under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main page is complete
-without it. Run 4's full record is [notes/stranger-test/run-4.md](../../../notes/stranger-test/run-4.md);
-this page is what the block said about it at the time.*
+*An appendix to [milestone 117 (the stranger test)](../0117-newcomer-onboarding.md), moved out under
+[§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main page is
+complete without it. Run 4's full record is
+[notes/stranger-test/run-4.md](../../../notes/stranger-test/run-4.md); this page is what the block
+said about it at the time.*
 
 ## What run 4 measured, 2026-08-18
 

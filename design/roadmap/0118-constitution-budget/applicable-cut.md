@@ -1,9 +1,9 @@
 # Milestone 118 appendix: the applicable cut, 2026-08-18
 
 An appendix to [milestone 118 (CLAUDE.md has a budget)](../0118-constitution-budget.md), moved out
-of that block on 2026-10-12 (UTC) under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The block is complete without
-it; this is the second lane's verification, cut by cut, and the growth measurement behind it.
+under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The block
+is complete without it; this is the second lane's verification, cut by cut, and the growth
+measurement behind it.
 
 [The audit](audit.md) named eight rules with a mechanism. This lane checked each claim against the
 tree, and four of the eight did not survive contact. That is the finding rather than a footnote.

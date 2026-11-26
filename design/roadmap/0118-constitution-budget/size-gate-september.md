@@ -1,10 +1,10 @@
 # Milestone 118 appendix: the size gate's ceiling in September
 
 An appendix to [milestone 118 (CLAUDE.md has a budget)](../0118-constitution-budget.md), moved out
-of that block on 2026-10-12 (UTC) under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The block is complete without
-it. This continues [the size gate's ledger](size-gate.md) through September 2026, oldest first:
-every raise and lowering of the `agents-md-lines` ceiling, with the reason each was worth it.
+under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The block
+is complete without it. This continues [the size gate's ledger](size-gate.md) through September
+2026, oldest first: every raise and lowering of the `agents-md-lines` ceiling, with the reason each
+was worth it.
 
 ## 1032 to 1035, 2026-09-01
 

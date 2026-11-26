@@ -1,12 +1,11 @@
 # Milestone 118 appendix: the size gate and every move of its ceiling
 
 An appendix to [milestone 118 (CLAUDE.md has a budget)](../0118-constitution-budget.md), moved out
-of that block on 2026-10-12 (UTC) under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The block is complete without
-it. This is the gate's design and the ledger of its ceiling, from 2026-08-22 until calef dropped it
-on 2026-10-06; September's entries are in [size-gate-september.md](size-gate-september.md). The
-entries were reordered oldest first when they moved here; before that they were appended in no fixed
-order.
+under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The block
+is complete without it. This is the gate's design and the ledger of its ceiling, from 2026-08-22
+until calef dropped it on 2026-10-06; September's entries are in
+[size-gate-september.md](size-gate-september.md). The entries were reordered oldest first when they
+moved here; before that they were appended in no fixed order.
 
 ## The gate, 2026-08-22
 

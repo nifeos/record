@@ -1,9 +1,9 @@
 # Milestone 118 appendix: the plan in three pieces
 
 An appendix to [milestone 118 (CLAUDE.md has a budget)](../0118-constitution-budget.md), moved out
-of that block on 2026-10-12 (UTC) under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The block is complete without
-it; this is the plan as written before the work, with the reasoning each piece was built on.
+under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The block
+is complete without it; this is the plan as written before the work, with the reasoning each piece
+was built on.
 
 ## Split, the way this tree has split three monoliths already
 

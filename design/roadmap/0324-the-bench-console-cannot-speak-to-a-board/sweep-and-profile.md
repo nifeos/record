@@ -1,11 +1,11 @@
 # Parts 2 and 3 as built: the sweep recognizer and the board profile, 2026-09-19
 
 An appendix of [milestone 324 (the bench console cannot speak to any of the three
-boards)](../0324-the-bench-console-cannot-speak-to-a-board.md), moved out of it on 2026-10-12 (UTC)
-under §212 (a prose budget). The block keeps what landed, the hoist, the defect another session's
-merge created and what could not be tested, and is complete without this file. This file keeps the
-working: the recognizer's statuses, the four exercised outcomes, the profile's two tests, the
-quiet-timer sizing, the recognizer break in full, and the reasoning behind three follow-on records.
+boards)](../0324-the-bench-console-cannot-speak-to-a-board.md), moved out under §212 (a prose
+budget). The block keeps what landed, the hoist, the defect another session's merge created and what
+could not be tested, and is complete without this file. This file keeps the working: the
+recognizer's statuses, the four exercised outcomes, the profile's two tests, the quiet-timer sizing,
+the recognizer break in full, and the reasoning behind three follow-on records.
 
 Two changes to one tool, plus the hoist that both of them turned out to need.
 

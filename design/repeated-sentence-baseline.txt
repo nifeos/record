@@ -177,13 +177,9 @@
 
 1357b858dca1 design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
-1430e1766eb3 notes/dir-capability/caretaker.md
 
-1430e1766eb3 notes/dir-capability/limitations.md
 
-1430e1766eb3 notes/dir-capability/rename.md
 
-1430e1766eb3 notes/dir-capability/tests-and-stack-usage.md
 
 151b5b5752fc design/audit-reports/README.md
 
@@ -213,17 +209,11 @@
 
 181380389d58 notes/empty-selectors.md
 
-18256eb91253 design/roadmap/0117-newcomer-onboarding/first-plan.md
 
-18256eb91253 design/roadmap/0117-newcomer-onboarding/harness-and-cadence.md
 
-18256eb91253 design/roadmap/0117-newcomer-onboarding/run-3.md
 
-18256eb91253 design/roadmap/0117-newcomer-onboarding/run-4.md
 
-18256eb91253 design/roadmap/0117-newcomer-onboarding/run-5.md
 
-18256eb91253 design/roadmap/0117-newcomer-onboarding/run-6.md
 
 18afcfe2356d design/roadmap/0578-acpi-on-aarch64.md
 
@@ -513,13 +503,9 @@
 
 2a658b0cdba5 design/roadmap/0723-a-stopped-merge-watcher-is-reported-at-once.md
 
-2aa3cf673090 notes/grant-expression/clock-grant.md
 
-2aa3cf673090 notes/grant-expression/memory-grant.md
 
-2aa3cf673090 notes/grant-expression/per-file-grants.md
 
-2aa3cf673090 notes/grant-expression/two-words.md
 
 2b9ad4781409 design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
@@ -763,13 +749,9 @@
 
 45e50d162bfa design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
-46608c10fc98 design/roadmap/0138-file-io-throughput/batching-and-cache.md
 
-46608c10fc98 design/roadmap/0138-file-io-throughput/frontier.md
 
-46608c10fc98 design/roadmap/0138-file-io-throughput/options.md
 
-46608c10fc98 design/roadmap/0138-file-io-throughput/record-and-transfer.md
 
 46b1a14c882a design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
@@ -1205,17 +1187,11 @@
 
 
 
-77052501df0b design/roadmap/0142-a-text-display-worth-living-in/dependency.md
 
-77052501df0b design/roadmap/0142-a-text-display-worth-living-in/determinism.md
 
-77052501df0b design/roadmap/0142-a-text-display-worth-living-in/palette.md
 
-77052501df0b design/roadmap/0142-a-text-display-worth-living-in/rich-text.md
 
-77052501df0b design/roadmap/0142-a-text-display-worth-living-in/scanout.md
 
-77052501df0b design/roadmap/0142-a-text-display-worth-living-in/type.md
 
 7752e5534df4 design/audit-reports/2026-09-29-names-and-numbers.md
 
@@ -1326,15 +1302,10 @@
 
 8343b3d43e8d design/roadmap/0057-partitioning-and-xattrs/extended-attributes.md
 
-8367ecad664e design/roadmap/0118-constitution-budget/applicable-cut.md
 
-8367ecad664e design/roadmap/0118-constitution-budget/audit.md
 
-8367ecad664e design/roadmap/0118-constitution-budget/plan.md
 
-8367ecad664e design/roadmap/0118-constitution-budget/size-gate-september.md
 
-8367ecad664e design/roadmap/0118-constitution-budget/size-gate.md
 
 83ee26349536 design/decisions/0184-an-x86-64-host-in-the-host-pass.md
 
@@ -1402,11 +1373,8 @@
 
 930e83c166c1 notes/empty-selectors.md
 
-946eb555ecea design/roadmap/0324-the-bench-console-cannot-speak-to-a-board/rulings.md
 
-946eb555ecea design/roadmap/0324-the-bench-console-cannot-speak-to-a-board/stop-mode.md
 
-946eb555ecea design/roadmap/0324-the-bench-console-cannot-speak-to-a-board/sweep-and-profile.md
 
 9537d620cd22 design/roadmap/0518-the-per-crate-census-nobody-wrote-down.md
 
@@ -1682,11 +1650,8 @@ b3a783250bcb design/decisions/0183-what-no-arguments-means.md
 
 b3a783250bcb design/roadmap/0440-what-no-arguments-means.md
 
-b3c1e40325bd design/roadmap/0188-ipc-fastpath/design-space.md
 
-b3c1e40325bd design/roadmap/0188-ipc-fastpath/phase-4-evidence.md
 
-b3c1e40325bd design/roadmap/0188-ipc-fastpath/phases-1-to-3.md
 
 
 
@@ -1891,17 +1856,11 @@ cb31c429ffd1 design/decisions/0253-concurrent-login-sessions.md
 
 cb31c429ffd1 design/roadmap/0806-concurrent-login-sessions.md
 
-cba377cea53f design/roadmap/0161-x86-64-kernel-port/closing.md
 
-cba377cea53f design/roadmap/0161-x86-64-kernel-port/early-boot.md
 
-cba377cea53f design/roadmap/0161-x86-64-kernel-port/open-list.md
 
-cba377cea53f design/roadmap/0161-x86-64-kernel-port/processes-and-userspace.md
 
-cba377cea53f design/roadmap/0161-x86-64-kernel-port/ring-3.md
 
-cba377cea53f design/roadmap/0161-x86-64-kernel-port/smp-and-vt-d.md
 
 cec5b37aa8a6 design/roadmap/0250-an-unviable-mutant-is-a-hole-that-reads-as-a-pass.md
 
@@ -1923,13 +1882,9 @@ d08b72cf5fca design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
 d08b72cf5fca design/roadmap/0887-crate-repositories-share-one-ci-template.md
 
-d0b6708efcca notes/framebuffer-contract/flushed-hang.md
 
-d0b6708efcca notes/framebuffer-contract/iommu-escape-test.md
 
-d0b6708efcca notes/framebuffer-contract/later-rungs.md
 
-d0b6708efcca notes/framebuffer-contract/scanout-referee.md
 
 d1a0aac9754b design/roadmap/0579-constitution-carry-vs-brief/classification.md
 
@@ -2255,11 +2210,8 @@ ec1d6e2c660a notes/bench-boots.md
 
 ec1d6e2c660a notes/risk-6-bench-evening.md
 
-ec80f2732b68 design/roadmap/0064-std-for-real-crates/ranked-list.md
 
-ec80f2732b68 design/roadmap/0064-std-for-real-crates/scope.md
 
-ec80f2732b68 design/roadmap/0064-std-for-real-crates/tcp-listener-and-file-times.md
 
 edc012806cae design/roadmap/0135-loom-region-claim.md
 

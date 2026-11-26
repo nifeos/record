@@ -1,11 +1,11 @@
 # The dependency: §46's test, the measured graphs, and the prior art
 
 This appendix belongs to [milestone 142 (a text display good enough that people use it instead of a
-GUI)](../0142-a-text-display-worth-living-in.md). It was moved out of that page on 2026-10-12 (UTC)
-under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md), and the
-main page is complete without it. It holds the dependency analysis that [§166 (the rasteriser dependency, and whether the glyph atlas ships one face or four)](../../decisions/0166-the-rasteriser-and-how-many-faces.md)
-ruled on 2026-10-05 (UTC): rasteriser
-A, `ttf-parser` 0.25.1 plus `ab_glyph_rasterizer` 0.1.10.
+GUI)](../0142-a-text-display-worth-living-in.md). It was moved out under [§212 (a prose
+budget)](../../decisions/0212-a-prose-budget-for-every-document.md), and the main page is complete
+without it. It holds the dependency analysis that [§166 (the rasteriser dependency, and whether the
+glyph atlas ships one face or four)](../../decisions/0166-the-rasteriser-and-how-many-faces.md)
+ruled on 2026-10-05 (UTC): rasteriser A, `ttf-parser` 0.25.1 plus `ab_glyph_rasterizer` 0.1.10.
 
 ## §46's test, in order
 

@@ -1,10 +1,9 @@
 # The design space: what a fastpath may skip, how it stays proved, and the alternatives priced
 
-An appendix of [milestone 188 (the IPC fastpath)](../0188-ipc-fastpath.md), moved out of it on
-2026-10-12 (UTC) under §212 (a prose budget). The main page is complete without it and keeps each
-section here as a summary. This file keeps the full reasoning, written during scoping (2026-08-28 to
-2026-09-04) for whoever takes phase 4. The per-symbol figures it cites are in
-[scoping.md](scoping.md).
+An appendix of [milestone 188 (the IPC fastpath)](../0188-ipc-fastpath.md), moved out under §212 (a
+prose budget). The main page is complete without it and keeps each section here as a summary. This
+file keeps the full reasoning, written during scoping (2026-08-28 to 2026-09-04) for whoever takes
+phase 4. The per-symbol figures it cites are in [scoping.md](scoping.md).
 
 ## What a fastpath would skip, and what it cannot skip
 

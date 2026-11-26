@@ -2,10 +2,10 @@
 
 *Name: ratified 2026-10-18 (calef, convention-rulings Rule 3).*
 
-An appendix to [notes/framebuffer-contract.md](../framebuffer-contract.md), moved there on
-2026-10-11 (UTC) under §212 (a prose budget). It is the record of milestone 177 (wire the graphical
-terminal stack into the real interactive boot)'s hang, carried unexplained
-for three weeks, and the boot evidence that resolved it.
+An appendix to [notes/framebuffer-contract.md](../framebuffer-contract.md), moved there under §212
+(a prose budget). It is the record of milestone 177 (wire the graphical terminal stack into the real
+interactive boot)'s hang, carried unexplained for three weeks, and the boot evidence that resolved
+it.
 
 RESOLVED 2026-09-19 (milestone 177): the second `FLUSH` on the real boot never returned because
 nobody received the driver's `FLUSHED` report. Found 2026-08-27 by milestone 177's boot-wiring lane

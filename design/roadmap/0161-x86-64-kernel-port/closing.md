@@ -1,11 +1,11 @@
 # Milestone 161 appendix: closing the follow-on, 2026-09-19
 
 An appendix to [milestone 161 (the x86_64 kernel port)](../0161-x86-64-kernel-port.md), moved out
-of that page on 2026-10-12 (UTC) under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md).
-The main page is complete without it; this is the working of the lane on
+under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main
+page is complete without it; this is the working of the lane on
 `milestone/161-x86-64-port-remainder`, which closed the four items the 2026-09-03 follow-on left
-open. Long sentences were split to meet [§213 (writing standards)](../../decisions/0213-writing-standards.md);
-no fact changed.
+open. Long sentences were split to meet [§213 (writing
+standards)](../../decisions/0213-writing-standards.md); no fact changed.
 
 Each item was re-checked against the tree first, because the list said "Checked 2026-09-03". One had
 already been done by another milestone: SMP failure (3), by

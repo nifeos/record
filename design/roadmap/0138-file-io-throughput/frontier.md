@@ -1,10 +1,9 @@
 # The question underneath, and what stayed out of scope
 
 This appendix belongs to [milestone 138 (close the read gap)](../0138-file-io-throughput.md). It was
-moved out of that block on 2026-10-12 (UTC) under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md), and the block is complete
-without it. It holds the full argument for why the 13 us residual is a frontier rather than a wall,
-and why a data cache stayed out of scope when a metadata cache did not.
+moved out under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md),
+and the block is complete without it. It holds the full argument for why the 13 us residual is a
+frontier rather than a wall, and why a data cache stayed out of scope when a metadata cache did not.
 
 ## Does this architecture have a disk-read liability that cannot be overcome?
 
