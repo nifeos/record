@@ -10,8 +10,8 @@ edition 2024, `rust-version` 1.88, no dependencies and no features. Read: `Cargo
 items (`lib`, `data_plane`, `descriptor`, `layout`, `registers`, `control_registers`,
 `supported_devices`, and under `platform_controller_hub` the modules `hardware_access`,
 `sequence`, `physical_layer_device`, `non_volatile_memory`, `flush`, `ultra_low_power`, `reset`
-and `registers`). The simulator, the tests and the three Kani proof modules were read for their
-types only; `docs/` and `fuzz/` were listed, not read.
+and `registers`). The review read the simulator, the tests and the three Kani proof modules for
+their types only, and listed `docs/` and `fuzz/` without reading them.
 
 ## The commands
 
@@ -39,11 +39,11 @@ directory and read. The measurement used the crates.io API with the User-Agent
 `release-review-lane`, on 2026-11-26 (UTC).
 
 - `ixgbe-driver` 0.1.1: `IxgbeHal` (`src/hal.rs`) is an `unsafe trait` with `dma_alloc`,
-  `dma_dealloc`, `mmio_phys_to_virt` and a wait; `IxgbeDevice<H, const QS: usize>`
+  `dma_dealloc`, `mmio_phys_to_virt` and a wait. `IxgbeDevice<H, const QS: usize>`
   (`src/ixgbe.rs`) owns its queues and reads its registers with `read_volatile` at
-  `self.addr + reg` (`get_reg32(reg: u32)`); `NicDevice` (`src/lib.rs`) has `receive_packets`
+  `self.addr + reg` (`get_reg32(reg: u32)`). `NicDevice` (`src/lib.rs`) has `receive_packets`
   with a closure, `send(queue_id, IxgbeNetBuf)`, `get_mac_addr() -> [u8; 6]` and
-  `get_link_speed`; `IxgbeError` derives only `Debug`. Five dependencies, `smoltcp` 0.12 among
+  `get_link_speed`. `IxgbeError` derives only `Debug`. Five dependencies, `smoltcp` 0.12 among
   them.
 - `eth-intel` 0.2.4: an e1000 driver over `dma-api` and `mmio-api`; `Regs::read(offset: usize)`
   over a `NonNull<u8>` (`src/e1000/registers.rs`); `Error` (`src/err.rs`) derives
@@ -69,10 +69,10 @@ directory and read. The measurement used the crates.io API with the User-Agent
 
 - Linux v6.12, `drivers/net/ethernet/intel/e1000e/` (`netdev.c`, `e1000.h`, `hw.h`, `regs.h`):
   `struct e1000_ring` holds the descriptor memory, its bus address and the `tail` register
-  together; `e1000_alloc_rx_buffers` writes the receive tail once per `E1000_RX_BUFFER_WRITE` (16)
-  buffers after a `wmb`; `e1000_clean_rx_irq` reads the status with a `dma_rmb` before the
-  descriptor and copies frames shorter than `copybreak`; `er32` and `ew32` read and write an
-  offset from `hw_addr`; `hw.h` declares function tables for the MAC, the PHY and the NVM.
+  together. `e1000_alloc_rx_buffers` writes the receive tail once per `E1000_RX_BUFFER_WRITE` (16)
+  buffers after a `wmb`. `e1000_clean_rx_irq` reads the status with a `dma_rmb` before the
+  descriptor and copies frames shorter than `copybreak`. `er32` and `ew32` read and write an
+  offset from `hw_addr`, and `hw.h` declares function tables for the MAC, the PHY and the NVM.
   GPL; read for its interface shape only.
 
 ## The benchmark

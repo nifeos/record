@@ -1,7 +1,7 @@
 ---
 status: PARTIAL
 raised: 2026-11-26
-milestone_dependencies: "1057, 1129"
+milestone_dependencies: 1057, 1129
 decision_dependencies: none
 machine_requirements: none
 specific_machine: none
@@ -21,7 +21,7 @@ and its rulings on the ring size (P2-6) and on the private test doubles (P2-7) s
 1057 ratified stand, `empty_descriptor_rings` among them; the recheck against the naming rules made
 after the clearance finds none that a later rule reopens.
 
-Reuse: the prior-art table weighs each Intel Ethernet driver a caller could take instead.
+Reuse: the prior-art table weighs each Intel driver a caller could take.
 
 ## Finding status
 
@@ -77,7 +77,7 @@ driver, which drives the same parts.
 | `embassy-net-driver` | integration: the `Driver` trait | 0.2.0 | 2,673,211 | 977,529 | 18 | 2023-10-18 |
 | Linux `drivers/net/ethernet/intel/e1000e` | outside Rust | v6.12 | | | | |
 
-No crate on crates.io is named `e1000e`, `e1000`, `igb`, `intel-e1000`, `e1000e-driver` or
+crates.io has no crate named `e1000e`, `e1000`, `igb`, `intel-e1000`, `e1000e-driver` or
 `igb-driver`, and searches for 82574, I219 and e1000e find no other driver.
 
 ### What `e1000e` does better
@@ -100,8 +100,8 @@ No crate on crates.io is named `e1000e`, `e1000`, `igb`, `intel-e1000`, `e1000e-
 
 ## The items
 
-Effort is S (half a day), M (a day or two) or L (longer). One-way means a caller outside the
-repository acts on it once 0.1.0 is out, so each P0 lands in 0.1.0 or not at all.
+Effort is S (half a day), M (a day or two) or L (longer). A P0 changes a public item that callers
+will build on from 0.1.0 onward, so it lands before that version or stays as it is.
 
 ### P0: the 0.1.0 interface
 
@@ -142,13 +142,11 @@ offset constants together. Door: one-way (D3). Effort: S.
 
 Verified in source.
 `DataPlane::start`, `receive`, `transmit` and `can_transmit` each take `&mut impl
-DirectMemoryAccessRegion` and `&mut impl Tails`, so one data plane can be handed a different region
-on a later call and the cursors then describe memory they did not fill. `ixgbe-driver`'s
+DirectMemoryAccessRegion` and `&mut impl Tails`, so a caller can hand one data plane a different region on a later call and the cursors then describe memory they did not fill. `ixgbe-driver`'s
 `IxgbeDevice` and `virtio-drivers`' `VirtIONetRaw` own their queues and their transport, and
 Linux's `struct e1000_ring` holds the ring's memory (`desc`, `dma`) and its `tail` together. The
 borrow lets a caller keep the region and the registers in fields of its own and split the borrows.
-Change: none before 0.1.0 unless the DMA-region decision of milestone 1129 picks ownership; an
-owning wrapper can be added beside these methods later. Door: one-way (D4). Effort: M if it changes.
+Change: none before 0.1.0 unless the DMA-region decision of milestone 1129 picks ownership; an owning wrapper can come beside these methods later. Door: one-way (D4). Effort: M if it changes.
 
 ### P1: before the first release
 
@@ -246,26 +244,22 @@ passes divided by the repeats; the range is over three runs of the program.
 - Device write alone: the fake device's part of the second column, timed by itself, to subtract.
 
 Inferred: the data plane's own share of a receive is about 10 ns at 60 bytes and 36 to 44 ns at
-1514, so the copy of the larger frame costs about 30 ns here. Not run against a comparator:
-`virtio-drivers` keeps its `FakeTransport` behind `#[cfg(test)]`, and `ixgbe-driver` brings its
-device up through `IxgbeHal::mmio_phys_to_virt` and waits on registers, so neither has a
-like-for-like setup without hardware.
+1514, so the copy of the larger frame costs about 30 ns here. No comparator ran: `virtio-drivers` keeps its fake behind `#[cfg(test)]`, and `ixgbe-driver` needs a mapped device, so neither runs like for like without hardware.
 
 ## One-way doors
 
 - D1, the counters (P0-1). Recommended: private fields and two read methods before 0.1.0, the
-  stricter choice; a setter can be added later, a field cannot be taken back.
+  stricter choice; a setter can come later, and a public field cannot go back.
 - D2, the device table (P0-2). Recommended: keep `DEVICE_IDS` inside the crate and
   `is_supported_device` and `model_name` as the interface, the stricter choice; a typed,
-  `#[non_exhaustive]` table can be published later.
+  `#[non_exhaustive]` table can follow later.
 - D3, the register offset width (P0-3). Recommended: `u32`, matching `designware_ethernet::Hardware`
   and every comparator, and covering every offset the crate names with room to spare; the DMA region
   keeps `u64`, since a region can be large. Decided once for every ring driver by the
   register-access decision.
 - D4, who holds the region and the tails (P0-4). Recommended: keep the per-call borrow for 0.1.0;
   an owning wrapper can come later beside it, and taking the borrow form away later cannot.
-- D5, the tails trait. `Tails` sets the two tails and carries the barrier, and lets a receive tail
-  write be held back to a newer value, as `designware_ethernet`'s `Tails` sets its two and carries
+- D5, the tails trait. `Tails` sets the two tails and carries the barrier, and lets a caller hold a receive tail write back to a newer value, as `designware_ethernet`'s `Tails` sets its two and carries
   its barrier. `non_volatile_memory_express` and `extensible_host_controller_interface` compute a
   doorbell offset and declare no trait, and Linux writes `rx_ring->tail` with `writel` once per 16
   buffers (`E1000_RX_BUFFER_WRITE`). Recommended: keep the trait as it stands, and have the
@@ -322,7 +316,7 @@ like-for-like setup without hardware.
 
 - **Outstanding.** The shared decisions of milestone 1129 take D3 for register access, D4 for
   regions, D5 for doorbells and tails, D6 for simulators and P2-1 for feature names.
-- **Outstanding.** The first release also waits on 1057's cabled I219 run, which stays its own.
+
 
 ## Done when
 
@@ -338,5 +332,5 @@ to D6, and `script/review-status` shows the block BUILT.
 ## Index row
 
 The release review of `e1000e` against `ixgbe-driver`, `eth-intel`, `e1000-driver`, `eth-igb`,
-`virtio-drivers`, `smoltcp` and Linux: four one-way interface changes before 0.1.0, three smaller
-fixes before the release, a measured data plane of 9 to 67 ns a frame, and six doors to rule.
+`virtio-drivers`, `smoltcp` and Linux. Four one-way interface changes come before 0.1.0 and three
+smaller fixes before the release; the data plane measures 9 to 67 ns a frame; six doors wait.
