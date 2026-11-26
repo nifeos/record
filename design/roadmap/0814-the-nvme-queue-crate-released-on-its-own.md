@@ -100,23 +100,10 @@ they left with `Handoff` on 2026-10-26 (#2736).
    reads `target_arch`, so stock Kani proves them. The patched Kani of §218 (carry a Kani patch so
    riscv64 is proved, and send it upstream) is carried only if one comes to need riscv64. Milestone
    589 (Kani can prove riscv64 from the hosts we already have) built it.
-5. Soak, as its own repository (calef, 2026-10-17 UTC, replying "Agrred" (sic) to the maintainer's
-   proposal; §305 (git dependencies are allowed on `nifeos/*` only, pinned to a landed commit)).
-   Milestone 818 (`jh7110_entropy`: proven JH7110 TRNG logic, released on its own) is the pilot and
-   soaks first. Before publication the crate is moved, not copied: it leaves this tree, and nife
-   depends on `partsfoundry/non_volatile_memory_express` by `rev`. A copy left behind does not count. The
-   soak ends on evidence, not a duration, when all five hold:
-   1. nife builds and passes CI against the repository at a pinned commit, with no path dependency
-      left.
-   2. The shared template's weekly run (milestone 887) is green on the crate.
-   3. A release dry run is green.
-   4. The stranger test builds and proves the crate from its README alone.
-   5. The API has gone four weeks with no change `cargo-semver-checks` calls breaking.
-6. crates.io trusted publishing from that workflow, owned by a `nifeos` team, with no stored token.
-7. calef approves this publication, as he does every one.
-8. nife consumes the crates.io release by semantic version, and `Cargo.lock` records its checksum. A `[patch]` to
-   a checkout is allowed only during development, and a lint fails one that reaches `main`. The
-   soak's git dependency goes.
+5. Soak, as its own repository, until the [soak's five end conditions](../../notes/crate-move.md#the-soaks-five-end-conditions)
+   in the runbook hold.
+6. Publish and consume the release by version, by the runbook's
+   [publication steps](../../notes/crate-move.md#publication-and-consumption-by-version).
 
 ## Parity
 

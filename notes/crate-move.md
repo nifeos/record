@@ -238,11 +238,10 @@ tagged commit.
 
 ## The soak's five end conditions
 
-The soak ends on evidence; condition 5 also sets the shortest soak. Each condition below has its check; all five hold before
-a publication can come to calef. Condition 5 does not read `weekly / semver`, which reports a break
-in its run's summary and succeeds whatever it finds; it reads the labeler's finding on each merged
-pull request and a direct run. [Milestone 1034 (a runbook for moving a crate out of nife)](../design/roadmap/1034-a-crate-move-runbook.md)
-holds the grounds for four weeks.
+Every crate soaks as its own repository before it publishes (ruled 2026-10-17 UTC; §305 (git
+dependencies are allowed on `nifeos/*` only, pinned to a landed commit)). The soak ends, with no
+duration, when all five conditions hold (condition 5 ruled 2026-11-26 UTC, nifeos/record#48).
+Condition 5 does not read `weekly / semver`, which succeeds whatever it finds.
 
 | condition | check | who |
 |---|---|---|
@@ -250,7 +249,9 @@ holds the grounds for four weeks.
 | 2. the template's weekly run is green | `gh run list -R nifeos/<crate> --workflow weekly.yml --limit 1 --json conclusion` prints `success`; `gh workflow run weekly.yml -R nifeos/<crate>` starts one early | lane |
 | 3. a release dry run is green | `gh workflow run release.yml -R nifeos/<crate> -f version=<manifest version> -f dry-run=true`, then that run's `gate` succeeds and it creates no tag | lane |
 | 4. the stranger test builds and proves the crate from its README alone | `grep '^Last run:' docs/stranger-test.md` in the crate repository prints a date, with that run's appendix beside it | step 12 |
-| 5. the API goes four weeks with no change `cargo-semver-checks` calls breaking | 28 days have passed since the tag nife pins, with at least four scheduled `weekly` runs green; `gh search prs --repo nifeos/<crate> --merged-at '>=<tag date>' '"major break"'` prints nothing; and `cargo semver-checks --baseline-rev v<pinned version>` on the crate's `main` reports no major change. A break restarts the period at the tag that carries it. | lane |
+| 5a. every consumer in nife builds against the tagged release, unpatched | `git grep -n '^<crate> = ' -- '*.toml'` in nife, `tools/` included: each `rev` is tag `v<version>`'s commit, each `version` that tag's; no `[patch]` names it | lane |
+| 5b. `cargo-semver-checks` finds no break from that tag to `main` | `cargo semver-checks --baseline-rev v<version> --release-type minor` passes a nonzero count; a pre-release without `--release-type` skips every check | lane |
+| 5c. no open issue, milestone or BUGS entry proposes a break | read the crate's open issues, `gh search issues --owner nifeos --owner partsfoundry --state open <crate>`, its `BUGS` and each unbuilt milestone naming it | lane |
 
 ## Publication and consumption by version
 
@@ -270,9 +271,9 @@ publishes.
     github:nifeos:crate-maintainers <crate>`; on crates.io, a trusted publisher for
     `nifeos/<crate>`, workflow `release.yml`, environment `crates-io`; then delete the secret. Every
     later release publishes through trusted publishing alone.
-20. nife consumes the release (lane). Each consumer line becomes `<crate> = "<version>"`.
-    Expected: `cargo tree --locked -i <crate>` resolves from crates.io and `Cargo.lock` records the
-    checksum. The milestone's exit holds.
+20. nife consumes the release (lane). Each consumer line becomes `<crate> = "<version>"`, and a
+    lint fails any `[patch]` on `main`. Expected: `cargo tree --locked -i <crate>` resolves from
+    crates.io and `Cargo.lock` records the checksum. The milestone's exit holds.
 
 ## What calef does, in one list
 
@@ -302,5 +303,3 @@ publishes.
   line per surviving mutant, and the census records four counts (caught, missed, timeout, unviable)
   and no locations, so the lines cannot be written mechanically. The first `weekly / mutation` run fails on each survivor and names it; the move lane lists them in one pull request.
 - The dry run's nife check passes an identifier such as `NIFE_DATA`. Read `helpers/lint_externalized_crates.py`'s count for the crate as well.
-- Condition 3 is unmeasured on the pilot: no release run used `dry-run=true`, so whether a dry
-  run of an already tagged version passes the gate is unknown.

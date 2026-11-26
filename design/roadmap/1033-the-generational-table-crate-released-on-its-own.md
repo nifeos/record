@@ -50,8 +50,8 @@ Reuse: none exists that fits. Searched crates.io and read twelve candidates from
   prove the five harnesses.
 - End condition 1 holds once the repository's `main` is green at the pinned commit. Condition 2
   waits on the first weekly run, 3 on a release dry run, 4 on a recorded stranger run
-  (`docs/stranger-test.md` there reads `Last run: none`), and 5 on four weeks from the tag nife
-  pins.
+  (`docs/stranger-test.md` there reads `Last run: none`), and 5 on
+  [its three checks](../../notes/crate-move.md#the-soaks-five-end-conditions) from the tag nife pins.
 - A bump of the pin is a separate pull request citing the landed commit as
   `partsfoundry/generational_table@<sha>`.
 
@@ -59,9 +59,9 @@ Reuse: none exists that fits. Searched crates.io and read twelve candidates from
 
 1. The tag `v0.1.0`, which the release workflow makes when calef dispatches it, and the pin moved
    to that tag's commit.
-2. The soak, which ends on evidence and not a duration, as in milestone 818 (`jh7110_entropy`: proven JH7110 TRNG logic, released on its own).
-3. The publication of 0.1.0 by trusted publishing, which waits for the architect's approval.
-4. nife consuming the release by semantic version, with `Cargo.lock` recording its checksum, the
+2. The soak, until the runbook's [five end conditions](../../notes/crate-move.md#the-soaks-five-end-conditions) hold.
+3. The publication of 0.1.0 and nife's consumption of it by version, by the runbook's
+   [publication steps](../../notes/crate-move.md#publication-and-consumption-by-version), with the
    kernel's seven tables and `crates/memory_regions` among the consumers.
 
 The crate takes the third slot, after `file_allocation_table` (milestone
