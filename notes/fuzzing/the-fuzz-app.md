@@ -117,9 +117,9 @@ write nothing.
 5. At <https://github.com/organizations/nifeos/settings/apps/nife-fuzz-reader/installations>,
    install it on the nifeos organization with Only select repositories, nifeos/nife alone. Note the
    installation ID from the installation page's address.
-6. At <https://github.com/organizations/nifeos/settings/apps/nife-fuzz-reader>, under Credentials,
-   Key pairs, generate a private key. Copy it into a directory only root can enter on the machine that launches fix lanes, owned
-   by root, mode 0400. Delete every other copy.
+6. Generate its private key and place it on the machine that launches fix lanes, as step P10 of
+   [finishing the setup](finishing-the-setup.md#p10-generate-the-nife-fuzz-reader-key-and-place-it-on-the-fix-lane-machine-person-only-root)
+   says.
 7. Install the helper and the sudo rule as nifeos/fuzz-host's
    [`docs/fuzz-token-reader.md`](https://github.com/nifeos/fuzz-host/blob/main/docs/fuzz-token-reader.md)
    says. The App ID and installation ID are in the helper; neither is secret.

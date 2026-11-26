@@ -92,8 +92,8 @@ and decoder-needing words. Renamed, all private:
 The source's spelling, such as `GMAC_CHAN_TX_CONTROL_ST` or `MII_BMCR`, is in each constant's doc
 comment and in a `doc(alias)`. Every patch still applies and fails its own harness.
 
-Parameter names of public functions, spelled out. They are provisional: a parameter name is no
-part of a Rust signature's compatibility, so the maintainer rules them, pending the architect.
+Parameter names of public functions, spelled out. They are provisional, for the reason
+[the index](../crate-reviews.md#what-is-the-same-for-all-of-them) gives.
 
 | parameter | of | now |
 |---|---|---|

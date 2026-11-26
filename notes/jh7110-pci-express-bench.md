@@ -10,10 +10,9 @@ questions here, and every step that needs a second boot says so.
 
 ## Before anything else
 
-- Read the off-tree bench instructions first. The maintainers keep the bench's unit-specific
-  details in a private checkout, not in this repository: which serial device is the board's, which
-  outlet powers it, and which outlets and hubs must never lose power. Follow its warnings over
-  anything here. Never put anything from it in public text.
+- Read the off-tree bench instructions first, as
+  [the bench runbook](bench-runbook.md#before-touching-any-machine) says, and follow their warnings
+  over anything here.
 - Power off before you touch the M.2 slot. Seat the drive and fit its screw with the board
   unpowered. The slot takes an M-key 2230, 2242, 2260 or 2280 drive.
 - Nothing on this page writes the drive. The kernel's disk tree mounts the drive read-only at

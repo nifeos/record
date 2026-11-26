@@ -75,9 +75,8 @@ skeptic expects the project to die here, because this is where the most evidence
 ## Benchmarks that inform this risk
 
 As of 2026-10-08 (UTC), under §262 (nife is measured with the field's standard benchmarks).
-Each is to run unmodified on nife and on Linux, and none has produced a number yet. A port does
-not wait on a C library, since milestone 835 (#1896) built one from relibc under §265 (a C library
-started from relibc). It waits on whatever that first stage lacks, such as threads or sockets.
+[The index](README.md#the-standard-benchmarks-each-risk-is-measured-by) says how each runs and what
+a port waits on.
 
 - [Milestone 25 (cross-OS performance comparison)](../roadmap/0025-cross-os-comparison.md), `sel4bench`, the seL4 column. Waits on a PMU on silicon.
 - [Milestone 826 (an lmbench subset on nife and Linux)](../roadmap/0826-an-lmbench-subset-on-nife-and-linux.md). Its `fork` rows never run.

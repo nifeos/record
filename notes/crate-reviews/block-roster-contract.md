@@ -27,7 +27,7 @@ identity, and `write` no longer panics on any input. It is a leaf: nothing in th
 | version | `0.1.0`; no tag |
 | edition, `rust-version` | 2024, 1.88 |
 | license | `MIT OR Apache-2.0`, both texts at the crate root |
-| `publish` | `false`; milestone 1017 keeps the moved contract crates unpublished under §305 (git dependencies on `nifeos/*` only, pinned to a landed commit) until their own release milestone |
+| `publish` | `false`, until its own release milestone ([milestone 1017](../../design/roadmap/1017-the-contract-crates-leave-in-this-order.md) says why) |
 | size | one `src/lib.rs` of 586 lines: about 290 of library, 190 of tests, 105 of Kani harnesses |
 | package | `cargo package` packs 11 files, 45.7 KiB (14.5 KiB compressed), the three patches included, and builds from the packed copy |
 | consumers in nife | the writer in `kernel` (`kernel/src/user/disk_service.rs`), the reader `disk_surveyor` in `components`, and `system_tests` (development only); all by path |

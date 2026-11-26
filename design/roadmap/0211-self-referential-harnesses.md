@@ -53,7 +53,7 @@ findings among them. Three of those eleven were flagged by a bug in the extracto
 by a real call-graph edge, and a correct implementation of the test would have missed the whole
 encoder/decoder family. Every harness was read.
 
-In brief. Milestone 194's lane found it in `capability`, and `notes/falsification.md` states the
+In brief. Milestone 194's lane found it in `capability`, and `notes/falsification/six-real-records.md` states the
 generalization rather than the instance:
 
 > `derive_never_widens_rights` states its property *through the predicate it is testing*. It asserts
@@ -61,7 +61,7 @@ generalization rather than the instance:
 > `rights.is_subset_of(src.rights)`, so a consistently wrong `is_subset_of` satisfies both sides and
 > the harness cannot see the break.
 >
-> -- notes/falsification.md
+> -- notes/falsification/six-real-records.md
 
 Milestone 202's lane then found the same shape in `component_plan`'s proof, independently.
 

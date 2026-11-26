@@ -54,9 +54,8 @@ status is unchanged.
 ## Benchmarks that inform this risk
 
 As of 2026-10-08 (UTC), under §262 (nife is measured with the field's standard benchmarks).
-Each is to run unmodified on nife and on Linux, and none has produced a number yet. A port does
-not wait on a C library, since milestone 835 (#1896) built one from relibc under §265 (a C library
-started from relibc). It waits on whatever that first stage lacks, such as threads or sockets.
+[The index](README.md#the-standard-benchmarks-each-risk-is-measured-by) says how each runs and what
+a port waits on.
 
 - [Milestone 828 (iperf3 on nife and Linux)](../roadmap/0828-iperf3-on-nife-and-linux.md), the NIC half.
 - [Milestone 829 (netperf TCP_RR on nife and Linux)](../roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md), a driver's fixed delay.

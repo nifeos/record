@@ -136,8 +136,8 @@ Not run, and so not claimed:
 - Mutation. The census belongs in the 08:00 to 13:00 UTC window, and these checks ran outside it.
   The baseline row in `.cargo/mutants-baseline.txt`, from the census of 2026-10-19, reads 37 caught,
   0 missed, 0 timed out and 2 unviable. It predates both harnesses and the bound check, so it
-  undercounts. The move carries the row into the repository's `.github/mutants-exempts` as a
-  comment, and the repository's first weekly run lists survivors.
+  undercounts. The move carries the row across, and the first weekly run names
+  the survivors, as [the runbook](../crate-move.md#bugs) says.
 - Loom: the crate has no model, since its one ordering argument is the scheduler's handoff, which
   lives in the kernel.
 - The stranger test, `cargo-semver-checks` (a first release has no baseline), a 32-bit build and

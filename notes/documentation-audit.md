@@ -256,11 +256,8 @@ $ script/audits --baseline     # the counts to paste into both index tables
   substantial rewrite *inside* an existing crate, which moves no milestone and no component; the
   worklist catches that better than any calendar, which is why it exists.
 
-- The external-packages trigger is a poor proxy here and is set to 30 rather than 1. A
-  documentation sweep does not care that a transitive lockfile entry moved; it cares that a
-  dependency *class* arrived, and nothing counts classes. Thirty is a batch size that means the graph
-  really moved. The honest reading of that cell is "effectively off, kept because the table has a
-  column".
+- The external-packages trigger is a poor proxy here, set to 30 and so effectively off. [The audit
+  index](../design/audit-reports/README.md#when-the-next-audit-is-due) says why.
 
 - Nothing checks that a sweep happened. A row in the index closes the tripwire, and a row is
   cheap to type. That limit is 92's and it is not fixable by a script: the mechanism makes the sweep

@@ -99,8 +99,8 @@ release, because names become permanent on first publication.
 | `PowerManagementChipBus::controller` | an `(address, size)` pair with no word for either | `controller_physical_window` |
 | `sdcard_divider_for` | `sdcard` fuses two words, while `MAXIMUM_SD_CARD_DIVIDER` separates them | `sd_card_divider_for` |
 
-Parameter names of public functions, spelled out. They are provisional: a parameter name is no
-part of a Rust signature's compatibility, so the maintainer rules them, pending the architect.
+Parameter names of public functions, spelled out. They are provisional, for the reason
+[the index](../crate-reviews.md#what-is-the-same-for-all-of-them) gives.
 
 | parameter | of | now |
 |---|---|---|
