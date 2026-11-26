@@ -146,8 +146,8 @@ one-way (D3). Effort: S.
 
 Verified in source.
 `Region` (`src/lib.rs`, lines 15 to 22) has two public fields, `start` and `size_bytes`, and no
-`#[non_exhaustive]`, so a caller builds one with a struct literal, as every `out` array does, and
-a third field, such as the node a region came from, breaks each of them. `fdt`'s `MemoryRegion`
+`#[non_exhaustive]`, so a caller builds one with a struct literal, as every `out` array does. A
+third field, such as the node a region came from, breaks each of them. `fdt`'s `MemoryRegion`
 has public fields too; `dtoolkit` returns its register entries through methods.
 Change: `#[non_exhaustive]`, with `Region::new` and the `Default` of P1-2 for building one. Door:
 one-way (D5). Effort: S.
@@ -303,8 +303,7 @@ has, which visits every token. Parse is a header check in all three. The crate i
 
 ## Done when
 
-Every P0 and P1 finding reads Done, or Will not fix with its ruling, the architect has ruled D1
-to D6, and `script/review-status` shows the block BUILT.
+For `device_tree_blob`, every P0 and P1 item is Done or ruled Will not fix, the architect has decided D1 to D6, and `script/review-status` reports BUILT.
 
 ## BUGS
 

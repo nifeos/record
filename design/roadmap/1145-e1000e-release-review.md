@@ -323,8 +323,7 @@ Inferred: the data plane's own share of a receive is about 10 ns at 60 bytes and
 
 ## Done when
 
-Every P0 and P1 finding reads Done, or Will not fix with its ruling, the architect has ruled D1
-to D6, and `script/review-status` shows the block BUILT.
+The `e1000e` review is done once its P0 and P1 items read Done or Will not fix, D1 to D6 have rulings, and `script/review-status` lists BUILT.
 
 ## BUGS
 

@@ -330,8 +330,7 @@ for each entry; `fatfs` 0.3 also has no sector cache.
 
 ## Done when
 
-The block reads BUILT when `script/review-status` reports BUILT: each P0 and P1 item reads Done or
-Will not fix with its ruling, and D1 to D6 carry the architect's rulings.
+Each P0 and P1 item of `file_allocation_table` is Done or carries a Will not fix ruling, D1 to D6 are ruled, and `script/review-status` reports this block BUILT.
 
 ## BUGS
 
