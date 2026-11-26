@@ -14,7 +14,7 @@ Everything here is aarch64 icount on QEMU 11.1.2 and `nightly-2026-10-18`, the f
 `9f60ba737` against `main` at `5635cb7da`. Each count is bit-identical run to run, and the floor
 commit reproduces its saved rows to within one tick. A tick is 16 guest instructions on aarch64
 ([icount-tick-scales](icount-tick-scales.md)). The kernel is the opt-level 0 build the gate
-measures, so every cost below is a debug-build cost. Release costs are smaller and were not measured.
+measured then, so every cost below is a debug-build cost. Release costs are smaller and were not measured.
 
 ## What the floor sees: four merges
 

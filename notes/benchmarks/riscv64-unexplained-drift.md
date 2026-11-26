@@ -26,7 +26,7 @@ Each save absorbed drift on `main` that its `# why:` line named and did not sepa
 
 ## How it was measured
 
-riscv64 icount, the -O0 bench kernel the gate measures, QEMU 11.1.2, one hart. Four windows of
+riscv64 icount, the -O0 bench kernel the gate measured then, QEMU 11.1.2, one hart. Four windows of
 first-parent merges, each between two commits whose readings reproduce what the floors or the
 merge queue recorded:
 

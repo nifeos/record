@@ -11,6 +11,7 @@ One tool cannot both gate commits and tell the truth about magnitudes.
 | | icount (default) | HVF (`--real`) |
 |---|---|---|
 | what runs | TCG translation, `-icount shift=0,sleep=off` | the kernel, natively on the M-series core |
+| build | release, as it ships (nife#4132) | dev, or `--release` |
 | virtual time | a deterministic function of instructions executed | the hardware counter, 24 MHz |
 | numbers are | exact and reproducible per binary | real: the host's caches, TLBs and predictors |
 | numbers mean | path length; magnitudes are fiction | nanoseconds; determinism is gone |
@@ -124,30 +125,29 @@ above is the one to quote. sel4bench's own PMU method needs a real PMU, which
 [xenon](benchmarks/sel4bench-on-xenon.md) and argon (milestone 127 (the seL4 machine)) have.
 [Calibration against seL4](benchmarks/calibration-against-sel4.md) has the build recipe.
 
-### The regression floors (icount, `nightly-2026-09-23`, QEMU 11.1.1)
+### The regression floors (icount, release, `nightly-2026-11-25`, QEMU 11.1.2)
 
-Ticks per iteration from `bench/baseline-<arch>.txt`, the source of truth, read as of 2026-09-24.
+Ticks per iteration from `bench/baseline-<arch>.txt` on 2026-11-26.
 Ticks are not comparable across architectures: aarch64 counts at 62.5 MHz (16 instructions a tick), riscv64 at 10 MHz (about 100), x86_64 at 1 GHz
-(one). [Icount tick scales](benchmarks/icount-tick-scales.md) ground-truth measures them and
-corrects the cross-arch table.
+(one). [Icount tick scales](benchmarks/icount-tick-scales.md) measures them.
 
 | bench | aarch64 | riscv64 | x86_64 |
 |---|---:|---:|---:|
-| `ipc_rtt` | 1,032 | 171 | 17,202 |
-| `call_reply` | 1,059 | 177 | 17,734 |
-| `relay_rtt` | 2,058 | 343 | 34,331 |
-| `broker_rtt` | 2,115 | 354 | 35,429 |
-| `yield_switch` | 563 | 94 | 9,594 |
-| `spawn_reap` | 3,383 | 538 | 44,469 |
-| `map_new` | 240 | 37 | 2,758 |
-| `null_system_call` | 20.5 | 3.7 | (EL0 plane not in this leg) |
-| `ctx_switch` | 612 | 103 | |
-| `ipc_rtt_el0` | 2,203 | 372 | |
-| `spawn_el0` | 13,721 | 2,167 | |
+| `ipc_rtt` | 75.6 | 12.7 | 1,181 |
+| `call_reply` | 78.9 | 13.2 | 1,219 |
+| `relay_rtt` | 151 | 25.4 | 2,361 |
+| `broker_rtt` | 158 | 26.3 | 2,437 |
+| `yield_switch` | 35.8 | 6.3 | 607 |
+| `spawn_reap` | 982 | 166 | 7,972 |
+| `map_new` | 115 | 18.7 | 804 |
+| `null_system_call` | 6.6 | 1.8 | (EL0 plane not in this leg) |
+| `ctx_switch` | 49.6 | 10.0 | |
+| `ipc_rtt_el0` | 192 | 35.1 | |
+| `spawn_el0` | 3,114 | 502 | |
 
 ### What a userspace server costs
 
-The confined-server tax is one intermediary: `relay_rtt` minus `ipc_rtt`, about 1,030 ticks on
+The confined-server tax is one intermediary: `relay_rtt` minus `ipc_rtt`, about 75 ticks on
 aarch64, or two extra switches and two extra rendezvous. The queue broker costs the same shape again,
 `broker_rtt` at 2.0x `call_reply` on both ISAs, which is why it is opt-in per channel. A live service
 swap adds nothing to the steady state. [The service path](benchmarks/service-path.md) has the

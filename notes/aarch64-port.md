@@ -203,7 +203,7 @@ whole.
 Linux keeps `current` in `SP_EL0` instead, which would mean swapping that register on every trap.
 
 It is one `asm!` block of five instructions rather than `interrupts::disable` and a load, because
-the icount gate measures an opt-level 0 kernel where those are five calls that never inline. Built
+the opt-level 0 kernel the icount gate counted until 2026-11-26 made those five calls that never inline. Built
 that way it cost `ipc_rtt` 13,875 ticks per 1,000 round trips
 ([benchmarks/drift-since-the-2026-10-10-floor.md](benchmarks/drift-since-the-2026-10-10-floor.md)).
 

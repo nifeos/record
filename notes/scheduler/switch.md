@@ -129,7 +129,7 @@ end of the struct in the same page, and a `&mut Thread`'s provenance stops at th
 
 Both functions read the current thread's state themselves and are `#[inline(always)]`. Passing the
 state in made LLVM duplicate the run-queue pop, 76 bytes of `schedule` on aarch64. With both left to
-the compiler, the icount gate's debug build saw `yield_switch` and `ctx_switch` rise 1.0 to 1.2% on
+the compiler, the icount gate's debug build of that time saw `yield_switch` and `ctx_switch` rise 1.0 to 1.2% on
 all three ISAs. Both measurements came on 2026-10-12 (UTC). The release build inlined them either
 way.
 
@@ -141,7 +141,7 @@ grant), §139 (who may read the cycle counter) option 4). The other, on x86_64, 
 (§152 (the port-range capability)). Both reads and both installs are `#[cfg]`-gated at the switch
 site. Neither rides the switch tuple.
 
-The debug build the icount gate measures does not fold a constant away. A constant-`false` tuple
+A debug build does not fold a constant away, and the icount gate counted one until 2026-11-26. A constant-`false` tuple
 element and an empty install cost `yield_switch` +35.6 and `ctx_switch` +36.0 ticks per switch on
 aarch64. A constant `None` port grant cost 13% on the same two rows. With the feature off, the
 counter keeps the closed value boot wrote. That boot write is not behind the feature, because

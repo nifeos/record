@@ -123,7 +123,7 @@ residual 237 left behind. 139 threaded the grant through the shared context-swit
 element. When 237 gated the feature off, it turned that element into a constant `false` and trusted
 the optimizer to fold it away (a `#[cfg]` is not allowed on a tuple element, which is why 237
 reached for the fold). The fold works in the release build but not in the debug build the icount
-gate measures. So the const-`false` element, its read, and a gated-off
+gate measured then. So the const-`false` element, its read, and a gated-off
 `install_cycle_counter_grant` call all stayed in the shipping switch and cost the +35.7.
 
 This is the class milestone 299 (the x86 port-range capability) found and fixed for the x86 port grant in the same function
