@@ -18,8 +18,8 @@ run, and the cleared package
 [`notes/crate-reviews/designware-ethernet.md`](../../notes/crate-reviews/designware-ethernet.md).
 This review reopens neither, and no name the package ratified falls under a later naming rule.
 
-Reuse: the prior-art table weighs each DesignWare driver a caller could take instead, and the
-evidence section feeds the shared decisions of milestone 1129.
+Reuse: the prior-art table weighs each DesignWare driver a caller could take instead; the evidence
+section feeds milestone 1129's shared decisions.
 
 ## Finding status
 
@@ -31,12 +31,13 @@ The status words are those `script/review-status` reads.
   decision of milestone 1129.
 - P0-4, the bring-up answers a bare tuple and takes an unchecked station address: Open.
 - P0-5, the packed settings word is a public format: Open.
+- P0-6, safe functions take the physical address the device uses: Open.
+- P0-7, an inconclusive coherence probe passes the bring-up: Open.
 - P1-1, the README says the crate has run on a board, and the crate page says it has not: Open.
-- P1-2, an inconclusive coherence probe passes the bring-up: Open.
-- P1-3, a short receive buffer loses a good frame as a dropped one: Open.
-- P1-4, one failure section, few examples, four links to private items, and a README that is not
+- P1-2, a short receive buffer loses a good frame as a dropped one: Open.
+- P1-3, one failure section, few examples, four links to private items, and a README that is not
   the crate page: Open.
-- P1-5, the probe deadline subtracts two clock readings unchecked: Open.
+- P1-4, the probe deadline subtracts two clock readings unchecked: Open.
 - P2-1, the manifest has no `documentation` key and no `include` list: Open.
 - P2-2, `smoltcp` and `embassy-net-driver` adapters and a borrowed frame: Waiting on the
   feature-names decision of milestone 1129.
@@ -46,7 +47,7 @@ The status words are those `script/review-status` reads.
 
 ## Open decisions
 
-The one-way doors below, D1 to D5, each for the architect.
+The one-way doors below, D1 to D7, each for the architect.
 
 ## Goal
 
@@ -82,10 +83,9 @@ MDIO traits and the register-access crates.
 | `safe-mmio` | integration: register access | 0.4.0 | 647,707 | 214,105 | 13 | 2026-11-12 |
 | `embedded-hal` | integration: `delay::DelayNs` | 1.0.0 | 41,112,022 | 10,120,693 | 1852 | 2024-01-09 |
 
-`stm32-eth` passes 10,000 downloads in 90 days, so the rule needs no system outside Rust. The
-leading crate drives the older 3.x descriptors, not this crate's 4.x and 5.x format. So the review
-read three anyway: Linux `stmmac` at v6.12, U-Boot `dwc_eth_qos.c` at
-v2025.10, and OpenBSD `dwqe.c` at `59ec3ab4d107`, the commit the crate cites.
+`stm32-eth` passes 10,000 downloads in 90 days, but drives the older 3.x descriptors, so the
+review also read Linux `stmmac` at v6.12, U-Boot `dwc_eth_qos.c` at v2025.10, and OpenBSD `dwqe.c`
+at `59ec3ab4d107`.
 
 ### What `designware_ethernet` does better
 
@@ -96,12 +96,10 @@ v2025.10, and OpenBSD `dwqe.c` at `59ec3ab4d107`, the commit the crate cites.
 - Than `embassy-stm32`'s `eth::v2`, on the same descriptor format: `receive_verdict` checks the
   length against the buffer, the caller's room and the 1514-byte frame bound before any copy (a
   Kani proof), and one `receive` call consumes at most one ring of descriptors.
-- Than `dwmac-my`, on the same board and controller: no allocator, no `unsafe` method on
-  `DirectMemoryAccessRegion`, and MDIO errors that name the address, where `dwmac-my` returns
+- Than `dwmac-my`, on the same board and controller: no allocator, and MDIO errors that name the address, where `dwmac-my` returns
   `&'static str`.
 - Than every Rust comparator: the cache-coherence probe measures whether each side sees the other's
-  writes, and the bring-up refuses on a measured incoherence. U-Boot answers the same question with
-  a cache operation per platform; no Rust crate asks it.
+  writes, and the bring-up refuses on a measured incoherence; no Rust crate asks.
 - Than `ieee802_3_miim`: `ManagementDataIo::read` returns `Result<u16, Error>`, so a caller learns
   of a stuck bus; `Miim::read_raw` returns a bare `u16`.
 
@@ -133,16 +131,17 @@ identifier is not the `YT8531`'s (`Error::UnknownPhysicalLayerDevice`). A strang
 carries a Realtek or Microchip device rewrites the bring-up. Linux (`phylink`), U-Boot (`phy_connect`) and OpenBSD (`mii(4)`) all
 attach the physical layer device apart from the MAC, and `stm32-eth` implements
 `ieee802_3_miim::Miim` and leaves the device to the caller.
-Change: a trait for a physical layer device's configure and link read, which the Motorcomm module
-implements, with `Inputs` and `Port` generic over it. Name provisional. Door: one-way (D2). Effort: M.
+Change: name the bring-up after the `YT8531`, and defer a physical layer device trait, since a
+published trait is itself a one-way commitment. Once D1 makes `Inputs` non-exhaustive, a generic
+bring-up can come later as an addition. Names provisional. Door: one-way (D2). Effort: S.
 
 #### P0-3. Four error types with no `Display` and no `core::error::Error`
 
 Verified in source.
 `bring_up::Error`, `network_interface_controller::Error`, `management_data_io::Error` and
 `TransmitError` are `#[non_exhaustive]` and none implements `Display` or `core::error::Error`;
-`bring_up::Error` wraps two others without a `source`. `stm32-eth`'s `RxError` and `TxError` and
-`esp-emac`'s `EmacError` have no `Display` either.
+`bring_up::Error` wraps two others without a `source`. `stm32-eth`'s and `esp-emac`'s errors have no
+`Display` either.
 Change: `Display` and `core::error::Error` on all four, with `source` returning the wrapped error,
 in the shape the shared errors decision picks. Door: one-way (D3). Effort: S.
 
@@ -169,27 +168,38 @@ publishes one.
 Change: make both crate-private for 0.1.0, or, if a caller needs them, add a version field in the
 top bits before 0.1.0 and freeze the layout. Door: one-way (D5). Effort: S.
 
-### P1: before the first release
+#### P0-6. Safe functions take the physical address the device uses
 
-#### P1-1. The README says the crate has run on a board, and the crate page says it has not
+Verified in source (`src/data_plane.rs`, `src/bring_up.rs`, `src/network_interface_controller.rs`).
+`DataPlane::new(u64)`, `network_interface_controller::configure` (its `region_physical_address`)
+and the public field `Inputs::region_physical_address` are all safe. That number becomes the
+buffer addresses in the descriptors: `start`, `receive` and `transmit` add a buffer offset to it.
+Safe code can thus aim the device's memory access anywhere, which leaves the interface's
+soundness open.
+Change: either the constructors that take an address become `unsafe fn` with a `# Safety`
+section, or the region becomes an `unsafe trait` that supplies its own physical address. Door:
+one-way (D6). Effort: M.
 
-Verified in source.
-The README claims a run on a StarFive VisionFive 2; the crate page's BUGS says no test has touched
-the device, and the board run of milestone 1074 is still open. Change: the README says what the
-crate page says until the board run lands.
-Door: two-way. Effort: S.
-
-#### P1-2. An inconclusive coherence probe passes the bring-up
+#### P0-7. An inconclusive coherence probe passes the bring-up
 
 Verified in source (`src/bring_up.rs`, `bring_up`).
 `bring_up` refuses every verdict but `Verdict::Coherent` and `Verdict::Inconclusive`. An
 inconclusive probe means the loopback frame never completed and the probe measured nothing, yet
 the bring-up runs the rings as if the platform were coherent. U-Boot never assumes: each platform
 names its cache operations. Change: refuse on `Inconclusive` by default, with the account holding
-the observation, and, once P0-1 lands, a field of `Inputs` that accepts it. Door: two-way, as a
-behavior change the CHANGELOG states. Effort: S.
+the observation, and, once P0-1 lands, a field of `Inputs` that accepts it. Door: one-way (D7), since refusing after
+0.1.0 breaks boards that pass today. Effort: S.
 
-#### P1-3. A short receive buffer loses a good frame as a dropped one
+### P1: before the first release
+
+#### P1-1. The README says the crate has run on a board, and the crate page says it has not
+
+Verified in source.
+The README claims a run on a StarFive VisionFive 2; the crate page's BUGS says no test has touched
+the device. Change: the README says what the crate page says until the board run lands.
+Door: two-way. Effort: S.
+
+#### P1-2. A short receive buffer loses a good frame as a dropped one
 
 Verified in source (`src/descriptor.rs`, `src/data_plane.rs`).
 `receive_verdict` drops a frame longer than `out.len()`, and `receive` reposts its slot and counts
@@ -198,7 +208,7 @@ it in `dropped` with the malformed frames. The caller cannot tell a short buffer
 Change: document that `out` must hold `MAXIMUM_FRAME_BYTES`, and count short-buffer drops apart
 from malformed ones. Door: two-way. Effort: S.
 
-#### P1-4. One failure section, few examples, four links to private items, and a README that is not the crate page
+#### P1-3. One failure section, few examples, four links to private items, and a README that is not the crate page
 
 Verified by `cargo doc` and in source.
 Of the thirteen public functions that return a `Result`, only `bring_up` has an `# Errors`
@@ -209,12 +219,12 @@ Change: an `# Errors` heading on each fallible function, examples on `bring_up`,
 `DataPlane`, the four links as plain text, and `#![doc = include_str!("../README.md")]`. Door:
 two-way. Effort: M.
 
-#### P1-5. The probe deadline subtracts two clock readings unchecked
+#### P1-4. The probe deadline subtracts two clock readings unchecked
 
 Verified in source (`src/bring_up.rs`, the loop after `cache_coherence::prepare`).
 `port.now_microseconds() - started` panics in a debug build if the caller's clock reads lower the
 second time, and wraps in a release build, which ends the wait at once and yields an inconclusive
-probe that P1-2 then accepts. Change: `saturating_sub`. Door: two-way. Effort: S.
+probe that P0-7 then accepts. Change: `saturating_sub`. Door: two-way. Effort: S.
 
 ### P2: may follow
 
@@ -230,8 +240,7 @@ README and the CHANGELOG. Door: two-way. Effort: S.
 Verified in the comparators' source.
 `stm32-eth` implements `smoltcp::phy::Device` behind `smoltcp-phy`, and `esp-p4-eth` implements
 `embassy-net-driver`. This crate implements neither, and its data plane copies each frame in and
-out, so an adapter over it copies twice. Linux v6.12 also copies into its `skb`, and the copy
-costs tens of nanoseconds below. Change: a closure-taking
+out, so an adapter over it copies twice. Change: a closure-taking
 receive and transmit over the ring buffers, and the two adapters behind features named by the
 shared decision. Door: two-way (additions). Effort: M.
 
@@ -239,8 +248,7 @@ shared decision. Door: two-way (additions). Effort: M.
 
 Verified in source and inferred for the rate.
 Both rings hold 16 entries, fixed. At 1 Gbit/s a ring of 16 minimum-size frames fills in about
-11 microseconds, which a polled loop easily misses. Linux defaults to 512 and lets `ethtool`
-change it; `embassy-stm32` and `esp-emac` take const parameters (`esp-emac`'s default to 10).
+11 microseconds. Linux defaults to 512; `embassy-stm32` and `esp-emac` take const parameters.
 Change: defaulted const parameters on `DataPlane` and the layout, which adds them without a break.
 Door: two-way. Effort: M.
 
@@ -266,8 +274,7 @@ the repository. The region is ordinary memory, the tails discard their writes, t
 60 bytes and 41 to 49 ns at 1514 bytes; receive 17 to 21 ns at either size, each with encode or
 verdict, copy, ring step and tail write. On a board, uncached or coherent memory dominates both.
 
-The review could not run `stm32-eth` beside it: it builds only for an STM32 target and drives the
-3.x descriptors, so no input suits both.
+`stm32-eth` builds only for an STM32 target, so it did not run beside it.
 
 ## One-way doors
 
@@ -276,16 +283,20 @@ Each for the architect, one at a time.
 - D1, structs that can grow (P0-1). Recommended: `#[non_exhaustive]` on `Inputs`, `Link`,
   `BusConfiguration`, `Settings` and `Bus`, with constructors, and `dropped` behind a getter. A
   non-exhaustive struct can open later; an exhaustive one cannot close.
-- D2, the physical layer device (P0-2). Recommended: a trait the bring-up is generic over, with the
-  Motorcomm module as its first implementation, as every system outside Rust does. The alternative
-  keeps the bring-up and names it the `YT8531`'s; a trait after 0.1.0 breaks `Inputs` and `Port`.
-- D3, the error shape (P0-3). Recommended: `Display` and `core::error::Error` on all four, with
-  `source` on the wrapping variants, in the shape the shared errors decision picks.
+- D2, the physical layer device (P0-2). Recommended: defer the trait and name the bring-up after
+  the `YT8531`. With D1, a generic bring-up can follow as an addition; a trait published now
+  cannot be withdrawn.
+- D3, the error shape (P0-3). Recommended: `Display`, `core::error::Error` and `source`, in the
+  shared errors decision's shape.
 - D4, the bring-up's answer and the station address (P0-4). Recommended: a named result struct and
-  a validated address newtype. A validated type can gain conversions later; a bare array cannot
-  gain the check.
+  a validated address newtype; a bare array can never gain the check.
 - D5, the packed settings word (P0-5). Recommended: crate-private for 0.1.0. A published layout is
   a format, and none of the comparators publishes one.
+- D6, the device's physical address (P0-6). Recommended: an `unsafe trait` region that supplies its
+  own address, which holds the promise in one implementation and removes the public field;
+  failing that, `unsafe fn` constructors. Safe later is compatible; the reverse breaks callers.
+- D7, the inconclusive probe (P0-7). Recommended: refuse it by default, the stricter choice, with
+  an `Inputs` field that accepts it once D1 lands.
 
 ## Evidence for the shared decisions
 
@@ -293,27 +304,21 @@ What this crate shows for each shape of milestone 1129, at `565b331f`.
 
 - **Errors.** Four error enums, all `#[non_exhaustive]`, none with `Display` or
   `core::error::Error` (`src/bring_up.rs`, `src/network_interface_controller.rs`,
-  `src/management_data_io.rs`, `src/data_plane.rs`). Variants carry the input that failed by name
-  (`Timeout { physical_layer_device_bus_address, register }`, `RegionOutOfReach {
-  direct_memory_access_physical_address_bits }`), and `bring_up::Error` wraps the others as tuple
-  variants: one enum per module.
+  `src/management_data_io.rs`, `src/data_plane.rs`). Variants name the input that failed, and
+  `bring_up::Error` wraps the others as tuple variants: one enum per module.
 - **DMA regions.** `DirectMemoryAccessRegion` (`src/data_plane.rs`) has `read_u64`, `write_u64`,
   `read_bytes` and `write_bytes` at `u64` offsets, takes `&self` to read, and has no barrier and no
-  cache operation; `cache_coherence` measures coherence rather than supplying it. U-Boot's four
-  cache operations per platform argue for clean and invalidate methods with empty defaults, which
-  a shared trait could add without a break.
+  cache operation; `cache_coherence` measures coherence rather than supplying it. P0-6 asks
+  whether the region should supply its own address.
 - **Doorbells and tails.** `Tails` (`src/data_plane.rs`) holds `set_receive_tail`,
   `set_transmit_tail` and `barrier`, each tail the low 32 bits of a physical address, which works
   because `configure` refuses a region that straddles 4 GiB. The barrier sits with the tails
   because it orders descriptor writes before the doorbell.
 - **Register access.** `Hardware` (`src/hardware.rs`) joins `read(u32) -> u32`, `write(u32, u32)`
   and `delay_microseconds(u64)` in one trait, with a volatile 32-bit access as its contract.
-  `bring_up::Port` adds `now_microseconds` and the region. `stm32-eth` uses the peripheral access
-  crates; `embassy-stm32` its own `pac`.
-- **Byte sinks and sources.** Not applicable: the crate moves frames through `&mut [u8]` and
-  `&[u8]`, not byte streams.
-- **Feature names.** The crate declares none. P2-2 would add the first two, and `stm32-eth`'s
-  `smoltcp-phy` is the measured precedent.
+  `bring_up::Port` adds `now_microseconds` and the region.
+- **Byte sinks and sources.** Not applicable: frames, not byte streams.
+- **Feature names.** None. P2-2 would add the first two, after `stm32-eth`'s `smoltcp-phy`.
 - **Simulators.** `src/simulator.rs`, 799 lines, `#[cfg(test)]`, models the controller, its
   descriptors and a physical layer device; P2-5.
 - **Memory regions.** The caller provides the region; `layout` fixes its shape
@@ -323,13 +328,12 @@ What this crate shows for each shape of milestone 1129, at `565b331f`.
 
 ## Follow-on
 
-- **Outstanding.** The evidence section feeds the shared decisions of milestone 1129.
 - **Outstanding.** The board run of milestone 1074 settles P1-1.
 
 ## Done when
 
 Each P0 and P1 finding reads Done or Will not fix with its ruling, the architect has answered D1 to
-D5, and `script/review-status` reports BUILT.
+D7, and `script/review-status` reports BUILT.
 
 ## BUGS
 
@@ -339,5 +343,5 @@ D5, and `script/review-status` reports BUILT.
 ## Index row
 
 The release review of `designware_ethernet` against `stm32-eth`, `esp-emac`, `dwmac-my` and three
-drivers outside Rust: five one-way interface changes before 0.1.0, five two-way fixes before the
-release, five that may follow, five doors to rule.
+drivers outside Rust: seven one-way interface changes before 0.1.0, four two-way fixes before the
+release, five that may follow, seven doors to rule.
