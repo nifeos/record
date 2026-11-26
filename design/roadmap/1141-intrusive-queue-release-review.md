@@ -10,8 +10,8 @@ needs_person: yes
 # 1141. `intrusive_queue`: the release review's findings
 
 The release review of `partsfoundry/intrusive_queue` at commit `7368a9e3`, under
-[milestone 1129](1129-crate-interfaces-best-in-class.md). Its baseline is
-[milestone 1097](1097-intrusive-queue-outside-review.md), every finding of which has landed, and
+[milestone 1129](1129-crate-interfaces-best-in-class.md) (the combine review of each crate's interface). Its baseline is
+[milestone 1097](1097-intrusive-queue-outside-review.md) (the outside review), every finding of which has landed, and
 the cleared package [`notes/crate-reviews/intrusive-queue.md`](../../notes/crate-reviews/intrusive-queue.md).
 The `Unqueued` token, the `Send` bound and the seven ratified names stand; the one thing reopened
 is the shape of the `Node` trait, on Miri evidence 1097 did not have.

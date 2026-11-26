@@ -220,5 +220,5 @@ fn main() {
 
 ## Not run
 
-- The crate's own Kani harnesses and falsification patches; milestone 1097 ran them, and this
+- The crate's own Kani harnesses and falsification patches; milestone 1097 (the outside review) ran them, and this
   review changes nothing.
