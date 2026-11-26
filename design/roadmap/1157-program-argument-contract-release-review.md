@@ -322,8 +322,8 @@ with the leading comparator. The one cost the format sets is P2-3's.
 
 ## Done when
 
-`script/review-status` reads this block as BUILT. That needs a Done or a Will not fix on each of
-its six P0 and five P1 lines, and a ruling on each of D1 to D6.
+`script/review-status` reads this block as BUILT: a Done or a Will not fix on each of its six P0
+and five P1 lines, and a ruling on each of D1 to D6.
 
 ## BUGS
 
