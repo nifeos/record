@@ -11,8 +11,7 @@ needs_person: yes
 
 *(The number and the slug are provisional.)*
 
-Raised by review lane A of [milestone 1129](1129-crate-interfaces-best-in-class.md) (crate interfaces
-best in class). The lane read `partsfoundry/byte_glob` at `a095cd8`, the head of its `main`, as a
+Raised by review lane A of [milestone 1129](1129-crate-interfaces-best-in-class.md) (the combine review: each crate's interface against the best in its space). The lane read `partsfoundry/byte_glob` at `a095cd8`, the head of its `main`, as a
 stranger choosing a glob crate would meet it. It changed nothing in any repository. The baseline is
 [the outside review, 1092](1092-glob-outside-review.md), and
 [the review package](../../notes/crate-reviews/byte-glob.md). The scope rulings, the one-backtrack

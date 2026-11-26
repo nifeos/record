@@ -11,7 +11,7 @@ needs_person: yes
 
 *(The number and the slug are provisional.)*
 
-Raised by review lane A of [milestone 1129](1129-crate-interfaces-best-in-class.md). The lane read
+Raised by review lane A of [milestone 1129](1129-crate-interfaces-best-in-class.md) (the combine review: each crate's interface against the best in its space). The lane read
 `partsfoundry/generational_table` at `b524333`, the head of its `main`, as someone choosing between
 it and `slotmap` would. It wrote nothing to any repository. The baseline is
 [the outside review, 1048](1048-generational-table-outside-review.md), with
