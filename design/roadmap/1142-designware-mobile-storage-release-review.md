@@ -26,7 +26,9 @@ Reuse: the prior-art table weighs each SD driver a caller could take instead.
 - P0-2, the error variants are positional: Waiting on the errors decision of milestone 1129.
 - P0-3, block buffers carry no block type: Open.
 - P0-4, the bus width is a bare `u8`: Open.
-- P1-1, the `simulator` feature turns the crate into a std crate: Open.
+- P0-5, `command::Response` is exhaustive: Open.
+- P0-6, the region trait is safe to implement: Open.
+- P1-1, the `simulator` feature turns the whole crate into a std crate: Open.
 - P1-2, the README miscounts the harnesses: Open.
 - P1-3, a stale comment in the manifest: Open.
 - P1-4, two public types have no `Debug`: Open.
@@ -41,7 +43,7 @@ Reuse: the prior-art table weighs each SD driver a caller could take instead.
 
 ## Open decisions
 
-The one-way doors D1 to D7 below.
+The one-way doors D1 to D9 below.
 
 ## Goal
 
@@ -88,8 +90,7 @@ drive it on the same boards.
 - Than `sdmmc-protocol` with `dwmmc-host`: it has no dependencies, where `dwmmc-host` 0.4.2
   takes eight (among them `dma-api`, `mmio-api`, `embedded-hal`, `log` and `volatile`). It keeps a
   polled FIFO path beside the descriptor path, where `dwmmc-host` needs an interrupt and the
-  engine. Its constructor is safe, over a register trait the caller implements, where `dwmmc-host`
-  opens with `unsafe fn new(base: NonNull<u8>)`. It exports a simulator for a caller's tests and
+  engine. It exports a simulator for a caller's tests and
   proves 22 properties with Kani.
 - Than `simple-sdmmc`: every transfer returns an error, where `simple-sdmmc` 0.1.1's
   `read_block` and `write_blocks` `unwrap` the controller's result and panic. It refuses a buffer that
@@ -108,14 +109,20 @@ repository acts on it once 0.1.0 is out, so each P0 lands in 0.1.0 or not at all
 
 #### P0-1. Five public structs are exhaustive
 
-Verified in source.
+Verified in source (`src/sd.rs`, `src/host_controller.rs`, `src/card.rs`, `src/command.rs`).
 `sd::Card` (ten public fields), `host_controller::Identity` (ten), `card::CardIdentification`,
 `command::Command` and `command::Data` have every field public and no `#[non_exhaustive]`. A caller
 can build a `Card` that no card answered, and adding a field later, such as a card's speed class,
 breaks every caller that builds or destructures one. `Deadlines` already has the attribute;
 `simple-sdmmc` keeps its `SdMmc` fields private.
-Change: `#[non_exhaustive]` on all five, with the fields still readable; `Command::new` and
-`Command::with_data` remain the way to build a command. Door: one-way (D1). Effort: S.
+`command::Data` has no public constructor, only its three public fields, so the attribute alone
+would leave a caller no way to build one and make `Command::with_data` unusable.
+Change: `Card` and `Identity`, which are the hardware's answers and which a caller hands back to
+`read_blocks`, get private fields with getters, so a caller can read one and never forge one.
+`Data` gains a constructor, such as `Data::new(block_bytes, blocks, write)` (name provisional),
+and becomes `#[non_exhaustive]`. `CardIdentification` and `Command` become `#[non_exhaustive]`
+with their fields still readable, and `Command::new` and `Command::with_data` remain the way to
+build a command. Door: one-way (D1). Effort: S.
 
 #### P0-2. The error variants are positional
 
@@ -141,30 +148,52 @@ caller with bytes uses `as_chunks`. Door: one-way (D3). Effort: S.
 #### P0-4. The bus width is a bare `u8`
 
 Verified in source.
-`sd::identify(host, maximum_bus_width: u8)` reads any value of four or more as four, and anything
-less as one; `Card::bus_width` is a `u8` too. Linux and U-Boot carry the device tree's
+`sd::identify(host, maximum_bus_width: u8)` accepts 8 as a maximum, and its documentation names
+8 for an eMMC slot, but the driver never sets an eight-bit bus. `configure_sd` sets four bits
+for any maximum of four or more and one bit otherwise (`src/sd.rs`, lines 393 to 400), and the
+eMMC path ignores the argument. `Card::bus_width` is a `u8` too. Linux and U-Boot carry the device tree's
 `bus-width` as an integer, but neither is a type a caller can misuse at compile time.
-Change: a `BusWidth` enum, `#[non_exhaustive]`, with one, four and eight bits, in both places.
-Door: one-way (D4). Effort: S.
+Change: a `BusWidth` enum, `#[non_exhaustive]`, in both places, whose documentation says which
+widths the driver sets today. Door: one-way (D4). Effort: S.
+
+#### P0-5. `command::Response` is exhaustive
+
+Verified in source (`src/command.rs`, line 100).
+`Response` lists the response kinds this driver sends (`None`, `R1`, `R1b`, `R2`, `R3`, `R6` and
+`R7`) with no `#[non_exhaustive]`. A caller that matches on it breaks when a later release adds
+one, such as an SDIO card's R4 or R5.
+Change: `#[non_exhaustive]`. Door: one-way (D8). Effort: S.
+
+#### P0-6. The region trait is safe to implement
+
+Verified in source (`src/internal_direct_memory_access.rs`).
+`DirectMemoryAccessRegion` is a safe trait, and its `direct_memory_access_bus_address` tells the
+controller where to read and write memory. The driver trusts that address, so the soundness of
+every transfer rests on code a caller writes without an `unsafe` block. `dwmmc-host` 0.4.2 puts
+the same promise on its constructor, `unsafe fn new(base: NonNull<u8>)`, and this crate's
+constructor is safe. The question is where the soundness promise sits.
+Change: `pub unsafe trait DirectMemoryAccessRegion`, with a `# Safety` section that states the
+promise the trait's documentation already lists. Door: one-way (D9). Effort: S.
 
 ### P1: before the first release
 
-#### P1-1. The `simulator` feature turns the crate into a std crate
+#### P1-1. The `simulator` feature turns the whole crate into a std crate
 
-Verified by building.
+Verified in source; the second hazard inferred from Cargo's feature unification.
 `#![cfg_attr(not(any(test, feature = "simulator")), no_std)]` makes every module, the driver's
-included, compile against std when the feature is on. `cargo build --lib --target
-riscv64imac-unknown-none-elf` passes, and the same with `--features simulator` fails with 320
-errors. A test build of the driver can then use std without the bare-target build noticing until
-it runs.
+included, compile against std when the feature is on. The simulator needs std, so the feature
+cannot build for a bare target whatever the fix; the hazards lie elsewhere. With the feature on,
+a stray use of std in a driver module compiles, and nothing notices until a build without it.
+Cargo also unifies features across a build, so one workspace member that turns `simulator` on
+turns std on for every member that builds this crate in the same run.
 Change: `#![no_std]` always, `extern crate std` under the feature, and the feature documented as
 needing std. The feature's name is door D5. Door: two-way. Effort: S.
 
 #### P1-2. The README miscounts the harnesses
 
 Verified in source.
-The README says "twenty-two in all", then "runs all twenty-four harnesses", and quotes a run line
-of 24; `src/proofs.rs` holds 22 `#[kani::proof]` harnesses. Change: 22 throughout. Door: two-way.
+The README says "twenty-two in all" at line 84, then "runs all twenty-four harnesses" at line
+194, and quotes a run line of 24 at line 221; `src/proofs.rs` holds 22 `#[kani::proof]` harnesses. Change: 22 throughout. Door: two-way.
 Effort: S.
 
 #### P1-3. A stale comment in the manifest
@@ -252,8 +281,10 @@ simulator models no bus timing, so a run on it would measure the simulator.
 
 ## One-way doors
 
-- D1, exhaustive structs (P0-1). Recommended: `#[non_exhaustive]` on all five before 0.1.0,
-  the stricter choice; dropping the attribute later breaks no caller.
+- D1, exhaustive structs (P0-1). Recommended: private fields with getters on `Card` and
+  `Identity`, the stricter choice, so no caller can forge a hardware answer; `#[non_exhaustive]`
+  on `CardIdentification`, `Command` and `Data`, with a constructor for `Data`. Opening a field
+  or dropping the attribute later breaks no caller.
 - D2, error fields (P0-2). Recommended: named fields, decided once for every crate by the
   errors decision.
 - D3, block buffer type (P0-3). Recommended: arrays of `BLOCK_BYTES`, matching
@@ -270,16 +301,21 @@ simulator models no bus timing, so a run on it would measure the simulator.
 - D7, the region trait. 1050's decision 4, provisional A, keeps this crate's
   `DirectMemoryAccessRegion`. Recommended: keep it until the shared region decision rules, since
   its `u32` offsets and its barrier differ from the other two drivers'.
+- D8, the response kinds (P0-5). Recommended: `#[non_exhaustive]` on `Response`.
+- D9, whether the region trait is `unsafe` (P0-6). Recommended: `unsafe trait`. The trait's
+  bus address decides where the controller writes, so its implementer makes a promise the
+  compiler cannot check, and an `unsafe impl` is where Rust asks for one. Making it safe later is
+  a relaxation; making it unsafe after 0.1.0 breaks every implementer.
 
 ## Follow-on
 
 - **Outstanding.** The shared decisions of milestone 1129 take D2 for errors, D5 and P2-1 for feature names and simulators, D6 for
-  register access, D7 for regions.
+  register access, D7 and D9 for regions.
 
 ## Done when
 
 Every P0 and P1 finding reads Done, or Will not fix with its ruling, the architect has ruled D1
-to D7, and `script/review-status` shows the block BUILT.
+to D9, and `script/review-status` shows the block BUILT.
 
 ## BUGS
 
@@ -289,5 +325,5 @@ to D7, and `script/review-status` shows the block BUILT.
 ## Index row
 
 The release review of `designware_mobile_storage` against `embedded-sdmmc`, `sdmmc-protocol` with
-`dwmmc-host`, `simple-sdmmc`, Linux and U-Boot: four one-way type changes before 0.1.0, a feature
-that turns off no_std, four smaller fixes before the release and seven doors to rule.
+`dwmmc-host`, `simple-sdmmc`, Linux and U-Boot: six one-way type changes before 0.1.0, a feature
+that turns off no_std, four smaller fixes before the release and nine doors to rule.

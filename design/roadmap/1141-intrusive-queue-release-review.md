@@ -33,13 +33,14 @@ Reuse: the prior-art table weighs each intrusive list a caller could take instea
 
 ## Open decisions
 
-One-way doors D1 and D2 below, for the architect.
+One-way doors D1 and D2 below, for the architect, ruled together.
 
 ## Goal
 
 A stranger choosing between this crate, `intrusive-collections` and `cordyceps` finds the fastest
-queue at what it does. Its trait lets a caller keep a reference to a node's other fields while the
-node waits in the queue, and it implements the traits people expect of a collection.
+queue at what it does, with the traits people expect of a collection. Its `Node` trait has a
+shape under which a later release can let a caller hold a reference to a queued node, which the
+0.1.0 contract still forbids.
 
 ## What the review read and ran
 
@@ -84,21 +85,33 @@ the repository acts on it after 0.1.0. Every P0 is a one-way change, so it lands
 
 #### P0-1. `set_next` takes the whole node by `&mut`
 
-Verified with Miri (nightly, 2026-10-31).
+Verified with Miri (nightly, 2026-10-31), on the six programs in the appendix.
 `Node::set_next(&mut self, ...)` makes the queue form a unique reference to the whole node on every
 push. A caller that holds `&(*node).id`, a shared reference to a field that is not the link,
-across `push_back` has undefined behavior under Stacked Borrows: Miri reports the reference
-"later invalidated ... by a Unique function-entry retag" at the queue's `set_next` call. The same
-program passes under Tree Borrows. A trait in the shape of `cordyceps` 0.3.5's `Linked::links`,
-`unsafe fn link(this: NonNull<Self>) -> NonNull<Option<NonNull<Self>>>`, projects to the link
-field by raw pointer, and the same sequence passes under both models.
+across `push_back` has undefined behavior under Stacked Borrows. Miri reports the reference
+"later invalidated ... by a Unique function-entry retag" at the queue's `set_next` call. Tree
+Borrows accepts the same program.
+
+A trait that projects by raw pointer to a bare `Option<NonNull<Self>>` field keeps that field
+reference valid under both models. It does not keep a reference to the whole node valid: a `&Job`
+held while the queue writes the link through the projection is undefined behavior under both.
+`cordyceps` 0.3.5 is not that shape. Its `Linked::links` returns `NonNull<Links<T>>`, and `Links`
+wraps its pointers in an `UnsafeCell` (`src/list.rs`, lines 231 to 232). A queue that projects to
+an opaque `Link<T>` of its own, private fields around an `UnsafeCell`, passes the whole-node
+program under both models.
+
+Rule 3 of `Unqueued::new` already forbids every program here that holds a reference across a
+queue operation, so none of them shows a bug in the crate as documented. The finding is that the
+current trait can never relax that rule. A `&mut self` method retags the whole node whatever the
+documentation says. Under the opaque link, a later release can narrow rule 3 to "no reference to
+the link" and break no caller.
 Milestone 1097 weighed the reference-free shape (its item 5) and kept this one, on the argument
-that a held `&mut` breaks the aliasing rules under either shape. That holds for a `&mut` to the whole node; the
-experiment here is about a shared reference to another field, which only the projection keeps
-valid. `intrusive-collections` keeps its links in `Cell`s, which has the same effect.
-Change: the projection shape, with the queue's every link access through it. Rule 3 of
-`Unqueued::new` stays as written for 0.1.0; it can relax later to "no reference to the link",
-which breaks no caller. Door: one-way (D1). Effort: M, with the harnesses and the patches.
+that a held `&mut` breaks the aliasing rules under either shape. That holds for a `&mut` to the
+whole node. A shared reference survives only when the link sits in a cell; `intrusive-collections`
+keeps its links in `Cell`s to the same end.
+Change: `unsafe fn link(this: NonNull<Self>) -> NonNull<Link<Self>>`, where `Link<T>` is the
+crate's own type with its field private and inside an `UnsafeCell`, and the queue reaches every
+link through it. Rule 3 stays as written for 0.1.0. Door: one-way (D1, ruled with D2). Effort: M, with the harnesses and the patches.
 
 ### P1: before the first release
 
@@ -170,16 +183,18 @@ After the first removal the node sits at the back, so the second row is this cra
 
 ## One-way doors
 
-- D1, the `Node` trait's shape (P0-1). Recommended: the projection shape, as `cordyceps`
-  has it, before 0.1.0. The current shape forbids, under Stacked Borrows, a reference that the
-  projection allows, and the trait is the one thing every caller implements.
-- D2, what `Iter` yields. Today `NonNull<T>`. Recommended: keep it. Yielding `&T` would hold a
-  reference to the link while the caller could still push, which is sound only when the link sits
-  in an `UnsafeCell`, as `cordyceps`'s `Links` does. A later release can add an adapter yielding `&T`.
+- D1, the `Node` trait's shape (P0-1). Recommended: project to an opaque `Link<T>` that wraps an
+  `UnsafeCell`, as `cordyceps`'s `Links` does, before 0.1.0. A projection to a bare `Option`
+  field fixes the field reference and still forbids a whole-node one under both models, so it
+  would close the door it means to open.
+- D2, what `Iter` yields. Today `NonNull<T>`. Recommended: keep it for 0.1.0. Yielding `&T`
+  holds a reference to the link while the caller could still reach the node, which is sound only
+  when the link sits in an `UnsafeCell`. D1's opaque link is that cell, so a later release can
+  add an adapter yielding `&T`; under any other D1 answer it never can. The two are one ruling.
 
 ## Follow-on
 
-- **Outstanding.** D1 and D2 wait on the architect. The shared decisions take nothing from this
+- **Outstanding.** D1 and D2 wait on the architect, as one ruling. The shared decisions take nothing from this
   crate, which has no error type, no byte sink and no feature.
 
 ## Done when

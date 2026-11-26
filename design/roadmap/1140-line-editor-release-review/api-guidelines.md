@@ -20,7 +20,7 @@ read against `partsfoundry/line_editor` at `2c625ef6`. A finding named in a row 
 | C-SEND-SYNC | met | every type is plain data and is `Send` and `Sync` |
 | C-GOOD-ERR | not met | `Refusal` has no `Display` or `Error`, and `restore` returns `Option` (P0-1) |
 | C-NUM-FMT | not applicable | no numeric type of its own |
-| C-RW-VALUE | not met | `&mut S` is not a `Sink` (P1-3) |
+| C-RW-VALUE | met | every method borrows its sink as `&mut impl Sink`, so the caller keeps it |
 | C-EVOCATIVE | not applicable | no macros |
 | C-MACRO-ATTR | not applicable | no macros |
 | C-ANYWHERE | not applicable | no macros |
@@ -42,9 +42,9 @@ read against `partsfoundry/line_editor` at `2c625ef6`. A finding named in a row 
 | C-DEREF | not applicable | no `Deref` |
 | C-CTOR | met | `new` and `Default` on `LineEditor` and `RawQueue` |
 | C-INTERMEDIATE | met | `pending` exposes the half-typed line and its cursor |
-| C-CALLER-CONTROL | not met | the buffers are fixed inside the editor (P2-3) |
+| C-CALLER-CONTROL | met | inputs arrive as `&[u8]` and sinks as `&mut`, so no method takes ownership it does not need |
 | C-GENERIC | met | the sink is a generic parameter |
-| C-OBJECT | not met | a `dyn Sink` cannot be passed (P1-3) |
+| C-OBJECT | not met | the implicit `Sized` bound refuses a `dyn Sink` (P1-3) |
 | C-NEWTYPE | not applicable | no value a newtype would distinguish |
 | C-CUSTOM-TYPE | met | `feed` returns an `Event`, not flags |
 | C-BITFLAG | not applicable | no flag set |
@@ -61,4 +61,4 @@ read against `partsfoundry/line_editor` at `2c625ef6`. A finding named in a row 
 | C-STABLE | met | no dependencies |
 | C-PERMISSIVE | met | MIT OR Apache-2.0 |
 
-Totals: 21 met, 9 not met, 24 not applicable.
+Totals: 23 met, 7 not met, 24 not applicable.
