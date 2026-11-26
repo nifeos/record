@@ -64,7 +64,7 @@ public API:
 - Write, bug 3 (upstream item 9). At 1 KiB blocks `rsext4` leaves clear the padding of an inode bitmap it
   initializes, and `e2fsck -fn` exits 4. The fork fixes it.
 - Write oracle, 2026-11-22 (UTC). Sixteen cases, extended attributes included, fail only on bugs
-  1 to 3 in 0.9.2 and only on bug 1 in the fork
+  1 to 3 in 0.9.2 and on none of them in the fork
   ([the write-oracle appendix](0190-ext4-read-write/write-oracle.md)).
 - Journal. It writes descriptor, revoke and commit blocks with journal checksum v3, and Linux's
   `e2fsck` replays them. Across two images, 158 power-cut points all recovered to a clean volume.
@@ -73,7 +73,8 @@ public API:
 - `unsafe`. In 0.9.2, eleven uses. Nine are the hardware CRC32C paths for aarch64 and x86_64. Two
   are in `blockgroup_description/table.rs`, which casts a `&[u8]` to `*const Ext4GroupDesc` and to
   `*mut Ext4GroupDesc` with no `SAFETY` comment and no proof of alignment. In the fork the casts
-  are gone and each CRC32C use states its argument (item 5).
+  are gone, the crate denies `unsafe` code outside `crc32c`, and each of the 12 remaining uses
+  states its argument (item 5).
 - Fuzzing and proofs. 0.9.2 has no fuzz targets and no Kani harnesses. The fork carries item 4's
   fuzz targets in `fuzz/`, which its `fuzz` workflow runs weekly. It carries eight Kani harnesses
   in six `verification.rs` modules, each with a falsification patch in `falsifications/`, and its
@@ -89,7 +90,7 @@ Not yet tested, beyond the follow-on's list: concurrent callers, `orphan_file` a
 
 | condition | `rsext4` as nife takes it, from partsfoundry/rsext4 | what closes it |
 |---|---|---|
-| a safety argument on every use of `unsafe` | the casts are gone, and each CRC32C use states one | the review below, at the commit nife pins |
+| a safety argument on every use of `unsafe` | the casts are gone, and each of the 12 uses states one | the review below, at the commit nife pins |
 | proofs that match ours | eight Kani harnesses in the fork, passing in its `proofs` workflow; none upstream | met in the fork |
 | aarch64, riscv64 and x86_64 | builds for all three; hardware CRC32C on two, a software path on riscv64 | the oracle suite passing on each |
 | maintained | upstream is active in `tgoskits`, at least 24 commits by six people from 2026-08-04 to 2026-11-08 | met by partsfoundry/rsext4, maintained indefinitely |
@@ -100,8 +101,8 @@ Every contribution goes to `rcore-os/tgoskits`, against `fs/rsext4`; the numbers
 below are that repository's. We follow its policy on agent-written submissions.
 
 1. The `i_blocks` fix, with its reproducer as a test in the crate: grow a directory to 300
-   entries, unmount, and require `e2fsck -fn` to exit 0. Fixed upstream in `dde4020be`; not in the
-   fork.
+   entries, unmount, and require `e2fsck -fn` to exit 0. Fixed upstream in `dde4020be`; the fork carries
+   the part that fixes it (`4dc13db`).
 2. The truncate fix, with its reproducer: the failing seeds as fixed inputs, a check that
    truncation of a depth-2 tree succeeds, and a check that a failed truncation leaves the file's
    bytes as they were. 2a merged (`#2827`). 2b open (`#2829`), with `#2845` stacked on it, which
@@ -120,7 +121,7 @@ below are that repository's. We follow its policy on agent-written submissions.
 6. Kani harnesses that match ours. Decoding a superblock, a group descriptor, an extent header or
    entry, or a directory entry reads only inside its slice, for every input up to a stated bound.
    A directory block walk ends inside its block. The software CRC32C equals the bitwise definition.
-   Offered in issue `#2836`, unanswered; a pull request is in preparation. They run in the fork.
+   Merged (`#2846`), after issue `#2836`. They run in the fork.
 7. Mount reports why it refused, rather than mapping every error from `read_superblock` to a bare
    `Io`. Merged (`#2839`).
 8. `InodeInfo` reports whole times: nanoseconds, times before 1970 and times past 2106. Open
@@ -144,7 +145,7 @@ Each of the four phases is useful alone, and the oracle judges each.
 
 | phase | what | judged by |
 |---|---|---|
-| 1 | Read-only: one confined `ext4_server` holding one block-device capability, with `rsext4` mounted read-only | the oracle, read half, over the corpus |
+| 1 | Read-only: one confined `ext4_server` holding one block-device capability, with `rsext4` mounted read-only. nifeos/nife#4110 (provisional) builds the core: "Milestone 190 phase 1: a read-only ext4_server core, judged by the read oracle" | the oracle, read half, over the corpus |
 | 2 | The differential oracle: `rsext4` against libext2fs and against Linux, in `tools/`, on the host | itself, in CI, before any write is trusted |
 | 3 | Write, `metadata_csum` on every write | `e2fsck -fn` exits 0 after each operation; Linux reads back what nife wrote |
 | 4 | jbd2: `rsext4`'s journal, which Linux replays | power cut, then Linux replay, then `e2fsck -fn` |
@@ -250,27 +251,22 @@ it. That ruling is not the adoption ruling above, which stays open.
 
 ## Follow-on
 
-- **Done.** Upstream merged items 2a, 4, 5a, 5b, 7 and 9 (`rcore-os/tgoskits#2827`, `#2835`,
-  `#2831`, `#2833`, `#2839`, `#2825`). [The drafts](0190-ext4-read-write/upstream/README.md) hold
+- **Done.** Upstream merged items 2a, 4, 5a, 5b, 6, 7 and 9 (`rcore-os/tgoskits#2827`, `#2835`,
+  `#2831`, `#2833`, `#2846`, `#2839`, `#2825`). [The drafts](0190-ext4-read-write/upstream/README.md) hold
   each text.
 - **Outstanding.** Upstream review of 2b (`#2829`), the shrink commit stacked on it (`#2845`) and
   item 8 (`#2840`).
-- **Outstanding.** Item 6: `#2836` has no answer. A pull request offering the harnesses is in
-  preparation, and its text goes to the architect before filing.
 - **Done.** The read and write oracle in `tools/ext4_oracle/` and its CI job `ext4-read-oracle` on
   x86_64, with the sector-size reproducer as a test, taking `rsext4` from partsfoundry/rsext4 at a
-  pinned `rev`.
+  pinned `rev` (`388ebd6`), where no write outcome holds an `e2fsck` failure.
 - **Done.** In partsfoundry/rsext4: eight Kani harnesses in six `verification.rs` modules, each
-  with a falsification patch, passing in its `proofs` workflow, and the fuzz targets, which its
+  with a falsification patch, passing in its `proofs` workflow, and seven fuzz targets, which its
   `fuzz` workflow runs weekly.
-- **Outstanding.** partsfoundry/rsext4 lacks `rcore-os/tgoskits@dde4020be`, bug 1 and the
-  recovery-flag order; the write oracle still holds bug 1 as expected. It also lacks 5a as upstream
-  merged it (`partsfoundry/rsext4#8`).
-- **Outstanding.** partsfoundry/rsext4's weekly run fails three jobs: miri stops at the hardware
-  CRC32C path's inline assembly, the crates.io badges check misfires for a fork, and nobody has run
-  the stranger test.
-- **Outstanding.** partsfoundry/rsext4 carries 108 crate-standard exemptions for upstream code it
-  keeps as written: 54 function lengths, 47 acronyms and 7 file lengths.
+- **Done.** partsfoundry/rsext4 carries bugs 1, 2a, 2b, 2c and 3 (`4dc13db`, `#9`, `#10`) and 5a
+  as upstream merged it (`#8`). Its weekly workflow passes on `main`.
+- **Outstanding.** partsfoundry/rsext4 lacks the recovery-flag order of `rcore-os/tgoskits@dde4020be`.
+- **Outstanding.** partsfoundry/rsext4 carries 109 crate-standard exemptions for upstream code it
+  keeps as written: 55 function lengths, 47 acronyms and 7 file lengths.
 - **Outstanding.** Our side: the oracle on aarch64 and riscv64, the kernel as a second read oracle,
   a volume over 1 GiB, the write-reordering and power-cut sweeps, hostile-image fuzzing in nife's
   rotation, and `ext4_server` under QEMU.
