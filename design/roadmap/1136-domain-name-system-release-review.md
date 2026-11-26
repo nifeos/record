@@ -1,5 +1,6 @@
 ---
-status: PARTIAL
+status: BUILT
+built: 2026-11-26
 raised: 2026-11-26
 milestone_dependencies: 1087, 1129
 decision_dependencies: none
@@ -32,14 +33,16 @@ that print and chain like any other, and a README whose example runs.
 
 Each line reads against `partsfoundry/domain_name_system` at `513558c`.
 
-- Item 1 (P0), addresses as `[u8; 4]`: Open.
-- Item 2 (P1), errors that neither print nor chain: Open.
-- Item 3 (P1), the README's example does not compile: Open.
-- Item 4 (P1), the package ships the repository: Open.
-- Item 5 (P1), types without `Debug` or equality: Open.
-- Item 6 (P2), twenty-two public functions without an example: Open.
-- Item 7 (P2), `Name` cannot be a hash key: Open.
-- Item 8 (P2), crates.io metadata: Open.
+- Item 1 (P0), addresses as `[u8; 4]`: Done, partsfoundry/domain_name_system#12, building door
+  1's recommended `core::net::Ipv4Addr`.
+- Item 2 (P1), errors that neither print nor chain: Done, partsfoundry/domain_name_system#12; the
+  messages' wording follows the shared error decision once it is ruled.
+- Item 3 (P1), the README's example does not compile: Done, partsfoundry/domain_name_system#12.
+- Item 4 (P1), the package ships the repository: Done, partsfoundry/domain_name_system#12.
+- Item 5 (P1), types without `Debug` or equality: Done, partsfoundry/domain_name_system#12.
+- Item 6 (P2), twenty-two public functions without an example: Done, partsfoundry/domain_name_system#12.
+- Item 7 (P2), `Name` cannot be a hash key: Done, partsfoundry/domain_name_system#12.
+- Item 8 (P2), crates.io metadata: Done, partsfoundry/domain_name_system#12.
 
 ## Prior art
 
@@ -230,8 +233,9 @@ C-QUESTION-MARK (item 3), C-EXAMPLE (item 6), C-METADATA (item 8), C-DEBUG (item
 
 ## Follow-on
 
-- **Outstanding.** Items 1 to 8, open on the crate's `main` at `513558c`.
-- **Outstanding.** The five one-way doors, for the architect.
+- **Done.** Items 1 to 8, in partsfoundry/domain_name_system#12.
+- **Recorded.** The five one-way doors, for the architect. Door 1's recommended option is built,
+  provisionally, in partsfoundry/domain_name_system#12; doors 2 to 5 change nothing yet.
 
 ## Index row
 
