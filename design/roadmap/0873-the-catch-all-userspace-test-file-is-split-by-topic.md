@@ -16,9 +16,8 @@ needs_person: no
 §266 (a Rust source file stays under 2,000 lines) sets the ceiling. Milestone 846 (the file-server
 core moves its tests out) is the closest model, since this file is tests and nothing else.
 
-The cut and every module name below are calef's call. A lane writes them up as a
-`status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request
-carries `needs-architect`.
+The cut and every module name below are calef's call. A lane routes them to calef as
+[the routing tenet](../tenets/routing-work-and-decisions.md) says, before it moves a line.
 
 Reuse: not applicable; this moves code and adds none. The precedent is the 84 other files in
 `system_tests/src/user/`, 73 of them a `*_tests.rs` module on one topic, declared in `user.rs`.
@@ -141,14 +140,12 @@ Found with `grep` at `396187b0b`.
   dated records of where each went red. 30 tracked files name the path in all, and 32 name the
   module path `user::tests::`, mostly in roadmap history.
 - `design/file-length-baseline.tsv` lists the file at 3,533; that row goes in the same change.
-  `design/comment-block-baseline.tsv` keys two rows on this path, and both blocks move.
-  `tests.rs` (43 lines, the doc of `an_asid_flush_reaches_the_other_cpus`) lands in
+  `design/comment-block-baseline.tsv` keys two rows on this path, and both blocks move. `tests.rs`
+  (43 lines, the doc of `an_asid_flush_reaches_the_other_cpus`) lands in
   `user/address_space_tests.rs`. `tests.rs` (42 lines, the doc of
   `a_granted_thread_reads_the_cycle_counter_and_an_ungranted_one_faults`) lands in
-  `user/cycle_counter_tests.rs`. The ratchet admits no row on a path the merge base gave none, and
-  a block in a new file meets the 40-line cap outright. So it fails both unless each is cut to 40
-  lines in the same change. The alternative is a fix to the ratchet, letting a row move with its
-  block, ruled separately.
+  `user/cycle_counter_tests.rs`. A split carries each row to the new file, as
+  `helpers/comment_block_ratchet.py` states.
 - No Kani harness is in the file.
 - Pull request #1892 was in flight at `396187b0b`, as a draft. It does not touch this file, but it
   adds 28 lines to `user.rs`, adds sibling test files and patches, and edits

@@ -44,8 +44,9 @@ outsider pass attacks the confinement claim), was by GLM 5.3 and did not count.
 
 - The pass's note exists with its launch record, its refusal log and `script/booted-rows`' output.
 - Every escape is a failing test committed before any fix.
-- Risk 7's appendix cites the pass through the maintainer under §216 (fatal-risk facts are
-  correctable, and verdicts are the architect's). Moving the color stays calef's.
+- Risk 7's appendix cites the pass, as
+  [milestone 800](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#where-the-results-go)
+  sets out. Moving the color stays calef's.
 
 ## Follow-on
 

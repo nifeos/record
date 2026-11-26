@@ -21,9 +21,8 @@ Its row in `design/file-length-baseline.tsv` says 2,094. The file lost 27 lines 
 when milestone 863 (the comment-block sweep continues) cut its crate docs, and nobody banked the
 row. The ratchet allows that, since a row is a ceiling that only falls.
 
-The layout and every name below are calef's call. A lane writes them up as a `status: PROPOSED`
-file in `design/decisions/` before it moves a line, and its pull request carries
-`needs-architect`.
+The layout and every name below are calef's call. A lane routes them to calef as
+[the routing tenet](../tenets/routing-work-and-decisions.md) says, before it moves a line.
 
 The lane wrote it up on 2026-10-12 (UTC) as §296 (the component-plan crate root's proofs move into
 a child module), re-measured on main at `17b23264e` (2,067 lines). Which part leaves first is

@@ -17,9 +17,8 @@ needs_person: no
 Rust source file stays under 2,000 lines) sets the ceiling and its dated goals. Milestone 840 (the
 scheduler file is split along its seams) is the model.
 
-The cut and every module name below are calef's call. A lane writes them up as a
-`status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request
-carries `needs-architect`.
+The cut and every module name below are calef's call. A lane routes them to calef as
+[the routing tenet](../tenets/routing-work-and-decisions.md) says, before it moves a line.
 
 The lane wrote it up on 2026-10-11 (UTC) as §279 (the system-initializer crate root splits into
 private modules), with the file re-measured on main at `ae6b91e79` (5,850 lines). calef ruled the

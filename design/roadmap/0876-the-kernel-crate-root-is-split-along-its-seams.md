@@ -17,9 +17,8 @@ Rust source file stays under 2,000 lines) sets the ceiling. Milestone 840 (the s
 split along its seams) is the model, and milestone 843 (the system-initializer crate root is split
 along its seams) is the nearest case, because most of this file is one function.
 
-The cut and every module name below are calef's call. A lane writes them up as a
-`status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request
-carries `needs-architect`.
+The cut and every module name below are calef's call. A lane routes them to calef as
+[the routing tenet](../tenets/routing-work-and-decisions.md) says, before it moves a line.
 
 Reuse: not applicable; this moves code and adds none.
 

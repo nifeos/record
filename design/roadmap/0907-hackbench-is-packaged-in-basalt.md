@@ -17,11 +17,10 @@ ioping block when this was written. The title and slug are drafts.)*
 
 **BUILT, 2026-10-17 (UTC).** basalt builds hackbench from a recipe that pins `hackbench.c` by
 SHA-256 and publishes one package per architecture. nife builds no hackbench. On all three
-architectures under QEMU, `swish-check` types `jig install hackbench` against basalt's package
-and runs the installed program's thread mode, and the kernel suite runs both of
-`c_thread_tests`' hackbench runs on the same bytes. The recipe records each architecture's
-package digest, and basalt's build refuses a package that does not match it. "Built" below has
-the rest.
+architectures under QEMU, `swish-check` types `jig install hackbench` against basalt's package and
+runs the installed program's thread mode, and the kernel suite runs both of `c_thread_tests`'
+hackbench runs on the same bytes. The recipe pins each architecture's package digest, as milestone
+917 built. "Built" below has the rest.
 
 calef, 2026-10-12 (UTC): *"They should all be installed via jig through basalt. I missed that for
 our benchmarking tools, so I created debt by prioritizing them first."* This is that debt for
@@ -50,11 +49,8 @@ same program on silicon, and from 2026-10-12 its exit needs the package this mil
    names. It links against that commit's C library with threads, once for each architecture
    (§19 (architectural parity is a tenet; the targets are aarch64, riscv64, and x86_64)).
 3. The manifest note, written by basalt's build through the writer milestone 810 builds.
-4. A package archive per architecture (§197 (a package is one archive file, named and vouched for
-   by its recipe)), kind `optional`. The recipe vouches for it (§195 (a reviewed recipe vouches for
-   a package, and the machine's owner may overrule it)). It is published to basalt's index
-   (§250 (an image names its distribution's package index, at `basalt.nifeos.org`, and a package's
-   bytes may live anywhere)).
+4. The package, vouched for and published as item 4 of
+   [milestone 906](0906-ioping-is-packaged-in-basalt.md#the-work) states.
 5. The test moves behind `jig install hackbench`: `c_thread_tests.rs` installs the package before
    it runs the program, or the test moves into basalt's package build as milestone 897 moves
    SQLite's.
@@ -99,13 +95,13 @@ moved rather than rewritten.
 - basalt's `recipes/hackbench.toml` carries a `[package_digest]` table, one SHA-256 for each of
   aarch64, riscv64 and x86_64, recorded by milestone 917 (basalt's packages build reproducibly)
   in nifeos/basalt#29. basalt's pin-bump rewrites it with each new pin.
-- basalt's `helpers/packages.py build` refuses a package whose bytes hash to anything else, and
-  basalt's `packages` workflow builds twice, in separate checkouts, and fails unless the two
-  repositories are byte-identical.
-- At the basalt commit `xtask/basalt-pin` names, the recipe's three digests equal the assets of
-  the Release that commit published. `cargo xtask basalt-fetch` accepts each package only under
-  them, through `package_index::accept`, and `jig install hackbench` checks the index line built from
-  them.
+- basalt's build holds a package to that digest, as
+  [milestone 917](0917-basalts-packages-build-reproducibly-and-the-recipe-records-each-packages-digest.md)
+  states.
+- The three digests equal the pinned Release's assets, checked as for SQLite in
+  [milestone 897](0897-sqlite-is-packaged-in-basalt.md#the-packages-digest-checked-2026-10-19-utc).
+  `cargo xtask basalt-fetch` accepts each package only under them, through `package_index::accept`,
+  and `jig install hackbench` checks the index line built from them.
 
 ## BUGS
 
@@ -116,8 +112,7 @@ moved rather than rewritten.
 
 ## Follow-on
 
-- **Done.** The package's digest in the recipe, by milestone 917 (basalt's packages build
-  reproducibly, and the recipe records each package's digest).
+- **Done.** The digest in the recipe: milestone 917.
 - **Recorded.** The prompt's heap limit on hackbench's threads, in this block's `BUGS`, for
   milestone 827.
 - **Done.** Milestone 897 (SQLite is packaged in basalt) builds on the same C recipe shape, which

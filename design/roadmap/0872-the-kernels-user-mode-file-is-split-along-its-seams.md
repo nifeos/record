@@ -133,10 +133,8 @@ Found with `grep` at `396187b0b`. A lane has to carry each one.
 - No patch under `kernel/falsifications/` names this file.
 - `design/comment-block-baseline.tsv` keys two rows on this path. The 46-line doc of
   `AddressSpace::map_physical` stays in the parent and is unaffected. The 52-line doc of
-  `boot_progenitor` lands in `user/progenitor_boot.rs`. The ratchet admits no row on a
-  path the merge base gave none, and a block in a new file meets the 40-line cap outright. So it
-  fails this block unless the doc is cut to 40 lines in the same change. The alternative is a fix
-  to the ratchet, letting a row move with its block, ruled separately.
+  `boot_progenitor` lands in `user/progenitor_boot.rs`. A split carries each row to the new file, as
+  `helpers/comment_block_ratchet.py` states.
 - `design/file-length-baseline.tsv` lists this file at 3,867. #1892 does not bank it. The split
   takes the file under 2,000, so the row is removed in the same change.
 - 26 citations of the form `user.rs:NNNN` name this file. Milestone 811's block holds 11, dated to

@@ -17,9 +17,8 @@ has not grown since 2026-10-03. §266 (a Rust source file stays under 2,000
 lines) sets the ceiling. Milestone 842 (the grant-plan crate root is split along its seams) is the
 model for this block.
 
-The cut and every module name below are calef's call. A lane writes them up as a
-`status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request
-carries `needs-architect`.
+The cut and every module name below are calef's call. A lane routes them to calef as
+[the routing tenet](../tenets/routing-work-and-decisions.md) says, before it moves a line.
 
 **BUILT, 2026-10-12 (UTC).** The lane wrote the cut up as §294 (the timetable crate root splits
 into private modules). §282 (when a file is split, the parent becomes an index) answers its

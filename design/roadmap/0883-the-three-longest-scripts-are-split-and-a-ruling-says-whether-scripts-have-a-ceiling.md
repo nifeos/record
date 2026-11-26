@@ -20,9 +20,8 @@ and `helpers/file_length_ratchet.py` selects them by suffix. Whether a rule shou
 the `unwritten` decision dependency, as it was for milestone 840 (the scheduler file is split
 along its seams) before §266 existed.
 
-The cut, every file name below, and that rule are calef's call. A lane writes them up as a
-`status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request
-carries `needs-architect`.
+The cut, every file name below, and that rule are calef's call. A lane routes them to calef as
+[the routing tenet](../tenets/routing-work-and-decisions.md) says, before it moves a line.
 
 Reuse: not applicable; this moves code and adds none. The precedent is `helpers/`, which already
 holds the Python behind 14 of `script/lint`'s sections and nine modules `script/metrics` imports.

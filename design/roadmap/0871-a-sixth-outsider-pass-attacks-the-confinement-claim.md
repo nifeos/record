@@ -27,19 +27,19 @@ It counts an attack only when it boots, and keeps the standing refusal log.
 
 ## Why
 
-Risk 7 (the confinement claim is false) is AMBER. Its criterion (c) for green is two consecutive
-independent attacks with no escape on a shipped path, at least one by a non-Anthropic model or a
-human. A pass that leaves a refusal on a shipped path unexamined does not count (calef, "Add the
-refusal log."). Pass 4 (milestone 800) booted the socket capture of milestone 649 (every client of
-a network stack shares its socket numbers) and restarted the count at zero. The fifth pass (PR
-#1895, Anthropic, unmerged when this was written) found no escape; once it lands, this pass is the
-second of the two, and it supplies the non-Anthropic half.
+Risk 7 (the confinement claim is false) is AMBER, and
+[its page](../fatal-risks/7-the-confinement-claim.md) states criterion (c) for green. Pass 4
+(milestone 800) booted the socket capture of milestone 649 (every client of a network stack shares
+its socket numbers) and restarted the count at zero. The fifth pass (PR #1895, Anthropic, unmerged
+when this was written) found no escape; once it lands, this pass is the second of the two, and it
+supplies the non-Anthropic half.
 
 ## The attack
 
-Informed, the posture milestone 800 set: the whole tree and its history are in hand, as any
-attacker of a public repository has them. Variant analysis against each fixed escape, and new
-ground where nothing has been found. The surfaces, newest first:
+Informed, the posture of
+[milestone 800](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#the-attack-is-informed).
+Variant analysis against each fixed escape, and new ground where nothing has been found. The
+surfaces, newest first:
 
 - The milestone 801 package fetch path, shipped 2026-10-10 in PRs #1884 and #1890. Its parts:
   `package_index`'s admission of a hostile index (Q1's private and link-local refusal, the "moved
@@ -82,17 +82,18 @@ includes row 35, so it covers this pass's variant ground. See
 - Every escape is a failing test committed before any fix.
 - The pass-6 note exists with its refusal log, and is indexed in `notes/README/` and its area page,
   which pass 5's draft forgot and lint caught.
-- Risk 7's appendix cites the pass through the maintainer under §216 (fatal-risk facts are
-  correctable, and verdicts are the architect's). Moving the color stays calef's.
+- Risk 7's appendix cites the pass, as
+  [milestone 800](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#where-the-results-go)
+  sets out. Moving the color stays calef's.
 
 ## Follow-on
 
 - **Milestone 936.** The table sweep and the variant work go to the tenth outsider pass, by GLM 5.3,
   in `design/roadmap/0936-a-tenth-outsider-pass-attacks-the-confinement-claim.md`. It waits
   on calef's GLM token allowance.
-- **Milestone 198.** A human review, or a public bounty once a stranger can install nife, is the
-  stronger form and waits on milestone 198 (a package manager, and the trivial install that makes
-  a second customer possible).
+- **Milestone 198** (a package manager). The stronger form that
+  [milestone 800](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#follow-on) names waits
+  on it.
 - **Milestone 825.** The redoxfs name-window TOCTOU remains the open shipped-path refusal both
   passes declined to boot; its probe belongs to milestone 825 (a hostile client races the file
   server's name window), NOT-STARTED.
