@@ -75,6 +75,7 @@ they can afford not to is that nothing there needs a second copy of a number.
 | 3 | [The same story, on real silicon, on all three architectures](03-login-to-kilo-on-silicon.md) |
 | 4 | [Install a system composed from packages, and update it from packages](04-install-and-update-from-packages.md) |
 | 5 | [Crates leave nife and are consumed back by version](05-crates-released-on-their-own.md) |
+| 6 | [Boot a nife image whose launch volume is ext4, and read it from Linux](06-boot-on-ext4-and-read-it-from-linux.md) |
 
 ## The format
 
