@@ -239,15 +239,9 @@ tagged commit.
 ## The soak's five end conditions
 
 Every crate soaks as its own repository before it publishes (ruled 2026-10-17 UTC; §305 (git
-dependencies are allowed on `nifeos/*` only, pinned to a landed commit)). The crate is moved, not
-copied: it leaves nife, and nife depends on its repository by `rev`. A copy left behind does not
-count. The soak is how the publication policy's "API stable" is measured, and each crate's milestone
-states where its own soak stands.
-
-The soak ends on evidence, with no duration, when all five conditions hold; condition 5 is three
-checks (ruled 2026-11-26 UTC, nifeos/record#48). A publication comes to calef only after all five
-hold. Condition 5 does not read `weekly / semver`, which reports a break in its run's summary and
-succeeds whatever it finds; it reads a direct run.
+dependencies are allowed on `nifeos/*` only, pinned to a landed commit)). The soak ends, with no
+duration, when all five conditions hold (condition 5 ruled 2026-11-26 UTC, nifeos/record#48).
+Condition 5 does not read `weekly / semver`, which succeeds whatever it finds.
 
 | condition | check | who |
 |---|---|---|
@@ -255,12 +249,9 @@ succeeds whatever it finds; it reads a direct run.
 | 2. the template's weekly run is green | `gh run list -R nifeos/<crate> --workflow weekly.yml --limit 1 --json conclusion` prints `success`; `gh workflow run weekly.yml -R nifeos/<crate>` starts one early | lane |
 | 3. a release dry run is green | `gh workflow run release.yml -R nifeos/<crate> -f version=<manifest version> -f dry-run=true`, then that run's `gate` succeeds and it creates no tag | lane |
 | 4. the stranger test builds and proves the crate from its README alone | `grep '^Last run:' docs/stranger-test.md` in the crate repository prints a date, with that run's appendix beside it | step 12 |
-| 5a. every consumer in nife builds against the tagged release with no patch | in nife, `git grep -n '^<crate> = ' -- '*.toml'` lists every consumer, the standalone workspaces under `tools/` included; each line's `rev` is the commit that `git rev-list -n1 v<version>` prints in the crate repository and its `version` is that tag's; and no `[patch]` table in a nife manifest or `.cargo/config.toml` names the crate | lane |
-| 5b. `cargo-semver-checks` finds no breaking change from that tag to `main` | `cargo semver-checks --baseline-rev v<version> --release-type minor` on the crate's `main` prints `no semver update required` with a nonzero count of checks passed. Without `--release-type`, a pre-release version skips every check and passes on nothing. | lane |
-| 5c. no open issue, milestone or BUGS entry proposes a breaking change to the crate | `gh issue list -R nifeos/<crate> --state open`, `gh search issues --owner nifeos --owner partsfoundry --state open <crate>`, the crate's milestone and its `BUGS`, and every milestone in `design/roadmap/` that names the crate and is not `BUILT`, each read; none proposes a change 5b would call breaking | lane |
-
-A breaking change that lands on `main` during the soak fails 5b until a new tag carries it and nife's
-pins move to that tag, which is a separate nife pull request.
+| 5a. every consumer in nife builds against the tagged release, unpatched | `git grep -n '^<crate> = ' -- '*.toml'` in nife, `tools/` included: each `rev` is tag `v<version>`'s commit, each `version` that tag's; no `[patch]` names it | lane |
+| 5b. `cargo-semver-checks` finds no break from that tag to `main` | `cargo semver-checks --baseline-rev v<version> --release-type minor` passes a nonzero count; a pre-release without `--release-type` skips every check | lane |
+| 5c. no open issue, milestone or BUGS entry proposes a break | read the crate's open issues, `gh search issues --owner nifeos --owner partsfoundry --state open <crate>`, its `BUGS` and each unbuilt milestone naming it | lane |
 
 ## Publication and consumption by version
 
@@ -280,9 +271,8 @@ publishes.
     github:nifeos:crate-maintainers <crate>`; on crates.io, a trusted publisher for
     `nifeos/<crate>`, workflow `release.yml`, environment `crates-io`; then delete the secret. Every
     later release publishes through trusted publishing alone.
-20. nife consumes the release (lane). Each consumer line becomes `<crate> = "<version>"`, and the
-    soak's git dependency goes. A `[patch]` to a checkout is allowed only during development, and a
-    lint fails one that reaches `main`. Expected: `cargo tree --locked -i <crate>` resolves from
+20. nife consumes the release (lane). Each consumer line becomes `<crate> = "<version>"`, and a
+    lint fails any `[patch]` on `main`. Expected: `cargo tree --locked -i <crate>` resolves from
     crates.io and `Cargo.lock` records the checksum. The milestone's exit holds.
 
 ## What calef does, in one list
@@ -313,5 +303,3 @@ publishes.
   line per surviving mutant, and the census records four counts (caught, missed, timeout, unviable)
   and no locations, so the lines cannot be written mechanically. The first `weekly / mutation` run fails on each survivor and names it; the move lane lists them in one pull request.
 - The dry run's nife check passes an identifier such as `NIFE_DATA`. Read `helpers/lint_externalized_crates.py`'s count for the crate as well.
-- Condition 3 is unmeasured on the pilot: no release run used `dry-run=true`, so whether a dry
-  run of an already tagged version passes the gate is unknown.

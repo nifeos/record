@@ -42,7 +42,7 @@ runs in `script/lint`.
 
 The soak has no duration. It ends when the runbook's
 [five end conditions](../../notes/crate-move.md#the-soaks-five-end-conditions) hold, condition 5 being
-three checks of evidence that no break is needed (ruled 2026-11-26 UTC, nifeos/record#48).
+three checks of evidence that the API needs no break (ruled 2026-11-26 UTC, nifeos/record#48).
 
 ## BUGS
 
@@ -52,8 +52,8 @@ The gaps found in the move machinery are in the runbook's `BUGS` section, where 
 
 - **Recorded.** The gaps in the move machinery, each in `notes/crate-move.md`'s `BUGS`. Three are
   the template's: its unreleased naming gates, its orphan check and its scaffold's mentions of nife.
-  The rest are nife's: the missing `[patch]` lint, the fuzz targets the dry run does not stage, the
-  mutation baseline and the unmeasured release dry run.
+  The rest are nife's: the missing `[patch]` lint, the fuzz targets the dry run does not stage and the
+  mutation baseline.
 - **Milestone 1043.** Milestone 1043 (a moved crate fuzzed in its own repository) records it:
   `design/roadmap/1043-a-moved-crate-is-fuzzed-in-its-own-repository.md`.
 

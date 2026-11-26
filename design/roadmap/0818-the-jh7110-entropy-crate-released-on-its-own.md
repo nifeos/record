@@ -140,9 +140,9 @@ harness.
   42997968584. Condition 5, measured 2026-11-26 (UTC) at the crate's `main` `eac91ef`: check 5b
   holds, since `cargo semver-checks --baseline-rev v0.3.0-pre.1 --release-type minor` passes 202
   checks and fails none (the same run against `v0.2.0` fails three). Check 5c holds: the
-  repository has no open issue and no milestone, the one open issue naming the crate in either
-  organization (nifeos/nife#4118) asks for a new pre-release tag and no break, and no milestone or
-  `BUGS` entry here proposes one. Check 5a does not hold: no consumer pins a tag. `kernel`,
+  repository has no open issue and no milestone, and no milestone or `BUGS` entry here proposes a
+  break. The one open issue naming the crate in either organization, nifeos/nife#4118, asks for a
+  new pre-release tag. Check 5a does not hold: no consumer pins a tag. `kernel`,
   `components` and `machine_discovery` pin `df37dc9`, 6 commits past `v0.3.0-pre.1` with the same
   source (only the README differs), and the board check pins `ee0bde8`, an untagged commit between
   `v0.2.0` and `v0.3.0-pre.1`, with `version = "0.2.0"`. No `[patch]` names the crate. The soak
