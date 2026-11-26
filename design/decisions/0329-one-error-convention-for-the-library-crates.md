@@ -1,6 +1,8 @@
 ---
-status: PROPOSED
+status: DECIDED
 raised: 2026-11-26
+decided: 2026-11-26
+ratified_by: calef
 ---
 
 # 329. One error convention for the library crates
@@ -72,6 +74,13 @@ names that do not say they refuse. Deciding the traits alone (option B) leaves e
 part by itself, and the reviews already give four answers. On a close call the stricter rule wins:
 a crate can drop a `#[non_exhaustive]` or add a derive after publish without breaking anyone, but
 cannot do the reverse.
+
+## The decision
+
+Ruled 2026-11-26 (UTC): option A, the full convention, rules 1 to 10 as written. A2 is rejected
+because an unmarked variant cannot gain a field later. B is rejected because it leaves the one-way
+part undecided per crate. C is rejected because the crates share no failure vocabulary and it binds
+crates that stand alone. D is rejected because it merges families sharing no variant.
 
 ## Is the premise true
 
