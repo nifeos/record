@@ -21,8 +21,7 @@ cleared package
 with [its interface listing](../../notes/crate-reviews/file-allocation-table-public-api.md).
 1061's open item, the first-publish token, stays its own. Three settled choices stay closed: the
 `embedded-io-07` feature, optional and off by default (ruled 2026-11-12 UTC); the crate stays
-standalone; and the names of 1061's P1-5 to P1-9, ratified as built (2026-11-16 UTC). Those names
-were ratified after every naming rule now in force, so the release-review rule reopens none.
+standalone; and the names of 1061's P1-5 to P1-9, ratified as built (2026-11-16 UTC). Their ratification came after every naming rule now in force, so the release-review rule reopens none.
 
 Reuse: the crate's tests and its `lamfat` comparison tests, and a scratch benchmark crate that
 [the appendix](1143-file-allocation-table-release-review/what-was-checked.md) describes. No new
@@ -273,8 +272,7 @@ copy dominates; listing is about 2.7 times faster across the three runs (2.4 to 
 
 ## One-way doors
 
-- D1, the raw attribute byte (P0-1). Recommended: crate-private, the stricter choice; a typed or
-  raw getter can be added later without breaking a caller.
+- D1, the raw attribute byte (P0-1). Recommended: crate-private, the stricter choice; a typed or raw getter can come later without breaking a caller.
 - D2, the cluster type (P0-2). Recommended: a newtype, matching `DirectoryCluster` and
   `embedded-sdmmc`'s `ClusterId`; its name goes to the naming authority.
 - D3, sector widths and the `fill_sector` refusal (P0-3). Recommended: `u64` throughout and a
@@ -327,7 +325,7 @@ copy dominates; listing is about 2.7 times faster across the three runs (2.4 to 
 
 ## Done when
 
-The block is built when `script/review-status` reports BUILT: each P0 and P1 item reads Done or
+The block reads BUILT when `script/review-status` reports BUILT: each P0 and P1 item reads Done or
 Will not fix with its ruling, and D1 to D6 carry the architect's rulings.
 
 ## BUGS
