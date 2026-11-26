@@ -87,18 +87,19 @@ they left with `Handoff` on 2026-10-26 (#2736).
    it is already ours), and `partsfoundry/non_volatile_memory_express` does not exist yet.
    `script/crate-standalone` checks the first.
 2. In the tree, `script/verify` proves the harnesses and `Cargo.toml` says `publish = false`.
-3. The package is 0.1.0 with its own semver, states `rust-version` (#1806's note built it on stable
-   1.94.1), and ships its harnesses and falsification patches. `cargo package --list` shows them.
+3. The package meets Fork 3 of
+   [milestone 857 (crates released on their own)](0857-crates-released-on-their-own.md#the-rulings).
+   `cargo package --list` shows its harnesses and falsification patches.
 4. Ready means proofs passing and the API stable. §235 (the OS is built and updated from packages,
-   and its source divides by purpose) has milestone 610 (the interface's stability is
-   measured weekly)'s per-package co-change column, and the soak (step 5) is how the second is
-   measured. When the soak exits, calef adds it to the lint-checked publish allowlist. The
-   `partsfoundry/non_volatile_memory_express` repository is created when the crate moves, on the shared CI
-   template (milestone 887), through reusable workflows: Kani through `kani-github-action`, lint,
-   release. Its release workflow refuses to publish unless the proof job is green. No harness here
-   reads `target_arch`, so stock Kani proves them. The patched Kani of §218 (carry a Kani patch so
-   riscv64 is proved, and send it upstream) is carried only if one comes to need riscv64. Milestone
-   589 (Kani can prove riscv64 from the hosts we already have) built it.
+   and its source divides by purpose) has milestone 610 (the interface's stability is measured
+   weekly)'s per-package co-change column, and the soak (step 5) is how the second is measured. When
+   the soak exits, calef adds it to the lint-checked publish allowlist. The
+   `partsfoundry/non_volatile_memory_express` repository is created when the crate moves, on the
+   shared CI template (milestone 887), through reusable workflows: Kani through
+   `kani-github-action`, lint, release. Its release workflow refuses to publish unless the proof job
+   is green. No harness here reads `target_arch`, so stock Kani proves them. §218 (carry a Kani
+   patch so riscv64 is proved) applies only if a harness comes to need riscv64. Milestone 589 (Kani
+   can prove riscv64 from the hosts we already have) built it.
 5. Soak, as its own repository, until the [soak's five end conditions](../../notes/crate-move.md#the-soaks-five-end-conditions)
    in the runbook hold.
 6. Publish and consume the release by version, by the runbook's
@@ -197,9 +198,8 @@ handoff harnesses and the `confinement_attackers` feature describe code that lef
 
 ## BUGS
 
-- Steps 4 and 5 wait on milestone 887 (crate repositories share one CI template),
-  which owns the shared CI template, the publish allowlist lint and the `nifeos` crates.io team,
-  and on milestone 610's per-package co-change column.
+- Steps 4 and 5 wait on milestone 887 (one CI template) and on 610's
+  co-change column.
 - `needs_person` is `yes` because the exit includes a publication only calef can approve. Everything
   before step 6 can start now.
 

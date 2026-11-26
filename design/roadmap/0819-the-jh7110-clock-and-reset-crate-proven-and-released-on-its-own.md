@@ -24,8 +24,8 @@ calef's rulings, quoted from the maintainer comments on #1806 of 2026-10-07 (UTC
   one per crate"*.
 - Fork 4: *"the release workflow refuses to publish unless the proof job is green."* His word:
   *"Yes"*. The other release rules are forks 1 to 3 and 6, applied in *Release* below.
-- Ruled 2026-10-25 (UTC): the crates take plain values; the device-tree walk moves to nife, and
-  the knowledge of the vendor and mainline JH7110 trees stays in each crate as data and decoders.
+- The crates take plain values, by the ruling in
+  [milestone 857 (crates released on their own)](0857-crates-released-on-their-own.md#the-rulings).
 
 ## What exists, checked 2026-10-07 (UTC)
 
@@ -58,16 +58,17 @@ calef's rulings, quoted from the maintainer comments on #1806 of 2026-10-07 (UTC
 - A ruling of 2026-10-26 (UTC) ratified the crate's names and renamed eight of them first. The
   `Name:` blocks of its source hold them.
 
-**Reuse:** the alternatives were surveyed in #1806's `other-implementations.md` appendix (looked up 2026-10-07),
-and none is taken, because calef ruled this crate "publish ours". The only Rust JH7110 crates found,
-weathered-steel's `jh71xx-pac` 0.11.1 and `jh71xx-hal` 0.7.2 (Codeberg, 2025-03), are register maps
-under GPL-3.0-only, which nife cannot take under its license. No Rust crate for the clock and reset
-logic was found. Linux's `clk-starfive-jh7110-*` drivers stay the reference and are read, never
-copied. The I2C timing function `standard_mode_100k` takes no text from any driver: its
-counts follow from the I2C specification's standard-mode limits and the `DesignWare` count registers'
-description, and its fill (the whole shortfall to the low count) is nife's own. OpenBSD's `dwiic.c`
-(ISC) states no equations (read 2026-11-01), so no notice rides with the function. No upstream offer goes anywhere: calef ruled on #1806 that nife contributes only to
-projects nife depends on.
+**Reuse:** the alternatives were surveyed in #1806's `other-implementations.md` appendix (looked up
+2026-10-07), and none is taken, because calef ruled this crate "publish ours". The only Rust JH7110
+crates found, weathered-steel's `jh71xx-pac` 0.11.1 and `jh71xx-hal` 0.7.2 (Codeberg, 2025-03), are
+register maps under GPL-3.0-only, which nife cannot take under its license. No Rust crate for the
+clock and reset logic was found. Linux's `clk-starfive-jh7110-*` drivers stay the reference and are
+read, never copied. The I2C timing function `standard_mode_100k` takes no text from any driver: its
+counts follow from the I2C specification's standard-mode limits and the `DesignWare` count
+registers' description, and its fill (the whole shortfall to the low count) is nife's own. OpenBSD's
+`dwiic.c` (ISC) states no equations (read 2026-11-01), so no notice rides with the function. No
+upstream offer goes anywhere, by the ruling in
+[milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md).
 
 ## What is proven
 
@@ -107,18 +108,18 @@ and the device-tree queries, which the cut moves out of the crate.
 2. The proofs above exist with their falsification patches, and the cut stands. `cargo tree -p
    jh7110_clock_and_reset` then lists no nife crate.
 3. In the tree, `script/verify` proves the harnesses and `Cargo.toml` says `publish = false`.
-4. The package is 0.1.0 with its own semver, states `rust-version` (#1806's note built it on stable
-   1.94.1), and ships its harnesses and falsification patches. `cargo package --list` shows them.
-5. Ready means proofs passing and the API stable. §235 (the OS is built and updated from packages,
-   and its source divides by purpose) has milestone 610 (the interface's stability is
-   measured weekly)'s per-package co-change column, and the soak (step 6) is how the second is
-   measured. When the soak exits, calef adds it to the lint-checked publish allowlist. The
-   `nifeos/jh7110_clock_and_reset` repository is created when the crate moves, on the shared CI
-   template (milestone 887), through reusable workflows: Kani through `kani-github-action`, lint,
-   release. Its release workflow refuses to publish unless the proof job is green. Nothing here
-   reads `target_arch`, so stock Kani serves. The patched Kani of §218 (carry a Kani patch so
-   riscv64 is proved, and send it upstream) is carried only if a harness comes to need riscv64.
-   Milestone 589 (Kani can prove riscv64 from the hosts we already have) built it.
+4. The package meets Fork 3 of
+   [milestone 857 (crates released on their own)](0857-crates-released-on-their-own.md#the-rulings).
+   `cargo package --list` shows its harnesses and falsification patches.
+5. Ready means proofs passing and the API stable.
+   [Milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md#release-by-1806s-rulings)
+   says how each is measured; here the soak is step 6. When the soak exits, calef adds it to the
+   lint-checked publish allowlist. The `nifeos/jh7110_clock_and_reset` repository is created when
+   the crate moves, on the shared CI template (milestone 887), through reusable workflows: Kani
+   through `kani-github-action`, lint, release. Its release workflow refuses to publish unless the
+   proof job is green. Nothing here reads `target_arch`, so stock Kani serves. §218 (carry a Kani
+   patch so riscv64 is proved) applies only if a harness comes to need riscv64. Milestone 589 (Kani
+   can prove riscv64 from the hosts we already have) built it.
 6. Soak, as its own repository, until the [soak's five end conditions](../../notes/crate-move.md#the-soaks-five-end-conditions)
    in the runbook hold.
 7. Publish and consume the release by version, by the runbook's
@@ -140,9 +141,9 @@ ratified, `CLOCK_MULTIPLEXER_MASK` by the architect on 2026-11-11 (UTC).
 
 ## Before the move
 
-The shared template's check job holds a crate repository's names and prose at a ceiling of 0, and
-`script/crate-standalone` runs none of those gates. Run over the tree `script/crate-move --dry-run`
-stages, at the template commit the moved crate repositories pin, they find:
+The template's gates, run as
+[milestone 816 (proven DesignWare Ethernet QoS logic)](0816-the-designware-ethernet-crate-released-on-its-own.md#before-the-move)
+runs them, find:
 
 | gate | findings | what they are |
 |---|---|---|
@@ -150,9 +151,8 @@ stages, at the template commit the moved crate repositories pin, they find:
 | `register_names` | 8 | five `len` and `size` fields with no unit; the field `power_management_chip_address`, the PMIC's I2C bus address, with no `bus` qualifier; and two test names that say `addresses` |
 | `prose_acronyms` | 28 | acronyms in doc comments not expanded at their first use |
 
-Each is a rename or a doc-comment edit in this tree before the move, with its consumers. A rename
-of a public name the architect ratified goes to the architect as one table before the move; the
-maintainer decides the private names, parameters and tests provisionally. The README meets the
+Each is a rename or a doc-comment edit in this tree before the move, with its consumers. Who decides
+each rename is as in milestone 816 (proven DesignWare Ethernet QoS logic). The README meets the
 template's prose caps.
 
 ## Review before release
@@ -204,9 +204,8 @@ links it carried, by milestone 857's provenance rule.
 
 ## BUGS
 
-- Steps 5 and 6 wait on milestone 887 (crate repositories share one CI template),
-  which owns the shared CI template, the publish allowlist lint and the `nifeos` crates.io team,
-  and on milestone 610's per-package co-change column.
+- Steps 5 and 6 wait on milestone 887 (one CI template) and on 610's
+  co-change column.
 - The four properties are a proposal, read from the code, not a ruling. The milestone's `MAX_PMIC_BUS_STEPS`
   is `MAXIMUM_POWER_MANAGEMENT_CHIP_BUS_STEPS` in the code.
 - The device-tree fixtures are excerpts of the mainline and vendor JH7110 trees. They moved to
@@ -227,8 +226,6 @@ links it carried, by milestone 857's provenance rule.
   conditions, the publication and nife consuming the release by semantic version. Checked by `ls
   crates/jh7110_clock_and_reset` and by `gh api repos/nifeos/jh7110_clock_and_reset`, which returns
   not found.
-- **Recorded.** Publishing to crates.io waits on the maintainers' hold and an architect's approval,
-  as the *Release* section states.
 
 ## Index row
 
