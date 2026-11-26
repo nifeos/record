@@ -34,7 +34,7 @@ measured root over a writable layer remains open there.
 | 1 | 190 | | the fork's fixes at the commit nife pins: bugs 1 to 3 and the recovery-flag order, each with a test, every `unsafe` argued and the Kani harnesses passing; nife's oracle pin moves to a fork commit that carries the recovery-flag order |
 | 2 | 190 | | the differential oracle passing in CI on aarch64, riscv64 and x86_64, with every image in the corpus |
 | 3 | 190 | | fuzzing that runs: the fork's fuzz targets and `ext4_server`'s in nife's rotation, with no open finding |
-| 4 | 997 | | the power-cut, torn-write and lying-device sweeps with the negative control, in CI, each bucket counted beside RedoxFS's; a nonzero lying-device count goes to the architect with the numbers |
+| 4 | 997 | | the power-cut, torn-write and lying-device sweeps with the negative control, in CI, each bucket counted beside the RedoxFS numbers of milestone 37 (Prove RedoxFS's crash consistency); a nonzero lying-device count goes to the architect with the numbers |
 | 5 | 190 | | `ext4_server` as a nife program, reading and writing a Linux-formatted drive under QEMU on each architecture, with `e2fsck -fn` and `borg check` passing afterwards |
 | 6 | 190 | 46 | the adoption ruling, asked for in its own pull request carrying `needs-architect`, with each bar condition and the commit or test that meets it |
 | 7 | 909 | | basalt composes the bootable image from its packages and boots it under QEMU on all three architectures |
