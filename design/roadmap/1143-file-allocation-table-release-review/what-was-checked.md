@@ -95,6 +95,15 @@ Three runs pinned to one core, in nanoseconds, this crate first:
 Seven unpinned runs on the shared host put the read at 76,269 to 79,744 against 82,468 to 89,823,
 and the listing at 18,684 to 29,551 against 64,246 to 93,890; both move with the host's load.
 
+## The create cost
+
+Finding P2-7 will not be fixed. Each create reads the whole directory once: one pass refuses a
+clashing name, numbers the alias and finds the free slots. Remembering the first free run would
+save no reads, since a directory that fills from the front has it at the end marker. In a release
+build on a Linux x86_64 host, the 1,000th, 2,000th and 4,000th 8.3 creates in the root of a 128 MiB
+FAT32 volume of one-sector clusters read 65, 127 and 253 sectors. The crate README's `BUGS` section states
+the cost.
+
 ## What was not run
 
 - Kani, mutation testing and the fuzz targets were not run; the harness count comes from source.

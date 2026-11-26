@@ -41,11 +41,9 @@ Reuse: the crate's tests and a scratch benchmark crate; no new tool.
 - P2-5, six value types have no `Hash`: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
 - P2-6, `Attributes` has no operators: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
 - P2-7, creating entries in a large directory is quadratic: Will not fix, provisional, ruled
-  2026-11-26 UTC. Each create reads the whole directory once, to refuse a clashing name and number
-  the alias as well as to find free slots; the 1,000th, 2,000th and 4,000th creates in the root of a
-  FAT32 volume of one-sector clusters read 65, 127 and 253 sectors. A cheaper create needs a record
-  of the names a directory holds, which takes memory the crate does not have without an allocator,
-  so the cost stays documented in the README's `BUGS` section.
+  2026-11-26 UTC. A cheaper create needs memory the crate does not have without an allocator;
+  [the appendix](1143-file-allocation-table-release-review/what-was-checked.md#the-create-cost)
+  gives the measured reads.
 
 ## Open decisions
 
@@ -66,9 +64,7 @@ Guidelines items in
 
 ## Prior art
 
-The figures come from the crates.io API, read on 2026-11-26 (UTC). The task a stranger brings is
-reading and writing a FAT12, FAT16 or FAT32 volume on a device with no operating system, or in a
-host tool that builds an image. The review read `fatfs` at 0.3.6, its published version; its git
+The figures come from the crates.io API, read on 2026-11-26 (UTC). The review read `fatfs` at 0.3.6, its published version; its git
 main line is an unpublished 0.4 with its own I/O traits, which `lamfat` 0.4.3 republishes, so the
 review read that too.
 
@@ -96,7 +92,7 @@ review read that too.
   the compiler cannot find the crate, and with it, since the `core_io` build script fails. Its errors are
   typed enums a caller matches, where `fatfs` returns `io::Error` built from string messages
   (`Error::new(ErrorKind::Other, "...")`). It lists a 128-file directory in under a third of the
-  time `fatfs` takes, as Measured performance shows below.
+  time `fatfs` takes (Measured performance, below).
 - Than `embedded-sdmmc` 0.10.0: it is a file system alone, over any sector size of 512 to
   4,096 bytes. `embedded-sdmmc` binds its FAT code to its own 512-byte `Block` and takes
   `embedded-hal`, `heapless`, `thiserror`, `bitbybit`, `arbitrary-int` and `log` with it. Its errors
