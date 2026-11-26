@@ -294,7 +294,7 @@ returning, so the GIC is not left refusing interrupts to the thread switched to.
 
 ### Costs the debug build pays
 
-The icount gate measures an opt-level 0 kernel, where nothing inlines. So the branch for "no stack
+An opt-level 0 kernel inlines nothing, and these two choices come from measuring one. So the branch for "no stack
 switch", which every system call takes, is made in Rust rather than in the trampoline (routing it
 through anyway cost 8.6 instructions per `null_system_call`). And `is_from_lower_el` is two comparisons
 written out under `#[inline(always)]`, because `(8..=11).contains(&index)` is a real call into

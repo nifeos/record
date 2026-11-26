@@ -10,9 +10,8 @@ anyone is waiting.
 
 ## Today's path
 
-These are static instruction counts of the Rust half, in the debug build the icount tripwire
-measures. They come from `llvm-objdump -d`, whole functions, excluding the assembly vector's frame
-save.
+These are static instruction counts of the Rust half, in the debug build. They come from
+`llvm-objdump -d`, whole functions, excluding the assembly vector's frame save.
 
 | aarch64 | | riscv64 | |
 |---|---|---|---|
@@ -48,8 +47,8 @@ four cores that is 12,000 instructions per second. Against a 1 GHz core that is 
 per million, and less on a faster one.
 
 In a release build the same code collapses to roughly four instructions: an `mrs`, a load, a
-compare and a not-taken branch. The debug number is the one reported because the debug build is
-what this tree gates.
+compare and a not-taken branch. This page reports the debug number; the icount gate counts the
+release build.
 
 ## The error bar, stated plainly
 
