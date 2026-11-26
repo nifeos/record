@@ -14,8 +14,8 @@ The survey reads each crate's `origin/main` on 2026-11-26 (UTC), at the commits 
 ## Background
 
 The partsfoundry library crates report failure in many ways, from an error enum with `Display` and
-`core::error::Error` to a raw `i32`. [Milestone 1129](../roadmap/1129-crate-interfaces-best-in-class.md) lists errors
-as the first shape the crates should share. Twelve release reviews (blocks 1134 to 1148) hold an
+`core::error::Error` to a raw `i32`. [Milestone 1129](../roadmap/1129-crate-interfaces-best-in-class.md)
+(each crate's interface against the best in its space) lists errors as the first shape to share. Twelve release reviews (blocks 1134 to 1148) hold an
 errors paragraph each, and six of their findings wait on this decision.
 
 It matters now because the publishing hold waits on it. Each crate's first crates.io publish and its
