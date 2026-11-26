@@ -35,7 +35,7 @@ Each line reads against `partsfoundry/generational_table` at `b524333`.
 - Item 1 (P0), a full table drops the value it refused: Open.
 - Item 2 (P1), fourteen public methods have no example: Open.
 - Item 3 (P2), iterators a caller cannot name: Open.
-- Item 4 (P2), no `for` loop over a borrowed table: Open.
+- Item 4 (P2), no `for` loop over a table: Open.
 - Item 5 (P2), no `retain`: Open.
 - Item 6 (P2), no way to borrow two entries mutably: Open.
 - Item 7 (P2), the worst insert scans every slot: Open.
@@ -97,8 +97,8 @@ has to test for space first or build the value inside `insert_with_name`. The fi
 neighbor gives the value back: `heapless` 0.9.4's `Vec::push` returns `Result<(), T>`. `slotmap`
 1.1.1 never refuses, and panics when full.
 
-Change: `insert(value) -> Result<EntryName<T>, T>`, returning the refused value in `Err`.
-`insert_with_name` builds nothing on a full table and keeps `Option`. 1048's item 6 specified the
+Change: `insert` returns a `Result` whose `Err` gives the refused value back, in the shape door 1
+below settles. `insert_with_name` builds nothing on a full table and keeps `Option`. 1048's item 6 specified the
 `Option` return. This review reopens the return type, not the ratified name. Verified in the source.
 One-way: see door 1 below. Effort S, with the callers.
 
@@ -127,12 +127,13 @@ Change: named iterator types with those two traits, and `DoubleEndedIterator` wh
 is cheap. Callers cannot name an opaque return type, so naming it later breaks nobody. Verified.
 Two-way. Effort S.
 
-#### Item 4: No `for` loop over a borrowed table
+#### Item 4: No `for` loop over a table
 
 `for (name, value) in &table` does not compile, because the crate implements no `IntoIterator` for
-`&Table` or `&mut Table`. `slotmap` and `thunderdome` implement both.
+`&Table` or `&mut Table`, and none for `Table` by value. `slotmap` and `thunderdome` implement all
+three.
 
-Change: the two implementations, over item 3's named types. Verified. Additive, two-way.
+Change: the three implementations, over item 3's named types. Verified. Additive, two-way.
 Effort XS.
 
 #### Item 5: No `retain`
@@ -170,12 +171,19 @@ exactly. Change: add both. Verified. Two-way. Effort XS.
 
 ## One-way doors
 
-1. The return of `insert` (item 1). Recommended: `Result<EntryName<T>, T>`. It costs one `.ok()` at a
-   caller that wants the old shape. A rival return type could be a refusal type that holds the value.
-   It would leave room for a later reason, but the table can refuse for only one reason: no slot.
+1. The return of `insert` (item 1). A bare `T` in `Err`, as `heapless` returns, cannot implement
+   `core::error::Error`, so `?` cannot carry it into a caller's error and it prints as nothing in
+   particular. `arrayvec` 0.7.8's `try_push` returns `CapacityError<T>`, which implements `Error` and
+   gives the value back through `element`; the standard library's `TrySendError<T>` does the same
+   for a channel. Recommended: a refusal type of that shape, generic over `T`, with a method that
+   returns the value, decided together with milestone 1129's shared error decision so it prints and
+   chains like the other crates' errors. It costs one call at a caller that wants the value back,
+   and `.ok()` at one that wants the old `Option`.
 2. The bit layout of `EntryName`. `to_bits` and `from_bits` make the generation-high, slot-low
    packing part of the interface, since a caller passes names across a boundary as words.
-   Recommended: keep it as built and say in the documentation that it is stable for the 0.x series.
+   `EntryName::NEVER_MINTED`, the word `u64::MAX`, is part of that layout: a caller may store it as
+   "no entry", so no slot and generation may ever pack to it. Recommended: keep the layout and that
+   reserved word as built, and say in the documentation that both are stable for the 0.x series.
 3. Retiring a slot rather than wrapping its generation. A table shrinks by one slot after
    2^32 - 1 reuses of that slot. Recommended: keep it, since it is the safety property the proofs
    carry.
@@ -200,8 +208,8 @@ What each row times and the command are in
 ## The checklist
 
 [The checklist appendix](1135-generational-table-release-review/checklist.md) marks all 54 items of
-the Rust API Guidelines checklist. Three are not met: C-ITER-TY (item 3), C-EXAMPLE (item 2) and
-C-METADATA (item 8).
+the Rust API Guidelines checklist. Four are not met: C-ITER (item 4), C-ITER-TY (item 3),
+C-EXAMPLE (item 2) and C-METADATA (item 8).
 
 ## Done when
 

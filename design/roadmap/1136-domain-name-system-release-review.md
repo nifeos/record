@@ -36,7 +36,7 @@ Each line reads against `partsfoundry/domain_name_system` at `513558c`.
 - Item 2 (P1), errors that neither print nor chain: Open.
 - Item 3 (P1), the README's example does not compile: Open.
 - Item 4 (P1), the package ships the repository: Open.
-- Item 5 (P1), two types without `Debug`: Open.
+- Item 5 (P1), types without `Debug` or equality: Open.
 - Item 6 (P2), twenty-two public functions without an example: Open.
 - Item 7 (P2), `Name` cannot be a hash key: Open.
 - Item 8 (P2), crates.io metadata: Open.
@@ -137,11 +137,14 @@ Change: `include` the source, the proofs' patches if the proofs should build fro
 package, the README, the changelog and the licenses. Verified by running the command. Two-way.
 Effort XS.
 
-#### Item 5: Two types without `Debug`
+#### Item 5: Types without `Debug` or equality
 
 `Reader` derives only `Clone`, and `TcpReply` derives nothing. A caller whose own state holds a
-`TcpReply` cannot derive `Debug`. Change: `Debug` on both, printing positions rather than the bytes.
-Verified. Additive, two-way. Effort XS.
+`TcpReply` cannot derive `Debug`. `Question`, `Record` and `Query` derive `Debug`, `Clone` and
+`Copy` but not `PartialEq` or `Eq`, although `Name` has both. A test cannot `assert_eq!` a parsed
+question against the one it sent. Change: `Debug` on `Reader` and `TcpReply`, printing positions
+rather than the bytes, and `PartialEq` and `Eq` on the other three. Verified. Additive, two-way.
+Effort XS.
 
 ### P2
 
@@ -175,11 +178,22 @@ Change: add the field. Verified. Two-way. Effort XS.
    the contract that numbers each one. Recommended: keep it. Item 2 adds traits, not variants, and so
    leaves it as it is.
 3. Public fields on `Header`, `Question` and `Record`. A field added later breaks every caller that
-   builds one with a struct literal. RFC 1035 fixes all three layouts, and EDNS(0) lives in a record,
-   not in the header. Recommended: keep the fields public.
-
-`Header::flags` is a raw `u16` with `FLAG_` constants rather than a flag type. The crate takes no
-dependency, and the constants carry names, so the review raises no finding there.
+   builds one with a struct literal or matches all its fields. RFC 1035 fixes the header's layout,
+   and a caller builds a `Header` to pass to `write`, so its fields earn their place. `Question` and
+   `Record` are what `Reader` returns, and `Record.data_offset` is a position in the message, which
+   no RFC fixes. Recommended: keep `Header` fully public, and mark `Question` and `Record`
+   `#[non_exhaustive]`, which keeps their fields readable and a later release can drop compatibly.
+4. Wire numbers as bare integers. `Question` and `Record` carry `record_type` and `class` as `u16`,
+   `Header::flags` is a `u16` with `FLAG_` constants, and `response_code()` returns a `u8`.
+   `hickory-proto` 0.26.4 has `RecordType`, `DNSClass` and `ResponseCode` enums with an `Unknown`
+   variant. Changing a field's type after the first release breaks every caller that reads it.
+   Recommended: a newtype over the number for each (names provisional), carrying the ratified
+   constants as associated constants and converting to and from the integer. A newtype keeps an
+   unknown code intact without an `Unknown` variant, and needs no dependency.
+5. The public `MAXIMUM_IPV4_ADDRESSES`, set to 8, fixes `Answer`'s capacity. A caller that sizes its
+   own array by it, or relies on seeing no more than eight addresses, would break if a later release
+   raised it. Recommended: keep it public at 8, and document it as a floor that a minor release may
+   raise, so that no caller may treat it as exact.
 
 ## Benchmarks
 
@@ -199,8 +213,9 @@ command and what each column includes.
 ## The checklist
 
 [The checklist appendix](1136-domain-name-system-release-review/checklist.md) marks all 54 items.
-Seven are not met: C-COMMON-TRAITS (items 5 and 7), C-GOOD-ERR (item 2), C-CRATE-DOC and
-C-QUESTION-MARK (item 3), C-EXAMPLE (item 6), C-METADATA (item 8) and C-DEBUG (item 5).
+Eight are not met: C-COMMON-TRAITS (items 5 and 7), C-GOOD-ERR (item 2), C-CRATE-DOC and
+C-QUESTION-MARK (item 3), C-EXAMPLE (item 6), C-METADATA (item 8), C-DEBUG (item 5) and C-BITFLAG
+(door 4).
 
 ## Done when
 
@@ -216,11 +231,11 @@ C-QUESTION-MARK (item 3), C-EXAMPLE (item 6), C-METADATA (item 8) and C-DEBUG (i
 ## Follow-on
 
 - **Outstanding.** Items 1 to 8, open on the crate's `main` at `513558c`.
-- **Outstanding.** The three one-way doors, for the architect.
+- **Outstanding.** The five one-way doors, for the architect.
 
 ## Index row
 
 The release review of `domain_name_system` against `hickory-proto` and `simple-dns`. One item blocks
 the 0.1.0 interface: addresses should be `core::net::Ipv4Addr`. Four land before the release:
-printable errors, a README that compiles, an `include` list and `Debug` on two types. Three may
-follow. Three one-way doors are for the architect.
+printable errors, a README that compiles, an `include` list, and `Debug` and equality on
+five types. Three may follow. Five one-way doors are for the architect.

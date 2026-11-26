@@ -96,9 +96,9 @@ calls `Special` the default. `glob` 0.3.4's `MatchOptions` derives `Hash`, `Defa
 `Ord` beside them. A caller who keys a cache by policy, or whose own options struct derives
 `Default`, has to write the implementation by hand.
 
-Change: derive `Hash` on both, and `Default` on `LeadingDot` with `#[default]` on `Special`, so the
-type and its documentation agree. Verified in the source. Adding a derive is additive, so two-way.
-Effort XS.
+Change: derive `Hash` on both. Verified in the source. Adding a derive is additive, so two-way.
+Effort XS. Which value a `Default` names is a one-way door, so it is door 4 below rather than part
+of this item.
 
 #### Item 2: No example on the front page or on two functions
 
@@ -131,8 +131,9 @@ The lane verified the gap and infers the demand from the two comparators. Additi
 and `wildmatch` 2.7.0 (`WildMatch::new_case_insensitive`) each offer ASCII or Unicode case folding.
 `byte_glob` has none. A file system that folds case, such as a FAT volume, needs it.
 
-Change: an ASCII fold as a new function beside `matches_with`, leaving the third argument as
-ratified (door 1 below). Verified absent; the lane infers the need. Additive, two-way. Effort S.
+Change: an ASCII fold as a second field of the options struct that door 1 below recommends, so
+`matches_with` and `match_steps` both gain it with no new function. Verified absent; the lane infers
+the need. Additive once door 1 lands. Effort S.
 
 #### Item 5: Every call parses the pattern again
 
@@ -153,17 +154,31 @@ describes the crate exactly. Change: add both. Verified in the manifest. Two-way
 
 ## One-way doors
 
-1. The policy argument's shape. `matches_with` takes a `LeadingDot` enum as its third argument,
-   where `glob` takes a `MatchOptions` struct and `globset` a builder. A struct takes a new option
-   without a new function; an enum argument does not. Recommended: keep the enum as ratified, and
-   give any later option, such as item 4's fold, its own function. A wider options struct can still
-   arrive later beside these functions, and nothing a caller wrote breaks.
+1. The policy argument's shape. `matches_with` and `match_steps` take a `LeadingDot` enum as their
+   third argument, where `glob` takes a `MatchOptions` struct and `globset` a builder. A struct takes
+   a new option without a new function; an enum argument does not. Item 4 already plans a second
+   option, so a function per option would multiply: each fold rule times each dot rule, twice over
+   for `match_steps`. A struct added beside them later would leave those functions in the interface
+   for good. `glob`'s `MatchOptions` has public fields and no `#[non_exhaustive]`, so even it cannot
+   take a field without a major release. Recommended: at 0.1.0, a `#[non_exhaustive]` options
+   struct (its name provisional) as the third argument of both functions. `LeadingDot` is one of its
+   fields, and a constructor and setter methods build it. `matches` keeps its two arguments.
 2. The input type. Both arguments are `&[u8]`. `impl AsRef<[u8]>` would take a `&str` directly, but
    a generic function cannot become a function pointer without naming its type parameter, and the
    `b"..."` literal already reads well. Recommended: keep `&[u8]`.
 3. The name `Outcome`, provisional since the outside review's item P2-3. `glob` and `globset`
    return a bare `bool` and have no such type; `regex` 1.x calls its result `Match`, which here would
    mislead, because the type reports a failure too. Recommended: ratify `Outcome` as built.
+4. Which value a `Default` names. The crate documentation calls `Special` the default, and `matches`
+   uses it. A `Default` that later disagrees with the plain function stays wrong until a major
+   release. `glob` 0.3.4's derived `Default` sets `case_sensitive` to `false` while
+   `MatchOptions::new()` sets it to `true`, and a FIXME beside `new` defers the fix that way. Recommended: `Default` on the options struct only, defined as exactly what `matches`
+   does, with a test that the two agree. `LeadingDot` gets no `Default` at 0.1.0; adding one later
+   is compatible, and changing one is not.
+5. `LeadingDot` is exhaustive. Its documentation says there are exactly two answers, and a caller
+   may match on it with no wildcard arm. A third rule, such as a dot special only after a `/` for a
+   caller matching paths, would then break that caller. Recommended: `#[non_exhaustive]`, which a
+   later release can drop compatibly; the reverse is a major release.
 
 ## Benchmarks
 
@@ -205,10 +220,10 @@ C-COMMON-TRAITS (item 1), C-CRATE-DOC and C-EXAMPLE (item 2), and C-METADATA (it
 ## Follow-on
 
 - **Outstanding.** Items 1 to 6, open on the crate's `main` at `a095cd8`.
-- **Outstanding.** The three one-way doors, for the architect.
+- **Outstanding.** The five one-way doors, for the architect.
 
 ## Index row
 
 The release review of `byte_glob` against `glob`, `globset` and `wildmatch`. Two items land before
 the first release: the common traits and the missing examples. Four may follow: an escape function,
-a case fold, a compiled form and the manifest metadata. Three one-way doors are for the architect.
+a case fold, a compiled form and the manifest metadata. Five one-way doors are for the architect.
