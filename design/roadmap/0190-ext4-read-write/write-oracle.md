@@ -55,19 +55,19 @@ its `CHANGES.md` lists. Measured on a Linux host with e2fsprogs 1.47.2, against 
 five minutes of processor time.
 
 Against the fork, every operation applies and every readback equals the model. `e2fsck` calls 42
-of the 48 images clean:
+of the 48 images clean, and exits 0 on the other six, which offer to shorten a tree:
 
 | case | 4 KiB on 4,096 | 4 KiB on 512 | 1 KiB on 512 |
 |---|---|---|---|
-| `directory-past-inline-extents` (bug 1) | exit 4, `i_blocks` 72 for 88 | exit 4, 72 for 88 | exit 4, 58 for 62 |
+| `directory-past-inline-extents` | exit 0, offers to narrow the tree | the same | the same |
 | `truncate-depth-2-inside-a-block` | exit 0, offers to shorten the tree | the same | the same |
 
-- Bug 1. A directory that grows while files' data takes the blocks after it fragments, so it passes
+- Bug 1, fixed in the fork. A directory that grows while files' data takes the blocks after it fragments, so it passes
   the four extents its inode holds into a level-1 leaf. Its `i_blocks` then comes out two blocks
-  short: 16 sectors at 4 KiB blocks, 4 at 1 KiB. `e2fsck` also offers to narrow the tree. A
+  short in 0.9.2: 16 sectors at 4 KiB blocks, 4 at 1 KiB. `e2fsck` also offers to narrow the tree. A
   directory grown with empty files stays contiguous, keeps its extents in the inode and is clean, at
   3,000 entries as at 500. The directory's entries read back correct. Upstream fixed it after 0.9.2
-  (`rcore-os/tgoskits@dde4020be`), and the fork does not carry that fix.
+  (`rcore-os/tgoskits@dde4020be`), and the fork carries the part that fixes it (`4dc13db`).
 - Truncating a depth-2 tree to 100 bytes leaves a level-1 index `e2fsck` would shorten. `e2fsck`
   exits 0, so the tree is valid, only not minimal.
 
