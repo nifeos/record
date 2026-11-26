@@ -161,8 +161,8 @@ describes the crate exactly. Change: add both. Verified in the manifest. Two-way
    for `match_steps`. A struct added beside them later would leave those functions in the interface
    for good. `glob`'s `MatchOptions` has public fields and no `#[non_exhaustive]`, so even it cannot
    take a field without a major release. Recommended: at 0.1.0, a `#[non_exhaustive]` options
-   struct (its name provisional) with `LeadingDot` as one field, built by a constructor and setter
-   methods, as the third argument of both functions. `matches` keeps its two arguments.
+   struct (its name provisional) as the third argument of both functions. `LeadingDot` is one of its
+   fields, and a constructor and setter methods build it. `matches` keeps its two arguments.
 2. The input type. Both arguments are `&[u8]`. `impl AsRef<[u8]>` would take a `&str` directly, but
    a generic function cannot become a function pointer without naming its type parameter, and the
    `b"..."` literal already reads well. Recommended: keep `&[u8]`.
@@ -170,7 +170,7 @@ describes the crate exactly. Change: add both. Verified in the manifest. Two-way
    return a bare `bool` and have no such type; `regex` 1.x calls its result `Match`, which here would
    mislead, because the type reports a failure too. Recommended: ratify `Outcome` as built.
 4. Which value a `Default` names. The crate documentation calls `Special` the default, and `matches`
-   uses it. A `Default` that later disagrees with the plain function cannot be fixed without a major
+   uses it. A `Default` that later disagrees with the plain function stays wrong until a major
    release: `glob` 0.3.4's derived `Default` sets `case_sensitive` to `false` while
    `MatchOptions::new()` sets it to `true`, and a FIXME beside `new` defers the fix to a major
    release. Recommended: `Default` on the options struct only, defined as exactly what `matches`
