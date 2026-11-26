@@ -87,13 +87,9 @@
 
 0c3ca1a6b712 design/roadmap/0258-archive-and-compression.md
 
-0c67be9bd26a design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
-0c67be9bd26a design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
 
-0c67be9bd26a design/roadmap/0190-ext4-read-write/upstream/5a-crc32c-safety-arguments.md
 
-0c67be9bd26a design/roadmap/0190-ext4-read-write/upstream/5b-group-descriptor-decode.md
 
 
 
@@ -603,9 +599,7 @@
 
 3d0711087ebb design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
-3d36ff484eef design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
-3d36ff484eef design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
 
 3d5598af0e1f design/roadmap/0848-a-client-pays-for-its-session-in-a-server.md
 
@@ -757,17 +751,11 @@
 
 527277078493 notes/bench-runbook.md
 
-52ca8296da66 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
-52ca8296da66 design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
 
-52ca8296da66 design/roadmap/0190-ext4-read-write/upstream/5a-crc32c-safety-arguments.md
 
-52ca8296da66 design/roadmap/0190-ext4-read-write/upstream/5b-group-descriptor-decode.md
 
-52ca8296da66 design/roadmap/0190-ext4-read-write/upstream/7-mount-refusal-reason.md
 
-52ca8296da66 design/roadmap/0190-ext4-read-write/upstream/8-whole-inode-times.md
 
 53c8a6c6f050 design/roadmap/0607-nife-is-built-and-updated-from-packages.md
 
@@ -1008,9 +996,7 @@
 
 71e801cbe0ca notes/process-view/survey-design.md
 
-721e99fe76ff design/roadmap/0190-ext4-read-write/upstream/4-fuzz-targets.md
 
-721e99fe76ff design/roadmap/0190-ext4-read-write/upstream/6-kani-harnesses.md
 
 72d2e1d240fa design/roadmap/0304-prover-one-architecture.md
 
@@ -1341,13 +1327,9 @@ a0184ae48880 notes/crate-reviews/test-and-set-lock.md
 
 a0184ae48880 notes/crate-reviews/user-mode-runtime.md
 
-a0528fd4ad39 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
-a0528fd4ad39 design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
 
-a0528fd4ad39 design/roadmap/0190-ext4-read-write/upstream/7-mount-refusal-reason.md
 
-a0528fd4ad39 design/roadmap/0190-ext4-read-write/upstream/8-whole-inode-times.md
 
 a0e4a8e7de68 design/roadmap/0263-can-a-timer-be-a-capability.md
 
@@ -1403,21 +1385,13 @@ ac85b363ee37 design/roadmap/0873-the-catch-all-userspace-test-file-is-split-by-t
 
 
 
-ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
-ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
 
-ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/4-fuzz-targets.md
 
-ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/5a-crc32c-safety-arguments.md
 
-ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/5b-group-descriptor-decode.md
 
-ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/6-kani-harnesses.md
 
-ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/7-mount-refusal-reason.md
 
-ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/8-whole-inode-times.md
 
 adfa3dcf0475 design/roadmap/0202-confinement-claims-falsified.md
 
@@ -1505,15 +1479,11 @@ b731a5544624 design/roadmap/0259-sweep-the-notes-for-stale-claims.md
 
 b731a5544624 notes/why-not-general-purpose.md
 
-b734d5d5890e design/roadmap/0190-ext4-read-write/upstream/5a-crc32c-safety-arguments.md
-
-b734d5d5890e design/roadmap/0190-ext4-read-write/upstream/5b-group-descriptor-decode.md
 
 
 
-b92d219ec2fc design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
-b92d219ec2fc design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
+
 
 
 
@@ -1763,11 +1733,8 @@ d9c6ff3e005b design/roadmap/0828-iperf3-on-nife-and-linux.md
 
 d9c6ff3e005b design/roadmap/0833-the-same-storage-benchmark-on-nife-and-linux.md
 
-daf0d37dca12 design/roadmap/0190-ext4-read-write/upstream/4-fuzz-targets.md
 
-daf0d37dca12 design/roadmap/0190-ext4-read-write/upstream/7-mount-refusal-reason.md
 
-daf0d37dca12 design/roadmap/0190-ext4-read-write/upstream/8-whole-inode-times.md
 
 db2531826b1d design/roadmap/0520-cfi-in-hand-written-asm.md
 
@@ -1885,17 +1852,11 @@ e51626abe49e design/roadmap/0134-the-measurements-that-decide.md
 
 e51626abe49e design/roadmap/0134-the-measurements-that-decide/build-record.md
 
-e626224e5de9 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
-e626224e5de9 design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
 
-e626224e5de9 design/roadmap/0190-ext4-read-write/upstream/4-fuzz-targets.md
 
-e626224e5de9 design/roadmap/0190-ext4-read-write/upstream/5a-crc32c-safety-arguments.md
 
-e626224e5de9 design/roadmap/0190-ext4-read-write/upstream/7-mount-refusal-reason.md
 
-e626224e5de9 design/roadmap/0190-ext4-read-write/upstream/8-whole-inode-times.md
 
 e63e1ce4b018 design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
@@ -1954,9 +1915,7 @@ eb58dd9e2dbb design/roadmap/1093-globally-unique-identifier-partition-table-outs
 
 eb58dd9e2dbb design/roadmap/1094-grant-plan-outside-review.md
 
-ebddfc475ee8 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
-ebddfc475ee8 design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
 
 ebee1a65f0f0 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
@@ -2031,13 +1990,9 @@ f59855c643ae design/roadmap/1097-intrusive-queue-outside-review.md
 
 
 
-f618fa0b2879 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
-f618fa0b2879 design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
 
-f618fa0b2879 design/roadmap/0190-ext4-read-write/upstream/5a-crc32c-safety-arguments.md
 
-f618fa0b2879 design/roadmap/0190-ext4-read-write/upstream/5b-group-descriptor-decode.md
 
 
 
