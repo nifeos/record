@@ -40,8 +40,9 @@ installed-programs table under `activation/`.
 
 - The adoption ruling of milestone 190 (ext4, read and write), under §46 (we take what meets our
   bar). Nothing in this block links `rsext4` into a nife image before that ruling.
-- Milestone 997 (ext4 through rsext4, under milestone 37's crash injector), whose sweeps are part
-  of 190's bar.
+- Milestone 997 (ext4 through rsext4, under milestone 37's crash injector), whose sweeps put
+  `rsext4` behind the injector of milestone 37 (Prove RedoxFS's crash consistency). They are part of
+  190's bar.
 - Milestone 990's item 2, which attaches the launch volume and reads generation 1 at boot. It is
   outstanding for RedoxFS too.
 - Milestone 909 (basalt composes the bootable image from its packages), for item 4.
@@ -49,7 +50,8 @@ installed-programs table under `activation/`.
 ## Questions for the architect
 
 - §244 (the installed disk has four partitions) names partition 1 as "nife data, RedoxFS". The
-  type GUID of §45 does not change, but the row's format does. That edit is the architect's.
+  type GUID of §45 (a nife partition is `EC5CC08B-D749-4434-AC38-A274C50385BA`, and that never
+  changes) stays. The format that row names changes, and that edit is the architect's.
 - §34 leaves open whether the extended-attribute layer carries over to ext4 or gives way to ext4's
   own extended attributes. `fs_proto` hides where an attribute lives, so either answer works here.
 - §34 leaves open whether the cut-over and RedoxFS's removal happen in one step or two. This block

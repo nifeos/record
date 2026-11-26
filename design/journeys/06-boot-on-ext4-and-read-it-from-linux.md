@@ -41,7 +41,7 @@ measured root over a writable layer remains open there.
 | 8 | 1131 | | the cut-over: the image builder makes an ext4 launch volume, `ext4_server` holds it, and `jig` installs and the `activation/` table land on it |
 | 9 | 1131 | | the Linux half: the image's data partition passes `e2fsck -fn`, and a Linux mount lists what `jig` installed |
 | 10 | 1133 | | filesystem operations timed on one ext4 volume, through nife and through Linux, on the same machine |
-| 11 | 1132 | | RedoxFS leaves the tree, from milestone 982's inventory, with a twin for each helper it still needs |
+| 11 | 1132 | | RedoxFS leaves the tree, from the inventory of milestone 982 (Retire RedoxFS once a launch store proves itself), with a twin for each helper it still needs |
 
 The steps run in order with two exceptions. Steps 2 and 3 do not wait on each other, and step 7
 runs beside steps 1 to 6, since basalt's composition does not depend on the filesystem. Step 8
@@ -54,7 +54,8 @@ Two steps cross repositories. A fix lands in partsfoundry/rsext4 first and nife'
 the landed commit in a separate pull request (step 1). Step 8 lands in nife, and basalt's pin then
 moves to that nife commit.
 
-Step 4 carries a fork that milestone 997 already names. ext4 checksums metadata and not file data,
+Step 4 carries a fork that milestone 997 (ext4 through rsext4, under milestone 37's crash injector)
+already names. ext4 checksums metadata and not file data,
 so a write that the device acknowledges and drops reads back as stale bytes. Whether a nonzero
 count there passes is the architect's call, with the numbers in hand. §34 does not decide it.
 
