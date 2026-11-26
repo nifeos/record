@@ -23,8 +23,8 @@ Each ran with the build directory outside the clone, on a Linux x86_64 host with
 - `cargo +1.88 test` passes with the same counts.
 - `RUSTDOCFLAGS="-D warnings" cargo doc --no-deps` passes.
 - `cargo clippy --all-targets` prints no warning.
-- `cargo build --lib --target <t>` passes for `x86_64-unknown-none`,
-  `aarch64-unknown-none-softfloat` and `riscv64imac-unknown-none-elf`.
+- The library builds for three bare targets with `cargo build --lib --target <t>`:
+  `x86_64-unknown-none`, `aarch64-unknown-none-softfloat` and `riscv64imac-unknown-none-elf`.
 - `cargo package --list --allow-dirty` lists 47 files. Sixteen are the sources, the tests, the
   README, the changelog, the two licenses and Cargo's own four files; 31 are the rest (P2-4).
 - `grep -c 'kani::proof'` over the two `verification.rs` files counts three harnesses, the

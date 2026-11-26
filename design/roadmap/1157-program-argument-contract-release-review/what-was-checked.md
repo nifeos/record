@@ -20,8 +20,8 @@ Run with rustc 1.100.0 on a Linux x86_64 host, with the build directory outside 
 
 - `cargo build` and `cargo clippy` pass with no warning.
 - `cargo test` passes: fourteen unit tests and one doctest.
-- `cargo build --lib` passes for `x86_64-unknown-none`, `aarch64-unknown-none-softfloat` and
-  `riscv64imac-unknown-none-elf`.
+- The one-file library builds with `cargo build --lib` for each installed bare target:
+  `x86_64-unknown-none`, `aarch64-unknown-none-softfloat` and `riscv64imac-unknown-none-elf`.
 - `cargo doc --no-deps` passes with no warning.
 - `cargo package --list --allow-dirty` lists 39 files, 19 of them under `.github/` and
   `.githooks/` (P2-4).
@@ -52,8 +52,8 @@ One scratch crate depends on the clone by path, on `argv` at `=0.1.14` and on `c
 
 ## The comparators read
 
-The review downloaded each crate below from crates.io at the version the prior-art table gives,
-unpacked it into a directory of its own and read the files named.
+Each of the five crates below came from crates.io as a `.crate` file at the version the prior-art
+table gives. Each was unpacked into its own empty directory, and the files named were read there.
 
 - `argv` 0.1.14, `src/lib.rs`: `iter()` returns an `Iter` of `&'static OsStr` with
   `ExactSizeIterator`. On Linux with glibc a function in `.init_array` captures `argc` and `argv`,

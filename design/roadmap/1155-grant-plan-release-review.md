@@ -103,8 +103,8 @@ own: `byte_glob`, `grant_contract` and `program_argument_contract` (P1-7).
 
 ## The items
 
-Effort is S (half a day), M (a day or two) or L (longer). A door is one-way when code outside the
-repository depends on the answer after 0.1.0, which is why a P0 cannot wait for a later release.
+Effort is S (half a day), M (a day or two) or L (longer). Every P0 below changes a public item of `grant_plan` that a caller would
+depend on once 0.1.0 is out, so none of them can wait for a later release.
 
 ### P0: the 0.1.0 interface
 

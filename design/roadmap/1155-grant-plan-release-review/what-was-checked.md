@@ -72,9 +72,9 @@ and a bound name. It planned 206,870 stages and caught no panic, in a debug buil
 
 A scratch crate that depends on `grant_plan` by path, on `shlex` at `=2.0.1` and on
 `brush-parser` at `=0.5.0`. It ran under `cargo run --release` on a Linux x86_64 host (an Intel
-Xeon Platinum 8160 at 2.10 GHz) with rustc 1.100.0. Each measurement starts at 64 repeats and
-doubles until a pass lasts 50 ms, then runs seven passes and reports the lowest time divided by
-the count. Inputs and results pass through `std::hint::black_box`. The two inputs:
+Xeon Platinum 8160 at 2.10 GHz) with rustc 1.100.0. The timing loop is
+the one [milestone 1154 (the release review of `boot_ladder`) describes](../1154-boot-ladder-release-review/what-was-checked.md).
+Inputs and results pass through `std::hint::black_box`. The two inputs:
 
 - a line of 75 bytes and twelve words, two of them quoted:
   `count -v "my notes.txt" 'second file' plain.txt logs/report.txt a b c d e f`;
