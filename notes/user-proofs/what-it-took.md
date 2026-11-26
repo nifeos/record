@@ -11,7 +11,7 @@ had already paid for most of it.
 
 | what stopped it | why | the fix |
 |---|---|---|
-| `unwinding panics are not supported without std` | the workspace deliberately does not set `panic = "abort"` (DECISIONS §7, testing with a QEMU harness and host-testable crates) | nothing, as for the kernel ([notes/kernel-proofs.md](../kernel-proofs.md)) |
+| `unwinding panics are not supported without std` | the workspace deliberately does not set `panic = "abort"`, under DECISIONS §7 (testing: a QEMU harness and host-testable crates) | nothing, as for the kernel ([notes/kernel-proofs.md](../kernel-proofs.md)) |
 | `found duplicate lang item panic_impl` | Kani links `std`, which defines the handler `user_mode_runtime::panic_handler!()` expands to | `#[cfg(not(kani))]` on the macro invocation, in the one binary carrying a harness |
 | `Failed to detect Kani functions ... seems to be using #[no_std]` | Kani refuses a `no_std` crate root that never mentions it, and 67 of the 68 programs never will | select the binaries instead: `--bin`, derived in `script/verify` from a grep of the tree |
 
