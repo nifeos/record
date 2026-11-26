@@ -140,8 +140,7 @@ carries a Realtek or Microchip device rewrites the bring-up. Linux (`phylink`), 
 attach the physical layer device apart from the MAC, and `stm32-eth` implements
 `ieee802_3_miim::Miim` and leaves the device to the caller.
 Change: name the bring-up after the `YT8531`, and defer a physical layer device trait, since a
-published trait is itself a one-way commitment. Once D1 makes `Inputs` non-exhaustive, a generic
-bring-up can come later as an addition. Names provisional. Door: one-way (D2). Effort: S.
+published trait is itself a one-way commitment. Names provisional. Door: one-way (D2). Effort: S.
 
 #### P0-3. Four error types with no `Display` and no `core::error::Error`
 
@@ -299,7 +298,7 @@ Each for the architect, one at a time.
 - D4, the bring-up's answer and the station address (P0-4). Recommended: a named result struct and
   a validated address newtype; a bare array can never gain the check.
 - D5, the packed settings word (P0-5). Recommended: crate-private for 0.1.0. A published layout is
-  a format, and none of the comparators publishes one.
+  a format.
 - D6, the device's physical address (P0-6). Recommended: an `unsafe trait` region that supplies its
   own address, which holds the promise in one implementation and removes the public field;
   failing that, `unsafe fn` constructors. Safe later is compatible; the reverse breaks callers.
