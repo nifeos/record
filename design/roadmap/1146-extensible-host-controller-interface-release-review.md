@@ -25,28 +25,43 @@ Reuse: the prior-art table weighs each xHCI crate a caller could take instead.
 
 The status words are those `script/review-status` reads.
 
-- P0-1, `Event` is exhaustive and its completion codes are bare bytes: Open.
-- P0-2, `Capabilities` is exhaustive: Open.
-- P0-3, one driver's memory layout is public: Open.
-- P0-4, two builders take the data direction as a `bool`: Open.
-- P0-5, slots, ports, endpoints and speeds are all bare `u8`: Open.
-- P0-6, `doorbell` is the one register offset with no bound: Open.
-- P0-7, `TransferRequestBlock` exposes its dwords as a public field: Open.
+- P0-1, `Event` is exhaustive and its completion codes are bare bytes: Done,
+  `partsfoundry/extensible_host_controller_interface#29`.
+- P0-2, `Capabilities` is exhaustive: Done, `partsfoundry/extensible_host_controller_interface#29`.
+- P0-3, one driver's memory layout is public: Done,
+  `partsfoundry/extensible_host_controller_interface#29`.
+- P0-4, two builders take the data direction as a `bool`: Done,
+  `partsfoundry/extensible_host_controller_interface#29`.
+- P0-5, slots, ports, endpoints and speeds are all bare `u8`: Done,
+  `partsfoundry/extensible_host_controller_interface#29`.
+- P0-6, `doorbell` is the one register offset with no bound: Done,
+  `partsfoundry/extensible_host_controller_interface#29`.
+- P0-7, `TransferRequestBlock` exposes its dwords as a public field: Done,
+  `partsfoundry/extensible_host_controller_interface#29`.
 - P0-8, the crate refuses with `bool`, `Option` and panics: Waiting on the errors decision of
   milestone 1129.
-- P0-9, `ProducerRing::enqueue` never refuses: Open.
-- P1-1, the documentation speaks of one driver and a kernel: Open.
-- P1-2, `Capabilities` reads neither the 64-bit addressing bit nor the segment table bound: Open.
-- P1-3, no `Hash` and no `#[must_use]`: Open.
-- P1-4, most entry points have no example: Open.
-- P2-1, a TRB carries at most 65,535 bytes: Open.
-- P2-2, the Host Controller Event decodes as `Other`: Open.
+- P0-9, `ProducerRing::enqueue` never refuses: Done,
+  `partsfoundry/extensible_host_controller_interface#29`.
+- P1-1, the documentation speaks of one driver and a kernel: Done,
+  `partsfoundry/extensible_host_controller_interface#29`.
+- P1-2, `Capabilities` reads neither the 64-bit addressing bit nor the segment table bound: Done,
+  `partsfoundry/extensible_host_controller_interface#29`.
+- P1-3, no `Hash` and no `#[must_use]`: Done,
+  `partsfoundry/extensible_host_controller_interface#29`.
+- P1-4, most entry points have no example: Done,
+  `partsfoundry/extensible_host_controller_interface#29`.
+- P2-1, a TRB carries at most 65,535 bytes: Done,
+  `partsfoundry/extensible_host_controller_interface#29`.
+- P2-2, the Host Controller Event decodes as `Other`: Done,
+  `partsfoundry/extensible_host_controller_interface#29`.
 - P2-3, ring constructors with no fallible form: Open.
 - P2-4, the doorbell's value has no builder: Waiting on the doorbells decision of milestone 1129.
-- P2-5, no little-endian byte form of a TRB: Open.
+- P2-5, no little-endian byte form of a TRB: Done,
+  `partsfoundry/extensible_host_controller_interface#29`.
 - P2-6, the fake controller is an example, not an export: Waiting on the simulators decision of
   milestone 1129.
-- P2-7, the manifest has no `documentation` key: Open.
+- P2-7, the manifest has no `documentation` key: Done,
+  `partsfoundry/extensible_host_controller_interface#29`.
 
 ## Open decisions
 
