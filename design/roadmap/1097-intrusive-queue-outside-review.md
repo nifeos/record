@@ -23,8 +23,7 @@ cargo-mutants. No new tool.
 
 ## Finding status
 
-Every finding not Done blocks the first crates.io publish, which waits until every outside-review
-milestone reaches delivery.
+Every finding not Done blocks the first crates.io publish, under [the publishing hold](1093-globally-unique-identifier-partition-table-outside-review.md#finding-status).
 
 - Item 1 (P0), the manifest is a workspace member's: Done, [#3882](https://github.com/nifeos/nife/pull/3882). The manifest states its own
   license, `rust-version = "1.85"`, description, keywords, categories and lint tables.

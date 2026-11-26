@@ -366,19 +366,12 @@
 
 23fa2401dfc0 design/roadmap/0914-a-ninth-outsider-pass-attacks-the-confinement-claim.md
 
-2406a839d1da design/roadmap/1085-device-tree-blob-outside-review.md
 
-2406a839d1da design/roadmap/1088-elf-outside-review.md
 
-2406a839d1da design/roadmap/1096-interfaces-note-outside-review.md
 
-2406a839d1da notes/crate-reviews/interfaces-note.md
 
-2406a839d1da notes/crate-reviews/static-elf.md
 
-268d1cb1cc84 design/roadmap/1102-network-time-protocol-outside-review.md
 
-268d1cb1cc84 design/roadmap/1104-paging-outside-review.md
 
 
 
@@ -573,13 +566,9 @@
 
 3ac63eda7b01 notes/credentials.md
 
-3b51aec45038 design/roadmap/1095-inter-process-communication-outside-review.md
 
-3b51aec45038 design/roadmap/1096-interfaces-note-outside-review.md
 
-3b51aec45038 design/roadmap/1097-intrusive-queue-outside-review.md
 
-3b51aec45038 design/roadmap/1098-line-editor-outside-review.md
 
 
 
@@ -635,11 +624,8 @@
 
 4478818b4720 notes/x86-port/cpu-state.md
 
-45a5d8c34f28 design/roadmap/1094-grant-plan-outside-review/ruled-decisions.md
 
-45a5d8c34f28 design/roadmap/1096-interfaces-note-outside-review/ruled-decisions.md
 
-45a5d8c34f28 design/roadmap/1098-line-editor-outside-review.md
 
 
 
@@ -800,9 +786,7 @@
 
 5857eab2f07e design/roadmap/0907-hackbench-is-packaged-in-basalt.md
 
-5867d64db834 design/roadmap/1088-elf-outside-review.md
 
-5867d64db834 design/roadmap/1088-elf-outside-review/decisions.md
 
 
 
@@ -1251,9 +1235,7 @@
 
 986e8c54a8dc design/roadmap/0579-constitution-carry-vs-brief/roles.md
 
-997f4768f643 design/roadmap/1102-network-time-protocol-outside-review.md
 
-997f4768f643 design/roadmap/1104-paging-outside-review.md
 
 9a293f969797 design/roadmap/0906-ioping-is-packaged-in-basalt.md
 
@@ -1263,9 +1245,7 @@
 
 9a46e9dcda5c notes/crate-reviews/subtree-scope.md
 
-9b0c059d210e design/roadmap/1094-grant-plan-outside-review.md
 
-9b0c059d210e design/roadmap/1112-user-mode-runtime-outside-review.md
 
 9b40d65ed751 design/roadmap/0816-the-designware-ethernet-crate-released-on-its-own.md
 
@@ -1572,9 +1552,7 @@ bf563b052a85 design/roadmap/0527-the-survey-selector-and-a-threads-placement.md
 
 bf563b052a85 notes/process-view/survey-design.md
 
-bf8d027cb1c9 design/roadmap/1093-globally-unique-identifier-partition-table-outside-review.md
 
-bf8d027cb1c9 design/roadmap/1097-intrusive-queue-outside-review/ruled-decisions.md
 
 c0041ee4dc12 notes/crate-reviews/current-cpu-contract.md
 
@@ -1626,9 +1604,7 @@ c6cb1b0fd617 design/decisions/0023-multi-queue-dma-confinement.md
 
 c6cb1b0fd617 notes/dma/directions.md
 
-c6e4b0e07928 design/roadmap/1090-filesystem-contract-outside-review.md
 
-c6e4b0e07928 design/roadmap/1091-filesystem-fixture-outside-review.md
 
 c71b0e02a5cd design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
@@ -1950,9 +1926,7 @@ eb450db650e0 design/roadmap/0827-hackbench-on-nife-and-linux.md
 
 eb450db650e0 design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
-eb58dd9e2dbb design/roadmap/1093-globally-unique-identifier-partition-table-outside-review.md
 
-eb58dd9e2dbb design/roadmap/1094-grant-plan-outside-review.md
 
 ebddfc475ee8 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 

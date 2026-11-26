@@ -128,8 +128,8 @@ has no review package (item 1), and it waits on `intrusive_queue` leaving first.
 Alternatives: clear together with `intrusive_queue`, so both repositories open in one lane; hold
 until the P1 items land as well.
 
-Prior art: `generational_table`, `block_roster` and `file_allocation_table` each moved on a cleared
-review with no tag. Nothing outside nife links this crate. Example: the kernel's manifest switches
+Prior art. Three crates moved on a cleared review with no tag
+([the partition-table review](../1093-globally-unique-identifier-partition-table-outside-review.md) names them). Nothing outside nife links this crate. Example: the kernel's manifest switches
 from a path to a pinned revision of `nifeos/inter_process_communication` in the move's pin pull
 request.
 
