@@ -11,7 +11,7 @@ needs_person: yes
 
 *(The number and the slug are provisional.)*
 
-Raised by review lane A of [milestone 1129](1129-crate-interfaces-best-in-class.md) (the combine review). The lane read
+Raised by review lane A of [milestone 1129 (the combine review)](1129-crate-interfaces-best-in-class.md). The lane read
 `partsfoundry/domain_name_system` at `513558c`, the head of its `main`, as a stub-resolver author
 weighing it against `hickory-proto` would. It changed no repository. The baseline is
 [the outside review, 1087](1087-domain-name-system-outside-review.md) and
