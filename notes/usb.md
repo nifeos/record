@@ -49,10 +49,19 @@ the line discipline. A keyboard that is unplugged gives its slot back, and one p
 found.
 
 Until bring-up ends, every wait is a bounded poll of the event ring, and the interrupt is used only
-afterwards. A command and a transfer each get a second, and a port reset half a second. Those come
-from the specification's own limits rather than from a measurement on xenon. While a command is
-waited for, port change events are remembered and every other event is dropped, so a key pressed
-during a stall recovery is lost.
+afterwards. Each wait takes the bound `extensible_host_controller_interface` names for it: a halt
+32 ms, a controller reset 10 s, a command 5 s, a port reset 800 ms, and 20 ms after powering a port.
+The crate names none for two of them, so the driver names its own: the run handshake takes the halt
+bound, as Linux's `xhci_start` does, and a control transfer 5 s, USB 2.0's limit for a standard
+request. Those come from the specification and Linux rather than from a measurement on xenon. A
+wait that reaches its bound fails the step it was in. While a command is waited for, port change
+events are remembered and every other event is dropped, so a key pressed during a stall recovery is
+lost.
+
+The driver places every TRB with `ProducerRing::try_enqueue` and reports each completion through
+`complete`, so when a controller stops consuming, its ring fills and the driver refuses the next TRB
+rather than overwriting an entry the controller has not reached. The driver reports a full command
+or control ring as the command or transfer timeout it follows from.
 
 ## The confinement, in one sentence
 
