@@ -6,23 +6,24 @@ raised: 2026-11-26
 # 329. One error convention for the library crates
 
 *(The section number and title are provisional until the merge lands them. So is every name below
-that does not exist yet: the fields `offset` and `source`, the method `into_inner`, and each new
-error type.)*
+that does not exist yet: the fields `offset` and `source`, the method `into_inner`, each new error
+type and each rename.)*
 
-The survey reads each crate's `origin/main` on 2026-11-26 (UTC), at the commits in the first table.
+The survey reads each crate's `origin/main` on 2026-11-26 (UTC).
+[`costs.md`](0329-one-error-convention-for-the-library-crates/costs.md) costs option A per crate.
 
 ## Background
 
 The partsfoundry library crates report failure in many ways, from an error enum with `Display` and
 `core::error::Error` to a raw `i32`. Milestone 1129 (the combine review) lists errors as the first
-shape to share. Twelve release reviews (blocks 1134 to 1148) hold an
-errors paragraph each, and six of their findings wait on this decision.
+shape to share. Its release reviews (blocks 1134 to 1154) hold an errors paragraph each, and twelve
+of their findings wait on this decision.
 
 It matters now because the publishing hold waits on it: each crate's first crates.io publish and its
 0.1.0 interface wait for every shared decision that touches it. Nothing is on crates.io yet, so an
-edit can still change any shape. After publish, an error's shape becomes a one-way door. A new variant in an exhaustive enum, a new
-field in a variant, or a tuple variant turned into a named one breaks every caller that matches it.
-A new trait implementation breaks nobody. So the part that cannot wait is the shape, not the traits.
+edit can still change any shape. After publish, an error's shape becomes a one-way door. A new
+variant in an exhaustive enum, a new field in a variant, a rename or a removed derive breaks every
+caller that relies on it. A new trait implementation breaks nobody.
 
 ## The recommendation
 
@@ -30,48 +31,60 @@ Adopt option A, the convention below, for every library crate, and give each cra
 a finding that follows it.
 
 1. A refusal is a `Result<_, E>`, where `E` is a type of the crate: never `()`, `bool`, a bare `T`
-   or a raw integer. `Option` answers only an ordinary absence, such as a lookup that finds nothing,
-   an iterator's end, or a report that carries no state (block 1111's decision 3 stands).
-2. Every public error type implements `Debug`, `Display` and `core::error::Error`. A type generic
-   over a device error `E` displays for any `E` and is an `Error` when `E` is one. The types hold
-   plain data, so they are `Send`, `Sync` and `'static`.
+   or a raw integer. `Option` answers only an absence with one cause, such as a lookup that finds
+   nothing or an iterator's end (block 1111's decision 3 stands).
+2. Every public error type implements `Debug`, `Display` and `core::error::Error`, which is stable
+   in `core` since Rust 1.81; every crate declares 1.85 or later.
 3. A message describes its own level only, in lower case with no closing period. An error that wraps
    another returns it from `source` and leaves it out of `Display`.
-4. Every public error enum is `#[non_exhaustive]`, and so is each of its variants that has fields. A
-   unit variant stays plain. An error struct keeps its fields private behind accessors or carries
-   `#[non_exhaustive]`.
+4. Every public error enum is `#[non_exhaustive]`, and so is each variant with named fields. A unit
+   variant and a tuple variant that holds one wrapped error stay unmarked, so a caller can still
+   build and match them. An error struct keeps its fields private or carries the attribute.
 5. Named fields hold a variant's data. A tuple variant holds one wrapped error and nothing else. A
    variant that holds a wrapped error beside other data names that field `source`.
-6. A failure says where it happened and gives back what it took. A parser that walks a
-   variable-length structure through offsets puts the byte offset in a field named `offset` on each
-   variant that refuses a part of the structure. A variant with a fixed position needs none, such as
-   a header field or a buffer that ends too soon. A call that takes ownership of a value and refuses
-   it hands the value back through `into_inner`, as `TrySendError<T>` does.
-7. Each family of operations that fail the same ways gets one error enum, named for what it refuses:
-   one per module or per group of entry points, not one per crate and not one per function.
+6. A parser that walks a variable-length structure puts the byte offset in a field named `offset`
+   on each variant whose position depends on the input. A variant whose position the format fixes,
+   such as the magic number, carries none. A type whose every variant has an offset may instead be a
+   struct with a private offset and a `kind()` enum, as `Utf8Error` and `nom`'s `Error` carry
+   location outside the kind.
+7. A call that takes ownership of a value and refuses it hands the value back through `into_inner`,
+   the name of the stable `PoisonError::into_inner`.
+8. Entry points share an error enum when their sets of variants overlap; an enum splits when its
+   entry points fall into groups that share no variant. Each fallible function's `# Errors` section
+   lists the variants it returns.
+9. Every error type derives `Clone`, `PartialEq` and `Eq`, and `Copy` unless it holds a refused
+   value. A type that holds a refused `T` implements `Debug`, `Display` and `Error` for every `T`
+   without printing it, as `PoisonError<T>` does, and is `Send` and `Sync` exactly when `T` is. A
+   type generic over a device error `E` is an `Error` when `E` is one.
+10. An error type's name ends in `Error`, in the verb-object-error order of the API Guidelines'
+    C-WORD-ORDER. A crate with one family names it `Error`.
 
 The crates write the implementations by hand. A derive crate such as `thiserror` needs its own
 dependency ruling, and a crate can adopt one later without touching its interface.
 
-The reason: rules 4 to 6 alone become one-way doors at publish, and they cover what the reviews keep
-finding: positional variants, no location, a dropped value, enums that cannot grow. Deciding the traits alone (option B) leaves each crate to settle the one-way
+The reason: rules 4 to 10 become one-way doors at publish, and they cover what the reviews keep
+finding: positional variants, no location, a dropped value, enums that cannot grow and names that
+do not say they refuse. Deciding the traits alone (option B) leaves each crate to settle the one-way
 part by itself, and the reviews already give four answers. On a close call the stricter rule wins:
-a crate can drop `#[non_exhaustive]` after publish without breaking anyone, but cannot add it.
+a crate can drop a `#[non_exhaustive]` or add a derive after publish without breaking anyone, but
+cannot do the reverse.
 
 ## Is the premise true
 
 The premise is that the crates disagree in shape as well as in traits. The source agrees. Of 51
-types and 261 variants in 17 crates, 32 variants in 8 crates keep data in positional fields. 19
-types in 9 crates lack `core::error::Error` (18 lack `Display` too), and 18 types in 11 crates lack
-`#[non_exhaustive]`. No crate marks a variant with it.
+types and 261 variants in 17 crates, 32 variants in 8 crates keep data in positional fields. 17
+types in 8 crates lack `core::error::Error`, and 16 of those lack `Display` too. 18 types in 11
+crates lack `#[non_exhaustive]`, and no crate marks a variant. 19 type names in 11 crates do not end
+in `Error`. Every type derives `Clone`, `Copy`, `PartialEq` and `Eq`, and 15 derive `Hash`.
 
-Wrapping takes four forms. `file_allocation_table` returns the inner error from `source` and
-leaves it out of `Display`. `e1000e` does both. `designware_mobile_storage` renders it and has no
-`source`. `designware_ethernet` and `domain_name_system` do neither. The standard library's `Error`
+Wrapping takes four forms. `file_allocation_table` and `domain_name_system` return the inner error
+from `source` and leave it out of `Display`. `e1000e` does both. `designware_mobile_storage`
+renders it and has no `source`. `designware_ethernet` does neither. The standard library's `Error`
 documentation says to do one or the other, never both.
 
-The census of milestone 1129 missed `grant_plan`'s `NameSetFull` and `NoJobNamed` and
-`program_argument_contract`'s `WrongPageLength`, and eight crates moved past its commits.
+The census of milestone 1129 missed `grant_plan`'s `NameSetFull` and `NoJobNamed`,
+`program_argument_contract`'s `WrongPageLength` and the crate `jh7110_clock_and_reset`, and eight
+crates moved past its commits.
 
 ## What the crates do today
 
@@ -87,7 +100,7 @@ variant that only wraps another error.
 | `designware_ethernet` | `f518554c96` | 4 | 12 | 0/0 | 4 | 1 | 2 variants, neither form |
 | `designware_mobile_storage` | `f52f89aca2` | 4 | 31 | 4/4 | 4 | 20 | 7 variants rendered, no `source` |
 | `device_tree_blob` | `c888b6ace4` | 1 | 10 | 1/1 | 1 | 4 | none |
-| `domain_name_system` | `748394ad7f` | 2 | 19 | 0/0 | 1 | 1 | 1 variant, neither form |
+| `domain_name_system` | `8f6dd771da` | 2 | 19 | 2/2 | 1 | 1 | `source` only, 1 variant |
 | `e1000e` | `42cdc139a8` | 4 | 20 | 4/4 | 4 | 0 | 2 variants, both forms |
 | `entropy_contract` | `5150f14f78` | 3 | 2, and 2 unit structs | 2/3 | 1 | 0 | none |
 | `environment_contract` | `62ea88d90a` | 1 | 3 | 1/1 | 0 | 0 | none |
@@ -99,25 +112,19 @@ variant that only wraps another error.
 | `program_argument_contract` | `b097970b86` | 2 | 1, and a unit struct | 0/0 | 0 | 0 | none |
 | `universal_serial_bus` | `4612f6b5e5` | 1 | 6 | 0/0 | 0 | 0 | none |
 
-Twelve crates have no error type. Rule 1 reaches three of them:
-
-- `generational_table` (`b5243332a6`): `insert` returns `Option<EntryName<T>>` and drops the value
-  when the table is full.
-- `extensible_host_controller_interface` (`a10790e155`): `ProducerRing::complete` answers `false`
-  for a stale and a foreign address alike, and `find_extended` answers `None` for four endings, two
-  of which mean a broken controller.
-- `file_system_contract` (`0551506169`): `extended_attribute::set` and `remove` return
-  `Result<usize, i32>` with five error numbers.
-
-The other nine have nothing to refuse. In the one repository that depends on the crates today, a
-resolver matches `domain_name_system::Reject` with a wildcard arm already, and a shell names
-`grant_plan::Refusal` variants 14 times.
+Rule 1 reaches eight crates that refuse with `Option`, `bool` or a raw integer for more than one
+cause: six with no error type (`generational_table`, `extensible_host_controller_interface`,
+`file_system_contract`, `boot_ladder`, `grant_contract`, `jh7110_entropy`), plus
+`file_allocation_table`'s `fill_sector` and twelve functions of `non_volatile_memory_express`.
+Seven crates answer only with predicates or single-cause `Option`s, `jh7110_clock_and_reset` among
+them. In the one repository that uses the crates, a resolver matches `Reject` with a wildcard arm, and a
+shell names `grant_plan::Refusal` variants 14 times.
 
 ## Prior art, read 2026-11-26 (UTC)
 
-I read each crate's source from crates.io, the standard library in rustc 1.102.0-nightly
-(2026-11-22), and the API Guidelines at `rust-lang/api-guidelines@97a0969cb0`. Demand comes from the
-crates.io API the same day.
+I read each crate's source from crates.io, the standard library's `library/` source in the nightly
+toolchains of 2026-11-22 and 2026-11-26, and the API Guidelines at
+`rust-lang/api-guidelines@97a0969cb0`. Demand comes from the crates.io API the same day.
 
 | crate | version | downloads | 90 days | reverse dependencies | last updated |
 |---|---|---|---|---|---|
@@ -130,129 +137,115 @@ crates.io API the same day.
 | `embedded-hal` | 1.0.0 | 41,184,610 | 10,193,281 | 1,852 | 2024-01-09 |
 | `fdt` | 0.1.5 | 1,713,432 | 471,091 | 7 | 2026-10-01 |
 
+None of these marks a variant `#[non_exhaustive]`; rule 4 goes past them all.
+
 ### The standard library
 
-`core::error::Error`'s documentation sets the message style (lower case, no trailing punctuation)
-and the wrapping rule (`source` or `Display`, not both). `io::ErrorKind` is `#[non_exhaustive]`
-with 44 variants. `Utf8Error` keeps `valid_up_to` private behind an accessor, and
-`mpsc::TrySendError<T>` returns the unsent value in `Full(T)`. We choose `source` over rendering, so a
-chain printer shows each level once.
+`core::error::Error`'s documentation sets the message style and the wrapping rule. `io::ErrorKind`
+is `#[non_exhaustive]` with 44 variants. `Utf8Error` keeps `valid_up_to` private behind an accessor.
+`PoisonError<T>` hands its value back through a stable `into_inner` and implements `Debug`,
+`Display` and `Error` for every `T`; `TrySendError::into_inner` exists but is unstable, behind
+`try_send_error_into_inner`. Every error type C-WORD-ORDER lists ends in `Error`. We choose `source`
+over rendering, so a chain printer shows each level once.
 
 ### The API Guidelines, C-GOOD-ERR
 
 Every error type implements `Error`, `Send` and `Sync`, and `()` never serves as an error. Rules 1
-and 2 restate this item; rules 4 to 6 add what it leaves out.
+and 2 restate this item; rules 4 to 10 add what it leaves out.
 
 ### embedded-hal 1.0.0
 
-Each module's `Error` trait asks only for `Debug` and a `kind()` onto a shared `#[non_exhaustive]`
-`ErrorKind`. The
-trait does not extend `core::error::Error`, though each `ErrorKind` implements it. It serves one
-trait with many implementers: a driver generic over SPI tests for `ErrorKind::Overrun` without
-knowing the bus. Each of our crates is one implementer.
+Each module (`digital`, `i2c`, `pwm`, `spi`) declares its own `Error` trait, which asks only for
+`Debug` and a `kind()`, and its own `#[non_exhaustive]` `ErrorKind`. Neither the traits nor the
+kinds touch `core::error::Error`, since the crate declares Rust 1.60. It serves one trait with many
+implementers; each of our crates is one implementer.
 
 ### embedded-io 0.7.1
 
 `Error` extends `core::error::Error` and adds `kind()` onto an 18-variant `#[non_exhaustive]`
-`ErrorKind` that mirrors the standard library's. `ReadExactError<E>` is exhaustive (`UnexpectedEof`,
-`Other(E)`), displays its `Debug` form and has no `source`. Rule 3 would give `Other(E)` a
-`source`; whether a device error exposes `embedded_io::ErrorKind` belongs to the byte sinks
-decision.
+`ErrorKind`. `ReadExactError<E>` is exhaustive, displays its `Debug` form and has no `source`. Rule
+3 would give `Other(E)` a `source`; whether a device error exposes `embedded_io::ErrorKind` belongs
+to the byte sinks decision.
 
 ### nom 8.0.0, a no_std parser
 
 The default `Error<I>` has two public fields: `input`, the remaining input, which serves as the
-location, and `code`, an exhaustive `ErrorKind` of 57 variants. It carries location, as rule 6 asks, through public fields over an
-exhaustive kind, which rule 4 refuses.
+location, and `code`, an exhaustive `ErrorKind` of 57 variants. It carries location outside the
+kind, which rule 6 allows, through public fields over an exhaustive kind, which rule 4 refuses.
 
 ### fdt 0.1.5 and object 0.41.0
 
-`fdt`'s `FdtError` has three unit variants (`BadMagic`, `BadPtr`, `BufferTooSmall`), is exhaustive,
-implements `Display` and lacks `Error`, with no location. `object`'s read `Error` wraps one private
-`&'static str` with `Display` and `Error`: a caller can print it and cannot match it. Rule 7 keeps
-enums a caller can match, and rule 6 adds the location both lack.
+`fdt`'s `FdtError` has three unit variants, is exhaustive, implements `Display` and lacks `Error`,
+with no location. `object`'s read `Error` wraps one private `&'static str`: a caller can print it
+and cannot match it. Rule 8 keeps enums a caller can match, and rule 6 adds the location both lack.
 
 ### thiserror 2.0.21
 
 It is `no_std` and implements `core::error::Error`. Its `source` returns the field marked
 `#[source]` or named `source`, and a `#[from]` variant holds the source error and nothing else.
-Rule 5 matches that shape, so a crate that switches to it later changes no public item. We differ
-only in writing the code by hand.
+Rule 5 matches that shape, so a crate that switches to it later changes no public item.
 
 ### arrayvec 0.7.8 and heapless 0.9.4
 
 `arrayvec`'s `try_push` returns `CapacityError<T>`, which keeps the element private behind
-`element()` and implements `Error` under `std`. `heapless`'s `Vec::push` returns a bare `T`, which
-cannot implement `Error`. Rule 6 takes `arrayvec`'s shape with the standard library's method name.
+`element()` and implements `Debug` for every `T`. `heapless`'s `Vec::push` returns a bare `T`,
+which cannot implement `Error`. Rule 7 takes `arrayvec`'s shape with the standard library's name.
 
 ## Options
 
 ### A. The full convention (recommended)
 
-Rules 1 to 7. Cost by crate ("name" turns a positional variant into named fields, "mark" adds
-`#[non_exhaustive]`, "traits" adds `Display` and `Error`):
+Rules 1 to 10, costed in [`costs.md`](0329-one-error-convention-for-the-library-crates/costs.md):
 
-| crate | what changes | types | variants |
-|---|---|---|---|
-| `address_space_layout` | `Error`; mark the enum and its two struct variants | 1 | 2 |
-| `block_roster_contract` | mark `TooManyDevices` | 1 | 0 |
-| `capability_table` | mark the enum | 1 | 0 |
-| `designware_ethernet` | traits on four; one `source`; name 1; mark 4 variants | 4 | 5 |
-| `designware_mobile_storage` | name 20; stop rendering 7 wrappers (2 among the 20); two `source` | 4 | 25 |
-| `device_tree_blob` | name 4; `offset` on 5 (`BadToken` in both) | 1 | 8 |
-| `domain_name_system` | traits on both; mark `Reject`; name 1; one `source`; `offset` on 8 | 2 | 10 |
-| `e1000e` | stop rendering in two wrapping variants | 1 | 2 |
-| `entropy_contract` | traits on `Refusal`; mark two unit structs and `ShortReply` | 3 | 1 |
-| `environment_contract` | mark the enum | 1 | 0 |
-| `file_allocation_table` | name 3; mark 5 variants | 4 | 8 |
-| `grant_plan` | traits and mark on five; name `NoSuchCapability` | 5 | 1 |
-| `interfaces_note` | traits and mark on both; name `BadField` | 2 | 1 |
-| `line_editor` | traits and mark; name `Layout` | 1 | 1 |
-| `program_argument_contract` | traits and mark on both | 2 | 0 |
-| `universal_serial_bus` | traits and mark; mark 3 variants; `at` becomes `offset` | 1 | 3 |
-| `generational_table` | a new refusal type generic over `T`, with `into_inner` | new 1 | new |
-| `extensible_host_controller_interface` | new error types for `complete` and `find_extended` | new 2 | new |
-| `file_system_contract` | a new error type for the five error numbers | new 1 | new |
+- 34 of the 51 types change in 16 crates, and 67 variants change shape.
+- 11 new types in 8 crates, under rule 1.
+- 19 renames in 11 crates, under rule 10.
+- 111 expressions under `tests/` in 3 crates build a variant rule 4 would mark, and become
+  `matches!` patterns. None of the cited prior art pays this, because none marks variants.
+- Rule 8 keeps one enum for the two multi-entry enums traced; 13 others were not traced.
 
-In all, 34 of the 51 types change in 16 crates, 67 variants change shape, and 3 crates gain 4 new
-types. `non_volatile_memory_express` already conforms. A caller gains `{ .. }` in a pattern on a
-marked variant and a wildcard arm in an exhaustive match.
+A caller gains `{ .. }` in a pattern on a marked variant and a wildcard arm in an exhaustive match.
 
 ### B. The traits only
 
-Rules 1 to 3; each crate's review settles its own shape. Cost: 22 types in 11 crates and the same 4
-new types. It skips the 18 markings, the 32 positional variants and the 13 offsets, which make up
-the one-way part. A trait can arrive after publish in a minor release, and a variant's shape cannot.
+Rules 1 to 3; each crate's review settles its own shape. Cost: 20 types in 10 crates and the same
+11 new types. It skips the 18 markings, the 32 positional variants, the offsets and the names, which
+make up the one-way part. A trait can arrive after publish in a minor release, and a shape cannot.
 
-### C. A shared error kind, as embedded-hal has
+### C. A shared error kind
 
-A, plus a new shared crate with one `#[non_exhaustive]` `ErrorKind` and a `kind()` on every error.
-Cost: A's, plus a crate, a dependency from 17 crates and a kind for each of 261 variants. The crates
-share no failure vocabulary: a FAT cluster chain and a refused shell option have no common kind but
-`Other`, and it binds crates that stand alone.
+A, plus a new shared crate with one `#[non_exhaustive]` `ErrorKind` and a `kind()` on every error,
+as `embedded-io` has for its own family. Cost: A's, plus a crate, a dependency from 25 crates and a
+kind for each of 261 variants. The crates share no failure vocabulary: a FAT cluster chain and a
+refused shell option have no common kind but `Other`, and it binds crates that stand alone.
 
 ### D. One error enum per crate
 
 Every crate returns one enum, as `device_tree_blob` and `capability_table` do. Cost: 45 types merge
 into 11 in 11 crates (15 into 1 in `file_allocation_table`), and every fallible signature there
-changes. A caller then matches variants a call can never return: a FAT format call would carry a
-device error it never produces.
+changes. It puts in one type the families whose entry points share no variant, which rule 8 keeps
+apart.
 
 ## Which waiting findings each option settles
 
 | finding | A | B | C | D |
 |---|---|---|---|---|
 | 1135 door 1, `insert` drops the refused value | yes | the type only | yes | yes |
-| 1136 item 2, `Error` and `Reject` lack the traits | yes | yes | yes | yes |
 | 1140 D1, `restore` answers `Option<()>`; `Refusal` traits | yes | not the marking | yes | yes |
 | 1142 P0-2 and D2, positional variants | yes | no | yes | no |
 | 1144 P0-3 and D3, no location | yes | no | yes | no |
 | 1146 P0-8 and D9, refusals by `bool`, `Option` and panic | yes | the traits only | yes | yes |
 | 1147 P0-3 and D3, no `Display`, `Error` or `source` | yes | yes | yes | yes |
 | 1148 P1-1, D1, D4 and D7 | yes | P1-1 only | yes | yes |
+| 1149 P0-5 and D5, `Option` and panics with no reason | yes | rule 1 only | yes | no |
+| 1150 P0-6 and D6, `Pool` drops the reason | yes | the `Result` only | yes | the `Result` only |
+| 1152 P0-1 and D1, exhaustive, one variant for two causes | yes | no | yes | no |
+| 1153 P0-3 and D3, `ImagePlacement` exhaustive and misnamed | yes | the traits only | yes | the traits only |
+| 1154 P0-3 and D3, a damaged verdict reads as `None` | yes | yes | yes | yes |
 
-Under A, rule 7 settles 1148's D4. `file_allocation_table` (1143) and `e1000e` (1145) have no waiting finding; A gives each one
-more, of 8 and 2 variants.
+Under A, rule 8 settles 1148's D4 the way it recommends. Block 1136's item 2 no longer waits: the
+crate added the traits and `source` at `8f6dd771da`. `file_allocation_table` (1143) and `e1000e`
+(1145) gain one finding each, and 1143's P0-3 takes rule 1.
 
 ## Reversibility, and who has acted on it
 
@@ -263,13 +256,14 @@ variants and fields in a minor release; B, C and D leave enums that grow only in
 
 ## The seven questions
 
-1. Alternatives: B, C and D under Options, each with why it lost.
+1. Alternatives: B, C and D under Options, each with why it lost, and rule 8's stricter test in
+   `costs.md`.
 2. The tree: `file_allocation_table` already writes rules 2 and 3 down in `src/error_display.rs`.
 3. Prior art: read in source, above.
 4. The premise: true, by the counts under Is the premise true.
-5. Cost: measured per crate under option A; B, C and D beside it.
+5. Cost: measured per crate in `costs.md`; B, C and D beside it.
 6. Reversibility: full until each crate's first publish; afterward A keeps growth compatible.
-7. At equal cost, A still wins. It costs the most work, so effort does not drive it.
+7. Effort does not drive A. B costs less and C costs more; A wins on shape at any cost.
 
 ## A concrete example
 
@@ -291,19 +285,20 @@ pub enum Error {
 }
 ```
 
-A reader of the boot error learns the byte where the blob went wrong, and a later release can add a
-field to any variant without breaking a caller. For wrapping,
-`designware_mobile_storage`'s `InitializationError::GoIdle` would display `CMD0 failed` and return
-the host controller's error from `source`.
+`BadMagic` sits at a fixed place and carries no offset; `Truncated` can happen anywhere in the walk
+and carries one. A later release can add a field to any marked variant without breaking a caller.
+A sample family under rules 2 to 10 compiles with rustc 1.100.0 under `no_std`: an enum with
+marked struct variants, a generic wrapper with `source`, and a refused-value type with
+`into_inner` that is `Send` and `Sync` for a `String`. A caller in another crate matches with
+`{ .. }`, and rustc refuses its attempt to build a marked variant (E0639).
 
 ## What was not checked
 
-- Nothing compiled. A script made the counts, with a reading where it could not decide; the caller
-  counts are rough greps, and I did not check which caller matches are exhaustive.
+- Only the sample compiled under the rules, no crate. The counts are pattern matches.
 - Lanes E to J of milestone 1129 have not reviewed their crates yet, so the costs for `grant_plan`
   and the contract crates rest on this survey alone.
 - Rule 6's reach over eight `domain_name_system` variants is this file's reading; block 1136 did not
   ask for an offset.
 - `file_system_contract`'s error numbers are wire values, and the contract-crate layout decision
   may shape the type that replaces them.
-- I did not check `Send` and `Sync` per type; every type read holds plain data.
+- Rule 8 was traced for 2 of 15 multi-entry enums.
