@@ -102,14 +102,14 @@ DECISIONS §9 (locking: IrqSafeMutex, plus a discipline) is about.
 
 ## The kernel's half
 
-The design behind `kernel/src/virtual_io.rs`, the enumeration and the confined transport.
+The design behind `kernel/src/virtual_io.rs`.
 notes/dma.md has the confinement itself and notes/pcie.md the transport seam.
 
 On riscv64 the virtio-mmio window is mapped only when the device tree names a `virtio,mmio` node.
 On the T-Head TH1520 the QEMU window's address is DRAM, and a probe there could mistake RAM for a
-device. A machine without the bus reports zero slots.
+device.
 
-Block devices have one ordering on every machine, and it is the roster's row order: every
+Block devices share one ordering, the roster's row order: every
 virtio-mmio slot in slot order, then every modern virtio-pci function in bus:device.function order.
 `disk_service::devices` lists the roster in the same order, so a listing and a wiring cannot
 disagree about which disk is which. On aarch64 and riscv64 both boards have five mmio block
@@ -127,14 +127,14 @@ The PCI accessors `pread` and `pwrite` are safe functions over a module invarian
 `unsafe fn`s. They are private, and every call site passes `common` plus a constant offset under
 0x40, `isr`, `notify_addr[q]`, or `device_config` plus an offset the capability's length bounds.
 All four are fields of `Transport::Pci`, set in one place, `Transport::pci`, from a BAR that
-`pci::PciVirtualIoDevice` mapped. Twenty `unsafe` blocks restating one sentence would make nothing
-checkable. One gap: `notify_addr[q]` is zero until `setup_queue` resolves it, so `notify` refuses a
+`pci::PciVirtualIoDevice` mapped. One gap: `notify_addr[q]` is zero until `setup_queue` resolves it, so `notify` refuses a
 queue whose doorbell is not ready rather than write through `phys_to_virt(0)`.
 
-A transport's slot comes back when its driver dies (§16 (object revocation)). The table is a `generational_table::Table`, so a released device's capability fails and never
-names its successor. A starter binds the driver thread with
+A transport's slot comes back when its driver dies (§16 (object revocation)). The table is a
+`generational_table::Table`, so a released device's capability never names its successor. A starter binds the driver thread with
 `bind_to_current_thread`; its removal from the thread table runs `unregister`, which resets the
-device and frees the slot. An unbound device lives for the boot, which keeps
+device and frees the slot. The release skips its reset once another driver of the same hardware has reset
+the device, since a second one would wipe that driver's queues and its request in flight. An unbound device lives for the boot, which keeps
 `entropy_service::ensure`'s one service per device. BUGS: release leaves a PCIe IOMMU
 domain in place, so re-registering one leaks its page-table frames.
 
