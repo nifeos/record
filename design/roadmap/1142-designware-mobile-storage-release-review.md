@@ -160,7 +160,7 @@ widths the driver sets today. Door: one-way (D4). Effort: S.
 
 Verified in source (`src/command.rs`, line 100).
 `Response` lists the response kinds this driver sends (`None`, `R1`, `R1b`, `R2`, `R3`, `R6` and
-`R7`) with no `#[non_exhaustive]`, so a caller that matches on it breaks when a later release adds
+`R7`) with no `#[non_exhaustive]`. A caller that matches on it breaks when a later release adds
 one, such as an SDIO card's R4 or R5.
 Change: `#[non_exhaustive]`. Door: one-way (D8). Effort: S.
 
