@@ -2248,59 +2248,32 @@ e1cf2d26d099 design/decisions/0044-entropy-capability.md
 
 e1cf2d26d099 notes/entropy.md
 
-e1ecdbe4d935 design/roadmap/0492-a-const-in-a-proof-module-escapes-its-exclusion.md
 
-e1ecdbe4d935 design/roadmap/0493-a-disk-file-job-mix-needs-a-disk-radon-can-drive.md
 
-e1ecdbe4d935 design/roadmap/0494-a-driver-for-the-network-card-a-pc-actually-has.md
 
-e1ecdbe4d935 design/roadmap/0496-a-dying-programs-last-words-reach-nobody.md
 
-e1ecdbe4d935 design/roadmap/0497-a-filesystem-server-that-knows-the-time.md
 
-e1ecdbe4d935 design/roadmap/0498-a-program-that-takes-an-argument-and-an-input.md
 
-e1ecdbe4d935 design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
-e1ecdbe4d935 design/roadmap/0504-an-mtime-for-an-open-file.md
 
-e1ecdbe4d935 design/roadmap/0505-an-x86-64-input-driver-that-never-lets-the-core-idle.md
 
-e1ecdbe4d935 design/roadmap/0506-colour-the-kernel-stacks-and-take-e1-again.md
 
-e1ecdbe4d935 design/roadmap/0509-live-patching-the-kernel.md
 
-e1ecdbe4d935 design/roadmap/0510-nothing-regenerates-the-roadmap-index.md
 
-e1ecdbe4d935 design/roadmap/0511-the-boards-screen-under-uefi.md
 
-e1ecdbe4d935 design/roadmap/0514-the-hvf-std-listener-hangs-in-some-full-runs.md
 
-e1ecdbe4d935 design/roadmap/0515-the-installer-a-stick-runs-to-put-itself-on-the-disk.md
 
-e1ecdbe4d935 design/roadmap/0516-uefi-test-exits-one-after-a-passing-suite.md
 
-e1ecdbe4d935 design/roadmap/0526-a-riscv64-host-that-hands-us-acpi.md
 
-e1ecdbe4d935 design/roadmap/0528-cheri-capabilities-are-not-these-capabilities.md
 
-e1ecdbe4d935 design/roadmap/0530-name-a-customer.md
 
-e1ecdbe4d935 design/roadmap/0532-the-census-writes-its-own-row.md
 
-e1ecdbe4d935 design/roadmap/0533-the-roadmap-after-the-split.md
 
-e1ecdbe4d935 design/roadmap/0534-the-soft-float-targets-could-now-be-flipped.md
 
-e1ecdbe4d935 design/roadmap/0535-the-trusted-core-has-no-size.md
 
-e1ecdbe4d935 design/roadmap/0537-what-a-trusted-component-costs.md
 
-e1ecdbe4d935 design/roadmap/0539-which-rva23-extensions-this-kernel-must-save.md
 
-e1ecdbe4d935 design/roadmap/0540-a-finding-said-out-loud-is-not-a-finding-recorded.md
 
-e1ecdbe4d935 design/roadmap/0555-a-program-that-asks-the-cpu-dies-without-saying-so.md
 
 e34251093e2f design/roadmap/0610-the-interfaces-stability-is-measured-weekly.md
 

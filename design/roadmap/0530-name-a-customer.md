@@ -10,9 +10,12 @@ needs_person: no
 ---
 # 530. Name a customer, or admit the ranking function has nothing to rank
 
-*(Number provisional until the merge queue lands it.)* Promoted from the proposal `name-a-customer`, filed 2026-09-21, on calef's instruction of 2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own, unedited except for this paragraph: the argument is its author's and promotion is not the moment to improve it. Raised by the maintainer, from calef's question about what nife
-would have to be to change anyone else's behavior, and from the fact that every honest answer began
-with "a customer".
+*(Number provisional until the merge queue lands it.)* Promoted from the proposal `name-a-customer`,
+filed 2026-09-21, on calef's instruction of 2026-09-20 to give every proposal on `main` a number.
+The text below is the proposal's own, unedited, by [the promotion
+rule](../../notes/roadmap.md#anybody-may-add-to-the-roadmap-designroadmapproposals). Raised by the
+maintainer, from calef's question about what nife would have to be to change anyone else's behavior,
+and from the fact that every honest answer began with "a customer".
 
 Nobody but calef can name one, and no lane can substitute for it.
 

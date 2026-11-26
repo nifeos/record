@@ -10,9 +10,13 @@ needs_person: no
 ---
 # 535. The trusted core has no size, and the tree cannot say how big it is
 
-*(Number provisional until the merge queue lands it.)* Promoted from the proposal `the-trusted-core-has-no-size`, filed 2026-09-20, on calef's instruction of 2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own, unedited except for this paragraph: the argument is its author's and promotion is not the moment to improve it. Filed by `maintainer/redleaf-comparison` from the RedLeaf and
-Tock-founding-paper reading (`notes/redleaf.md`, `notes/trusted-base.md`). *(Number and slug
-provisional until the merge queue lands it.)*
+*(Number provisional until the merge queue lands it.)* Promoted from the proposal
+`the-trusted-core-has-no-size`, filed 2026-09-20, on calef's instruction of 2026-09-20 to give every
+proposal on `main` a number. The text below is the proposal's own, unedited, by [the promotion
+rule](../../notes/roadmap.md#anybody-may-add-to-the-roadmap-designroadmapproposals). Filed by
+`maintainer/redleaf-comparison` from the RedLeaf and Tock-founding-paper reading
+(`notes/redleaf.md`, `notes/trusted-base.md`). *(Number and slug provisional until the merge queue
+lands it.)*
 
 One note, one `script/metrics` column, and a cross-reference. No hardware, no
 decision, no system call surface. One sentence inside it is an architect's: any published claim about how

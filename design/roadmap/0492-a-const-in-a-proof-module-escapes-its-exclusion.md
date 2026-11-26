@@ -10,13 +10,15 @@ needs_person: no
 ---
 # 492. A const inside a proof module is not excluded, because its mutant has no module path
 
-*(Number provisional until the merge queue lands it.)* Promoted from the
-proposal `a-const-in-a-proof-module-escapes-its-exclusion`, filed 2026-09-19, on calef's instruction
-of 2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own,
-unedited except for this paragraph: the argument is its author's and promotion is not the moment to
-improve it. Found by milestone 438 (would a diff-scoped mutation check have caught) while replaying `cargo mutants --in-diff` against milestone 319 (the crate that parses firmware had no)'s
-pull request. Two of the four survivors it reported are mutants that `cargo test` can never kill, in
-a module `cargo test` never compiles.
+*(Number provisional until the merge queue lands it.)* Promoted from the proposal
+`a-const-in-a-proof-module-escapes-its-exclusion`, filed 2026-09-19, on calef's instruction of
+2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own,
+unedited, by [the promotion
+rule](../../notes/roadmap.md#anybody-may-add-to-the-roadmap-designroadmapproposals). Found by
+milestone 438 (would a diff-scoped mutation check have caught) while replaying `cargo mutants
+--in-diff` against milestone 319 (the crate that parses firmware had no)'s pull request. Two of the
+four survivors it reported are mutants that `cargo test` can never kill, in a module `cargo test`
+never compiles.
 
 One entry in `.cargo/mutants.toml` and a paragraph saying why, which is the same
 shape milestone 326 already used for `**/src/proofs.rs`. Nothing has to build or boot first.

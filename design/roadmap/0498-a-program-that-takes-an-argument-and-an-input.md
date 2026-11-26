@@ -10,13 +10,14 @@ needs_person: no
 ---
 # 498. Whether a program may take an argument and an input stream
 
-*(Number provisional until the merge queue lands it.)* Promoted from the
-proposal `a-program-that-takes-an-argument-and-an-input`, filed 2026-09-19, on calef's instruction
-of 2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own,
-unedited except for this paragraph: the argument is its author's and promotion is not the moment to
-improve it. Raised by milestone 150 (eight hand-maintained lists), item 3 of its design questions.
-That lane was told to keep current behavior and write this up rather than decide it in code,
-because it is a policy about what programs may be.
+*(Number provisional until the merge queue lands it.)* Promoted from the proposal
+`a-program-that-takes-an-argument-and-an-input`, filed 2026-09-19, on calef's instruction of
+2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own,
+unedited, by [the promotion
+rule](../../notes/roadmap.md#anybody-may-add-to-the-roadmap-designroadmapproposals). Raised by
+milestone 150 (eight hand-maintained lists), item 3 of its design questions. That lane was told to
+keep current behavior and write this up rather than decide it in code, because it is a policy about
+what programs may be.
 
 Nothing is blocked on it. Milestone 150 closed the mechanical half, so either answer
 is cheap to carry out.

@@ -11,13 +11,14 @@ needs_person: no
 ---
 # 505. An x86_64 input driver that never lets the core idle
 
-*(Number provisional until the merge queue lands it.)* Promoted from the
-proposal `an-x86-64-input-driver-that-never-lets-the-core-idle`, filed 2026-09-19, on calef's
-instruction of 2026-09-20 to give every proposal on `main` a number. The text below is the
-proposal's own, unedited except for this paragraph: the argument is its author's and promotion is
-not the moment to improve it. Found by milestone 182 (x86_64's own interactive-boot entry point)'s lane while building `script/swish-check`'s
-x86_64 leg. Milestone 299 recorded x86_64's polling input driver as a latency and CPU limitation;
-this is the measurement that says it is more than that.
+*(Number provisional until the merge queue lands it.)* Promoted from the proposal
+`an-x86-64-input-driver-that-never-lets-the-core-idle`, filed 2026-09-19, on calef's instruction of
+2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own,
+unedited, by [the promotion
+rule](../../notes/roadmap.md#anybody-may-add-to-the-roadmap-designroadmapproposals). Found by
+milestone 182 (x86_64's own interactive-boot entry point)'s lane while building
+`script/swish-check`'s x86_64 leg. Milestone 299 recorded x86_64's polling input driver as a latency
+and CPU limitation; this is the measurement that says it is more than that.
 
 As far as the lane could see, nothing gates it. The `Irq` capability, `irq_wait`/`irq_ack` and the
 input driver's interrupt-driven arm all exist on aarch64 and riscv64. Milestone 299 (the x86

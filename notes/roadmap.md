@@ -233,7 +233,9 @@ Reuse: <what existing code was considered, and why it was or was not taken>
 
 Promotion is the integrator's, at merge, like every other global name: give the file its number,
 `git mv` it up a directory, set its `status`, and add `promoted_from` with the slug. `script/roadmap --check` validates the rest, and nothing else has to
-happen, because there is no table for it to appear in.
+happen, because there is no table for it to appear in. Promotion leaves the proposal's text
+unedited, apart from one opening paragraph that says where it came from: the argument is its
+author's and promotion is not the moment to improve it.
 
 The graveyard question, asked here rather than discovered later. A proposal nobody promotes is
 the same burial in a new location. Nothing can force a promotion, and a gate that tried ("no proposal
