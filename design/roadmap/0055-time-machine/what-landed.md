@@ -1,11 +1,11 @@
 # Milestone 55 appendix: what landed before the retirement
 
 An appendix to [milestone 55 (Time Machine: SMB3 with Apple's extensions, and
-mDNS)](../0055-time-machine.md), moved out of that page on 2026-10-12 (UTC) under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main page is complete
-without it. This is the block's record of the SMB half as it was built between 2026-08-17 and
-2026-08-19, before the premise was retired on 2026-08-30. All of the code described here went with
-the SMB implementation; notes/smb.md records it.
+mDNS)](../0055-time-machine.md). [§212 (a prose
+budget)](../../decisions/0212-a-prose-budget-for-every-document.md) moved it out. The main page is
+complete without it. This is the block's record of the SMB half as it was built between 2026-08-17
+and 2026-08-19, before the premise was retired on 2026-08-30. All of the code described here went
+with the SMB implementation; notes/smb.md records it.
 
 ## The `AAPL` create context and the Time Machine flag
 

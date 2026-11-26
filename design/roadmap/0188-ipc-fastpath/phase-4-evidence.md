@@ -1,9 +1,9 @@
 # Phase 4's evidence: what phases 1 to 3 and E3 on radon say about a hand-written fastpath
 
-An appendix of [milestone 188 (the IPC fastpath)](../0188-ipc-fastpath.md), moved out of it on
-2026-10-12 (UTC) under §212 (a prose budget). The main page is complete without it: it keeps the
-verdict, the headline figures and the recommendation. This file keeps the argument for and against
-phase 4 after phases 1 to 3, and the E3 run on radon with its table. Both were written on 2026-09-04.
+An appendix of [milestone 188 (the IPC fastpath)](../0188-ipc-fastpath.md), moved out under §212 (a
+prose budget). The main page is complete without it: it keeps the verdict, the headline figures and
+the recommendation. This file keeps the argument for and against phase 4 after phases 1 to 3, and
+the E3 run on radon with its table. Both were written on 2026-09-04.
 
 ## Phases 1 to 3 did not close the gap and were never going to
 

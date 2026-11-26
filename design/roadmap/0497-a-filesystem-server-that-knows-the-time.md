@@ -12,9 +12,10 @@ needs_person: no
 
 Promoted from the proposal `a-filesystem-server-that-knows-the-time`, filed 2026-09-19, on calef's
 instruction of 2026-09-20 to give every proposal on `main` a number. The text below is the
-proposal's own, unedited except for this paragraph: the argument is its author's and promotion is
-not the moment to improve it. Written by the milestone 64 (enough std to run somebody else's crate)
-lane (`milestone/64-std-filesystem-shim`), from milestone 64's block and `notes/touch.md`'s `BUGS`.
+proposal's own, unedited, by [the promotion
+rule](../../notes/roadmap.md#anybody-may-add-to-the-roadmap-designroadmapproposals). Written by the
+milestone 64 (enough std to run somebody else's crate) lane (`milestone/64-std-filesystem-shim`),
+from milestone 64's block and `notes/touch.md`'s `BUGS`.
 
 The mechanism a reader needs already exists and already has a decision behind it:
 DECISIONS §43 made reading the wall clock a broadly grantable, read-only authority (a `Frame`

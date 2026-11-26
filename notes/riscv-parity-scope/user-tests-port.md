@@ -2,10 +2,10 @@
 
 *Name: provisional.*
 
-An appendix to [notes/riscv-parity-scope.md](../riscv-parity-scope.md), moved there on 2026-10-11
-(UTC) under §212 (a prose budget). It is the record of making `kernel::sched::tests` and
-`kernel::user::tests` run on both ISAs: what moved, the three defects the port surfaced, the
-assertions broken on purpose, and what stays aarch64-only.
+An appendix to [notes/riscv-parity-scope.md](../riscv-parity-scope.md), moved there under §212 (a
+prose budget). It is the record of making `kernel::sched::tests` and `kernel::user::tests` run on
+both ISAs: what moved, the three defects the port surfaced, the assertions broken on purpose, and
+what stays aarch64-only.
 
 Follow-on (§19 (architectural parity), 2026-07-31): the last two gated portable tests are gated no longer.
 `kernel::sched::tests::an_interrupt_becomes_a_message` and

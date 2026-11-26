@@ -6,8 +6,7 @@ refused_by: 18, 448
 # 466. Verus, and unbounded proof
 
 Refused by milestone 18 (design/roadmap/0018-verify-capability-core.md), which records it in its
-Follow-on. Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names
-work a number, a status and a condition that would change it.
+Follow-on. Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

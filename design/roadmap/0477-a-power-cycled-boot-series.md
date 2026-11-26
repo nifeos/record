@@ -7,8 +7,7 @@ refused_by: 249, 448
 
 Refused by milestone 249
 (design/roadmap/0249-the-boot-lottery-is-sampled-by-a-person-walking-to-the-board.md), which records
-it in its Follow-on. Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal
-that names work a number, a status and a condition that would change it.
+it in its Follow-on. Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

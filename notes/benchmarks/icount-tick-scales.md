@@ -1,10 +1,9 @@
 # icount tick scales: a tick is not an instruction
 
-*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers and
-lets a reader act without opening this file. This one holds the per-architecture tick scales under
-`-icount`, the in-kernel ground-truth measurement that fixed them, and the correction of the x86_64
-"17x". Name: provisional (the icount-attribution lane, 2026-09-30); [the naming record](README.md)
-holds the ratified ones.*
+*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers. This
+one holds the per-architecture tick scales under `-icount`, the in-kernel ground-truth measurement
+that fixed them, and the correction of the x86_64 "17x". Name: provisional (the icount-attribution
+lane, 2026-09-30); [the naming record](README.md) holds the ratified ones.*
 
 ## 2026-09-30: the x86_64 "17x" was units; the kernel paths are within 7 percent
 

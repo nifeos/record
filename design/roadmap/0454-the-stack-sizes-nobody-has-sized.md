@@ -7,8 +7,7 @@ refused_by: 90, 124, 448
 
 Refused by milestone 124 (design/roadmap/0124-a-thread-is-born-where-it-lives.md) and milestone 90
 (design/roadmap/0090-secondary-stack-guard.md), each of which records it in its Follow-on. Milestone
-448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names work a number, a
-status and a condition that would change it.
+448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

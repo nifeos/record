@@ -1,10 +1,9 @@
 # Milestone 117 appendix: the harness and the cadence
 
-*An appendix to [milestone 117 (the stranger test)](../0117-newcomer-onboarding.md), moved out of
-that page on 2026-10-12 (UTC) under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main page is complete
-without it. This is the record of the two lanes that built `script/stranger-test` and its monthly
-tripwire, both on 2026-08-18.*
+*An appendix to [milestone 117 (the stranger test)](../0117-newcomer-onboarding.md), moved out under
+[§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main page is
+complete without it. This is the record of the two lanes that built `script/stranger-test` and its
+monthly tripwire, both on 2026-08-18.*
 
 ## The recurrence lane, 2026-08-18
 

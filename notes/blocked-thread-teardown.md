@@ -194,9 +194,9 @@ authority, cost, what it breaks and how it fails.
   does not free a stranded caller in another region. Chosen by calef on 2026-09-03 and built as
   milestone 133.
 - B, a terminate verb on the `ThreadControlBlock` capability: seL4's `suspend()` transliterated. It
-  separates stopping a thread from reclaiming its memory. That may be exactly right (it separates
-  policy from memory) or exactly wrong (it produces a stopped thread nobody can free), and which one it
-  is depends on a spawn-time endowment convention that does not exist yet.
+  separates stopping a thread from reclaiming its memory. Whether that
+  is right depends on a spawn-time endowment convention that does not exist yet, as
+  [the four proposals](blocked-thread-teardown/the-four-proposals.md) argue.
 - C, *the abortable call*: free the stranded caller, not the hung server. Piece 1 wakes a
   reply-parked caller with `Gone` when its server can no longer answer, and it shipped as milestone
   254. Piece 2, a deadline on `CALL`, is the fork of milestone 106 (a wait that ends on the interrupt

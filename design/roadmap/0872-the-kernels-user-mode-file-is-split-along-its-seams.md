@@ -12,10 +12,9 @@ needs_person: no
 
 *(The title and slug are provisional.)*
 
-`kernel/src/user.rs` is 3,866 lines at `396187b0b`. Services leave it for `kernel/src/user/` while new work
-arrives. §266 (a Rust source file stays under 2,000 lines) sets the ceiling and a 2026-12-31
-goal of no file over 4,000. Milestone 840 (the scheduler file is split along its seams) is the
-model.
+`kernel/src/user.rs` is 3,866 lines at `396187b0b`. Services leave it for `kernel/src/user/` while
+new work arrives. §266 (a Rust source file stays under 2,000 lines) sets the ceiling and its dated
+goals. Milestone 840 (the scheduler file is split along its seams) is the model.
 
 The cut was calef's call, and he ruled it on 2026-10-11 (UTC) in §281 (the kernel's user-mode file
 splits into child modules of `user`). On the first fork: *"Agreed, make the parent an index."* That

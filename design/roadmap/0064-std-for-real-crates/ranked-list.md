@@ -1,10 +1,10 @@
 # The ranked list, pass by pass, 2026-08-04 to 2026-08-22
 
 An appendix to [milestone 64 (enough `std` to run somebody else's
-crate)](../0064-std-for-real-crates.md), moved out of that page on 2026-10-12 (UTC) under [§212 (a
-prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main page is complete
-without it. This is the block's account of how the ranked list was worked, from the first pass to
-the fourth, as the block carried it before the last pass bound file times.
+crate)](../0064-std-for-real-crates.md). [§212 (a prose
+budget)](../../decisions/0212-a-prose-budget-for-every-document.md) moved it out. The main page is
+complete without it. This is the block's account of how the ranked list was worked, from the first
+pass to the fourth, as the block carried it before the last pass bound file times.
 
 ## Why the third pass's headline was wrong
 

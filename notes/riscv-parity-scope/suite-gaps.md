@@ -2,10 +2,9 @@
 
 *Name: provisional.*
 
-An appendix to [notes/riscv-parity-scope.md](../riscv-parity-scope.md), moved there on 2026-10-11
-(UTC) under §212 (a prose budget). It holds the ASID gap milestone 58 (RISC-V TLB shootdown) closed,
-the 24-test
-overlap still open, the leak police that never policed `user::tests`, and two misread test failures.
+An appendix to [notes/riscv-parity-scope.md](../riscv-parity-scope.md), moved there under §212 (a
+prose budget). It holds the ASID gap milestone 58 (RISC-V TLB shootdown) closed, the 24-test overlap
+still open, the leak police that never policed `user::tests`, and two misread test failures.
 
 ## Closed gap: RISC-V allocated ASIDs and then threw them away
 

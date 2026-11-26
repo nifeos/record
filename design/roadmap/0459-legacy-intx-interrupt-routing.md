@@ -7,8 +7,7 @@ refused_by: 161, 215, 448
 
 Refused by milestone 161 (design/roadmap/0161-x86-64-kernel-port.md) and milestone 215
 (design/roadmap/0215-x86-64-pci-interrupt-routing.md), each of which records it in its Follow-on.
-Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names work a
-number, a status and a condition that would change it.
+Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

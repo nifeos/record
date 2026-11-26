@@ -13,10 +13,11 @@ needs_person: no
 
 Promoted from the proposal `the-hvf-std-listener-hangs-in-some-full-runs`, filed 2026-09-19, on
 calef's instruction of 2026-09-20 to give every proposal on `main` a number. The text below is the
-proposal's own, unedited except for this paragraph: the argument is its author's and promotion is
-not the moment to improve it. Found by milestone 227 (a GICv3 driver, because GICv2 boots and)'s
-lane (a GICv3 driver), on the first two full `script/test --hvf` runs this machine could make since
-milestone 222 (the one command a person runs before).
+proposal's own, unedited, by [the promotion
+rule](../../notes/roadmap.md#anybody-may-add-to-the-roadmap-designroadmapproposals). Found by
+milestone 227 (a GICv3 driver, because GICv2 boots and)'s lane (a GICv3 driver), on the first two
+full `script/test --hvf` runs this machine could make since milestone 222 (the one command a person
+runs before).
 
 It needs an Apple Silicon Mac with HVF, and nothing else.
 

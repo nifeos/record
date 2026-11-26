@@ -10,8 +10,12 @@ needs_person: no
 ---
 # 537. What a trusted component costs, in the only currency that travels
 
-*(Number provisional until the merge queue lands it.)* Promoted from the proposal `what-a-trusted-component-costs`, filed 2026-09-21, on calef's instruction of 2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own, unedited except for this paragraph: the argument is its author's and promotion is not the moment to improve it. Raised by the maintainer, from calef's question about how cost per
-trusted component would be measured and to what accuracy.
+*(Number provisional until the merge queue lands it.)* Promoted from the proposal
+`what-a-trusted-component-costs`, filed 2026-09-21, on calef's instruction of 2026-09-20 to give
+every proposal on `main` a number. The text below is the proposal's own, unedited, by [the promotion
+rule](../../notes/roadmap.md#anybody-may-add-to-the-roadmap-designroadmapproposals). Raised by the
+maintainer, from calef's question about how cost per trusted component would be measured and to what
+accuracy.
 
 Everything it needs is already produced and thrown away.
 

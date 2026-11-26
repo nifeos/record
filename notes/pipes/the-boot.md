@@ -2,11 +2,7 @@
 
 *An appendix to `nifeos/nife:notes/pipes.md`, which is the page to read. This file holds the five
 processes an interactive boot runs, how the filesystem reaches the shell, and the four stack
-overflows. The lane that split the file moved it here verbatim from the main page on 2026-09-25
-(UTC), under [§212 (a prose
-budget)](../../design/decisions/0212-a-prose-budget-for-every-document.md). The directory
-`notes/pipes/` and this file's stem are provisional names, minted that day by the lane that split
-the file. Naming is calef's.*
+overflows. It moved here as [the index](README.md) says.*
 
 The records this file cites by number:
 

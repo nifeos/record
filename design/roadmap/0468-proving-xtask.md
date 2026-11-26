@@ -6,8 +6,7 @@ refused_by: 197, 448
 # 468. Proving `xtask`
 
 Refused by milestone 197 (design/roadmap/0197-user-and-xtask-proofs.md), which records it in its
-Follow-on. Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names
-work a number, a status and a condition that would change it.
+Follow-on. Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

@@ -10,9 +10,16 @@ needs_person: no
 ---
 # 540. A finding said out loud is not a finding recorded
 
-*(Number provisional until the merge queue lands it. The integrator renumbered it from 524 at merge on 2026-09-21, when a concurrently merged lane took that number, which is the case AGENTS.md predicts for anything global to the tree.)* Promoted from the proposal `a-finding-said-out-loud-is-not-a-finding-recorded`, filed 2026-09-20, on calef's instruction of 2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own, unedited except for this paragraph: the argument is its author's and promotion is not the moment to improve it. Raised by calef, who asked for *"improved rigor around capturing
-all of the action without my prompting"* after a day in which he had to ask twice what had not been
-written down, and got four items both times.
+*(Number provisional until the merge queue lands it. The integrator renumbered it from 524 at merge
+on 2026-09-21, when a concurrently merged lane took that number, which is the case AGENTS.md
+predicts for anything global to the tree.)* Promoted from the proposal
+`a-finding-said-out-loud-is-not-a-finding-recorded`, filed 2026-09-20, on calef's instruction of
+2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own,
+unedited, by [the promotion
+rule](../../notes/roadmap.md#anybody-may-add-to-the-roadmap-designroadmapproposals). Raised by
+calef, who asked for *"improved rigor around capturing all of the action without my prompting"*
+after a day in which he had to ask twice what had not been written down, and got four items both
+times.
 
 The substance is an amendment to `AGENTS.md`, which is an architect's file and which no
 agent may edit. Everything else here is either already built or a few lines.
@@ -22,7 +29,7 @@ agent may edit. Everything else here is either already built or a few lines.
 `AGENTS.md` already binds a lane: *identified work leaves the lane in a tracked form, or the
 merge waits*, in exactly two shapes, a proposed milestone or a recorded limitation where a reader
 meets the feature. That rule works. Milestone 448 (a refusal gets a number, a status, and a
-condition that would change it) exists because the same rule had no word for a **decision not to**,
+condition that would change it) exists because the same rule had no word for a *decision not to*,
 and the refusals that named work had nowhere to live.
 
 There is no counterpart for the maintainer, and the maintainer is the one doing the talking. A

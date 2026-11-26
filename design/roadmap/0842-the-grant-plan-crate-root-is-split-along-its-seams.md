@@ -13,9 +13,9 @@ needs_person: no
 *(The title and slug are provisional.)*
 
 `crates/grant_plan/src/lib.rs` is 7,080 lines at `0435a9aeb`, the largest Rust file after
-`kernel/src/sched.rs`. It was 5,060 lines on 2026-09-24. §266 (a Rust source file stays under
-2,000 lines) sets the ceiling and a 2026-12-31 goal of no file over 4,000. Milestone 840 (the
-scheduler file is split along its seams) is the model for this block.
+`kernel/src/sched.rs`. It was 5,060 lines on 2026-09-24. §266 (a Rust source file stays under 2,000
+lines) sets the ceiling and its dated goals. Milestone 840 (the scheduler file is split along its
+seams) is the model for this block.
 
 The cut and every module name below are calef's call. A lane writes them up as a
 `status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request

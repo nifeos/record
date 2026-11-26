@@ -1,10 +1,9 @@
 # Steps 1 and 3: the 8 KiB record and the 64 KiB request
 
 This appendix belongs to [milestone 138 (close the read gap)](../0138-file-io-throughput.md). It was
-moved out of that block on 2026-10-12 (UTC) under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md), and the block is complete
-without it. It holds the measurement and reasoning behind the first two steps built. The tables
-behind both are in
+moved out under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md),
+and the block is complete without it. It holds the measurement and reasoning behind the first two
+steps built. The tables behind both are in
 [`notes/benchmarks/read-path-record-and-request-size.md`](../../../notes/benchmarks/read-path-record-and-request-size.md).
 
 ## Step 1, built and measured: the record is 8 KiB (2026-08-18)

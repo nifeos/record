@@ -17,8 +17,9 @@ provisional names; naming is calef's.*
 
 ## What this file's numbers cite
 
-Glossed here because the split made this a file of its own, and `script/citations` asks each
-file to say once what a number cites. Each gloss is the record's own title.
+Glossed here by [the per-file
+rule](../citations.md#the-ratchet-a-citation-a-commit-adds-says-what-it-cites). Each gloss is the
+record's own title.
 
 - §74 (Audits run on change, not on the calendar: events first, then a count)
 - milestone 93 (Documentation audits as a mechanism: the docs stay true to the tree)

@@ -6,8 +6,7 @@ refused_by: 216, 448
 # 472. A bench console that can power-cycle a board
 
 Refused by milestone 216 (design/roadmap/0216-board-console.md), which records it in its Follow-on.
-Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names work a
-number, a status and a condition that would change it.
+Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

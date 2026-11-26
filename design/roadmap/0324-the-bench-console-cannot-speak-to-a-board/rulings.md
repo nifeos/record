@@ -1,10 +1,10 @@
 # The two rulings and how they were reached, 2026-09-19
 
 An appendix of [milestone 324 (the bench console cannot speak to any of the three
-boards)](../0324-the-bench-console-cannot-speak-to-a-board.md), moved out of it on 2026-10-12 (UTC)
-under §212 (a prose budget). The block states both rulings and what they built, and is complete
-without this file. This file keeps the reasoning behind each ruling, the premises that had decayed
-before promotion, and why the title changed.
+boards)](../0324-the-bench-console-cannot-speak-to-a-board.md). §212 (a prose budget) moved it out.
+The block states both rulings and what they built, and is complete without this file. This file
+keeps the reasoning behind each ruling, the premises that had decayed before promotion, and why the
+title changed.
 
 ## Part 4: it writes, under a mode that names its purpose
 

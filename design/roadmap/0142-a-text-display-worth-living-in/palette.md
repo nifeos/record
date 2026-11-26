@@ -1,11 +1,11 @@
 # Solarized Dark Higher Contrast, against milestone 141's three properties
 
 This appendix belongs to [milestone 142 (a text display good enough that people use it instead of a
-GUI)](../0142-a-text-display-worth-living-in.md). It was moved out of that page on 2026-10-12 (UTC)
-under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md), and the
-main page is complete without it. It holds the palette investigation that [§104 (the rich-text font
-is DejaVu Sans Mono, and the palette is Solarized)](../../decisions/0104-the-font-and-the-palette.md)
-ruled on, choosing canonical Solarized Dark.
+GUI)](../0142-a-text-display-worth-living-in.md). It was moved out under [§212 (a prose
+budget)](../../decisions/0212-a-prose-budget-for-every-document.md), and the main page is complete
+without it. It holds the palette investigation that [§104 (the rich-text font is DejaVu Sans Mono,
+and the palette is Solarized)](../../decisions/0104-the-font-and-the-palette.md) ruled on, choosing
+canonical Solarized Dark.
 
 ## The name
 

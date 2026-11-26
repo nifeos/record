@@ -1,9 +1,9 @@
 # Milestone 118 appendix: the audit of 2026-08-18
 
 An appendix to [milestone 118 (CLAUDE.md has a budget)](../0118-constitution-budget.md), moved out
-of that block on 2026-10-12 (UTC) under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The block is complete without
-it; this is the audit's working, kept so a reader can check the block's summary against it.
+under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The block
+is complete without it; this is the audit's working, kept so a reader can check the block's summary
+against it.
 
 ## Which rules have a mechanism, and which are the budget
 

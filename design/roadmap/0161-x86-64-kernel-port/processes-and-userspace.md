@@ -1,10 +1,10 @@
 # Milestone 161 appendix: the scheduler, real processes and userspace, steps 12 and 13
 
 An appendix to [milestone 161 (the x86_64 kernel port)](../0161-x86-64-kernel-port.md), moved out
-of that page on 2026-10-12 (UTC) under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md).
-The main page is complete without it; this is the record of steps 12 and 13 (both 2026-08-24) and of
-the open list's item 4, which the page now summarizes. Long sentences were split to meet
-[§213 (writing standards)](../../decisions/0213-writing-standards.md); no fact changed.
+under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main
+page is complete without it; this is the record of steps 12 and 13 (both 2026-08-24) and of the open
+list's item 4, which the page now summarizes. Long sentences were split to meet [§213 (writing
+standards)](../../decisions/0213-writing-standards.md); no fact changed.
 
 ## Step 12: the scheduler, real processes, and the kernel's own test suite
 

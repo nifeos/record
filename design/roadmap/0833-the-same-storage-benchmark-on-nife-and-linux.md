@@ -84,13 +84,12 @@ included) binds this. calef, 2026-10-12 (UTC): "They should all be installed via
 basalt."*
 
 fio must run on nife installed by `jig install` from basalt's package index. basalt builds the
-package against the nife commit it pins. The install waits on milestone 809 (the package client
-becomes a program, `jig`, with the verbs an index needs). It also waits on milestone 801 (packages
-over the internet: a host name, HTTPS and the distribution's index). The rest of the port does not
-start until those milestones are built (calef, 2026-10-12 UTC: "For our other programs let's block
-start on packaging. That was the point but if we are done with fio let's not throw out the work.").
-The C library work already done for fio stays: the needs #2038 recorded and the pieces #2040 built
-(`getrusage`, `basename`, `select`, `O_SYNC` and a `stdlib.h` fix).
+package against the nife commit it pins. The install waits on milestones 809 and 801, as §297 (a
+package `jig` installs) lists. The rest of the port does not start until those milestones are built
+(calef, 2026-10-12 UTC: "For our other programs let's block start on packaging. That was the point
+but if we are done with fio let's not throw out the work."). The C library work already done for fio
+stays: the needs #2038 recorded and the pieces #2040 built (`getrusage`, `basename`, `select`,
+`O_SYNC` and a `stdlib.h` fix).
 
 ## Index row
 

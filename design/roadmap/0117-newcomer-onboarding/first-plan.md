@@ -1,9 +1,9 @@
 # Milestone 117 appendix: the two halves and the predicted worklist
 
-*An appendix to [milestone 117 (the stranger test)](../0117-newcomer-onboarding.md), moved out of
-that page on 2026-10-12 (UTC) under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main page is complete
-without it. This is the plan as minted on 2026-08-05, with the notes later lanes added to it.*
+*An appendix to [milestone 117 (the stranger test)](../0117-newcomer-onboarding.md), moved out under
+[§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main page is
+complete without it. This is the plan as minted on 2026-08-05, with the notes later lanes added to
+it.*
 
 ## The two halves, and only one is mechanical
 

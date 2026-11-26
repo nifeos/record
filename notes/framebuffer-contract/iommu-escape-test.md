@@ -2,9 +2,9 @@
 
 *Name: provisional, minted 2026-10-11 (UTC) by lane/third-ten-longest-notes.*
 
-An appendix to [notes/framebuffer-contract.md](../framebuffer-contract.md), moved there on
-2026-10-11 (UTC) under §212 (a prose budget). It records why the test reads the fault queue rather
-than the device, and the RISC-V fault-queue overflow it ran into.
+An appendix to [notes/framebuffer-contract.md](../framebuffer-contract.md), moved there under §212
+(a prose budget). It records why the test reads the fault queue rather than the device, and the
+RISC-V fault-queue overflow it ran into.
 
 ## A surprise worth recording: the device's "OK" is not evidence
 

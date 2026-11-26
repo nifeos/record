@@ -11,10 +11,11 @@ needs_person: no
 # 504. An mtime for an open file, not only for a name
 
 Promoted from the proposal `an-mtime-for-an-open-file`, filed 2026-09-19, on calef's instruction of
-2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own, unedited
-except for this paragraph: the argument is its author's and promotion is not the moment to improve
-it. Written by the milestone 64 (enough std to run somebody else's crate) lane
-(`milestone/64-std-filesystem-shim`), from milestone 64's block.
+2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own,
+unedited, by [the promotion
+rule](../../notes/roadmap.md#anybody-may-add-to-the-roadmap-designroadmapproposals). Written by the
+milestone 64 (enough std to run somebody else's crate) lane (`milestone/64-std-filesystem-shim`),
+from milestone 64's block.
 
 Every option that closes this puts something on the file contract, which two
 programs agree on (`crates/file_system_contract`, the FS server, every caretaker and the `std` PAL),

@@ -3,6 +3,8 @@
 `nifeos/nife:notes/pipes.md` is the page to read; it stands on its own, so a reader can act
 without opening anything here, and its appendix table is the index. These files hold each
 mechanism's full reasoning, the measurements, the refused options and the BUGS history.
+Each moved here verbatim from the main page, under [§212 (a prose
+budget)](../../design/decisions/0212-a-prose-budget-for-every-document.md), when a lane split it.
 
 [the-shell-side](the-shell-side.md) holds the reasoning behind the shell's own pipeline and slot
 code, `components/src/swish/pipeline.rs` and `wiring.rs`, whose doc comments link it.

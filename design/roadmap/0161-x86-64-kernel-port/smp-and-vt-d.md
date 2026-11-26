@@ -1,11 +1,11 @@
 # Milestone 161 appendix: SMP bring-up and VT-d, items 5 and 6
 
 An appendix to [milestone 161 (the x86_64 kernel port)](../0161-x86-64-kernel-port.md), moved out
-of that page on 2026-10-12 (UTC) under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md).
-The main page is complete without it; this is items 5 and 6 of the open list as they stood on
-2026-08-25. Failures (1) and (3) below were closed later; [closing.md](closing.md) has how. Long
-sentences were split to meet [§213 (writing standards)](../../decisions/0213-writing-standards.md);
-no fact changed.
+under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main
+page is complete without it; this is items 5 and 6 of the open list as they stood on 2026-08-25.
+Failures (1) and (3) below were closed later; [closing.md](closing.md) has how. Long sentences were
+split to meet [§213 (writing standards)](../../decisions/0213-writing-standards.md); no fact
+changed.
 
 ## Item 5: SMP, via INIT-SIPI-SIPI
 

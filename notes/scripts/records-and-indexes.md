@@ -23,8 +23,9 @@ provisional names; naming is calef's.*
 
 ## What this file's numbers cite
 
-Glossed here because the split made this a file of its own, and `script/citations` asks each
-file to say once what a number cites. Each gloss is the record's own title.
+Glossed here by [the per-file
+rule](../citations.md#the-ratchet-a-citation-a-commit-adds-says-what-it-cites). Each gloss is the
+record's own title.
 
 - milestone 40 (Documentation as a system service: searchable, rendered, and installed by packages)
 - milestone 117 (The stranger test: could someone build this and understand it without asking)

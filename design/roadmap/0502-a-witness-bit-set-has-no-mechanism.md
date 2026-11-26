@@ -10,12 +10,12 @@ needs_person: no
 ---
 # 502. A witness bit set is held together by a hand-written list, and the list has gone stale twice
 
-*(Number provisional until the merge queue lands it.)* Promoted from the
-proposal `a-witness-bit-set-has-no-mechanism`, filed 2026-09-19, on calef's instruction of
-2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own, unedited
-except for this paragraph: the argument is its author's and promotion is not the moment to improve
-it. Found by milestone 326 (nobody has been assigned to turn a) while triaging the 2026-09-14 mutation census. It is not that milestone's
-work: 326 fixed the two lists it found broken, which is rung four again.
+*(Number provisional until the merge queue lands it.)* Promoted from the proposal
+`a-witness-bit-set-has-no-mechanism`, filed 2026-09-19, on calef's instruction of 2026-09-20 to give
+every proposal on `main` a number. The text below is the proposal's own, unedited, by [the promotion
+rule](../../notes/roadmap.md#anybody-may-add-to-the-roadmap-designroadmapproposals). Found by
+milestone 326 (nobody has been assigned to turn a) while triaging the 2026-09-14 mutation census. It
+is not that milestone's work: 326 fixed the two lists it found broken, which is rung four again.
 
 Everything it needs is in `crates/file_system_contract` and a `macro_rules!`.
 

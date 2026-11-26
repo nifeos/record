@@ -70,11 +70,9 @@ included) binds this. calef, 2026-10-12 (UTC): "They should all be installed via
 basalt."*
 
 STREAM must run on nife installed by `jig install` from basalt's package index. basalt builds the
-package against the nife commit it pins. The install waits on milestone 809 (the package client
-becomes a program, `jig`, with the verbs an index needs). It also waits on milestone 801 (packages
-over the internet: a host name, HTTPS and the distribution's index). No work toward that starts
-until those milestones are built (calef, 2026-10-12 UTC: "For our other programs let's block start
-on packaging.").
+package against the nife commit it pins. The install waits on milestones 809 and 801, as §297 (a
+package `jig` installs) lists. No work toward that starts until those milestones are built (calef,
+2026-10-12 UTC: "For our other programs let's block start on packaging.").
 
 ## Index row
 

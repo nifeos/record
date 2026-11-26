@@ -1,10 +1,10 @@
 # The three options, and how they were priced (2026-08-18)
 
 This appendix belongs to [milestone 138 (close the read gap)](../0138-file-io-throughput.md). It was
-moved out of that block on 2026-10-12 (UTC) under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md), and the block is complete
-without it. It keeps the options as first written, the sweep that priced them, and the count that
-ruled out the third. calef's decision to take all four steps settled every option here.
+moved out under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md),
+and the block is complete without it. It keeps the options as first written, the sweep that priced
+them, and the count that ruled out the third. calef's decision to take all four steps settled every
+option here.
 
 ## Why the options had to be priced first
 

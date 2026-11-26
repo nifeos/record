@@ -51,8 +51,9 @@ how to add one, and for the honest limits.
 
 ## What this file's numbers cite
 
-Glossed here because the split made this a file of its own, and `script/citations` asks each
-file to say once what a number cites. Each gloss is the record's own title.
+Glossed here by [the per-file
+rule](../citations.md#the-ratchet-a-citation-a-commit-adds-says-what-it-cites). Each gloss is the
+record's own title.
 
 - milestone 62 (Tests that assert on time: make a red run mean something)
 - milestone 78 (The load-sensitive assertions, and the three that measure the wrong thing)

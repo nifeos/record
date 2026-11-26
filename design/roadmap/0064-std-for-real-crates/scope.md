@@ -1,11 +1,11 @@
 # How milestone 64 was scoped, and its tie to milestone 47
 
 An appendix to [milestone 64 (enough `std` to run somebody else's
-crate)](../0064-std-for-real-crates.md), moved out of that page on 2026-10-12 (UTC) under [§212 (a
-prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main page is complete
-without it. This is the block's original framing from 2026-08-01: what milestone 27 (Rust `std` on
-the native ABI) left, why the work came due, the method, and the relationship with milestone 47
-(navigation and naming).
+crate)](../0064-std-for-real-crates.md). [§212 (a prose
+budget)](../../decisions/0212-a-prose-budget-for-every-document.md) moved it out. The main page is
+complete without it. This is the block's original framing from 2026-08-01: what milestone 27 (Rust
+`std` on the native ABI) left, why the work came due, the method, and the relationship with
+milestone 47 (navigation and naming).
 
 ## What 27 actually delivered, and where it stops
 

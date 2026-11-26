@@ -1,11 +1,11 @@
 # Milestone 580 appendix: what else was considered
 
 An appendix to [milestone 580 (nobody reads branches, so give the maintainer a command that
-does)](../0580-nobody-reads-branches.md), moved out of that page on 2026-10-12 (UTC) under [§212 (a
-prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main page is complete
-without it. This is the proposal's own list of the alternatives it weighed and refused, as filed on
-2026-09-23, with the note on the one calef overruled. Long sentences were split in moving; the
-argument is unchanged.
+does)](../0580-nobody-reads-branches.md). [§212 (a prose
+budget)](../../decisions/0212-a-prose-budget-for-every-document.md) moved it out. The main page is
+complete without it. This is the proposal's own list of the alternatives it weighed and refused, as
+filed on 2026-09-23, with the note on the one calef overruled. Long sentences were split in moving;
+the argument is unchanged.
 
 ## Extend `helpers/merge-drain.sh`
 

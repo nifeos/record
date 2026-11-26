@@ -15,8 +15,8 @@ wrote)'s item (g) on #2490 with "B". `portable_executable` is to read the ELF an
 through `object` 0.40.0, keep its conversion policy, and stay unpublished. Its input is nife's own
 build product, so the proofs below would protect no known user. The text below is the proposal's.
 
-*(From calef's rulings on pull request #1806; the title and slug are drafts. The FAT crate's block,
-milestone 813 (a proven FAT crate released on its own), is the shape this follows.)*
+*(From calef's rulings on pull request #1806; the title and slug are drafts. Milestone 813 (a proven
+FAT crate released on its own) is the shape this follows.)*
 
 calef's rulings, quoted from the maintainer comments on #1806 of 2026-10-07 (UTC):
 
@@ -60,11 +60,10 @@ formats and converts neither.
 
 Nothing yet. The crate has no Kani harnesses today, so closing the audit's holes and writing all
 five proofs is this milestone's scope, not a step before it. Each row is a property this crate must
-prove before it publishes. The harness cell names the Kani harness that proves it, or says `none
-yet`; every named harness carries a falsification patch that makes it fail at its own assertion.
-Each patch sits at `crates/portable_executable/falsifications/<module.path>.<harness>.patch`, as
-§134 (a harness carries a machine-replayable falsification record) and `script/falsifications`
-require. The first four rows are the audit's holes, closed.
+prove before it publishes. The harness cell reads as in milestone 813's table. Each patch sits at
+`crates/portable_executable/falsifications/<module.path>.<harness>.patch`, as §134 (a harness
+carries a machine-replayable falsification record) and `script/falsifications` require. The first
+four rows are the audit's holes, closed.
 
 | property | harness |
 |---|---|
@@ -126,9 +125,9 @@ Name: `portable_executable` is ratified today (`script/names`, checked 2026-10-1
 
 ## Review before release
 
-- The public API speaks the device's vocabulary, not nife's: no nife capability type, spawn handoff
-  or nife error enum in a public signature. A reviewer judges this; no script can. Known today:
-  Errors are the crate's own; check that no type from `xtask` reaches a public signature.
+- The public API speaks the device's vocabulary, by the test milestone 813 states. A reviewer judges
+  this; no script can. Known today: Errors are the crate's own; check that no type from `xtask`
+  reaches a public signature.
 
 ## Exit
 
@@ -140,12 +139,10 @@ stick still boots in EDK2 under the existing UEFI gate. In `nifeos/portable_exec
 that published 0.1.0 shows the Kani job green ahead of the publish job. The five soak criteria of
 release step 6 hold before it publishes.
 
-The name check of release step 1 passes first, so the repository, the package and every doc link
-carry a ratified name. Before the move, `script/crate-standalone portable_executable` exits 0 in
-nife, and every row of *What is proven* names a harness that stock Kani proves in the copy and whose
-falsification patch makes it fail. No crate publishes without Kani harnesses covering its
-hostile-input and state-machine surface, each carrying a falsification patch that makes it fail at
-its own assertion, replayable in the crate's own repository with stock Kani.
+The name check of release step 1 passes first, by Fork 5 of milestone 857. Before the move,
+`script/crate-standalone portable_executable` exits 0 in nife, and every row of *What is proven*
+names a harness that stock Kani proves in the copy and whose falsification patch makes it fail. No
+crate publishes without the proofs milestone 857 (crates released on their own) requires.
 
 ## BUGS
 

@@ -6,8 +6,7 @@ refused_by: 168, 448
 # 464. A committed baseline and a `--check` for the multitasking sweep
 
 Refused by milestone 168 (design/roadmap/0168-multitasking-benchmark.md), which records it in its
-Follow-on. Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names
-work a number, a status and a condition that would change it.
+Follow-on. Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

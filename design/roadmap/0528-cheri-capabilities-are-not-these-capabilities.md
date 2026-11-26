@@ -10,9 +10,13 @@ needs_person: no
 ---
 # 528. CHERI's capabilities are not this kernel's capabilities, and the tree never says so
 
-*(Number provisional until the merge queue lands it.)* Promoted from the proposal `cheri-capabilities-are-not-these-capabilities`, filed 2026-09-20, on calef's instruction of 2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own, unedited except for this paragraph: the argument is its author's and promotion is not the moment to improve it. Filed by `maintainer/riscv-summit-research` from the RISC-V Summit
-Europe 2026 reading (`notes/riscv-summit-2026.md`). *(Number and slug provisional until the merge
-queue lands it.)*
+*(Number provisional until the merge queue lands it.)* Promoted from the proposal
+`cheri-capabilities-are-not-these-capabilities`, filed 2026-09-20, on calef's instruction of
+2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own,
+unedited, by [the promotion
+rule](../../notes/roadmap.md#anybody-may-add-to-the-roadmap-designroadmapproposals). Filed by
+`maintainer/riscv-summit-research` from the RISC-V Summit Europe 2026 reading
+(`notes/riscv-summit-2026.md`). *(Number and slug provisional until the merge queue lands it.)*
 
 The work is one note in `notes/` and a cross-reference from `notes/acronyms.md`,
 both of which a lane can start today against a published specification. One sentence inside it is
