@@ -1065,23 +1065,14 @@
 
 645a507b9883 notes/rented-metal/a-second-provider.md
 
-64855e2c8021 design/fatal-risks/multicore-reliability.md
 
-64855e2c8021 design/fatal-risks/proofs-and-their-reach.md
 
-64855e2c8021 design/fatal-risks/somebody-elses-software.md
 
-64855e2c8021 design/fatal-risks/the-confined-driver.md
 
-64855e2c8021 design/fatal-risks/the-confinement-claims.md
 
-64855e2c8021 design/fatal-risks/the-crossing-cost.md
 
-64855e2c8021 design/fatal-risks/the-hal-and-the-next-machine.md
 
-64855e2c8021 design/fatal-risks/the-mutation-verdict.md
 
-64855e2c8021 design/fatal-risks/what-leaves-nife.md
 
 6492253c7cd3 notes/shared-page-audit/compositor-findings.md
 
@@ -2384,23 +2375,14 @@ fc83bc852473 design/roadmap/0482-a-buffering-stage-between-pipe-ends.md
 
 fc83bc852473 design/roadmap/0483-the-console-server-on-the-sink-protocol.md
 
-fdc81cc0d0ec design/fatal-risks/multicore-reliability.md
 
-fdc81cc0d0ec design/fatal-risks/proofs-and-their-reach.md
 
-fdc81cc0d0ec design/fatal-risks/somebody-elses-software.md
 
-fdc81cc0d0ec design/fatal-risks/the-confined-driver.md
 
-fdc81cc0d0ec design/fatal-risks/the-confinement-claims.md
 
-fdc81cc0d0ec design/fatal-risks/the-crossing-cost.md
 
-fdc81cc0d0ec design/fatal-risks/the-hal-and-the-next-machine.md
 
-fdc81cc0d0ec design/fatal-risks/the-mutation-verdict.md
 
-fdc81cc0d0ec design/fatal-risks/what-leaves-nife.md
 
 fe31a8820b01 design/decisions/0027-filesystem-service.md
 

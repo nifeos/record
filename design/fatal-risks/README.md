@@ -75,6 +75,10 @@ carry no `color:` key.
 ## The nine, one file each
 
 A risk's file holds the claim of record: its status, its experiment, its cost and its caveats. Each links an appendix with the evidence.
+The entry is written so that a reader can decide what to work on next without opening the
+appendix. The appendix exists to be verified or challenged: it holds the evidence, the dates, the
+numbers, the corrections and the refusals behind the verdict, at the length they need rather than
+the length the six-pager has.
 
 1. [Only software written for nife runs on nife](1-only-software-written-for-nife.md)
 2. [The proofs prove trivia, and the real bugs live where Kani cannot reach](2-the-proofs-prove-trivia.md)
