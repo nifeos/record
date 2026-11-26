@@ -98,9 +98,10 @@ this list reads as though an unlocked bootloader were the wall. It is not:
   sit at 32 KB, phone big cores and server cores at 64 KB. The cache floor is a real requirement and
   a nearly free one.
 
-And a note for a future reader, from calef, 2026-09-04: *"These things change over time. I just
-want to ensure that because we cannot today we don't make decisions that block it in the future."*
-Nothing on this list is a decision this project made; items 0 to 3 are properties of machines. The
+A note for a future reader: on 2026-09-04 calef asked that what this project cannot reach today
+not become a decision that blocks it later, and
+[DECISIONS §96 (process kernel or event kernel)](../design/decisions/0096-process-kernel-or-event-kernel.md#the-four-inputs-and-three-of-them-are-already-settled)
+holds his words. Nothing on this list is a decision this project made; items 0 to 3 are properties of machines. The
 place where a decision of ours could foreclose a small target is the kernel model, and
 DECISIONS §96's memory input is recorded there as closed at this project's scale rather than
 absolutely, for exactly this reason.

@@ -7,8 +7,8 @@ raised: 2026-11-26
 *The slug is this lane's coinage and provisional; calef names things.*
 
 On 2026-11-25 (UTC) the architect ruled that ext4 through `rsext4` replaces RedoxFS, and §34
-(RedoxFS is the primary filesystem) records that ruling. RedoxFS is not a viable long-term store,
-and no benchmark can compare it with Linux on filesystem operations. nife takes `rsext4` from
+(RedoxFS is the primary filesystem) records that ruling and
+[why RedoxFS cannot stay](../decisions/0034-redoxfs-primary.md#what-replaces-it-and-what-will-not). nife takes `rsext4` from
 partsfoundry/rsext4. The fork offers every fix upstream to `rcore-os/tgoskits` first and carries
 whatever upstream does not take, for as long as upstream does not take it.
 

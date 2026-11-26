@@ -153,8 +153,9 @@ silently capped every truncate at the region's size. That was 4096 bytes when th
 64 KiB now (milestone 138 step 3), which changes the number and not the argument. A size is an
 offset-shaped quantity, and does not belong in a field bounded by how much a request can carry.
 
-Adding `CREATE` surfaced a rule that had been true by accident. RedoxFS's `check_name` rejects `:`,
-over-long names, and duplicates; `/`, `.` and `..` pass straight through. Nothing walked paths, so
+Adding `CREATE` surfaced a rule that had been true by accident: RedoxFS's own name check lets
+`/`, `.` and `..` through, as [DECISIONS §27 (the filesystem service)](../design/decisions/0027-filesystem-service.md#amendment-milestone-31-phase-2-2026-07-30-create-and-truncate-exist-and-a-per-file-grant-is-a-caretaker-process)
+records. Nothing walked paths, so
 nothing escaped, and the "one component, no `..`" invariant held by the *absence of a walker* rather
 than by a check. With `CREATE` a client could write one: `create_file("../escape")` made a directory
 entry literally named that. Still not a traversal, and still a landmine, because the moment anything

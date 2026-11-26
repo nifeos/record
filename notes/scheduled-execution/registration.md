@@ -26,9 +26,10 @@ on 2026-09-26.
 ### A. One system timetable, one document per registrar
 
 One scheduler for the machine. Each session is handed its own registration endpoint, and the
-scheduler keeps a `Held` and a document per endpoint. It lost on authority. The scheduler must back
-every entry it fires, so it holds the union of every user's delegated authority. Compromising it
-yields everyone's, which is the sum this milestone exists to bound, now taken across users. Revoking
+scheduler keeps a `Held` and a document per endpoint. It lost on authority: the scheduler would
+hold the union of every user's delegated authority, as
+[§222 (who holds a user's schedule)](../../design/decisions/0222-who-holds-a-users-schedule.md#the-options)
+sets out. Compromising it yields everyone's, which is the sum this milestone exists to bound, now taken across users. Revoking
 one user under §108 also becomes a message the scheduler must act on, rather than a subtree death.
 
 ### B. One system timetable, one entry per call
