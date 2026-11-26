@@ -246,9 +246,9 @@ keeping O0.
 The seven questions:
 
 1. What else did this consider? A keeps a gate that counts a build nobody runs. B1 counts more code
-   that does not ship. B2 is further from what ships at no measured saving. B3 slows the edit rebuild
-   and costs gdb its locals; F does neither. D saves two baselines where E saves one. C alone leaves the suite at a
-   level that does not ship.
+   that does not ship. B2 is further from what ships at no measured saving. B3 slows the edit
+   rebuild and costs gdb its locals; F does neither. D saves two baselines where E saves one. C
+   alone leaves the suite at a level that does not ship.
 2. What does this tree do in the analogous case? fastpath-footprint and build-is-reproducible build
    the shipped profile because that is what they check. Milestone 750 put overflow checks in
    release to check what ships.
