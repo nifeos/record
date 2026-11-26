@@ -8,10 +8,8 @@ the ranking.
 
 ## Addition A: a gate-firing ledger
 
-What it is. Every gate that renders a verdict appends one line on failure: UTC timestamp, gate
-name, sub-check name, branch. Local file, git-ignored, never read by any gate. `script/lint --fired`
-(or its own entry point) reports firings per check over a window and, more usefully, the checks that
-have never fired.
+What it is. The ledger
+[the main page](../0531-no-gate-records-when-it-fires.md#addition-a-a-gate-firing-ledger) describes.
 
 Which recorded failure it would have caught. None directly, and that is the honest statement: it
 is an instrument, not a gate. What it would have prevented is the shape this whole audit ran into.
@@ -62,13 +60,9 @@ fired.
 
 ## Addition B: a gate carries a selftest, or it is not evidence
 
-What it is. §134 (a harness carries a machine-replayable falsification record, or it is not
-evidence)'s convention, applied to checks as it is to proofs. Each `script/` entry point that
-renders a verdict grows a `--selftest` that runs it against fixtures which must fail and fixtures
-which must stay quiet. And `script/lint` gains one check: an entry point with a verdict and no
-`--selftest` is refused. The shape is already in the tree and does not need designing;
-`script/fatal-risks --selftest` is the worked example and it costs 0.65 s combined with its
-`--check`.
+What it is. The selftest rule
+[the main page](../0531-no-gate-records-when-it-fires.md#addition-b-a-gate-carries-a-selftest-or-it-is-not-evidence)
+states. The shape is already in the tree and does not need designing.
 
 Which recorded failures it would have caught. `script/fmt` ignoring `--check`, which the record
 calls the same defect as the `tee` fail-open and which went unnoticed for months. The `--shard 4/4`
@@ -139,14 +133,14 @@ unfixed defect one level up: neither existing watcher reports its own death.
 
 ## Addition D, smaller: refuse `git stash` in a shared checkout
 
-`AGENTS.md` records the 2026-08-26 case where one session's stash entry was popped into another
-lane's tree, and prescribes a patch file instead. That is rung four for a hazard with a rung-two
+[The main page](../0531-no-gate-records-when-it-fires.md#addition-d-smaller-refuse-git-stash-in-a-shared-checkout)
+gives the stash case and the rule it prompted. That is rung four for a hazard with a rung-two
 mechanism available, and the mechanism was verified here rather than recalled: git's
-`reference-transaction` hook fires on `refs/stash` and can abort the transaction. Tested in a scratch
-repository: the stash is refused, the working tree is left exactly as it was, and ordinary commits
-are unaffected. Cost measured over 20 commits with and without the hook: 0.364 s against 0.809 s,
-so about 22 ms per ref transaction, which is process spawn rather than the check. A fetch is one
-transaction and one invocation, not one per ref.
+`reference-transaction` hook fires on `refs/stash` and can abort the transaction. Tested in a
+scratch repository: the stash is refused, the working tree is left exactly as it was, and ordinary
+commits are unaffected. Cost measured over 20 commits with and without the hook: 0.364 s against
+0.809 s, so about 22 ms per ref transaction, which is process spawn rather than the check. A fetch
+is one transaction and one invocation, not one per ref.
 
 It is ranked last because the recorded incident lost nothing, and it is included because it is the
 only place in this audit where a rung-four rule can move up a rung for ten lines of shell. It cannot

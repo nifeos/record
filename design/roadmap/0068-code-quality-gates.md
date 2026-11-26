@@ -86,10 +86,10 @@ assert.
 
 ## The `missing_docs` half: a ratchet, a worklist, and a decided policy
 
-401 undocumented public items across 32 of the 55 crates (2026-08-17). Adopting the lint
-tree-wide is a commitment to write those 401 first, so it was not adopted tree-wide at first. What was
-adopted then is `#![warn(missing_docs)]` in the 23 crates that were already clean, which under
-`script/lint`'s `-D warnings` means they cannot regress.
+401 undocumented public items across 32 of the 55 crates (2026-08-17).
+[The `missing_docs` ratchet](../../notes/doc-coverage.md) says why it was not adopted tree-wide.
+What was adopted then is `#![warn(missing_docs)]` in the 23 crates that were already clean, which
+under `script/lint`'s `-D warnings` means they cannot regress.
 
 Two measurement traps caught the first lane and are worth the paragraph, because both make a
 number look authoritative while being wrong.

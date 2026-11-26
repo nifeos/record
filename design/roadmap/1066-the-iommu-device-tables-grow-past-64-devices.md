@@ -15,10 +15,8 @@ needs_person: no
 Reuse: both drivers already build their tables; this grows them in place. The kernel drives the
 IOMMU, and Kani proves these drivers, so no third-party crate applies.
 
-Ruled 2026-11-10 (UTC): the QEMU runners keep virtio-mmio, and §18 (the PCIe transport: one driver,
-two buses, the seam in the kernel)'s item 3 stands. A later move of the aarch64 and riscv64 runners
-to virtio-pci needs this milestone and milestone 1065 (MSI replaces the interrupt lines on
-aarch64 and riscv64) first.
+[Milestone 1065](1065-several-drivers-share-an-interrupt-line.md) (MSI replaces the interrupt lines)
+holds the virtio-mmio ruling; a move to virtio-pci needs both.
 
 ## Why it stands on its own
 

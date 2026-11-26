@@ -66,10 +66,10 @@ ports shipped the same shape on their first day. Verified on q35:
 Three separate facts, and the third is the strongest.
 
 - `cs 0x23` is the hardware's answer to what ring this is, since CPL is literally `CS[1:0]`.
-- `BadSystemCall (-6)` came out of the portable `crate::system_call::dispatch`, through
-  `TrapFrame::{system_call_nr, arg, set_arg}`, and reached the program in `rdi`. So the ABI accessors,
-  the entry and the return all work. Asking for a refusal is deliberate. It is the one answer that
-  dispatcher can give on a kernel with no scheduler.
+- `BadSystemCall (-6)` came back through the portable dispatcher, as
+  [ring 3](../../../notes/x86-port/ring-3.md) traces. So the ABI accessors, the entry and the return
+  all work. Asking for a refusal is deliberate. It is the one answer that dispatcher can give on a
+  kernel with no scheduler.
 - `Permission(Read)` rather than `Translation(Read)` is the page tables saying the walk found the
   kernel's `.text` and refused it. That is the privilege boundary doing its job, not an accident of
   an incomplete map.
