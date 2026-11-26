@@ -10,9 +10,11 @@ needs_person: yes
 # 1140. `line_editor`: the release review's findings
 
 The release review of `partsfoundry/line_editor` at commit `2c625ef6`, made under
-[milestone 1129](1129-crate-interfaces-best-in-class.md) (the combine review of each crate's interface). It compares the crate's public
+milestone 1129 (the combine review), whose
+[block](1129-crate-interfaces-best-in-class.md) sets its form. It compares the crate's public
 interface with the no_std line editors a stranger would choose instead, and lists what changes
-before the 0.1.0 interface. The baseline is [milestone 1098](1098-line-editor-outside-review.md) (what an outside maintainer would fix),
+before the 0.1.0 interface. The baseline is milestone 1098 (what an outside maintainer would fix),
+[its block](1098-line-editor-outside-review.md),
 whose findings have all landed, and the cleared package
 [`notes/crate-reviews/line-editor.md`](../../notes/crate-reviews/line-editor.md). Neither is
 reopened here.

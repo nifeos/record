@@ -10,8 +10,10 @@ needs_person: yes
 # 1142. `designware_mobile_storage`: the release review's findings
 
 The release review of `partsfoundry/designware_mobile_storage` at commit `ac950346`, version
-0.1.0-pre.3, under [milestone 1129](1129-crate-interfaces-best-in-class.md) (the combine review of each crate's interface). The baseline is
-[milestone 1050](1050-designware-mobile-storage-outside-review.md) (the outside review's findings) and the cleared package
+0.1.0-pre.3, under milestone 1129 (the combine review), whose
+[block](1129-crate-interfaces-best-in-class.md) sets its form. The baseline is
+milestone 1050 (the outside review's findings),
+[its block](1050-designware-mobile-storage-outside-review.md) and the cleared package
 [`notes/crate-reviews/designware-mobile-storage.md`](../../notes/crate-reviews/designware-mobile-storage.md).
 1050's open items wait on a board run and stay its own; nothing here repeats them. Its decision 4,
 the crate keeping its own direct memory access trait, stands as door D7 below.
