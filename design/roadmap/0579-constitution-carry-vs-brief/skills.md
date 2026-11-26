@@ -1,14 +1,13 @@
 # Milestone 579's refusal of skills, for the record
 
-An appendix to [`design/roadmap/0579-constitution-carry-vs-brief.md`](../0579-constitution-carry-vs-brief.md),
-milestone 579 (which of the constitution must be carried, and which is a brief). It holds the three
+An appendix to [milestone 579](../0579-constitution-carry-vs-brief.md). It holds the three
 reasons, as filed on 2026-09-23, for answering no when calef asked whether the roles should become
 skills. It was moved out of the block on 2026-10-12 (UTC) under §212 (a prose budget). The block is
 complete without it, and says what the tree did afterwards.
 
-calef asked whether the roles should become Claude Code skills, loaded on demand from
-`.claude/skills/`. The answer is no, for three reasons that were given in conversation and belong in
-the tree rather than only in a chat log.
+[The block](../0579-constitution-carry-vs-brief.md#the-refusal-of-skills) states the question. The
+answer is no, for three reasons that were given in conversation and belong in the tree rather than
+only in a chat log.
 
 ## `AGENTS.md` is deliberately the cross-tool convention
 

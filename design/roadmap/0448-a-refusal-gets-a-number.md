@@ -24,10 +24,8 @@ disposition that resolves to nothing, and a refusal that named real work had now
 
 The cost arrived on 2026-09-20 and it is concrete. Milestone 164 (x86_64 userspace can't build
 `aes`) refused "Route 2, an SSE-enabled x86 userspace target" in September, for a good reason:
-nothing needed FP state to compile `aes`. The reason eroded quietly afterwards. Milestone 442 (a
-crypto provider `rustls` can use on all three bare-metal targets) needs five force-soft build flags.
-An AVX2-detecting crate dies in ring 3 with `vector 6 (invalid opcode)`. The bitsliced AES cost
-that block declined to measure is starting to have the workload it said it lacked. Nothing compared
+nothing needed FP state to compile `aes`. The reason eroded quietly afterwards, in the three ways
+[milestone 461](0461-an-sse-enabled-x86-64-userspace-target.md) records. Nothing compared
 any of that against the refusal, because a refusal had no home that anything reads. calef reopened
 it by hand, in conversation, which is the medium AGENTS.md exists to abolish.
 
@@ -69,7 +67,7 @@ that has since turned BUILT. That is rung two: it fires without anybody remember
 
 A milestone implies work somebody could take, so not every refusal earns one. The brief's
 starting criterion held up, and contact with 140 bullets sharpened it into three tests a refusal
-must pass **all** of:
+must pass all of:
 
 1. It names work somebody could execute (a route, an artifact, a mechanism), rather than a
    decision about how one lane shaped its own diff.

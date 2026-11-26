@@ -6,13 +6,13 @@ the specification's own name and the word the datasheet, the boot output and QEM
 all print; what moved is the crate, the kernel module, its `NonVolatileMemoryExpress` type, and the
 program. A reader who greps `nvme` and finds nothing is looking for the expansion.
 
-The storage half of milestone 53 (the board's own peripherals), decided by calef on 2026-08-15: NVMe first. The backup workload
-(milestone 55 (Time Machine)) measures sustained sequential write and endurance, which SD media fails. And a real
-PCIe device driver compounds toward the machines this project actually wants to
-run on. Everything this project drove before this was a QEMU paravirtual device. An NVMe controller
-is a real device family with a real specification, the same one in the M.2 drive on the desk. QEMU
-emulates it faithfully enough that the driver written here is the driver the
-board-side work will reuse.
+The storage half of milestone 53 (the board's own peripherals), decided by calef on 2026-08-15: NVMe
+first. Milestone 55 (Time Machine), whose backup workload needed the sustained sequential write SD
+media lacks, has the status REMOVED. A real PCIe device driver still compounds toward the machines
+this project wants to run on. Everything this project drove before this was a QEMU paravirtual
+device. An NVMe controller is a real device family with a real specification, the same one in the
+M.2 drive on the desk. QEMU emulates it faithfully enough that the driver written here is the driver
+the board-side work will reuse.
 
 ## The shape
 

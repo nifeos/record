@@ -1,10 +1,9 @@
 # The determinism measurement, and the rendering choices it forces
 
-This appendix belongs to [milestone 142 (a text display good enough that people use it instead of a
-GUI)](../0142-a-text-display-worth-living-in.md). It was moved out under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md), and the main page is complete
-without it. It holds the measurements behind the page's "How the verification survives" section,
-which decided the crate.
+This appendix belongs to [milestone 142](../0142-a-text-display-worth-living-in.md). It was moved
+out under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md), and
+the main page is complete without it. It holds the measurements behind the page's "How the
+verification survives" section, which decided the crate.
 
 ## Why the worry is real
 

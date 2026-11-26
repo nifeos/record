@@ -23,8 +23,8 @@ decision waiting.
 No, and therefore the userspace-timer-service answer to milestone 106 does not survive
 [§19 (architectural)](../decisions/0019-architectural-parity.md) parity. Two clauses, and both are needed:
 
-1. On riscv64 no *architected* timer can be granted to U-mode, on any machine, by the privileged
-   architecture rather than by a gap in this kernel. Three independent closures, below.
+1. On riscv64 the privileged architecture itself closes every architected U-mode timer, as
+   [the note](../../notes/timer-capability.md) states. Three independent closures, below.
 2. The one mechanism that works on all three is per-board MMIO, and it is not uniformly
    available. Both real boards have generous spare timer blocks (argon fourteen channels, radon four,
    each channel with its own interrupt line), but QEMU's aarch64 `virt` has no MMIO timer device at

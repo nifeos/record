@@ -85,14 +85,14 @@ already exists, and adds harnesses to a script that already exists.
 
 ## BUGS
 
-- **Loom models C11, not ARM and not RISC-V.** A bug it finds is real; a clean run is not a proof
+- Loom models C11, not ARM and not RISC-V. A bug it finds is real; a clean run is not a proof
   about the silicon. This is milestone 80's standing caveat and it applies unchanged; milestone 81's
   Hypervisor.framework leg is the complementary evidence, and it samples rather than searches.
 - **The model checks the claim, not the free loop.** What loom searches is who wins the right to
-  reclaim a region. That the winner then frees the right pages, exactly once, is `destroy_outcome`'s
-  Kani proof plus the kernel's own tests, and the two arguments meet only in the reader's head. A
-  model that covered both would need the frame allocator lifted too, which is a much larger crate
-  than this milestone should mint.
+  reclaim a region. The proof of the free loop is in the
+  [interleavings BUGS list](../../notes/interleaving/limitations.md). A model that covered both
+  would need the frame allocator lifted too, which is a much larger crate than this milestone
+  should mint.
 - **The kernel's real lock is not the lock loom searches.** `IrqSafeMutex` masks interrupts and
   carries a rank for the deadlock order; the model uses `loom::sync::Mutex`, which has neither. So
   the model says the protocol is correct *given* mutual exclusion, and says nothing about whether
@@ -118,10 +118,7 @@ already exists, and adds harnesses to a script that already exists.
   Milestone 81's Hypervisor.framework leg is the complementary evidence and it samples rather than
   searches.
 - **Recorded.** `design/roadmap/0135-loom-region-claim.md` records that the model covers the claim
-  and not the free loop. That
-  the winner then frees the right pages exactly once is `destroy_outcome`'s Kani proof plus the
-  kernel's tests, and the two arguments meet only in the reader's head. Covering both would mean
-  lifting the frame allocator, a much larger crate than this milestone should mint.
+  and not the free loop, as its BUGS above says.
 - **Recorded.** `design/roadmap/0135-loom-region-claim.md` records that `loom::sync::Mutex` is not
   `IrqSafeMutex`: it masks no
   interrupts and carries no rank, so the model says the protocol is correct given mutual exclusion

@@ -11,9 +11,7 @@
 
 
 
-0161facaf4c7 design/roadmap/0138-file-io-throughput/options.md
 
-0161facaf4c7 notes/benchmarks/five-blocks-per-request.md
 
 
 
@@ -71,13 +69,9 @@
 
 
 
-0c67be9bd26a design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
-0c67be9bd26a design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
 
-0c67be9bd26a design/roadmap/0190-ext4-read-write/upstream/5a-crc32c-safety-arguments.md
 
-0c67be9bd26a design/roadmap/0190-ext4-read-write/upstream/5b-group-descriptor-decode.md
 
 
 
@@ -136,19 +130,6 @@
 
 
 
-15a99af7101a design/roadmap/0138-file-io-throughput/options.md
-
-15a99af7101a notes/benchmarks/five-blocks-per-request.md
-
-
-
-
-
-
-
-181380389d58 design/roadmap/0401-a-gate-that-selects-the-set-it-judges.md
-
-181380389d58 notes/empty-selectors.md
 
 
 
@@ -158,9 +139,16 @@
 
 
 
-18da2302fead design/roadmap/0401-a-gate-that-selects-the-set-it-judges.md
 
-18da2302fead notes/empty-selectors.md
+
+
+
+
+
+
+
+
+
 
 
 
@@ -192,11 +180,8 @@
 
 
 
-1cf40702ac17 design/roadmap/0579-constitution-carry-vs-brief/classification.md
 
-1cf40702ac17 design/roadmap/0579-constitution-carry-vs-brief/roles.md
 
-1cf40702ac17 design/roadmap/0579-constitution-carry-vs-brief/skills.md
 
 
 
@@ -291,9 +276,7 @@
 
 
 
-23d19552de22 design/roadmap/0129-scheduled-execution.md
 
-23d19552de22 notes/scheduled-execution/registration.md
 
 
 
@@ -423,13 +406,9 @@
 
 
 
-37322d4cbf9c design/roadmap/0448-a-refusal-gets-a-number.md
 
-37322d4cbf9c design/roadmap/0461-an-sse-enabled-x86-64-userspace-target.md
 
-374ec21a02a4 design/roadmap/1057-e1000e-outside-review.md
 
-374ec21a02a4 design/roadmap/1059-block-roster-contract-outside-review.md
 
 
 
@@ -451,9 +430,7 @@
 
 
 
-398dc3bd814a design/roadmap/0579-constitution-carry-vs-brief.md
 
-398dc3bd814a design/roadmap/0579-constitution-carry-vs-brief/skills.md
 
 39949b1d9ce0 design/roadmap/0526-a-riscv64-host-that-hands-us-acpi.md
 
@@ -489,9 +466,7 @@
 
 3d0711087ebb design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
-3d36ff484eef design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
-3d36ff484eef design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
 
 3d5598af0e1f design/roadmap/0848-a-client-pays-for-its-session-in-a-server.md
 
@@ -513,9 +488,7 @@
 
 
 
-4478818b4720 design/roadmap/0915-nmi-double-fault-and-machine-check-run-on-their-own-stacks.md
 
-4478818b4720 notes/x86-port/cpu-state.md
 
 
 
@@ -611,23 +584,15 @@
 
 
 
-52ca8296da66 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
-
-52ca8296da66 design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
-
-52ca8296da66 design/roadmap/0190-ext4-read-write/upstream/5a-crc32c-safety-arguments.md
-
-52ca8296da66 design/roadmap/0190-ext4-read-write/upstream/5b-group-descriptor-decode.md
-
-52ca8296da66 design/roadmap/0190-ext4-read-write/upstream/7-mount-refusal-reason.md
-
-52ca8296da66 design/roadmap/0190-ext4-read-write/upstream/8-whole-inode-times.md
 
 
 
-541a6e769fbe design/roadmap/0523-the-job-mix-supervisor-in-userspace/what-provoked-it.md
 
-541a6e769fbe design/roadmap/0563-a-seal-check-that-reads-bytes-cannot-see-a-check-that-was-dropped.md
+
+
+
+
+
 
 5448d1a7f01d design/roadmap/0187-x86-64-arch-audit/method.md
 
@@ -770,9 +735,7 @@
 
 
 
-692cf387ebb5 design/roadmap/1111-usb-outside-review.md
 
-692cf387ebb5 notes/crate-reviews/universal-serial-bus.md
 
 
 
@@ -815,9 +778,7 @@
 
 
 
-721e99fe76ff design/roadmap/0190-ext4-read-write/upstream/4-fuzz-targets.md
 
-721e99fe76ff design/roadmap/0190-ext4-read-write/upstream/6-kani-harnesses.md
 
 
 
@@ -827,9 +788,7 @@
 
 73bc8a1ce93c notes/crate-reviews/jh7110-clock-and-reset.md
 
-7639375a7269 design/roadmap/0186-architecture-list-derivation.md
 
-7639375a7269 notes/architecture-list-sweep.md
 
 767d28e30fed design/roadmap/1087-domain-name-system-outside-review/what-was-checked.md
 
@@ -915,9 +874,7 @@
 
 
 
-80dbd9025b3d design/roadmap/0307-which-assertion-fires.md
 
-80dbd9025b3d notes/confinement-claims/which-assertion-fires.md
 
 8154a34d0ae6 notes/load-sensitive-assertions/caretaker-teardown-wait.md
 
@@ -960,9 +917,6 @@
 
 88fb002ece54 design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
-8b264d4e4304 design/roadmap/0583-citations-across-lines.md
-
-8b264d4e4304 notes/citations/bugs.md
 
 
 
@@ -979,9 +933,6 @@
 
 
 
-930e83c166c1 design/roadmap/0401-a-gate-that-selects-the-set-it-judges.md
-
-930e83c166c1 notes/empty-selectors.md
 
 
 
@@ -991,9 +942,9 @@
 
 
 
-95a3c6d65aac design/roadmap/0401-a-gate-that-selects-the-set-it-judges.md
 
-95a3c6d65aac notes/empty-selectors.md
+
+
 
 
 
@@ -1013,9 +964,7 @@
 
 97efab5b6043 notes/jh7110-entropy-board-check.md
 
-986e8c54a8dc design/roadmap/0579-constitution-carry-vs-brief/classification.md
 
-986e8c54a8dc design/roadmap/0579-constitution-carry-vs-brief/roles.md
 
 
 
@@ -1080,17 +1029,11 @@ a0184ae48880 notes/crate-reviews/test-and-set-lock.md
 
 a0184ae48880 notes/crate-reviews/user-mode-runtime.md
 
-a0528fd4ad39 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
-a0528fd4ad39 design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
 
-a0528fd4ad39 design/roadmap/0190-ext4-read-write/upstream/7-mount-refusal-reason.md
 
-a0528fd4ad39 design/roadmap/0190-ext4-read-write/upstream/8-whole-inode-times.md
 
-a0e4a8e7de68 design/roadmap/0263-can-a-timer-be-a-capability.md
 
-a0e4a8e7de68 notes/timer-capability.md
 
 
 
@@ -1132,21 +1075,6 @@ a62d45e0972f design/roadmap/0481-terminal-multiplexing.md
 
 
 
-ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
-
-ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
-
-ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/4-fuzz-targets.md
-
-ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/5a-crc32c-safety-arguments.md
-
-ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/5b-group-descriptor-decode.md
-
-ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/6-kani-harnesses.md
-
-ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/7-mount-refusal-reason.md
-
-ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/8-whole-inode-times.md
 
 
 
@@ -1157,9 +1085,14 @@ ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/8-whole-inode-times.md
 
 
 
-b1eb6160a423 design/roadmap/0049-users-and-attribution.md
 
-b1eb6160a423 design/roadmap/0049-users-and-attribution/build.md
+
+
+
+
+
+
+
 
 b23d755b70c4 design/fatal-risks/1-only-software-written-for-nife.md
 
@@ -1223,15 +1156,11 @@ b4ff48eec6d8 design/roadmap/0850-a-program-is-asked-to-give-memory-back.md
 
 
 
-b734d5d5890e design/roadmap/0190-ext4-read-write/upstream/5a-crc32c-safety-arguments.md
-
-b734d5d5890e design/roadmap/0190-ext4-read-write/upstream/5b-group-descriptor-decode.md
 
 
 
-b92d219ec2fc design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
-b92d219ec2fc design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
+
 
 
 
@@ -1247,9 +1176,7 @@ bc501bc89ce0 design/roadmap/1060-extensible-host-controller-interface-outside-re
 
 bc501bc89ce0 design/roadmap/1061-file-allocation-table-outside-review.md
 
-bc577cd89fbc design/roadmap/0401-a-gate-that-selects-the-set-it-judges.md
 
-bc577cd89fbc notes/empty-selectors.md
 
 
 
@@ -1341,9 +1268,7 @@ cb31c429ffd1 design/roadmap/0806-concurrent-login-sessions.md
 
 
 
-cec5b37aa8a6 design/roadmap/0250-an-unviable-mutant-is-a-hole-that-reads-as-a-pass.md
 
-cec5b37aa8a6 design/roadmap/0354-the-mutants-nobody-counts.md
 
 cefd74a62ac7 design/roadmap/1090-filesystem-contract-outside-review.md
 
@@ -1361,9 +1286,7 @@ d08b72cf5fca design/roadmap/0887-crate-repositories-share-one-ci-template.md
 
 
 
-d1a0aac9754b design/roadmap/0579-constitution-carry-vs-brief/classification.md
 
-d1a0aac9754b design/roadmap/0579-constitution-carry-vs-brief/roles.md
 
 
 
@@ -1439,11 +1362,8 @@ d96678cdcf14 notes/crate-reviews/domain-name-system.md
 
 
 
-daf0d37dca12 design/roadmap/0190-ext4-read-write/upstream/4-fuzz-targets.md
 
-daf0d37dca12 design/roadmap/0190-ext4-read-write/upstream/7-mount-refusal-reason.md
 
-daf0d37dca12 design/roadmap/0190-ext4-read-write/upstream/8-whole-inode-times.md
 
 
 
@@ -1470,9 +1390,7 @@ dd7a792417a3 notes/c-seam.md
 
 
 
-de28c0685846 design/roadmap/0053-board-peripherals.md
 
-de28c0685846 notes/non-volatile-memory-express.md
 
 
 
@@ -1540,17 +1458,11 @@ e34251093e2f notes/interface-stability.md
 
 
 
-e626224e5de9 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
-e626224e5de9 design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
 
-e626224e5de9 design/roadmap/0190-ext4-read-write/upstream/4-fuzz-targets.md
 
-e626224e5de9 design/roadmap/0190-ext4-read-write/upstream/5a-crc32c-safety-arguments.md
 
-e626224e5de9 design/roadmap/0190-ext4-read-write/upstream/7-mount-refusal-reason.md
 
-e626224e5de9 design/roadmap/0190-ext4-read-write/upstream/8-whole-inode-times.md
 
 e63e1ce4b018 design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
@@ -1562,21 +1474,13 @@ e63e1ce4b018 design/roadmap/0817-the-designware-mobile-storage-crate-released-on
 
 
 
-e902f0b85794 design/roadmap/0142-a-text-display-worth-living-in/dependency.md
 
-e902f0b85794 design/roadmap/0142-a-text-display-worth-living-in/determinism.md
 
-e902f0b85794 design/roadmap/0142-a-text-display-worth-living-in/palette.md
 
-e902f0b85794 design/roadmap/0142-a-text-display-worth-living-in/rich-text.md
 
-e902f0b85794 design/roadmap/0142-a-text-display-worth-living-in/scanout.md
 
-e902f0b85794 design/roadmap/0142-a-text-display-worth-living-in/type.md
 
-e95481b328c0 design/roadmap/0186-architecture-list-derivation.md
 
-e95481b328c0 notes/architecture-list-sweep.md
 
 
 e9c0a6bfa099 notes/scheduler.md
@@ -1596,9 +1500,7 @@ ea0f461623a5 notes/crate-reviews/clock-contract.md
 
 
 
-ebddfc475ee8 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
-ebddfc475ee8 design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
 
 ebee1a65f0f0 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
@@ -1609,9 +1511,7 @@ ebee1a65f0f0 notes/crate-reviews/e1000e.md
 
 
 
-edc012806cae design/roadmap/0135-loom-region-claim.md
 
-edc012806cae notes/interleaving/limitations.md
 
 ef8e18db8e10 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
@@ -1662,13 +1562,9 @@ f59855c643ae design/roadmap/1097-intrusive-queue-outside-review.md
 
 
 
-f618fa0b2879 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
-f618fa0b2879 design/roadmap/0190-ext4-read-write/upstream/2b-restore-truncate-tail.md
 
-f618fa0b2879 design/roadmap/0190-ext4-read-write/upstream/5a-crc32c-safety-arguments.md
 
-f618fa0b2879 design/roadmap/0190-ext4-read-write/upstream/5b-group-descriptor-decode.md
 
 
 

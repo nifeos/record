@@ -10,17 +10,12 @@ upstream, each with the title and Chinese body below: the issue as
 patch beside this file.
 
 - Repository: `rcore-os/tgoskits`, branch `dev`, package `fs/rsext4` (0.9.2).
-- Base commit: `0353572d1e2cca79e25a2805deeff4521449a5c1` ("fix(x86_vlapic): stop the APIC timer
-  without yielding in the vCPU entry window ([#2819](https://github.com/rcore-os/tgoskits/pull/2819))"), the head of `dev` at filing. The patch beside this file dates from the earlier base
-  `6e80b940d` and applies to this one unchanged.
+- Base commit: `0353572d1`, the one [every draft shares](README.md#what-every-draft-shares).
 - The change: [5a-crc32c-safety-arguments.patch](5a-crc32c-safety-arguments.patch), one commit,
   `git format-patch` output. It applies with `git am` on the base commit.
-- Upstream's contributing guide (section 4.3) processes no pull request without a linked issue, so
-  the issue below goes first, and the pull request body names its number.
-- Issue settings, which the guide (section 3.7) requires in the sidebar:
-  Assignees `calef`, labels `task` and `q4`, Type `Task`, Milestone `2026Q4`.
-  GitHub dropped these at creation, because the filing account has no triage
-  permission on the repository; the guide asks a maintainer to fill them in.
+- The issue below went first, as [every draft's did](README.md#what-every-draft-shares).
+- Issue settings: label `task`, Type `Task`, and the
+  [shared rest](README.md#what-every-draft-shares).
 
 ## Issue (filed)
 
@@ -168,12 +163,11 @@ Not verified: the aarch64 hardware CRC32C path was only compiled and checked wit
 
 ## Test evidence
 
-Before filing, every check the pull request cites ran again on `0353572d1`, the head of `dev` then,
-with the patch applied. `cargo test -p rsext4 --lib` passed 428 tests, and the aarch64 clippy run
-was clean. `cargo xtask clippy --package rsext4` passed its 3 checks, and `cargo fmt --check` was
-clean. `cargo xtask test --since 0353572d1` failed only the three growth tests, and they fail the
-same way on unchanged `dev`. `ax-block` passed all its tests in that run, so the pull request no
-longer mentions its earlier intermittent failure. The runs below are the earlier ones, on
+Before filing, the [shared rerun](README.md#what-every-draft-shares) covered this patch. `cargo test
+-p rsext4 --lib` passed 428 tests, and the aarch64 clippy run was clean. `cargo xtask clippy
+--package rsext4` passed its 3 checks, and `cargo fmt --check` was clean. `cargo xtask test` failed
+only the shared three growth tests. `ax-block` passed all its tests in that run, so the pull request
+no longer mentions its earlier intermittent failure. The runs below are the earlier ones, on
 `6e80b940d`.
 
 Each command ran in the clone on the patch applied to the base commit.

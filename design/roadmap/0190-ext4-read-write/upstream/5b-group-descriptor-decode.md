@@ -9,17 +9,12 @@ request as [rcore-os/tgoskits#2833](https://github.com/rcore-os/tgoskits/pull/28
 commit is the patch beside this file.
 
 - Repository: `rcore-os/tgoskits`, branch `dev`, package `fs/rsext4` (0.9.2).
-- Base commit: `0353572d1e2cca79e25a2805deeff4521449a5c1` ("fix(x86_vlapic): stop the APIC timer
-  without yielding in the vCPU entry window ([#2819](https://github.com/rcore-os/tgoskits/pull/2819))"), the head of `dev` at filing. The patch beside this file dates from the earlier base
-  `6e80b940d` and applies to this one unchanged.
+- Base commit: `0353572d1`, the one [every draft shares](README.md#what-every-draft-shares).
 - The change: [5b-group-descriptor-decode.patch](5b-group-descriptor-decode.patch), one commit,
   `git format-patch` output. It applies with `git am` on the base commit, with or without 5a.
-- Upstream's contributing guide (section 4.3) processes no pull request without a linked issue, so
-  the issue below goes first, and the pull request body names its number.
-- Issue settings, which the guide (section 3.7) requires in the sidebar:
-  Assignees `calef`, labels `bug` and `q4`, Type `Bug`, Milestone `2026Q4`.
-  GitHub dropped these at creation, because the filing account has no triage
-  permission on the repository; the guide asks a maintainer to fill them in.
+- The issue below went first, as [every draft's did](README.md#what-every-draft-shares).
+- Issue settings: label `bug`, Type `Bug`, and the
+  [shared rest](README.md#what-every-draft-shares).
 
 ## What upstream may refuse
 
@@ -168,9 +163,8 @@ Before filing, every check the pull request cites ran again on `0353572d1`, the 
 With only the new test file on that base, the debug build aborted with `misaligned pointer
 dereference` in `get_desc`. The release build failed the 32-byte test with the same values and
 passed the 64-byte one. With the patch, `cargo test -p rsext4 --lib` passed 430 tests. `cargo xtask
-clippy --package rsext4` passed its 3 checks, and `cargo fmt --check` was clean. `cargo xtask test
---since 0353572d1` failed only the three growth tests, and they fail the same way on unchanged
-`dev`. The runs below are the earlier ones, on `6e80b940d`.
+clippy --package rsext4` passed its 3 checks, and `cargo fmt --check` was clean. `cargo xtask test`
+failed only the shared three growth tests. The runs below are the earlier ones, on `6e80b940d`.
 
 Each command ran in the clone on the base commit or on the patch applied to it.
 

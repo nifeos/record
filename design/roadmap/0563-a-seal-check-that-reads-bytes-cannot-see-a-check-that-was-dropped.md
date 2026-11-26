@@ -33,12 +33,12 @@ board,job_mix  -> 0
 board          -> 3
 ```
 
-Since milestone 268 (every architecture boots the same way: describe the machine, test yourself, hand over) the
-measured-boot refusal lives in `user::boot_progenitor`. `kernel/src/main.rs` reaches it only under
-`#[cfg(not(any(feature = "soak_test", feature = "job_mix")))]` (`:1640`, `:2018`, with
-`riscv_hand_over`'s own `cfg_attr` at `:2195`), and `bench` diverts at the same sites. So a `soak`,
-a `job_mix` or a `bench` card **verifies nothing**, the trust root is unreferenced, and it is dead
-code.
+The measured-boot refusal lives in `user::boot_progenitor`, as [523's
+appendix](0523-the-job-mix-supervisor-in-userspace/what-provoked-it.md) found. `kernel/src/main.rs`
+reaches it only under `#[cfg(not(any(feature = "soak_test", feature = "job_mix")))]` (`:1640`,
+`:2018`, with `riscv_hand_over`'s own `cfg_attr` at `:2195`), and `bench` diverts at the same sites.
+So a `soak`, a `job_mix` or a `bench` card **verifies nothing**, the trust root is unreferenced, and
+it is dead code.
 
 ## Why the tool then says the wrong thing
 

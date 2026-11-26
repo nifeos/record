@@ -90,8 +90,9 @@ It attributed the fixed term to "RedoxFS re-reading its own metadata, about 5.3 
 asked the question that attribution left open: is the 208 us inherent to RedoxFS's design, or is it
 the absence of a cache that any store would also need? PR #348 answered it.
 
-It is the absence of a cache. Every 4 KiB read of an ordinary file makes exactly five single-block
-reads below the record, and they are the same five block numbers on every request. They are
+It is the absence of a cache, as
+[notes/benchmarks/five-blocks-per-request.md](../../../notes/benchmarks/five-blocks-per-request.md)
+measures: five single-block reads per 4 KiB request, the same five each time. They are
 `Transaction::read_tree_and_addr`'s walk of the node tree (L3 root, L2, L1, L0) and then the file's
 own `Node` block. Measured at 5.00 per request over 256 requests per phase, sequential and random.
 99.6% of them were a block already read in the same phase, and the count was unchanged at record
