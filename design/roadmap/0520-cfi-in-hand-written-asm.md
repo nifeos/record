@@ -92,11 +92,10 @@ Whether they can *also* recover the interrupted PC -- and so keep an unwind goin
 boundary, into whatever kernel code took the interrupt -- is where the three architectures diverge.
 This is recorded here rather than only in a note nobody reads twice:
 
-- x86_64 can, in full. The hardware trap frame puts the interrupted RIP and RSP at fixed
-  offsets from the software frame's own CFA. The SysV DWARF register mapping already treats
-  register 16 (RIP) as the ordinary return-address column and register 7 (RSP) as an ordinary
-  describable register. `isr_common` states `.cfi_offset 16, 16` / `.cfi_offset 7, 40` and the
-  unwind genuinely continues past the trap.
+- x86_64 can, in full. The hardware trap frame puts the interrupted RIP and RSP at fixed offsets
+  from the software frame's own CFA. The SysV DWARF mapping treats RIP (16) and RSP (7) as ordinary
+  registers ([notes/cfi-unwind.md](../../notes/cfi-unwind.md)). `isr_common` states
+  `.cfi_offset 16, 16` / `.cfi_offset 7, 40` and the unwind genuinely continues past the trap.
 - **AArch64 has a spec-correct answer that the tool does not honor.** The interrupted PC lives in
   `elr_el1`, and AArch64's own DWARF register mapping anticipates exactly this case: register 33 is
   `ELR_mode`, defined for describing an asynchronously-created frame. `vectors.s` states

@@ -76,8 +76,8 @@ for the unit, which is the whole of 447's cost argument.
   nothing on x86_64 mounts an encrypted RedoxFS volume, so there is no workload and a synthetic
   number would be a fact leaving the machine with nothing behind it. What 447 changed is that the
   number is obtainable rather than blocked.
-- **The seam of §31 (the foreign-language seam: C holds no capabilities and makes no system calls)
-  widens.** A C component
+- **The seam of §31 (the foreign-language seam) widens,** as
+  [447's case for the flip](0447-vector-registers-are-a-thread-s-own/target-flip.md) says. A C component
   compiled by bare-metal clang currently cannot touch a vector register at all, and §31 says why:
   "the kernel never enables FP/SIMD for EL0, and the context switch" saves nothing, so such a
   register would be "a trap or a corruption depending on which of those two bit first". After the

@@ -16,14 +16,14 @@ needs_person: no
 §267 (a comment states the constraint as it is now) caps a comment block at 40 lines. It follows
 milestone 862 (the comment-block sweep's next worth).
 
-This worth's rows, all module headers: `crates/system_initializer/src/lib.rs` (301, held by
-its `no_run` doctest, which is a gate and stays), `components/src/timetable.rs` (201), then
+This worth's rows, all module headers: `crates/system_initializer/src/lib.rs` (301, held by its
+`no_run` doctest, which is a gate and stays), `components/src/timetable.rs` (201), then
 `crates/glob/src/lib.rs` (190), `crates/serial_console/src/lib.rs` (186), and
-`crates/non_volatile_memory_express/src/lib.rs` and `crates/component_plan/src/lib.rs` (185
-each). A worth takes the worst handful that is not a gated example. Each block's history goes to
-a commit message, its findings to a note, its naming record to `design/naming/`, and every shrink
-is banked. The method, the refused alternatives and the evidence are milestone 860's block and
-`notes/comment-cost-2026-10-07.md`.
+`crates/non_volatile_memory_express/src/lib.rs` and `crates/component_plan/src/lib.rs` (185 each). A
+worth takes the worst handful that is not a gated example. Each block's history goes to a commit
+message, its findings to a note, its naming record to `design/naming/`, and every shrink is banked.
+The method is
+[milestone 862 (the comment-block sweep's next worth)](0862-the-comment-block-sweeps-next-worth.md)'s.
 
 Reuse: the ratchet, the lexer and the baseline already exist (milestone 860 built them). This
 worth only runs the sweep and banks, and takes no new code.

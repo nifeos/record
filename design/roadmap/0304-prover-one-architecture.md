@@ -111,10 +111,9 @@ strongest case in this tree for a bounded model checker. A vector is an index in
 getting one wrong does not misroute an interrupt, it runs the page-fault handler.
 
 - `no_vector_belongs_to_two_bands`. `MSI_VECTOR_BASE`'s doc claims the three vector bands are
-  "disjoint by construction rather than by anybody remembering". This is that claim, over every
-  entry count an eight-bit version register can report and every state the MSI bump counter can be
-  in, asked through the two predicates the trap handler actually calls rather than restated from the
-  constants.
+  "disjoint by construction rather than by anybody remembering".
+  [The x86 interrupt controller proofs](../../notes/kernel-proofs/x86-interrupt-controller-proofs.md)
+  say how this harness checks that claim.
 - **`an_owned_gsi_routes_inside_the_io_apic_band`.** For every GSI the guard admits, the flat map
   lands inside `GSI_VECTOR_BASE..MSI_VECTOR_BASE`. The same shape as milestone 255's
   `no_stream_can_reach_another_streams_tables` one architecture over: a firmware-supplied

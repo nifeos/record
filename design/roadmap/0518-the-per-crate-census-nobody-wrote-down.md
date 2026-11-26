@@ -127,9 +127,8 @@ record here makes that rewrite safer by giving it something to be checked agains
 - The baseline row's counts are derived, not observed. Its own file says so: the 2026-08-03 run
   was resumed twice, `caught` is total-minus-the-rest, and three of 5,551 mutants could not be
   matched to any pass. A comparison against it compares against a reconstruction.
-- A deleted crate and a crate renamed to something git could not follow look identical, and both
-  print as "only in A". `multicast_dns_protocol` and `multicast_dns_config` are that case between
-  2026-09-14 and 2026-09-19.
+- A deleted crate and an untracked rename look alike;
+  [notes/mutation-census.md](../../notes/mutation-census.md#bugs) carries it.
 
 ## Follow-on
 

@@ -85,17 +85,17 @@ and port decoders (`context`, `port`). The report words left with the handoff fo
    for it (or it is already ours), and `partsfoundry/extensible_host_controller_interface` does not exist
    yet. `script/crate-standalone` checks the first.
 2. In the tree, `script/verify` proves the harnesses and `Cargo.toml` says `publish = false`.
-3. The package is 0.1.0 with its own semver, states `rust-version` (#1806's note built it on stable
-   1.94.1), and ships its harnesses and falsification patches. `cargo package --list` shows them.
-4. Ready means proofs passing and the API stable. §235 (the OS is built and updated from packages,
-   and its source divides by purpose) has milestone 610 (the interface's stability is
-   measured weekly)'s per-package co-change column, and the soak (step 5) is how the second is
-   measured. When the soak exits, calef adds it to the lint-checked publish allowlist. The
-   `partsfoundry/extensible_host_controller_interface` repository is created when the crate moves, on the
-   shared CI template (milestone 887), through reusable workflows: Kani through
-   `kani-github-action`, lint, release. Its release workflow refuses to publish unless the proof job
-   is green. No harness here reads `target_arch`, so stock Kani proves them. The patched Kani of
-   §218 (carry a Kani patch so riscv64 is proved, and send it upstream) is carried only if one comes
+3. The package meets Fork 3 of
+   [milestone 857 (crates released on their own)](0857-crates-released-on-their-own.md#the-rulings).
+   `cargo package --list` shows its harnesses and falsification patches.
+4. Ready means proofs passing and the API stable.
+   [Milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md#release-by-1806s-rulings)
+   says how each is measured; here the soak is step 5. When the soak exits, calef adds it to the
+   lint-checked publish allowlist. The `partsfoundry/extensible_host_controller_interface`
+   repository is created when the crate moves, on the shared CI template (milestone 887), through
+   reusable workflows: Kani through `kani-github-action`, lint, release. Its release workflow
+   refuses to publish unless the proof job is green. No harness here reads `target_arch`, so stock
+   Kani proves them. §218 (carry a Kani patch so riscv64 is proved) applies only if a harness comes
    to need riscv64. Milestone 589 (Kani can prove riscv64 from the hosts we already have) built it.
 5. Soak, as its own repository, until the [soak's five end conditions](../../notes/crate-move.md#the-soaks-five-end-conditions)
    in the runbook hold.
@@ -111,12 +111,12 @@ host, all exit 0. The release workflow builds the same four.
 ## Standalone, measured 2026-10-11 (UTC)
 
 `script/crate-standalone extensible_host_controller_interface` fails today, at base `ae6b91e79`. The
-manifest inherits `license` and `lints` from nife's workspace and states no `rust-version`, and
-there is no README, `LICENSE-MIT` or `LICENSE-APACHE`. Those hold for all nine crates. Builds and
-tests on stable for the host and the three bare-metal targets. Stock Kani proves all three harnesses
-in the copy, and each falsification patch, applied with `-p3`, turns its harness red. It fails on
-manifest and files only, plus 12 lines citing this tree: 5 `milestone N`, 3 `§N`, 2 naming calef, 1
-tree path and 1 provenance block.
+manifest and files fail as for all nine crates in
+[milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md#standalone-measured-2026-10-11-utc).
+Builds and tests on stable for the host and the three bare-metal targets. Stock Kani proves all
+three harnesses in the copy, and each falsification patch, applied with `-p3`, turns its harness
+red. It fails on manifest and files only, plus 12 lines citing this tree: 5 `milestone N`, 3 `§N`, 2
+naming calef, 1 tree path and 1 provenance block.
 
 `script/names` reports the name `extensible_host_controller_interface` ratified (checked
 2026-10-25).
@@ -192,9 +192,8 @@ links it carried, by milestone 857's provenance rule.
 
 ## BUGS
 
-- Steps 4 and 5 wait on milestone 887 (crate repositories share one CI template),
-  which owns the shared CI template, the publish allowlist lint and the `nifeos` crates.io team,
-  and on milestone 610's per-package co-change column.
+- Steps 4 and 5 wait on milestone 887 (one CI template) and on 610's
+  co-change column.
 - Milestone 242 is PARTIAL, and the crate's own `BUGS` says a device behind a hub cannot be
   addressed. A stranger meets that limit first, so the published README states it.
 - Whether the context and port decoders want proofs before 0.1 is still open.

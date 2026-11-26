@@ -1,10 +1,9 @@
 # Rich text: what `Attr` had to grow, and what increment five built
 
-This appendix belongs to [milestone 142 (a text display good enough that people use it instead of a
-GUI)](../0142-a-text-display-worth-living-in.md). It was moved out under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md), and the main page is complete
-without it. It holds the rich-text analysis as written at minting, and the detail of what lane
-`milestone/142-text-display` built on 2026-09-26.
+This appendix belongs to [milestone 142](../0142-a-text-display-worth-living-in.md). It was moved
+out under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md), and
+the main page is complete without it. It holds the rich-text analysis as written at minting, and the
+detail of what lane `milestone/142-text-display` built on 2026-09-26.
 
 ## The cell at minting
 

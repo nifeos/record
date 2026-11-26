@@ -53,11 +53,10 @@ Everything needed to run it now exists, and none of it existed on 2026-09-01:
 
 ## What it needs
 
-Bench evenings, one per machine, and the discipline to read the first heartbeat before walking
-away. Milestone 221's procedure is explicit about this and it is the part most likely to be
-skipped: `wakerate` should be about `100 * harts`, and `crossings` must be rising between beats
-rather than frozen. Eight hours of a non-crossing soak is eight hours of milestone 219's experiment
-rather than 221's, and the difference is invisible afterwards.
+Bench evenings, one per machine, and the discipline to read the first heartbeat before walking away.
+Milestone 221's procedure is explicit about this and it is the part most likely to be skipped:
+`wakerate` should be about `100 * harts`, and `crossings` must be rising between beats rather than
+frozen. [The bench runbook](../../notes/bench-runbook.md) says what a frozen count costs.
 
 Record `rounds`, `rate`, `wakes` and `crossings` for every run, in `notes/soak.md`'s table.
 

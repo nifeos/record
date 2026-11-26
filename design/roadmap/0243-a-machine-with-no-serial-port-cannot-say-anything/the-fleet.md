@@ -31,10 +31,10 @@ Two qualifications, both worth stating rather than discovering:
   start one. That is a port, filed in that note as "possibly the fifth", not a boot. An Intel
   MacBook is in the fleet. Worth knowing for later: m1n1 offers a serial console over USB-C. That is
   more than any commodity x86 machine here offers.
-- Milestone 195 (finish the UEFI boot path) created a question each machine answers for itself.
-  `PHYS_START` is 32 MiB, not 1 MiB, because OVMF holds ACPI NVS and its own allocations across
-  the low range. Whether a given machine leaves 32 MiB free is that machine's answer. The loader
-  prints which range it wanted and which descriptors are in the way, rather than `Load Error`.
+- Milestone 195 (finish the UEFI boot path) created a question each machine answers for itself. Why
+  `PHYS_START` is 32 MiB is in [the bench runbook](../../../notes/bench-runbook.md). Whether a given
+  machine leaves 32 MiB free is that machine's answer. The loader prints which range it wanted and
+  which descriptors are in the way, rather than `Load Error`.
 
 The cheap experiment this makes available: build a stick, boot one of those machines, and read
 what the loader says on the screen. Even with the kernel silent afterwards, that establishes three

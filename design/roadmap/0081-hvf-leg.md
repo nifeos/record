@@ -64,10 +64,9 @@ says which mode ran.
   running `script/ci-build` with no arguments is a convention. `notes/hvf-leg.md`.
 - **Refused.** A self-hosted runner on the dev machine, which is the only way to put HVF in hosted
   CI. GitHub's macOS arm64 runners are themselves virtual machines with no nested virtualization. It
-  couples CI to a laptop that sleeps. The loud skip was taken instead so a
-  transcript can never be misread as having had silicon coverage.
-  This refusal is milestone 488 (design/roadmap/0488-a-self-hosted-ci-runner.md), which carries it
-  with the condition that would change it.
+  couples CI to a laptop that sleeps. The loud skip was taken instead so a transcript can never be
+  misread as having had silicon coverage. Milestone 488
+  (design/roadmap/0488-a-self-hosted-ci-runner.md) carries this refusal.
 
 ## Index row
 

@@ -8,13 +8,13 @@ transaction check that decided it, and what is built.
 
 ## Decided in direction, and then in mechanism
 
-calef decided 2026-07-30: extended attributes, not AppleDouble sidecars, on the grounds that we
-will want them anyway. Agreed, and it does not reopen §34 (RedoxFS is the primary filesystem, on
-three conditions). That entry surveyed ext2, FAT32/exFAT,
-littlefs, btrfs, ZFS and F2FS before choosing RedoxFS, and xattrs were never the deciding axis. So
-the requirement adds a gap to fill rather than a comparison to redo. ext4 works on the router, but
-importing it means importing C, which §34 chose RedoxFS specifically to avoid. There is no
-`no_std` Rust ext4.
+The direction is the ruling
+[milestone 57](../0057-partitioning-and-xattrs.md#extended-attributes-decided-and-built) records,
+and it does not reopen §34 (RedoxFS is the primary filesystem, on three conditions). That entry
+surveyed ext2, FAT32/exFAT, littlefs, btrfs, ZFS and F2FS before choosing RedoxFS, and xattrs were
+never the deciding axis. So the requirement adds a gap to fill rather than a comparison to redo.
+ext4 works on the router, but importing it means importing C, which §34 chose RedoxFS specifically
+to avoid. There is no `no_std` Rust ext4.
 
 Verified: RedoxFS has no xattr support. The fork is closed: the layer
 (§34's amendment). Reversibility decides it: `fs_proto` hides which implementation was chosen, so
@@ -33,9 +33,8 @@ arbitrary. Sixteen attributes of 255-byte names is exactly one page. That is why
 no cursor and therefore cannot be observed half-changed. Every ceiling refuses with its own errno
 (§42 (a filesystem declares what it offers and must be truthful)).
 
-BFS is not foreclosed. Every attribute carries a `u32` type code the layer stores, returns, and never
-interprets. So an indexed store later is a change of implementation rather than a format migration
-plus a wire break.
+BFS is not foreclosed, for the reason the refused indexed store in
+[milestone 57](../0057-partitioning-and-xattrs.md#follow-on) gives.
 
 There were three ways to get it wrong, all of which §34's amendment named in advance. The purge
 rides the same transaction as the removal and asks the engine (`remove_node` answers `Some(id)`

@@ -83,8 +83,8 @@ the other two architectures had.
 
 `arch::init` now establishes it clear, per core, beside the GDT and the IDT. `smp.rs`'s
 `secondary_main` calls that function and `boot.s`'s AP path jumps to `secondary_main`, so the
-secondaries are covered by the same line. It cost nothing, as forecast. Nothing in this tree
-reads a performance counter from ring 3, and nothing under `arch/x86_64/` programs a perf MSR at all.
+secondaries are covered by the same line. It cost nothing, as forecast. Nothing here reads or
+programs a counter, as [the cycle counter](../../notes/x86-port/user-mode-runtime.md) note records.
 With the counters unprogrammed, an open `PCE` would have exposed zeros or firmware's leftovers
 rather than anything useful.
 

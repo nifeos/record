@@ -28,12 +28,12 @@ files, beside nine recorded gaps that are working as designed and about fifteen 
 legitimately one architecture's. Rule 5 and §19 (architectural parity is a tenet) make those
 bugs; the other twenty-four are not, and the sweep's value is in that split.
 
-The pattern is the actual result. Everything in the tree that stayed complete at three
-architectures is either a Rust `match` the compiler pushed on (`kernel/build.rs`'s `panic!` default
-arm, `crates/elf`'s `EXPECTED_MACHINE`, `xtask`'s `ArchLegs`) or a per-architecture file whose
-absence a build notices. Everything that went stale is a space-separated string in a shell script, a
-YAML step, a TOML array, or a sentence in a note. Ten of the eleven silent gaps are in that second
-group and the eleventh is a `#[cfg]` pair with no `else`.
+The pattern is the actual result. Everything in the tree that stayed complete at three architectures
+is either a Rust `match` the compiler pushed on (`kernel/build.rs`'s `panic!` default arm,
+`crates/elf`'s `EXPECTED_MACHINE`, `xtask`'s `ArchLegs`) or a per-architecture file whose absence a
+build notices. Everything that went stale is a plain list, of the four kinds [the
+note](../../notes/architecture-list-sweep.md) names. Ten of the eleven silent gaps are in that
+second group and the eleventh is a `#[cfg]` pair with no `else`.
 
 ## What "done" means
 
@@ -246,11 +246,8 @@ in `kernel/src/pci.rs` is fixed.
 - **Recorded.** `virtual_io_ring_barrier` is a provisional name. It is a new public function, which
   is an architect's call; it sits in `user_mode_runtime::virtual_io` and carries that module's `virtio_`
   prefix, which is the argument for it, and nothing about the fix depends on the spelling.
-- **Recorded.** The rung-1 limit this milestone's own note states still holds: deriving the list
-  removes the copy, not the incompleteness. Nothing stops a new gate writing
-  `for arch in aarch64 riscv64`, and `deny.toml` cannot read the derivation at all. The
-  `compile_error!` in `virtual_io_ring_barrier` is the one place in this territory where a missing
-  architecture now fails to build rather than failing to order.
+- **Recorded.** The rung-1 limit [this milestone's own note](../../notes/architecture-list-sweep.md)
+  states still holds: deriving the list removes the copy, not the incompleteness.
 - **Milestone 187.** Finding 8, the unaudited x86_64 arch tree, is milestone 187 (read the x86_64
   arch tree through the lens the first arch audit used), which was minted for it.
 

@@ -72,5 +72,5 @@ None.
 None.
 
 The architect cleared this package on 2026-11-20 (UTC) and gives the go to create
-`partsfoundry/interfaces_note`, with `publish = false`, no tag and no publish. The move lane runs the stranger test, the template's
-workflows and the first weekly mutation run in the new repository.
+`partsfoundry/interfaces_note`, with `publish = false`, no tag and no publish.
+[The crate move runbook](../crate-move.md) gives the steps after the move.

@@ -17,9 +17,8 @@ a crate) measured it at 2,625 on 2026-08-02, and it was 3,899 on 2026-09-24. §2
 file stays under 2,000 lines) sets the ceiling and its dated goals. Milestone 840 (the scheduler
 file is split along its seams) is the model.
 
-The cut and every module name below are calef's call. A lane writes them up as a
-`status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request
-carries `needs-architect`.
+The cut and every module name below are calef's call. A lane routes them to calef as
+[the routing tenet](../tenets/routing-work-and-decisions.md) says, before it moves a line.
 
 The lane wrote it up on 2026-10-10 (UTC) as §273 (the shell program becomes a directory of
 modules), and calef ruled it on 2026-10-11 (UTC). The witnesses get `witness.rs` as a temporary

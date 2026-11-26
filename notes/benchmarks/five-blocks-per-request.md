@@ -180,8 +180,8 @@ residual is now owned by the socket contract's own 4080-byte chunking. The table
 in [notes/smb.md](../smb.md)'s throughput section. What follows is the finding as it stood, which is
 what made that milestone exist.
 
-Milestone 138 asks whether 4 KiB is the atypical case. A Time Machine backup writes band files, which
-are large and sequential, and a 128 KiB record is plausibly right for those.
+[Milestone 138's options](../../design/roadmap/0138-file-io-throughput/options.md) ask whether
+4 KiB is the atypical case, since backup band files are large and sequential.
 
 It is not the atypical case. It is the only case this system has. `user/src/smb_server.rs` chunks
 every SMB read and every SMB write into `file_system_contract::PAGE`-sized requests, in a loop,

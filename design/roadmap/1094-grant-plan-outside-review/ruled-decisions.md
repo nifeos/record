@@ -118,8 +118,8 @@ Rule, ruled 2026-11-19 (UTC) by the maintainer, provisional: write both review p
 architect then ratifies any provisional names from the packages and clears `grant_plan` and
 `grant_contract` together, with no tag and no publication.
 
-Prior art. In this tree `generational_table`, `block_roster` and `file_allocation_table` each moved
-on a cleared review with no tag. Where nife differs: nothing outside nife pins either crate.
+Prior art. Three crates moved on a cleared review with no tag
+([the partition-table review](../1093-globally-unique-identifier-partition-table-outside-review.md) names them). Where nife differs: nothing outside nife pins either crate.
 
 Example. Both packages exist, the architect clears them in one step, and `grant_contract` and
 `grant_plan` get their repositories together, the planner depending on the leaf by version.

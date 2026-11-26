@@ -53,9 +53,9 @@ and for the key-line parser of milestone 666 (a signed build installs up to its 
 
 ## 6. Ruled: no override of a word the image carries
 
-Ruled 2026-11-02 (UTC): §229 (a bare name reaches an installed program) stands. A bare word the
-image carries runs the image's program, and an installed program runs under its own name or by
-path. [The command-name appendix](command-names.md) says how a word finds a program.
+Ruled 2026-11-02 (UTC): §229 (a bare name reaches an installed program) stands, as item 6 of
+[the central program table block](../1027-leaving-the-central-program-table.md) records.
+[The command-name appendix](command-names.md) says how a word finds a program.
 
 ## 7. Ruled: the image's names are the measured archive's
 

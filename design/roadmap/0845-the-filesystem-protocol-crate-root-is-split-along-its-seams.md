@@ -17,9 +17,8 @@ so it is the slowest grower of the six files over 4,000. §266 (a Rust source fi
 lines) sets the ceiling and its dated goals. Milestone 840 (the scheduler file is split along its
 seams) is the model.
 
-The cut and every module name below are calef's call. A lane writes them up as a
-`status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request
-carries `needs-architect`.
+The cut and every module name below are calef's call. A lane routes them to calef as
+[the routing tenet](../tenets/routing-work-and-decisions.md) says, before it moves a line.
 
 The lane wrote it up on 2026-10-10 (UTC) as §274 (the filesystem-protocol crate root splits into its module files), `status: PROPOSED`, with the cut re-measured
 on main at `396187b0b` and a recommendation on each fork. calef ruled on 2026-10-11 (UTC). Every

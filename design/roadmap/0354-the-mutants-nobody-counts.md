@@ -35,9 +35,10 @@ to replace the body with `Default::default()`. `measured_boot::verdict` returned
 decision in that crate saying whether unmeasured code may run. Deriving `Default` turned it from *1
 unviable, 0 tested* into **1 caught**. `measured_boot` alone had nine unviable mutants.
 
-Why it is worse than a missed mutant. A missed mutant is visible: it appears in the report, it
-lowers the score, somebody argues about it. An unviable one leaves no trace in the number, so a
-crate's score is silently computed over a smaller function than the reader believes.
+It is worse than a missed mutant, as
+[milestone 250 (an unviable mutant reads as a pass)](0250-an-unviable-mutant-is-a-hole-that-reads-as-a-pass.md)
+argues. An unviable one leaves no trace in the number, so a crate's score is silently computed over
+a smaller function than the reader believes.
 
 The cheap version is most of it. It is `cargo mutants --list` per crate counting unviable (one command,
 no run), then reading them to see whether a small honest change to the code makes the mutant both

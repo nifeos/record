@@ -40,8 +40,8 @@ calef's rulings, quoted from the maintainer comments on #1806 of 2026-10-07 (UTC
   `discover_aon_syscon` reading a `DeviceTreeBlob`. The device-tree queries move to the kernel side,
   which already depends on `device_tree_blob`. The tests also `include_bytes!` a fixture from
   `../../device_tree_blob/tests/fixtures/`, outside the package, which `cargo package` cannot ship.
-- Ruled 2026-10-25 (UTC): the crates take plain values; the device-tree walk moves to nife, and
-  the knowledge of the vendor and mainline JH7110 trees stays in each crate as data and decoders.
+- The crates take plain values, by the ruling in
+  [milestone 857 (crates released on their own)](0857-crates-released-on-their-own.md#the-rulings).
 - Cut on 2026-10-25 (UTC) by #2719. The crate names the compatible strings and node names, and
   `Discovered::from_node`, `mainline_phy` and `vendor_phy` decode a node's properties. The walk
   is `machine_discovery::jh7110::designware_ethernet`, and the fixtures moved with its tests. The
@@ -52,12 +52,12 @@ calef's rulings, quoted from the maintainer comments on #1806 of 2026-10-07 (UTC
   `net_stack.rs`.
 - crates.io answers 404 for the name (checked 2026-10-07).
 
-**Reuse:** the alternatives were surveyed in #1806's `other-implementations.md` appendix (looked up 2026-10-07),
-and none is taken, because calef ruled this crate "publish ours". elliott10's `dwmac-my` 0.2.0
-(2026-02, MIT) is the one Rust DWMAC crate on crates.io, with 35 downloads, no reverse dependencies
-and no proofs found. Linux's `stmmac` (GPL-2.0) stays the reference for behavior and is read, never
-copied. No upstream offer goes anywhere: calef ruled on #1806 that nife contributes only to projects
-nife depends on.
+**Reuse:** the alternatives were surveyed in #1806's `other-implementations.md` appendix (looked up
+2026-10-07), and none is taken, because calef ruled this crate "publish ours". elliott10's
+`dwmac-my` 0.2.0 (2026-02, MIT) is the one Rust DWMAC crate on crates.io, with 35 downloads, no
+reverse dependencies and no proofs found. Linux's `stmmac` (GPL-2.0) stays the reference for
+behavior and is read, never copied. No upstream offer goes anywhere, by the ruling in
+[milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md).
 
 ## What is proven
 
@@ -86,18 +86,18 @@ and controller bring-up.
 2. Make the cut above. `cargo tree -p designware_ethernet` then lists no nife crate, and the tests
    read only fixtures inside the package.
 3. In the tree, `script/verify` proves the harnesses and `Cargo.toml` says `publish = false`.
-4. The package is 0.1.0 with its own semver, states `rust-version` (#1806's note built it on stable
-   1.94.1), and ships its harnesses and falsification patches. `cargo package --list` shows them.
-5. Ready means proofs passing and the API stable. §235 (the OS is built and updated from packages,
-   and its source divides by purpose) has milestone 610 (the interface's stability is
-   measured weekly)'s per-package co-change column, and the soak (step 6) is how the second is
-   measured. When the soak exits, calef adds it to the lint-checked publish allowlist. The
-   `partsfoundry/designware_ethernet` repository is created when the crate moves, on the shared CI
-   template (milestone 887), through reusable workflows: Kani through `kani-github-action`, lint,
-   release. Its release workflow refuses to publish unless the proof job is green. No harness here
-   reads `target_arch`, so stock Kani proves them. The patched Kani of §218 (carry a Kani patch so
-   riscv64 is proved, and send it upstream) is carried only if one comes to need riscv64. Milestone
-   589 (Kani can prove riscv64 from the hosts we already have) built it.
+4. The package meets Fork 3 of
+   [milestone 857 (crates released on their own)](0857-crates-released-on-their-own.md#the-rulings).
+   `cargo package --list` shows its harnesses and falsification patches.
+5. Ready means proofs passing and the API stable.
+   [Milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md#release-by-1806s-rulings)
+   says how each is measured; here the soak is step 6. When the soak exits, calef adds it to the
+   lint-checked publish allowlist. The `partsfoundry/designware_ethernet` repository is created when
+   the crate moves, on the shared CI template (milestone 887), through reusable workflows: Kani
+   through `kani-github-action`, lint, release. Its release workflow refuses to publish unless the
+   proof job is green. No harness here reads `target_arch`, so stock Kani proves them. §218 (carry a
+   Kani patch so riscv64 is proved) applies only if a harness comes to need riscv64. Milestone 589
+   (Kani can prove riscv64 from the hosts we already have) built it.
 6. Soak, as its own repository, until the [soak's five end conditions](../../notes/crate-move.md#the-soaks-five-end-conditions)
    in the runbook hold.
 7. Publish and consume the release by version, by the runbook's
@@ -179,9 +179,8 @@ links it carried, by milestone 857's provenance rule.
 
 ## BUGS
 
-- Steps 5 and 6 wait on milestone 887 (crate repositories share one CI template),
-  which owns the shared CI template, the publish allowlist lint and the `nifeos` crates.io team,
-  and on milestone 610's per-package co-change column.
+- Steps 5 and 6 wait on milestone 887 (one CI template) and on 610's
+  co-change column.
 - Milestone 53 (the board's own peripherals: network and storage on real silicon) is PARTIAL and its
   network lane is active, so the API is still moving.
 - The device-tree fixtures (`tests/fixtures/*.dts`) are excerpts of the mainline and vendor JH7110
@@ -203,8 +202,6 @@ links it carried, by milestone 857's provenance rule.
 - **Outstanding.** The tag `v0.1.0-pre.1`, which waits for calef, the soak's end conditions, the
   publication and nife consuming the release by semantic version. Checked by
   `git ls-remote --tags https://github.com/partsfoundry/designware_ethernet`, which lists no tag.
-- **Recorded.** Publishing to crates.io waits on the maintainers' hold and an architect's approval,
-  as the *Release* section states.
 
 ## Index row
 

@@ -3,14 +3,17 @@
 Name: unrecorded. Provisional, and not yet put to calef; the parent note is
 [kani-upstream.md](../kani-upstream.md).
 
-The texts for the upstream conversation (issue [#2402](https://github.com/model-checking/kani/issues/2402) and the pull request), one file each, beside
-the note that argues them. [model-checking/kani#4913](https://github.com/model-checking/kani/pull/4913)
-is open and out of draft. feliperodri requested changes on 2026-10-05 (UTC); calef answered every
-thread and asked for re-review. Upstream `main` was merged in on 2026-10-22 (merge `3b698421a`,
-three conflicts from upstream [#4941](https://github.com/model-checking/kani/pull/4941), which rewrote `--export-json` to the RFC 0015 shape), and
-`c264c6929` makes that export report the verification target and updates RFC 0015's field table.
-It waits on a maintainer approving the fork's CI run, then on re-review. The comment drafted in
-[issue-2402-comment.md](issue-2402-comment.md) is not posted on [#2402](https://github.com/model-checking/kani/issues/2402).
+The texts for the upstream conversation (issue
+[#2402](https://github.com/model-checking/kani/issues/2402) and the pull request), one file each,
+beside the note that argues them.
+[model-checking/kani#4913](https://github.com/model-checking/kani/pull/4913) is open and out of
+draft. Its review state is in [kani-upstream.md](../kani-upstream.md). Upstream `main` was merged in
+on 2026-10-22 (merge `3b698421a`, three conflicts from upstream
+[#4941](https://github.com/model-checking/kani/pull/4941), which rewrote `--export-json` to the RFC
+0015 shape), and `c264c6929` makes that export report the verification target and updates RFC 0015's
+field table. It waits on a maintainer approving the fork's CI run, then on re-review. The comment
+drafted in [issue-2402-comment.md](issue-2402-comment.md) is not posted on
+[#2402](https://github.com/model-checking/kani/issues/2402).
 
 - [pull-request-4913-review.md](pull-request-4913-review.md): the rehearsal review of the opened
   pull request (2026-09-30, UTC).

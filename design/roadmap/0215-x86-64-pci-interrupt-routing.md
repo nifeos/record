@@ -54,8 +54,8 @@ is the original bug wearing the clothes of a graceful degradation.
 
 An intid on x86_64 was already two things: a **vector** for a local APIC source (there is no
 controller input to name) and a legacy IRQ number for an IO APIC line. An MSI is a local APIC
-source in the only sense that matters, because the device writes the vector straight to the APIC.
-So an MSI intid is its vector, and three things collapse rather than needing building:
+source, as [the ACPI and PCI interrupts note](../../notes/x86-port/acpi-and-pci.md) explains. So an
+MSI intid is its vector, and three things collapse rather than needing building:
 
 - `irq::enable` has nothing to do for one, and that is an answer rather than a stub: the message is
   edge-delivered and already over. A driver's `Irq::ACK` is correspondingly a no-op.

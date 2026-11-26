@@ -89,9 +89,10 @@ transcribed by hand.
 
 ## What it waits on
 
-The C library is §265 (a C library started from relibc), built as milestone 835 (a C library,
-stage 1: files, clock and memory). ioping 1.3 runs unmodified on nife under QEMU on all three
-architectures. What remains is the comparison on xenon.
+The C library,
+[milestone 835 (a C library, stage 1)](0835-a-c-library-stage-one-files-clock-and-memory.md), is
+built. ioping 1.3 runs unmodified on nife under QEMU on all three architectures. What remains is the
+comparison on xenon.
 
 It needs nothing else that is missing. From memory, to be checked against the pinned source, ioping
 uses `open`, `pread` and `pwrite`, `clock_gettime` and `getopt`, with no threads and no `fork`. Of
@@ -101,23 +102,20 @@ Reuse: ioping is taken unmodified; no nife-side benchmark program is written.
 
 ## How it runs continuously
 
-QEMU TCG wall-clock timings are meaningless, so nothing here gates on them. Where a host-side
-harness allows, CI gates on deterministic instruction counts through `script/bench` (a pinned
-icount baseline per workload step, `--check` failing on drift). The wall-clock runs happen on
-silicon, and write dated rows to `notes/benchmarks.md` with the Linux row beside them. A run that
-cannot reach the board writes nothing rather than a TCG number.
+It runs continuously as
+[milestone 826 (an lmbench subset on nife and Linux)](0826-an-lmbench-subset-on-nife-and-linux.md)
+does.
 
 ## Done when
 
-*§297 (software reaches a nife system as a package `jig` installs from basalt's index, the kernel
-included) binds this. calef, 2026-10-12 (UTC): "They should all be installed via jig through
-basalt."*
+*§297 (a package `jig` installs) binds this. calef, 2026-10-12 (UTC): "They should all be installed
+via jig through basalt."*
 
 ioping must run on nife installed by `jig install` from basalt's package index. basalt builds the
 package against the nife commit it pins. The install waits on milestones 809 and 801, as §297 (a
 package `jig` installs) lists. The package itself is milestone 906 (ioping is packaged in basalt,
-and its test installs it with `jig`). No work toward that starts until those milestones are built
-(calef, 2026-10-12 UTC: "For our other programs let's block start on packaging.").
+and its test installs it with `jig`). No work toward that starts until those milestones land
+([the package manager](../../notes/packages/jig.md#a-port-waits-on-the-package-client) holds the rule).
 
 ## BUGS
 

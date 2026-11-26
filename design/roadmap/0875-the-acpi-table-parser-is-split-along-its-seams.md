@@ -17,9 +17,8 @@ table parser, and it is 3,009 lines at `396187b0b`. It is a
 module of the `machine_discovery` crate, not its root. §266 (a Rust source file stays under 2,000
 lines) sets the ceiling. Milestone 840 (the scheduler file is split along its seams) is the model.
 
-The cut and every module name below are calef's call. A lane writes them up as a
-`status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request
-carries `needs-architect`.
+The cut and every module name below are calef's call. A lane routes them to calef as
+[the routing tenet](../tenets/routing-work-and-decisions.md) says, before it moves a line.
 
 §293 (the ACPI table parser splits into one private module per table) is that write-up, decided,
 with the file measured on main at `17b23264e`. Three decisions answer forks 1 and 2 below: §272 (the grant-plan crate root splits into

@@ -8,8 +8,8 @@ calef's decision of the same day against filesystem-level encryption on the back
 
 ## Reading the drive from a MacBook or a Linux host: BUILT 2026-07-30
 
-The question that makes a backup credible rather than merely functional: the board is dead, can I
-get my data? calef asked it, and the answer turns out to be that we disabled the feature.
+calef asked the question [the host recovery note](../../../notes/host-recovery.md) opens with, and
+the answer turns out to be that we disabled the feature.
 
 Correction to this section's original heading, which said "which upstream already solved". It
 half did. Upstream solved *mounting* (FUSE), and that is the path we deliberately do not take.

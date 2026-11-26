@@ -17,9 +17,8 @@ needs_person: no
 lines) sets the ceiling and its dated goals. Milestone 840 (the scheduler file is split along its
 seams) is the model for this block.
 
-The cut and every module name below are calef's call. A lane writes them up as a
-`status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request
-carries `needs-architect`.
+The cut and every module name below are calef's call. A lane routes them to calef as
+[the routing tenet](../tenets/routing-work-and-decisions.md) says, before it moves a line.
 
 **BUILT, 2026-10-11 (UTC).** The lane wrote the cut up on 2026-10-10 as §272 (the grant-plan
 crate root splits into private modules), and calef ruled its three forks on 2026-10-11, each as

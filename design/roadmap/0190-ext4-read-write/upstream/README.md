@@ -34,6 +34,32 @@ reviewed its text and given a separate go.
   allocated in an `INODE_UNINIT` group leaving its inode bitmap's padding clear; merged as
   rcore-os/tgoskits#2825.
 
+## What every draft shares
+
+- Base: `rcore-os/tgoskits`, branch `dev`, commit `0353572d1e2cca79e25a2805deeff4521449a5c1`
+  ("fix(x86_vlapic): stop the APIC timer without yielding in the vCPU entry window
+  ([#2819](https://github.com/rcore-os/tgoskits/pull/2819))"), the head of `dev` at filing. Item 9
+  went first, on the earlier base `6e80b940d`. Every other patch here dates from `6e80b940d` and
+  applies to `0353572d1` unchanged.
+- Linked Issue: upstream's contributing guide (section 4.3) processes no pull request without one.
+  So each Issue went first, and its pull request body names the Issue's number.
+- Issue settings: the guide (section 3.7) requires them in the sidebar. They are Assignees `calef`,
+  labels `q4` and either `bug` or `task`, the matching Type, and Milestone `2026Q4`. GitHub dropped
+  them at creation, because the filing account has no triage permission on the repository. The
+  guide asks a maintainer to fill them in. Each draft names its own label.
+- The rerun: before filing, every check a pull request cites ran again on `0353572d1` with its
+  patch applied. There `cargo xtask test --since 0353572d1` failed only three growth tests, and
+  they fail the same way on unchanged `dev`. Two are rsext4's, in `tests/filesystem_growth.rs`. The
+  third is ax-fs-ng's `root_growth_preserves_other_partitions_and_ext4_contents`, which failed in
+  two feature profiles on `6e80b940d`.
+- Why the growth tests fail: the filing host's `mke2fs.conf` enables `orphan_file`, and the
+  feature check in `layout.rs` refuses any compatible feature outside its list. With
+  `MKE2FS_CONFIG` naming a copy of `/etc/mke2fs.conf` without `orphan_file`, they pass.
+- Red and green: each regression test ran with its commit's source change reverted (red), then as
+  committed (green). For items 2a and 2b that went through
+  `cargo test -q -p rsext4 --features host-test --test file_operations <test>`. That is the profile
+  `cargo xtask test` runs for rsext4.
+
 *Name: provisional. For the drafts the parent's upstream round cites. calef names directories.*
 
 - `2a-free-empty-extent-index` Name: provisional. The upstream item's number, a letter per

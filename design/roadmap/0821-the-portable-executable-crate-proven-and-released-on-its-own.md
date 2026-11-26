@@ -86,19 +86,18 @@ the riscv64 UEFI gate shows for this tree's own loader and nothing shows in gene
 2. Close the four holes in `BUGS`, write the five proofs above with their falsification patches, and
    rewrite `BUGS` to say what the crate now refuses.
 3. In the tree, `script/verify` proves the harnesses and `Cargo.toml` says `publish = false`.
-4. The package is 0.1.0 with its own semver, states `rust-version` (#1806's note built it on stable
-   1.94.1), and ships its harnesses and falsification patches. `cargo package --list` shows them.
-5. Ready means proofs passing and the API stable. §235 (the OS is built and updated from packages,
-   and its source divides by purpose) has milestone 610 (the interface's stability is
-   measured weekly)'s per-package co-change column, and the soak (step 6) is how the second is
-   measured. When the soak exits, calef adds it to the lint-checked publish allowlist. The
-   `nifeos/portable_executable` repository is created when the crate moves, on the shared CI
-   template (milestone 887), through reusable workflows: Kani through `kani-github-action`, lint,
-   release. Its release workflow refuses to publish unless the proof job is green. Nothing here
-   reads `target_arch`; the ELF's machine is data, not the build target. So stock Kani serves. The
-   patched Kani of §218 (carry a Kani patch so riscv64 is proved, and send it upstream) is carried
-   only if a harness comes to need riscv64. Milestone 589 (Kani can prove riscv64 from the hosts we
-   already have) built it.
+4. The package meets Fork 3 of
+   [milestone 857 (crates released on their own)](0857-crates-released-on-their-own.md#the-rulings).
+   `cargo package --list` shows its harnesses and falsification patches.
+5. Ready means proofs passing and the API stable.
+   [Milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md#release-by-1806s-rulings)
+   says how each is measured; here the soak is step 6. When the soak exits, calef adds it to the
+   lint-checked publish allowlist. The `nifeos/portable_executable` repository is created when the
+   crate moves, on the shared CI template (milestone 887), through reusable workflows: Kani through
+   `kani-github-action`, lint, release. Its release workflow refuses to publish unless the proof job
+   is green. Nothing here reads `target_arch`; the ELF's machine is data, not the build target. So
+   stock Kani serves. §218 (carry a Kani patch so riscv64 is proved) applies only if a harness comes
+   to need riscv64. Milestone 589 (Kani can prove riscv64 from the hosts we already have) built it.
 6. Soak, as its own repository, until the [soak's five end conditions](../../notes/crate-move.md#the-soaks-five-end-conditions)
    in the runbook hold.
 7. Publish and consume the release by version, by the runbook's
@@ -114,12 +113,12 @@ the first release, since rustc emits PE for those directly.
 
 ## Standalone, measured 2026-10-11 (UTC)
 
-`script/crate-standalone portable_executable` fails today, at base `ae6b91e79`. The manifest
-inherits `license` and `lints` from nife's workspace and states no `rust-version`, and there is no
-README, `LICENSE-MIT` or `LICENSE-APACHE`. Those hold for all nine crates. Builds and tests on
-stable for the host and the three bare-metal targets, and has no harness for Kani to run. Beyond
-manifest and files, 8 lines cite this tree: 3 tree paths, 2 `milestone N`, 1 `§N`, 1 naming calef
-and 1 provenance block.
+`script/crate-standalone portable_executable` fails today, at base `ae6b91e79`. The manifest and
+files fail as for all nine crates in
+[milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md#standalone-measured-2026-10-11-utc).
+Builds and tests on stable for the host and the three bare-metal targets, and has no harness for
+Kani to run. Beyond manifest and files, 8 lines cite this tree: 3 tree paths, 2 `milestone N`, 1
+`§N`, 1 naming calef and 1 provenance block.
 
 Name: `portable_executable` is ratified today (`script/names`, checked 2026-10-11).
 
@@ -146,9 +145,8 @@ crate publishes without the proofs milestone 857 (crates released on their own) 
 
 ## BUGS
 
-- Steps 5 and 6 wait on milestone 887 (crate repositories share one CI template),
-  which owns the shared CI template, the publish allowlist lint and the `nifeos` crates.io team,
-  and on milestone 610's per-package co-change column.
+- Steps 5 and 6 wait on milestone 887 (one CI template) and on 610's
+  co-change column.
 - The five properties are this lane's proposal, read from the code and its audit, not a ruling.
 - `needs_person` is `yes` because the exit includes a publication only calef can approve. Everything
   before step 7 can start now.

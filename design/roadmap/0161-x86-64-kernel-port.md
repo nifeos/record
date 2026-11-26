@@ -219,10 +219,10 @@ failure 3, milestone 316); the other three were open as written. The working is 
 2. `CR4.PGE` and `CR4.PCIDE`. icount tick counts were byte-identical with PGE on and off, and TCG
    timing overlapped within 1%, because the pinned QEMU flushes its TLB on every `CR3` write. The
    bits stay off and the question is not answered. KVM on cordoba, or xenon, would answer it.
-3. SMP failure (1). 26 of 40 four-core boots reported a core "did not start". `cpu_start` re-read
-   the online count after the STARTUP IPIs, so a core that checked in during the settle delay was
-   counted absent. Reading it once, before the INIT, fixed it: 40 of 40 at `-smp 4`, 20 of 20 at
-   `-smp 8` and at `-smp 3`. It plausibly explains the UEFI leg's one-in-three in
+3. SMP failure (1). 26 of 40 four-core boots reported a core "did not start".
+   [The `uefi-boot` two-core rate](../../notes/uefi-boot-two-core-rate.md) gives the cause. Reading
+   the online count once, before the INIT, fixed it: 40 of 40 at `-smp 4`, 20 of 20 at `-smp 8` and
+   at `-smp 3`. It plausibly explains the UEFI leg's one-in-three in
    [milestone 412 (`script/test`'s UEFI leg asserts two cores online)](0412-the-uefi-boot-gate-asserts-two-cores-that-do-not-always-start.md),
    not measured here.
 4. SMP failure (3). Already fixed by milestone 316 (`BOOT_CPU_ID`); verified in the tree.

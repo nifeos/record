@@ -26,8 +26,8 @@ nife work at all, so nothing here waits on anybody.
 
 ## This question came from the lab, which almost none of them do
 
-AGENTS.md ranks work by the shortest path to a system a customer runs, and that path has been
-vacant since 2026-08-30. This is not a workload and does not fill it. It is worth marking anyway,
+AGENTS.md ranks work by the shortest path to a system a customer runs, and that path is vacant
+([the note on general-purpose applications](../../notes/why-not-general-purpose.md) says since when). This is not a workload and does not fill it. It is worth marking anyway,
 because it is the first requirement in weeks that arrived from the environment the machines actually
 live in rather than from the roadmap's own logic, and the ranking function is supposed to notice
 that difference.

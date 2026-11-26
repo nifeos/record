@@ -17,9 +17,8 @@ source file stays under 2,000 lines) sets the ceiling and its dated goals. Miles
 scheduler file is split along its seams) is the model, but this block reaches a different answer,
 because the file is mostly tests.
 
-The file layout and every name below are calef's call. A lane writes them up as a
-`status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request
-carries `needs-architect`.
+The file layout and every name below are calef's call. A lane routes them to calef as
+[the routing tenet](../tenets/routing-work-and-decisions.md) says, before it moves a line.
 
 The lane wrote it up on 2026-10-10 (UTC) as §275 (the file server core's tests move into child modules by topic), `status: PROPOSED`, with the cut re-measured
 on main at `396187b0b` and a recommendation on each fork. Nothing moves until calef rules.

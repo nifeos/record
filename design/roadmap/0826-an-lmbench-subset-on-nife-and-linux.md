@@ -58,8 +58,9 @@ Reuse: lmbench is taken; the harness is the likeliest place a patch is needed.
 
 ## What it waits on
 
-The C library is §265 (a C library started from relibc), and its first stage, milestone 835 (a C
-library, stage 1: files, clock and memory), is built. This program's other needs are below.
+The C library,
+[milestone 835 (a C library, stage 1)](0835-a-c-library-stage-one-files-clock-and-memory.md), is
+built. This program's other needs are below.
 
 Fork. nife has no `fork` by design (§10 (process model: capability-based, microkernel)), so a path
 that needs it never unblocks. The port runs the program's no-fork mode where one exists, and a row
@@ -83,14 +84,13 @@ nothing rather than a TCG number.
 
 ## Done when
 
-*§297 (software reaches a nife system as a package `jig` installs from basalt's index, the kernel
-included) binds this. calef, 2026-10-12 (UTC): "They should all be installed via jig through
-basalt."*
+*§297 (a package `jig` installs) binds this. calef, 2026-10-12 (UTC): "They should all be installed
+via jig through basalt."*
 
 Each lmbench program must run on nife installed by `jig install` from basalt's package index. basalt
 builds the package against the nife commit it pins. The install waits on milestones 809 and 801, as
-§297 (a package `jig` installs) lists. No work toward that starts until those milestones are built
-(calef, 2026-10-12 UTC: "For our other programs let's block start on packaging.").
+§297 (a package `jig` installs) lists. No work toward that starts until those milestones land
+([the package manager](../../notes/packages/jig.md#a-port-waits-on-the-package-client) holds the rule).
 
 ## Index row
 

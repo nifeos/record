@@ -79,9 +79,8 @@ login would use `verify`; and anything later that signs.
 
 ## BUGS
 
-- It does not protect against an attacker who holds the endpoint right now. They can authenticate
-  sessions for as long as they hold it. The claim is that compromise is *bounded and revocable*, not
-  that the key is safe from a live intruder.
+- It does not protect against an attacker who holds the endpoint right now, as
+  [the NTLMv2 note](../../notes/ntlm.md) says.
 - Shipping MD4 and MD5 is deliberate and is protocol compliance, not a security choice. NTLMv2
   specifies them; implementing them says nothing about their strength, the way implementing DES to
   talk to old hardware would not. What matters is what is stored and what is claimed about it.

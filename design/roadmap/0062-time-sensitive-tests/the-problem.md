@@ -57,10 +57,9 @@ Added 2026-08-04 from `notes/semihosting.md#the-hang-watchdog-and-what-it-cannot
 which records the limitation and names the fix
 nobody owns. The suite's own deadlock detector has exactly the problem this milestone is about.
 
-The heartbeat is bumped once per test, at the test's start, in `Testable::run`, and never while
-a test runs. So "no progress for 60 s" cannot distinguish a genuine deadlock from a test that is
-simply *slower* than 60 s. Both look identical from outside: the heartbeat stops advancing because
-no *new* test started.
+The heartbeat is bumped once per test, at the test's start, in `Testable::run`, and never while a
+test runs. So a slow test looks like a deadlock, as
+[the semihosting note](../../../notes/semihosting.md) records.
 
 This has already cost a diagnosis. Milestone 32's FS-server test tripped the watchdog as a false
 deadlock. It was not stuck, it was starved: leaked spinning driver threads crammed onto core 0 slowed

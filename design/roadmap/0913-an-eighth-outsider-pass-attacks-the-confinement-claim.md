@@ -31,12 +31,12 @@ boots, and keeps the standing refusal log.
 
 ## Why
 
-Risk 7 (the confinement claim is false) is AMBER. Its criterion (c) for green is two consecutive
-independent attacks with no escape on a shipped path, at least one by a non-Anthropic model or a
-human. The count is 0: the seventh pass found no escape but booted 3 of 34 rows, and calef ruled on
-#2010 (2026-10-12 UTC), option (b), that it does not count. The same ruling set the floor this pass
-must meet. Its one near miss, the retype gap, is milestone 824 (a retype mints no right its budget
-lacks), so this pass runs on a tree where 824 has landed.
+Risk 7 (the confinement claim is false) is AMBER, and
+[its page](../fatal-risks/7-the-confinement-claim.md) states criterion (c) for green. The count is
+0: the seventh pass found no escape but booted 3 of 34 rows, and calef ruled on #2010 (2026-10-12
+UTC), option (b), that it does not count. The same ruling set the floor this pass must meet. Its one
+near miss, the retype gap, is milestone 824 (a retype mints no right its budget lacks), so this pass
+runs on a tree where 824 has landed.
 
 ## calef's ruling, 2026-10-13 (UTC)
 
@@ -115,11 +115,12 @@ Risk 7's page and appendix cite the pass under §216, by lane `lane/pass-8-rulin
 - Every escape is a failing test committed before any fix.
 - A pass-8 note with the per-row table and its refusal log, indexed in `notes/README/` and its area
   page.
-- Risk 7's appendix cites the pass through the maintainer under §216 (fatal-risk facts are
-  correctable, and verdicts are the architect's). Moving the color stays calef's.
+- Risk 7's appendix cites the pass, as
+  [milestone 800](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#where-the-results-go)
+  sets out. Moving the color stays calef's.
 
 ## Follow-on
 
-- **Milestone 198.** A human review, or a public bounty once a stranger can install nife, is the
-  stronger form and waits on milestone 198 (a package manager, and the trivial install that makes a
-  second customer possible).
+- **Milestone 198.** The stronger form that
+  [milestone 800](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#follow-on) names waits
+  on milestone 198 (a package manager).

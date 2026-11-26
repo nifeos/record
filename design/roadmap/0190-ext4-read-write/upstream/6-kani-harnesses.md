@@ -11,10 +11,8 @@ Chinese body below.
 - The harnesses: in partsfoundry/rsext4, six `verification.rs` modules under `src/`, each behind
   `#[cfg(kani)]`, with a falsification patch per harness in `falsifications/`. There is no patch
   beside this file, because the submission is an issue, not a pull request.
-- Issue settings, which upstream's contributing guide (section 3.7) requires in the sidebar:
-  Assignees `calef`, labels `task` and `q4`, Type `Task`, Milestone `2026Q4`. GitHub dropped these
-  at creation, because the filing account has no triage permission on the repository; the guide asks
-  a maintainer to fill them in.
+- Issue settings: label `task`, Type `Task`, and the
+  [shared rest](README.md#what-every-draft-shares).
 
 ## Why an issue and not a pull request
 

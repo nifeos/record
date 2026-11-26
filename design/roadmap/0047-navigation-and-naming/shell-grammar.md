@@ -37,10 +37,10 @@ the prefix marks the part already visible and stays silent on the part that matt
 extra` is refused because worker's manifest says `FileSpec::Forbidden`, not because of any prefix.
 
 The deeper reason: the capability claim is about absence, not presence. That a filename grants
-access to that file surprises nobody. What `wc report.txt` proves is that wc got that file *and
-nothing else*, and that claim lives in the tokens which are not on the line. A prefix decorating a
-token that *is* present cannot express it. `caps <cmd>` can, including direction, which makes it the
-visibility mechanism.
+access to that file surprises nobody.
+[Two words came out of the grammar](../../../notes/grant-expression/two-words.md) states that claim.
+A prefix decorating a token that *is* present cannot express it. `caps <cmd>` can, including
+direction, which makes it the visibility mechanism.
 
 What survives: the manifest declaring direction; `caps` as the sole visibility surface; `--mem 16`,
 a real grant with no Unix analogue spelled as an ordinary flag. Tests are the `crates/grant_plan`

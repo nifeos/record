@@ -68,24 +68,22 @@ the Linux side. No nife-side benchmark program is written, so there is no shim t
 
 ## What it waits on
 
-The C library is §265 (a C library started from relibc), and its first stage, milestone 835 (a C
-library, stage 1: files, clock and memory), is built. This program's other needs are below.
+The C library,
+[milestone 835 (a C library, stage 1)](0835-a-c-library-stage-one-files-clock-and-memory.md), is
+built. This program's other needs are below.
 
-Threads. fio times its jobs with its own threads even when jobs are processes. Threads are milestone
-812 (`std::thread::spawn` runs real threads in one address space), option A of §105
-(`std::thread::spawn` stays declined, until a customer needs it), reopened 2026-10-07 and not yet
-scheduled. Until then, milestone 834 (ioping) answers risk 6's read gap at queue depth 1 without
-threads.
+Threads. fio times its jobs with its own threads even when jobs are processes. Threads are
+[milestone 812 (`std::thread::spawn` runs real threads)](0812-threads-in-one-address-space.md),
+built. Milestone 834 (ioping) answers risk 6's read gap at queue depth 1 without threads.
 
 ## Done when
 
-*§297 (software reaches a nife system as a package `jig` installs from basalt's index, the kernel
-included) binds this. calef, 2026-10-12 (UTC): "They should all be installed via jig through
-basalt."*
+*§297 (a package `jig` installs) binds this. calef, 2026-10-12 (UTC): "They should all be installed
+via jig through basalt."*
 
 fio must run on nife installed by `jig install` from basalt's package index. basalt builds the
 package against the nife commit it pins. The install waits on milestones 809 and 801, as §297 (a
-package `jig` installs) lists. The rest of the port does not start until those milestones are built
+package `jig` installs) lists. The rest of the port does not start until those milestones land
 (calef, 2026-10-12 UTC: "For our other programs let's block start on packaging. That was the point
 but if we are done with fio let's not throw out the work."). The C library work already done for fio
 stays: the needs #2038 recorded and the pieces #2040 built (`getrusage`, `basename`, `select`,

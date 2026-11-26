@@ -21,9 +21,8 @@ This is the host-testable crate behind the shell. Milestone 70 (`swish`'s remain
 crate) lifted it out of the program on 2026-08-02. It renders every sentence the prompt prints and
 decides what a typed line is, with no capability in hand.
 
-The cut and every module name below are calef's call. A lane writes them up as a
-`status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request
-carries `needs-architect`.
+The cut and every module name below are calef's call. A lane routes them to calef as
+[the routing tenet](../tenets/routing-work-and-decisions.md) says, before it moves a line.
 
 The lane wrote it up on 2026-10-12 (UTC) as §290 (the shell logic crate root splits into private
 modules by feature). It asks nothing. §272 (the grant-plan crate root splits into private modules)

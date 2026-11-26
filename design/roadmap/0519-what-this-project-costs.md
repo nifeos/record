@@ -36,10 +36,10 @@ than tidy. See the deadline below.
 
 The shape those numbers make is the finding, and it should be stated before anyone optimizes the
 wrong term. Cash to date is under a thousand dollars all in, against about ten person-weeks of one
-experienced engineer's full attention. At any plausible rate for that person's time, the human cost
-is on the order of 99% of the economic cost and the machines are a rounding error. The claim this
-project can honestly make is not that software became cheap; it is that the scarce input is still a
-person, and what changed is how much one person's attention can be made to carry.
+experienced engineer's full attention. At any plausible rate for that time,
+[the cost note](../../notes/register-of-measures/project-cost.md) puts the person at about 99%. The
+claim this project can honestly make is not that software became cheap; it is that the scarce input
+is still a person, and what changed is how much one person's attention can be made to carry.
 
 ## The deadline, which decides the sequencing
 

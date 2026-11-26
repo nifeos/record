@@ -50,37 +50,31 @@ Reuse: netperf is taken and ported.
 
 ## What it waits on
 
-The C library is §265 (a C library started from relibc), and its first stage, milestone 835 (a C
-library, stage 1: files, clock and memory), is built. This program's other needs are below.
+The C library,
+[milestone 835 (a C library, stage 1)](0835-a-c-library-stage-one-files-clock-and-memory.md), is
+built. This program's other needs are below.
 
-A NIC on silicon, milestones 494 (a driver for the network card a PC actually has) and 53 (the
-board's own peripherals).
+A NIC on silicon, as [milestone 828 (iperf3 on nife and Linux)](0828-iperf3-on-nife-and-linux.md)
+lists.
 
-Fork. `netserver` forks a child per test by default. nife has no `fork` by design (§10 (process
-model: capability-based, microkernel)), so a path that needs it never unblocks. The port runs the
-program's no-fork mode where one exists, and a row that cannot run is recorded with its reason, as
-`notes/benchmarks.md` already does for spawn. From memory, `netserver` has a flag that runs tests
-serially in one process; the port checks the source before relying on it.
+Fork. `netserver` forks a child per test by default. nife has no `fork`, so a fork row follows
+[milestone 826 (an lmbench subset)](0826-an-lmbench-subset-on-nife-and-linux.md)'s rule. From
+memory, `netserver` has a flag that runs tests serially in one process; the port checks the source
+before relying on it.
 
 ## How it runs continuously
 
-QEMU TCG wall-clock timings are meaningless, so nothing here gates on them. Where a host-side
-harness allows, CI gates on deterministic instruction counts through `script/bench` (a pinned
-icount baseline per workload step, `--check` failing on drift). The wall-clock runs happen on
-silicon on a schedule, as the runbook does for the soak, and write dated rows to
-`notes/benchmarks.md` with the Linux row beside them. A run that cannot reach the board writes
-nothing rather than a TCG number.
+It runs continuously as [milestone 826 (an lmbench subset on nife and Linux)](0826-an-lmbench-subset-on-nife-and-linux.md) does.
 
 ## Done when
 
-*§297 (software reaches a nife system as a package `jig` installs from basalt's index, the kernel
-included) binds this. calef, 2026-10-12 (UTC): "They should all be installed via jig through
-basalt."*
+*§297 (a package `jig` installs) binds this. calef, 2026-10-12 (UTC): "They should all be installed
+via jig through basalt."*
 
 netperf must run on nife installed by `jig install` from basalt's package index. basalt builds the
 package against the nife commit it pins. The install waits on milestones 809 and 801, as §297 (a
-package `jig` installs) lists. No work toward that starts until those milestones are built (calef,
-2026-10-12 UTC: "For our other programs let's block start on packaging.").
+package `jig` installs) lists. No work toward that starts until those milestones land
+([the package manager](../../notes/packages/jig.md#a-port-waits-on-the-package-client) holds the rule).
 
 ## Index row
 

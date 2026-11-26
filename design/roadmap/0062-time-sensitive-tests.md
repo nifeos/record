@@ -137,11 +137,10 @@ tree `50a0e7cb` (both the assertion disposition and the migration-drain fix in p
 8 cores. 45 runs, 112 minutes of wall clock. One-minute load average across the whole loop: 4.8
 low, 90.1 peak, a wider band on both ends than the first acceptance run's 26.1 to 63.0.
 
-Result: 45 of 45 green. `ticks_arrive_at_the_configured_rate` ran on both ISA legs in every run
-(90 legs) and never printed `UNMEASURED`. `the_handler_keeps_up_when_no_lock_is_held` is gone from
-the suite, so it could contribute neither a red nor a false pass.
-`a_migrated_kernel_thread_keeps_its_hart_pointer`, the migration-drain fix's own target, was green
-in all 45 runs. No other assertion in the suite went red.
+Result: 45 of 45 green. `ticks_arrive_at_the_configured_rate` ran on both ISA legs in every run (90
+legs) and never printed `UNMEASURED`. `the_handler_keeps_up_when_no_lock_is_held` is gone from the
+suite, so it could contribute neither a red nor a false pass.
+[The confirmation run](../../notes/load-sensitive-assertions/confirmation-run.md) lists the rest.
 
 **The honest bound this run sets, not a claim wider than that.** Zero red in 45 trials does not
 prove the true rate is zero. By the rule of three it bounds it at roughly 6.7% (95% confidence) at

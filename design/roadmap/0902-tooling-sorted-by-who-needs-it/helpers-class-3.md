@@ -1,13 +1,11 @@
 # Helpers in class 3
 
-An appendix of [nife's tooling, sorted by who needs it](../0902-tooling-sorted-by-who-needs-it.md),
-measured 2026-10-12 (UTC) against `e3cc3f128`.
+An appendix of [nife's tooling, sorted by who needs it](../0902-tooling-sorted-by-who-needs-it.md), which says what was measured.
 Every class-3 file in `helpers/`, with recorded fixtures as one row per directory.
 
 Columns. Class is 1 (build and prove), 2 (standards), 3 (the fleet) or 4 (one machine). Two
 numbers mean the row straddles both. "Called or read by" lists the files that name this path,
-comments included. The search covers `script/`, `helpers/`, `.github/`, `.githooks/`, `.claude/`,
-`.cargo/` and `xtask/`. "Calls or reads" lists the inventoried paths this file names. Both show four and a
+comments included. The parent's "What was measured" lists the paths searched. "Calls or reads" lists the inventoried paths this file names. Both show four and a
 count. `s/` is `script/`, `h/` is `helpers/`, and a bare `.yml` is a workflow. The last
 column counts the times the file names calef.
 

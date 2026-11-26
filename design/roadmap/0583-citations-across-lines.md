@@ -58,7 +58,8 @@ Eighteen sites needed a correction, three were correct path citations the backti
 ## BUGS
 
 - The per-file gloss key ignores the letter. A file that glosses `milestone 19` answers the ratchet for `milestone 19d` as well. That is deliberate and matches the existing per-number rule, but it means a sub-part can ride on its parent's gloss. Only 20a has a record of its own today, so the exposure is small and the fix is a letter-aware key across `script/roadmap` too.
-- A citation split across *two* line breaks is still invisible. The one-newline cap is what stops a stray `(` on line 40 pairing with a `)` on line 900, and nothing in the tree wraps that way today.
+- A citation split across *two* line breaks is still invisible, for the reason
+  [the citations BUGS](../../notes/citations/bugs.md) gives.
 - The pre-filter now selects any file with a line ending in a citation. That is 204 files the scan did not open before. It costs time rather than correctness, and it is the reason to keep the selftest: if somebody later tightens the pattern for speed, the fixtures are what notice.
 
 ## Follow-on

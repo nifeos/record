@@ -38,8 +38,8 @@ calef's rulings, quoted from the maintainer comments on #1806 of 2026-10-07 (UTC
   `address_space_layout::pair_page`, its one use (`src/lib.rs`, in the handoff). That function places
   nife's virtual addresses, so the handoff it serves is nife's spawn ABI; whether the handoff stays
   in the published crate or moves to the driver is the lane's call, recorded in its pull request.
-- Ruled 2026-10-25 (UTC): the crates take plain values; the device-tree walk moves to nife, and
-  the knowledge of the vendor and mainline JH7110 trees stays in each crate as data and decoders.
+- The crates take plain values, by the ruling in
+  [milestone 857 (crates released on their own)](0857-crates-released-on-their-own.md#the-rulings).
 - Cut on 2026-10-25 (UTC) by #2719. The three virtual addresses that `pair_page` placed moved to
   `crates/driver_process_contract`, which the kernel and the components link, and `Handoff`, its
   `pack` and its harness have since moved there too.
@@ -48,13 +48,13 @@ calef's rulings, quoted from the maintainer comments on #1806 of 2026-10-07 (UTC
   `e1000e_transport.rs` and `net_stack.rs` (descriptors and tails).
 - crates.io answers 404 for the name (checked 2026-10-07).
 
-**Reuse:** the alternatives were surveyed in #1806's `other-implementations.md` appendix (looked up 2026-10-07),
-and none is taken, because calef ruled this crate "publish ours". rcore-os's `eth-intel` 0.2.4
-(MIT, 10.8k downloads, no proofs found) is a young driver inside the `tgoskits` monorepo.
-elliott10's `e1000-driver` 0.1.0 (2023-02) is GPL-2.0 and drives the older e1000. Redox's `e1000d`
-is a daemon whose GitHub mirror is archived. Linux's `e1000e` and FreeBSD's `em` stay the references
-for behavior and are read, never copied. No upstream offer goes anywhere: calef ruled on #1806 that
-nife contributes only to projects nife depends on.
+**Reuse:** the alternatives were surveyed in #1806's `other-implementations.md` appendix (looked up
+2026-10-07), and none is taken, because calef ruled this crate "publish ours". rcore-os's
+`eth-intel` 0.2.4 (MIT, 10.8k downloads, no proofs found) is a young driver inside the `tgoskits`
+monorepo. elliott10's `e1000-driver` 0.1.0 (2023-02) is GPL-2.0 and drives the older e1000. Redox's
+`e1000d` is a daemon whose GitHub mirror is archived. Linux's `e1000e` and FreeBSD's `em` stay the
+references for behavior and are read, never copied. No upstream offer goes anywhere, by the ruling
+in [milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md).
 
 ## What is proven
 
@@ -79,18 +79,18 @@ first candidate for a fifth row.
    ours), and `partsfoundry/e1000e` does not exist yet. `script/crate-standalone` checks the first.
 2. Make the cut above. `cargo tree -p e1000e` then lists no nife crate.
 3. In the tree, `script/verify` proves the harnesses and `Cargo.toml` says `publish = false`.
-4. The package is 0.1.0 with its own semver, states `rust-version` (#1806's note built it on stable
-   1.94.1), and ships its harnesses and falsification patches. `cargo package --list` shows them.
-5. Ready means proofs passing and the API stable. §235 (the OS is built and updated from packages,
-   and its source divides by purpose) has milestone 610 (the interface's stability is
-   measured weekly)'s per-package co-change column, and the soak (step 6) is how the second is
-   measured. When the soak exits, calef adds it to the lint-checked publish allowlist. The
-   `partsfoundry/e1000e` repository exists since the crate moved, on the shared CI template (milestone
-   887), through reusable workflows: Kani through `kani-github-action`, lint, release. Its release
-   workflow refuses to publish unless the proof job is green. No harness here reads `target_arch`,
-   so stock Kani proves them. The patched Kani of §218 (carry a Kani patch so riscv64 is proved, and
-   send it upstream) is carried only if one comes to need riscv64. Milestone 589 (Kani can prove
-   riscv64 from the hosts we already have) built it.
+4. The package meets Fork 3 of
+   [milestone 857 (crates released on their own)](0857-crates-released-on-their-own.md#the-rulings).
+   `cargo package --list` shows its harnesses and falsification patches.
+5. Ready means proofs passing and the API stable.
+   [Milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md#release-by-1806s-rulings)
+   says how each is measured; here the soak is step 6. When the soak exits, calef adds it to the
+   lint-checked publish allowlist. The `partsfoundry/e1000e` repository exists since the crate
+   moved, on the shared CI template (milestone 887), through reusable workflows: Kani through
+   `kani-github-action`, lint, release. Its release workflow refuses to publish unless the proof job
+   is green. No harness here reads `target_arch`, so stock Kani proves them. §218 (carry a Kani
+   patch so riscv64 is proved) applies only if a harness comes to need riscv64. Milestone 589 (Kani
+   can prove riscv64 from the hosts we already have) built it.
 6. Soak, as its own repository, until the [soak's five end conditions](../../notes/crate-move.md#the-soaks-five-end-conditions)
    in the runbook hold.
 7. Publish and consume the release by version, by the runbook's
@@ -104,12 +104,12 @@ the pinned nightly for `aarch64-unknown-none-softfloat`, `riscv64imac-unknown-no
 
 ## Standalone, measured 2026-10-11 (UTC)
 
-`script/crate-standalone e1000e` fails today, at base `ae6b91e79`. The manifest inherits `license`
-and `lints` from nife's workspace and states no `rust-version`, and there is no README,
-`LICENSE-MIT` or `LICENSE-APACHE`. Those hold for all nine crates. It does not build alone:
-`address_space_layout` is a path dependency outside the copy, so neither the build nor Kani ran.
-Release step 2's cut is what fixes that. Beyond manifest and files, 23 lines cite this tree: 12
-`milestone N`, 5 tree paths, 2 `§N`, 2 naming calef and 2 provenance blocks.
+`script/crate-standalone e1000e` fails today, at base `ae6b91e79`. The manifest and files fail as
+for all nine crates in
+[milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md#standalone-measured-2026-10-11-utc).
+It does not build alone: `address_space_layout` is a path dependency outside the copy, so neither
+the build nor Kani ran. Release step 2's cut is what fixes that. Beyond manifest and files, 23 lines
+cite this tree: 12 `milestone N`, 5 tree paths, 2 `§N`, 2 naming calef and 2 provenance blocks.
 
 `script/names` reports the name `e1000e` ratified (checked 2026-10-25).
 
@@ -212,9 +212,8 @@ links it carried, by milestone 857's provenance rule.
   in `partsfoundry/e1000e` names each survivor, and each goes into `.github/mutants-exempts` there with
   its reason.
 
-- Steps 5 and 6 wait on milestone 887 (crate repositories share one CI template),
-  which owns the shared CI template, the publish allowlist lint and the `nifeos` crates.io team,
-  and on milestone 610's per-package co-change column.
+- Steps 5 and 6 wait on milestone 887 (one CI template) and on 610's
+  co-change column.
 - Milestone 494 is still PARTIAL, so the API may still move. Semver 0.x allows that; publishing
   before 494 lands costs only version churn.
 - `needs_person` is `yes` because the exit includes a publication only calef can approve. Everything

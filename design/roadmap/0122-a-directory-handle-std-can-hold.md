@@ -7,7 +7,7 @@ built: 2026-08-18
 
 Built on 2026-08-18 (PR #320). Both options were built, in the order this block
 recommends, and both are proven end to end on both ISAs by the `std_exerciser` transcript. What the
-recommendation also asked for and this milestone did **not** do is measure A; see "What it did not
+recommendation also asked for and this milestone did not do is measure A; see "What it did not
 do" below, which also names the one contract question it turned up.
 
 ## The finding
@@ -90,8 +90,8 @@ at the depth it is going to. At most two handles are open at once, because each 
 And `remove_dir_all` needed no code at all. std's generic implementation is written in terms of
 `read_dir`, `remove_file` and `remove_dir` on paths it composes with `DirEntry::path`, so it started
 working the moment those paths resolved. It had been refused here with a note explaining that the
-recursion has to descend and a nested path is refused, which was true when it was written. That is
-the fourth refusal in this PAL found to have outlived its own reason, after milestone 64's three.
+recursion has to descend and a nested path is refused, which was true when it was written. It is one
+of the refusals [the descent note](../../notes/std/fs-descent.md) finds outlived their reason.
 
 **Two live bugs the walk found**, both invisible to a flat path and both in the tree before this
 milestone:
@@ -100,11 +100,11 @@ milestone:
   `parent & (READ | WRITE)`, so a descent that asked only for `CREATE` mints a file nobody can
   write: `std::fs::write("a/b")` created the file and then failed `EROFS` on its own first write.
   Against the granted directory it could never show, because nothing is requested there.
-- `dir::EPERM` was being reported to std programs as `Unsupported`. The PAL read a `-1` reply as
-  the kernel refusing the invoke, on the recorded ground that `EPERM` is not in the FS server's
-  vocabulary. It has been since milestone 47. So the one answer meaning "this capability does not
-  carry that right" arrived as "this platform cannot do that", which is §42's silent degradation and
-  would have made a narrowed grant indistinguishable from no grant at all.
+- `dir::EPERM` was being reported to std programs as `Unsupported`, for the reason
+  [the descent note](../../notes/std/fs-descent.md) gives. So the one answer meaning "this
+  capability does not carry that right" arrived as "this platform cannot do that", which is the
+  silent degradation §42 (a filesystem declares what it offers) refuses and would have made a
+  narrowed grant indistinguishable from no grant at all.
 
 ## What it did not do
 
