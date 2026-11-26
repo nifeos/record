@@ -35,7 +35,7 @@ Reuse: the prior-art table weighs each Intel driver a caller could take.
 - P1-2, no item carries an example: Done, partsfoundry/e1000e#42.
 - P1-3, no fallible function has an `# Errors` section: Done, partsfoundry/e1000e#42.
 - P2-1, a `smoltcp` device adapter: Waiting on the feature-name decision of milestone 1129.
-- P2-2, a data path without the copy: Open.
+- P2-2, a data path without the copy: Waiting on the DMA regions decision of milestone 1129.
 - P2-3, a link-state query: Done, partsfoundry/e1000e#42.
 - P2-4, `DataPlane::new` panics where it could refuse: Done, partsfoundry/e1000e#42.
 - P2-5, the manifest has no `documentation` key: Done, partsfoundry/e1000e#42.
