@@ -40,7 +40,12 @@ Reuse: the crate's tests and a scratch benchmark crate; no new tool.
 - P2-4, a sector buffer sized to the device: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
 - P2-5, six value types have no `Hash`: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
 - P2-6, `Attributes` has no operators: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
-- P2-7, creating entries in a large directory is quadratic: Open.
+- P2-7, creating entries in a large directory is quadratic: Will not fix, provisional, ruled
+  2026-11-26 UTC. Each create reads the whole directory once, to refuse a clashing name and number
+  the alias as well as to find free slots; the 1,000th, 2,000th and 4,000th creates in the root of a
+  FAT32 volume of one-sector clusters read 65, 127 and 253 sectors. A cheaper create needs a record
+  of the names a directory holds, which takes memory the crate does not have without an allocator,
+  so the cost stays documented in the README's `BUGS` section.
 
 ## Open decisions
 
