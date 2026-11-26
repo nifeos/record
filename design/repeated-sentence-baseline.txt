@@ -5,6 +5,10 @@
 # A change that folds a copy into a link removes its row (`python3 helpers/repeated_sentences.py
 # --bank` does it); `--report` prints the sentence behind each hash.
 # Layout (helpers/baseline_layout.py): rows sorted, a blank line after every row.
+003e3b38f75c design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
+
+003e3b38f75c design/roadmap/0820-the-xhci-crate-released-on-its-own.md
+
 015deba074bc design/roadmap/0125-a-number-in-the-prose-is-a-claim.md
 
 015deba074bc notes/counted-claims.md
@@ -641,24 +645,6 @@
 
 33fbe97a669b design/roadmap/0031-capability-shell.md
 
-3401da24db2e design/roadmap/0813-a-proven-fat-crate-released-on-its-own.md
-
-3401da24db2e design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
-
-3401da24db2e design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
-
-3401da24db2e design/roadmap/0816-the-designware-ethernet-crate-released-on-its-own.md
-
-3401da24db2e design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
-
-3401da24db2e design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
-
-3401da24db2e design/roadmap/0819-the-jh7110-clock-and-reset-crate-proven-and-released-on-its-own.md
-
-3401da24db2e design/roadmap/0820-the-xhci-crate-released-on-its-own.md
-
-3401da24db2e design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
-
 356e695a4635 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
 356e695a4635 design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
@@ -789,10 +775,6 @@
 
 3f1e5efabc27 design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
-3fad2c290b62 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
-
-3fad2c290b62 design/roadmap/1033-the-generational-table-crate-released-on-its-own.md
-
 40290afaa3fa design/roadmap/0527-the-survey-selector-and-a-threads-placement.md
 
 40290afaa3fa notes/process-view/survey-design.md
@@ -804,22 +786,6 @@
 418b22176e44 design/decisions/0183-what-no-arguments-means.md
 
 418b22176e44 design/roadmap/0440-what-no-arguments-means.md
-
-42cea7f04945 design/roadmap/0813-a-proven-fat-crate-released-on-its-own.md
-
-42cea7f04945 design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
-
-42cea7f04945 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
-
-42cea7f04945 design/roadmap/0816-the-designware-ethernet-crate-released-on-its-own.md
-
-42cea7f04945 design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
-
-42cea7f04945 design/roadmap/0819-the-jh7110-clock-and-reset-crate-proven-and-released-on-its-own.md
-
-42cea7f04945 design/roadmap/0820-the-xhci-crate-released-on-its-own.md
-
-42cea7f04945 design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
 4478818b4720 design/roadmap/0915-nmi-double-fault-and-machine-check-run-on-their-own-stacks.md
 
@@ -1108,22 +1074,6 @@
 5dbf8de65241 design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
 5dbf8de65241 design/roadmap/0819-the-jh7110-clock-and-reset-crate-proven-and-released-on-its-own.md
-
-5f651d3c3ad1 design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
-
-5f651d3c3ad1 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
-
-5f651d3c3ad1 design/roadmap/0816-the-designware-ethernet-crate-released-on-its-own.md
-
-5f651d3c3ad1 design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
-
-5f651d3c3ad1 design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
-
-5f651d3c3ad1 design/roadmap/0819-the-jh7110-clock-and-reset-crate-proven-and-released-on-its-own.md
-
-5f651d3c3ad1 design/roadmap/0820-the-xhci-crate-released-on-its-own.md
-
-5f651d3c3ad1 design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
 605f56dce228 design/roadmap/0699-a-local-editor-for-the-screen-sessions-uart-arm.md
 
@@ -2138,10 +2088,6 @@ d2b5a0cca76b design/roadmap/1084-current-cpu-contract-outside-review/what-was-ch
 d3bc1a240c3d notes/kernel-proofs.md
 
 d3bc1a240c3d notes/user-proofs/what-it-took.md
-
-d3e32b74feb8 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
-
-d3e32b74feb8 design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
 d3fda964450d design/roadmap/0857-crates-released-on-their-own.md
 
