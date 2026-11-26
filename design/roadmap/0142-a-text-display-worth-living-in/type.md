@@ -2,9 +2,9 @@
 
 This appendix belongs to [milestone 142](../0142-a-text-display-worth-living-in.md). It was moved
 out under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md), and
-the main page is complete without it. It holds the font investigation as written before [§104 (the
-rich-text font is DejaVu Sans Mono, and the palette is
-Solarized)](../../decisions/0104-the-font-and-the-palette.md) chose DejaVu Sans Mono on 2026-08-20.
+the main page is complete without it. It holds the font investigation as written before
+[§104 (the rich-text font is DejaVu Sans Mono, and the palette is Solarized)](../../decisions/0104-the-font-and-the-palette.md)
+chose DejaVu Sans Mono on 2026-08-20.
 
 ## Menlo cannot ship, and DejaVu is its ancestor
 

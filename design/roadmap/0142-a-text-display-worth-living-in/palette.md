@@ -2,9 +2,9 @@
 
 This appendix belongs to [milestone 142](../0142-a-text-display-worth-living-in.md). It was moved
 out under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md), and
-the main page is complete without it. It holds the palette investigation that [§104 (the rich-text
-font is DejaVu Sans Mono, and the palette is
-Solarized)](../../decisions/0104-the-font-and-the-palette.md) ruled on, choosing canonical Solarized
+the main page is complete without it. It holds the palette investigation that
+[§104 (the rich-text font is DejaVu Sans Mono, and the palette is Solarized)](../../decisions/0104-the-font-and-the-palette.md)
+ruled on, choosing canonical Solarized
 Dark.
 
 ## The name

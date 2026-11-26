@@ -28,9 +28,9 @@ can drive a ring against a fake device from an example, and know exactly what th
 do, before the first tag goes on it. The weekly gates pass, the public trait names are final, and the port of the
 I219 bring-up states every place it departs from its source.
 
-Publishing stays held, under the hold that
-[milestone 1050](1050-designware-mobile-storage-outside-review.md) states. Nothing in this block
-lifts that hold, and a green gate here is not permission to publish.
+Publishing stays held, as
+[milestone 1050 (`designware_mobile_storage`'s outside review)](1050-designware-mobile-storage-outside-review.md)
+says. Nothing in this block lifts that hold, and a green gate here is not permission to publish.
 
 ## What the review covered
 
