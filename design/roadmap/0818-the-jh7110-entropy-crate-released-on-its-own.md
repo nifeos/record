@@ -142,14 +142,14 @@ harness.
   `crates-io` environment with calef as reviewer, the labels and the team. The manifest keeps
   `publish = false`; the caller sets `allow-unpublished` for the soak.
 - `crates/jh7110_entropy` no longer exists here. `kernel`, `components` and `machine_discovery`
-  depend on `partsfoundry/jh7110_entropy` by `rev` `cfdbeb7` (§305), the commit of its tag `v0.2.0`. The
+  depend on `partsfoundry/jh7110_entropy` by `rev` `df37dc9` (§305), a commit 6 commits past its tag `v0.3.0-pre.1`. The
   verify table, the Kani reach list and the trust-boundary table no longer list it; the repository's
   own `proofs / kani` and `proofs / falsify` jobs prove the four harnesses.
 - End condition 1 holds: nife builds against the repository at that commit and its `main` is green.
   Condition 2 holds: the first scheduled weekly run, on 2026-11-02 (UTC), is green. Condition 4
   holds: `docs/stranger-test.md` there records a run on 2026-10-31. Condition 3 holds: the
   `release` workflow's gate and rehearse jobs passed at `522b98b` on 2026-11-11 (UTC), run
-  42997968584. Condition 5 counts four weeks from `v0.1.1`, so it ends no earlier than 2026-11-29.
+  42997968584. Condition 5 counts four weeks from `v0.3.0-pre.1` (2026-11-16 UTC), the release that carries the last breaking change `cargo-semver-checks` finds, so it ends no earlier than 2026-12-14.
 - A bump of the pin is a separate pull request citing the landed commit as
   `partsfoundry/jh7110_entropy@<sha>`.
 
@@ -161,8 +161,8 @@ first so reviewed, the pilot of the review as of the mechanics. It moved on 2026
 before that ruling, so the review reads its repository, and it comes before any contract crate
 leaves. The ruling's second item needs a tagged release whose
 commit carries the Cargo version, so that `cargo-semver-checks --baseline-rev` has a baseline.
-`partsfoundry/jh7110_entropy` carries the tags `v0.1.0`, `v0.1.1` and `v0.2.0`, and nife's three pins
-state `version = "0.2.0"` beside the revision. The architect cleared this crate's review on 2026-11-01
+`partsfoundry/jh7110_entropy` carries the tags `v0.1.0`, `v0.1.1`, `v0.2.0` and `v0.3.0-pre.1`, and nife's three pins
+state `version = "0.3.0-pre.1"` beside the revision. The architect cleared this crate's review on 2026-11-01
 (UTC).
 
 ## Review before release
@@ -247,11 +247,11 @@ names until the ratification pass, so this section keeps the links it carried.
 
 ## Follow-on
 
-- **Outstanding.** The soak's end condition 5 and release steps 7 to 9. Checked 2026-11-14
+- **Outstanding.** The soak's end condition 5 and release steps 7 to 9. Checked 2026-11-26
   (UTC): conditions 1 to 4 hold (*The soak* above), the four weeks of condition 5 end no earlier
-  than 2026-11-29, and nothing has published.
+  than 2026-12-14, and nothing has published.
 - **Recorded.** Ruled 2026-11-02 UTC: until `jh7110_entropy` reaches crates.io, nife depends on
-  `partsfoundry/jh7110_entropy` at the commit of its tag `v0.1.1` (`rev = "53b022b55b42a6dfc7eb670c438f0d3463da8db5"`, with `version = "0.1.1"`).
+  `partsfoundry/jh7110_entropy` by git revision (`rev = "df37dc91383c4226b0266499c48de7e5e92ecb99"`, with `version = "0.3.0-pre.1"`).
   A crates.io version replaces the pin after the soak release dry run.
 - **Recorded.** Ruled 2026-11-01 (UTC): the `needs-architect` hold on a semver break applies on
   wire-identity changes only for contract crates. `jh7110_entropy` is not one, so its hold on
