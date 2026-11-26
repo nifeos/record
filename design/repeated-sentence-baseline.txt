@@ -79,13 +79,9 @@
 
 0bff0d517bcd notes/glyphs.md
 
-0c3ca1a6b712 design/roadmap/0170-nano-editor.md
 
-0c3ca1a6b712 design/roadmap/0171-git-core-userspace.md
 
-0c3ca1a6b712 design/roadmap/0173-rustc-cargo-self-host.md
 
-0c3ca1a6b712 design/roadmap/0258-archive-and-compression.md
 
 0c67be9bd26a design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
@@ -124,21 +120,13 @@
 
 11fd5062cd7f design/roadmap/1102-network-time-protocol-outside-review.md
 
-1294526829b4 design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
-1294526829b4 design/roadmap/0827-hackbench-on-nife-and-linux.md
 
-1294526829b4 design/roadmap/0828-iperf3-on-nife-and-linux.md
 
-1294526829b4 design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
-1294526829b4 design/roadmap/0831-sqlite-speedtest1-on-nife-and-linux.md
 
-1294526829b4 design/roadmap/0832-stream-on-nife-and-linux.md
 
-1294526829b4 design/roadmap/0833-the-same-storage-benchmark-on-nife-and-linux.md
 
-1294526829b4 design/roadmap/0834-ioping-on-nife-and-linux.md
 
 12f1f555ddfb design/audit-reports/2026-09-29-names-and-numbers.md
 
@@ -404,11 +392,8 @@
 
 290b3b01447a notes/process-view/survey-design.md
 
-296e0bd907e3 design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
-296e0bd907e3 design/roadmap/0827-hackbench-on-nife-and-linux.md
 
-296e0bd907e3 design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
 299160cafdc2 notes/crate-reviews/current-cpu-contract.md
 
@@ -451,17 +436,11 @@
 
 
 
-2b9ad4781409 design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
-2b9ad4781409 design/roadmap/0827-hackbench-on-nife-and-linux.md
 
-2b9ad4781409 design/roadmap/0828-iperf3-on-nife-and-linux.md
 
-2b9ad4781409 design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
-2b9ad4781409 design/roadmap/0832-stream-on-nife-and-linux.md
 
-2b9ad4781409 design/roadmap/0833-the-same-storage-benchmark-on-nife-and-linux.md
 
 
 
@@ -675,17 +654,11 @@
 
 478710abf64a notes/host-recovery.md
 
-492a889e84e2 design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
-492a889e84e2 design/roadmap/0827-hackbench-on-nife-and-linux.md
 
-492a889e84e2 design/roadmap/0828-iperf3-on-nife-and-linux.md
 
-492a889e84e2 design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
-492a889e84e2 design/roadmap/0831-sqlite-speedtest1-on-nife-and-linux.md
 
-492a889e84e2 design/roadmap/0832-stream-on-nife-and-linux.md
 
 
 
@@ -1084,13 +1057,9 @@
 
 
 
-7a82a433223c design/roadmap/0066-vaultwarden.md
 
-7a82a433223c design/roadmap/0099-git-on-nife.md
 
-7a82a433223c design/roadmap/0123-the-demonstration.md
 
-7a82a433223c design/roadmap/0149-hpc-benchmark-suite.md
 
 7b44b3957aca design/roadmap/0800-a-non-anthropic-model-attacks-the-confinement-claim.md
 
@@ -1283,35 +1252,20 @@
 
 9d79730ebc2f design/roadmap/0808-every-gate-accounts-for-its-time.md
 
-9ea231266a04 design/roadmap/0066-vaultwarden.md
 
-9ea231266a04 design/roadmap/0099-git-on-nife.md
 
-9ea231266a04 design/roadmap/0123-the-demonstration.md
 
-9ea231266a04 design/roadmap/0170-nano-editor.md
 
-9ea231266a04 design/roadmap/0171-git-core-userspace.md
 
-9ea231266a04 design/roadmap/0173-rustc-cargo-self-host.md
 
-9ea231266a04 design/roadmap/0258-archive-and-compression.md
 
-9ea231266a04 design/roadmap/0710-firefox-port.md
 
-9ea231266a04 design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
-9ea231266a04 design/roadmap/0827-hackbench-on-nife-and-linux.md
 
-9ea231266a04 design/roadmap/0828-iperf3-on-nife-and-linux.md
 
-9ea231266a04 design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
-9ea231266a04 design/roadmap/0831-sqlite-speedtest1-on-nife-and-linux.md
 
-9ea231266a04 design/roadmap/0832-stream-on-nife-and-linux.md
 
-9ea231266a04 design/roadmap/0834-ioping-on-nife-and-linux.md
 
 9f5c66f11924 design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
@@ -1375,9 +1329,7 @@ a62d45e0972f design/roadmap/0480-a-server-that-logs-which-channel-a-request-arri
 
 a62d45e0972f design/roadmap/0481-terminal-multiplexing.md
 
-a7556deab768 design/roadmap/0828-iperf3-on-nife-and-linux.md
 
-a7556deab768 design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
 
 
@@ -1598,19 +1550,12 @@ c21e6f8ab53d design/roadmap/0483-the-console-server-on-the-sink-protocol.md
 
 
 
-c38886a429c1 design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
-c38886a429c1 design/roadmap/0827-hackbench-on-nife-and-linux.md
 
-c38886a429c1 design/roadmap/0828-iperf3-on-nife-and-linux.md
 
-c38886a429c1 design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
-c38886a429c1 design/roadmap/0831-sqlite-speedtest1-on-nife-and-linux.md
 
-c38886a429c1 design/roadmap/0832-stream-on-nife-and-linux.md
 
-c38886a429c1 design/roadmap/0834-ioping-on-nife-and-linux.md
 
 
 
@@ -1737,9 +1682,7 @@ d844d4c04483 design/decisions/0044-entropy-capability.md
 
 d844d4c04483 notes/entropy.md
 
-d8499456cdf4 design/roadmap/0831-sqlite-speedtest1-on-nife-and-linux.md
 
-d8499456cdf4 design/roadmap/0834-ioping-on-nife-and-linux.md
 
 d85dee968a89 design/roadmap/1099-machine-statistics-contract-outside-review.md
 
@@ -1757,11 +1700,8 @@ d96678cdcf14 notes/crate-reviews/domain-name-system.md
 
 
 
-d9c6ff3e005b design/roadmap/0827-hackbench-on-nife-and-linux.md
 
-d9c6ff3e005b design/roadmap/0828-iperf3-on-nife-and-linux.md
 
-d9c6ff3e005b design/roadmap/0833-the-same-storage-benchmark-on-nife-and-linux.md
 
 daf0d37dca12 design/roadmap/0190-ext4-read-write/upstream/4-fuzz-targets.md
 
@@ -1944,11 +1884,8 @@ eb3502635a58 design/roadmap/0047-navigation-and-naming/shell-grammar.md
 
 eb3502635a58 notes/grant-expression/two-words.md
 
-eb450db650e0 design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
-eb450db650e0 design/roadmap/0827-hackbench-on-nife-and-linux.md
 
-eb450db650e0 design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
 eb58dd9e2dbb design/roadmap/1093-globally-unique-identifier-partition-table-outside-review.md
 

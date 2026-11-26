@@ -140,9 +140,8 @@ literature without visiting a second source.
 
 ## Done when
 
-*Amended 2026-10-12 (UTC) under §297 (software reaches a nife system as a package `jig` installs
-from basalt's index, the kernel included). calef, that day: "They should all be installed via jig
-through basalt."*
+*§297 (a package `jig` installs) binds this. calef, 2026-10-12 (UTC): "They should all be installed
+via jig through basalt."*
 
 Each benchmark it runs must run on nife installed by `jig install` from basalt's package index.
 basalt builds the package against the nife commit it pins. The install waits on milestones 809 and
