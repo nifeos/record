@@ -16,10 +16,9 @@ milestone 1129 (the combine review), whose [block](1129-crate-interfaces-best-in
 form. The baseline is milestone 1057 (the outside review's findings),
 [its block](1057-e1000e-outside-review.md) and the cleared package
 [`notes/crate-reviews/e1000e.md`](../../notes/crate-reviews/e1000e.md). 1057's open items stay its
-own, and nothing here repeats them: the first release still waits for its cabled I219 run (P1-7),
-and its rulings on the ring size (P2-6) and on the private test doubles (P2-7) stand. The names
-1057 ratified stand, `empty_descriptor_rings` among them; the recheck against the naming rules made
-after the clearance finds none that a later rule reopens.
+own: the first release still waits for its cabled I219 run (P1-7), and its rulings on the ring size
+(P2-6) and on the private test doubles (P2-7) stand. No naming rule made after the clearance
+reopens a name 1057 ratified.
 
 Reuse: the prior-art table weighs each Intel driver a caller could take.
 
