@@ -165,6 +165,6 @@ Minimal setup, in the order the launch brief's prompt runs it:
   commit and on main: 13 of 13 tests on aarch64 and riscv64, 18 of 18 on x86_64. Its tests are on
   main as `ninth_pass_*`, each reviewer commit carrying `Co-Authored-By: Claude Opus 4.8`, and the
   runner's branch is gone. The pass note has the per-ISA table.
-- **Milestone 198** (a package manager). The stronger form that
-  [milestone 800](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#follow-on) names waits
-  on it.
+- **Milestone 198** (a package manager). The stronger form that milestone 800 (a non-Anthropic model
+  attacks the confinement claim) [names](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#follow-on)
+  waits on it.

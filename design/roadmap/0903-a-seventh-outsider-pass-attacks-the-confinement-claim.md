@@ -26,10 +26,11 @@ the standing refusal log.
 ## Why
 
 Risk 7 (the confinement claim is false) is AMBER, and
-[its page](../fatal-risks/7-the-confinement-claim.md) states criterion (c) for green. The sixth pass
-(milestone 871) booted DNS rebinding in the package fetch, fixed in #1901, and the count restarted
-at zero. calef asked on 2026-10-12 (UTC) for the seventh pass, with the independence rule as the
-point: a fresh reviewer, briefed the way milestone 633 allows.
+[its page](../fatal-risks/7-the-confinement-claim.md) states criterion (c) for green. The sixth
+pass, milestone 871 (a sixth outsider pass attacks the confinement claim), booted DNS rebinding in
+the package fetch, fixed in #1901, and the count restarted at zero. calef asked on 2026-10-12 (UTC)
+for the seventh pass, with the independence rule as the point: a fresh reviewer, briefed the way
+milestone 633 allows.
 
 ## The attack
 

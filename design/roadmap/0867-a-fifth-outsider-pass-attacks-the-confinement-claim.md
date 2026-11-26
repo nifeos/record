@@ -33,8 +33,8 @@ is at zero. This pass can be the first of the two; the second must be non-Anthro
 
 ## The attack
 
-Informed, the posture of
-[milestone 800](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#the-attack-is-informed).
+Informed, the posture of milestone 800 (a non-Anthropic model attacks the confinement claim),
+[stated there](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#the-attack-is-informed).
 Variant analysis against each fixed escape, and new ground where nothing has been found. The brief's
 targets were rows not attacked before, the newest surfaces and a refusal log. The surfaces: the §255
 socket capabilities, std at the prompt, the §252 (a resolver grant is one zone per client badge)
