@@ -25,9 +25,9 @@ Two witnesses because there are two different claims, and neither implies the ot
   comes back unchanged, that is not "the store landed somewhere else": the page was right there, in
   the offender's own page tables, one byte past a pointer it legitimately held, and **the store did
   not happen.** This is the stronger of the two.
-- `WITNESS_FAR` is a different frame at the same virtual address. `c_seam_wild` writes
-  `grant[len + 4096]`, an address the component has no mapping for at all and the confiner does.
-  When the confiner's page is unchanged, that is the statement **a virtual address means nothing
+- `WITNESS_FAR` is a different frame at `0x5000_2000`, two pages past the grant. `c_seam_wild`
+  writes `grant[len + 4096]`, an address the component has no mapping for at all and the
+  confiner does. When the confiner's page is unchanged, that is the statement **a virtual address means nothing
   outside the address space that owns it**, which is the MMU claim itself, made concrete rather than
   assumed.
 
