@@ -1,9 +1,9 @@
 # The service path: what a userspace server costs
 
-*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers and
-lets a reader act without opening this file. This one holds `relay_rtt`, `broker_rtt`, `fs_read`,
-and two small re-saves from July and August, with the dates, tables and corrections behind them.
-Name: ratified 2026-09-24 (calef); [the naming record](README.md) holds it.*
+*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers. This
+one holds `relay_rtt`, `broker_rtt`, `fs_read`, and two small re-saves from July and August, with
+the dates, tables and corrections behind them. Name: ratified 2026-09-24 (calef); [the naming
+record](README.md) holds it.*
 
 ## The service-path benchmarks: what a userspace-server architecture costs (2026-07-29)
 

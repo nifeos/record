@@ -335,9 +335,8 @@ There was also one stale `design/roadmap.md` path, and two claims a decision doe
 ## The same shape in another medium
 
 Milestone 112 (the SAFETY comments that bind nobody) found the same failure in a `// SAFETY:`
-comment that described a different operation and passed its lint for as long as the file existed. A
-comment that names its subject can be compared against it; one that does not is unverifiable by
-construction. The case is in [citations/another-medium.md](citations/another-medium.md).
+comment that described a different operation and passed its lint for as long as the file existed. The case, and
+what follows from it, is in [citations/another-medium.md](citations/another-medium.md).
 
 ## See also
 

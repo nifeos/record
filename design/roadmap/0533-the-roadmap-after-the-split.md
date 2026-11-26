@@ -12,11 +12,12 @@ needs_person: no
 
 Promoted from the proposal `the-roadmap-after-the-split`, filed 2026-09-19, on calef's instruction
 of 2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own,
-unedited except for this paragraph: the argument is its author's and promotion is not the moment to
-improve it. Written by `maintainer/roadmap-after-the-split`, on calef's question of 2026-09-19: *"We
-have a lot of machinery now for managing milestones. We could use issues. Are we sure our current
-approach is still the right approach? How will we manage this when we break up the repo and build
-packages?"* Shaped for the integrator to mint as a `design/decisions/` section.
+unedited, by [the promotion
+rule](../../notes/roadmap.md#anybody-may-add-to-the-roadmap-designroadmapproposals). Written by
+`maintainer/roadmap-after-the-split`, on calef's question of 2026-09-19: *"We have a lot of
+machinery now for managing milestones. We could use issues. Are we sure our current approach is
+still the right approach? How will we manage this when we break up the repo and build packages?"*
+Shaped for the integrator to mint as a `design/decisions/` section.
 
 The record's *location* is reversible (a `git mv`). The **citation convention is
 not**: 3,148 `milestone N` sites in 288 Rust files follow it, and it is in a reader's head. Options

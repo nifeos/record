@@ -1,10 +1,9 @@
 # The x86 TSS I/O-bitmap switch cost
 
-*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers and
-lets a reader act without opening this file. This one holds the naive and lazy bitmap writes that
-§121 (what a device capability is when the device has no page) asked to have priced, with the dates,
-tables and corrections behind them. Name: ratified 2026-09-24 (calef); [the naming
-record](README.md) holds it.*
+*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers. This
+one holds the naive and lazy bitmap writes that §121 (what a device capability is when the device
+has no page) asked to have priced, with the dates, tables and corrections behind them. Name:
+ratified 2026-09-24 (calef); [the naming record](README.md) holds it.*
 
 ## 2026-08-24: the TSS I/O-bitmap switch cost (DECISIONS §121's amendment)
 

@@ -14,8 +14,8 @@ needs_person: no
 
 `crates/file_system_contract/src/lib.rs` is 5,744 lines at `0435a9aeb`. It was 5,327 on 2026-09-24,
 so it is the slowest grower of the six files over 4,000. §266 (a Rust source file stays under 2,000
-lines) sets the ceiling and a 2026-12-31 goal of no file over 4,000. Milestone 840 (the scheduler
-file is split along its seams) is the model.
+lines) sets the ceiling and its dated goals. Milestone 840 (the scheduler file is split along its
+seams) is the model.
 
 The cut and every module name below are calef's call. A lane writes them up as a
 `status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request

@@ -12,10 +12,10 @@ needs_person: no
 
 *(The title and slug are provisional.)*
 
-`xtask/src/swish_check.rs` is 4,274 lines at `ae6b91e79`. §266 (a Rust source file stays under 2,000 lines) sets the
-ceiling and a 2026-12-31 goal of no file over 4,000. Milestone 840 (the scheduler file is split
-along its seams) is the model, and milestone 365 (`xtask/src/main.rs` is 6,785 lines with no module
-structure) is the precedent inside `xtask`.
+`xtask/src/swish_check.rs` is 4,274 lines at `ae6b91e79`. §266 (a Rust source file stays under 2,000
+lines) sets the ceiling and its dated goals. Milestone 840 (the scheduler file is split along its
+seams) is the model, and milestone 365 (`xtask/src/main.rs` is 6,785 lines with no module structure)
+is the precedent inside `xtask`.
 
 The cut and every module name below are calef's call. A lane writes them up as a
 `status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request

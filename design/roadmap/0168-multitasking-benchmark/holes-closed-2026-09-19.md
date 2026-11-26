@@ -1,11 +1,11 @@
 # Milestone 168 appendix: what changed on 2026-09-19, the two holes closed without a board
 
-An appendix to [milestone 168 (a multi-tasking workload benchmark)](../0168-multitasking-benchmark.md),
-moved out of that page on 2026-10-12 (UTC) under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main page is complete
-without it. This is the lane of 2026-09-19 that changed the instrument between the two radon
-readings. It holds the evidence for the new statistic, the two jobs added, what the lane found on the
-way, the HVF cross-check that could not run, and the two proposals it absorbed.
+An appendix to [milestone 168 (a multi-tasking workload
+benchmark)](../0168-multitasking-benchmark.md). [§212 (a prose
+budget)](../../decisions/0212-a-prose-budget-for-every-document.md) moved it out. The main page is
+complete without it. This is the lane of 2026-09-19 that changed the instrument between the two
+radon readings. It holds the evidence for the new statistic, the two jobs added, what the lane found
+on the way, the HVF cross-check that could not run, and the two proposals it absorbed.
 
 A lane on patagonia, with no hardware, closed the two things that stopped the five-boot result of
 2026-09-16 ([radon-2026-09-16.md](radon-2026-09-16.md)) carrying a verdict for

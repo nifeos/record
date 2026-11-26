@@ -4,8 +4,7 @@
 
 An appendix to [`notes/arch-audit.md`](../arch-audit.md), from the audit of 2026-07-29 (UTC).
 
-Recorded because "we looked and it is fine" is the other half of an audit, and because each of these
-is a place a future change could break something.
+Recorded for the reason [the main page](../arch-audit.md) gives.
 
 aarch64 `RESTORE_CONTEXT` after the fix: safe by construction, claim verified. The only writes
 between `msr daifset, #0xf` and the `eret` are to `SPSR_EL1`, `ELR_EL1`, `SP_EL0`, and the general

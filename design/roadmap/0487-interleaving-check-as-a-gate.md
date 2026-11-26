@@ -6,8 +6,7 @@ refused_by: 80, 448
 # 487. `script/interleaving-check` as a gate
 
 Refused by milestone 80 (design/roadmap/0080-loom.md), which records it in its Follow-on. Milestone
-448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names work a number, a
-status and a condition that would change it.
+448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

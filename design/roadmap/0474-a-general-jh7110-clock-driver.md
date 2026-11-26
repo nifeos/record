@@ -6,8 +6,7 @@ refused_by: 220, 448
 # 474. A general JH7110 clock driver, covering all five domains
 
 Refused by milestone 220 (design/roadmap/0220-jh7110-clock-and-reset.md), which records it in its
-Follow-on. Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names
-work a number, a status and a condition that would change it.
+Follow-on. Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

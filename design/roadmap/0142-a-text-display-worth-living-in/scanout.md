@@ -1,10 +1,10 @@
 # The scanout and the grid: the original arithmetic and how increments one and two were built
 
 This appendix belongs to [milestone 142 (a text display good enough that people use it instead of a
-GUI)](../0142-a-text-display-worth-living-in.md). It was moved out of that page on 2026-10-12 (UTC)
-under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md), and the
-main page is complete without it. It holds the scanout section as first written at minting and the
-build narrative of increments one and two.
+GUI)](../0142-a-text-display-worth-living-in.md). It was moved out under [§212 (a prose
+budget)](../../decisions/0212-a-prose-budget-for-every-document.md), and the main page is complete
+without it. It holds the scanout section as first written at minting and the build narrative of
+increments one and two.
 
 ## The scanout, as written at minting
 

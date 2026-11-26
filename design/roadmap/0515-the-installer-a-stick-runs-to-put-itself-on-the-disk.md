@@ -10,13 +10,15 @@ needs_person: yes
 ---
 # 515. The installer: a stick that puts itself on the machine's disk and is then not needed
 
-*(Number provisional until the merge queue lands it.)* Promoted from the
-proposal `the-installer-a-stick-runs-to-put-itself-on-the-disk`, filed 2026-09-19, on calef's
-instruction of 2026-09-20 to give every proposal on `main` a number. The text below is the
-proposal's own, unedited except for this paragraph: the argument is its author's and promotion is
-not the moment to improve it. Written by milestone 198 (a package manager, and the trivial install)'s rungs lane (`milestone/198-rungs-to-a-
-trivial-install`) for rung 2 of the trivial install DECISIONS §157 (a trivial install is a web page,) defines. §157's table names the
-installer as owned by no milestone; this is the proposal for it.
+*(Number provisional until the merge queue lands it.)* Promoted from the proposal
+`the-installer-a-stick-runs-to-put-itself-on-the-disk`, filed 2026-09-19, on calef's instruction of
+2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own,
+unedited, by [the promotion
+rule](../../notes/roadmap.md#anybody-may-add-to-the-roadmap-designroadmapproposals). Written by
+milestone 198 (a package manager, and the trivial install)'s rungs lane (`milestone/198-rungs-to-a-
+trivial-install`) for rung 2 of the trivial install DECISIONS §157 (a trivial install is a web
+page,) defines. §157's table names the installer as owned by no milestone; this is the proposal for
+it.
 
 The on-disk layout of an installed system is read by every later nife that boots
 from that disk, so once a stranger has installed it is a format (the layout fork below, options

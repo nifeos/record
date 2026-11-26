@@ -6,8 +6,7 @@ refused_by: 51, 448
 # 484. IANA zone rules, and `strftime`
 
 Refused by milestone 51 (design/roadmap/0051-wall-clock-time.md), which records it in its Follow-on.
-Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names work a
-number, a status and a condition that would change it.
+Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

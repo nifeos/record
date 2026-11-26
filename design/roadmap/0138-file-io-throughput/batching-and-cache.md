@@ -1,10 +1,9 @@
 # Steps 4 and 2: the 16-block blk transfer and the metadata cache
 
 This appendix belongs to [milestone 138 (close the read gap)](../0138-file-io-throughput.md). It was
-moved out of that block on 2026-10-12 (UTC) under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md), and the block is complete
-without it. It holds the measurement and reasoning behind the last two steps built, both on
-2026-08-19. The full accounts are in
+moved out under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md),
+and the block is complete without it. It holds the measurement and reasoning behind the last two
+steps built, both on 2026-08-19. The full accounts are in
 [`notes/benchmarks/read-path-block-contract-and-metadata-cache.md`](../../../notes/benchmarks/read-path-block-contract-and-metadata-cache.md).
 
 ## Step 4: the blk contract carries 16 blocks, and the win is smaller than the block count predicts

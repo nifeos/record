@@ -55,10 +55,8 @@ These are worth more than the findings, because each one is a shape that did not
   `helpers/qemu-runner-<arch>.sh`, `kernel/link-<arch>.ld`, and twelve files under
   `kernel/src/arch/<arch>/`: all complete at three.
 
-The pattern. Everything that stayed complete is either a Rust `match` the compiler pushed on,
-or a per-architecture file whose absence a build notices. Everything that went stale is a
-space-separated string in a shell script, a YAML step, a TOML array, or a sentence in a note.
-Ten of the eleven silent gaps are in the second group and the eleventh is a `#[cfg]` pair with no `else`.
+The pattern is the one [the main page](../architecture-list-sweep.md) states: ten of the eleven
+silent gaps are in its second group and the eleventh is a `#[cfg]` pair with no `else`.
 
 ## One hazard that is not a finding today
 

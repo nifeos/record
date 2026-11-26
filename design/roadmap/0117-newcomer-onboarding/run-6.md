@@ -1,9 +1,8 @@
 # Milestone 117 appendix: run 6 and the three items it closed
 
-*An appendix to [milestone 117 (the stranger test)](../0117-newcomer-onboarding.md), moved out of
-that page on 2026-10-12 (UTC) under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main page is complete
-without it, and carries why run 6 made the block `BUILT`. Run 6's full record is
+*An appendix to [milestone 117 (the stranger test)](../0117-newcomer-onboarding.md), moved out under
+[§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main page is
+complete without it, and carries why run 6 made the block `BUILT`. Run 6's full record is
 [notes/stranger-test/run-6.md](../../../notes/stranger-test/run-6.md); this page is the lane's
 account of it, written 2026-09-19.*
 

@@ -6,8 +6,7 @@ refused_by: 50, 448
 # 483. The console server on the sink protocol
 
 Refused by milestone 50 (design/roadmap/0050-pipes-and-redirection.md), which records it in its
-Follow-on. Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names
-work a number, a status and a condition that would change it.
+Follow-on. Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

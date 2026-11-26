@@ -2,9 +2,8 @@
 
 *Name: provisional.*
 
-An appendix to [notes/grant-expression.md](../grant-expression.md), moved there on 2026-10-11
-(UTC) under §212 (a prose budget). It records how `date` got a clock at the prompt against
-what this note predicted.
+An appendix to [notes/grant-expression.md](../grant-expression.md), moved there under §212 (a prose
+budget). It records how `date` got a clock at the prompt against what this note predicted.
 
 ## The four links this note said were missing, and the one it got wrong
 

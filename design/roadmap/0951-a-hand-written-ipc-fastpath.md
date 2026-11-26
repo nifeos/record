@@ -6,9 +6,8 @@ refused_by: 188
 # 951. A hand-written IPC fastpath: a second path through `CALL` and reply that skips the scheduler
 
 Refused by milestone 188 (design/roadmap/0188-ipc-fastpath.md), whose phase 4 this was. calef closed
-188 on 2026-10-24 (UTC): *"Close 188, refuse phase 4"*. Milestone 448
-(design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names work a number, a status
-and a condition that would change it. The number was assigned by the integrator of that day.
+188 on 2026-10-24 (UTC): *"Close 188, refuse phase 4"*. Milestone 448 (a refusal gets a number)
+gives a refusal this form. The number was assigned by the integrator of that day.
 
 ## The refusal, in its own words
 

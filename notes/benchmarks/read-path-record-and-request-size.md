@@ -1,10 +1,9 @@
 # Milestone 138 (close the read gap), steps 1 and 3
 
-*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers and
-lets a reader act without opening this file. This one holds the 8 KiB record and the 64 KiB file
-request, measured before and after, with the dates, tables and corrections behind them. Name:
-ratified 2026-09-24 (calef), who refused `milestone-138-steps-1-and-3` for this file; [the naming
-record](README.md) says why.*
+*An appendix to [`notes/benchmarks.md`](../benchmarks.md), which carries the current numbers. This
+one holds the 8 KiB record and the 64 KiB file request, measured before and after, with the dates,
+tables and corrections behind them. Name: ratified 2026-09-24 (calef), who refused
+`milestone-138-steps-1-and-3` for this file; [the naming record](README.md) says why.*
 
 ## Step 1 taken: the record is 8 KiB, and 72% of a read is now the part it does not touch (milestone 138, 2026-08-18)
 

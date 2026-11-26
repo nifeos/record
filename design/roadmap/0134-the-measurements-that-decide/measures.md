@@ -1,9 +1,9 @@
 # The measures, defined: E1 to E4 and M5 to M12
 
-This appendix belongs to [milestone 134 (the register of measures)](../0134-the-measurements-that-decide.md).
-It was moved out on 2026-10-12 (UTC) under §212 (a prose budget), and the main page is complete
-without it. It holds each measure's full definition: the mechanism, the prediction, the instrument
-and what each outcome settles.
+This appendix belongs to [milestone 134 (the register of
+measures)](../0134-the-measurements-that-decide.md). It was moved out under §212 (a prose budget),
+and the main page is complete without it. It holds each measure's full definition: the mechanism,
+the prediction, the instrument and what each outcome settles.
 
 ## Tier A: available today, on the dev machine under Hypervisor.framework
 

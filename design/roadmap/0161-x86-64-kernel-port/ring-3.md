@@ -1,10 +1,10 @@
 # Milestone 161 appendix: ring 3 and the `system_call` pair, step 11
 
 An appendix to [milestone 161 (the x86_64 kernel port)](../0161-x86-64-kernel-port.md), moved out
-of that page on 2026-10-12 (UTC) under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md).
-The main page is complete without it; this is the record of step 11 (2026-08-24, the open list's
-item 3) and of that item's own text, which the page now summarizes. Long sentences were split to
-meet [§213 (writing standards)](../../decisions/0213-writing-standards.md); no fact changed.
+under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main
+page is complete without it; this is the record of step 11 (2026-08-24, the open list's item 3) and
+of that item's own text, which the page now summarizes. Long sentences were split to meet [§213
+(writing standards)](../../decisions/0213-writing-standards.md); no fact changed.
 
 ## What was built
 

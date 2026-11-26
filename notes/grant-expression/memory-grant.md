@@ -2,9 +2,8 @@
 
 *Name: provisional.*
 
-An appendix to [notes/grant-expression.md](../grant-expression.md), moved there on 2026-10-11
-(UTC) under §212 (a prose budget). It records the kernel fix `--mem N` needed and the program
-that spends what it was granted.
+An appendix to [notes/grant-expression.md](../grant-expression.md), moved there under §212 (a prose
+budget). It records the kernel fix `--mem N` needed and the program that spends what it was granted.
 
 ## The region had to become delegable first
 

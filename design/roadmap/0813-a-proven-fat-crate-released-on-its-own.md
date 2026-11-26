@@ -228,12 +228,10 @@ properties, `script/falsifications` reports every harness `replayable`, and the 
 three targets. Publication is the last step and not the exit, since it waits on calef. The five soak
 criteria of release step 5 hold before it publishes.
 
-The name check of release step 1 passes first, so the repository, the package and every doc link
-carry a ratified name. Before the move, `script/crate-standalone file_allocation_table` exits 0 in
-nife, and every row of *What is proven* names a harness that stock Kani proves in the copy and whose
-falsification patch makes it fail. No crate publishes without Kani harnesses covering its
-hostile-input and state-machine surface, each carrying a falsification patch that makes it fail at
-its own assertion, replayable in the crate's own repository with stock Kani.
+The name check of release step 1 passes first, by Fork 5 of milestone 857. Before the move,
+`script/crate-standalone file_allocation_table` exits 0 in nife, and every row of *What is proven*
+names a harness that stock Kani proves in the copy and whose falsification patch makes it fail. No
+crate publishes without the proofs milestone 857 (crates released on their own) requires.
 
 ## Patents
 
@@ -254,8 +252,8 @@ predate 1995, so none can still be in force. FAT12, FAT16 and FAT32 themselves d
 
 ## What the crate no longer cites
 
-The crate's source cites nothing of this tree beyond its `Name:` blocks, which stay at their
-names until the ratification pass, so this section keeps the links it carried.
+The crate's source cites nothing of this tree beyond its `Name:` blocks. This section keeps the
+links it carried, by milestone 857's provenance rule.
 
 - `src/lib.rs`, crate doc: why an installer needs a FAT writer was `notes/installing.md`. The read
   half was milestone 140 (mount a drive this system did not create), and the doc now names the

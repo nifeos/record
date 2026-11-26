@@ -1,13 +1,13 @@
 # Milestone 161 appendix: the open list's items 0 to 2, and the port-I/O question
 
 An appendix to [milestone 161 (the x86_64 kernel port)](../0161-x86-64-kernel-port.md), moved out
-of that page on 2026-10-12 (UTC) under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md).
-The main page is complete without it. The block's open list ran in the order the work should be
-done, because each item was a prerequisite for the next. Items 3 and 4 are in [ring-3.md](ring-3.md)
-and [processes-and-userspace.md](processes-and-userspace.md), and items 5 and 6 in
-[smp-and-vt-d.md](smp-and-vt-d.md). This file has the rest as the block recorded them in late
-August 2026. Long sentences were split to meet
-[§213 (writing standards)](../../decisions/0213-writing-standards.md); no fact changed.
+under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main
+page is complete without it. The block's open list ran in the order the work should be done, because
+each item was a prerequisite for the next. Items 3 and 4 are in [ring-3.md](ring-3.md) and
+[processes-and-userspace.md](processes-and-userspace.md), and items 5 and 6 in
+[smp-and-vt-d.md](smp-and-vt-d.md). This file has the rest as the block recorded them in late August
+2026. Long sentences were split to meet [§213 (writing
+standards)](../../decisions/0213-writing-standards.md); no fact changed.
 
 ## Item 0: the device-discovery seam
 

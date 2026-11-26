@@ -6,8 +6,7 @@ refused_by: 112, 448
 # 453. A lint for a SAFETY comment on a safe fn
 
 Refused by milestone 112 (design/roadmap/0112-safety-comments-that-bind.md), which records it in its
-Follow-on. Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names
-work a number, a status and a condition that would change it.
+Follow-on. Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

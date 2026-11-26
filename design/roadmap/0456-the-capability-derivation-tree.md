@@ -8,8 +8,7 @@ refused_by: 13, 14, 26, 448
 Refused by milestone 13 (design/roadmap/0013-capability-revocation.md), milestone 14
 (design/roadmap/0014-kernel-objects-from-untyped.md), and milestone 26
 (design/roadmap/0026-object-revocation.md), each of which records it in its Follow-on. Milestone 448
-(design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names work a number, a status
-and a condition that would change it.
+(a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

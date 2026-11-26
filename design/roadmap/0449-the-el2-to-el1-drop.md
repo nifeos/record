@@ -6,8 +6,7 @@ refused_by: 2, 448
 # 449. The EL2 to EL1 drop the vectors were promised alongside
 
 Refused by milestone 2 (design/roadmap/0002-exception-vectors.md), which records it in its
-Follow-on. Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names
-work a number, a status and a condition that would change it.
+Follow-on. Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

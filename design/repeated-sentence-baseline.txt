@@ -69,9 +69,7 @@
 
 0969fe242bd6 design/roadmap/0782-measure-the-reach-of-the-glob-and-calendar-proofs.md
 
-0a1dd35039b6 notes/crates-io-on-nife/later-passes.md
 
-0a1dd35039b6 notes/crates-io-on-nife/probe-results.md
 
 0a715bf6697b design/roadmap/0595-the-shell-runs-a-std-program.md
 
@@ -141,9 +139,7 @@
 
 10d415351819 design/roadmap/0397-bootstrap-installs-and-also-judges.md
 
-112c687a7a3b design/roadmap/0055-time-machine/path-to-built.md
 
-112c687a7a3b design/roadmap/0055-time-machine/what-landed.md
 
 11fd5062cd7f design/roadmap/1101-memory-regions-outside-review.md
 
@@ -177,13 +173,9 @@
 
 1357b858dca1 design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
-1430e1766eb3 notes/dir-capability/caretaker.md
 
-1430e1766eb3 notes/dir-capability/limitations.md
 
-1430e1766eb3 notes/dir-capability/rename.md
 
-1430e1766eb3 notes/dir-capability/tests-and-stack-usage.md
 
 151b5b5752fc design/audit-reports/README.md
 
@@ -213,17 +205,11 @@
 
 181380389d58 notes/empty-selectors.md
 
-18256eb91253 design/roadmap/0117-newcomer-onboarding/first-plan.md
 
-18256eb91253 design/roadmap/0117-newcomer-onboarding/harness-and-cadence.md
 
-18256eb91253 design/roadmap/0117-newcomer-onboarding/run-3.md
 
-18256eb91253 design/roadmap/0117-newcomer-onboarding/run-4.md
 
-18256eb91253 design/roadmap/0117-newcomer-onboarding/run-5.md
 
-18256eb91253 design/roadmap/0117-newcomer-onboarding/run-6.md
 
 18afcfe2356d design/roadmap/0578-acpi-on-aarch64.md
 
@@ -241,23 +227,14 @@
 
 1a6fdf7f54eb notes/crate-reviews/jh7110-clock-and-reset.md
 
-1c2ee3549604 design/roadmap/0813-a-proven-fat-crate-released-on-its-own.md
 
-1c2ee3549604 design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
-1c2ee3549604 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
-1c2ee3549604 design/roadmap/0816-the-designware-ethernet-crate-released-on-its-own.md
 
-1c2ee3549604 design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
 
-1c2ee3549604 design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
-1c2ee3549604 design/roadmap/0819-the-jh7110-clock-and-reset-crate-proven-and-released-on-its-own.md
 
-1c2ee3549604 design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
-1c2ee3549604 design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
 1c6061285383 design/roadmap/0842-the-grant-plan-crate-root-is-split-along-its-seams.md
 
@@ -339,91 +316,48 @@
 
 21e857e46f32 design/roadmap/0403-an-x86-64-host-in-the-host-pass.md
 
-22562f96b931 design/roadmap/0449-the-el2-to-el1-drop.md
 
-22562f96b931 design/roadmap/0450-a-signature-over-the-init-image.md
 
-22562f96b931 design/roadmap/0451-more-than-eight-names-in-a-grant.md
 
-22562f96b931 design/roadmap/0452-a-salvage-tool-for-a-broken-superblock.md
 
-22562f96b931 design/roadmap/0453-a-lint-for-a-safety-comment-on-a-safe-fn.md
 
-22562f96b931 design/roadmap/0454-the-stack-sizes-nobody-has-sized.md
 
-22562f96b931 design/roadmap/0455-the-signalling-stratum.md
 
-22562f96b931 design/roadmap/0456-the-capability-derivation-tree.md
 
-22562f96b931 design/roadmap/0457-sub-page-object-packing.md
 
-22562f96b931 design/roadmap/0458-asid-generations-and-rollover.md
 
-22562f96b931 design/roadmap/0459-legacy-intx-interrupt-routing.md
 
-22562f96b931 design/roadmap/0460-a-riscv64-arm-for-instruction-entropy.md
 
-22562f96b931 design/roadmap/0461-an-sse-enabled-x86-64-userspace-target.md
 
-22562f96b931 design/roadmap/0462-the-soft-aes-cost.md
 
-22562f96b931 design/roadmap/0463-an-mcfg-whose-first-bus-is-not-zero.md
 
-22562f96b931 design/roadmap/0464-a-committed-baseline-for-the-multitasking-sweep.md
 
-22562f96b931 design/roadmap/0465-net-transport-and-socket-test-client-as-crates.md
 
-22562f96b931 design/roadmap/0466-verus-and-unbounded-proof.md
 
-22562f96b931 design/roadmap/0467-replyrecv-fusion.md
 
-22562f96b931 design/roadmap/0468-proving-xtask.md
 
-22562f96b931 design/roadmap/0469-automating-the-vendored-engine-rebase.md
 
-22562f96b931 design/roadmap/0470-a-gate-on-harness-quality.md
 
-22562f96b931 design/roadmap/0471-a-skip-that-returns.md
 
-22562f96b931 design/roadmap/0472-a-bench-console-that-drives-power.md
 
-22562f96b931 design/roadmap/0473-a-soak-leg-in-script-test.md
 
-22562f96b931 design/roadmap/0474-a-general-jh7110-clock-driver.md
 
-22562f96b931 design/roadmap/0475-the-accelerator-probe-on-kvm-and-whpx.md
 
-22562f96b931 design/roadmap/0476-the-qemu-bounded-self-test-in-a-gate.md
 
-22562f96b931 design/roadmap/0477-a-power-cycled-boot-series.md
 
-22562f96b931 design/roadmap/0478-tier-three-full-posix.md
 
-22562f96b931 design/roadmap/0479-a-blocking-mutation-gate-on-the-diff.md
 
-22562f96b931 design/roadmap/0480-a-server-that-logs-which-channel-a-request-arrived-on.md
 
-22562f96b931 design/roadmap/0481-terminal-multiplexing.md
 
-22562f96b931 design/roadmap/0482-a-buffering-stage-between-pipe-ends.md
 
-22562f96b931 design/roadmap/0483-the-console-server-on-the-sink-protocol.md
 
-22562f96b931 design/roadmap/0484-iana-zone-rules-and-strftime.md
 
-22562f96b931 design/roadmap/0485-xattrs-in-the-redoxfs-on-disk-format.md
 
-22562f96b931 design/roadmap/0486-an-indexed-typed-attribute-store.md
 
-22562f96b931 design/roadmap/0487-interleaving-check-as-a-gate.md
 
-22562f96b931 design/roadmap/0488-a-self-hosted-ci-runner.md
 
-22562f96b931 design/roadmap/0489-the-rule-1-lint-past-the-kernel.md
 
-22562f96b931 design/roadmap/0490-cpu-time-in-time.md
 
-22562f96b931 design/roadmap/0951-a-hand-written-ipc-fastpath.md
 
 22784ab875e0 design/roadmap/0124-a-thread-is-born-where-it-lives.md
 
@@ -529,27 +463,16 @@
 
 29b098ada12a design/roadmap/1054-an-entry-that-conflicts-with-the-queue-is-caught-before-it.md
 
-29bf1ce0ac11 notes/scripts/analysis-and-supply-chain.md
 
-29bf1ce0ac11 notes/scripts/boards-and-boot-checks.md
 
-29bf1ce0ac11 notes/scripts/build-test-and-gate.md
 
-29bf1ce0ac11 notes/scripts/helpers-and-bootstrap.md
 
-29bf1ce0ac11 notes/scripts/load-and-reliability.md
 
-29bf1ce0ac11 notes/scripts/process-measures.md
 
-29bf1ce0ac11 notes/scripts/records-and-indexes.md
 
-29bf1ce0ac11 notes/stack/guard-page-faults-2026-08-16.md
 
-29bf1ce0ac11 notes/stack/interrupt-stack.md
 
-29bf1ce0ac11 notes/stack/kernel-stack-freed-under-its-owner.md
 
-29bf1ce0ac11 notes/stack/kernel-stack-overflows-2026-08-14.md
 
 2a2293bdf40d design/decisions/0189-what-a-caretaker-is-when-it-translates.md
 
@@ -565,13 +488,9 @@
 
 2a658b0cdba5 design/roadmap/0723-a-stopped-merge-watcher-is-reported-at-once.md
 
-2aa3cf673090 notes/grant-expression/clock-grant.md
 
-2aa3cf673090 notes/grant-expression/memory-grant.md
 
-2aa3cf673090 notes/grant-expression/per-file-grants.md
 
-2aa3cf673090 notes/grant-expression/two-words.md
 
 2b9ad4781409 design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
@@ -767,9 +686,7 @@
 
 3d9591ffb07a notes/load-sensitive-assertions/timer-assertion-disposition.md
 
-3e8c1e2cd64f design/roadmap/0134-the-measurements-that-decide/build-record.md
 
-3e8c1e2cd64f design/roadmap/0134-the-measurements-that-decide/measures.md
 
 3f1e5efabc27 design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
@@ -815,13 +732,9 @@
 
 45e50d162bfa design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
-46608c10fc98 design/roadmap/0138-file-io-throughput/batching-and-cache.md
 
-46608c10fc98 design/roadmap/0138-file-io-throughput/frontier.md
 
-46608c10fc98 design/roadmap/0138-file-io-throughput/options.md
 
-46608c10fc98 design/roadmap/0138-file-io-throughput/record-and-transfer.md
 
 46b1a14c882a design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
@@ -897,49 +810,27 @@
 
 4f9ad19d266c design/roadmap/0902-tooling-sorted-by-who-needs-it/scripts.md
 
-50e6ae481aba notes/benchmarks/baseline-save-audit.md
 
-50e6ae481aba notes/benchmarks/calibration-against-sel4.md
 
-50e6ae481aba notes/benchmarks/counter-frequency-and-calibration.md
 
-50e6ae481aba notes/benchmarks/cross-os-primitives.md
 
-50e6ae481aba notes/benchmarks/drift-decomposition.md
 
-50e6ae481aba notes/benchmarks/fastpath-footprint-gate.md
 
-50e6ae481aba notes/benchmarks/filesystem-throughput.md
 
-50e6ae481aba notes/benchmarks/five-blocks-per-request.md
 
-50e6ae481aba notes/benchmarks/icount-drift-and-provenance.md
 
-50e6ae481aba notes/benchmarks/icount-tick-scales.md
 
-50e6ae481aba notes/benchmarks/kernel-footprint-and-caches.md
 
-50e6ae481aba notes/benchmarks/per-core-and-multi-hart.md
 
-50e6ae481aba notes/benchmarks/preemption-in-the-window.md
 
-50e6ae481aba notes/benchmarks/read-path-block-contract-and-metadata-cache.md
 
-50e6ae481aba notes/benchmarks/read-path-record-and-request-size.md
 
-50e6ae481aba notes/benchmarks/record-level-sweep.md
 
-50e6ae481aba notes/benchmarks/rfence-self-row.md
 
-50e6ae481aba notes/benchmarks/riscv-map-new-and-the-rfence-probe.md
 
-50e6ae481aba notes/benchmarks/service-path.md
 
-50e6ae481aba notes/benchmarks/spawn-el0.md
 
-50e6ae481aba notes/benchmarks/x86-instruments.md
 
-50e6ae481aba notes/benchmarks/x86-tss-iomap.md
 
 51f53cbf648a design/decisions/0268-the-cast-ratchet-does-not-count-a-64-bit-integer-cast-to-usize.md
 
@@ -981,19 +872,12 @@
 
 57220c24b67e notes/delegated-review/the-method.md
 
-580f77df5160 design/roadmap/0842-the-grant-plan-crate-root-is-split-along-its-seams.md
 
-580f77df5160 design/roadmap/0843-the-system-initializer-crate-root-is-split-along-its-seams.md
 
-580f77df5160 design/roadmap/0844-the-shell-program-is-split-along-its-seams.md
 
-580f77df5160 design/roadmap/0845-the-filesystem-protocol-crate-root-is-split-along-its-seams.md
 
-580f77df5160 design/roadmap/0846-the-file-server-core-moves-its-tests-out.md
 
-580f77df5160 design/roadmap/0847-the-swish-check-harness-is-split-along-its-seams.md
 
-580f77df5160 design/roadmap/0872-the-kernels-user-mode-file-is-split-along-its-seams.md
 
 5816a8d1999a design/roadmap/0461-an-sse-enabled-x86-64-userspace-target.md
 
@@ -1087,21 +971,13 @@
 
 617763188d32 design/roadmap/0057-partitioning-and-xattrs/extended-attributes.md
 
-61b94bf81c54 design/roadmap/0813-a-proven-fat-crate-released-on-its-own.md
 
-61b94bf81c54 design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
-61b94bf81c54 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
-61b94bf81c54 design/roadmap/0816-the-designware-ethernet-crate-released-on-its-own.md
 
-61b94bf81c54 design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
 
-61b94bf81c54 design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
-61b94bf81c54 design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
-61b94bf81c54 design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
 623ef2e9d1a0 design/decisions/0027-filesystem-service.md
 
@@ -1147,23 +1023,14 @@
 
 645a507b9883 notes/rented-metal/a-second-provider.md
 
-64855e2c8021 design/fatal-risks/multicore-reliability.md
 
-64855e2c8021 design/fatal-risks/proofs-and-their-reach.md
 
-64855e2c8021 design/fatal-risks/somebody-elses-software.md
 
-64855e2c8021 design/fatal-risks/the-confined-driver.md
 
-64855e2c8021 design/fatal-risks/the-confinement-claims.md
 
-64855e2c8021 design/fatal-risks/the-crossing-cost.md
 
-64855e2c8021 design/fatal-risks/the-hal-and-the-next-machine.md
 
-64855e2c8021 design/fatal-risks/the-mutation-verdict.md
 
-64855e2c8021 design/fatal-risks/what-leaves-nife.md
 
 6492253c7cd3 notes/shared-page-audit/compositor-findings.md
 
@@ -1187,9 +1054,7 @@
 
 676801083a37 design/roadmap/0159-jh7110-trng-driver/bench-runs.md
 
-684c4c8b56dd notes/blocked-thread-teardown.md
 
-684c4c8b56dd notes/blocked-thread-teardown/the-four-proposals.md
 
 68d2033d8cde notes/credentials.md
 
@@ -1205,17 +1070,11 @@
 
 6965bce6028a design/roadmap/0907-hackbench-is-packaged-in-basalt.md
 
-69cba2077b6c notes/pipes/buffering.md
 
-69cba2077b6c notes/pipes/declarations-and-wire.md
 
-69cba2077b6c notes/pipes/one-wait-point.md
 
-69cba2077b6c notes/pipes/tests-and-the-boot-gate.md
 
-69cba2077b6c notes/pipes/the-boot.md
 
-69cba2077b6c notes/pipes/the-file-end.md
 
 6a7d4637f8da notes/crate-reviews/counter-frequency-contract.md
 
@@ -1279,101 +1138,59 @@
 
 767d28e30fed design/roadmap/1106-program-argument-contract-outside-review/what-was-checked.md
 
-76893bcfdd94 design/roadmap/0066-vaultwarden.md
 
-76893bcfdd94 design/roadmap/0099-git-on-nife.md
 
-76893bcfdd94 design/roadmap/0123-the-demonstration.md
 
-76893bcfdd94 design/roadmap/0149-hpc-benchmark-suite.md
 
-76893bcfdd94 design/roadmap/0170-nano-editor.md
 
-76893bcfdd94 design/roadmap/0171-git-core-userspace.md
 
-76893bcfdd94 design/roadmap/0173-rustc-cargo-self-host.md
 
-76893bcfdd94 design/roadmap/0258-archive-and-compression.md
 
-76893bcfdd94 design/roadmap/0710-firefox-port.md
 
-76893bcfdd94 design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
-76893bcfdd94 design/roadmap/0827-hackbench-on-nife-and-linux.md
 
-76893bcfdd94 design/roadmap/0828-iperf3-on-nife-and-linux.md
 
-76893bcfdd94 design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
-76893bcfdd94 design/roadmap/0831-sqlite-speedtest1-on-nife-and-linux.md
 
-76893bcfdd94 design/roadmap/0832-stream-on-nife-and-linux.md
 
-76893bcfdd94 design/roadmap/0833-the-same-storage-benchmark-on-nife-and-linux.md
 
-76893bcfdd94 design/roadmap/0834-ioping-on-nife-and-linux.md
 
-77052501df0b design/roadmap/0142-a-text-display-worth-living-in/dependency.md
 
-77052501df0b design/roadmap/0142-a-text-display-worth-living-in/determinism.md
 
-77052501df0b design/roadmap/0142-a-text-display-worth-living-in/palette.md
 
-77052501df0b design/roadmap/0142-a-text-display-worth-living-in/rich-text.md
 
-77052501df0b design/roadmap/0142-a-text-display-worth-living-in/scanout.md
 
-77052501df0b design/roadmap/0142-a-text-display-worth-living-in/type.md
 
 7752e5534df4 design/audit-reports/2026-09-29-names-and-numbers.md
 
 7752e5534df4 design/roadmap/0622-the-fence-inventory-is-readjudicated.md
 
-77f38f08ccfd design/roadmap/0813-a-proven-fat-crate-released-on-its-own.md
 
-77f38f08ccfd design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
-77f38f08ccfd design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
-77f38f08ccfd design/roadmap/0816-the-designware-ethernet-crate-released-on-its-own.md
 
-77f38f08ccfd design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
 
-77f38f08ccfd design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
-77f38f08ccfd design/roadmap/0819-the-jh7110-clock-and-reset-crate-proven-and-released-on-its-own.md
 
-77f38f08ccfd design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
-77f38f08ccfd design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
 7820be4d1c69 design/roadmap/0813-a-proven-fat-crate-released-on-its-own.md
 
 7820be4d1c69 design/roadmap/0923-exfat-waits-for-its-patents.md
 
-7828b67c4923 notes/blocked-thread-teardown.md
 
-7828b67c4923 notes/blocked-thread-teardown/what-the-machine-already-has.md
 
 78e811359751 design/naming.md
 
 78e811359751 design/naming/acronyms-and-abbreviations.md
 
-7a4fe45df09c design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
-7a4fe45df09c design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
-7a4fe45df09c design/roadmap/0816-the-designware-ethernet-crate-released-on-its-own.md
 
-7a4fe45df09c design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
 
-7a4fe45df09c design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
-7a4fe45df09c design/roadmap/0819-the-jh7110-clock-and-reset-crate-proven-and-released-on-its-own.md
 
-7a4fe45df09c design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
-7a4fe45df09c design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
 7a82a433223c design/roadmap/0066-vaultwarden.md
 
@@ -1435,9 +1252,7 @@
 
 8187e9559b47 notes/semihosting.md
 
-82233b71d4da design/roadmap/0168-multitasking-benchmark/holes-closed-2026-09-19.md
 
-82233b71d4da design/roadmap/0168-multitasking-benchmark/radon-2026-09-16.md
 
 8228d589b4a5 design/roadmap/0485-xattrs-in-the-redoxfs-on-disk-format.md
 
@@ -1451,15 +1266,10 @@
 
 8343b3d43e8d design/roadmap/0057-partitioning-and-xattrs/extended-attributes.md
 
-8367ecad664e design/roadmap/0118-constitution-budget/applicable-cut.md
 
-8367ecad664e design/roadmap/0118-constitution-budget/audit.md
 
-8367ecad664e design/roadmap/0118-constitution-budget/plan.md
 
-8367ecad664e design/roadmap/0118-constitution-budget/size-gate-september.md
 
-8367ecad664e design/roadmap/0118-constitution-budget/size-gate.md
 
 83ee26349536 design/decisions/0184-an-x86-64-host-in-the-host-pass.md
 
@@ -1527,11 +1337,8 @@
 
 930e83c166c1 notes/empty-selectors.md
 
-946eb555ecea design/roadmap/0324-the-bench-console-cannot-speak-to-a-board/rulings.md
 
-946eb555ecea design/roadmap/0324-the-bench-console-cannot-speak-to-a-board/stop-mode.md
 
-946eb555ecea design/roadmap/0324-the-bench-console-cannot-speak-to-a-board/sweep-and-profile.md
 
 9537d620cd22 design/roadmap/0518-the-per-crate-census-nobody-wrote-down.md
 
@@ -1719,9 +1526,7 @@ a8ab22ea3583 design/decisions/0192-a-checked-direct-map-reader-for-the-acpi-walk
 
 a8ab22ea3583 design/roadmap/0423-a-checked-direct-map-reader-for-the-acpi-walk.md
 
-a98d69acee8d design/roadmap/0579-constitution-carry-vs-brief/classification.md
 
-a98d69acee8d design/roadmap/0579-constitution-carry-vs-brief/roles.md
 
 a99faf728420 design/roadmap/0226-qemu-bounded-orphans.md
 
@@ -1731,21 +1536,13 @@ ac85b363ee37 design/roadmap/0872-the-kernels-user-mode-file-is-split-along-its-s
 
 ac85b363ee37 design/roadmap/0873-the-catch-all-userspace-test-file-is-split-by-topic.md
 
-ad1d8bd7f87f design/roadmap/0813-a-proven-fat-crate-released-on-its-own.md
 
-ad1d8bd7f87f design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
-ad1d8bd7f87f design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
-ad1d8bd7f87f design/roadmap/0816-the-designware-ethernet-crate-released-on-its-own.md
 
-ad1d8bd7f87f design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
 
-ad1d8bd7f87f design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
-ad1d8bd7f87f design/roadmap/0819-the-jh7110-clock-and-reset-crate-proven-and-released-on-its-own.md
 
-ad1d8bd7f87f design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
 ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
@@ -1815,29 +1612,17 @@ b3a783250bcb design/decisions/0183-what-no-arguments-means.md
 
 b3a783250bcb design/roadmap/0440-what-no-arguments-means.md
 
-b3c1e40325bd design/roadmap/0188-ipc-fastpath/design-space.md
 
-b3c1e40325bd design/roadmap/0188-ipc-fastpath/phase-4-evidence.md
 
-b3c1e40325bd design/roadmap/0188-ipc-fastpath/phases-1-to-3.md
 
-b40573a61cf7 design/roadmap/0813-a-proven-fat-crate-released-on-its-own.md
 
-b40573a61cf7 design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
-b40573a61cf7 design/roadmap/0815-the-e1000e-crate-released-on-its-own.md
 
-b40573a61cf7 design/roadmap/0816-the-designware-ethernet-crate-released-on-its-own.md
 
-b40573a61cf7 design/roadmap/0817-the-designware-mobile-storage-crate-released-on-its-own.md
 
-b40573a61cf7 design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
-b40573a61cf7 design/roadmap/0819-the-jh7110-clock-and-reset-crate-proven-and-released-on-its-own.md
 
-b40573a61cf7 design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
-b40573a61cf7 design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
 b45496756570 design/roadmap/1079-byte-sink-contract-outside-review.md
 
@@ -1873,9 +1658,7 @@ b734d5d5890e design/roadmap/0190-ext4-read-write/upstream/5a-crc32c-safety-argum
 
 b734d5d5890e design/roadmap/0190-ext4-read-write/upstream/5b-group-descriptor-decode.md
 
-b753e07009e9 notes/architecture-list-sweep.md
 
-b753e07009e9 notes/architecture-list-sweep/not-findings.md
 
 b92d219ec2fc design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
@@ -1955,21 +1738,13 @@ c0041ee4dc12 notes/crate-reviews/current-cpu-contract.md
 
 c0041ee4dc12 notes/crate-reviews/machine-statistics-contract.md
 
-c08ff336dd4d notes/pipes/buffering.md
 
-c08ff336dd4d notes/pipes/declarations-and-wire.md
 
-c08ff336dd4d notes/pipes/one-wait-point.md
 
-c08ff336dd4d notes/pipes/second-stream-fork.md
 
-c08ff336dd4d notes/pipes/second-stream.md
 
-c08ff336dd4d notes/pipes/tests-and-the-boot-gate.md
 
-c08ff336dd4d notes/pipes/the-boot.md
 
-c08ff336dd4d notes/pipes/the-file-end.md
 
 c115e752a669 design/roadmap/0877-the-timetable-crate-root-is-split-along-its-seams.md
 
@@ -1979,9 +1754,7 @@ c21e6f8ab53d design/roadmap/0482-a-buffering-stage-between-pipe-ends.md
 
 c21e6f8ab53d design/roadmap/0483-the-console-server-on-the-sink-protocol.md
 
-c354e746022b notes/arch-audit.md
 
-c354e746022b notes/arch-audit/candidates-cleared.md
 
 c38886a429c1 design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
@@ -2033,17 +1806,11 @@ cb31c429ffd1 design/decisions/0253-concurrent-login-sessions.md
 
 cb31c429ffd1 design/roadmap/0806-concurrent-login-sessions.md
 
-cba377cea53f design/roadmap/0161-x86-64-kernel-port/closing.md
 
-cba377cea53f design/roadmap/0161-x86-64-kernel-port/early-boot.md
 
-cba377cea53f design/roadmap/0161-x86-64-kernel-port/open-list.md
 
-cba377cea53f design/roadmap/0161-x86-64-kernel-port/processes-and-userspace.md
 
-cba377cea53f design/roadmap/0161-x86-64-kernel-port/ring-3.md
 
-cba377cea53f design/roadmap/0161-x86-64-kernel-port/smp-and-vt-d.md
 
 cec5b37aa8a6 design/roadmap/0250-an-unviable-mutant-is-a-hole-that-reads-as-a-pass.md
 
@@ -2065,13 +1832,9 @@ d08b72cf5fca design/roadmap/0818-the-jh7110-entropy-crate-released-on-its-own.md
 
 d08b72cf5fca design/roadmap/0887-crate-repositories-share-one-ci-template.md
 
-d0b6708efcca notes/framebuffer-contract/flushed-hang.md
 
-d0b6708efcca notes/framebuffer-contract/iommu-escape-test.md
 
-d0b6708efcca notes/framebuffer-contract/later-rungs.md
 
-d0b6708efcca notes/framebuffer-contract/scanout-referee.md
 
 d1a0aac9754b design/roadmap/0579-constitution-carry-vs-brief/classification.md
 
@@ -2105,39 +1868,22 @@ d58638c05df6 design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
 d58638c05df6 design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
-d59e8c6f9dac design/roadmap/0066-vaultwarden.md
 
-d59e8c6f9dac design/roadmap/0099-git-on-nife.md
 
-d59e8c6f9dac design/roadmap/0123-the-demonstration.md
 
-d59e8c6f9dac design/roadmap/0149-hpc-benchmark-suite.md
 
-d59e8c6f9dac design/roadmap/0170-nano-editor.md
 
-d59e8c6f9dac design/roadmap/0171-git-core-userspace.md
 
-d59e8c6f9dac design/roadmap/0173-rustc-cargo-self-host.md
 
-d59e8c6f9dac design/roadmap/0258-archive-and-compression.md
 
-d59e8c6f9dac design/roadmap/0710-firefox-port.md
 
-d59e8c6f9dac design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
-d59e8c6f9dac design/roadmap/0827-hackbench-on-nife-and-linux.md
 
-d59e8c6f9dac design/roadmap/0828-iperf3-on-nife-and-linux.md
 
-d59e8c6f9dac design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
-d59e8c6f9dac design/roadmap/0831-sqlite-speedtest1-on-nife-and-linux.md
 
-d59e8c6f9dac design/roadmap/0832-stream-on-nife-and-linux.md
 
-d59e8c6f9dac design/roadmap/0833-the-same-storage-benchmark-on-nife-and-linux.md
 
-d59e8c6f9dac design/roadmap/0834-ioping-on-nife-and-linux.md
 
 d623e036405a design/fatal-risks/the-confinement-claims.md
 
@@ -2175,9 +1921,7 @@ d93ccd8fa4a6 notes/ntp.md
 
 d93ccd8fa4a6 notes/ntp/the-client-tests.md
 
-d93e100765bb notes/blocked-thread-teardown.md
 
-d93e100765bb notes/blocked-thread-teardown/what-the-machine-already-has.md
 
 d96678cdcf14 notes/crate-reviews/byte-glob.md
 
@@ -2219,9 +1963,7 @@ dbbbb1a7580c design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
 dbbbb1a7580c design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
-dcc598f6e822 notes/citations.md
 
-dcc598f6e822 notes/citations/another-medium.md
 
 dcf90396b17c design/roadmap/0897-sqlite-is-packaged-in-basalt.md
 
@@ -2237,9 +1979,7 @@ dd7a792417a3 design/decisions/0031-foreign-language-seam.md
 
 dd7a792417a3 notes/c-seam.md
 
-dd7d6f55ceb3 notes/riscv-parity-scope/suite-gaps.md
 
-dd7d6f55ceb3 notes/riscv-parity-scope/user-tests-port.md
 
 dd85350d35be notes/memory-regions.md
 
@@ -2291,59 +2031,32 @@ e1cf2d26d099 design/decisions/0044-entropy-capability.md
 
 e1cf2d26d099 notes/entropy.md
 
-e1ecdbe4d935 design/roadmap/0492-a-const-in-a-proof-module-escapes-its-exclusion.md
 
-e1ecdbe4d935 design/roadmap/0493-a-disk-file-job-mix-needs-a-disk-radon-can-drive.md
 
-e1ecdbe4d935 design/roadmap/0494-a-driver-for-the-network-card-a-pc-actually-has.md
 
-e1ecdbe4d935 design/roadmap/0496-a-dying-programs-last-words-reach-nobody.md
 
-e1ecdbe4d935 design/roadmap/0497-a-filesystem-server-that-knows-the-time.md
 
-e1ecdbe4d935 design/roadmap/0498-a-program-that-takes-an-argument-and-an-input.md
 
-e1ecdbe4d935 design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
-e1ecdbe4d935 design/roadmap/0504-an-mtime-for-an-open-file.md
 
-e1ecdbe4d935 design/roadmap/0505-an-x86-64-input-driver-that-never-lets-the-core-idle.md
 
-e1ecdbe4d935 design/roadmap/0506-colour-the-kernel-stacks-and-take-e1-again.md
 
-e1ecdbe4d935 design/roadmap/0509-live-patching-the-kernel.md
 
-e1ecdbe4d935 design/roadmap/0510-nothing-regenerates-the-roadmap-index.md
 
-e1ecdbe4d935 design/roadmap/0511-the-boards-screen-under-uefi.md
 
-e1ecdbe4d935 design/roadmap/0514-the-hvf-std-listener-hangs-in-some-full-runs.md
 
-e1ecdbe4d935 design/roadmap/0515-the-installer-a-stick-runs-to-put-itself-on-the-disk.md
 
-e1ecdbe4d935 design/roadmap/0516-uefi-test-exits-one-after-a-passing-suite.md
 
-e1ecdbe4d935 design/roadmap/0526-a-riscv64-host-that-hands-us-acpi.md
 
-e1ecdbe4d935 design/roadmap/0528-cheri-capabilities-are-not-these-capabilities.md
 
-e1ecdbe4d935 design/roadmap/0530-name-a-customer.md
 
-e1ecdbe4d935 design/roadmap/0532-the-census-writes-its-own-row.md
 
-e1ecdbe4d935 design/roadmap/0533-the-roadmap-after-the-split.md
 
-e1ecdbe4d935 design/roadmap/0534-the-soft-float-targets-could-now-be-flipped.md
 
-e1ecdbe4d935 design/roadmap/0535-the-trusted-core-has-no-size.md
 
-e1ecdbe4d935 design/roadmap/0537-what-a-trusted-component-costs.md
 
-e1ecdbe4d935 design/roadmap/0539-which-rva23-extensions-this-kernel-must-save.md
 
-e1ecdbe4d935 design/roadmap/0540-a-finding-said-out-loud-is-not-a-finding-recorded.md
 
-e1ecdbe4d935 design/roadmap/0555-a-program-that-asks-the-cpu-dies-without-saying-so.md
 
 e34251093e2f design/roadmap/0610-the-interfaces-stability-is-measured-weekly.md
 
@@ -2401,7 +2114,6 @@ e95481b328c0 design/roadmap/0186-architecture-list-derivation.md
 
 e95481b328c0 notes/architecture-list-sweep.md
 
-e95481b328c0 notes/architecture-list-sweep/not-findings.md
 
 e9c0a6bfa099 notes/scheduler.md
 
@@ -2441,11 +2153,8 @@ ec1d6e2c660a notes/bench-boots.md
 
 ec1d6e2c660a notes/risk-6-bench-evening.md
 
-ec80f2732b68 design/roadmap/0064-std-for-real-crates/ranked-list.md
 
-ec80f2732b68 design/roadmap/0064-std-for-real-crates/scope.md
 
-ec80f2732b68 design/roadmap/0064-std-for-real-crates/tcp-listener-and-file-times.md
 
 edc012806cae design/roadmap/0135-loom-region-claim.md
 
@@ -2477,9 +2186,7 @@ f05ee56f3bb9 design/roadmap/0389-nife-hosts-on-a-tailnet.md
 
 f05ee56f3bb9 notes/why-not-general-purpose.md
 
-f07259b25c9b design/roadmap/0317-interrupt-remapping-flags/riscv64.md
 
-f07259b25c9b design/roadmap/0317-interrupt-remapping-flags/x86-64.md
 
 f1672f9f52f7 design/roadmap/0197-user-and-xtask-proofs.md
 
@@ -2541,9 +2248,7 @@ fa064113eb08 design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
 fa064113eb08 design/roadmap/1033-the-generational-table-crate-released-on-its-own.md
 
-fa61e0fc1b19 design/roadmap/0580-nobody-reads-branches/what-else-was-considered.md
 
-fa61e0fc1b19 design/roadmap/0580-nobody-reads-branches/what-this-would-cost.md
 
 faa00ed7c30d design/roadmap/1065-several-drivers-share-an-interrupt-line.md
 
@@ -2561,23 +2266,14 @@ fc83bc852473 design/roadmap/0482-a-buffering-stage-between-pipe-ends.md
 
 fc83bc852473 design/roadmap/0483-the-console-server-on-the-sink-protocol.md
 
-fdc81cc0d0ec design/fatal-risks/multicore-reliability.md
 
-fdc81cc0d0ec design/fatal-risks/proofs-and-their-reach.md
 
-fdc81cc0d0ec design/fatal-risks/somebody-elses-software.md
 
-fdc81cc0d0ec design/fatal-risks/the-confined-driver.md
 
-fdc81cc0d0ec design/fatal-risks/the-confinement-claims.md
 
-fdc81cc0d0ec design/fatal-risks/the-crossing-cost.md
 
-fdc81cc0d0ec design/fatal-risks/the-hal-and-the-next-machine.md
 
-fdc81cc0d0ec design/fatal-risks/the-mutation-verdict.md
 
-fdc81cc0d0ec design/fatal-risks/what-leaves-nife.md
 
 fe31a8820b01 design/decisions/0027-filesystem-service.md
 

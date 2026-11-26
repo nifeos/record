@@ -9,8 +9,8 @@ needs_person: yes
 ---
 # 815. `e1000e`: proven Intel e1000e ring logic, released on its own
 
-*(From calef's rulings on pull request #1806; the title and slug are drafts. The FAT crate's block,
-milestone 813 (a proven FAT crate released on its own), is the shape this follows.)*
+*(From calef's rulings on pull request #1806; the title and slug are drafts. Milestone 813 (a proven
+FAT crate released on its own) is the shape this follows.)*
 
 calef's rulings, quoted from the maintainer comments on #1806 of 2026-10-07 (UTC):
 
@@ -58,10 +58,8 @@ nife contributes only to projects nife depends on.
 
 ## What is proven
 
-Each row is a property this crate must prove before it publishes. The harness cell names the Kani
-harness that proves it, or says `none yet`; every named harness carries a falsification patch that
-makes it fail at its own assertion. Each patch is under `falsifications/` in that repository. All
-three prove.
+Each row is a property this crate must prove before it publishes. The harness cell reads as in
+milestone 813's table. Each patch is under `falsifications/` in that repository. All three prove.
 
 | property | harness |
 |---|---|
@@ -126,9 +124,9 @@ blocks, which the ratification pass settles.
 
 ## Review before release
 
-- The public API speaks the device's vocabulary, not nife's: no nife capability type, spawn handoff
-  or nife error enum in a public signature. A reviewer judges this; no script can. Known today:
-  `Handoff`, nife's spawn ABI, no longer sits in the crate. The addresses taken from `address_space_layout` left with the cut.
+- The public API speaks the device's vocabulary, by the test milestone 813 states. A reviewer judges
+  this; no script can. Known today: `Handoff`, nife's spawn ABI, no longer sits in the crate. The
+  addresses taken from `address_space_layout` left with the cut.
 
 ## Names a stranger may misread, open before release
 
@@ -145,17 +143,15 @@ targets. In `partsfoundry/e1000e`, the run that published 0.1.0 shows the Kani j
 publish job, and every harness's falsification patch makes its proof fail. The five soak criteria of
 release step 6 hold before it publishes.
 
-The name check of release step 1 passes first, so the repository, the package and every doc link
-carry a ratified name. Before the move, `script/crate-standalone e1000e` exits 0 in nife, and every
-row of *What is proven* names a harness that stock Kani proves in the copy and whose falsification
-patch makes it fail. No crate publishes without Kani harnesses covering its hostile-input and
-state-machine surface, each carrying a falsification patch that makes it fail at its own assertion,
-replayable in the crate's own repository with stock Kani.
+The name check of release step 1 passes first, by Fork 5 of milestone 857. Before the move,
+`script/crate-standalone e1000e` exits 0 in nife, and every row of *What is proven* names a harness
+that stock Kani proves in the copy and whose falsification patch makes it fail. No crate publishes
+without the proofs milestone 857 (crates released on their own) requires.
 
 ## What the crate no longer cites
 
-The crate's source cites nothing of this tree beyond its `Name:` blocks, which stay at their
-names until the ratification pass, so this section keeps the links it carried.
+The crate's source cites nothing of this tree beyond its `Name:` blocks. This section keeps the
+links it carried, by milestone 857's provenance rule.
 
 - `src/lib.rs`, the crate doc: milestone 494 (a driver for the network card a PC actually has)
   wrote the crate. Its design is `notes/e1000e.md`, and `notes/e1000e/the-i219-port.md` says where

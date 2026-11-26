@@ -97,12 +97,11 @@ calef, 2026-10-12 (UTC), under §297 (software reaches a nife system as a packag
 from basalt's index, the kernel included): "They should all be installed via jig through basalt."
 
 `tar` must run on nife installed by `jig install` from basalt's package index. basalt builds the
-package against the nife commit it pins. The install waits on milestone 809 (the package client
-becomes a program, `jig`, with the verbs an index needs). It also waits on milestone 801 (packages
-over the internet: a host name, HTTPS and the distribution's index). No work toward that starts
-until those milestones are built (calef, 2026-10-12 UTC: "For our other programs let's block start
-on packaging."). `tar` is written in this tree, and basalt builds and publishes its package all the
-same. zlib is a library linked into programs, so it reaches a system inside their packages.
+package against the nife commit it pins. The install waits on milestones 809 and 801, as §297 (a
+package `jig` installs) lists. No work toward that starts until those milestones are built (calef,
+2026-10-12 UTC: "For our other programs let's block start on packaging."). `tar` is written in this
+tree, and basalt builds and publishes its package all the same. zlib is a library linked into
+programs, so it reaches a system inside their packages.
 
 ## BUGS
 

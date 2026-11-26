@@ -2,10 +2,7 @@
 
 *An appendix to `nifeos/nife:notes/pipes.md`, which is the page to read. This file holds why the
 file end of a redirection cannot be a separate process, what that costs, and why it made `>>` one
-bit. The lane that split the file moved it here verbatim from the main page on 2026-09-25 (UTC),
-under [§212 (a prose budget)](../../design/decisions/0212-a-prose-budget-for-every-document.md). The
-directory `notes/pipes/` and this file's stem are provisional names, minted that day by the lane
-that split the file. Naming is calef's.*
+bit. It moved here as [the index](README.md) says.*
 
 ## The file behind a `>` is this shell, and that was not the plan
 

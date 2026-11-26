@@ -18,11 +18,11 @@ the block as filed.
 
 Promoted from the proposal `the-census-writes-its-own-row`, filed 2026-09-20, on calef's instruction
 of 2026-09-20 to give every proposal on `main` a number. The text below is the proposal's own,
-unedited except for this paragraph: the argument is its author's and promotion is not the moment to
-improve it. Written by milestone 518 (a census that cannot be attributed is a number nobody can act
-on)'s lane, from the gap its own `BUGS` section names. The record it built is rung three of
-AGENTS.md's ladder, a thing somebody has to remember, and the tenet says to move up a rung when you
-notice that shape.
+unedited, by [the promotion
+rule](../../notes/roadmap.md#anybody-may-add-to-the-roadmap-designroadmapproposals). Written by
+milestone 518 (a census that cannot be attributed is a number nobody can act on)'s lane, from the
+gap its own `BUGS` section names. The record it built is rung three of AGENTS.md's ladder, a thing
+somebody has to remember, and the tenet says to move up a rung when you notice that shape.
 
 `.github/workflows/mutation.yml` has `permissions: contents: read` today, and
 every workflow in this tree makes that same least-privilege choice deliberately. Changing it for one

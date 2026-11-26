@@ -3,10 +3,9 @@
 *Name: provisional, minted 2026-10-11 (UTC) by lane/third-ten-longest-notes, after the parent's own
 word for the check.*
 
-An appendix to [notes/framebuffer-contract.md](../framebuffer-contract.md), moved there on
-2026-10-11 (UTC) under §212 (a prose budget). It records what makes the scanout check a real check,
-the constraints found building it, and the 2026-08-26 investigation of a resize bug that did not
-exist.
+An appendix to [notes/framebuffer-contract.md](../framebuffer-contract.md), moved there under §212
+(a prose budget). It records what makes the scanout check a real check, the constraints found
+building it, and the 2026-08-26 investigation of a resize bug that did not exist.
 
 ## What makes it a real check
 
