@@ -5,9 +5,8 @@ authority)](../0139-cycle-counter-authority.md), the four checks that reframed t
 milestone 75 (who may read the cycle counter). The main page is complete without this one, which
 exists to verify or challenge it.
 
-Milestone 75's block frames this as a decision about whether to open something that is closed.
-Three checks say the framing is wrong in three different directions, and each one changes what the
-decision has to cover.
+The framing these checks correct is stated in [§139 (who may read the cycle counter, and by what
+authority)](../0139-cycle-counter-authority.md#the-premise-was-half-false-and-that-is-the-most-useful-thing-in-this-document).
 
 ## 1. On `x86_64` the counter is already open to every program, and nothing decided that
 
