@@ -17,7 +17,7 @@ merge; the title and the slug are drafts.
 
 The shipped kernel builds with `--release`: opt-level 3, debug assertions off, and overflow checks
 on, which is the one thing the root `[profile.release]` sets. `script/board-image` ships that
-release kernel with a debug user-space archive; milestone 797 (release user space in board images)
+release kernel with a debug user-space archive; milestone 797 (release userspace in board images)
 would change that and has not started. `script/test` and the gating `script/bench --check` build
 cargo's dev profile at opt-level 0, with 21 packages raised one at a time in the root `Cargo.toml`:
 eighteen to opt-level 2, and fixtures, user_mode_runtime and moho_abi to opt-level 1. So the build
