@@ -1,8 +1,8 @@
 # Milestone 317 appendix: riscv64, offered and declined in one word
 
-An appendix to [milestone 317 (the interrupt-remapping flags, and where MSI confinement actually
-lives)](../0317-interrupt-remapping-flags.md), moved out of that page on 2026-10-12 (UTC) under
-[§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main page is
+An appendix to [milestone 317 (the interrupt-remapping
+flags)](../0317-interrupt-remapping-flags.md). [§212 (a prose
+budget)](../../decisions/0212-a-prose-budget-for-every-document.md) moved it out. The main page is
 complete without it. This is the riscv64 measurement in full: where the mechanism sits, the boot
 reading, why no flag exists, the inversion against x86_64, and what is a reading rather than a
 measurement.

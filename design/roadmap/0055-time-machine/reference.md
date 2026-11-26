@@ -2,7 +2,7 @@
 
 An appendix to
 [milestone 55 (Time Machine: SMB3 with Apple's extensions, and mDNS)](../0055-time-machine.md),
-under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main
+under [§212 (a prose budget)](../../decisions/0212-a-prose-budget-for-every-document.md) moved it out. The main
 page is complete without it. It holds the router whose configuration became the requirement list,
 and what that list implies. The work is recorded at full size deliberately, because the failure mode
 here is starting it while imagining it is "a file server".

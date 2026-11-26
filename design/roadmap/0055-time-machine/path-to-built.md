@@ -1,11 +1,11 @@
 # Milestone 55 appendix: the path to BUILT, as scoped 2026-08-22
 
 An appendix to [milestone 55 (Time Machine: SMB3 with Apple's extensions, and
-mDNS)](../0055-time-machine.md), moved out of that page on 2026-10-12 (UTC) under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main page is complete
-without it. This is the milestone's own scoping pass of 2026-08-22, and a second pass the same day
-that found the `ReplaceIfExists` question. The premise was retired eight days later, on 2026-08-30,
-so none of the steps below will run.
+mDNS)](../0055-time-machine.md). [§212 (a prose
+budget)](../../decisions/0212-a-prose-budget-for-every-document.md) moved it out. The main page is
+complete without it. This is the milestone's own scoping pass of 2026-08-22, and a second pass the
+same day that found the `ReplaceIfExists` question. The premise was retired eight days later, on
+2026-08-30, so none of the steps below will run.
 
 ## The scoping pass
 

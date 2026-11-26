@@ -1,9 +1,9 @@
 # What was built, and when: 2026-08-18 to 2026-09-19
 
-This appendix belongs to [milestone 134 (the register of measures)](../0134-the-measurements-that-decide.md).
-It was moved out on 2026-10-12 (UTC) under §212 (a prose budget), and the main page is complete
-without it. It holds the dated build narrative and the corrections made along the way, in the order
-they happened. The main page carries each result as a summary.
+This appendix belongs to [milestone 134 (the register of
+measures)](../0134-the-measurements-that-decide.md). It was moved out under §212 (a prose budget),
+and the main page is complete without it. It holds the dated build narrative and the corrections
+made along the way, in the order they happened. The main page carries each result as a summary.
 
 ## 2026-08-18: the register, and the unsafe census folded in
 

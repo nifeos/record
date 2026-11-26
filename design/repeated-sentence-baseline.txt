@@ -69,9 +69,7 @@
 
 0969fe242bd6 design/roadmap/0782-measure-the-reach-of-the-glob-and-calendar-proofs.md
 
-0a1dd35039b6 notes/crates-io-on-nife/later-passes.md
 
-0a1dd35039b6 notes/crates-io-on-nife/probe-results.md
 
 0a715bf6697b design/roadmap/0595-the-shell-runs-a-std-program.md
 
@@ -141,9 +139,7 @@
 
 10d415351819 design/roadmap/0397-bootstrap-installs-and-also-judges.md
 
-112c687a7a3b design/roadmap/0055-time-machine/path-to-built.md
 
-112c687a7a3b design/roadmap/0055-time-machine/what-landed.md
 
 11fd5062cd7f design/roadmap/1101-memory-regions-outside-review.md
 
@@ -690,9 +686,7 @@
 
 3d9591ffb07a notes/load-sensitive-assertions/timer-assertion-disposition.md
 
-3e8c1e2cd64f design/roadmap/0134-the-measurements-that-decide/build-record.md
 
-3e8c1e2cd64f design/roadmap/0134-the-measurements-that-decide/measures.md
 
 3f1e5efabc27 design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
@@ -1262,9 +1256,7 @@
 
 8187e9559b47 notes/semihosting.md
 
-82233b71d4da design/roadmap/0168-multitasking-benchmark/holes-closed-2026-09-19.md
 
-82233b71d4da design/roadmap/0168-multitasking-benchmark/radon-2026-09-16.md
 
 8228d589b4a5 design/roadmap/0485-xattrs-in-the-redoxfs-on-disk-format.md
 
@@ -1538,9 +1530,7 @@ a8ab22ea3583 design/decisions/0192-a-checked-direct-map-reader-for-the-acpi-walk
 
 a8ab22ea3583 design/roadmap/0423-a-checked-direct-map-reader-for-the-acpi-walk.md
 
-a98d69acee8d design/roadmap/0579-constitution-carry-vs-brief/classification.md
 
-a98d69acee8d design/roadmap/0579-constitution-carry-vs-brief/roles.md
 
 a99faf728420 design/roadmap/0226-qemu-bounded-orphans.md
 
@@ -2001,9 +1991,7 @@ dd7a792417a3 design/decisions/0031-foreign-language-seam.md
 
 dd7a792417a3 notes/c-seam.md
 
-dd7d6f55ceb3 notes/riscv-parity-scope/suite-gaps.md
 
-dd7d6f55ceb3 notes/riscv-parity-scope/user-tests-port.md
 
 dd85350d35be notes/memory-regions.md
 
@@ -2211,9 +2199,7 @@ f05ee56f3bb9 design/roadmap/0389-nife-hosts-on-a-tailnet.md
 
 f05ee56f3bb9 notes/why-not-general-purpose.md
 
-f07259b25c9b design/roadmap/0317-interrupt-remapping-flags/riscv64.md
 
-f07259b25c9b design/roadmap/0317-interrupt-remapping-flags/x86-64.md
 
 f1672f9f52f7 design/roadmap/0197-user-and-xtask-proofs.md
 
@@ -2275,9 +2261,7 @@ fa064113eb08 design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
 fa064113eb08 design/roadmap/1033-the-generational-table-crate-released-on-its-own.md
 
-fa61e0fc1b19 design/roadmap/0580-nobody-reads-branches/what-else-was-considered.md
 
-fa61e0fc1b19 design/roadmap/0580-nobody-reads-branches/what-this-would-cost.md
 
 faa00ed7c30d design/roadmap/1065-several-drivers-share-an-interrupt-line.md
 
