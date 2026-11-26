@@ -20,12 +20,14 @@ overflow checks on, which is the one thing the root `[profile.release]` sets. `s
 gating `script/bench --check` build cargo's dev profile at opt-level 0. The root `Cargo.toml` raises
 21 packages one at a time: eighteen to opt-level 2, and fixtures, user_mode_runtime and moho_abi to
 opt-level 1. So the build that gates every merge is not the build anyone boots. This is a
-measurement, as milestone 744 was for milestone 750: it changes no profile, and the choice it
-prepares is calef's.
+measurement, as milestone 744 (measure the kernel's overflow checks) was for milestone 750
+(overflow checks in the shipped build). It changes no profile, and the choice it prepares is
+calef's.
 
-No milestone or decision chose dev for the gate on its own merits. Milestone 25 added
-`bench --release` in nifeos/nife@2ce5d1a97 for magnitudes next to release Linux, and kept the rest
-on dev for fast rebuilds and debuginfo. `xtask/src/bench.rs` says release never runs under icount
+No milestone or decision chose dev for the gate on its own merits. Milestone 25 (cross-OS
+performance comparison) added `bench --release` in nifeos/nife@2ce5d1a97 for magnitudes next to
+release Linux, and kept the rest on dev for fast rebuilds and debuginfo. `xtask/src/bench.rs` says
+release never runs under icount
 because it changes instruction counts. That gives no reason dev is the right thing to count.
 
 Reuse: the measurement uses the suite's own `script/test`, `script/bench --check` and timing record,
