@@ -42,6 +42,10 @@ extend-exclude = ["vendor/", "patches/", "*.lock", "target/", "bench/**/*.log", 
 extend-ignore-re = ["\\b[0-9a-f]{12,}\\b"]
 
 [default.extend-words]
+# EMAC, the Ethernet media access controller as Espressif names it, and the crate `esp-emac` with its
+# `EmacError` and `EmacConfig`, which milestone 1147 (the designware_ethernet release review) compares.
+emac = "emac"
+Emac = "Emac"
 # Eduard Suess's 1909 name for the Earth's nickel-iron core, Ni plus Fe, and the name this OS takes
 # under milestone 120 (the rename). `typos` reports it as a misspelling of "knife" and is not wrong to: the whole
 # argument for the name is that its accidental reading is `knife`, which is sharp, single-purpose and
