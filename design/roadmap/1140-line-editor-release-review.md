@@ -25,18 +25,19 @@ Reuse: the prior-art table weighs each line editor a caller could take instead.
 
 The status words are those `script/review-status` reads.
 
-- P0-1, `restore` answers `Option<()>` and `Refusal` is not an error: Open.
-- P0-2, `Event::None` shadows `Option::None`: Open.
-- P0-3, `pop_up_to_eight` returns the host's reply shape: Open.
-- P0-4, the handoff publishes its encoding: Open.
-- P1-1, the host protocol's words in the crate's documentation: Open.
-- P1-2, four public types have no `Debug`: Open.
-- P1-3, a `dyn Sink` cannot reach the sink parameter: Open.
-- P1-4, no failure sections and five items without an example: Open.
-- P2-1, the manifest has no `documentation` key: Open.
+- P0-1, `restore` answers `Option<()>` and `Refusal` is not an error: Done
+  in partsfoundry/line_editor#5.
+- P0-2, `Event::None` shadows `Option::None`: Done in partsfoundry/line_editor#5.
+- P0-3, `pop_up_to_eight` returns the host's reply shape: Done in partsfoundry/line_editor#5.
+- P0-4, the handoff publishes its encoding: Done in partsfoundry/line_editor#5.
+- P1-1, the host protocol's words in the crate's documentation: Done in partsfoundry/line_editor#5.
+- P1-2, four public types have no `Debug`: Done in partsfoundry/line_editor#5.
+- P1-3, a `dyn Sink` cannot reach the sink parameter: Done in partsfoundry/line_editor#5.
+- P1-4, no failure sections and five items without an example: Done in partsfoundry/line_editor#5.
+- P2-1, the manifest has no `documentation` key: Done in partsfoundry/line_editor#5.
 - P2-2, an `embedded-io` adapter: Waiting on the byte-sink decision of milestone 1129.
 - P2-3, capacities the caller chooses: Open.
-- P2-4, UTF-8 input: Open.
+- P2-4, UTF-8 input: Done in partsfoundry/line_editor#5.
 
 ## Open decisions
 
