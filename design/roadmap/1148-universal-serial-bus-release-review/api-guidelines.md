@@ -8,13 +8,13 @@ on each of the 54 items of the
 | code | verdict | why |
 |---|---|---|
 | C-CASE | met | `BootReport`, `find_boot_keyboard`, `REPORT_BYTES` |
-| C-CONV | met | `to_u64` on a `Copy` type, `parse` from a slice |
+| C-CONV | not met | `to_u64` takes `&self` on a `Copy` type, the standard 1147 applies to `Settings::to_word` |
 | C-GETTER | met | no `get_` getter; `get_descriptor` names the USB request |
 | C-ITER | not applicable | no collection is iterated |
 | C-ITER-TY | not applicable | no iterator type |
 | C-FEATURE | not applicable | no features |
 | C-WORD-ORDER | met | `NoBootKeyboard`, `PacketTooSmall`, `NotThatDescriptor` |
-| C-COMMON-TRAITS | met | every public type derives `Debug`, `Clone`, `Copy`, `PartialEq` and `Eq`; `BootReport` also `Default` |
+| C-COMMON-TRAITS | not met | every public type derives `Debug`, `Clone`, `Copy`, `PartialEq` and `Eq` but not `Hash`, as in 1146 |
 | C-CONV-TRAITS | not met | no `From` between `SetupPacket` and its eight bytes (P2-2) |
 | C-COLLECT | not applicable | no collection |
 | C-SERDE | not applicable | descriptors and reports have their wire form already |
@@ -46,7 +46,7 @@ on each of the 54 items of the
 | C-CALLER-CONTROL | met | the caller owns every buffer and every transfer |
 | C-GENERIC | not met | `changes` takes `&mut dyn FnMut` rather than a generic or an iterator (P0-3) |
 | C-OBJECT | not applicable | no traits |
-| C-NEWTYPE | met | `u8` stays where every value is valid (D5) |
+| C-NEWTYPE | not met | `u8` stays where every value is valid (D5), but `request_type` has reserved values (P0-4) |
 | C-CUSTOM-TYPE | not met | the `bool` argument of the `changes` callback (P0-3) |
 | C-BITFLAG | met | the modifier byte stays the report's own byte, and `changes` turns it into usages |
 | C-BUILDER | not applicable | no type with many optional parts |
@@ -56,10 +56,10 @@ on each of the 54 items of the
 | C-DEBUG | met | every public type derives `Debug` |
 | C-DEBUG-NONEMPTY | met | the derived output names each type |
 | C-SEALED | not applicable | no traits |
-| C-STRUCT-PRIVATE | not met | `DeviceDescriptor`, `ConfigurationHeader` and `BootKeyboard` (P0-2) |
+| C-STRUCT-PRIVATE | not met | `DeviceDescriptor`, `ConfigurationHeader`, `BootKeyboard` and `BootReport` (P0-2) |
 | C-NEWTYPE-HIDE | not applicable | no wrapper type |
 | C-STRUCT-BOUNDS | not applicable | no generic types |
 | C-STABLE | met | no dependencies |
 | C-PERMISSIVE | met | MIT OR Apache-2.0 |
 
-Totals: 21 met, 11 not met, 22 not applicable.
+Totals: 18 met, 14 not met, 22 not applicable.
