@@ -327,7 +327,7 @@ the architect has ruled D1 to D8.
 
 The release review of `block_roster_contract` against `block-utils`, `rs-drivelist` and
 `blockdev`, the neighbors `multiboot2` and `zerocopy`, seL4's boot information page and the NVMe
-namespace list. Seven findings touch the 0.1.0 interface: two constants that spell `VIRTIO`, a
-transport that is a bare `u32`, public `Device` fields, one unit error for two causes, no refusal
-for another version, identity and entry-point spellings, and two names without a ruling. Four
+namespace list. Seven findings touch the 0.1.0 interface. They are two constants that spell `VIRTIO`, a transport
+that is a bare `u32`, public `Device` fields, one unit error for two causes, no refusal for another
+version, identity and entry-point spellings, and two names without a ruling. Four
 land before the release, five may follow, and eight doors wait for the architect.
