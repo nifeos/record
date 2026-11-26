@@ -43,34 +43,37 @@ All runs were on one 80-core x86_64 Linux host under TCG, against nifeos/nife ma
 nifeos/nife@4727ab7cf2 merged into the measurement branch (nifeos/nife#4108, a draft not meant to
 merge). Each level ran in its own worktree with every per-package entry deleted, which is what
 option B below proposes, and cargo's dev-profile environment overrides set the base level. The
-untouched tree, with its 21 entries, is the O0 column. The release column is a true `--release`
-build of the bench kernel and its user programs, through a measurement switch on #4108. Two
-levels ran at a time, so wall times carry noise of perhaps ten percent; the icount rows carry none.
+untouched tree, with its 21 entries, is the O0 column. The rel column is dev made
+release-equivalent: opt-level 3, debug assertions off, debuginfo off, 16 codegen units,
+incremental off, overflow checks on. Two levels ran at a time, so wall times carry noise of
+perhaps ten percent; the icount rows carry none.
 
-Runs still going at this revision: O1, O3, the release-equivalent dev build, and the release bench
-on riscv64 and x86_64. Their cells read pending.
+A true `--release` bench of aarch64 matches the rel column to within one instruction on every row,
+so rel stands for the shipped profile here. The same run on riscv64 and x86_64 is open work (see
+Follow-on).
 
 ### The gating benchmark
 
 Every row ran twice at every level, and the two runs are identical to the instruction. Every
 optimized run fails `--check`, as it must, since the baseline holds opt-level 0 counts. Selected
-rows (instructions; nifeos/nife#4108 holds the full tables):
+rows, as instructions at O0 and the change from O0 (nifeos/nife#4108 holds every row):
 
-| row | arch | O0 | O2 | release |
-|---|---|---|---|---|
-| ipc_rtt | aarch64 | 803253 | -89% | -91% |
-| call_reply | aarch64 | 836441 | -89% | -91% |
-| spawn_reap | aarch64 | 183437 | -65% | -66% |
-| map_new | aarch64 | 14628 | -50% | -50% |
-| coremark | aarch64 | 17739199 | -90% | -92% |
-| null_system_call | aarch64 | 238750 | -45% | -45% |
-| ipc_rtt_el0 | aarch64 | 7978125 | -86% | -88% |
-| ipc_rtt | riscv64 | 129381 | -88% | pending |
-| rfence_self | riscv64 | 5934 | -11% | pending |
-| null_system_call | riscv64 | 47400 | -24% | pending |
-| ipc_rtt | x86_64 | 13751053 | -89% | pending |
-| tss_iomap_switch | x86_64 | 19558051 | -91% | pending |
-| coremark | x86_64 | 263128262 | -87% | pending |
+| row | arch | O0 | O1 | O2 | O3 | rel |
+|---|---|---|---|---|---|---|
+| ipc_rtt | aarch64 | 803253 | -85% | -89% | -89% | -91% |
+| call_reply | aarch64 | 836441 | -83% | -89% | -89% | -91% |
+| spawn_reap | aarch64 | 183437 | -63% | -65% | -65% | -66% |
+| map_new | aarch64 | 14628 | -48% | -50% | -50% | -50% |
+| coremark | aarch64 | 17739199 | -90% | -90% | -92% | -92% |
+| null_system_call | aarch64 | 238750 | -41% | -45% | -45% | -45% |
+| ipc_rtt_el0 | aarch64 | 7978125 | -79% | -86% | -86% | -88% |
+| ipc_rtt | riscv64 | 129381 | -86% | -88% | -88% | -90% |
+| rfence_self | riscv64 | 5934 | -11% | -11% | -10% | -10% |
+| null_system_call | riscv64 | 47400 | -26% | -24% | -24% | -26% |
+| ipc_rtt_el0 | riscv64 | 1321739 | -82% | -84% | -85% | -87% |
+| ipc_rtt | x86_64 | 13751053 | -86% | -89% | -89% | -91% |
+| tss_iomap_switch | x86_64 | 19558051 | -68% | -91% | -91% | -72% |
+| coremark | x86_64 | 263128262 | -87% | -87% | -89% | -89% |
 
 Findings:
 
@@ -78,21 +81,35 @@ Findings:
    Eight to nine instructions in ten on every IPC row are code that the shipped kernel does not
    execute.
 2. The rows do not move together, so an opt-level 0 regression does not predict a shipped one.
-   `rfence_self` falls 11 percent (it is firmware-bound), `map_new` half, IPC nine tenths.
-3. Compiler drift is large at opt-level 0. The 2026-11-18 nightly re-save (nifeos/nife@1547eb2af9)
-   moved x86_64 rows -12.5 to -16.6 percent, aarch64 -10.5 (`map_new`) to -19.6 (`map_el0`), and
-   riscv64 -1.7 (`rfence_self`) to -16.8. Drift at O1 and O2 across a toolchain change is not yet
-   measured. The toolchain-bump workflow restamps only when every row moves under 0.5 percent and
-   all under 2 percent together; those bounds came from O0 drift and would need checking again.
-4. On main, `bench --release` builds a release kernel only on aarch64. The riscv64 and x86_64 paths
-   call cargo directly and boot `target/<triple>/debug/kernel`, so they measure a dev kernel whatever
-   the flag. The first release run here showed it: riscv64 kernel rows matched O0 to the tick,
-   and only `sink_throughput`, a user program, moved. #4108 routes both paths through the profile.
-5. The x86_64 release kernel did not finish the bench under icount. It printed both probes and
-   then made no progress for an hour, when the run was stopped. One run so far; a second run and
-   the cause are pending. The earlier figure of -72 percent for `tss_iomap_switch` at the
-   release-equivalent level came from a dev build that the per-package entries still shaped, and
-   this revision withdraws it.
+   `rfence_self` falls 10 percent (it is firmware-bound), `map_new` about half, IPC nine tenths.
+3. O1 against O2. Across every row of every architecture, O1 gets on average 96 percent of O2's
+   reduction from O0. What it leaves still counts: O1's IPC rows hold 16 to 45 percent more
+   instructions than O2's, and its EL0 rows on aarch64 up to 57 percent more. Its
+   `tss_iomap_switch` holds 3.8 times O2's count.
+4. O2 against rel. O2's IPC rows still hold 20 to 30 percent more instructions than the shipped
+   profile's. O3 is within about five percent of O2 on every row but CoreMark, so most of that gap
+   is what debug assertions and the dev profile's other settings cost on those paths.
+5. `tss_iomap_switch` on x86_64 differs between O3 (-91%) and rel (-72%), deterministically, with
+   every per-package entry deleted. The shipped profile spends 3.3 times O3's instructions on that
+   path. Nothing explains it yet; only a release-profile bench shows it.
+6. Compiler drift at opt-level 0 is large and at O1 and O2 almost nil. One toolchain change,
+   nightly 2026-11-17 to 2026-11-18, measured on the same tree at each level:
+
+   | level | aarch64 | riscv64 | x86_64 |
+   |---|---|---|---|
+   | O0 | -10.8 to -19.4% | -1.7 to -16.7% | -12.7 to -16.6% |
+   | O1 | -0.01 to +0.25% | -0.06 to +0.08% | 0.00% |
+   | O2 | -0.10 to +0.01% | -0.06 to +0.15% | -0.06 to 0.00% |
+
+   The O0 row matches the 2026-11-18 baseline re-save (nifeos/nife@1547eb2af9) within half a point. The
+   toolchain-bump workflow restamps only when every row moves under 0.5 percent and all under 2
+   percent together; those bounds came from O0 drift. At O1 and O2 this toolchain change sits well
+   inside them, though one change is a sample of one.
+7. On main, `bench --release` builds a release kernel only on aarch64. The riscv64 and x86_64 paths
+   call cargo directly and boot `target/<triple>/debug/kernel`, so they measure a dev kernel
+   whatever the flag. #4108 routes both through the profile for the measurement.
+8. With that change, the x86_64 release kernel printed both bench probes under icount and then made
+   no progress for an hour, in one run. The release-equivalent dev build of the same path finishes.
 
 ### The test suite
 
@@ -107,9 +124,10 @@ debug assertions:
    three (on #4108). No code outside tests compares linker symbols for equality.
 2. `ipc_stack_depth` (O1 and up). `cfg(debug_assertions)` chooses its paint margin, a stand-in for
    opt-level: 512 bytes in debug, 64 in release. At O1 to O3 assertions stay on, so the margin is
-   512 and every optimized series sits at its floor. With the margin forced to 64, O2 still leaves
-   one series at the floor on every architecture (the `call_reply` server REPLY). The release
-   branch of this test has never run in any gate, because nothing runs the kernel suite in release.
+   512 and every optimized series sits at its floor. With the margin forced to 64, series still
+   sit at the floor: up to three at O1, one at O2 and O3 (the `call_reply` server REPLY), and one
+   to three at rel. The release branch of this test has never run in any gate, because nothing
+   runs the kernel suite in release.
 3. The loader's test binary (O1 and up, aarch64 and x86_64). Optimized, `image_self_checker` has
    two loadable segments, not three, and no read-only one, so
    `a_read_only_segment_is_mapped_read_only` and `the_initial_ramdisk_holds_a_native_executable`
@@ -118,30 +136,39 @@ debug assertions:
    one read of `RODATA_MARKER` is of an immutable static, which the optimizer folds to a constant,
    so no `.rodata` links. `black_box` on the reference keeps the read, and all three architectures
    then keep a read-only segment at O0 to O3 (on #4108). The tests still assert on the segment.
-4. Debug assertions (release only, one test). An earlier run with `--no-fail-fast` found one host
-   failure: `address_space_identifier`'s `a_second_free_of_one_identifier_is_caught`, a
-   `should_panic` test of a `debug_assert!`. The tree has 43 `debug_assert!` sites in the kernel
-   and 23 in crates; all go silent in the shipped build.
+4. Debug assertions (rel only, one test). The host leg stops on
+   `address_space_identifier`'s `a_second_free_of_one_identifier_is_caught`, a `should_panic` test
+   of a `debug_assert!`. The tree has 43 `debug_assert!` sites in the kernel and 23 in crates; all
+   go silent in the shipped build.
 
-With items 1 to 3 patched, O2 passes the whole suite, cold and warm, on all three architectures,
-apart from item 2's series with its margin forced.
+With items 1 to 3 patched, O1, O2 and O3 pass the whole suite, cold and warm, on all three
+architectures, apart from item 2's series with its margin forced. At rel the kernel and system legs
+pass on all three.
 
-Wall time, in seconds, from the suite's own timing record (run phases; builds after the slash):
+Wall time in seconds, from the suite's own timing record (run phases):
 
-| leg | O0 | O2 |
-|---|---|---|
-| aarch64 kernel and system, warm | 232 | 152 |
-| riscv64 kernel and system, warm | 236 | 147 |
-| x86_64 kernel, system, IOMMU and OVMF, warm | 398 / 22 | 257 / 39 |
-| host crates, warm | 73 | 57 |
-| host crates, cold build and run | 154 | 162 |
-| whole suite, cold, end to end | 1723 | 1373 |
-| kernel builds within the cold suite | 61 | 99 |
+| leg | O0 | O1 | O2 | O3 | rel |
+|---|---|---|---|---|---|
+| aarch64 kernel and system, warm | 232 | 144 | 152 | 125 | 129 |
+| riscv64 kernel and system, warm | 236 | 144 | 147 | 129 | 128 |
+| x86_64 kernel, system, IOMMU and OVMF, warm | 399 | 277 | 257 | 249 | 272 |
+| host crates, warm | 73 | 69 | 57 | 57 | stops at item 4 |
+| host crates, cold build and run | 154 | 150 | 162 | 149 | stops at item 4 |
+| whole suite, cold, end to end | 1723 | 1260 | 1373 | 1252 | stops at item 4 |
 
-The kernel legs run 34 to 38 percent faster at O2, not nine times faster, because most of a leg is
-timer waits, device emulation and image builds. The cold suite as a whole takes 20 percent less.
-Optimized builds cost 38 seconds more in the cold suite's kernel builds and 8 in the host leg; a
-cold build of the user-space ramdisk alone is pending.
+Build cost, in seconds:
+
+| build | O0 | O1 | O2 |
+|---|---|---|---|
+| kernel builds within the cold suite, all legs | 61 | 80 | 99 |
+| user programs (the ramdisk), cold, aarch64 | 7 | 7 | 9 |
+| user programs, cold, riscv64 | 7 | 9 | 9 |
+| user programs, cold, x86_64 | 6 | 8 | 9 |
+
+The kernel legs run 31 to 46 percent faster optimized, not nine times faster, because most of a
+leg is timer waits, device emulation and image builds. O1 and O2 are within noise of each other on
+leg time. A cold O2 suite pays about 38 seconds more kernel build and two or three seconds more
+per architecture for the user programs, against more than five minutes saved in run time.
 
 ### What else moves
 
@@ -156,10 +183,16 @@ cold build of the user-space ramdisk alone is pending.
   off.
 - Panic quality. Unchanged in what the kernel prints: `[PANIC]`, the location and the message
   come from `PanicInfo` at every level.
-- Debugger stepping under `xtask gdb` at O1 and O2: pending.
-- Mutation testing. The workflow derives each mutant's timeout as five times its package's
-  baseline test time, with a floor of 20 seconds. Faster optimized tests shorten the derived
-  timeouts in step, so the timeout column of the mutation baseline may shift. Not yet measured.
+- Debugger stepping. Under `cargo xtask gdb` on aarch64, `break kernel_main` and five `next`
+  steps show source lines at O0, O1 and O2. Optimized, the breakpoint lands one statement in, the
+  first step goes back one line, and the `boot_info_pointer` argument is gone. A backtrace there ends
+  at `kernel_main` at every level, as it is the first Rust frame.
+- Mutation testing. Not yet measured; a sample is set for the night-time window. The workflow
+  derives each mutant's timeout as five times its package's baseline test time, with a floor of 20
+  seconds. A package whose tests run under four seconds keeps the floor at every level, and a hang
+  stays a hang. The likely shift is small and downward: a slow mutant
+  that timed out at O0 may finish optimized and move to caught or missed. Each mutant build costs
+  more optimized.
 
 ### What option C costs beyond a baseline save
 
@@ -168,7 +201,7 @@ and `bench/attributions.tsv` (802 lines) loses continuity across that save. The 
 workflow and `metrics.yml`'s drift check (`helpers/baseline_drift.py`) act on the numbers. About
 twenty record notes and `notes/benchmarks.md` cite tick counts, and each would need a line saying
 which profile it counted. The rule in `xtask/src/bench.rs` that release never runs under icount
-would need rewriting.
+would need rewriting, and the two bench paths of finding 7 would need the profile.
 
 ## Options
 
@@ -177,24 +210,32 @@ Each option's cost is what this measurement found, not an estimate.
 - A. Keep dev at opt-level 0. No work. The gate keeps counting mostly unoptimized code and keeps
   absorbing compiler drift of ten to twenty percent as baseline saves. It never runs the release
   branch of `ipc_stack_depth` or any other release-only path.
-- B1. Dev at opt-level 1, debug assertions, overflow checks and debuginfo kept. The same fixes as
-  B2. Numbers pending.
+- B1. Dev at opt-level 1, debug assertions, overflow checks and debuginfo kept, with B2's fixes.
+  Run time and drift match B2. It counts 16 to 57 percent more instructions than O2 on the IPC
+  and EL0 rows and misses most of the `tss_iomap_switch` change, so its bench stays further from
+  what ships. Its host leg is 12 seconds slower warm.
 - B2. Dev at opt-level 2, the same kept. Fix the three symbol comparisons and the loader fixture.
   Rework `ipc_stack_depth`'s margin so it keys on what it measures rather than on
   `debug_assertions`. Delete the 21 per-package entries. Save one bench baseline per architecture.
-  Measured: 34 to 38 percent less run time per kernel leg, 20 percent off the cold suite.
-- C. The gating bench on a release build, the suite unchanged. Fix the two bench paths that ignore
+  Measured: kernel legs 34 to 38 percent faster, the cold suite 20 percent faster, toolchain drift
+  under a quarter of a percent.
+- C. The gating bench on a release build, the suite unchanged. Route the two bench paths through
   the profile, find why the x86_64 release kernel stalls under icount, and pay the costs above.
-- D. B then C.
+  O2 counts 20 to 30 percent more IPC instructions than it does, and only C sees the real
+  `tss_iomap_switch`.
+- D. B2 then C.
 
 ## Recommendation
 
-Pending the remaining runs, the direction is D with B first, and the choice between O1 and O2
-waits on the O1 numbers. The seven questions:
+D, with B2 first. B2 alone takes most of the gain: the bench stops counting unoptimized code,
+toolchain drift drops from ten to twenty percent to under a quarter of a percent, and the suite
+runs faster. C then moves the bench onto the shipped profile, once its two blockers are fixed. The
+seven questions:
 
-1. What else did this consider? A loses because the gate measures a build nobody runs. C alone
-   loses because the suite keeps missing the optimizer-sensitive failures above. B alone leaves the
-   bench off the shipped build.
+1. What else did this consider? A loses because the gate measures a build nobody runs and pays a
+   baseline save at every nightly. B1 loses to B2 at the same run time and the same drift, because
+   it counts more code that does not ship. C alone loses because the suite keeps missing the
+   optimizer-sensitive failures above, and C cannot start until the x86_64 stall has a cause.
 2. What does this tree do in the analogous case? fastpath-footprint and build-is-reproducible
    already build the shipped profile because that is what they are about; milestone 750 turned on
    overflow checks in release for the same reason, to check what ships.
@@ -213,23 +254,29 @@ waits on the O1 numbers. The seven questions:
    benchmarking. [rustc-perf](https://github.com/rust-lang/rustc-perf/blob/463fb3a255f7/collector/README.md#L65-L68)
    counts instructions because they vary least, and
    [measures](https://github.com/rust-lang/rustc-perf/blob/463fb3a255f7/docs/glossary.md) the
-   compiler artifacts built from merged commits. None of the four benchmarks an unoptimized build.
+   compiler artifacts built from merged commits. None of the four benchmarks an unoptimized build;
+   Linux and seL4 are the precedent for B2's opt-level 2 with assertions kept apart.
 4. Is the premise true? With two corrections: there are 21 per-package entries, three of them at
    opt-level 1, and board images ship a debug user space with the release kernel.
-5. What does each cost? In Options above.
-6. How reversible? B is a two-way door: a profile is two lines and a baseline is one save. C is
+5. What does each cost? In Options above, measured.
+6. How reversible? B2 is a two-way door: a profile is two lines and a baseline is one save. C is
    less so, because the workflows and notes above act on the numbers.
 7. Would we still choose it at equal cost? Yes. The recommendation is about measuring the
-   shipped build, not about effort; B even lowers the suite's run time.
+   shipped build, not about effort; B2 even lowers the suite's run time.
 
 ## Follow-on
 
-- **Recorded.** The choice among the options is calef's, once the pending runs fill this block.
-- **Recorded.** The x86_64 release kernel's stall under icount, and the two bench paths that
-  ignore `--release` on main, need fixes before option C can start.
+- **Recorded.** The choice among the options is calef's, in this block's Options and
+  Recommendation. On D, a B2 lane carries the four test fixes, the profile change and the
+  per-package deletions, and a C lane follows.
+- **Recorded.** Open work before C: the x86_64 release kernel's stall under icount, the riscv64
+  true-release bench, and the two bench paths that ignore `--release` on main.
+- **Recorded.** Nothing explains the `tss_iomap_switch` difference between O3 and rel on x86_64
+  yet. One icount run per setting bisects it over the five settings that separate the two.
+- **Recorded.** The mutation-timeout sample, coremark and capability_manifest_note at O0 and O2.
 
 ## Index row
 
 What building the test suite and the gating icount bench optimized would cost and find, measured
-at opt-level 0 and 2 and a release bench on aarch64 so far, with options for calef; no profile
-changed.
+at opt-level 0 to 3 and release on three ISAs, with toolchain drift, options and a recommendation
+for calef; no profile changed.
