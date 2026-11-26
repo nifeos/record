@@ -63,8 +63,8 @@ names in nife (its fleet lint and its pre-push hook) stay in nife.
 The baselines the ratchets hold the record to are the record's rows of nife's:
 `design/passive-baseline.tsv`, `design/module-block-baseline.txt`,
 `design/naming-rule-baseline.txt` and `design/removed.tsv`. The record's own is
-`design/repeated-sentence-baseline.txt`, the copies the one-home rule found when it was made. Each
-only shrinks.
+`design/repeated-sentence-baseline.txt`, the copies the one-home rule found when it took effect.
+Each only shrinks.
 
 ## Where things go
 

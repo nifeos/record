@@ -36,5 +36,5 @@ few words and links there.
 The `repeated_sentences` section of `script/lint` holds the record to it. It refuses a sentence of
 100 or more characters that appears in more than one Markdown file under `design/` and `notes/`,
 unless `design/repeated-sentence-baseline.txt` lists that copy. The list holds the copies that
-existed when the rule was made, and it only shrinks. `helpers/repeated_sentences.py` says what the
-check exempts and why.
+existed when the rule took effect, and it only shrinks. `helpers/repeated_sentences.py` says what
+the check exempts and why.
