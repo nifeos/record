@@ -31,12 +31,12 @@ have and this one leaves out.
 
 Each line reads against `partsfoundry/byte_glob` at `a095cd8`.
 
-- Item 1 (P1), the missing common traits: Open.
-- Item 2 (P1), no example on the front page or on two functions: Open.
+- Item 1 (P1), the missing common traits: Done, [partsfoundry/byte_glob#10](https://github.com/partsfoundry/byte_glob/pull/10).
+- Item 2 (P1), no example on the front page or on two functions: Done, [partsfoundry/byte_glob#10](https://github.com/partsfoundry/byte_glob/pull/10).
 - Item 3 (P2), no way to escape a literal name: Open.
-- Item 4 (P2), no case-insensitive match: Open.
-- Item 5 (P2), every call parses the pattern again: Open.
-- Item 6 (P2), crates.io metadata: Open.
+- Item 4 (P2), no case-insensitive match: Done, [partsfoundry/byte_glob#10](https://github.com/partsfoundry/byte_glob/pull/10).
+- Item 5 (P2), every call parses the pattern again: Done, [partsfoundry/byte_glob#10](https://github.com/partsfoundry/byte_glob/pull/10).
+- Item 6 (P2), crates.io metadata: Done, [partsfoundry/byte_glob#10](https://github.com/partsfoundry/byte_glob/pull/10).
 
 ## Prior art
 
