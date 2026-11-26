@@ -37,7 +37,7 @@ with cargo's profile environment overrides. No other optimized test path exists.
 
 All runs were on one 80-core x86_64 Linux host under TCG, on nifeos/nife@a64a709eb2. That is main at
 nifeos/nife@a42d91c57e with the measurement's fixes merged in (nifeos/nife#4108, a draft not meant
-to merge).
+to merge). The mutation sample alone ran on an earlier head of that branch.
 
 Each optimized level ran in its own worktree with every per-package entry deleted, as the B options
 below propose. The O0 column is the tree as it is. The rel column is a release-equivalent dev build:
@@ -74,9 +74,9 @@ Findings:
 3. O1 leaves 17 to 41 percent more IPC instructions than O2, 47 percent on `sink_throughput`, and
    3.9 times O2's `tss_iomap_switch`.
 4. O2 and O3 agree within 1.5 percent on aarch64 and x86_64 IPC rows; on riscv64 O3 runs 1.3 to 5
-   percent more. They differ on CoreMark. Both hold 21 to 32 percent more kernel IPC instructions
-   than rel, and 15 to 17 percent more on the EL0 rows. Debug assertions are the likely cause, but
-   nobody has bisected the five settings.
+   percent more. They differ on CoreMark. Both hold 21 to 29 percent more instructions on `ipc_rtt`,
+   `relay_rtt`, `call_reply` and `broker_rtt` than rel, and 15 to 17 percent more on the EL0 rows.
+   Debug assertions are the likely cause, but nobody has bisected the five settings.
 5. The shipped profile spends 3.4 times O3's instructions on `tss_iomap_switch`, deterministically.
    Nothing explains it yet, and only a release bench sees it.
 6. On main, `bench --release` boots a dev kernel on riscv64 and x86_64 (nifeos/nife#4122).
@@ -106,8 +106,7 @@ The toolchain-bump workflow restamps only when every row moves under 0.5 percent
 or more crosses. Of the six pairs above, four cross at O0 and three at every other level. Optimized
 moves are smaller but cross about as often. Two intervals give no rate of re-saves.
 
-The 2026-11-18 re-save, nifeos/nife@1547eb2af9, blames code generation; it was the debuginfo
-default.
+The 2026-11-18 re-save, nifeos/nife@1547eb2af9, blames code generation; debuginfo caused it.
 
 ### The test suite
 
@@ -169,7 +168,7 @@ does not reach them.
   Any B option changes what runs on boards and moves every board job-mix and soak number. This
   overlaps milestone 797 (release userspace in board images).
 - fastpath-footprint and build-is-reproducible already build `--release`. Kani and Miri follow only
-  `cfg(debug_assertions)`. Panic output comes from `PanicInfo` at every level.
+  `cfg(debug_assertions)`.
 - Debugging. Under `cargo xtask gdb` on aarch64, a break in `isa::initialize`, three frames deep,
   at two lines:
 
@@ -219,22 +218,22 @@ nifeos/nife@a64a709eb2 strips. Nothing else blocks C.
   counts what ships, sees `tss_iomap_switch`, and is immune to the debuginfo default.
 - D. B2, then C. Two baseline saves and two breaks in `attributions.tsv`, and C throws the O2
   baseline away.
-- F. A named CI cargo profile, opt-level 3 with debug assertions, overflow checks and none of the
-  21 entries, for `script/test` and `script/mutation`. Dev stays at O0 with its entries for the edit
-  loop and gdb. Mutation on the CI profile pays the 12 to 19 percent rebuild cost, not the O0
-  host-test times, which settles the conflict above. It needs B3's fixes and its own target
-  directory; board images keep their dev user space.
+- F. A named CI cargo profile, opt-level 3 with debug assertions, overflow checks and none of the 21
+  entries, for `script/test` and `script/mutation`. Dev stays at O0 with its entries for the edit
+  loop and gdb. Mutation on the CI profile pays a rebuild cost, 12 to 19 percent in a two-package O2
+  sample, not the O0 host-test times, which settles the conflict above. It needs B3's fixes and its
+  own target directory; board images keep their dev user space.
 - E. Bisect `tss_iomap_switch`, then C, then F (or B3), then R. One baseline save, since a release
   bench does not follow the dev profile.
 
 ## Recommendation
 
-E with F. Bisect `tss_iomap_switch` over the five settings first, so C does not publish floors that
+E. Bisect `tss_iomap_switch` over the five settings first, so C does not publish floors that
 hold an unexplained 3.4 times. Then move the gating bench to release. Move the suite to the CI
 profile once #4129 and `ipc_stack_depth` are fixed, and add the release leg to the queue after that.
 F gives the suite the shipped opt-level without slowing the edit rebuild or costing gdb.
 
-The order follows blockers, not effort. C waits on the bisect and #4122. F and R wait on fixes of
+C waits on the bisect and #4122. F and R wait on fixes of
 unknown cost.
 
 One-way doors, for calef: C and the release floors it publishes, which workflows and notes then act
@@ -247,8 +246,8 @@ The seven questions:
 
 1. What else did this consider? A keeps a gate that counts a build nobody runs. B1 counts more code
    that does not ship. B2 is further from what ships at no measured saving. B3 slows the edit
-   rebuild and costs gdb its locals; F does neither. D saves two baselines where E saves one. C
-   alone leaves the suite at a level that does not ship.
+   rebuild and costs gdb its locals; F does neither. D saves a second baseline. C alone
+   leaves the suite at a level that does not ship.
 2. What does this tree do in the analogous case? fastpath-footprint and build-is-reproducible build
    the shipped profile because that is what they check. Milestone 750 put overflow checks in
    release to check what ships.
