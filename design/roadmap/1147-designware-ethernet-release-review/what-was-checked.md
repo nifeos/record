@@ -61,5 +61,5 @@ Each from its published crate at the version in the block's table:
 
 - The comparative benchmark against `stm32-eth`, which builds only for an STM32 target with a chip
   feature and drives the 3.x descriptors.
-- Any run on a board; that is the open item of milestone 1074.
+- Any run on a board; that is the open item of milestone 1074 (what an outside maintainer would fix).
 - Mutation testing, which the crate repository runs in its merge queue.

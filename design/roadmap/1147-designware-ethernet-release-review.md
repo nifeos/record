@@ -9,8 +9,8 @@ needs_person: yes
 ---
 # 1147. `designware_ethernet`: the release review's findings
 
-The release review of `partsfoundry/designware_ethernet` at commit `565b331f`, under milestone
-1129 (the combine review), whose [block](1129-crate-interfaces-best-in-class.md) sets its form. It
+The release review of `partsfoundry/designware_ethernet` at commit `565b331f`, under
+milestone 1129 (the combine review), whose [block](1129-crate-interfaces-best-in-class.md) sets its form. It
 compares the public interface with the Rust drivers for the same Synopsys controller and with three
 drivers outside Rust. The baseline is milestone 1074 (what an outside maintainer would fix),
 [its block](1074-designware-ethernet-outside-review.md), whose items have all landed but the board
