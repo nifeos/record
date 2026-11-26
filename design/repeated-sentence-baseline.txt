@@ -41,9 +41,7 @@
 
 0446af711fbc notes/citations/ratchet.md
 
-045e6110efe8 design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
-045e6110efe8 design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
 04e8cc8e67fb design/decisions/0222-who-holds-a-users-schedule.md
 
@@ -162,9 +160,7 @@
 
 151b5b5752fc notes/documentation-audit.md
 
-159ab6896a38 design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
-159ab6896a38 design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
 15a99af7101a design/roadmap/0138-file-io-throughput/options.md
 
@@ -200,9 +196,7 @@
 
 18da2302fead notes/empty-selectors.md
 
-1957312e894a design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
-1957312e894a design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
 1a6fdf7f54eb notes/crate-reviews/designware-ethernet.md
 
@@ -625,9 +619,7 @@
 
 
 
-3f1e5efabc27 design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
-3f1e5efabc27 design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
 40290afaa3fa design/roadmap/0527-the-survey-selector-and-a-threads-placement.md
 
@@ -649,9 +641,7 @@
 
 45a5d8c34f28 design/roadmap/1098-line-editor-outside-review.md
 
-45c413d8deff design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
-45c413d8deff design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
 45e50d162bfa design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
@@ -671,9 +661,7 @@
 
 
 
-46b1a14c882a design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
-46b1a14c882a design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
 472f1fc81c95 design/roadmap/1071-entropy-contract-outside-review.md
 
@@ -816,13 +804,9 @@
 
 5867d64db834 design/roadmap/1088-elf-outside-review/decisions.md
 
-587421f1f570 design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
-587421f1f570 design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
-5901502be7ee design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
-5901502be7ee design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
 5916eddb8d39 design/roadmap/0517-survivor-growth-on-the-lines-a-diff-touched.md
 
@@ -1006,9 +990,7 @@
 
 6bba6b22add9 notes/crate-reviews/page-tables.md
 
-6c9904c09df2 design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
-6c9904c09df2 design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
 6cbc51042904 design/decisions/0139-cycle-counter-authority.md
 
@@ -1136,9 +1118,7 @@
 
 7ba1d53b8c47 notes/kani-upstream/README.md
 
-7c333b2d70cd design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
-7c333b2d70cd design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
 7c70993e526f design/roadmap/0461-an-sse-enabled-x86-64-userspace-target.md
 
@@ -1177,9 +1157,7 @@
 
 
 
-843f4f4348b5 design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
-843f4f4348b5 design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
 8458a8eb5b8b design/roadmap/0385-a-note-that-cites-a-milestone-that-moved.md
 
@@ -1193,9 +1171,7 @@
 
 8644de0291b3 design/roadmap/1108-socket-contract-outside-review.md
 
-8658caf7b5ca design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
-8658caf7b5ca design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
 88fb002ece54 design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
@@ -1261,9 +1237,7 @@
 
 962d23b708c7 design/naming/rules-a-script-can-check.md
 
-968a5c0bc2ce design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
-968a5c0bc2ce design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
 97454dd4ec31 design/roadmap/0305-kernel-falsification-sweep.md
 
@@ -1405,9 +1379,7 @@ a7556deab768 design/roadmap/0828-iperf3-on-nife-and-linux.md
 
 a7556deab768 design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
-a80d88dc7299 design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
-a80d88dc7299 design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
 
 
@@ -1549,9 +1521,7 @@ b9ded129ea8e notes/falsification.md
 
 b9ded129ea8e notes/falsification/six-real-records.md
 
-ba161f061c3b design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
-ba161f061c3b design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
 
 
@@ -1751,9 +1721,7 @@ d623e036405a design/fatal-risks/the-confinement-claims.md
 
 d623e036405a design/roadmap/0633-an-outside-agent-attacks-the-confinement-claim.md
 
-d6769d74eaeb design/roadmap/0437-a-witness-bit-set-has-no-mechanism.md
 
-d6769d74eaeb design/roadmap/0502-a-witness-bit-set-has-no-mechanism.md
 
 d7bfd48688cf design/decisions/0253-concurrent-login-sessions.md
 
