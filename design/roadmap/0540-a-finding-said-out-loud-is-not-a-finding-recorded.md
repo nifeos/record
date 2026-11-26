@@ -29,7 +29,7 @@ agent may edit. Everything else here is either already built or a few lines.
 `AGENTS.md` already binds a lane: *identified work leaves the lane in a tracked form, or the
 merge waits*, in exactly two shapes, a proposed milestone or a recorded limitation where a reader
 meets the feature. That rule works. Milestone 448 (a refusal gets a number, a status, and a
-condition that would change it) exists because the same rule had no word for a **decision not to**,
+condition that would change it) exists because the same rule had no word for a *decision not to*,
 and the refusals that named work had nowhere to live.
 
 There is no counterpart for the maintainer, and the maintainer is the one doing the talking. A

@@ -1078,17 +1078,11 @@
 
 6965bce6028a design/roadmap/0907-hackbench-is-packaged-in-basalt.md
 
-69cba2077b6c notes/pipes/buffering.md
 
-69cba2077b6c notes/pipes/declarations-and-wire.md
 
-69cba2077b6c notes/pipes/one-wait-point.md
 
-69cba2077b6c notes/pipes/tests-and-the-boot-gate.md
 
-69cba2077b6c notes/pipes/the-boot.md
 
-69cba2077b6c notes/pipes/the-file-end.md
 
 6a7d4637f8da notes/crate-reviews/counter-frequency-contract.md
 
@@ -1760,21 +1754,13 @@ c0041ee4dc12 notes/crate-reviews/current-cpu-contract.md
 
 c0041ee4dc12 notes/crate-reviews/machine-statistics-contract.md
 
-c08ff336dd4d notes/pipes/buffering.md
 
-c08ff336dd4d notes/pipes/declarations-and-wire.md
 
-c08ff336dd4d notes/pipes/one-wait-point.md
 
-c08ff336dd4d notes/pipes/second-stream-fork.md
 
-c08ff336dd4d notes/pipes/second-stream.md
 
-c08ff336dd4d notes/pipes/tests-and-the-boot-gate.md
 
-c08ff336dd4d notes/pipes/the-boot.md
 
-c08ff336dd4d notes/pipes/the-file-end.md
 
 c115e752a669 design/roadmap/0877-the-timetable-crate-root-is-split-along-its-seams.md
 

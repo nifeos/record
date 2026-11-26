@@ -1,11 +1,11 @@
 # Parts 1 and 4 as built: the stop mode, 2026-09-19
 
 An appendix of [milestone 324 (the bench console cannot speak to any of the three
-boards)](../0324-the-bench-console-cannot-speak-to-a-board.md), moved out under §212 (a prose
-budget). The block keeps what landed, the trigger finding, the exit statuses and what could not be
-tested, and is complete without this file. This file keeps the working: how the invariant is
-enforced, why the obvious trigger loses, the end-to-end check it makes possible, the test coverage
-and the two choices calef may want to overrule.
+boards)](../0324-the-bench-console-cannot-speak-to-a-board.md). §212 (a prose budget) moved it out.
+The block keeps what landed, the trigger finding, the exit statuses and what could not be tested,
+and is complete without this file. This file keeps the working: how the invariant is enforced, why
+the obvious trigger loses, the end-to-end check it makes possible, the test coverage and the two
+choices calef may want to overrule.
 
 ## What landed
 

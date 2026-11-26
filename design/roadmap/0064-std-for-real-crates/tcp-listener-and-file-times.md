@@ -1,10 +1,10 @@
 # The fourth pass's `TcpListener` and the last pass's file times
 
 An appendix to [milestone 64 (enough `std` to run somebody else's
-crate)](../0064-std-for-real-crates.md), moved out under [§212 (a prose
-budget)](../../decisions/0212-a-prose-budget-for-every-document.md). The main page is complete
-without it. This holds the two bindings that turned out not to need a decision: `TcpListener`
-(2026-08-18) and file times by path (2026-09-19).
+crate)](../0064-std-for-real-crates.md). [§212 (a prose
+budget)](../../decisions/0212-a-prose-budget-for-every-document.md) moved it out. The main page is
+complete without it. This holds the two bindings that turned out not to need a decision:
+`TcpListener` (2026-08-18) and file times by path (2026-09-19).
 
 ## The fourth pass: `TcpListener`, which was a binding and not a decision (2026-08-18)
 

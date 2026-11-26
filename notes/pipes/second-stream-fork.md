@@ -3,9 +3,8 @@
 *Name: ratified 2026-10-18 (calef, convention-rulings Rule 3).*
 
 *An appendix to `nifeos/nife:notes/pipes.md`, which is the page to read. This file holds the
-analysis written while `2>` was undecided, which explains what the built thing is not. The lane that
-split the file moved it here verbatim from the main page on 2026-09-25 (UTC), under [§212 (a prose
-budget)](../../design/decisions/0212-a-prose-budget-for-every-document.md).*
+analysis written while `2>` was undecided, which explains what the built thing is not. It moved here
+as [the index](README.md) says.*
 
 The records this file cites by number:
 
