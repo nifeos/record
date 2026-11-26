@@ -23,7 +23,9 @@ A lane here works by the same rules as a lane in nife, and nife keeps them, once
 
 nife's `AGENTS.md` holds the rest of the house rules (American spelling, no em-dashes, a document
 states the rule in force now), and [design/tenets/](design/tenets/README.md) holds the reasons
-behind them. The record's lint enforces the rules that read the record.
+behind them. The record's lint enforces the rules that read the record. One rule is the record's
+own: each rule or fact has one home, and other files link to it ([the documentation
+standard](design/tenets/documentation-standard.md#one-home-for-each-rule-or-fact) states it).
 
 ## Claiming a lane
 
@@ -60,7 +62,9 @@ names in nife (its fleet lint and its pre-push hook) stay in nife.
 
 The baselines the ratchets hold the record to are the record's rows of nife's:
 `design/passive-baseline.tsv`, `design/module-block-baseline.txt`,
-`design/naming-rule-baseline.txt` and `design/removed.tsv`. Each only shrinks.
+`design/naming-rule-baseline.txt` and `design/removed.tsv`. The record's own is
+`design/repeated-sentence-baseline.txt`, the copies the one-home rule found when it was made. Each
+only shrinks.
 
 ## Where things go
 

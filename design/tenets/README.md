@@ -22,7 +22,7 @@ rows would crowd the glossary index. `script/lint` reads `notes/*.md` without re
 | [elegance-over-convenience.md](elegance-over-convenience.md) | why an argument from implementation cost is the weakest one available here |
 | [reversibility.md](reversibility.md) | why each category is irreversible, and the two failures that shaped the rule |
 | [measure-first.md](measure-first.md) | why measuring is the action when the problem is not understood, and the case that overruled both sides |
-| [documentation-standard.md](documentation-standard.md) | why FreeBSD's Handbook and man pages are the standard, and what each part buys |
+| [documentation-standard.md](documentation-standard.md) | why FreeBSD's Handbook and man pages are the standard, what each part buys, and the one-home rule |
 | [lane-count.md](lane-count.md) | the measurement that retired queue depth, and the memory and disk ceilings |
 | [roles-and-the-queue.md](roles-and-the-queue.md) | the night that named the roles, and why each holds the authority it holds |
 | [routing-work-and-decisions.md](routing-work-and-decisions.md) | why a report is not a record, and what the label and the ask are for |

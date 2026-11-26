@@ -2,7 +2,7 @@
 
 *Appendix to `nifeos/nife:AGENTS.md`, which carries the rules: task-oriented, in-tree, real
 `EXAMPLES`, an honest `BUGS` section beside the feature. This file carries why that standard was
-chosen and what each of its four parts buys. Moved here 2026-09-23 (UTC) on calef's authorization,
+chosen and what each of its four parts buys, and it is the home of the one-home rule below. Moved here 2026-09-23 (UTC) on calef's authorization,
 unchanged in substance.*
 
 The standard to aim at is FreeBSD's (calef, 2026-07-30): the Handbook and the man pages, which
@@ -24,3 +24,17 @@ without leaving the system. Four things make them that, and all four are things 
 
 The point is not the format, which is theirs. It is the posture: documentation written for someone
 who has to *use* the thing, and honest enough that they trust it when it says something works.
+
+## One home for each rule or fact
+
+Each rule or fact has one home, and every other file that needs it links to that home instead of
+restating it (decided 2026-11-26 UTC, nifeos/record#50). A copy drifts: when the rule changes, the
+copies nobody found keep the old one. The home is the file that owns the subject. A decision holds
+its ruling, a runbook its steps, a milestone its own conditions. Another file names the rule in a
+few words and links there.
+
+The `repeated_sentences` section of `script/lint` holds the record to it. It refuses a sentence of
+100 or more characters that appears in more than one Markdown file under `design/` and `notes/`,
+unless `design/repeated-sentence-baseline.txt` lists that copy. The list holds the copies that
+existed when the rule was made, and it only shrinks. `helpers/repeated_sentences.py` says what the
+check exempts and why.
