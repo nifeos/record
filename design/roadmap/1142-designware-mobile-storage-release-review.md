@@ -22,24 +22,26 @@ Reuse: the prior-art table weighs each SD driver a caller could take instead.
 
 ## Finding status
 
-- P0-1, five public structs are exhaustive: Open.
+- P0-1, five public structs are exhaustive: Done, `partsfoundry/designware_mobile_storage#43`.
 - P0-2, the error variants are positional: Waiting on the errors decision of milestone 1129.
-- P0-3, block buffers carry no block type: Open.
-- P0-4, the bus width is a bare `u8`: Open.
-- P0-5, `command::Response` is exhaustive: Open.
+- P0-3, block buffers carry no block type: Done, `partsfoundry/designware_mobile_storage#43`.
+- P0-4, the bus width is a bare `u8`: Done, `partsfoundry/designware_mobile_storage#43`.
+- P0-5, `command::Response` is exhaustive: Done, `partsfoundry/designware_mobile_storage#43`.
 - P0-6, the region trait is safe to implement: Open.
-- P1-1, the `simulator` feature turns the whole crate into a std crate: Open.
-- P1-2, the README miscounts the harnesses: Open.
-- P1-3, a stale comment in the manifest: Open.
-- P1-4, two public types have no `Debug`: Open.
-- P1-5, only the crate page has an example: Open.
+- P1-1, the `simulator` feature turns the whole crate into a std crate: Done,
+  `partsfoundry/designware_mobile_storage#43`.
+- P1-2, the README miscounts the harnesses: Done, `partsfoundry/designware_mobile_storage#43`.
+- P1-3, a stale comment in the manifest: Done, `partsfoundry/designware_mobile_storage#43`.
+- P1-4, two public types have no `Debug`: Done, `partsfoundry/designware_mobile_storage#43`.
+- P1-5, only the crate page has an example: Done, `partsfoundry/designware_mobile_storage#43`.
 - P2-1, a `BlockDevice` adapter: Waiting on the feature-name decision of milestone 1129.
 - P2-2, a data path without the copy: Open.
 - P2-3, 64-bit descriptors: Open.
-- P2-4, `new` drops the register window when it refuses: Open.
+- P2-4, `new` drops the register window when it refuses: Done,
+  `partsfoundry/designware_mobile_storage#43`.
 - P2-5, the card protocol over a host trait: Open.
-- P2-6, the manifest has no `documentation` key: Open.
-- P2-7, the bounds on the struct declarations: Open.
+- P2-6, the manifest has no `documentation` key: Done, `partsfoundry/designware_mobile_storage#43`.
+- P2-7, the bounds on the struct declarations: Done, `partsfoundry/designware_mobile_storage#43`.
 
 ## Open decisions
 
