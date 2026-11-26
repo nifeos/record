@@ -41,9 +41,9 @@ same stride had been written out four times).
   write. For every pair of ids the bound admits, each entry lies inside the single frame that holds
   the table and no two entries share a byte.
 
-Both falsifications leave every test in the tree green, which is the argument. QEMU's `virt`
-board puts RAM at `0x4000_0000`, so bit 31 of a domain root is clear and `ttb >> 31` agrees with
-`ttb >> 32` on this board. And the one PCIe disk's requester id is far below 64, so raising
+Both falsifications leave every test in the tree green, which is the argument. On QEMU's `virt`
+board `ttb >> 31` agrees with `ttb >> 32`, for the reason
+[the SMMU proofs note](../../notes/kernel-proofs/smmu-proofs.md) gives. And the one PCIe disk's requester id is far below 64, so raising
 `STRTAB_LOG2` to 7 (the edit this file most invites, and one that writes off the end of a frame)
 is addressed by no test. `script/falsifications --sweep kernel` replays both, so this is `replayable`
 rather than `attested`.

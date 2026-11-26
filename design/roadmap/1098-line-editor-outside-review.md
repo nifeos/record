@@ -29,8 +29,7 @@ Reuse: the template `partsfoundry/crate-workflows` and its helpers (`spelled_out
 
 ## Finding status
 
-Every finding not Done blocks the first crates.io publish, which waits until every outside-review
-milestone reaches delivery.
+Every finding not Done blocks the first crates.io publish, under [the publishing hold](1093-globally-unique-identifier-partition-table-outside-review.md#finding-status).
 
 - Item 1 (P0), the crate does not stand alone: Done, [#4002](https://github.com/nifeos/nife/pull/4002).
 - Item 2 (P0), the cut: Done, [#3587](https://github.com/nifeos/nife/pull/3587).
@@ -294,8 +293,8 @@ and `terminal_contract` leave; `line_editor_component` stays in nife.
 - B. Clear `line_editor` alone first, since it depends on nothing.
 - C. Hold until a dry run also stages the move's own work (item 1).
 
-Prior art. In this tree `generational_table`, `block_roster` and `file_allocation_table` each moved
-on a cleared review with no tag. Where nife differs: nothing outside nife links either crate.
+Prior art. Three crates moved on a cleared review with no tag
+([the partition-table review](1093-globally-unique-identifier-partition-table-outside-review.md) names them). Where nife differs: nothing outside nife links either crate.
 Example: under A, the shell pins `partsfoundry/line_editor` by revision.
 
 Decided by the maintainer on 2026-11-19 (UTC), provisional: a one-way door at repository creation,

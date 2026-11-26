@@ -16,9 +16,8 @@ needs_person: no
 Milestone 840 (the scheduler file is split along its seams) is the model for the form.
 Milestone 846 (the file-server core moves its tests out) is the model for most of the answer.
 
-The cut and every module name below are calef's call. A lane writes them up as a
-`status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request
-carries `needs-architect`.
+The cut and every module name below are calef's call. A lane routes them to calef as
+[the routing tenet](../tenets/routing-work-and-decisions.md) says, before it moves a line.
 
 The lane wrote it up on 2026-10-12 (UTC) as §292 (the terminal engine's crate root becomes an
 index), `status: PROPOSED`, number provisional. This block was minted before §282 (when a file is

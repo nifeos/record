@@ -28,9 +28,9 @@ can drive a ring against a fake device from an example, and know exactly what th
 do, before the first tag goes on it. The weekly gates pass, the public trait names are final, and the port of the
 I219 bring-up states every place it departs from its source.
 
-Publishing stays held. No crate from this organization publishes to crates.io until the
-maintainers have extracted several crates and a review has decided whether any of them combine.
-Nothing in this block lifts that hold, and a green gate here is not permission to publish.
+Publishing stays held, as
+[milestone 1050 (`designware_mobile_storage`'s outside review)](1050-designware-mobile-storage-outside-review.md)
+says. Nothing in this block lifts that hold, and a green gate here is not permission to publish.
 
 ## What the review covered
 

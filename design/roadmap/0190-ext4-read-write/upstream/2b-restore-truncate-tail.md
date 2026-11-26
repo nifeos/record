@@ -10,18 +10,14 @@ patch beside this file. The Issue names item 2a's Issue, and the pull request na
 request.
 
 - Repository and branch: `rcore-os/tgoskits`, `dev`.
-- Base commit: `0353572d1e2cca79e25a2805deeff4521449a5c1` ("fix(x86_vlapic): stop the APIC timer
-  without yielding in the vCPU entry window ([#2819](https://github.com/rcore-os/tgoskits/pull/2819))"), the head of `dev` at filing. The patch beside
-  this file dates from the earlier base `6e80b940d` and applies to this one unchanged.
+- Base commit: `0353572d1`, the one [every draft shares](README.md#what-every-draft-shares).
 - The change: [`2b-restore-truncate-tail.patch`](2b-restore-truncate-tail.patch), one commit, `git
   format-patch` output. It applies to the base alone, but [item 2a](2a-free-empty-extent-index.md)
   adds its test at the same place in `fs/rsext4/tests/file_operations.rs`, and the two patches
   conflict there. So 2b went upstream after 2a, on its own branch from the base, and rebases on 2a
   once 2a lands; its bodies say so.
-- Issue settings, which upstream's contributing guide (section 3.7) requires in the sidebar:
-  Assignees `calef`, labels `bug` and `q4`, Type `Bug`, Milestone `2026Q4`. GitHub dropped these at
-  creation, because the filing account has no triage permission on the repository; the guide asks a
-  maintainer to fill them in.
+- Issue settings: label `bug`, Type `Bug`, and the
+  [shared rest](README.md#what-every-draft-shares).
 
 ## Issue (filed)
 
@@ -264,17 +260,15 @@ Not verified:
 
 ## Test evidence
 
-Before filing, every check the pull request cites ran again on `0353572d1`, the head of `dev` then,
-with the patch applied. Without the fix the new test failed (`left: Some(100)`, `right: None`), and
-with it the test passed. `cargo xtask clippy --package rsext4` passed its 3 checks, and `cargo fmt
---check` was clean. `cargo xtask test --since 0353572d1` failed only the three growth tests, and
-they fail the same way on unchanged `dev`. The runs below are the earlier ones, on `6e80b940d`.
+Before filing, the [shared rerun](README.md#what-every-draft-shares) covered this patch. Without the
+fix the new test failed (`left: Some(100)`, `right: None`), and with it the test passed. `cargo
+xtask clippy --package rsext4` passed its 3 checks, and `cargo fmt --check` was clean. `cargo xtask
+test` failed only the shared three growth tests. The runs below are the earlier ones, on
+`6e80b940d`.
 
-Run on the base commit above with the patch applied, on an x86_64 Linux host with e2fsprogs
-1.47.2. The test ran with the commit's source change reverted (red), then as committed (green),
-through `cargo test -q -p rsext4 --features host-test --test file_operations <test>`, the profile
-`cargo xtask test` runs for rsext4. Then `cargo xtask clippy --package rsext4` and
-`cargo fmt --check -p rsext4`:
+Run on the base commit above with the patch applied, on an x86_64 Linux host with e2fsprogs 1.47.2.
+The test ran [red, then green](README.md#what-every-draft-shares), through the `file_operations`
+profile. Then `cargo xtask clippy --package rsext4` and `cargo fmt --check -p rsext4`:
 
 ```
 == 2c004f2c4 with zero.rs and resize.rs from the base
@@ -290,13 +284,10 @@ cargo fmt --check -p rsext4: clean
 ```
 
 `cargo xtask test --since 6e80b940d`, run before the last edit to this commit, which changed only
-comments, selected 20 packages and exited 1. rsext4 passed 543 tests and failed 2, both in
-`tests/filesystem_growth.rs`; ax-fs-ng failed
-`root_growth_preserves_other_partitions_and_ext4_contents` in two feature profiles. Every other
-selected package passed. The growth failures come from this host's `mke2fs.conf`, which enables
-`orphan_file`; `layout.rs`'s feature check refuses any compatible feature outside its list. At the
-base commit the same three tests fail the same way. With `MKE2FS_CONFIG` pointing at a copy of
-`/etc/mke2fs.conf` without `orphan_file`, they pass:
+comments, selected 20 packages and exited 1. rsext4 passed 543 tests, and it and ax-fs-ng failed
+only the shared growth tests. Every other selected package passed. The README says [why the growth
+tests fail](README.md#what-every-draft-shares). At the base commit the same three tests fail the
+same way. Without `orphan_file`, they pass:
 
 ```
 == host mke2fs.conf

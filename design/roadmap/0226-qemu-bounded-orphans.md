@@ -92,9 +92,8 @@ something this project did not start.
 
 ## BUGS
 
-- A SIGKILL to the killer defeats all of it, and nothing on macOS can fix that. SIGKILL is not
-  trappable and macOS has no `prctl(PR_SET_PDEATHSIG)`, so a supervisor shot in the head cannot hand
-  off. `kill -9` at a whole process group is the realistic way to hit it. This is the case the lock
+- A SIGKILL to the killer defeats all of it, and nothing on macOS can fix that;
+  [notes/qemu.md](../../notes/qemu.md) says why. `kill -9` at a whole process group is the realistic way to hit it. This is the case the lock
   diagnostic exists for, and the self-test deliberately does not assert on it. Asserting on a known
   defect only pins it in place.
 - The parent-alive poll can be fooled by pid reuse. If the wrapper dies abnormally and its pid is

@@ -88,9 +88,10 @@ Each has a recommendation, and each is cheap to reverse until a second program s
 - Memory. C runs one timetable per scheduling user. The kernel test sizes one at a 768-page
   budget and a 32-page stack (`system_tests/src/user/timetable_tests.rs`). A real session chooses its own
   budget, and a one-entry document needs one 48-page instance at a time.
-- The yield loop. This is the larger cost, and the best argument for A. There is no timed wait
-  here. Milestone 106 (a wait that ends on either the interrupt or the deadline) is gated on
-  milestone 263 (can a userspace process hold a timer). Until then every running timetable spends
+- The yield loop. This is the larger cost, and the best argument for A. The timetable yields
+  rather than sleeps until milestone 674 (the last yield-spinners sleep on a timer) moves it onto
+  the `Timer` of milestone 106 (a wait that ends on either the interrupt or the deadline). Until
+  then every running timetable spends
   a core's worth of yields. N scheduling users means N such loops, where A pays once. The cost is
   temporary: `Registry::next_deadline` already computes what a timed wait would block on. It is not
   measured here, because no boot runs two timetables.

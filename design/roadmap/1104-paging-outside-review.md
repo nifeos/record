@@ -148,8 +148,8 @@ Blocks: the first publish.
 
 ### Clear the review package and approve the repository
 
-Background. A crate leaves this tree for its own `nifeos` repository only when the architect
-clears its review package, and that clearance approves the repository. `page_tables` serves
+Background. [The `network_time_protocol` review](1102-network-time-protocol-outside-review.md)
+states when a crate leaves this tree. `page_tables` serves
 every kernel that maps memory on these six formats, so it meets the bar for leaving. The
 architect ruled its published name on 2026-11-14 (UTC). The package is
 `notes/crate-reviews/page-tables.md`, and items 1, 3, 4, 9 and 11 are the move's work.
@@ -165,8 +165,7 @@ Door: one-way. Creating a public repository and moving the crate are outward ste
 
 Prior art. `aarch64-paging` and `page_table_multiarch` each live in their own repository and
 publish on their own cadence. nife differs in reviewing a whole crate once, before its first
-publish. Concrete example: the architect cleared `generational_table` on 2026-11-08 (UTC), and its
-repository, `partsfoundry/generational_table`, dates from that day.
+publish. The concrete example is the one that review gives.
 
 Ruled: A on 2026-11-20 (UTC). The architect clears the review and approves `nifeos/page_tables` with `publish = false`, no tag and no publish. The move lane takes items 1, 3, 4, 9 and 11.
 

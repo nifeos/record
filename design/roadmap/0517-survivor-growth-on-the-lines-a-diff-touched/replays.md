@@ -1,6 +1,6 @@
 # Does the blame proxy tell the truth: the six replays
 
-An appendix to [milestone 517 (what fraction of survivor growth arrives on lines a pull request
+An appendix to [milestone 517 (survivor growth on lines a pull request
 touched)](../0517-survivor-growth-on-the-lines-a-diff-touched.md). The main page is complete without
 it. This is the replay of `cargo mutants --in-diff` against six commits, which checked that blame
 attributes each survivor to a commit whose own diff-scoped run would have reported it.

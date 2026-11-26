@@ -109,8 +109,9 @@ under §216.
 - Every escape is a failing test committed before any fix.
 - A pass-9 note with the per-row table, the host facts and the refusal log, indexed in
   `notes/README/` and its area page.
-- Risk 7's appendix cites the pass through the maintainer under §216 (fatal-risk facts are
-  correctable, and verdicts are the architect's). Moving the color stays calef's.
+- Risk 7's appendix cites the pass, as
+  [milestone 800](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#where-the-results-go)
+  sets out. Moving the color stays calef's.
 
 ## BUGS
 
@@ -164,6 +165,6 @@ Minimal setup, in the order the launch brief's prompt runs it:
   commit and on main: 13 of 13 tests on aarch64 and riscv64, 18 of 18 on x86_64. Its tests are on
   main as `ninth_pass_*`, each reviewer commit carrying `Co-Authored-By: Claude Opus 4.8`, and the
   runner's branch is gone. The pass note has the per-ISA table.
-- **Milestone 198.** A human review, or a public bounty once a stranger can install nife, is the
-  stronger form and waits on milestone 198 (a package manager, and the trivial install that makes a
-  second customer possible).
+- **Milestone 198.** The stronger form that milestone 800 (a non-Anthropic model attacks the
+  confinement claim) [names](0800-a-non-anthropic-model-attacks-the-confinement-claim.md#follow-on)
+  waits on milestone 198 (a package manager).

@@ -114,8 +114,8 @@ There is no timed wait in this kernel, so a program whose whole purpose is to ac
 yield and re-read the counter. A running timetable costs a core's worth of yields, and it reaps dead
 children lazily, because a process has one wait point. `Registry::next_deadline` already computes
 the instant a timed wait would block until, so the loop changes by one line when one exists.
-Milestone 106 (a wait that ends on either the interrupt or the deadline) is gated on milestone 263
-(can a userspace process hold a timer).
+[The registration note](../../notes/scheduled-execution/registration.md) says which milestone
+moves the timetable onto a timed wait.
 
 ## What was left, and is now built
 

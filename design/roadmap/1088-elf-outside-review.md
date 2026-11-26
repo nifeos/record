@@ -161,8 +161,8 @@ Each decision's background, options and prior art are in
 - The clearance of the review of `static_elf` and its repository. Ruled 2026-11-20 (UTC), option
   A: the architect cleared the review package (`notes/crate-reviews/static-elf.md`) and gave the go
   for `nifeos/static_elf` as a `publish = false` repository, with no tag and no publish. The
-  architect ratified the package's public names on 2026-11-21 (UTC). The move lane runs the stranger test, the template's
-  workflows and the first weekly mutation run in the new repository. The clearance gates
+  architect ratified the package's public names on 2026-11-21 (UTC).
+  [The crate move runbook](../../notes/crate-move.md) gives the steps after the move. The clearance gates
   milestone 1039.
 - D1, which machine the parser accepts. Decided by the maintainer on 2026-11-14 (UTC),
   provisional, a two-way door before the first tag: option A. `Elf::parse` keeps the build's

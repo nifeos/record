@@ -248,7 +248,7 @@ document: how to run it, what it cannot reach, and its `BUGS`.
   (`rustc_interface/src/util.rs`, at Kani's `nightly-2025-11-21`) requires every feature the ABI
   needs in `sess.unstable_target_features`. rustc fills that from the backend's `target_config`,
   and Kani's returned nothing for riscv64. The patch's riscv64 arm there is the fix. Rebuilt
-  without it, the kernel's crates gave 54 warnings; with it, 0. 
+  without it, the kernel's crates gave 54 warnings; with it, 0.
 - script/verify-riscv64 (name provisional) builds that Kani once into
   `~/.cache/nife-kani-riscv64/` and runs `script/verify --only kernel` for
   `riscv64gc-unknown-linux-gnu`. It passes the launcher through `VERIFY_CARGO_KANI`, also
@@ -264,11 +264,11 @@ Warm: 45 s, 3 s of it proving. On patagonia a cold build took 244 to 621 s by lo
 
 ## Follow-on
 
-- **Outstanding.** The upstream half is [kani#4913](https://github.com/model-checking/kani/pull/4913),
-  open and out of draft. feliperodri requested changes on 2026-10-05 (UTC); calef answered every
-  thread and asked for re-review. It waits on a maintainer approving the fork's CI run, then on
-  re-review. Upstream `main` is merged in, and the `kani_lib.c` object and review fixes are in it.
-  Then dropping our patch.
+- **Outstanding.** The upstream half is
+  [kani#4913](https://github.com/model-checking/kani/pull/4913), open and out of draft. Its review
+  state is in [notes/kani-upstream.md](../../notes/kani-upstream.md). It waits on a maintainer
+  approving the fork's CI run, then on re-review. Upstream `main` is merged in, and the `kani_lib.c`
+  object and review fixes are in it. Then dropping our patch.
 - **Done.** The stub half of containment landed as #1302. Its three riscv64 `satp` proofs run
   only in this job.
 - **Milestone 536.** `design/fatal-risks/README.md` risk 2 ("Only riscv64 is unreachable, and nobody here

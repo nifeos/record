@@ -17,9 +17,8 @@ lines) sets the ceiling and its dated goals. Milestone 840 (the scheduler file i
 seams) is the model, and milestone 365 (`xtask/src/main.rs` is 6,785 lines with no module structure)
 is the precedent inside `xtask`.
 
-The cut and every module name below are calef's call. A lane writes them up as a
-`status: PROPOSED` file in `design/decisions/` before it moves a line, and its pull request
-carries `needs-architect`.
+The cut and every module name below are calef's call. A lane routes them to calef as
+[the routing tenet](../tenets/routing-work-and-decisions.md) says, before it moves a line.
 
 §280 (the swish-check harness splits into submodules, with its script in one) is that write-up. Its
 one fork, whether the script table gets its own module, follows calef's tree-wide precedent on

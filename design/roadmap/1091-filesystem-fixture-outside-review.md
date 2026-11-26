@@ -224,9 +224,7 @@ which is also the go to create the repository as `publish = false`, stay the arc
 from the package. This is one decision with the one in milestone 1090 (`file_system_contract`: what an
 outside maintainer would fix before it leaves), Decision E there.
 
-Prior art: `jh7110_clock_and_reset` and `designware_ethernet` each had a review package cleared
-before the organization made their repositories. Outside, `futures-rs` keeps `futures-test` in the
-workspace of the library it tests.
+Prior art: [Decision E of milestone 1090](1090-filesystem-contract-outside-review.md) gives it.
 
 Concrete example: ratifying one fixture name such as `SCRATCH_INIT` after its rename fixes the
 spelling in every manifest that uses it, which is why one package lists both crates.

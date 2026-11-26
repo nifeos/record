@@ -20,15 +20,14 @@ and 7,271,375 iterations in the first run against 6,831,327 and 7,288,574 in the
 same fixed window, with 82 preemptions both times. Same clock, same four cores online, same timer,
 same firmware. So the CPU is not throttled and the difference is in the workload, not the machine.
 
-The explanation is almost certainly placement, and milestone 221 (the soak never crosses cores,
-so build the hook that makes it) already predicted its shape. Its `BUGS` records that the crossing
+The explanation is almost certainly placement, and milestone 221 (the soak never crosses cores, so
+build the hook that makes it) already predicted its shape. Its `BUGS` records that the crossing
 count varies by more than 2x between identical runs and names the boot-time placement lottery as the
 cause. Twenty-four threads (four groups of a responder, three callers, a grinder and a tick waiter)
 are placed across four cores at spawn, and nothing rebalances. That is the central finding of
 milestone 219 (the boot tour ends and the kernel halts, so there is nothing to soak) and a
-deliberate design
-following DECISIONS 138 (how a saturated workload is made to hand threads across cores). A core that
-draws two grinders starves its IPC threads, because a grinder is pure compute and never yields.
+deliberate design following DECISIONS 138 (how a saturated workload is made to hand threads across
+cores). [The radon run](../../notes/soak/radon-2026-09-03.md) says why two grinders starve a core.
 
 **Almost certainly is not good enough**, and that is this milestone. The soak prints round trips,
 wakes, crossings, remote placements, steals and deferrals. **It does not print where any thread is.**

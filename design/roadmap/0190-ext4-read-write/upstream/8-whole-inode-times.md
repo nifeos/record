@@ -6,16 +6,13 @@ request that links it. The slug is provisional. The issue is upstream as
 Chinese body below, and the pull request as
 [rcore-os/tgoskits#2840](https://github.com/rcore-os/tgoskits/pull/2840).
 
-- Repository and base: rcore-os/tgoskits, branch `dev`, commit
-  `0353572d1e2cca79e25a2805deeff4521449a5c1`, the head of `dev` at filing. The patch dates from the
-  earlier base `6e80b940d` and applies to this one unchanged.
+- Repository and base: rcore-os/tgoskits `dev` at `0353572d1`, the
+  [shared base](README.md#what-every-draft-shares).
 - Patch: [8-whole-inode-times.patch](8-whole-inode-times.patch), one commit.
 - Issue title: `fix(rsext4): InodeInfo drops nanoseconds and misreads times outside 1970-2106`
 - Pull request title: `fix(rsext4)!: report whole inode times in InodeInfo`
-- Issue settings, which upstream's contributing guide (section 3.7) requires in the sidebar:
-  Assignees `calef`, labels `bug` and `q4`, Type `Bug`, Milestone `2026Q4`. GitHub dropped these at
-  creation, because the filing account has no triage permission on the repository; the guide asks a
-  maintainer to fill them in.
+- Issue settings: label `bug`, Type `Bug`, and the
+  [shared rest](README.md#what-every-draft-shares).
 
 ## Issue (Chinese, as filed)
 
@@ -222,12 +219,11 @@ converts with `Duration::from_secs(u64::from(inode.atime))`, so the VFS sees no 
 
 ## Test evidence
 
-Before filing, every check the pull request cites ran again on `0353572d1`, the head of `dev` then,
-with the patch applied. With the 32-bit-seconds decode put back, the new test and the `ax-fs-ng`
-durability test both failed with the same values, and with the fix both passed. `cargo xtask clippy`
-passed its 3 checks on `rsext4` and its 6 on `ax-fs-ng`, and `cargo fmt --check` was clean. `cargo
-xtask test --since 0353572d1` failed only the three growth tests, and they fail the same way on
-unchanged `dev`. The runs below are the earlier ones, on `6e80b940d`.
+Before filing, the [shared rerun](README.md#what-every-draft-shares) covered this patch. With the
+32-bit-seconds decode put back, the new test and the `ax-fs-ng` durability test both failed with the
+same values, and with the fix both passed. `cargo xtask clippy` passed its 3 checks on `rsext4` and
+its 6 on `ax-fs-ng`, and `cargo fmt --check` was clean. `cargo xtask test` failed only the shared
+three growth tests. The runs below are the earlier ones, on `6e80b940d`.
 
 Red, `rsext4`, decoding put back to the 32-bit seconds fields (`cargo test -p rsext4 --features
 host-test --test integration_test owned_metadata_update_reports_whole_times`):

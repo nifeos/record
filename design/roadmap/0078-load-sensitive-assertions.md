@@ -176,13 +176,14 @@ section. `script/icount` is the answer, notes/instruction-clock.md is its note, 
 in notes/load-sensitive-assertions.md is the record of building it.)*
 
 The timer twins were rebuilt rather than widened, and the rebuild is the model this milestone asked
-for: both tests now assert the **law** directly. Over a window in which `MISSED_TICKS` did not move,
-the deadline advanced by exactly one interval per delivered tick. The deadline is read back out of
-the machine on both ISAs: `CNTV_CVAL_EL0` on aarch64 and the software `DEADLINE` array on riscv64.
-The array is kept because SBI's `set_timer` is write-only, with a `deadline()` accessor added
-beside `missed_ticks()` on each. The defect this catches, re-arming from `now()` inside the handler,
-fails on the first tick. A descheduled emulator cannot fail it. A deschedule long enough to slip the
-grid increments `MISSED_TICKS`, which is the re-anchor safety valve working, and the window is retried.
+for: both tests now assert the **law** directly, as
+[the drift law](../../notes/load-sensitive-assertions/global-baselines-and-the-drift-law.md) states
+it. The deadline is read back out of the machine on both ISAs: `CNTV_CVAL_EL0` on aarch64 and the
+software `DEADLINE` array on riscv64. The array is kept because SBI's `set_timer` is write-only,
+with a `deadline()` accessor added beside `missed_ticks()` on each. The defect this catches,
+re-arming from `now()` inside the handler, fails on the first tick. A descheduled emulator cannot
+fail it. A deschedule long enough to slip the grid increments `MISSED_TICKS`, which is the re-anchor
+safety valve working, and the window is retried.
 
 One claim moved out of scope rather than being weakened, and it is riscv64's alone. Nothing
 proves that SBI actually fired at the software grid's deadlines. `DEADLINE` is our own array; on

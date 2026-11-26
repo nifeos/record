@@ -190,7 +190,7 @@ has the full flag list and the reasons.
 
 ## The confinement test, which is the milestone
 
-`kernel/src/user::c_seam_tests`, both ISAs. Three processes are involved:
+`system_tests/src/user/c_seam_tests.rs`, both ISAs. Three processes are involved:
 
 ```text
   c_confiner  budget + initrd + report + the C component's supervision endpoint
@@ -207,7 +207,7 @@ report what that address space could see, which is exactly the thing under suspi
 
 The address-space layout gives the checker two witnesses. `WITNESS_RO` is the frame the component and
 the confiner share ([the confinement test](c-seam/the-confinement-test.md) lays it out). `WITNESS_FAR` is a
-different frame at the virtual address one page further on. An overrun into the first proves the
+different frame, one page past `WITNESS_RO`, at an address the component has not mapped. An overrun into the first proves the
 store did not happen; a wild write to the second proves a virtual address means nothing outside the
 address space that owns it.
 

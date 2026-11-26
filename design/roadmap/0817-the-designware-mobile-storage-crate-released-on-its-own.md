@@ -45,8 +45,8 @@ calef's rulings, quoted from the maintainer comments on #1806 of 2026-10-07 (UTC
   `components/src/designware_mobile_storage.rs`, or stay with the two constants inlined; the lane
   picks and records why. The tests also `include_bytes!` a fixture from
   `../../device_tree_blob/tests/fixtures/`, outside the package.
-- Ruled 2026-10-25 (UTC): the crates take plain values; the device-tree walk moves to nife, and
-  the knowledge of the vendor and mainline JH7110 trees stays in each crate as data and decoders.
+- The crates take plain values, by the ruling in
+  [milestone 857 (crates released on their own)](0857-crates-released-on-their-own.md#the-rulings).
 - Cut on 2026-10-25 (UTC) by #2719. `Slot::from_node` decodes one slot from a node's properties,
   and `machine_discovery::jh7110::designware_mobile_storage` walks the tree, with the fixtures
   beside its tests. `serve` and its harness moved to `crates/driver_process_contract`, a contract
@@ -62,9 +62,10 @@ calef's rulings, quoted from the maintainer comments on #1806 of 2026-10-07 (UTC
 `dwmmc-host` 0.4.2 (Apache-2.0, 1.7k downloads) and `starfive-jh7110-dwmmc` 0.1.8 (911) live in the
 `tgoskits` monorepo with no proofs found. drivercraft's `sdmmc` 0.1.0 (11k) is a general SD/MMC
 crate with no proofs found. `embedded-sdmmc` is SD over SPI plus FAT, another scope, and its project
-bans AI-generated contributions. The crate adapts OpenBSD's `dwmmc.c` (ISC; it keeps the notice) and takes only the order of its addressing commands from `sdmmc_mem.c`. It reads
-Linux's `dw_mmc` (GPL-2.0) and never copies it. No upstream offer goes anywhere: calef ruled on #1806 that nife contributes
-only to projects nife depends on.
+bans AI-generated contributions. The crate adapts OpenBSD's `dwmmc.c` (ISC; it keeps the notice) and
+takes only the order of its addressing commands from `sdmmc_mem.c`. It reads Linux's `dw_mmc`
+(GPL-2.0) and never copies it. No upstream offer goes anywhere, by the ruling in
+[milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md).
 
 ## What is proven
 
@@ -99,18 +100,18 @@ row left with `serve` on 2026-10-25: its harness is `designware_mobile_storage::
 2. Make the cut above. `cargo tree -p designware_mobile_storage` then lists no nife crate, and the
    tests read only fixtures inside the package.
 3. In the tree, `script/verify` proves the harnesses and `Cargo.toml` says `publish = false`.
-4. The package is 0.1.0 with its own semver, states `rust-version` (#1806's note built it on stable
-   1.94.1), and ships its harnesses and falsification patches. `cargo package --list` shows them.
-5. Ready means proofs passing and the API stable. §235 (the OS is built and updated from packages,
-   and its source divides by purpose) has milestone 610 (the interface's stability is
-   measured weekly)'s per-package co-change column, and the soak (step 6) is how the second is
-   measured. When the soak exits, calef adds it to the lint-checked publish allowlist. The
-   `partsfoundry/designware_mobile_storage` repository is created when the crate moves, on the shared CI
-   template (milestone 887), through reusable workflows: Kani through `kani-github-action`, lint,
-   release. Its release workflow refuses to publish unless the proof job is green. No harness here
-   reads `target_arch`, so stock Kani proves them. The patched Kani of §218 (carry a Kani patch so
-   riscv64 is proved, and send it upstream) is carried only if one comes to need riscv64. Milestone
-   589 (Kani can prove riscv64 from the hosts we already have) built it.
+4. The package meets Fork 3 of
+   [milestone 857 (crates released on their own)](0857-crates-released-on-their-own.md#the-rulings).
+   `cargo package --list` shows its harnesses and falsification patches.
+5. Ready means proofs passing and the API stable.
+   [Milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md#release-by-1806s-rulings)
+   says how each is measured; here the soak is step 6. When the soak exits, calef adds it to the
+   lint-checked publish allowlist. The `partsfoundry/designware_mobile_storage` repository is
+   created when the crate moves, on the shared CI template (milestone 887), through reusable
+   workflows: Kani through `kani-github-action`, lint, release. Its release workflow refuses to
+   publish unless the proof job is green. No harness here reads `target_arch`, so stock Kani proves
+   them. §218 (carry a Kani patch so riscv64 is proved) applies only if a harness comes to need
+   riscv64. Milestone 589 (Kani can prove riscv64 from the hosts we already have) built it.
 6. Soak, as its own repository, until the [soak's five end conditions](../../notes/crate-move.md#the-soaks-five-end-conditions)
    in the runbook hold.
 7. Publish and consume the release by version, by the runbook's
@@ -125,10 +126,10 @@ with the pinned nightly for `aarch64-unknown-none-softfloat`, `riscv64imac-unkno
 ## Standalone, measured 2026-10-11 (UTC)
 
 `script/crate-standalone designware_mobile_storage` fails today, at base `ae6b91e79`. The manifest
-inherits `license` and `lints` from nife's workspace and states no `rust-version`, and there is no
-README, `LICENSE-MIT` or `LICENSE-APACHE`. Those hold for all nine crates. It does not build alone:
-`address_space_layout`, `file_system_contract` and `device_tree_blob` are path dependencies outside the
-copy, so neither the build nor Kani ran. A test reads
+and files fail as for all nine crates in
+[milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md#standalone-measured-2026-10-11-utc).
+It does not build alone: `address_space_layout`, `file_system_contract` and `device_tree_blob` are
+path dependencies outside the copy, so neither the build nor Kani ran. A test reads
 `../../device_tree_blob/tests/fixtures/qemu-riscv64-virt.dtb`. Beyond manifest and files, 14 lines
 cite this tree: 5 `milestone N`, 4 tree paths, 2 `§N`, 2 provenance blocks and 1 naming calef.
 
@@ -152,11 +153,11 @@ blocks, which the ratification pass settles.
 
 ## Names a stranger may misread, open before release
 
-design/naming.md's tests and Fork 5 of milestone 857 (names that stand on their own) judge
-each name. The lines below list the names that read as something other than clear or a term, as of
-2026-10-26 (UTC), copied as they stand. Each stays open until a ruling keeps or changes it. The tree
-keeps no record of a release-track crate's names (ruled 2026-10-26 UTC), so this list is the open
-work, and the lane that renames a name drops its line.
+[design/naming.md](../naming.md)'s tests and 857's Fork 5 judge each name. The lines below list the
+names that read as something other than clear or a term, as of 2026-10-26 (UTC), copied as they
+stand. Each stays open until a ruling keeps or changes it. The tree keeps no record of a
+release-track crate's names (ruled 2026-10-26 UTC), so this list is the open work, and the lane that
+renames a name drops its line.
 
 ### Nife's own plan
 
@@ -222,9 +223,8 @@ links it carried, by milestone 857's provenance rule.
 
 ## BUGS
 
-- Steps 5 and 6 wait on milestone 887 (crate repositories share one CI template),
-  which owns the shared CI template, the publish allowlist lint and the `nifeos` crates.io team,
-  and on milestone 610's per-package co-change column.
+- Steps 5 and 6 wait on milestone 887 (one CI template) and on 610's
+  co-change column.
 - Milestone 53 (the board's own peripherals: network and storage on real silicon) is PARTIAL, so the
   API is still moving.
 - The device-tree fixtures behind this crate's decoder are `jh7110-mmc-mainline.dts`,
@@ -240,8 +240,6 @@ links it carried, by milestone 857's provenance rule.
   release by semantic version. Checked by `gh api repos/partsfoundry/designware_mobile_storage/tags`,
   which lists no tag, and by `cargo tree --locked -i designware_mobile_storage`, which resolves to
   the git pin and not to crates.io.
-- **Recorded.** Publishing to crates.io waits on the maintainers' hold and an architect's approval,
-  as the *Release* section states.
 
 ## Index row
 

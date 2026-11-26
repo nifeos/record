@@ -23,8 +23,8 @@ calef's rulings, quoted from the maintainer comments on #1806 of 2026-10-07 (UTC
   as of today) [...] Names are ratified now and permanent on first publication."* His words: *"Yes,
   one per crate"*.
 - The release rules are forks 1 to 4 and 6 of the same pull request, applied in *Release* below.
-- Ruled 2026-10-25 (UTC): the crates take plain values; the device-tree walk moves to nife, and
-  the knowledge of the vendor and mainline JH7110 trees stays in each crate as data and decoders.
+- The crates take plain values, by the ruling in
+  [milestone 857 (crates released on their own)](0857-crates-released-on-their-own.md#the-rulings).
 
 ## What exists, checked 2026-10-07 (UTC)
 
@@ -46,13 +46,13 @@ calef's rulings, quoted from the maintainer comments on #1806 of 2026-10-07 (UTC
 - A ruling of 2026-10-26 (UTC) ratified the crate's names and renamed six of them first. The
   `Name:` blocks of its source hold them.
 
-**Reuse:** the alternatives were surveyed in #1806's `other-implementations.md` appendix (looked up 2026-10-07),
-and none is taken, because calef ruled this crate "publish ours". The only Rust JH7110 crates found,
-weathered-steel's `jh71xx-pac` 0.11.1 and `jh71xx-hal` 0.7.2 (Codeberg, 2025-03), are register maps
-under GPL-3.0-only, which nife cannot take under its license and which carry no TRNG logic. No Rust
-crate for the TRNG was found. Linux's `jh7110-trng` driver stays the reference and is read, never
-copied. No upstream offer goes anywhere: calef ruled on #1806 that nife contributes only to
-projects nife depends on.
+**Reuse:** the alternatives were surveyed in #1806's `other-implementations.md` appendix (looked up
+2026-10-07), and none is taken, because calef ruled this crate "publish ours". The only Rust JH7110
+crates found, weathered-steel's `jh71xx-pac` 0.11.1 and `jh71xx-hal` 0.7.2 (Codeberg, 2025-03), are
+register maps under GPL-3.0-only, which nife cannot take under its license and which carry no TRNG
+logic. No Rust crate for the TRNG was found. Linux's `jh7110-trng` driver stays the reference and is
+read, never copied. No upstream offer goes anywhere, by the ruling in
+[milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md).
 
 ## What is proven
 
@@ -80,18 +80,18 @@ out.
 2. Make the cut above. `cargo tree -p jh7110_entropy` then lists no nife crate, and the tests read
    only fixtures inside the package.
 3. In the tree, `script/verify` proves the harnesses and `Cargo.toml` says `publish = false`.
-4. The package is 0.1.0 with its own semver, states `rust-version` (#1806's note built it on stable
-   1.94.1), and ships its harnesses and falsification patches. `cargo package --list` shows them.
-5. Ready means proofs passing and the API stable. §235 (the OS is built and updated from packages,
-   and its source divides by purpose) has milestone 610 (the interface's stability is
-   measured weekly)'s per-package co-change column, and the soak (step 6) is how the second is
-   measured. When the soak exits, calef adds it to the lint-checked publish allowlist. The
-   `partsfoundry/jh7110_entropy` repository is created when the crate moves, on the shared CI template
-   (milestone 887), through reusable workflows: Kani through `kani-github-action`, lint, release.
-   Its release workflow refuses to publish unless the proof job is green. No harness here reads
-   `target_arch`, so stock Kani proves them. The patched Kani of §218 (carry a Kani patch so riscv64
-   is proved, and send it upstream) is carried only if one comes to need riscv64. Milestone 589
-   (Kani can prove riscv64 from the hosts we already have) built it.
+4. The package meets Fork 3 of
+   [milestone 857 (crates released on their own)](0857-crates-released-on-their-own.md#the-rulings).
+   `cargo package --list` shows its harnesses and falsification patches.
+5. Ready means proofs passing and the API stable.
+   [Milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md#release-by-1806s-rulings)
+   says how each is measured; here the soak is step 6. When the soak exits, calef adds it to the
+   lint-checked publish allowlist. The `partsfoundry/jh7110_entropy` repository is created when the
+   crate moves, on the shared CI template (milestone 887), through reusable workflows: Kani through
+   `kani-github-action`, lint, release. Its release workflow refuses to publish unless the proof job
+   is green. No harness here reads `target_arch`, so stock Kani proves them. §218 (carry a Kani
+   patch so riscv64 is proved) applies only if a harness comes to need riscv64. Milestone 589 (Kani
+   can prove riscv64 from the hosts we already have) built it.
 6. Soak, as its own repository, until the [soak's five end conditions](../../notes/crate-move.md#the-soaks-five-end-conditions)
    in the runbook hold. This crate is the pilot and soaks first: it is the smallest crate with a real cut, and
    the cut is where refactor lessons show up.
@@ -107,13 +107,13 @@ crate is not.
 
 ## Standalone, measured 2026-10-11 (UTC)
 
-`script/crate-standalone jh7110_entropy` fails today, at base `ae6b91e79`. The manifest inherits
-`license` and `lints` from nife's workspace and states no `rust-version`, and there is no README,
-`LICENSE-MIT` or `LICENSE-APACHE`. Those hold for all nine crates. It does not build alone:
-`device_tree_blob` is a path dependency outside the copy, so neither the build nor Kani ran. A test
-reads a fixture from `../../device_tree_blob/tests/fixtures/`, outside the crate. Beyond manifest
-and files, 26 lines cite this tree: 14 `milestone N`, 5 tree paths, 3 `§N`, 2 naming calef and 2
-provenance blocks.
+`script/crate-standalone jh7110_entropy` fails today, at base `ae6b91e79`. The manifest and files
+fail as for all nine crates in
+[milestone 814 (proven NVMe queue logic)](0814-the-nvme-queue-crate-released-on-its-own.md#standalone-measured-2026-10-11-utc).
+It does not build alone: `device_tree_blob` is a path dependency outside the copy, so neither the
+build nor Kani ran. A test reads a fixture from `../../device_tree_blob/tests/fixtures/`, outside
+the crate. Beyond manifest and files, 26 lines cite this tree: 14 `milestone N`, 5 tree paths, 3
+`§N`, 2 naming calef and 2 provenance blocks.
 
 `script/names` reports the name `jh7110_entropy` ratified (checked 2026-10-25).
 
@@ -226,9 +226,8 @@ links it carried, by milestone 857's provenance rule.
   `partsfoundry/jh7110_entropy` (id 1441110094) to the selected-repositories lists of
   `NIFE_SMELTER_APP_ID` and `NIFE_SMELTER_PRIVATE_KEY`. Ruled 2026-11-01 UTC; the extraction
   checklist of milestone 857 (crates released on their own) has the command.
-- Steps 5 and 6 wait on milestone 887 (crate repositories share one CI template),
-  which owns the shared CI template, the publish allowlist lint and the `nifeos` crates.io team,
-  and on milestone 610's per-package co-change column.
+- Steps 5 and 6 wait on milestone 887 (one CI template) and on 610's
+  co-change column.
 - The TRNG needs its clocks and reset released first, which is `jh7110_clock_and_reset`'s plan
   (milestone 819 (JH7110 clock and reset logic, proven, then released on its own)). A stranger using
   this crate alone must do that bring-up some other way; the crate's documentation says so before it

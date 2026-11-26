@@ -32,11 +32,8 @@ in the `BUGS` section of `uefi_loader/src/arch/aarch64/mod.rs`: the device tree 
 the firmware. PR #1153 replaced that entry with "An ACPI machine is described second-hand", in the
 same section.
 
-Every aarch64 server cloud is such a machine by specification. Arm's Server Base Boot
-Requirements make UEFI and ACPI the boot contract for Arm servers, and the clouds comply. AWS
-resolves an arm64 instance with no boot mode specified to UEFI, Azure's Cobalt 100 Arm series is
-Generation 2 only, and Google's image-import requirements say the boot disk must support ACPI. The
-sources and the dates they were read are in notes/rented-metal.md, which PR #1152 holds.
+Every aarch64 server cloud is such a machine by specification, as
+[rented aarch64](../../notes/rented-metal/aarch64.md) shows with its sources.
 
 This unblocks the whole aarch64 column, not one machine. Milestone 88 (nife
 on rented silicon: Oracle's free tier first, Graviton metal for the PMU) budgeted "a UEFI boot path

@@ -6,16 +6,13 @@ request that links it. The slug is provisional. The issue is upstream as
 Chinese body below, and the pull request as
 [rcore-os/tgoskits#2839](https://github.com/rcore-os/tgoskits/pull/2839).
 
-- Repository and base: rcore-os/tgoskits, branch `dev`, commit
-  `0353572d1e2cca79e25a2805deeff4521449a5c1`, the head of `dev` at filing. The patch dates from the
-  earlier base `6e80b940d` and applies to this one unchanged.
+- Repository and base: rcore-os/tgoskits `dev` at `0353572d1`, the
+  [shared base](README.md#what-every-draft-shares).
 - Patch: [7-mount-refusal-reason.patch](7-mount-refusal-reason.patch), one commit.
 - Issue title: `fix(rsext4): mount reports every superblock refusal as a bare Io`
 - Pull request title: `fix(rsext4): report why mount refused the superblock`
-- Issue settings, which upstream's contributing guide (section 3.7) requires in the sidebar:
-  Assignees `calef`, labels `bug` and `q4`, Type `Bug`, Milestone `2026Q4`. GitHub dropped these at
-  creation, because the filing account has no triage permission on the repository; the guide asks a
-  maintainer to fill them in.
+- Issue settings: label `bug`, Type `Bug`, and the
+  [shared rest](README.md#what-every-draft-shares).
 
 ## Issue (Chinese, as filed)
 
@@ -196,11 +193,11 @@ first at the block size, and mount reports `Io` rather than `InvalidMagic`.
 
 ## Test evidence
 
-Before filing, every check the pull request cites ran again on `0353572d1`, the head of `dev` then,
-with the patch applied. Without the fix the new test failed with `left: Io, right: InvalidMagic`,
-and with it the test passed. `cargo xtask clippy --package rsext4` passed its 3 checks, and `cargo
-fmt --check` was clean. `cargo xtask test --since 0353572d1` failed only the three growth tests, and
-they fail the same way on unchanged `dev`. The runs below are the earlier ones, on `6e80b940d`.
+Before filing, the [shared rerun](README.md#what-every-draft-shares) covered this patch. Without the
+fix the new test failed with `left: Io, right: InvalidMagic`, and with it the test passed. `cargo
+xtask clippy --package rsext4` passed its 3 checks, and `cargo fmt --check` was clean. `cargo xtask
+test` failed only the shared three growth tests. The runs below are the earlier ones, on
+`6e80b940d`.
 
 Red, with the test on the unfixed code (`cargo test -p rsext4 --features host-test --test
 error_handling mount_reports_why_it_refused_the_superblock`):

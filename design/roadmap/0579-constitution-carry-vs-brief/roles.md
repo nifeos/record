@@ -1,15 +1,11 @@
 # Milestone 579's table, the three roles
 
-An appendix to
-[`design/roadmap/0579-constitution-carry-vs-brief.md`](../0579-constitution-carry-vs-brief.md),
-milestone 579 (which of the constitution must be carried, and which is a brief). It holds the
+An appendix to [milestone 579](../0579-constitution-carry-vs-brief.md). It holds the
 passage-by-passage verdicts for the three roles section of `AGENTS.md`, the largest; every other
 section is in [classification.md](classification.md). It was moved out under §212 (a prose budget);
-the block is complete without it. Line ranges are against `AGENTS.md` as it stood when the proposal
-was filed on 2026-09-23 (925 lines).
-
-A verdict of `brief` names the provisional brief it would join; `uncertain` says why the block's two
-sub-questions did not both resolve cleanly.
+the block is complete without it. Line ranges are the ones
+[the block](../0579-constitution-carry-vs-brief.md#what-the-table-found) states, and verdicts read
+as [classification.md](classification.md) says.
 
 ### The three roles (304-623)
 

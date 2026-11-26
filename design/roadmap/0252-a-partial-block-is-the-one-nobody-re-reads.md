@@ -99,8 +99,8 @@ carelessness:
   cites files the SMB removal deleted on 2026-08-30, and milestone 53's ranking argument rests on
   milestone 55, which is `REMOVED`.
 
-**And the wrong sentence is rarely only in the roadmap.** Fixing a block repeatedly left a rustdoc,
-a module header or a note still saying the old thing, where no gate reads it. Ten of those are in
+**And the wrong sentence is rarely only in the roadmap.**
+[notes/follow-on-work.md](../../notes/follow-on-work.md) states it. Ten such sentences are in
 `design/roadmap/0333-claims-the-sweep-found-false-outside-the-roadmap.md`.
 
 **One block should probably not be `PARTIAL` at all.** Milestone 207's four Community Standards

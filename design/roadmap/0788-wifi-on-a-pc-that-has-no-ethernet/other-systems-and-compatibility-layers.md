@@ -19,6 +19,6 @@ nl80211 and tokio.
 | NetBSD rump kernels | `libnet80211` and only `iwn` among wireless drivers; no rump `iwm` | BSD (not read) | NetBSD's `iwm` does 802.11a/b/g only |
 | FreeBSD LinuxKPI `iwlwifi` | Linux iwlwifi under a shim over net80211 | the BSD half of iwlwifi | lists the 8265, but 802.11n/ac only on 22000 and later |
 
-A compatibility layer is the fastest way to a working Wi-Fi package and the one route that cannot
+[The milestone](../0788-wifi-on-a-pc-that-has-no-ethernet.md) says why a compatibility layer cannot
 serve the base. Genode tracks recent Linux and would bring every Intel generation at once, a real
 argument for a later GPL package but not for install time.

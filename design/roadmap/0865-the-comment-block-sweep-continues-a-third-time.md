@@ -16,13 +16,12 @@ again, worth four); minted from the proposal of the same name. §267 (a comment 
 40 lines. Its 2026-10-09 amendment rules the method: the constraint stays, history goes to the
 commit message and git, and no narrative is transplanted into a document.
 
-The baseline holds 336 rows. The worst after worth four:
-`components/src/timetable.rs` (module header) (191), `components/src/login.rs` (module header) (177),
-`crates/current_cpu_contract/src/lib.rs` (module header) (176), `components/src/system_installer.rs` (module header) (175)
-and `crates/serial_console/src/lib.rs` (module header) (173). A worth
-takes the worst handful that is not a gated example, and every shrink is banked. The method, the
-refused alternatives and the evidence are milestone 860 (comments state the constraint as it
-is now)'s block and `notes/comment-cost-2026-10-07.md`.
+The baseline holds 336 rows. The worst after worth four: `components/src/timetable.rs` (module
+header) (191), `components/src/login.rs` (module header) (177),
+`crates/current_cpu_contract/src/lib.rs` (module header) (176), `components/src/system_installer.rs`
+(module header) (175) and `crates/serial_console/src/lib.rs` (module header) (173). A worth takes
+the worst handful that is not a gated example, and every shrink is banked. The method and its
+evidence are milestone 860 (comments state the constraint as it is now).
 
 Reuse: the ratchet, the lexer and the baseline already exist (milestone 860 built them). This
 worth only runs the sweep and banks, and takes no new code.

@@ -26,8 +26,7 @@ cargo-mutants, cargo-fuzz. No new tool.
 
 ## Finding status
 
-Every finding not Done blocks the first crates.io publish, which waits until every outside-review
-milestone reaches delivery.
+Every finding not Done blocks the first crates.io publish, under [the publishing hold](1093-globally-unique-identifier-partition-table-outside-review.md#finding-status).
 
 - Item 1 (P0), the manifest does not stand alone: Done, [#3835](https://github.com/nifeos/nife/pull/3835). The manifest in
   `partsfoundry/interfaces_note` states its license, `rust-version`, description, keywords, categories
@@ -186,8 +185,8 @@ The rules in force, with their background and prior art, are in
   replaces it.
 - Decision 5, the repository: 2026-11-20 (UTC), option A. The architect cleared the review
   package and gives the go to create `partsfoundry/interfaces_note`, with `publish = false`, no tag and no
-  publish. The twenty public names keep decision 2's spelling. The move lane runs the
-  stranger test, the template's workflows and the first weekly mutation run in the new repository.
+  publish. The twenty public names keep decision 2's spelling.
+  [The crate move runbook](../../notes/crate-move.md) gives the steps after the move.
 - Decision 6, the fuzz crate's dependency hold: 2026-11-22 (UTC), option A. The labeler's hold on
   the `fuzz/` crate's dependencies is a false positive under the standing approvals for
   `libfuzzer-sys` in an unpublished fuzz crate and for the organization's own crates.

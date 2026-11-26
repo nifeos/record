@@ -202,9 +202,8 @@ screen inside the kernel image, checked *before* the yield so a refusal leaves t
 painting rather than a cleared screen nobody owns. It is a range test rather than a flag, so
 milestone 157's U-Boot aperture will pass it with nothing to remember.
 
-It is a boot of its own rather than a stage of the suite, and that is forced. `ramfb` adds a QEMU
-console, `screendump` with no device argument writes console 0, and the suite's machine already has a
-virtio-gpu there.
+It is a boot of its own rather than a stage of the suite, for the reason
+[the boards' screen](../../notes/serial-less-output/ramfb.md) gives.
 
 Two repairs the lane made to these gates afterwards are in
 [`gate-repairs.md`](0243-a-machine-with-no-serial-port-cannot-say-anything/gate-repairs.md): the

@@ -49,10 +49,8 @@ hand-drawn line is not. It is what catches the 117.
   constructor and a userspace `std` program reads it back through the identical accessor. So the
   same unsafe source genuinely executes with kernel privilege in one binary and under confinement in
   the other.
-- boot chain, 37 blocks. `uefi_loader` and the one crate only it reaches (`sealed_pair`). It
-  runs once, before the kernel starts, with the full privilege of the pre-OS environment, to decide
-  which kernel image gets control. Its memory is reclaimed before the kernel's isolation
-  boundary exists to enforce anything on it. A chain-of-trust question, not a runtime-isolation one.
+- boot chain, 37 blocks: `uefi_loader`, a chain-of-trust question, not a runtime-isolation one, as
+  [the unsafe census](../../notes/register-of-measures/unsafe-series.md) states.
 
 ## What was found and deliberately not folded in
 
@@ -95,7 +93,7 @@ currently 88 against a mixed density of 77) is a ceiling over the population thi
 two populations. If a ceiling is held against the split, kernel density (142 per 10,000) is the
 number it belongs on. It is the population a mixed number's blind spot actually lives in:
 unsafe code nothing confines. Userspace density (120) matters less for the same reason a bug there
-is a bug in one confined program rather than in the base. **This is a recommendation.** Changing
+is a bug in one confined program rather than in the base. This is a recommendation. Changing
 `script/lint`'s 88, or setting any ceiling on the new columns, is an architect's, not this
 milestone's. A ceiling started cold has no history of it moving deliberately the way 88 was
 cinched down six times (milestone 134 (the register of measures: every number this kernel owes

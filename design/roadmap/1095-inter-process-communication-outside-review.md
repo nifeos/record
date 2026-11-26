@@ -32,8 +32,7 @@ the items say which.
 
 ## Finding status
 
-Every finding not Done blocks the first crates.io publish, which waits until every outside-review
-milestone reaches delivery.
+Every finding not Done blocks the first crates.io publish, under [the publishing hold](1093-globally-unique-identifier-partition-table-outside-review.md#finding-status).
 
 - P0-1, no review package: Done, [#3824](https://github.com/nifeos/nife/pull/3824).
   [`notes/crate-reviews/inter-process-communication.md`](../../notes/crate-reviews/inter-process-communication.md)

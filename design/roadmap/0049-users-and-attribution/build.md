@@ -7,10 +7,10 @@ complete without it; this is how each piece is built, and its proof.
 
 ## The login service
 
-`login` (provisional name) is `components/src/login.rs`, with its wire contract `crates/login_contract`
-(provisional). It holds the credential service's verify endpoint, the file service's root directory
-capability, and a construction budget. The verify endpoint is milestone 56 (secrets and entropy)'s,
-unmodified: neither `cred_proto` nor `credentialer.rs` changed.
+[The main page](../0049-users-and-attribution.md#what-is-built) names `login`'s source and contract.
+It holds the credential service's verify endpoint, the file service's root directory capability, and
+a construction budget. The verify endpoint is milestone 56 (secrets and entropy)'s, unmodified:
+neither `cred_proto` nor `credentialer.rs` changed.
 
 A client presents an identity and a secret over `login_contract`. On a match, `login` builds a fresh
 `fs_subtree_caretaker`. That is the same construction `crates/system_initializer` performs for a

@@ -218,18 +218,18 @@ milestone 433 (drain the proposal pile to zero, and keep it there) at 108 citing
 
 Six "is there a milestone for X" questions in one evening turned up four things wrong on `main`
 rather than four things missing, all the same shape: prose that was true when written and went
-silently false when a milestone landed. `notes/why-not-general-purpose.md` told newcomers there was
-no networking, no writable filesystem, no display and no SMP, five of six rows false. Milestone 66's
-gap table said TCP listen and accept were absent from the contract a month after milestone 107
-(the socket contract learns to accept)
-shipped them. Every one is rung four of AGENTS.md's ladder and every one stayed green through every
-gate. The mechanism is a worklist rather than a failure, in the shape `script/names --unratified`
-already uses. When a pull request moves a milestone's status, print the notes that cite that
-milestone. The lane doing the flipping is the one person who knows what that milestone now
-makes true and is holding that knowledge at exactly the moment the check fires. Four measurements
-decided the design: the median milestone is cited by three notes, so a worklist is readable. 68
-statuses flipped in fourteen days, so it must be scoped to a pull request rather than swept over the
-tree. Only 4% of the 1,519 milestone citations in `notes/` carry a gloss, so it keys on the bare
-`milestone N` and not on what `script/citations` checks. It catches one of the two real cases.
-The half it misses is stated rather than glossed: a page saying "there is no networking" cites
-nothing, so there is no anchor to hang a check on, and that half wants a sweep rather than a gate.
+silently false when a milestone landed.
+[Citations that name what they cite](../../notes/citations.md) lists them. Milestone 66's gap table
+said TCP listen and accept were absent from the contract a month after milestone 107 (the socket
+contract learns to accept) shipped them. Every one is rung four of AGENTS.md's ladder and every one
+stayed green through every gate. The mechanism is a worklist rather than a failure, in the shape
+`script/names --unratified` already uses. When a pull request moves a milestone's status, print the
+notes that cite that milestone. The lane doing the flipping is the one person who knows what that
+milestone now makes true and is holding that knowledge at exactly the moment the check fires. Four
+measurements decided the design: the median milestone is cited by three notes, so a worklist is
+readable. 68 statuses flipped in fourteen days, so it must be scoped to a pull request rather than
+swept over the tree. Only 4% of the 1,519 milestone citations in `notes/` carry a gloss, so it keys
+on the bare `milestone N` and not on what `script/citations` checks. It catches one of the two real
+cases. The half it misses is stated rather than glossed: a page saying "there is no networking"
+cites nothing, so there is no anchor to hang a check on, and that half wants a sweep rather than a
+gate.

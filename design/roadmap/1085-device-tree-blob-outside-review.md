@@ -217,9 +217,8 @@ from a written package. Example: F-package and P0-1 each get a lane.
 ### Clear the `device_tree_blob` package for the move
 
 Ruled 2026-11-20 (UTC): option A. The review package is cleared. The repository, now
-`partsfoundry/device_tree_blob`, is a go, with `publish = false`, no tag and no publish. The move
-lane runs the stranger test, the template's workflows and the
-first weekly mutation run in the new repository.
+`partsfoundry/device_tree_blob`, is a go, with `publish = false`, no tag and no publish.
+[The crate move runbook](../../notes/crate-move.md) gives the steps after the move.
 
 Door: two-way until the repository exists. Example: the move lane creates the repository and lands P0-1,
 P1-5 and the renames there, as the package lists them.
