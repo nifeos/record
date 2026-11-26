@@ -13,9 +13,7 @@
 
 015deba074bc notes/counted-claims.md
 
-0161facaf4c7 design/roadmap/0138-file-io-throughput/options.md
 
-0161facaf4c7 notes/benchmarks/five-blocks-per-request.md
 
 01b71f214f04 design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
@@ -158,9 +156,7 @@
 
 
 
-15a99af7101a design/roadmap/0138-file-io-throughput/options.md
 
-15a99af7101a notes/benchmarks/five-blocks-per-request.md
 
 16ab6d4e3dec design/roadmap/0522-a-boundary-drawn-by-dependency-not-by-path.md
 
@@ -341,9 +337,7 @@
 
 23c834cc5a0a design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
-23d19552de22 design/roadmap/0129-scheduled-execution.md
 
-23d19552de22 notes/scheduled-execution/registration.md
 
 23fa2401dfc0 design/roadmap/0867-a-fifth-outsider-pass-attacks-the-confinement-claim.md
 
@@ -1735,9 +1729,7 @@ dd7a792417a3 notes/c-seam.md
 
 
 
-de28c0685846 design/roadmap/0053-board-peripherals.md
 
-de28c0685846 notes/non-volatile-memory-express.md
 
 
 
