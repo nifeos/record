@@ -93,23 +93,11 @@ out.
    `target_arch`, so stock Kani proves them. The patched Kani of §218 (carry a Kani patch so riscv64
    is proved, and send it upstream) is carried only if one comes to need riscv64. Milestone 589
    (Kani can prove riscv64 from the hosts we already have) built it.
-6. Soak, as its own repository (calef, 2026-10-17 UTC, replying "Agrred" (sic) to the maintainer's
-   proposal; §305 (git dependencies are allowed on `nifeos/*` only, pinned to a landed commit)).
-   This crate is the pilot and soaks first: it is the smallest crate with a real cut, and the cut is
-   where refactor lessons show up. Before publication the crate is moved, not copied: it leaves this
-   tree, and nife depends on `partsfoundry/jh7110_entropy` by `rev`. A copy left behind does not count.
-   The soak ends on evidence, not a duration, when all five hold:
-   1. nife builds and passes CI against the repository at a pinned commit, with no path dependency
-      left.
-   2. The shared template's weekly run (milestone 887) is green on the crate.
-   3. A release dry run is green.
-   4. The stranger test builds and proves the crate from its README alone.
-   5. The API has gone four weeks with no change `cargo-semver-checks` calls breaking.
-7. crates.io trusted publishing from that workflow, owned by a `nifeos` team, with no stored token.
-8. calef approves this publication, as he does every one.
-9. nife consumes the crates.io release by semantic version, and `Cargo.lock` records its checksum. A `[patch]` to
-   a checkout is allowed only during development, and a lint fails one that reaches `main`. The
-   soak's git dependency goes.
+6. Soak, as its own repository, until the [soak's five end conditions](../../notes/crate-move.md#the-soaks-five-end-conditions)
+   in the runbook hold. This crate is the pilot and soaks first: it is the smallest crate with a real cut, and
+   the cut is where refactor lessons show up.
+7. Publish and consume the release by version, by the runbook's
+   [publication steps](../../notes/crate-move.md#publication-and-consumption-by-version).
 
 ## Parity
 
@@ -149,7 +137,16 @@ harness.
   Condition 2 holds: the first scheduled weekly run, on 2026-11-02 (UTC), is green. Condition 4
   holds: `docs/stranger-test.md` there records a run on 2026-10-31. Condition 3 holds: the
   `release` workflow's gate and rehearse jobs passed at `522b98b` on 2026-11-11 (UTC), run
-  42997968584. Condition 5 counts four weeks from `v0.3.0-pre.1` (2026-11-16 UTC), the release that carries the last breaking change `cargo-semver-checks` finds, so it ends no earlier than 2026-12-14.
+  42997968584. Condition 5, measured 2026-11-26 (UTC) at the crate's `main` `eac91ef`: check 5b
+  holds, since `cargo semver-checks --baseline-rev v0.3.0-pre.1 --release-type minor` passes 202
+  checks and fails none (the same run against `v0.2.0` fails three). Check 5c holds: the
+  repository has no open issue and no milestone, the one open issue naming the crate in either
+  organization (nifeos/nife#4118) asks for a new pre-release tag and no break, and no milestone or
+  `BUGS` entry here proposes one. Check 5a does not hold: no consumer pins a tag. `kernel`,
+  `components` and `machine_discovery` pin `df37dc9`, 6 commits past `v0.3.0-pre.1` with the same
+  source (only the README differs), and the board check pins `ee0bde8`, an untagged commit between
+  `v0.2.0` and `v0.3.0-pre.1`, with `version = "0.2.0"`. No `[patch]` names the crate. The soak
+  ends when one nife pull request moves all four pins to a tag's commit and 5b holds from that tag.
 - A bump of the pin is a separate pull request citing the landed commit as
   `partsfoundry/jh7110_entropy@<sha>`.
 
@@ -247,9 +244,9 @@ names until the ratification pass, so this section keeps the links it carried.
 
 ## Follow-on
 
-- **Outstanding.** The soak's end condition 5 and release steps 7 to 9. Checked 2026-11-26
-  (UTC): conditions 1 to 4 hold (*The soak* above), the four weeks of condition 5 end no earlier
-  than 2026-12-14, and nothing has published.
+- **Outstanding.** The soak's end condition 5 and release step 7. Checked 2026-11-26 (UTC):
+  conditions 1 to 4 hold, checks 5b and 5c hold, and 5a waits on nife's pins moving to a tag's
+  commit (*The soak* above); nothing has published.
 - **Recorded.** Ruled 2026-11-02 UTC: until `jh7110_entropy` reaches crates.io, nife depends on
   `partsfoundry/jh7110_entropy` by git revision (`rev = "df37dc91383c4226b0266499c48de7e5e92ecb99"`, with `version = "0.3.0-pre.1"`).
   A crates.io version replaces the pin after the soak release dry run.
