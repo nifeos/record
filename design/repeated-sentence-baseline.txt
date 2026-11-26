@@ -1214,39 +1214,22 @@
 
 767d28e30fed design/roadmap/1106-program-argument-contract-outside-review/what-was-checked.md
 
-76893bcfdd94 design/roadmap/0066-vaultwarden.md
 
-76893bcfdd94 design/roadmap/0099-git-on-nife.md
 
-76893bcfdd94 design/roadmap/0123-the-demonstration.md
 
-76893bcfdd94 design/roadmap/0149-hpc-benchmark-suite.md
 
-76893bcfdd94 design/roadmap/0170-nano-editor.md
 
-76893bcfdd94 design/roadmap/0171-git-core-userspace.md
 
-76893bcfdd94 design/roadmap/0173-rustc-cargo-self-host.md
 
-76893bcfdd94 design/roadmap/0258-archive-and-compression.md
 
-76893bcfdd94 design/roadmap/0710-firefox-port.md
 
-76893bcfdd94 design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
-76893bcfdd94 design/roadmap/0827-hackbench-on-nife-and-linux.md
 
-76893bcfdd94 design/roadmap/0828-iperf3-on-nife-and-linux.md
 
-76893bcfdd94 design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
-76893bcfdd94 design/roadmap/0831-sqlite-speedtest1-on-nife-and-linux.md
 
-76893bcfdd94 design/roadmap/0832-stream-on-nife-and-linux.md
 
-76893bcfdd94 design/roadmap/0833-the-same-storage-benchmark-on-nife-and-linux.md
 
-76893bcfdd94 design/roadmap/0834-ioping-on-nife-and-linux.md
 
 77052501df0b design/roadmap/0142-a-text-display-worth-living-in/dependency.md
 
@@ -2040,39 +2023,22 @@ d58638c05df6 design/roadmap/0814-the-nvme-queue-crate-released-on-its-own.md
 
 d58638c05df6 design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
-d59e8c6f9dac design/roadmap/0066-vaultwarden.md
 
-d59e8c6f9dac design/roadmap/0099-git-on-nife.md
 
-d59e8c6f9dac design/roadmap/0123-the-demonstration.md
 
-d59e8c6f9dac design/roadmap/0149-hpc-benchmark-suite.md
 
-d59e8c6f9dac design/roadmap/0170-nano-editor.md
 
-d59e8c6f9dac design/roadmap/0171-git-core-userspace.md
 
-d59e8c6f9dac design/roadmap/0173-rustc-cargo-self-host.md
 
-d59e8c6f9dac design/roadmap/0258-archive-and-compression.md
 
-d59e8c6f9dac design/roadmap/0710-firefox-port.md
 
-d59e8c6f9dac design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
-d59e8c6f9dac design/roadmap/0827-hackbench-on-nife-and-linux.md
 
-d59e8c6f9dac design/roadmap/0828-iperf3-on-nife-and-linux.md
 
-d59e8c6f9dac design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
-d59e8c6f9dac design/roadmap/0831-sqlite-speedtest1-on-nife-and-linux.md
 
-d59e8c6f9dac design/roadmap/0832-stream-on-nife-and-linux.md
 
-d59e8c6f9dac design/roadmap/0833-the-same-storage-benchmark-on-nife-and-linux.md
 
-d59e8c6f9dac design/roadmap/0834-ioping-on-nife-and-linux.md
 
 d623e036405a design/fatal-risks/the-confinement-claims.md
 

@@ -133,12 +133,10 @@ through basalt."*
 
 Each program the demonstration runs, `rg` first, must run on nife installed by `jig install` from
 basalt's package index. basalt builds the package against the nife commit it pins. The install waits
-on milestone 809 (the package client becomes a program, `jig`, with the verbs an index needs). It
-also waits on milestone 801 (packages over the internet: a host name, HTTPS and the distribution's
-index). The package itself is milestone 810 (`ripgrep` is packaged in basalt and installed with
-`jig`). No work toward that starts until those milestones are built (calef, 2026-10-12 UTC: "For our
-other programs let's block start on packaging."). `rg` reached the prompt from the data disk, never
-from `jig`.
+on milestones 809 and 801, as §297 (a package `jig` installs) lists. The package itself is milestone
+810 (`ripgrep` is packaged in basalt and installed with `jig`). No work toward that starts until
+those milestones are built (calef, 2026-10-12 UTC: "For our other programs let's block start on
+packaging."). `rg` reached the prompt from the data disk, never from `jig`.
 
 ## BUGS
 

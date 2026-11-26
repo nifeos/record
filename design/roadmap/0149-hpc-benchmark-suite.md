@@ -145,11 +145,9 @@ from basalt's index, the kernel included). calef, that day: "They should all be 
 through basalt."*
 
 Each benchmark it runs must run on nife installed by `jig install` from basalt's package index.
-basalt builds the package against the nife commit it pins. The install waits on milestone 809 (the
-package client becomes a program, `jig`, with the verbs an index needs). It also waits on milestone
-801 (packages over the internet: a host name, HTTPS and the distribution's index). No work toward
-that starts until those milestones are built. calef ruled so on 2026-10-12 (UTC): "For our other
-programs let's block start on packaging."
+basalt builds the package against the nife commit it pins. The install waits on milestones 809 and
+801, as §297 (a package `jig` installs) lists. No work toward that starts until those milestones are
+built. calef ruled so on 2026-10-12 (UTC): "For our other programs let's block start on packaging."
 
 ## BUGS
 
