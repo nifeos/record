@@ -51,7 +51,7 @@ is the block's.
 | C-CUSTOM-TYPE | not met | `data` and `status` take the direction as `bool` (P0-4); completion codes are `u8` (P0-1) |
 | C-BITFLAG | met | the port and command bits are `u32` constants combined with `\|`, the register's own type |
 | C-BUILDER | not applicable | every builder is one call with its fields as arguments |
-| C-VALIDATE | not met | `doorbell` takes any slot (P0-6); the TRB builders do not check the 64 KiB rule, by design and stated |
+| C-VALIDATE | not met | `doorbell` takes any slot (P0-6); `enqueue` places past capacity (P0-9); the TRB builders do not check the 64 KiB rule, by design and stated |
 | C-DTOR-FAIL | not applicable | no `Drop` |
 | C-DTOR-BLOCK | not applicable | no `Drop` |
 | C-DEBUG | met | every public type derives `Debug` |

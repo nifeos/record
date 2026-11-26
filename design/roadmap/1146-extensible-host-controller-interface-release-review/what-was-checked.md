@@ -46,8 +46,9 @@ Each `.crate` from crates.io at the version in the prior-art table, unpacked and
   `#[non_exhaustive]` anywhere. Run in the benchmark.
 - `crab-usb` 0.12.1: a host stack over `xhci` 0.9, `dma-api` and `tock-registers`, with errors
   through `thiserror` and `anyhow`; `ConvertXhciError` maps completion codes to `TransferError`;
-  the transfer ring's enqueue and `next_index` in `src/backend/kmod/xhci/ring.rs` advance with no
-  full check. Read, not built.
+  its `Ring` is `pub(crate)`. Each transfer passes `ensure_ring_capacity` in
+  `Endpoint::submit_request`, which may return `TransferError::QueueFull`; only the command ring
+  enqueues with no check. Read, not built.
 - `usb-host` 0.1.3: the crates.io record only; it is host driver traits with no controller.
 
 ## The systems read

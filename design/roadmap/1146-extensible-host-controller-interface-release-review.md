@@ -34,6 +34,7 @@ The status words are those `script/review-status` reads.
 - P0-7, `TransferRequestBlock` exposes its dwords as a public field: Open.
 - P0-8, the crate refuses with `bool`, `Option` and panics: Waiting on the errors decision of
   milestone 1129.
+- P0-9, `ProducerRing::enqueue` never refuses: Open.
 - P1-1, the documentation speaks of one driver and a kernel: Open.
 - P1-2, `Capabilities` reads neither the 64-bit addressing bit nor the segment table bound: Open.
 - P1-3, no `Hash` and no `#[must_use]`: Open.
@@ -49,7 +50,7 @@ The status words are those `script/review-status` reads.
 
 ## Open decisions
 
-The one-way doors below, D1 to D10, each for the architect.
+The one-way doors below, D1 to D11, each for the architect.
 
 ## Goal
 
@@ -66,9 +67,8 @@ marks all 54 items.
 ## Prior art
 
 From the crates.io API on 2026-11-26 (UTC). A stranger brings the problem of driving an xHCI
-controller with no operating system under it, so the ranked crates are the no_std xHCI crates.
-The register crates are how such a driver reaches its registers, and the std crates run above an
-operating system's own driver; both stand in the table as neighbors.
+controller with no operating system under it, so the ranked crates are the no_std xHCI crates;
+the register and std crates stand beside them.
 
 | crate or system | role | version read | total | 90 days | reverse dependencies | updated |
 |---|---|---|---|---|---|---|
@@ -85,24 +85,19 @@ operating system's own driver; both stand in the table as neighbors.
 | OpenBSD `sys/dev/usb/xhci.c` | system | `cd5896cffe` | | | | 2025-03-01 |
 
 The demand appendix of milestone 1129 gave `xhci` 37,572 in 90 days, read earlier the same day.
-One crate over 10,000 is enough by 1129's rule. The review read the three systems as well, for
-what no Rust crate shows: the port write trap, the 64-bit addressing bit, and the events a driver
-ignores.
+One crate over 10,000 is enough by 1129's rule.
 
 ### What `extensible_host_controller_interface` does better
 
 - Than `xhci`: no dependency and no `unsafe`, where `xhci` 0.9.2 takes five dependencies and has
-  30 lines with `unsafe`, among them `Registers::new`. `ProducerRing` places the link, flips the
+  30 lines with `unsafe`, among them `Registers::new`. `try_enqueue` places the link, flips the
   cycle and refuses when full; `xhci` stops at the layouts and leaves the ring to the caller.
   Kani proves 13 properties, each with a falsification patch.
 - Than `crab-usb`: it runs anywhere a `u64` does, where `crab-usb` 0.12.1 needs 18 dependencies
-  and has 234 lines with `unsafe`. Its transfer ring (`src/backend/kmod/xhci/ring.rs`) advances
-  with no full check, so a caller can overwrite a TRB the controller has not reached.
+  and has 234 lines with `unsafe`.
 - Than both: `port::write_value` keeps the bits Linux's `xhci_port_state_to_neutral` keeps
   (`XHCI_PORT_RO | XHCI_PORT_RWS`, 0x4e00ffe9, in `xhci-hub.c`), so a port write never
   acknowledges a change by accident. The README states the barrier order on both sides of a ring.
-- Than the three systems: it is the arithmetic alone, testable on a host, where each system folds
-  it into a driver with its own memory and locking.
 
 ## The items
 
@@ -118,16 +113,22 @@ Verified in source (`src/event.rs`, `src/completion.rs`).
 `Event` has four variants and no `#[non_exhaustive]`, so the variant P2-2 wants breaks every
 caller's `match`. `Transfer` and `Command` carry `code: u8`, and `completion` is 36 `u8` constants
 and a `name` function, so the compiler cannot tell a completion code from a slot number. `xhci`
-returns `Result<CompletionCode, u8>`, with `CompletionCode` an enum.
-Change: `#[non_exhaustive]` on `Event`; the code becomes `CompletionCode(u8)`, with the ratified
+returns `Result<CompletionCode, u8>`, with `CompletionCode` an enum. `Transfer` ignores the Event
+Data bit (xHCI 1.2 section 6.4.2.1), and the field that bit adds breaks each caller who names the
+variant's fields. `TransferRequestBlockPlacement` and `DebounceVerdict` are exhaustive too.
+Change: `#[non_exhaustive]` on `Event`, on each of its struct-like variants, on
+`TransferRequestBlockPlacement` and on `DebounceVerdict`; the code becomes `CompletionCode(u8)`, with the ratified
 names as associated constants and `name()` as a method. Door: one-way (D1 and D2). Effort: S.
 
 #### P0-2. `Capabilities` is exhaustive
 
 Verified in source (`src/registers.rs`).
 `Capabilities` and `SupportedProtocol` have public fields and no `#[non_exhaustive]`, so a caller
-may build one with a struct literal, and the fields P1-2 adds break that caller.
-Change: `#[non_exhaustive]` on both. Door: one-way (D3). Effort: S.
+may build one with a struct literal, and the fields P1-2 adds break that caller. The public
+`maximum_slots: u8`, `maximum_ports: u8` and `first_port_number: u8` would freeze the bare types
+that D6 replaces.
+Change: `#[non_exhaustive]` on both; if D6 adopts the newtypes, private fields with getters
+instead. Door: one-way (D3). Effort: S.
 
 #### P0-3. One driver's memory layout is public
 
@@ -186,6 +187,17 @@ a size out of range. `xhci` returns the raw dwords as the error of every `try_fr
 Change: `find_extended` returns `Result<Option<u64>, _>` and `complete` a `Result` that says stale
 or foreign, each error `#[non_exhaustive]` with `Display` and `core::error::Error`, in the shape
 the shared errors decision picks. Door: one-way (D9). Effort: S.
+
+#### P0-9. `ProducerRing::enqueue` never refuses
+
+Verified in source (`src/ring.rs`) and in `crab-usb`'s.
+`enqueue` is public and places a TRB however many are outstanding, so a caller who loses count
+overwrites one the controller has not consumed. `try_enqueue` counts through `complete` and answers
+`None` when full. `crab-usb` does better here: its `Ring` is `pub(crate)`, and each transfer goes
+through `Endpoint::submit_request`, whose `ensure_ring_capacity` returns
+`TransferError::QueueFull`. Only its command ring enqueues with no check.
+Change: `enqueue` becomes crate-private, and the crate page's example moves to `try_enqueue`.
+Door: one-way (D11). Effort: S.
 
 ### P1: before the first release
 
@@ -289,11 +301,13 @@ doorbell write, so the review proposes no change.
 
 Each for the architect, one at a time.
 
-- D1, `Event` exhaustive (P0-1). Recommended: `#[non_exhaustive]`, the stricter choice; a later
+- D1, the exhaustive types (P0-1). Recommended: `#[non_exhaustive]` on `Event`, its struct-like
+  variants, `TransferRequestBlockPlacement` and `DebounceVerdict`, the stricter choice; a later
   release can drop it without breaking a caller.
 - D2, the completion code's type (P0-1). Recommended: the newtype `CompletionCode(u8)`. An enum
   needs an escape variant for the vendor ranges anyway, and the newtype keeps every byte.
-- D3, `Capabilities` and `SupportedProtocol` exhaustive (P0-2). Recommended: `#[non_exhaustive]`.
+- D3, `Capabilities` and `SupportedProtocol` exhaustive (P0-2). Recommended: `#[non_exhaustive]`,
+  and private fields with getters if D6 adopts the newtypes.
 - D4, `direct_memory_access` (P0-3). Recommended: out of the interface; a later release can add a
   module back, never remove one.
 - D5, the data direction (P0-4). Recommended: the enum, as `TransferType` already is.
@@ -304,6 +318,8 @@ Each for the architect, one at a time.
 - D9, the refusals (P0-8). Recommended: the two error types, in the errors decision's shape.
 - D10, the TRB length (P2-1). Recommended: keep `u16` on the builders that exist; a bulk builder
   takes its own wider length.
+- D11, the unchecked enqueue (P0-9). Recommended: only `try_enqueue` public for 0.1.0, the
+  stricter choice; a later release can publish `enqueue` without breaking a caller.
 
 ## Evidence for the shared decisions
 
@@ -316,8 +332,7 @@ What this crate shows each shared question of milestone 1129.
 - Simulators: two fakes, neither exported (P2-6).
 - Register access: no trait. `Capabilities` returns byte offsets as `u64` and takes register values
   as `u32`; the caller does every volatile access. The one callback is `find_extended`'s
-  `&mut dyn FnMut(u64) -> u32`. `xhci` reads through an `accessor` `Mapper` behind an `unsafe fn
-  new`, and `crab-usb` through `tock-registers`. A pure arithmetic crate keeps this shape under any
+  `&mut dyn FnMut(u64) -> u32`. A pure arithmetic crate keeps this shape under any
   shared trait, which belongs in the driver above it.
 - Memory regions and DMA regions: no trait. Physical addresses are bare `u64`, and the one layout
   is P0-3's. Any region decision must let a region say whether it lies below 4 GiB, for P1-2.
@@ -333,7 +348,7 @@ What this crate shows each shared question of milestone 1129.
 
 ## Done when
 
-Every P0 and P1 reads Done, or Will not fix with its ruling; D1 to D10 have rulings; and
+Every P0 and P1 reads Done, or Will not fix with its ruling; D1 to D11 have rulings; and
 `script/review-status` shows the block BUILT.
 
 ## BUGS
@@ -346,4 +361,4 @@ Every P0 and P1 reads Done, or Will not fix with its ruling; D1 to D10 have ruli
 ## Index row
 
 The release review of `extensible_host_controller_interface` against `xhci`, `crab-usb` and the
-Linux, U-Boot and OpenBSD drivers: eight one-way changes before 0.1.0 and ten doors to rule.
+Linux, U-Boot and OpenBSD drivers: nine one-way changes before 0.1.0 and eleven doors to rule.

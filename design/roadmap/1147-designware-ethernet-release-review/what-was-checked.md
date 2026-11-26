@@ -23,7 +23,7 @@ Run in a clean export of the commit above, on an x86_64 Linux host:
 - `cargo kani` (Kani 0.68.0): six of six harnesses verified, each in about 0.15 s.
 - `cargo package --list`: the list P2-1 names.
 - `cargo doc --no-deps`: clean. `RUSTDOCFLAGS="-D warnings" cargo doc --no-deps`: four errors, the
-  links to private items of P1-4.
+  links to private items of P1-3.
 - The benchmark: a bench crate outside the repository depending on the export by path, run with
   `cargo run --release`. It made four runs of 2,000,000 frames at 60 and 1514 bytes, over ordinary
   memory implementing `DirectMemoryAccessRegion`, with a simulated device completing each

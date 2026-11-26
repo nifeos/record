@@ -27,11 +27,11 @@ block's.
 | C-ANYWHERE | not applicable | no macros |
 | C-MACRO-VIS | not applicable | no macros |
 | C-MACRO-TY | not applicable | no macros |
-| C-CRATE-DOC | not met | the crate page is shorter than the README, which is not included (P1-4) |
-| C-EXAMPLE | not met | `bring_up`, `configure` and the Motorcomm sequences have no example (P1-4) |
-| C-QUESTION-MARK | not met | the README example calls `unwrap` on `transmit` (P1-4) |
-| C-FAILURE | not met | one `# Errors` heading among thirteen fallible public functions (P1-4) |
-| C-LINK | met | items link to each other and to the OpenBSD and Linux sources they follow; four links point at private items (P1-4) |
+| C-CRATE-DOC | not met | the crate page is shorter than the README, which is not included (P1-3) |
+| C-EXAMPLE | not met | `bring_up`, `configure` and the Motorcomm sequences have no example (P1-3) |
+| C-QUESTION-MARK | not met | the README example calls `unwrap` on `transmit` (P1-3) |
+| C-FAILURE | not met | one `# Errors` heading among thirteen fallible public functions (P1-3) |
+| C-LINK | met | items link to each other and to the OpenBSD and Linux sources they follow; four links point at private items (P1-3) |
 | C-METADATA | not met | no `documentation` key (P2-1) |
 | C-RELNOTES | met | `CHANGELOG.md` names each breaking change of 0.1.0-pre.1 |
 | C-HIDDEN | met | `simulator` and the descriptor bits are crate-private; nothing is `doc(hidden)` |
@@ -45,7 +45,7 @@ block's.
 | C-INTERMEDIATE | met | `Identity`, `Account`, `Observation` and `Applied` expose what each step saw, and each sequence is public |
 | C-CALLER-CONTROL | not met | the ring sizes are fixed, and each frame is copied in and out (P2-2, P2-3) |
 | C-GENERIC | met | every sequence takes `impl Hardware`, `impl ManagementDataIo` or `impl Port` |
-| C-OBJECT | not met | the sequences take `impl Hardware`, which is `Sized`, so a `dyn Hardware` cannot be passed; relaxing the bound later is compatible |
+| C-OBJECT | met | `Hardware`, `ManagementDataIo`, `DirectMemoryAccessRegion` and `Tails` are object-safe; `Port`, with a generic method, serves generic code |
 | C-NEWTYPE | not met | station addresses are `[u8; 6]` and physical addresses bare `u64` (P0-4) |
 | C-CUSTOM-TYPE | not met | `start` and `mac_configuration` take `loopback: bool`; an enum may follow without a break only through a new function |
 | C-BITFLAG | not applicable | the register bits are crate-private constants |
@@ -62,4 +62,4 @@ block's.
 | C-STABLE | met | no dependencies |
 | C-PERMISSIVE | met | `(MIT OR Apache-2.0) AND ISC AND BSD-2-Clause`, each permissive |
 
-Totals: 13 met, 22 not met, 19 not applicable.
+Totals: 14 met, 21 not met, 19 not applicable.

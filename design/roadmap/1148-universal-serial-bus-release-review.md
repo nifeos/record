@@ -15,12 +15,8 @@ The release review of `partsfoundry/universal_serial_bus` at commit `4612f6b5`, 
 (what an outside maintainer would fix before its first release), [its block](1111-usb-outside-review.md) and the cleared package
 [`notes/crate-reviews/universal-serial-bus.md`](../../notes/crate-reviews/universal-serial-bus.md).
 1111's three decisions stand and nothing here reopens them. The architect ratified every public
-name on 2026-11-19 with its specification alias. `changes` emits HID usages with the modifiers as
-0xe0 to 0xe7. `DeviceDescriptor::parse` returns a `Result` while `BootReport::parse` keeps its
-`Option`, and `Speed` has four variants. The one naming rule added since that ratification, the right and
-permission rule, touches no name in this crate, so the release-review rule reopens none. The
-usage-to-evdev table follows the standing rule for a keyboard table: its source is the HID Usage
-Tables and the evdev header, with Linux's `hid_keyboard[]` as a test cross-check only.
+name on 2026-11-19, and the one naming rule added since, the right and permission rule, touches
+none of them.
 
 Reuse: the prior-art table weighs each host-side USB crate a caller could take instead, and the
 device-side crates a caller may already know the vocabulary from.
@@ -30,6 +26,7 @@ device-side crates a caller may already know the vocabulary from.
 - P0-1, `Refusal` and `Speed` are exhaustive: Open.
 - P0-2, three public structs that will grow are exhaustive: Open.
 - P0-3, `changes` reports through a callback of a bare `u8` and `bool`: Open.
+- P0-4, `SetupPacket::request_type` is a bare `u8`: Open.
 - P1-1, `Refusal` has no `Display` and no `core::error::Error`: Waiting on the errors decision of
   milestone 1129.
 - P1-2, no fallible function has an `# Errors` section: Open.
@@ -42,7 +39,7 @@ device-side crates a caller may already know the vocabulary from.
 
 ## Open decisions
 
-The one-way doors D1 to D5 below.
+The one-way doors D1 to D7 below.
 
 ## Goal
 
@@ -62,9 +59,7 @@ command and system outside Rust that the review used, and
 
 Measured from the crates.io API on 2026-11-26 (UTC). A stranger brings this crate the problem of
 finding a boot keyboard behind a host controller and reading its keys. No crate on crates.io does
-that alone: the host-side stacks bundle a controller driver, the user-space crates need an
-operating system, and the busiest USB crates are for building a device. The review therefore also
-reads OpenBSD and Linux, which do the same job in a kernel.
+that alone, so the review also reads OpenBSD and Linux, which do the same job in a kernel.
 
 | crate or system | role | version read | total | 90 days | reverse dependencies | updated |
 |---|---|---|---|---|---|---|
@@ -104,7 +99,8 @@ reads OpenBSD and Linux, which do the same job in a kernel.
   its last release is from 2022.
 - Than `usbd-hid` and `keycode`: they build reports on the device side or map key names; neither
   reads a report from a device. Their `KeyboardReport` and `KeyMap` types are the vocabulary a
-  caller may already know, and this crate's `BootReport` holds the same eight bytes.
+  caller may already know, and this crate's `BootReport` holds the same report in seven bytes,
+  without the reserved one.
 - Than OpenBSD and Linux: it answers a bad descriptor length with a refusal naming its offset.
   Linux's `usb_parse_configuration` logs one and skips the rest of the configuration, and
   OpenBSD's `usbd_find_idesc` stops only at a length of 0. It drops a phantom report whole, where
@@ -123,9 +119,12 @@ builds on from the day 0.1.0 appears, so it ships in 0.1.0 or never ships.
 Verified in source.
 Neither enum has `#[non_exhaustive]`, and the README's BUGS list says so. A caller's `match` on
 `Refusal` breaks when a parser learns a new refusal (a configuration with no interface, a device
-descriptor that names zero configurations), and one on `Speed` breaks when the crate names
-SuperSpeedPlus, which USB 3.2 already defines. Change: `#[non_exhaustive]` on both, and the BUGS
-line goes. Door: one-way (D1). Effort: S.
+descriptor that names zero configurations). `Speed::Super` already covers SuperSpeedPlus, but a
+`match` on `Speed` breaks when the crate names a speed outside its four, such as the wireless
+speed Linux's `usb_device_speed` carries. The struct-like variants `Malformed`, `NoInterruptIn`
+and `PacketTooSmall` break each caller who names their fields when one gains a field.
+Change: `#[non_exhaustive]` on both enums and on each struct-like variant, and the BUGS line goes.
+Door: one-way (D1 and D7). Effort: S.
 
 #### P0-2. Three public structs that will grow are exhaustive
 
@@ -133,10 +132,12 @@ Verified in source.
 `DeviceDescriptor` (six public fields), `ConfigurationHeader` (three) and `BootKeyboard` (five)
 have every field public and no `#[non_exhaustive]`. Each leaves out fields of the descriptor it
 reads (P2-3), so adding one later breaks every caller that builds or destructures it, and a caller
-can build a `BootKeyboard` that no device described. `SetupPacket` and `BootReport` are different:
-the specification fixes their eight bytes, every field is already present, and a caller's test
-builds a `BootReport` to feed `changes`. Change: `#[non_exhaustive]` on the three, fields still
-readable; leave `SetupPacket` and `BootReport` as they are. Door: one-way (D2). Effort: S.
+can build a `BootKeyboard` that no device described. The specification fixes the bytes of
+`SetupPacket` and `BootReport`, so neither grows. `BootReport`'s public fields still let a caller
+build a report that `parse` refuses, such as one with usage 1 (error rollover) in a key slot.
+Change: `#[non_exhaustive]` on the three, fields still readable; `BootReport` takes private fields,
+getters and a constructor that refuses what `parse` refuses, which a caller's test uses to feed
+`changes`; `SetupPacket` stays as it is. Door: one-way (D2). Effort: S.
 
 #### P0-3. `changes` reports through a callback of a bare `u8` and `bool`
 
@@ -151,6 +152,15 @@ iterator, a type holding the two reports and a cursor, of a `KeyChange` struct w
 a two-variant `Press` and `Release` enum, both `#[non_exhaustive]`. A callback caller writes
 `for_each`. The two Kani harnesses on events move to the iterator. The new type names need a
 naming ruling. Door: one-way (D3). Effort: M.
+
+#### P0-4. `SetupPacket::request_type` is a bare `u8`
+
+Verified in source (`src/request.rs`) and in `usb-host`'s.
+`bmRequestType` packs a direction, a type and a recipient, and type 3 and recipients 4 to 31 are
+reserved (USB 2.0 Table 9-2). The public `request_type: u8` takes any byte. `usb-host` 0.1.3 types
+the field as `RequestType`, built from the three parts.
+Change: a `RequestType` newtype with a constructor from the three parts and a `get`, names
+provisional. Door: one-way (D6). Effort: S.
 
 ### P1: before the first release
 
@@ -205,7 +215,7 @@ Effort: M.
 Verified in source (C-CONV-TRAITS).
 `SetupPacket::to_u64` packs the packet as the little-endian quadword an xHCI setup stage carries.
 A DWC2 or EHCI driver writes eight bytes instead, and a test or a device-side reader wants to parse
-them. `usb-host` and `usbh` both expose a typed request type. Change: `to_le_bytes() -> [u8; 8]`
+them. Change: `to_le_bytes() -> [u8; 8]`
 and `from_le_bytes`, with `From` both ways. Door: two-way. Effort: S.
 
 #### P2-3. The fields `DeviceDescriptor` and `ConfigurationHeader` leave out
@@ -224,8 +234,7 @@ Change: add it. Door: two-way. Effort: S.
 ### Measured performance
 
 Run on a Linux x86_64 host, an Intel Xeon Platinum 8160 at 2.10 GHz, with rustc 1.100.0 in release
-mode; the best of seven runs of ten million calls each. The bench and its exact bytes are in
-[the appendix](1148-universal-serial-bus-release-review/what-was-checked.md).
+mode; the best of seven runs of ten million calls each. [The appendix](1148-universal-serial-bus-release-review/what-was-checked.md) holds the bench.
 
 | what | ns per call | what it includes |
 |---|---|---|
@@ -234,17 +243,16 @@ mode; the best of seven runs of ten million calls each. The bench and its exact 
 | two `BootReport::parse` and `changes` | 40.4 | two parses with the phantom check, then seven events into a closure |
 | a port of Linux `usb_kbd_irq`'s loop | 19.0 | the same seven events, no parse, no phantom check, no duplicate check |
 
-The walk runs once per device, and a boot keyboard sends at most one report a millisecond at full
-speed, so both costs are far below what a driver would notice. The interface does not limit speed
-here; the numbers settle only that the refusals and the duplicate check cost tens of nanoseconds.
+The walk runs once per device and a boot keyboard sends at most one report a millisecond, so
+neither cost matters to a driver.
 
 ## One-way doors
 
 - D1, exhaustive enums (P0-1). Recommended: `#[non_exhaustive]` on `Refusal` and `Speed` before
   0.1.0, the stricter choice; dropping the attribute later breaks no caller.
 - D2, exhaustive structs (P0-2). Recommended: `#[non_exhaustive]` on `DeviceDescriptor`,
-  `ConfigurationHeader` and `BootKeyboard`; keep `SetupPacket` and `BootReport` exhaustive, since
-  their layouts are the specification's and cannot grow.
+  `ConfigurationHeader` and `BootKeyboard`; private fields and a validating constructor on
+  `BootReport`, the stricter choice; keep `SetupPacket` exhaustive.
 - D3, how `changes` delivers events (P0-3). Recommended: an iterator of a typed `KeyChange`, since a
   callback is one `for_each` away from it and the reverse needs a buffer.
 - D4, one refusal type for the crate. The three descriptor parsers share `Refusal`, so
@@ -257,6 +265,10 @@ here; the numbers settle only that the refusals and the duplicate check cost ten
   256 values is a valid usage id and a valid descriptor type (class descriptors such as 0x21 and
   0x22 among them). A newtype would exclude no state, and OpenBSD, Linux, `usbd-hid` and
   `keycode` all index by the number. Recommended: keep `u8`; P0-3's `KeyChange` names the field.
+- D6, the request type (P0-4). Recommended: the newtype, since reserved values exist; a newtype
+  can gain conversions later, and a bare `u8` cannot gain the check.
+- D7, the struct-like variants of `Refusal` (P0-1). Recommended: `#[non_exhaustive]` on each, the
+  stricter choice; a later release can drop it without breaking a caller.
 
 ## Evidence for the shared decisions
 
@@ -274,13 +286,12 @@ here; the numbers settle only that the refusals and the duplicate check cost ten
   carries; the caller's controller driver owns the ring and rings the doorbell.
 - **Register access.** Not applicable. The crate touches no hardware (`src/lib.rs` documents it as
   pure computation) and defines no register trait.
-- **Byte sinks.** Not applicable. Nothing streams bytes out; `changes` reports to a closure (P0-3),
-  which is an event stream, not a byte stream.
+- **Byte sinks.** Not applicable: `changes` reports events, not bytes (P0-3).
 - **Feature names and simulators.** Not applicable. The manifest declares no features and no
   dependencies, and the crate exports no simulator. Its tests build configuration bytes inline,
   and `fuzz/` has two targets, the configuration walk and the report diff.
 - **Memory regions.** Not applicable. The crate allocates nothing and reserves no memory; its
-  largest value is the eight-byte `BootReport`.
+  largest values are eight bytes.
 
 ## Follow-on
 
@@ -289,7 +300,7 @@ here; the numbers settle only that the refusals and the duplicate check cost ten
 
 ## Done when
 
-Each P0 and P1 reads Done or Will not fix; D1 to D5 carry rulings; and `script/review-status`
+Each P0 and P1 reads Done or Will not fix; D1 to D7 carry rulings; and `script/review-status`
 shows the block BUILT.
 
 ## BUGS
@@ -305,5 +316,5 @@ shows the block BUILT.
 ## Index row
 
 The release review of `universal_serial_bus` against `crab-usb`, `nusb`, `usbh`, `usb-host`, the
-device-side crates, OpenBSD and Linux: three one-way changes before 0.1.0, four smaller fixes
-before the release, and five doors to rule.
+device-side crates, OpenBSD and Linux: four one-way changes before 0.1.0, four smaller fixes
+before the release, and seven doors to rule.
