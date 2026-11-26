@@ -89,9 +89,10 @@ transcribed by hand.
 
 ## What it waits on
 
-The C library, [milestone 835](0835-a-c-library-stage-one-files-clock-and-memory.md) (a C library,
-stage 1), is built. ioping 1.3 runs unmodified on nife under QEMU on all three architectures. What
-remains is the comparison on xenon.
+The C library,
+[milestone 835 (a C library, stage 1)](0835-a-c-library-stage-one-files-clock-and-memory.md), is
+built. ioping 1.3 runs unmodified on nife under QEMU on all three architectures. What remains is the
+comparison on xenon.
 
 It needs nothing else that is missing. From memory, to be checked against the pinned source, ioping
 uses `open`, `pread` and `pwrite`, `clock_gettime` and `getopt`, with no threads and no `fork`. Of
@@ -101,8 +102,9 @@ Reuse: ioping is taken unmodified; no nife-side benchmark program is written.
 
 ## How it runs continuously
 
-It runs continuously as [milestone 826](0826-an-lmbench-subset-on-nife-and-linux.md) (an lmbench
-subset on nife and Linux) does.
+It runs continuously as
+[milestone 826 (an lmbench subset on nife and Linux)](0826-an-lmbench-subset-on-nife-and-linux.md)
+does.
 
 ## Done when
 

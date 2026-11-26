@@ -68,11 +68,12 @@ the Linux side. No nife-side benchmark program is written, so there is no shim t
 
 ## What it waits on
 
-The C library, [milestone 835](0835-a-c-library-stage-one-files-clock-and-memory.md) (a C library,
-stage 1), is built. This program's other needs are below.
+The C library,
+[milestone 835 (a C library, stage 1)](0835-a-c-library-stage-one-files-clock-and-memory.md), is
+built. This program's other needs are below.
 
 Threads. fio times its jobs with its own threads even when jobs are processes. Threads are
-[milestone 812](0812-threads-in-one-address-space.md) (`std::thread::spawn` runs real threads),
+[milestone 812 (`std::thread::spawn` runs real threads)](0812-threads-in-one-address-space.md),
 built. Milestone 834 (ioping) answers risk 6's read gap at queue depth 1 without threads.
 
 ## Done when

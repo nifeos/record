@@ -22,8 +22,8 @@ This worth's rows, all module headers: `crates/system_initializer/src/lib.rs` (3
 `crates/non_volatile_memory_express/src/lib.rs` and `crates/component_plan/src/lib.rs` (185 each). A
 worth takes the worst handful that is not a gated example. Each block's history goes to a commit
 message, its findings to a note, its naming record to `design/naming/`, and every shrink is banked.
-The method is [milestone 862](0862-the-comment-block-sweeps-next-worth.md) (the comment-block
-sweep's next worth)'s.
+The method is
+[milestone 862 (the comment-block sweep's next worth)](0862-the-comment-block-sweeps-next-worth.md)'s.
 
 Reuse: the ratchet, the lexer and the baseline already exist (milestone 860 built them). This
 worth only runs the sweep and banks, and takes no new code.

@@ -58,8 +58,9 @@ Reuse: lmbench is taken; the harness is the likeliest place a patch is needed.
 
 ## What it waits on
 
-The C library, [milestone 835](0835-a-c-library-stage-one-files-clock-and-memory.md) (a C library,
-stage 1), is built. This program's other needs are below.
+The C library,
+[milestone 835 (a C library, stage 1)](0835-a-c-library-stage-one-files-clock-and-memory.md), is
+built. This program's other needs are below.
 
 Fork. nife has no `fork` by design (§10 (process model: capability-based, microkernel)), so a path
 that needs it never unblocks. The port runs the program's no-fork mode where one exists, and a row

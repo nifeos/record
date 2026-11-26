@@ -15,7 +15,7 @@ needs_person: no
 Reuse: both drivers already build their tables; this grows them in place. The kernel drives the
 IOMMU, and Kani proves these drivers, so no third-party crate applies.
 
-[Milestone 1065](1065-several-drivers-share-an-interrupt-line.md) (MSI replaces the interrupt lines)
+[Milestone 1065 (MSI replaces the interrupt lines)](1065-several-drivers-share-an-interrupt-line.md)
 holds the virtio-mmio ruling; a move to virtio-pci needs both.
 
 ## Why it stands on its own

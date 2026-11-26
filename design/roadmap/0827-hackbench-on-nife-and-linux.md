@@ -50,18 +50,18 @@ Reuse: hackbench is taken, ported and not rewritten.
 
 ## What it waits on
 
-The C library, [milestone 835](0835-a-c-library-stage-one-files-clock-and-memory.md) (a C library,
-stage 1), is built. This program's other needs are below.
+The C library,
+[milestone 835 (a C library, stage 1)](0835-a-c-library-stage-one-files-clock-and-memory.md), is
+built. This program's other needs are below.
 
 Threads or fork. hackbench's thread mode needs threads, and its process mode forks. Threads are
-[milestone 812](0812-threads-in-one-address-space.md) (`std::thread::spawn` runs real threads),
+[milestone 812 (`std::thread::spawn` runs real threads)](0812-threads-in-one-address-space.md),
 built. nife has no `fork`, so a fork row follows
-[milestone 826](0826-an-lmbench-subset-on-nife-and-linux.md) (an lmbench subset)'s rule.
+[milestone 826 (an lmbench subset)](0826-an-lmbench-subset-on-nife-and-linux.md)'s rule.
 
 ## How it runs continuously
 
-It runs continuously as [milestone 826](0826-an-lmbench-subset-on-nife-and-linux.md) (an lmbench
-subset on nife and Linux) does.
+It runs continuously as [milestone 826 (an lmbench subset on nife and Linux)](0826-an-lmbench-subset-on-nife-and-linux.md) does.
 
 ## Done when
 

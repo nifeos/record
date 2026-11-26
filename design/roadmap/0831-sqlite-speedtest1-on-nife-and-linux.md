@@ -52,9 +52,10 @@ Reuse: SQLite itself is taken unmodified; no benchmark program is written.
 
 ## What it waits on
 
-The C library, [milestone 835](0835-a-c-library-stage-one-files-clock-and-memory.md) (a C library,
-stage 1), is built. `speedtest1` runs unmodified on nife under QEMU on all three architectures. What
-remains is the Linux comparison on silicon.
+The C library,
+[milestone 835 (a C library, stage 1)](0835-a-c-library-stage-one-files-clock-and-memory.md), is
+built. `speedtest1` runs unmodified on nife under QEMU on all three architectures. What remains is
+the Linux comparison on silicon.
 
 Neither threads nor fork. SQLite builds single-threaded (`SQLITE_THREADSAFE=0`), and `speedtest1`
 runs in one process. Of the C programs here, this is the one the most people would run for its own
@@ -62,8 +63,9 @@ sake.
 
 ## How it runs continuously
 
-It runs continuously as [milestone 826](0826-an-lmbench-subset-on-nife-and-linux.md) (an lmbench
-subset on nife and Linux) does.
+It runs continuously as
+[milestone 826 (an lmbench subset on nife and Linux)](0826-an-lmbench-subset-on-nife-and-linux.md)
+does.
 
 ## Done when
 

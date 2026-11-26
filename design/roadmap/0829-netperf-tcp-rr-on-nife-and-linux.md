@@ -50,21 +50,21 @@ Reuse: netperf is taken and ported.
 
 ## What it waits on
 
-The C library, [milestone 835](0835-a-c-library-stage-one-files-clock-and-memory.md) (a C library,
-stage 1), is built. This program's other needs are below.
+The C library,
+[milestone 835 (a C library, stage 1)](0835-a-c-library-stage-one-files-clock-and-memory.md), is
+built. This program's other needs are below.
 
-A NIC on silicon, as [milestone 828](0828-iperf3-on-nife-and-linux.md) (iperf3 on nife and Linux)
+A NIC on silicon, as [milestone 828 (iperf3 on nife and Linux)](0828-iperf3-on-nife-and-linux.md)
 lists.
 
 Fork. `netserver` forks a child per test by default. nife has no `fork`, so a fork row follows
-[milestone 826](0826-an-lmbench-subset-on-nife-and-linux.md) (an lmbench subset)'s rule. From
+[milestone 826 (an lmbench subset)](0826-an-lmbench-subset-on-nife-and-linux.md)'s rule. From
 memory, `netserver` has a flag that runs tests serially in one process; the port checks the source
 before relying on it.
 
 ## How it runs continuously
 
-It runs continuously as [milestone 826](0826-an-lmbench-subset-on-nife-and-linux.md) (an lmbench
-subset on nife and Linux) does.
+It runs continuously as [milestone 826 (an lmbench subset on nife and Linux)](0826-an-lmbench-subset-on-nife-and-linux.md) does.
 
 ## Done when
 

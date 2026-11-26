@@ -111,7 +111,7 @@ The comparison with nearby work is in [the appendix](1099-machine-statistics-con
 ## The items
 
 Effort: S is half a day for a lane, M is a day or two, L is longer. Doors are one-way or two-way as
-[milestone 1073](1073-counter-frequency-contract-outside-review.md) (`counter_frequency_contract`)
+[milestone 1073 (`counter_frequency_contract`)](1073-counter-frequency-contract-outside-review.md)
 defines them.
 
 ### P0: blocks the move or the first green run
