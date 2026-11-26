@@ -1054,9 +1054,7 @@
 
 676801083a37 design/roadmap/0159-jh7110-trng-driver/bench-runs.md
 
-684c4c8b56dd notes/blocked-thread-teardown.md
 
-684c4c8b56dd notes/blocked-thread-teardown/the-four-proposals.md
 
 68d2033d8cde notes/credentials.md
 
@@ -1180,9 +1178,7 @@
 
 7820be4d1c69 design/roadmap/0923-exfat-waits-for-its-patents.md
 
-7828b67c4923 notes/blocked-thread-teardown.md
 
-7828b67c4923 notes/blocked-thread-teardown/what-the-machine-already-has.md
 
 78e811359751 design/naming.md
 
@@ -1662,9 +1658,7 @@ b734d5d5890e design/roadmap/0190-ext4-read-write/upstream/5a-crc32c-safety-argum
 
 b734d5d5890e design/roadmap/0190-ext4-read-write/upstream/5b-group-descriptor-decode.md
 
-b753e07009e9 notes/architecture-list-sweep.md
 
-b753e07009e9 notes/architecture-list-sweep/not-findings.md
 
 b92d219ec2fc design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
@@ -1760,9 +1754,7 @@ c21e6f8ab53d design/roadmap/0482-a-buffering-stage-between-pipe-ends.md
 
 c21e6f8ab53d design/roadmap/0483-the-console-server-on-the-sink-protocol.md
 
-c354e746022b notes/arch-audit.md
 
-c354e746022b notes/arch-audit/candidates-cleared.md
 
 c38886a429c1 design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
@@ -1929,9 +1921,7 @@ d93ccd8fa4a6 notes/ntp.md
 
 d93ccd8fa4a6 notes/ntp/the-client-tests.md
 
-d93e100765bb notes/blocked-thread-teardown.md
 
-d93e100765bb notes/blocked-thread-teardown/what-the-machine-already-has.md
 
 d96678cdcf14 notes/crate-reviews/byte-glob.md
 
@@ -1973,9 +1963,7 @@ dbbbb1a7580c design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
 dbbbb1a7580c design/roadmap/0821-the-portable-executable-crate-proven-and-released-on-its-own.md
 
-dcc598f6e822 notes/citations.md
 
-dcc598f6e822 notes/citations/another-medium.md
 
 dcf90396b17c design/roadmap/0897-sqlite-is-packaged-in-basalt.md
 
@@ -2126,7 +2114,6 @@ e95481b328c0 design/roadmap/0186-architecture-list-derivation.md
 
 e95481b328c0 notes/architecture-list-sweep.md
 
-e95481b328c0 notes/architecture-list-sweep/not-findings.md
 
 e9c0a6bfa099 notes/scheduler.md
 

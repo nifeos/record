@@ -7,10 +7,6 @@ authority is the whole problem. This is the reading of the kernel behind it, as 
 2026-08-17. The parent's opening paragraphs say what
 milestone 133 (ending a permanently blocked thread) found wrong in it.
 
-The most useful finding in this lane is not from the prior art. It is that the mechanism is nearly
-free and the authority is the whole problem, and that is the opposite of how the question reads
-from outside.
-
 ## Every blocked thread is in exactly one of three places, and the kernel knows which
 
 `thread::WaitRole` is a closed enumeration of three, written by the same `SCHED`-held statement that
@@ -57,5 +53,5 @@ with `remove_sender` before its TCB is freed. Endpoint wait queues are kernel st
 not the endpoint owner's property, and the tree has decided that once.
 
 So: the kernel could end any blocked thread today, in about thirty lines, with no new system call.
-Every proposal below differs in who may ask and in what the victim and its peers observe, not in
-whether it can be done.
+The proposals [the parent](../blocked-thread-teardown.md) weighs differ in who may ask and in what
+the victim and its peers observe, not in whether it can be done.
