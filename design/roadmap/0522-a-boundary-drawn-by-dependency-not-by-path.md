@@ -49,10 +49,8 @@ hand-drawn line is not. It is what catches the 117.
   constructor and a userspace `std` program reads it back through the identical accessor. So the
   same unsafe source genuinely executes with kernel privilege in one binary and under confinement in
   the other.
-- boot chain, 37 blocks. `uefi_loader` and the one crate only it reaches (`sealed_pair`). It
-  runs once, before the kernel starts, with the full privilege of the pre-OS environment, to decide
-  which kernel image gets control. Its memory is reclaimed before the kernel's isolation
-  boundary exists to enforce anything on it. A chain-of-trust question, not a runtime-isolation one.
+- boot chain, 37 blocks: `uefi_loader`, a chain-of-trust question, not a runtime-isolation one, as
+  [the unsafe census](../../notes/register-of-measures/unsafe-series.md) states.
 
 ## What was found and deliberately not folded in
 

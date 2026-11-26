@@ -202,11 +202,10 @@ the ruling changes where the records go and not how the composition checks them.
   - **Installed rows and their grant lines have no anchor off the volume.** Ruled 2026-11-01 (UTC)
     by the architect: they wait for an anchor held for milestone 917 (basalt's packages build
     reproducibly) and item 6 of milestone 607 (nife is built and updated from packages).
-    Candidates are a MAC the progenitor makes with a key the volume cannot supply, and a digest
-    of the live generation in a measured or sealed place. Until then an offline writer of the
-    volume can add an installed row and a grant line the approval file did not allow, bounded by
-    what the program's own note asks for. No digest of the whole launch volume is added, and the
-    loader passes no digest of generation 1.
+    [That item](0607-nife-is-built-and-updated-from-packages.md) lists the candidates. Until then an
+    offline writer of the volume can add an installed row and a grant line the approval file did not
+    allow, bounded by what the program's own note asks for. No digest of the whole launch volume is
+    added, and the loader passes no digest of generation 1.
   - **The kernel mounts the second block device.** Its file service serves virtio block slot 1
     (`kernel/src/user/fs_service/wiring.rs`), and the runners put their `nifefs` fixture disk at
     slot 0. A boot that attached the launch volume alone would put it where nothing mounts it.

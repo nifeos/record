@@ -35,10 +35,9 @@ and calef's ruling picks the first:
   at the moment it is caused, and it is attributable to the branch that caused it.
 - A check that fails saying the baselines are stale for this nightly. Louder, and it fails pull
   requests that did not cause it.
-- Auto-re-saving on a bump. Refused, and the refusal is written in the code at both places
-  somebody would reach for it. A floor that tracks the compiler by construction moves by exactly as
-  much as a nightly moved the kernel. So a nightly that genuinely made this kernel slower would
-  report nothing, and catching that is most of what the tripwire is for.
+- Auto-re-saving on a bump. Refused, and the refusal is written in the code at both places somebody
+  would reach for it, for the reason
+  [the icount drift note](../../notes/benchmarks/icount-drift-and-provenance.md) gives.
 
 What was built. Four small pieces, and the first two are what make the third unnecessary:
 
@@ -102,12 +101,9 @@ fact about the numbers rather than something to tidy.
 
 **The check lives in `--check`, not in `script/lint`, and compares the stamp against the emulator in
 front of it.** A static lint cannot ask this question, because there is no emulator in a repository.
-Of the two available comparisons only one is honest:
-
-| compared against | what it would do |
-|---|---|
-| `.qemu-version` | fails any baseline truthfully recorded off-pin, so it forbids the file from stating the truth, and still passes a comparison run on some third version |
-| **the emulator this run used** | asks the only apples-to-apples question there is: is the counter reading this floor the counter that produced it |
+Of the two available comparisons only one is honest, the emulator this run used, and
+[the icount drift note](../../notes/benchmarks/icount-drift-and-provenance.md) sets the two side by
+side.
 
 **`unrecorded` is a truthful answer and does not fail**, the posture
 milestone 115 (the names that were refused) already takes for names. Every baseline in the tree carries it

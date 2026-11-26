@@ -41,7 +41,7 @@ rather than widening a directory grant.
 The fork this milestone was raised to settle is settled. A refusal is not an error, and `$?` says
 which. `0` ran, and `1` failed (something was attempted and did not work). `2` was refused (the
 shell declined at the prompt with nothing spawned, nothing opened and no authority moved). `&&` and
-`||` read one bit out of it, because they ask one question and both non-zero answers are "no". The
+`||` read one bit of it, as [the `swish` language note](../../notes/swish-language.md) says. The
 distinction stays where a person can see it. Unix cannot draw that line at all. There `127` and a
 program's own `exit(1)` are the same kind of integer.
 

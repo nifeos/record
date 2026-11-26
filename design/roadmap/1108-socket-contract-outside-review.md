@@ -81,8 +81,8 @@ proofs cover the one piece of logic the crate holds beyond the grants.
   new ruling. No operation sends `VERSION` on the wire; the bind-time check that reads it belongs
   to milestone 1000 (message contracts carry bind-time version checks).
 - The move of `socket_contract` is cleared (ruled 2026-11-21 UTC, option A): the architect approved
-  creating `nifeos/socket_contract` with `publish = false`, no tag and no publish. The move lane's
-  first step is to prove that the `std` farm builds the platform layer from the pinned checkout.
+  creating `nifeos/socket_contract` with `publish = false`, no tag and no publish.
+  [The review](../../notes/crate-reviews/socket-contract.md) names the move lane's first step.
 
 ## What was checked, and how
 
