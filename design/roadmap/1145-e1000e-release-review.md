@@ -25,21 +25,21 @@ Reuse: the prior-art table weighs each Intel driver a caller could take.
 
 ## Finding status
 
-- P0-1, the data plane's counters are public fields: Open.
-- P0-2, the device table is a slice of bare pairs: Open.
+- P0-1, the data plane's counters are public fields: Done, partsfoundry/e1000e#42.
+- P0-2, the device table is a slice of bare pairs: Done, partsfoundry/e1000e#42.
 - P0-3, the register trait takes `u64` offsets: Waiting on the register-access decision of
   milestone 1129.
 - P0-4, nothing ties the bus address to the region: Waiting on the DMA-region decision of
   milestone 1129.
-- P1-1, the package ships the repository's scaffolding: Open.
-- P1-2, no item carries an example: Open.
-- P1-3, no fallible function has an `# Errors` section: Open.
+- P1-1, the package ships the repository's scaffolding: Done, partsfoundry/e1000e#42.
+- P1-2, no item carries an example: Done, partsfoundry/e1000e#42.
+- P1-3, no fallible function has an `# Errors` section: Done, partsfoundry/e1000e#42.
 - P2-1, a `smoltcp` device adapter: Waiting on the feature-name decision of milestone 1129.
 - P2-2, a data path without the copy: Open.
-- P2-3, a link-state query: Open.
-- P2-4, `DataPlane::new` panics where it could refuse: Open.
-- P2-5, the manifest has no `documentation` key: Open.
-- P2-6, no attribute states that the crate has no `unsafe`: Open.
+- P2-3, a link-state query: Done, partsfoundry/e1000e#42.
+- P2-4, `DataPlane::new` panics where it could refuse: Done, partsfoundry/e1000e#42.
+- P2-5, the manifest has no `documentation` key: Done, partsfoundry/e1000e#42.
+- P2-6, no attribute states that the crate has no `unsafe`: Done, partsfoundry/e1000e#42.
 
 ## Open decisions
 
