@@ -1378,9 +1378,7 @@ ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/7-mount-refusal-reason
 
 ad9b889fe3a7 design/roadmap/0190-ext4-read-write/upstream/8-whole-inode-times.md
 
-adfa3dcf0475 design/roadmap/0202-confinement-claims-falsified.md
 
-adfa3dcf0475 notes/confinement-claims/breaking-the-harnesses.md
 
 af77803b4537 design/roadmap/0897-sqlite-is-packaged-in-basalt.md
 
@@ -1569,9 +1567,7 @@ c38886a429c1 design/roadmap/0834-ioping-on-nife-and-linux.md
 
 
 
-c4e7b9d9600c design/roadmap/0788-wifi-on-a-pc-that-has-no-ethernet.md
 
-c4e7b9d9600c design/roadmap/0788-wifi-on-a-pc-that-has-no-ethernet/other-systems-and-compatibility-layers.md
 
 c524e66c1f76 design/roadmap/0240-a-soak-should-say-where-its-threads-landed.md
 
@@ -1720,9 +1716,7 @@ daf0d37dca12 design/roadmap/0190-ext4-read-write/upstream/7-mount-refusal-reason
 
 daf0d37dca12 design/roadmap/0190-ext4-read-write/upstream/8-whole-inode-times.md
 
-db2531826b1d design/roadmap/0520-cfi-in-hand-written-asm.md
 
-db2531826b1d notes/cfi-unwind.md
 
 
 
@@ -1824,9 +1818,7 @@ e34251093e2f notes/interface-stability.md
 
 
 
-e51626abe49e design/roadmap/0134-the-measurements-that-decide.md
 
-e51626abe49e design/roadmap/0134-the-measurements-that-decide/build-record.md
 
 e626224e5de9 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
@@ -1962,9 +1954,7 @@ f2b61d50fc8e notes/aarch64-modern-board-survey/jetson-and-ampere.md
 
 f2b61d50fc8e notes/aarch64-modern-board-survey/pi5-and-rk3588.md
 
-f4f1f7f330e0 design/roadmap/0519-what-this-project-costs.md
 
-f4f1f7f330e0 notes/register-of-measures/project-cost.md
 
 f59855c643ae design/roadmap/1048-generational-table-outside-review.md
 

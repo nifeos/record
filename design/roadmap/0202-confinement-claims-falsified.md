@@ -63,14 +63,14 @@ the claim is broken.*
 
 ## What breaking them found, which is the part worth reading
 
-§31 (the foreign-language seam)'s headline sentence is not what catches a broken confinement. The worked example above
-works: map `WITNESS_RO` read/write into the C component, rebuild, run, and the test goes red. It
-does not go red on the assertion anybody would name. The verdict equality, `assert_eq!(v[2],
-CONFINED, ...)`, which prints all four bits including `read-only witness intact`, never runs. A
-component that is not confined does not fault; a component that does not fault produces no death
-report; and `run_seam` collects every report before the test inspects any of them, so the run stalls
-at the collection. The witness check, which is the sentence §31 leads with, is reached only by an
-escape that faults anyway.
+§31 (the foreign-language seam)'s headline sentence is not what catches a broken confinement. The
+worked example above works: map `WITNESS_RO` read/write into the C component, rebuild, run, and the
+test goes red. It does not go red on the assertion anybody would name. The verdict equality,
+`assert_eq!(v[2], CONFINED, ...)`, which prints all four bits including `read-only witness intact`,
+never runs. A component that is not confined does not fault; a component that does not fault
+produces no death report; and `run_seam` collects every report before the test inspects any of them,
+so the run stalls at the collection. The witness check is thus reached only by an escape that faults
+anyway, as [the harnesses note](../../notes/confinement-claims/breaking-the-harnesses.md) shows.
 
 And the first run of it failed for the wrong reason, which is this block's own second `BUGS`
 entry firing on the day it was written. `run_seam`'s blocking receive had nothing to take, so the

@@ -22,10 +22,10 @@ at every sample. So the tree has been getting proportionally safer and nothing w
 single commit two days earlier, `d5a969a2`, moved that count by 94 in one change and nothing
 recorded it.
 
-The same day the block was extended at calef's direction. The first draft listed only the
-experiments runnable today, on the reasoning that a measure we cannot take is not yet useful.
-calef's correction: *"I'm fine defining measures that we cannot capture until the hardware. I want
-to capture the measures as a milestone."* That is where tier B came from.
+The same day the block was extended at calef's direction. The first draft listed only what could run
+that day ([the block](../0134-the-measurements-that-decide.md#why-a-register-and-why-two-tiers) says
+why). calef's correction: *"I'm fine defining measures that we cannot capture until the hardware. I
+want to capture the measures as a milestone."* That is where tier B came from.
 
 ## A correction the building lane made to the block
 
