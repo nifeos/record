@@ -72,8 +72,7 @@ is the shell's; the authority is explicit.
 
 - `..` stops at your root. You descend from what you hold and never ascend past it. This is
   chroot's shape arrived at from the other direction.
-- `pwd` is relative to your root, because naming anything above it implies a namespace that does
-  not exist.
+- `pwd` is relative to your root; [notes/shell-navigation.md](../../notes/shell-navigation.md) says why.
 
 Absolute paths are not a divergence: `/` is the root of your own namespace, Plan 9's answer
 ([absolute-paths-and-bind.md](0047-navigation-and-naming/absolute-paths-and-bind.md)). The

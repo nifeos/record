@@ -9,9 +9,7 @@
 
 003e3b38f75c design/roadmap/0820-the-xhci-crate-released-on-its-own.md
 
-015deba074bc design/roadmap/0125-a-number-in-the-prose-is-a-claim.md
 
-015deba074bc notes/counted-claims.md
 
 0161facaf4c7 design/roadmap/0138-file-io-throughput/options.md
 
@@ -168,9 +166,7 @@
 
 170304ec4f97 design/roadmap/0531-no-gate-records-when-it-fires/additions.md
 
-171cc331a5e9 design/roadmap/0047-navigation-and-naming.md
 
-171cc331a5e9 notes/shell-navigation.md
 
 181380389d58 design/roadmap/0401-a-gate-that-selects-the-set-it-judges.md
 
@@ -352,19 +348,12 @@
 
 23fa2401dfc0 design/roadmap/0914-a-ninth-outsider-pass-attacks-the-confinement-claim.md
 
-2406a839d1da design/roadmap/1085-device-tree-blob-outside-review.md
 
-2406a839d1da design/roadmap/1088-elf-outside-review.md
 
-2406a839d1da design/roadmap/1096-interfaces-note-outside-review.md
 
-2406a839d1da notes/crate-reviews/interfaces-note.md
 
-2406a839d1da notes/crate-reviews/static-elf.md
 
-268d1cb1cc84 design/roadmap/1102-network-time-protocol-outside-review.md
 
-268d1cb1cc84 design/roadmap/1104-paging-outside-review.md
 
 
 
@@ -374,21 +363,15 @@
 
 
 
-27b487a52bc3 design/roadmap/0193-kernel-kani-reachable.md
 
-27b487a52bc3 notes/kernel-proofs.md
 
-285d9b5e1832 design/roadmap/0784-reuse-what-the-tree-wrote/fat-adopt-or-build.md
 
-285d9b5e1832 design/roadmap/0813-a-proven-fat-crate-released-on-its-own.md
 
 288a4a39bc03 design/roadmap/0480-a-server-that-logs-which-channel-a-request-arrived-on.md
 
 288a4a39bc03 design/roadmap/0481-terminal-multiplexing.md
 
-290b3b01447a design/roadmap/0527-the-survey-selector-and-a-threads-placement.md
 
-290b3b01447a notes/process-view/survey-design.md
 
 296e0bd907e3 design/roadmap/0826-an-lmbench-subset-on-nife-and-linux.md
 
@@ -549,17 +532,11 @@
 
 39949b1d9ce0 design/roadmap/0539-which-rva23-extensions-this-kernel-must-save.md
 
-3ac63eda7b01 design/roadmap/0056-secrets-and-entropy.md
 
-3ac63eda7b01 notes/credentials.md
 
-3b51aec45038 design/roadmap/1095-inter-process-communication-outside-review.md
 
-3b51aec45038 design/roadmap/1096-interfaces-note-outside-review.md
 
-3b51aec45038 design/roadmap/1097-intrusive-queue-outside-review.md
 
-3b51aec45038 design/roadmap/1098-line-editor-outside-review.md
 
 
 
@@ -601,9 +578,7 @@
 
 
 
-40290afaa3fa design/roadmap/0527-the-survey-selector-and-a-threads-placement.md
 
-40290afaa3fa notes/process-view/survey-design.md
 
 411917f2c393 design/decisions/0027-filesystem-service.md
 
@@ -615,11 +590,8 @@
 
 4478818b4720 notes/x86-port/cpu-state.md
 
-45a5d8c34f28 design/roadmap/1094-grant-plan-outside-review/ruled-decisions.md
 
-45a5d8c34f28 design/roadmap/1096-interfaces-note-outside-review/ruled-decisions.md
 
-45a5d8c34f28 design/roadmap/1098-line-editor-outside-review.md
 
 
 
@@ -694,13 +666,9 @@
 
 
 
-4f9ad19d266c design/roadmap/0902-tooling-sorted-by-who-needs-it/ci-hooks-and-instructions.md
 
-4f9ad19d266c design/roadmap/0902-tooling-sorted-by-who-needs-it/helpers-class-3.md
 
-4f9ad19d266c design/roadmap/0902-tooling-sorted-by-who-needs-it/helpers-classes-1-and-2.md
 
-4f9ad19d266c design/roadmap/0902-tooling-sorted-by-who-needs-it/scripts.md
 
 
 
@@ -775,17 +743,13 @@
 
 5857eab2f07e design/roadmap/0907-hackbench-is-packaged-in-basalt.md
 
-5867d64db834 design/roadmap/1088-elf-outside-review.md
-
-5867d64db834 design/roadmap/1088-elf-outside-review/decisions.md
 
 
 
 
 
-5916eddb8d39 design/roadmap/0517-survivor-growth-on-the-lines-a-diff-touched.md
 
-5916eddb8d39 design/roadmap/0517-survivor-growth-on-the-lines-a-diff-touched/bounds.md
+
 
 598dfff72646 design/decisions/0195-a-recipe-vouches-and-the-owner-may-overrule.md
 
@@ -807,15 +771,10 @@
 
 5b5c325090f2 notes/scheduler.md
 
-5be0f036b303 design/roadmap/0255-the-arch-layer-the-prover-cannot-see.md
 
-5be0f036b303 notes/kernel-proofs/smmu-proofs.md
 
-5c08a4933698 design/roadmap/0252-a-partial-block-is-the-one-nobody-re-reads.md
 
-5c08a4933698 notes/follow-on-work.md
 
-5c08a4933698 notes/follow-on-work/partial-sweep.md
 
 5ce31112fa52 design/decisions/0231-a-dependents-warning-is-advisory.md
 
@@ -863,9 +822,7 @@
 
 
 
-62e2d5dea995 design/roadmap/0527-the-survey-selector-and-a-threads-placement.md
 
-62e2d5dea995 notes/process-view/survey-design.md
 
 640582c56056 design/roadmap/0050-pipes-and-redirection.md
 
@@ -905,9 +862,7 @@
 
 
 
-6606396140a4 design/roadmap/0198-package-manager.md
 
-6606396140a4 design/roadmap/0802-the-trivial-install.md
 
 
 
@@ -967,17 +922,13 @@
 
 6f7e78d60d11 design/roadmap/1103-page-frames-outside-review.md
 
-71e801cbe0ca design/roadmap/0527-the-survey-selector-and-a-threads-placement.md
 
-71e801cbe0ca notes/process-view/survey-design.md
 
 721e99fe76ff design/roadmap/0190-ext4-read-write/upstream/4-fuzz-targets.md
 
 721e99fe76ff design/roadmap/0190-ext4-read-write/upstream/6-kani-harnesses.md
 
-72d2e1d240fa design/roadmap/0304-prover-one-architecture.md
 
-72d2e1d240fa notes/kernel-proofs/x86-interrupt-controller-proofs.md
 
 
 
@@ -1029,9 +980,7 @@
 
 
 
-7820be4d1c69 design/roadmap/0813-a-proven-fat-crate-released-on-its-own.md
 
-7820be4d1c69 design/roadmap/0923-exfat-waits-for-its-patents.md
 
 
 
@@ -1178,19 +1127,14 @@
 
 9537d620cd22 notes/mutation-census.md
 
-95a1a2ede1fc design/roadmap/0517-survivor-growth-on-the-lines-a-diff-touched/bounds.md
 
-95a1a2ede1fc design/roadmap/0517-survivor-growth-on-the-lines-a-diff-touched/kernel-pricing.md
 
-95a1a2ede1fc design/roadmap/0517-survivor-growth-on-the-lines-a-diff-touched/replays.md
 
 95a3c6d65aac design/roadmap/0401-a-gate-that-selects-the-set-it-judges.md
 
 95a3c6d65aac notes/empty-selectors.md
 
-95cd38199e3a design/roadmap/0447-vector-registers-are-a-thread-s-own/target-flip.md
 
-95cd38199e3a design/roadmap/0534-the-soft-float-targets-could-now-be-flipped.md
 
 962d23b708c7 design/naming/crates.md
 
@@ -1212,9 +1156,7 @@
 
 986e8c54a8dc design/roadmap/0579-constitution-carry-vs-brief/roles.md
 
-997f4768f643 design/roadmap/1102-network-time-protocol-outside-review.md
 
-997f4768f643 design/roadmap/1104-paging-outside-review.md
 
 9a293f969797 design/roadmap/0906-ioping-is-packaged-in-basalt.md
 
@@ -1224,9 +1166,7 @@
 
 9a46e9dcda5c notes/crate-reviews/subtree-scope.md
 
-9b0c059d210e design/roadmap/1094-grant-plan-outside-review.md
 
-9b0c059d210e design/roadmap/1112-user-mode-runtime-outside-review.md
 
 
 
@@ -1346,9 +1286,7 @@ a7556deab768 design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
 
 
-a99faf728420 design/roadmap/0226-qemu-bounded-orphans.md
 
-a99faf728420 notes/qemu.md
 
 ac85b363ee37 design/roadmap/0872-the-kernels-user-mode-file-is-split-along-its-seams.md
 
@@ -1456,9 +1394,7 @@ b4ff48eec6d8 design/roadmap/0850-a-program-is-asked-to-give-memory-back.md
 
 
 
-b731a5544624 design/roadmap/0259-sweep-the-notes-for-stale-claims.md
 
-b731a5544624 notes/why-not-general-purpose.md
 
 b734d5d5890e design/roadmap/0190-ext4-read-write/upstream/5a-crc32c-safety-arguments.md
 
@@ -1513,21 +1449,13 @@ bec8c6c571de notes/timer-capability/specifications.md
 
 
 
-bf31870dc7ab design/roadmap/0902-tooling-sorted-by-who-needs-it/ci-hooks-and-instructions.md
 
-bf31870dc7ab design/roadmap/0902-tooling-sorted-by-who-needs-it/helpers-class-3.md
 
-bf31870dc7ab design/roadmap/0902-tooling-sorted-by-who-needs-it/helpers-classes-1-and-2.md
 
-bf31870dc7ab design/roadmap/0902-tooling-sorted-by-who-needs-it/scripts.md
 
-bf563b052a85 design/roadmap/0527-the-survey-selector-and-a-threads-placement.md
 
-bf563b052a85 notes/process-view/survey-design.md
 
-bf8d027cb1c9 design/roadmap/1093-globally-unique-identifier-partition-table-outside-review.md
 
-bf8d027cb1c9 design/roadmap/1097-intrusive-queue-outside-review/ruled-decisions.md
 
 c0041ee4dc12 notes/crate-reviews/current-cpu-contract.md
 
@@ -1577,9 +1505,7 @@ c6cb1b0fd617 design/decisions/0023-multi-queue-dma-confinement.md
 
 c6cb1b0fd617 notes/dma/directions.md
 
-c6e4b0e07928 design/roadmap/1090-filesystem-contract-outside-review.md
 
-c6e4b0e07928 design/roadmap/1091-filesystem-fixture-outside-review.md
 
 
 
@@ -1885,9 +1811,7 @@ eb450db650e0 design/roadmap/0827-hackbench-on-nife-and-linux.md
 
 eb450db650e0 design/roadmap/0829-netperf-tcp-rr-on-nife-and-linux.md
 
-eb58dd9e2dbb design/roadmap/1093-globally-unique-identifier-partition-table-outside-review.md
 
-eb58dd9e2dbb design/roadmap/1094-grant-plan-outside-review.md
 
 ebddfc475ee8 design/roadmap/0190-ext4-read-write/upstream/2a-free-empty-extent-index.md
 
@@ -1926,15 +1850,11 @@ eff7722eac67 design/decisions/0303-the-retention-declaration-says-nothing-about-
 
 
 
-f05ee56f3bb9 design/roadmap/0389-nife-hosts-on-a-tailnet.md
-
-f05ee56f3bb9 notes/why-not-general-purpose.md
 
 
 
-f1672f9f52f7 design/roadmap/0197-user-and-xtask-proofs.md
 
-f1672f9f52f7 design/roadmap/0468-proving-xtask.md
+
 
 f1a60642288b design/roadmap/0907-hackbench-is-packaged-in-basalt.md
 

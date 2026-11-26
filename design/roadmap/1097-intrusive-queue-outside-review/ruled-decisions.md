@@ -65,8 +65,8 @@ Options: A, a lane writes the package and adds the crate to the externalization 
 then clears once decisions 1 and 2 are ruled, with no tag and no publication. B, clear together with
 `inter_process_communication`. C, hold until the maintainer rules item 9.
 
-Prior art. `generational_table`, `block_roster` and `file_allocation_table` each moved on a cleared
-review with no tag. Where nife differs: nothing outside nife links the crate. Example: under A, the
+Prior art. Three crates moved on a cleared review with no tag
+([the partition-table review](../1093-globally-unique-identifier-partition-table-outside-review.md) names them). Where nife differs: nothing outside nife links the crate. Example: under A, the
 kernel and `inter_process_communication` both pin `partsfoundry/intrusive_queue` by revision.
 
 Door: one-way: a repository that exists has a name others link to.

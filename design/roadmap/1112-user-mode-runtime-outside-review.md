@@ -102,9 +102,7 @@ The comparison with nearby work is in [the appendix](1112-user-mode-runtime-outs
 ## The items
 
 Effort: XS is under an hour for a lane, S is half a day, M is a day or two, L is a week. A door is
-one-way when somebody outside the repository acts on it after the release (a public name, a
-published behavior, a layout, a wire value, a dependency); everything else is two-way and the
-maintainer decides it. The crate has no release, so every public name is two-way until the first tag
+one-way or two-way as [the `grant_plan` review](1094-grant-plan-outside-review.md) defines it. The crate has no release, so every public name is two-way until the first tag
 and one-way after it.
 
 ### P0: blocks the move or any publish

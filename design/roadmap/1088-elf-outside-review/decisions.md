@@ -143,8 +143,7 @@ reads `let file_hi = seg.vaddr + seg.data.len() as u64;`, which under A reads
 
 ## The crate name
 
-Ruled 2026-11-14 (UTC), option A: the crate is `static_elf`, in code and in package name, with no
-`package =` rename and no `doc(alias)` of the old spelling. The crates.io name `elf` belongs to a
+[The milestone](../1088-elf-outside-review.md) states the ruling, option A. The crates.io name `elf` belongs to a
 different, widely used parser (14.1 million downloads), and `static_elf` was free on 2026-11-14. The
 crate stays the front half of an ELF loader for static executables; the rename changes no behavior.
 The type `Elf` and every other public name keep their spelling. The repository, when the crate

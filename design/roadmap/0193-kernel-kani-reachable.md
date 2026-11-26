@@ -135,8 +135,8 @@ is missing.
   number that invites a bad estimate. What was measured is that the front door opens, not that the
   building is empty.
 - It says nothing about the user programs or `xtask`, which the same `script/verify` line puts
-  out of reach for the same reason. `user/` holds real parsers over untrusted input and has at least
-  as good a claim on the prover as the kernel does.
+  out of reach for the same reason. [notes/kernel-proofs.md](../../notes/kernel-proofs.md) states
+  the claim `user/` has on the prover.
 - A stub is a hole in a proof, and a proof with an unexamined stub is worse than no proof,
   because it reads as coverage. Whatever boundary this lands on needs the stubs enumerated where a
   reader meets the harness.

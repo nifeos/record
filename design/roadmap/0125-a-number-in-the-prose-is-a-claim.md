@@ -121,8 +121,8 @@ answers, in the same words the prose uses.
   nothing about it. That is the ratchet working as designed, and it means "the gate passes" never
   means "every number in the tree is right".
 - A marker can lie about what it counts. Nothing checks that `<!--count:kani-harnesses-->` sits
-  beside a sentence about harnesses rather than about crates. Same limit `script/names --check`
-  records: presence is checkable, meaning is prose, and prose is checked by reading.
+  beside a sentence about harnesses rather than about crates. [notes/counted-claims.md](../../notes/counted-claims.md)
+  states the limit this shares with `script/names --check`.
 - Some counts are expensive to derive. Anything needing a build (the frame counts from
   `script/stack-frame-check`, for instance) does not belong in `script/lint`, which runs constantly.
   The registry should refuse an entry it cannot compute cheaply rather than quietly slow the gate.

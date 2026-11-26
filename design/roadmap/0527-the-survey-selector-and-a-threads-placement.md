@@ -63,11 +63,8 @@ possible) ships or not at all. 282 is NOT-STARTED, so 2026-09-21 was that moment
 The deciding input was a forecast rather than an argument about elegance. A register row holds a
 fourth word with no new mechanism, and appending one is the fewest moving parts *if the row stops*.
 calef expects a third and a fourth fact, which settles it: a mechanism that must be redesigned at
-the sixth field is the wrong mechanism at the fourth. The systems that already went through this
-agree, and were read rather than recalled: Linux reached 52 fields in
-`/proc/[pid]/task/[tid]/stat` behind a pseudo-file, and Zircon reached 41 topics behind
-`zx_object_get_info(handle, topic, buffer, size)`, which is this selector. Nobody grows a register
-row.
+the sixth field is the wrong mechanism at the fourth. [The survey design note](../../notes/process-view/survey-design.md) gives the
+prior art in Linux and Zircon. Nobody grows a register row.
 
 What §150 still rules is untouched. Tick-sampled, per-thread, scheduled on-CPU time is still
 what milestone 282's figure means. Only how it reaches a reader moved.
@@ -77,17 +74,15 @@ what milestone 282's figure means. Only how it reaches a reader moved.
 `record::PLACEMENT` reports the core `sched::pick_spawn_target` chose when the thread started.
 `sched::spawn_reporting_placement` has handed that fact to the in-kernel job-mix supervisor since
 milestone 240 (the soak reports what happened and not where) as a return value, which is only
-available to whoever did the spawning. A userspace supervisor did not do the spawning, and that
-missing path is what kept that supervisor in the kernel.
+available to whoever did the spawning. [The survey design note](../../notes/process-view/survey-design.md) holds the placement argument.
 
 It is placement rather than location, and the reason is measured. Keeping the core a thread is
 on *now* means a store in the context switch, which is the hottest line of the hottest function. The
 kernel has exactly that field, `Thread::last_cpu`, and it is behind a soak-build feature gate.
 Shipping it unconditionally cost 5.7% of `ipc_fastpath`'s footprint on aarch64 (5788 ->
 6120 bytes), over milestone 132 (the fast path's footprint, and a gate)'s 5% bound, with
-riscv64 and x86_64 growing 4.7% and 4.6% behind it. A placement is one store per thread
-creation, on a path that is cold by definition, so the same information that was too expensive to
-keep continuously is free to keep once. `Thread::placement` is therefore unconditional where
+riscv64 and x86_64 growing 4.7% and 4.6% behind it. `Thread::placement`, one store per thread
+creation on a cold path, is therefore unconditional where
 `last_cpu` is not, and it is written at `sched::spawn_on` and `sched::start_thread_control_block`
 rather than inside `place_on`, which is also the wake path.
 
@@ -117,10 +112,7 @@ about the machine and a survey answers questions about a domain. That gap is a `
 
 §150 already weighed that a viewer holding `ENUMERATE` learns an aggregate about threads it cannot
 otherwise name, and accepted it for a continuous CPU-time counter. A placement is strictly less than
-what was accepted: **one bounded value out of at most 64, written once and never again**, against a
-counter that moves continuously and can therefore be differenced into a timing channel. A viewer
-that can already see a tid and a run state learns which of a handful of cores that thread was put
-on, and learns nothing whatever about a thread outside the domain it was handed.
+what was accepted, for the reasons [the survey design note](../../notes/process-view/survey-design.md) gives.
 
 That reasoning is in the dispatcher's own comment on the `SURVEY` arm rather than only in a
 decisions file two hops away. That is rung three of the ladder applied to an argument a reader

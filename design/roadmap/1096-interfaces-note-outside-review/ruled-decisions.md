@@ -92,8 +92,8 @@ and no publication, and the maintainer asks for that go from milestone 1096. Cle
 (B), and holding until a dry run also stages the move's own items 1 to 5, 11 and 15 (C), were the
 alternatives.
 
-Prior art. In this tree `generational_table`, `block_roster` and `file_allocation_table` each moved
-on a cleared review with no tag. Where nife differs: nothing outside nife links the crate.
+Prior art. Three crates moved on a cleared review with no tag
+([the partition-table review](../1093-globally-unique-identifier-partition-table-outside-review.md) names them). Where nife differs: nothing outside nife links the crate.
 
 Example. Once the renames land, `partsfoundry/interfaces_note` opens with the README of item 2, and nife
 pins it by revision.

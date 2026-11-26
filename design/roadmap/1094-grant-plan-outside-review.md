@@ -28,8 +28,7 @@ own `test_support::plan_line`. No new tool.
 
 ## Finding status
 
-Every item not Done blocks the first crates.io publish, which waits until every outside-review
-milestone reaches delivery.
+Every item not Done blocks the first crates.io publish, under [the publishing hold](1093-globally-unique-identifier-partition-table-outside-review.md#finding-status).
 
 - P0-1, split the catalog from the planner: Done, [#3584](https://github.com/nifeos/nife/pull/3584).
 - P0-2, the documentation does not build with warnings denied: Done, [#3566](https://github.com/nifeos/nife/pull/3566).
