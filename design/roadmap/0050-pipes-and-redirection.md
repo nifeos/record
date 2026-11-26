@@ -108,9 +108,9 @@ chain, not as a redesign. An optimization that is a process is the shape a micro
 ## SIGPIPE becomes a return code, the same way `SIGTTIN` disappeared in 48
 
 `yes | head`: `head` exits, its endpoint dies, and the producer's next SEND fails. Unix needs a
-signal because there is no other way to tell a writer that an anonymous fd is gone; §16 revocation
-already destroys the capability and the failure arrives as an error return. A third signal
-disappears, as [the sink protocol note](../../notes/sink-protocol.md) says.
+signal because there is no other way to tell a writer that an anonymous fd is gone; §16 (object
+revocation) already destroys the capability and the failure arrives as an error return. A third
+signal disappears, as [the sink protocol note](../../notes/sink-protocol.md) says.
 
 This forces one concrete change. Today's swallow ("print into the void") is right for a program with
 no console and wrong for a pipeline, where a dead reader must end the writer. So the sink protocol

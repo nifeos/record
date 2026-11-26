@@ -102,8 +102,9 @@ milestone:
   Against the granted directory it could never show, because nothing is requested there.
 - `dir::EPERM` was being reported to std programs as `Unsupported`, for the reason
   [the descent note](../../notes/std/fs-descent.md) gives. So the one answer meaning "this
-  capability does not carry that right" arrived as "this platform cannot do that", which is §42's
-  silent degradation and would have made a narrowed grant indistinguishable from no grant at all.
+  capability does not carry that right" arrived as "this platform cannot do that", which is the
+  silent degradation §42 (a filesystem declares what it offers) refuses and would have made a
+  narrowed grant indistinguishable from no grant at all.
 
 ## What it did not do
 
