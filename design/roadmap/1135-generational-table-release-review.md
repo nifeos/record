@@ -38,7 +38,11 @@ Each line reads against `partsfoundry/generational_table` at `b524333`.
 - Item 4 (P2), no `for` loop over a table: Done, partsfoundry/generational_table#29.
 - Item 5 (P2), no `retain`: Done, partsfoundry/generational_table#29.
 - Item 6 (P2), no way to borrow two entries mutably: Done, partsfoundry/generational_table#29.
-- Item 7 (P2), the worst insert scans every slot: Open.
+- Item 7 (P2), the worst insert scans every slot: Will not fix, ruled 2026-11-26 (provisional).
+  A free-slot bitmap needs an array whose size is computed from `N`, which stable Rust cannot
+  express, and each stable alternative (a second constant parameter, a free list, a third array)
+  breaks the closed size, layout or first-fit order. It reopens when that size becomes
+  expressible.
 - Item 8 (P2), crates.io metadata: Done, partsfoundry/generational_table#29.
 
 ## Prior art
