@@ -309,8 +309,7 @@ The interface shapes one cost: `check_served` restarts its walk on every call (P
 - **Byte sinks and sources.** The decoder borrows `&[u8]` with no copy, and the encoder returns
   `[u8; LEN]` by value, which a constant needs. `auditable-extract` and `object`'s `Note::desc`
   also return a sub-slice. The evidence points to plain slices for a fixed-layout contract.
-- **Feature names.** The manifest declares none. `goblin`'s `alloc` gate on its note iterator
-  shows what a feature costs a loader with no allocator (P2-2).
+- **Feature names.** The manifest declares none.
 - **Contract layout.** The crate exports `INTERFACE_ID` (a `u64`, 21) and `INTERFACES_VERSION` (a
   `u32`, 1) and no magic, since the owner string and the note type identify the note. Its entry
   points are `encode_interfaces`, `decode_interfaces` and `check_served`. A program lists every
@@ -334,12 +333,10 @@ fix, and D1 to D6 each carry a ruling.
 
 - The benchmark's comparator parses another format, so its row shows what each format costs a
   reader, not two decoders of one format.
-- The review read `stabby` for its loading interface only.
 - The scratch reader ran on one host and one linker, with no bare-target program.
 
 ## Index row
 
-The release review of `interfaces_note` against `auditable-serde` with `auditable-extract`,
-`stabby`, `abi_stable`, Linux's note macro and Xen's note header. Five one-way changes come before
-0.1.0, among them a refusal that can widen and a macro that places one note per program. Six
-smaller fixes land before the release, six may follow, and six doors wait for a ruling.
+The release review of `interfaces_note` against `auditable-serde`, `stabby`, `abi_stable` and
+Linux's note macro. Five one-way changes come before 0.1.0, among them a macro that places one
+note per program. Six fixes land before the release, six may follow, and six doors wait.

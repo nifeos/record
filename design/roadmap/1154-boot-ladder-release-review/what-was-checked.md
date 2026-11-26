@@ -8,7 +8,8 @@ An appendix to [the milestone](../1154-boot-ladder-release-review.md).
 `publish = false`. Read in full: `Cargo.toml`, `README.md`, `CHANGELOG.md`,
 `docs/stranger-test.md`, the `ci`, `proofs` and `ruled` workflow callers under
 `.github/workflows/`, and all four files under `src/` (`lib.rs`, `heads.rs`, `rungs.rs`, `verdict.rs`), tests and
-the two Kani harnesses included. The baseline read: milestone 1078's block, its prior-art
+the two Kani harnesses included. The baseline read: the block of milestone 1078 (what an outside maintainer would fix before it
+leaves), its prior-art
 appendix and the cleared package.
 
 ## The commands
