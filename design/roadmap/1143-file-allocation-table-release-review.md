@@ -27,19 +27,19 @@ Reuse: the crate's tests and a scratch benchmark crate; no new tool.
 
 ## Finding status
 
-- P0-1, entries return their attribute byte as a bare `u8`: Open.
-- P0-2, cluster numbers are bare `u32`: Open.
-- P0-3, the two image builders disagree on sector widths and refuse with a bare `bool`: Open.
-- P0-4, `WritableVolume` dereferences to `Volume`: Open.
-- P1-1, the crate page has no example: Open.
-- P1-2, the README misstates the size of a `Volume`: Open.
-- P1-3, fallible functions carry no `# Errors` section: Open.
-- P2-1, the manifest has no `documentation` key: Open.
+- P0-1, entries return their attribute byte as a bare `u8`: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P0-2, cluster numbers are bare `u32`: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P0-3, the two image builders disagree on sector widths and refuse with a bare `bool`: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P0-4, `WritableVolume` dereferences to `Volume`: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P1-1, the crate page has no example: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P1-2, the README misstates the size of a `Volume`: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P1-3, fallible functions carry no `# Errors` section: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P2-1, the manifest has no `documentation` key: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
 - P2-2, block-device adapters: Waiting on the feature-name decision of milestone 1129.
 - P2-3, `BufRead` and an async reader: Waiting on the byte sinks and sources decision of milestone 1129.
-- P2-4, a sector buffer sized to the device: Open.
-- P2-5, six value types have no `Hash`: Open.
-- P2-6, `Attributes` has no operators: Open.
+- P2-4, a sector buffer sized to the device: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P2-5, six value types have no `Hash`: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P2-6, `Attributes` has no operators: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
 - P2-7, creating entries in a large directory is quadratic: Open.
 
 ## Open decisions
