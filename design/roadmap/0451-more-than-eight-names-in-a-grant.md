@@ -6,8 +6,7 @@ refused_by: 109, 448
 # 451. More than eight names in a single grant
 
 Refused by milestone 109 (design/roadmap/0109-xargs-at-the-grant-bound.md), which records it in its
-Follow-on. Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names
-work a number, a status and a condition that would change it.
+Follow-on. Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

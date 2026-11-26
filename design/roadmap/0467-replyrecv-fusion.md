@@ -6,8 +6,7 @@ refused_by: 188, 448
 # 467. `ReplyRecv` fusion: the IPC round trip in two system calls instead of three
 
 Refused by milestone 188 (design/roadmap/0188-ipc-fastpath.md), which records it in its Follow-on.
-Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names work a
-number, a status and a condition that would change it.
+Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

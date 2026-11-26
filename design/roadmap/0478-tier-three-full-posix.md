@@ -19,8 +19,7 @@ ruling (PR #1856) declines permanently, so "tier three" is three stages and a sp
 any of them. The refusal is kept below because it is the argument the stages answer.
 
 Refused by milestone 36 (design/roadmap/0036-foreign-component.md), which records it in its
-Follow-on. Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names
-work a number, a status and a condition that would change it.
+Follow-on. Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

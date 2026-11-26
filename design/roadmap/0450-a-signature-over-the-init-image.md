@@ -6,8 +6,7 @@ refused_by: 104, 448
 # 450. A signature over the init image, in place of a compiled-in digest
 
 Refused by milestone 104 (design/roadmap/0104-init-measures-what-init-loads.md), which records it in
-its Follow-on. Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that
-names work a number, a status and a condition that would change it.
+its Follow-on. Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

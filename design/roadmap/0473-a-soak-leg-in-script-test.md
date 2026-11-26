@@ -6,8 +6,7 @@ refused_by: 219, 448
 # 473. A soak leg inside `script/test`
 
 Refused by milestone 219 (design/roadmap/0219-a-workload-that-does-not-stop.md), which records it in
-its Follow-on. Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that
-names work a number, a status and a condition that would change it.
+its Follow-on. Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

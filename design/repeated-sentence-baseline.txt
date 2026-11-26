@@ -339,91 +339,48 @@
 
 21e857e46f32 design/roadmap/0403-an-x86-64-host-in-the-host-pass.md
 
-22562f96b931 design/roadmap/0449-the-el2-to-el1-drop.md
 
-22562f96b931 design/roadmap/0450-a-signature-over-the-init-image.md
 
-22562f96b931 design/roadmap/0451-more-than-eight-names-in-a-grant.md
 
-22562f96b931 design/roadmap/0452-a-salvage-tool-for-a-broken-superblock.md
 
-22562f96b931 design/roadmap/0453-a-lint-for-a-safety-comment-on-a-safe-fn.md
 
-22562f96b931 design/roadmap/0454-the-stack-sizes-nobody-has-sized.md
 
-22562f96b931 design/roadmap/0455-the-signalling-stratum.md
 
-22562f96b931 design/roadmap/0456-the-capability-derivation-tree.md
 
-22562f96b931 design/roadmap/0457-sub-page-object-packing.md
 
-22562f96b931 design/roadmap/0458-asid-generations-and-rollover.md
 
-22562f96b931 design/roadmap/0459-legacy-intx-interrupt-routing.md
 
-22562f96b931 design/roadmap/0460-a-riscv64-arm-for-instruction-entropy.md
 
-22562f96b931 design/roadmap/0461-an-sse-enabled-x86-64-userspace-target.md
 
-22562f96b931 design/roadmap/0462-the-soft-aes-cost.md
 
-22562f96b931 design/roadmap/0463-an-mcfg-whose-first-bus-is-not-zero.md
 
-22562f96b931 design/roadmap/0464-a-committed-baseline-for-the-multitasking-sweep.md
 
-22562f96b931 design/roadmap/0465-net-transport-and-socket-test-client-as-crates.md
 
-22562f96b931 design/roadmap/0466-verus-and-unbounded-proof.md
 
-22562f96b931 design/roadmap/0467-replyrecv-fusion.md
 
-22562f96b931 design/roadmap/0468-proving-xtask.md
 
-22562f96b931 design/roadmap/0469-automating-the-vendored-engine-rebase.md
 
-22562f96b931 design/roadmap/0470-a-gate-on-harness-quality.md
 
-22562f96b931 design/roadmap/0471-a-skip-that-returns.md
 
-22562f96b931 design/roadmap/0472-a-bench-console-that-drives-power.md
 
-22562f96b931 design/roadmap/0473-a-soak-leg-in-script-test.md
 
-22562f96b931 design/roadmap/0474-a-general-jh7110-clock-driver.md
 
-22562f96b931 design/roadmap/0475-the-accelerator-probe-on-kvm-and-whpx.md
 
-22562f96b931 design/roadmap/0476-the-qemu-bounded-self-test-in-a-gate.md
 
-22562f96b931 design/roadmap/0477-a-power-cycled-boot-series.md
 
-22562f96b931 design/roadmap/0478-tier-three-full-posix.md
 
-22562f96b931 design/roadmap/0479-a-blocking-mutation-gate-on-the-diff.md
 
-22562f96b931 design/roadmap/0480-a-server-that-logs-which-channel-a-request-arrived-on.md
 
-22562f96b931 design/roadmap/0481-terminal-multiplexing.md
 
-22562f96b931 design/roadmap/0482-a-buffering-stage-between-pipe-ends.md
 
-22562f96b931 design/roadmap/0483-the-console-server-on-the-sink-protocol.md
 
-22562f96b931 design/roadmap/0484-iana-zone-rules-and-strftime.md
 
-22562f96b931 design/roadmap/0485-xattrs-in-the-redoxfs-on-disk-format.md
 
-22562f96b931 design/roadmap/0486-an-indexed-typed-attribute-store.md
 
-22562f96b931 design/roadmap/0487-interleaving-check-as-a-gate.md
 
-22562f96b931 design/roadmap/0488-a-self-hosted-ci-runner.md
 
-22562f96b931 design/roadmap/0489-the-rule-1-lint-past-the-kernel.md
 
-22562f96b931 design/roadmap/0490-cpu-time-in-time.md
 
-22562f96b931 design/roadmap/0951-a-hand-written-ipc-fastpath.md
 
 22784ab875e0 design/roadmap/0124-a-thread-is-born-where-it-lives.md
 

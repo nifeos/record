@@ -6,9 +6,8 @@ refused_by: 81, 119, 448
 # 488. A self-hosted CI runner
 
 Refused by milestone 119 (design/roadmap/0119-merge-throughput.md) and milestone 81
-(design/roadmap/0081-hvf-leg.md), each of which records it in its Follow-on. Milestone 448
-(design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names work a number, a status
-and a condition that would change it.
+(design/roadmap/0081-hvf-leg.md), each of which records it in its Follow-on. Milestone 448 (a
+refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

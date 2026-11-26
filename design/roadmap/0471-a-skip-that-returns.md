@@ -6,8 +6,7 @@ refused_by: 214, 448
 # 471. A `#[test_case]` that returns `Result<(), Skipped>`
 
 Refused by milestone 214 (design/roadmap/0214-print-and-return-skips.md), which records it in its
-Follow-on. Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names
-work a number, a status and a condition that would change it.
+Follow-on. Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

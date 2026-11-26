@@ -6,8 +6,7 @@ refused_by: 222, 448
 # 475. Extending the accelerator probe to KVM and WHPX
 
 Refused by milestone 222 (design/roadmap/0222-hvf-leg-fails-silently.md), which records it in its
-Follow-on. Milestone 448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names
-work a number, a status and a condition that would change it.
+Follow-on. Milestone 448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 

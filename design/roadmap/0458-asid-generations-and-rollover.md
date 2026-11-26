@@ -6,8 +6,7 @@ refused_by: 15, 448
 # 458. ASID generations and rollover
 
 Refused by milestone 15 (design/roadmap/0015-asids.md), which records it in its Follow-on. Milestone
-448 (design/roadmap/0448-a-refusal-gets-a-number.md) gives a refusal that names work a number, a
-status and a condition that would change it.
+448 (a refusal gets a number) gives a refusal this form.
 
 ## The refusal, in its own words
 
