@@ -27,20 +27,23 @@ Reuse: the crate's tests and a scratch benchmark crate; no new tool.
 
 ## Finding status
 
-- P0-1, entries return their attribute byte as a bare `u8`: Open.
-- P0-2, cluster numbers are bare `u32`: Open.
-- P0-3, the two image builders disagree on sector widths and refuse with a bare `bool`: Open.
-- P0-4, `WritableVolume` dereferences to `Volume`: Open.
-- P1-1, the crate page has no example: Open.
-- P1-2, the README misstates the size of a `Volume`: Open.
-- P1-3, fallible functions carry no `# Errors` section: Open.
-- P2-1, the manifest has no `documentation` key: Open.
+- P0-1, entries return their attribute byte as a bare `u8`: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P0-2, cluster numbers are bare `u32`: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P0-3, the two image builders disagree on sector widths and refuse with a bare `bool`: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P0-4, `WritableVolume` dereferences to `Volume`: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P1-1, the crate page has no example: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P1-2, the README misstates the size of a `Volume`: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P1-3, fallible functions carry no `# Errors` section: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P2-1, the manifest has no `documentation` key: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
 - P2-2, block-device adapters: Waiting on the feature-name decision of milestone 1129.
 - P2-3, `BufRead` and an async reader: Waiting on the byte sinks and sources decision of milestone 1129.
-- P2-4, a sector buffer sized to the device: Open.
-- P2-5, six value types have no `Hash`: Open.
-- P2-6, `Attributes` has no operators: Open.
-- P2-7, creating entries in a large directory is quadratic: Open.
+- P2-4, a sector buffer sized to the device: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P2-5, six value types have no `Hash`: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P2-6, `Attributes` has no operators: Done, [partsfoundry/file_allocation_table#62](https://github.com/partsfoundry/file_allocation_table/pull/62).
+- P2-7, creating entries in a large directory is quadratic: Will not fix, provisional, ruled
+  2026-11-26 UTC. A cheaper create needs memory the crate does not have without an allocator;
+  [the appendix](1143-file-allocation-table-release-review/what-was-checked.md#the-create-cost)
+  gives the measured reads.
 
 ## Open decisions
 
@@ -61,9 +64,7 @@ Guidelines items in
 
 ## Prior art
 
-The figures come from the crates.io API, read on 2026-11-26 (UTC). The task a stranger brings is
-reading and writing a FAT12, FAT16 or FAT32 volume on a device with no operating system, or in a
-host tool that builds an image. The review read `fatfs` at 0.3.6, its published version; its git
+The figures come from the crates.io API, read on 2026-11-26 (UTC). The review read `fatfs` at 0.3.6, its published version; its git
 main line is an unpublished 0.4 with its own I/O traits, which `lamfat` 0.4.3 republishes, so the
 review read that too.
 
@@ -91,7 +92,7 @@ review read that too.
   the compiler cannot find the crate, and with it, since the `core_io` build script fails. Its errors are
   typed enums a caller matches, where `fatfs` returns `io::Error` built from string messages
   (`Error::new(ErrorKind::Other, "...")`). It lists a 128-file directory in under a third of the
-  time `fatfs` takes, as Measured performance shows below.
+  time `fatfs` takes (Measured performance, below).
 - Than `embedded-sdmmc` 0.10.0: it is a file system alone, over any sector size of 512 to
   4,096 bytes. `embedded-sdmmc` binds its FAT code to its own 512-byte `Block` and takes
   `embedded-hal`, `heapless`, `thiserror`, `bitbybit`, `arbitrary-int` and `log` with it. Its errors
