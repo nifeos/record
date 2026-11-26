@@ -16,7 +16,7 @@ while Microsoft's exFAT patents are in force.
 ## Why
 
 Microsoft's exFAT patents claim from a 2004-12-17 or 2006-05-23 priority, and four are still live
-by Google Patents, checked 2026-10-14 (UTC). Its Patents section in
+by Google Patents, checked 2026-10-14 (UTC). The Patents section of
 [milestone 813 (a proven FAT crate)](0813-a-proven-fat-crate-released-on-its-own.md) gives the caveat.
 
 | patent | title | anticipated expiry |
