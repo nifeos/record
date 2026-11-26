@@ -7,8 +7,8 @@ An appendix to [notes/framebuffer-contract.md](../framebuffer-contract.md), move
 interactive boot)'s hang, carried unexplained for three weeks, and the boot evidence that resolved
 it.
 
-RESOLVED 2026-09-19 (milestone 177): the second `FLUSH` on the real boot never returned because
-nobody received the driver's `FLUSHED` report. Found 2026-08-27 by milestone 177's boot-wiring lane
+RESOLVED 2026-09-19 (milestone 177), with the cause [the main page](../framebuffer-contract.md)
+states. Found 2026-08-27 by milestone 177's boot-wiring lane
 and carried here, unexplained, for three weeks. The hypothesis recorded at the time (the driver stuck
 waiting on its own completion interrupt) was wrong, and so was the reading of the data point below.
 

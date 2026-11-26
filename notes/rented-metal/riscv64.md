@@ -1,7 +1,7 @@
 # Rented riscv64: the one offer, and what rental cannot buy
 
-An appendix to [`notes/rented-metal.md`](../rented-metal.md), which holds the four requirements,
-the recommendation for each architecture and BUGS. This file holds the riscv64 table, the free
+An appendix to [`notes/rented-metal.md`](../rented-metal.md), which holds the recommendations.
+This file holds the riscv64 table, the free
 RISC-V runners that do not qualify, and why no rental substitutes for radon.
 
 One offer, and it is the one §203 (capacity is rented rather than bought) already found.

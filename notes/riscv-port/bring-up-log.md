@@ -141,6 +141,4 @@ An appendix to [notes/riscv-port.md](../riscv-port.md), moved there on 2026-10-1
    a new `arch/` directory, not a diff across the kernel, with zero exceptions in portable non-test
    code.
 
-   The port is complete. Boot, MMU, traps, timer, scheduler, preemption, U-mode user programs,
-   capability invocation, userspace-built processes (init loads and builds children), and device
-   interrupts serviced by a userspace driver all run on RISC-V, the same portable core as aarch64.
+   The port is complete, as [the main page](../riscv-port.md) states.

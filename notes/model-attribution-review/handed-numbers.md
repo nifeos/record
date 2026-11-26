@@ -44,6 +44,5 @@ for rec in sys.stdin.read().split("\x00\x00"):
 ' | sort | uniq -c | sort -rn
 ```
 
-This is milestone 125 (a number in the prose is a claim) arriving uninvited. The point is not that
-someone miscounted. It is that the first number in a study about trustworthiness was itself
-unverified, which is exactly the failure the study would be looking for.
+This is milestone 125 (a number in the prose is a claim) arriving uninvited, and [the main
+page](../model-attribution-review.md) says why that matters.

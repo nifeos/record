@@ -46,7 +46,7 @@ calef ruled on every fork on 2026-09-27 (UTC), relayed by the maintainer on pull
 - The SDK is S2 now, one archive per release with C headers and the prebuilt runtime library, and
   S3 (an upstream Rust target) once `milestone/610-interface-stability` shows the interfaces stable.
   S1 is not planned.
-- The ABI revision is a field in the manifest note of milestone 597 (a program carries its manifest in an ELF note), not a separate note.
+- §235 says which note carries the ABI revision.
 - The repositories: R1 for what has not left, with package boundaries drawn in-tree and enforced
   by lint. The end state is everything leaving this repository, bottom-up, for repositories with
   one purpose each: the kernel, the programs, the tooling and the crates. `nifeos/nife` keeps only

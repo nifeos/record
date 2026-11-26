@@ -2,7 +2,8 @@
 
 Appendix to [the modern aarch64 board survey](../aarch64-modern-board-survey.md), and to [its server overview](server-and-cloud.md).
 
-Read 2026-10-21 (UTC). A source marked (secondary) is neither the vendor nor the upstream tree. "Not found" means no primary answer, not no. "Inferred" means deduced from cited facts and not read.
+Read 2026-10-21 (UTC). [The directory index](README.md) says what "(secondary)", "not found" and
+"inferred" mean.
 
 ## AWS Graviton3, Graviton4 and Graviton5 metal
 

@@ -83,16 +83,14 @@ in the caller, and the caller is a table of checks that has no opinion about QEM
 
 ## What is blocked
 
-Nothing. Milestone 286 shipped, the failure is loud, and the workaround is three commands a
-developer can type. This is a sharpness problem rather than a correctness one.
+Nothing, for the reasons §181 gives. This is a sharpness problem rather than a correctness one.
 
 ## Index row
 
 `script/bootstrap`'s own header promises one thing, that it installs only what is missing and is
 cheap to re-run. It does a second thing the header does not mention: after installing it calls
 `script/qemu-check`, which asks whether the QEMU on `PATH` is new enough to boot this kernel and
-exits non-zero when it is not. Installing what is missing and judging whether what is present is
-adequate are different questions that fail in different ways. Milestone 286 made the conflation
+exits non-zero when it is not. §181 separates those two questions. Milestone 286 made the conflation
 expensive for the first time by putting `bootstrap` at the head of the command a developer runs
 before pushing. A non-zero exit now ends the whole local tier on a machine where `fmt`, `lint`
 and `image-permissions` would all have passed. Four options, priced: leave it, and the developer

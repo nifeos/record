@@ -60,10 +60,7 @@ refusal is a fact about what the holder has, not a permission that could have sa
 
 It is a separate process for two reasons. The FS server receives on one endpoint, so serving a
 second narrower one would need a receive over a *set*. That means badging endpoint capabilities
-(seL4's answer), a design fork recorded rather than taken. And it makes the claim checkable. The
-confined program holds an endpoint to the caretaker and nothing that names the FS server, so "it
-cannot reach a second file" is a property of its cspace rather than of a branch it is trusted to
-take.
+(seL4's answer), a design fork recorded rather than taken. And it makes the claim checkable, for the reason §27 gives.
 
 Proven by an attacker, twice, and the second run is what makes the first mean anything. It
 reports a bitmap of what got through. Read-only grant: every bit clear, against a neighboring file
@@ -139,9 +136,7 @@ terminal contract. Effort: built in four lanes. The interactive boot's gate is `
   of them. So removing a file two levels down is a refusal at the prompt.
 - **Refused.** Badging endpoint capabilities so the FS server could receive over a set of endpoints
   and serve the narrowed one itself, which is seL4's answer. A separate caretaker process was taken
-  instead, because it makes the claim checkable from outside. The confined program holds an endpoint
-  to the caretaker and nothing that names the FS server, so "it cannot reach a second file" is a
-  property of its cspace rather than of a branch it is trusted to take.
+  instead, because it makes the claim checkable from outside (§27).
 - **Recorded.** `design/decisions/0076-roadmap-status-versus-tree.md` is the standing record of a
   defect class this block met: a milestone's status is maintained by its own lane, and nothing
   maintains it when another lane finishes its work.

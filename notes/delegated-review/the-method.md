@@ -3,8 +3,7 @@
 *Name: ratified 2026-10-18 (calef, convention-rulings Rule 3).*
 
 An appendix to [Does a delegated AI review catch what the gates and the maintainer
-miss](../delegated-review.md), the run of milestone 521 (does an AI review of a pull request catch
-anything the gates and the maintainer do not). It holds how blindness was enforced, what the corpus
+miss](../delegated-review.md). It holds how blindness was enforced, what the corpus
 leaves out, and how the runs were budgeted. The page carries the result and the verdict.
 
 ## How blindness was enforced, since nothing else here matters if it was not

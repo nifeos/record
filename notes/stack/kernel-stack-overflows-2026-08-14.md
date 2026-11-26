@@ -2,13 +2,11 @@
 
 *Name: ratified 2026-10-18 (calef, "Approve all"). Refused `overflows-2026-08-14`.*
 
-*An appendix to `nifeos/nife:notes/stack.md`, which explains the stack and is the page to read.
-This file holds the account of two real kernel stack overflows found by CI on 2026-08-14. It moved
-here on 2026-09-25 (UTC) under §212 (a prose budget). The move then edited it only to meet §213
-(writing standards), splitting long sentences and dropping bold, with the meaning unchanged. The
-five appendices were one file until then, in the order the main page's table lists them, so "above",
-"below" and "this file" in them mean that whole sequence. The directory `notes/stack/` and this
-file's stem are provisional names; naming is calef's.*
+*An appendix to `nifeos/nife:notes/stack.md`, which explains the stack and is the page to read. This
+file holds the account of two real kernel stack overflows found by CI on 2026-08-14. [The directory
+index](README.md) says how the five read together. The directory `notes/stack/` and this file's stem
+are provisional names; naming is calef's.*
+
 
 
 Two real kernel stack overflows in one day, on both architectures, found by CI. Written up from the

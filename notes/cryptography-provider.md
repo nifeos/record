@@ -230,8 +230,7 @@ today.
 ## Pricing the glue path
 
 The alternative to the refused alpha is to write the `CryptoProvider` glue in this tree over
-primitives chosen deliberately. That does not avoid depending on the primitives, so it was priced
-the same way before a line of it was written.
+primitives chosen deliberately.
 [`pricing-the-glue-path.md`](cryptography-provider/pricing-the-glue-path.md) has the measured graph,
 the per-primitive quality table and the full `rsa` argument. What it found:
 

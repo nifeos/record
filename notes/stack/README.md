@@ -4,6 +4,12 @@
 incident and carries the `BUGS`, so a reader can act without opening anything here. Its incident
 table is the index. These files hold each later stack incident in full, in date order.
 
+Five of them, the incidents of 2026-08-14 to 2026-08-17 and the interrupt stack, were one file until
+2026-09-25 (UTC), when they moved here under §212 (a prose budget). The move edited them only to
+meet §213 (writing standards), splitting long sentences and dropping bold, with the meaning
+unchanged. They read in the order the main page's table lists them, so "above", "below" and "this
+file" in them mean that whole sequence.
+
 *Name: provisional, for the directory and every stem in it. Each appendix's own preamble says the same of its stem. Naming is calef's;
 `script/names --unratified` lists each stem.*
 

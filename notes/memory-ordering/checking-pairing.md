@@ -34,8 +34,7 @@ that only looks like a gate. Same posture here:
 
 > Every `fence` outside test code must carry a `PAIR:` comment naming where its other half is.
 
-`script/lint` enforces it, over the contiguous comment block immediately above the fence, which is
-where `SAFETY:` already lives. Twelve sites today.
+`script/lint` enforces it where [the main page](../memory-ordering.md) says. Twelve sites today.
 
 It checks the bookkeeping, not the ordering, and that limitation is the design. What it buys is
 the forcing function. An author made to write down where the partner lives has to go and look for it.

@@ -156,5 +156,4 @@ argument for it were crate count it would be a bad argument, and that is recorde
 than smoothed over.
 
 calef ruled on both halves: `rustls-rustcrypto` refused (DECISIONS §198, the glue is ours, the
-primitives are not), and then, on 2026-09-20, "Take rsa." The provider is built, the two real
-chains verify on all three architectures, and the milestone's own list is finished.
+primitives are not), and then, on 2026-09-20, "Take rsa." [The main page](../cryptography-provider.md) says where the provider stands.

@@ -65,8 +65,7 @@ user pointer crosses the system call boundary, and matches the machine statistic
 past the proposal is built until it is ruled.
 
 **In brief.** Once the `console` server owns the console, two address spaces are writing to the same
-UART with no arbitration between them. The kernel writes directly, because a kernel that cannot
-print during a fault is a kernel nobody can debug, and the server writes on behalf of userspace. The
+UART with no arbitration between them. The kernel writes directly, for the reason §175 gives, and the server writes on behalf of userspace. The
 streams interleave at byte granularity. Deciding this means saying where kernel output goes: a
 second port, a buffer the server drains, a claim the server takes and the kernel respects except in
 a panic, or something else.
@@ -154,9 +153,7 @@ buffer serves worst, is the constraint that probably decides it.
 ## Index row
 
 Once the `console` server owns the console, the kernel and the server write to one UART from two
-address spaces with no arbitration, and the streams interleave at byte granularity. The kernel
-writes directly, because a kernel that cannot print during a fault is a kernel nobody can debug. The
-interleaving corrupts every bench session on argon, radon and xenon, where the serial log is the
+address spaces with no arbitration, and the streams interleave at byte granularity. The kernel writes directly, for the reason §175 gives. The interleaving corrupts every bench session on argon, radon and xenon, where the serial log is the
 only thing those machines can say. It breaks milestone 216 (nothing in this tree can read a)'s boot-sequence recognizer in the least
 visible way: the log looks like output, and a kernel message splits the line being matched. Deciding it means saying where kernel output goes: a second port, a buffer the server
 drains, a claim the server takes and the kernel respects except in a panic, or something else. The

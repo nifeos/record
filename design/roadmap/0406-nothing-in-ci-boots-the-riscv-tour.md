@@ -84,8 +84,7 @@ covered is the boot as a sequence, which is exactly what a board produces and wh
 It is what made a live step look dead. Milestone 289 was minted on the reasonable suspicion that
 `components/src/builder.rs` was vestigial. Every signal that would have said otherwise was outside
 CI: a crate's host tests over captured board logs, two `script/` tools nobody runs on a branch, and a
-bench note. A step nothing asserts and a step nothing needs produce the same evidence, and this tree
-has already spent one lane telling them apart.
+bench note. §186 states the lesson that cost.
 
 The recognizer already exists and is tested. `crates/serial_console` parses this exact transcript:
 `Progress` ratchets `spl`/`opensbi`/`uboot`/`handoff`/`banner`/`tour`, recognizes five failure
@@ -97,9 +96,7 @@ not a new instrument.
 ## What it would take, priced
 
 The boot itself is one `cargo xtask` verb over machinery that is all present: `initial_ramdisk_riscv()`,
-`helpers/qemu-runner-riscv64.sh`, `crates/serial_console`. A bounded tour boot is seconds, not
-minutes, because the tour halts on its own; the cost is the riscv64 kernel build, which
-`script/ci-build` already pays for other reasons.
+`helpers/qemu-runner-riscv64.sh`, `crates/serial_console`. §186 prices the boot.
 
 The open questions are an architect's and are the reason this is not just done:
 
@@ -114,9 +111,7 @@ The open questions are an architect's and are the reason this is not just done:
 
 ## The aarch64 and x86_64 halves, named so they are not discovered later
 
-aarch64's equivalent of the tour is the `initboot` path and it *is* exercised, by
-`script/swish-check`. x86_64 has neither a shell boot nor a tour step that loads userspace from an
-archive, and `swish_check()` says so in its own comment. So this proposal is riscv64-shaped on
+§186 says where the aarch64 and x86_64 halves stand. So this proposal is riscv64-shaped on
 purpose, and a general "boot every architecture's default kernel and read the transcript" is a larger
 thing that should be argued for separately rather than assumed here.
 

@@ -243,10 +243,8 @@ assertion.
   Milestone 255 put two harnesses into `arch/aarch64/iommu.rs` and milestone 304 two into
   `arch/x86_64/interrupt_controller.rs`; that is 1,279 of 16,225 lines. The corpus's own timer
   re-arm drift is still
-  on the far side of the `asm!` boundary and nothing here touches it. (This entry used to pair it
-  with "the VisionFive 2 undelivered wake." That reading is retracted,
-  `notes/visionfive2.md`'s fifth bench stop, 2026-08-15: it was a completed tour's terminal state,
-  not a stranded receiver, and never happened. Found still repeating it here 2026-09-23.)
+  on the far side of the `asm!` boundary and nothing here touches it. (The VisionFive 2
+  wake once paired with it is retracted, in `notes/visionfive2.md`.)
 - Only one architecture's `arch/` is compiled per run. Milestone 304 (`cargo kani -p kernel` only ever compiled one architecture) added an x86_64 runner to
   the aarch64 one, and milestone 589 a riscv64 job, so every subtree is compiled by some job. Since
   milestone 587 (most CI jobs do not need an arm64 host) the `prove` shards are the x86_64 half and

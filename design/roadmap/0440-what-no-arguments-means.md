@@ -75,8 +75,7 @@ physical core). One such check is a recorded gap where fifteen would be a lotter
 Shipped provisionally as `local` and `ci`. The refusals are the useful half:
 
 - `local` / `ci` (shipped). `local` says who waits: a person at a checkout. `ci` says the same
-  of a runner. The strongest argument against the pair is that `ci` names a deployment rather than
-  a property of the check. Nothing about `script/coverage` changes if this repository stops using
+  of a runner. §183 gives the strongest argument against the pair. Nothing about `script/coverage` changes if this repository stops using
   GitHub Actions, and the tag would be wrong the same day while the check was untouched. That is the
   shape of mistake this tree has made before with a display name matched by branch protection, and
   it is the reason to keep the pair provisional rather than ratify it in place. `local` is separately
@@ -97,8 +96,7 @@ Shipped provisionally as `local` and `ci`. The refusals are the useful half:
   The real criterion is what a person will wait for, which is not a duration.
 - `gate` / `report`. Refused. `DECISIONS §134` (a harness carries a machine-replayable
   falsification record) already spends that split on the `script/` family
-  itself (a verb does something, a noun reports). Reusing the words one level down would make
-  `coverage` a report in one sense and a gate in another on the same page.
+  itself (a verb does something, a noun reports). §183 says what reusing the words one level down would cost on the same page.
 
 **The noun rule does not reach this.** An earlier draft of this proposal argued that `local` and
 `ci` are adjectives where a tier, being a thing, wants a noun. That is a misreading and it is

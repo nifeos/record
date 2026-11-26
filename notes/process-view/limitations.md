@@ -5,8 +5,8 @@
 An appendix to [notes/process-view.md](../process-view.md), whose BUGS section lists each entry in
 one line.
 
-- Userspace cannot learn the machine's online cpu set, so a placement census cannot show an idle
-  core. `record::PLACEMENT` reports which cpu a thread was placed on, and a tally of those ids is
+- A placement census cannot show an idle core, the first limit [the main page](../process-view.md)
+  lists. `record::PLACEMENT` reports which cpu a thread was placed on, and a tally of those ids is
   a correct census of *where the threads are*. It cannot report a core that is online and carrying
   nothing, because that core appears in no thread's record, and it cannot tell that case apart from
   a core that is parked. Nothing in this tree gives userspace `smp::online_harts_mask`, and this

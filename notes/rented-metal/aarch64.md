@@ -1,7 +1,7 @@
 # Rented aarch64: the offers and the blocker
 
-An appendix to [`notes/rented-metal.md`](../rented-metal.md), which holds the four requirements,
-the recommendation for each architecture and BUGS. This file holds why no aarch64 cloud machine
+An appendix to [`notes/rented-metal.md`](../rented-metal.md), which holds the recommendations.
+This file holds why no aarch64 cloud machine
 boots nife, the offers table as read on 2026-09-23, and the Oracle Ampere A1 experiment.
 
 The loader writes a device tree from the ACPI tables (`uefi_loader/src/device_tree_from_acpi.rs`),

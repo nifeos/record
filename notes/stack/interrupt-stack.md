@@ -1,10 +1,11 @@
 # The per-CPU interrupt stack (milestone 124, 2026-08-16)
 
-*An appendix to `nifeos/nife:notes/stack.md`, which explains the stack and is the page to read.
-This file holds milestone 124's per-CPU interrupt stack: what was built, the rule that holds it, and
-what it measured (its BUGS are on the main page). The five appendices read in the order the main
-page's table lists them, so "above", "below" and "this file" in them mean that whole sequence. The
-directory `notes/stack/` and this file's stem are provisional names; naming is calef's.*
+*An appendix to `nifeos/nife:notes/stack.md`, which explains the stack and is the page to read. This
+file holds milestone 124's per-CPU interrupt stack: what was built, the rule that holds it, and what
+it measured (its BUGS are on the main page). [The directory index](README.md) says how the five read
+together. The directory `notes/stack/` and this file's stem are provisional names; naming is
+calef's.*
+
 
 
 Everything above this line describes a kernel in which an interrupt was paid for by whoever it

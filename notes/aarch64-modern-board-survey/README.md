@@ -2,7 +2,8 @@
 
 [`notes/aarch64-modern-board-survey.md`](../aarch64-modern-board-survey.md) carries the scorecard
 and the recommendation. These files carry the evidence behind it, with a URL and a read date on
-every claim.
+every claim. A source marked (secondary) is neither the vendor nor the upstream tree. "Not
+found" means no primary answer, not no. "Inferred" means deduced from cited facts and not read.
 
 - [`cores-and-sel4.md`](cores-and-sel4.md): per-core architecture features from Arm's TRMs, and
   seL4's support tier for each board family, read from seL4's own trees.
