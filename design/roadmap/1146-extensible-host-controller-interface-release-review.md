@@ -23,8 +23,6 @@ Reuse: the prior-art table weighs each xHCI crate a caller could take instead.
 
 ## Finding status
 
-The status words are those `script/review-status` reads.
-
 - P0-1, `Event` is exhaustive and its completion codes are bare bytes: Done,
   `partsfoundry/extensible_host_controller_interface#29`.
 - P0-2, `Capabilities` is exhaustive: Done, `partsfoundry/extensible_host_controller_interface#29`.
@@ -54,7 +52,8 @@ The status words are those `script/review-status` reads.
   `partsfoundry/extensible_host_controller_interface#29`.
 - P2-2, the Host Controller Event decodes as `Other`: Done,
   `partsfoundry/extensible_host_controller_interface#29`.
-- P2-3, ring constructors with no fallible form: Open.
+- P2-3, ring constructors with no fallible form: Waiting on the errors decision of milestone
+  1129.
 - P2-4, the doorbell's value has no builder: Waiting on the doorbells decision of milestone 1129.
 - P2-5, no little-endian byte form of a TRB: Done,
   `partsfoundry/extensible_host_controller_interface#29`.
@@ -65,7 +64,7 @@ The status words are those `script/review-status` reads.
 
 ## Open decisions
 
-The one-way doors below, D1 to D11, each for the architect.
+One-way doors, each for the architect.
 
 ## Goal
 
@@ -316,13 +315,11 @@ doorbell write, so the review proposes no change.
 
 Each for the architect, one at a time.
 
-- D1, the exhaustive types (P0-1). Recommended: `#[non_exhaustive]` on `Event`, its struct-like
-  variants, `TransferRequestBlockPlacement` and `DebounceVerdict`, the stricter choice; a later
+- D1, the exhaustive types (P0-1). Recommended: P0-1's change, the stricter choice; a later
   release can drop it without breaking a caller.
 - D2, the completion code's type (P0-1). Recommended: the newtype `CompletionCode(u8)`. An enum
   needs an escape variant for the vendor ranges anyway, and the newtype keeps every byte.
-- D3, `Capabilities` and `SupportedProtocol` exhaustive (P0-2). Recommended: `#[non_exhaustive]`,
-  and private fields with getters if D6 adopts the newtypes.
+- D3, `Capabilities` and `SupportedProtocol` exhaustive (P0-2). Recommended: P0-2's change.
 - D4, `direct_memory_access` (P0-3). Recommended: out of the interface; a later release can add a
   module back, never remove one.
 - D5, the data direction (P0-4). Recommended: the enum, as `TransferType` already is.
@@ -357,7 +354,7 @@ What this crate shows each shared question of milestone 1129.
 
 ## Follow-on
 
-- **Outstanding.** D9, P2-4 and P2-6 wait on the errors, doorbells and simulators decisions of
+- **Outstanding.** D9, P2-3, P2-4 and P2-6 wait on the errors, doorbells and simulators decisions of
   milestone 1129.
 - **Outstanding.** The hardware checks 1060 lists remain unrun on silicon.
 
