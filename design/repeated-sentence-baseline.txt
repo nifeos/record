@@ -724,10 +724,6 @@
 
 
 
-6cbc51042904 design/decisions/0139-cycle-counter-authority.md
-
-6cbc51042904 design/decisions/0139-cycle-counter-authority/premise-checks.md
-
 
 
 6f7e78d60d11 design/roadmap/1071-entropy-contract-outside-review.md

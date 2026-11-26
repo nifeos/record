@@ -92,7 +92,7 @@ cannot be scoped at all until the grant unit exists.
 ## The premise was half false, and that is the most useful thing in this document
 
 Milestone 75's block frames this as a decision about whether to open something that is closed.
-Three checks say the framing is wrong in three different directions, and each one changes what the
+Four checks say the framing is wrong in three different directions, and each one changes what the
 decision has to cover.
 
 The four findings, each with its evidence in
