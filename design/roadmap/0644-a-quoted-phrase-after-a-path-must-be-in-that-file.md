@@ -70,12 +70,12 @@ has today.
 from the repository root, then a comma, then a quoted phrase of six characters or more. It fails
 when the phrase is not in the file the path names, matched on the same normalization as the
 attributed quotations (whitespace collapsed, emphasis and double-quote punctuation dropped). A
-quotation that is stale on purpose carries `quotation: exception. Reason: ...` on its line or the
-one above, the reach `helpers/line_citations.py` allows its own marker. The false-positive shapes
-the audit's looser scan caught stay out on resolution. `runs.txt, "<run_id> <lane>"` in a usage
-template and `kani_lib.c, "machine model macos"` in a list of search strings name no file from the
-root, so they are never judged. The possessive (`AGENTS.md's "old wording"`, the historical form)
-has no comma, so the scanner never sees it.
+quotation stale on purpose carries `quotation: exception. Reason: ...`, placed as
+[the ratchet](../../notes/citations/ratchet.md) allows. The false-positive shapes the audit's looser
+scan caught stay out on resolution. `runs.txt, "<run_id> <lane>"` in a usage template and
+`kani_lib.c, "machine model macos"` in a list of search strings name no file from the root, so they
+are never judged. The possessive (`AGENTS.md's "old wording"`, the historical form) has no comma, so
+the scanner never sees it.
 
 Measured at the lane's base `8fad33799`: 128 citations in the shape, 125 with a path that resolves,
 12 quoting a phrase the file does not hold.

@@ -219,9 +219,8 @@ proofs and tests run in a configuration nobody checks is not demonstrating.
   large the stack is, so a frame bigger than 4096 bytes can still step over it in a single move and
   the overflow stays illegible. Growing the stack moves the fault further away without restoring the
   mechanism that makes it a fault at all; shrinking the frames below 4096 restores it. Growing the
-  stack remains an independent question on its own merits.
-  This refusal is milestone 454 (design/roadmap/0454-the-stack-sizes-nobody-has-sized.md), which
-  carries it with the condition that would change it.
+  stack remains an independent question on its own merits. Milestone 454
+  (design/roadmap/0454-the-stack-sizes-nobody-has-sized.md) carries this refusal.
 - **Milestone 331.** Delete the
   window in which a thread is published `Dead` while it still executes on its own kernel stack,
   instead of refusing inside it. Mark it `Departing` in `depart()` and promote it to `Dead` from

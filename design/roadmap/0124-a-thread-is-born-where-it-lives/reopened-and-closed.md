@@ -63,13 +63,12 @@ The section below is what it was, and it was not a stack overflow of any kind.
 
 ## Closed: the stack was freed under its owner (2026-08-17)
 
-A supervised corpse is published as `Dead` while it is still executing on its own kernel stack,
-and an out-of-band reaper on another core is allowed to free that stack. `depart()` marks the
-thread `Dead`, delivers its death message (which wakes the supervisor), releases `SCHED`, and only
-then calls `schedule()`. A supervisor that reaps in that window runs
-`reap_supervised` -> `reclaim_region` -> `reap_region_objects`, whose refuse phase asks only about
-`state`. `Dead` is not `Ready`/`Running`/`Blocked`, so nothing refuses, the `Thread` is dropped, and
-`KernelStack::drop` unmaps six pages with a real `tlbi` under a running core.
+The cause is the one [the block](../0124-a-thread-is-born-where-it-lives.md) states: a reaper frees
+a live stack. `depart()` marks the thread `Dead`, delivers its death message (which wakes the
+supervisor), releases `SCHED`, and only then calls `schedule()`. A supervisor that reaps in that
+window runs `reap_supervised` -> `reclaim_region` -> `reap_region_objects`, whose refuse phase asks
+only about `state`. `Dead` is not `Ready`/`Running`/`Blocked`, so nothing refuses, the `Thread` is
+dropped, and `KernelStack::drop` unmaps six pages with a real `tlbi` under a running core.
 
 The kernel already had the flag that answers this and the reap path never asked it.
 `Handshake::on_cpu` means exactly "a core is standing on this thread's stack" and is cleared by

@@ -75,14 +75,13 @@ linked to it) if it lands, since a reader meeting
 
 ## Done when
 
-*Amended 2026-10-12 (UTC) under §297 (software reaches a nife system as a package `jig` installs
-from basalt's index, the kernel included). calef, that day: "They should all be installed via jig
-through basalt."*
+*§297 (a package `jig` installs) binds this. calef, 2026-10-12 (UTC): "They should all be installed
+via jig through basalt."*
 
 `git` must run on nife installed by `jig install` from basalt's package index. basalt builds the
-package against the nife commit it pins. The install waits on milestones 809 and 801.
-§297 (a package `jig` installs) lists both. No work toward that starts until those milestones are built (calef,
-2026-10-12 UTC: "For our other programs let's block start on packaging.").
+package against the nife commit it pins. The install waits on milestones 809 and 801. §297 (a
+package `jig` installs) lists both. No work toward that starts until those milestones land
+([the package manager](../../notes/packages/jig.md#a-port-waits-on-the-package-client) holds the rule).
 
 ## Index row
 

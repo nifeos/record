@@ -110,9 +110,9 @@ The comparison with nearby work is in [the appendix](1099-machine-statistics-con
 
 ## The items
 
-Effort: S is half a day for a lane, M is a day or two, L is longer. A door is one-way when
-somebody outside the repository acts on it after the move (a published name, a wire value, a
-layout, a fixed address, a dependency); everything else is two-way and the maintainer decides it.
+Effort: S is half a day for a lane, M is a day or two, L is longer. Doors are one-way or two-way as
+[milestone 1073 (`counter_frequency_contract`)](1073-counter-frequency-contract-outside-review.md)
+defines them.
 
 ### P0: blocks the move or the first green run
 

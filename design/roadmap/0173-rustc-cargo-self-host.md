@@ -75,14 +75,14 @@ yet to measure against.
 
 ## Done when
 
-calef, 2026-10-12 (UTC), under §297 (software reaches a nife system as a package `jig` installs
-from basalt's index, the kernel included): "They should all be installed via jig through basalt."
+§297 (a package `jig` installs) binds this. calef, 2026-10-12 (UTC): "They should all be installed
+via jig through basalt."
 
 `rustc`, `cargo` and the linker they spawn must run on nife installed by `jig install` from basalt's
 package index. basalt builds the package against the nife commit it pins. The install waits on
 milestones 809 and 801, as §297 (a package `jig` installs) lists. No work toward that starts until
-those milestones are built (calef, 2026-10-12 UTC: "For our other programs let's block start on
-packaging.").
+those milestones are built
+([the package manager](../../notes/packages/jig.md#a-port-waits-on-the-package-client) holds the rule).
 
 ## Index row
 
