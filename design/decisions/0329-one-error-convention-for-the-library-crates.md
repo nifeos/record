@@ -14,11 +14,11 @@ The survey reads each crate's `origin/main` on 2026-11-26 (UTC), at the commits 
 ## Background
 
 The partsfoundry library crates report failure in many ways, from an error enum with `Display` and
-`core::error::Error` to a raw `i32`. [Milestone 1129](../roadmap/1129-crate-interfaces-best-in-class.md)
-(each crate's interface against the best in its space) lists errors as the first shape to share. Twelve release reviews (blocks 1134 to 1148) hold an
+`core::error::Error` to a raw `i32`. Milestone 1129 (the combine review) lists errors as the first
+shape to share. Twelve release reviews (blocks 1134 to 1148) hold an
 errors paragraph each, and six of their findings wait on this decision.
 
-It matters now because the publishing hold waits on it. Each crate's first crates.io publish and its
+It matters now because the publishing hold waits on it: each crate's first crates.io publish and its
 0.1.0 interface wait for every shared decision that touches it. Nothing is on crates.io yet, so an
 edit can still change any shape. After publish, an error's shape becomes a one-way door. A new variant in an exhaustive enum, a new
 field in a variant, or a tuple variant turned into a named one breaks every caller that matches it.
