@@ -33,13 +33,13 @@ use in an example.
 Each line reads against `partsfoundry/generational_table` at `b524333`.
 
 - Item 1 (P0), a full table drops the value it refused: Open.
-- Item 2 (P1), fourteen public methods have no example: Open.
-- Item 3 (P2), iterators a caller cannot name: Open.
-- Item 4 (P2), no `for` loop over a table: Open.
-- Item 5 (P2), no `retain`: Open.
-- Item 6 (P2), no way to borrow two entries mutably: Open.
+- Item 2 (P1), fourteen public methods have no example: Done, partsfoundry/generational_table#29.
+- Item 3 (P2), iterators a caller cannot name: Done, partsfoundry/generational_table#29.
+- Item 4 (P2), no `for` loop over a table: Done, partsfoundry/generational_table#29.
+- Item 5 (P2), no `retain`: Done, partsfoundry/generational_table#29.
+- Item 6 (P2), no way to borrow two entries mutably: Done, partsfoundry/generational_table#29.
 - Item 7 (P2), the worst insert scans every slot: Open.
-- Item 8 (P2), crates.io metadata: Open.
+- Item 8 (P2), crates.io metadata: Done, partsfoundry/generational_table#29.
 
 ## Prior art
 
