@@ -137,6 +137,16 @@ When it does not fit, `jig` prints `passed over https://github.com:443/...: Http
 installs from the Pages copy. The ignored test `a_release_download_is_e46_then_one_redirect_to_x1`
 (`pinned_tls_client/tests/peer.rs`) checks the same hop from the host.
 
+## A port waits on the package client
+
+A port to nife is complete when `jig install` puts it on the system from basalt's package index, as
+[§297 (software reaches a nife system as a package `jig` installs from basalt's index)](../../design/decisions/0297-software-reaches-nife-as-a-package-jig-installs-from-basalt.md)
+rules. That install waits on
+[milestone 809 (the package client becomes a program)](../../design/roadmap/0809-the-package-client-becomes-a-program.md)
+and
+[milestone 801 (packages over the internet)](../../design/roadmap/0801-packages-over-the-internet.md).
+No work toward a port's install starts until both land.
+
 ## BUGS
 
 - GitHub sets the size of its redirect's head, and no gate sees it grow, because a check may not

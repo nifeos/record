@@ -80,8 +80,8 @@ via jig through basalt."*
 
 `git` must run on nife installed by `jig install` from basalt's package index. basalt builds the
 package against the nife commit it pins. The install waits on milestones 809 and 801. §297 (a
-package `jig` installs) lists both. No work toward that starts until those milestones are built
-([notes/packages.md](../../notes/packages.md#a-port-waits-on-the-package-client) holds the rule).
+package `jig` installs) lists both. No work toward that starts until those milestones land
+([the package manager](../../notes/packages/jig.md#a-port-waits-on-the-package-client) holds the rule).
 
 ## Index row
 

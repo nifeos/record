@@ -82,7 +82,7 @@ via jig through basalt."
 package index. basalt builds the package against the nife commit it pins. The install waits on
 milestones 809 and 801, as §297 (a package `jig` installs) lists. No work toward that starts until
 those milestones are built
-([notes/packages.md](../../notes/packages.md#a-port-waits-on-the-package-client) holds the rule).
+([the package manager](../../notes/packages/jig.md#a-port-waits-on-the-package-client) holds the rule).
 
 ## Index row
 

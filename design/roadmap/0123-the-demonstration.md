@@ -135,7 +135,7 @@ basalt's package index. basalt builds the package against the nife commit it pin
 on milestones 809 and 801, as §297 (a package `jig` installs) lists. The package itself is milestone
 810 (`ripgrep` is packaged in basalt and installed with `jig`). No work toward that starts until
 those milestones are built
-([notes/packages.md](../../notes/packages.md#a-port-waits-on-the-package-client) holds the rule).
+([the package manager](../../notes/packages/jig.md#a-port-waits-on-the-package-client) holds the rule).
 `rg` reached the prompt from the data disk, never from `jig`.
 
 ## BUGS

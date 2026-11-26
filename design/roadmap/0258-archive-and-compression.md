@@ -98,8 +98,8 @@ via jig through basalt."
 
 `tar` must run on nife installed by `jig install` from basalt's package index. basalt builds the
 package against the nife commit it pins. The install waits on milestones 809 and 801, as §297 (a
-package `jig` installs) lists. No work toward that starts until those milestones are built
-([notes/packages.md](../../notes/packages.md#a-port-waits-on-the-package-client) holds the rule).
+package `jig` installs) lists. No work toward that starts until those milestones land
+([the package manager](../../notes/packages/jig.md#a-port-waits-on-the-package-client) holds the rule).
 `tar` is written in this tree, and basalt builds and publishes its package all the same. zlib is a
 library linked into programs, so it reaches a system inside their packages.
 

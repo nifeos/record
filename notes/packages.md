@@ -252,16 +252,6 @@ falsifications are in [packages/measurements.md](packages/measurements.md#what-p
 `jig install <name>` fetches over the network and installs, and `greeting`, which no archive
 packs, is what the gate fetches: [packages/fetching.md](packages/fetching.md).
 
-## A port waits on the package client
-
-A program ported to nife is done when it runs installed by `jig install` from basalt's package
-index, as
-[§297 (software reaches a nife system as a package `jig` installs from basalt's index)](../design/decisions/0297-software-reaches-nife-as-a-package-jig-installs-from-basalt.md)
-rules. That install waits on
-[milestone 809 (the package client becomes a program)](../design/roadmap/0809-the-package-client-becomes-a-program.md)
-and [milestone 801 (packages over the internet)](../design/roadmap/0801-packages-over-the-internet.md).
-No work toward a port's install starts until both are built.
-
 ## Where this stops
 
 Rung 3a's exit criterion (fetched, verified, installed, run, kept across a reboot, rolled back,
