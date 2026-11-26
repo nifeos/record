@@ -52,8 +52,8 @@ of the claim.
 ## What enumeration proves instead
 
 The length-independent claims are the host tests' job, and that is the `network_time_protocol`
-lesson applied (see [ntp.md](../ntp.md)). A model checker is the tool for domains too big to
-enumerate, not a better tool for domains that are not. Two places it decided the design here:
+lesson applied (see [ntp/what-is-proved.md](../ntp/what-is-proved.md)). Two places that lesson
+decided the design here:
 
 - Equivalence with exhaustive search. The property that would settle "is the greedy
   single-backtrack loop actually correct" is "it agrees with a naive matcher that tries everything".

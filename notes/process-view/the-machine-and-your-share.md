@@ -42,10 +42,9 @@ Four programs read them:
 | `slabtop` | a view of the job budget | where the budget's pages went, by kind of kernel object |
 | `top` | `ps`'s three slots and the page | a machine line under its summary, which is what became of `tload` |
 
-`slabtop` needed one thing the ruling did not name. A job budget's own pages are almost all carved
-into job regions, and the objects live in those, so a count of the budget alone would say its
-threads cost nothing. The object counts therefore sum over the region's whole live subtree, which
-the region table already records through each region's parent.
+`slabtop` needed one thing the ruling did not name. The object counts sum over the region's whole
+live subtree, for the reason [notes/memory-regions.md](../memory-regions.md) gives, and the region
+table already records that subtree through each region's parent.
 
 ## Ratified
 

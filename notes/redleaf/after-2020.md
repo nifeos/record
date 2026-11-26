@@ -37,9 +37,8 @@ conventional system call interface, and a proof effort rather than a compiler as
 ratio, *"less than 2.5 person-years"*, and full verification *"in under 20 seconds"* on an i9-13900hx.
 Their own Table 1 puts that beside seL4's 20:1 and CertiKOS's 14.9:1.
 
-That is the single most consequential fact in this note, and it is about neither paper's benchmarks.
-The team that built the strongest language-isolated OS in the literature spent the following five
-years building a hardware-isolated, machine-verified Rust microkernel instead. Nothing in either
+That is the single most consequential fact in this note, as [the main page](../redleaf.md) says,
+and it is about neither paper's benchmarks. Nothing in either
 Atmosphere paper says RedLeaf was abandoned or why, and this note does not claim it: the two lines
 share authors and could be complementary. What can be said is what the artifacts show, which is that
 the Verus-verified L4-shaped kernel is the one still being published and the RedLeaf tree has not

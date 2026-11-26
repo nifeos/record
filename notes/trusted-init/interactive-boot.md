@@ -78,11 +78,9 @@ the program ids `spawn_protocol` already sends in word 0.
   pipeline stage outliving its producer) permanently costs one region, so a long enough session of
   concurrent pipelines still ends at "could not spawn". Six job slots is generous for a prompt and
   small enough to keep the gate honest, which is the trade.
-- Init held a writable mapping of everything it ever built, until 2026-10-05 (UTC). `build_child`'s
-  scratch window is never unmapped (it cannot be: nothing in the ABI unmaps a page), so the progenitor can read and write any
-  page it laid down for a child. That included every boot server's. *Closed 2026-10-05; the
-  parenthesis stays because §162 (whether a holder can give up a mapping) quotes it, and the
-  sentence it quotes is also kept on the parent page, which is the file §162 names.* §249 (a
+- Init held a writable mapping of everything it ever built, until 2026-10-05 (UTC), through the
+  scratch window whose sentence [the parent page](../trusted-init.md) keeps for §162 (whether a
+  holder can give up a mapping) to quote. That included every boot server's. *Closed 2026-10-05.* §249 (a
   running address space stays nameable) let the kernel grant the progenitor its own space at slot
   28, and the loader now `UNMAP`s each page once it is in the child. The shell's output page and
   the two DMA pages the progenitor peeks at go the same way. `system_tests`' `running_space_tests`

@@ -216,9 +216,8 @@ The unsafe census went from calef's question to a gated row in four steps.
 
    The count more than quadrupled and the density more than halved. A ceiling on the count would
    have fired on nearly every lane.
-3. Choose the relation from the shape of the quantity. Equality for a census somebody maintains,
-   `count-at-least` where a deletion is the bad event, `count-at-most` where a drift up is. See
-   notes/counted-claims.md.
+3. Choose the relation from the shape of the quantity, as [the main page's step
+   3](../register-of-measures.md) says.
 4. Watch it fail. Add one `unsafe impl Send` anywhere and run `script/lint`:
 
    ```sh

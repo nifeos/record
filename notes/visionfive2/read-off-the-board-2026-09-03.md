@@ -53,9 +53,8 @@ The conclusion above is the part that was wrong. Milestone 239 went to the firmw
 rather than re-reading the board, and the node is there. The tree radon hands us is built from
 `arch/riscv/dts/jh7110.dtsi` in StarFive's U-Boot fork, and that file spells it:
 
-The node is `trng@1600C000` there. It carries the compatible string `starfive,trng`, a four-cell
-`reg` window of 0x4000 bytes at 0x1600C000, interrupt 30, two clocks (`hclk` and `miscahb_clk`),
-one reset, and `status` set to `disabled`.
+The node is `trng@1600C000` there, with the properties
+[notes/entropy/jh7110-trng.md](../entropy/jh7110-trng.md) lists.
 
 The source is starfive-tech/u-boot, branch `JH7110_VisionFive2_devel`, commit `bfbdce9b86a2` of
 2023-01-06. That was the last change to the file before this board's `Feb 12 2023` firmware build,
