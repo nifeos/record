@@ -5,13 +5,17 @@ findings in full. Effort is S (half a day), M (a day or two) or L (longer).
 
 ## P1: before the first release
 
-### P1-1. A refusal has no error type
+### P1-1. `decode` owes an error type once it has a second cause
 
 Verified in source. `decode` returns `None` with no cause, and a refusal on the wire is a `u64`
 a caller compares by hand. Nothing implements `core::error::Error` or `Display`. `termios`
 returns `std::io::Result`, and `rustix` returns its own `io::Result`.
-Change: what the errors decision picks, over the range of P0-3.
-Door: two-way after P0-3. Effort: S.
+§329 (one error convention for the library crates) rules the shape. Its rule 1 lets
+`None` stand while it has one cause, and a reserved bit is the one cause today. Door D5 adds a
+second, a count out of range.
+Change: with D5, `decode` returns a `Result` over an error enum of the crate, by rules 1, 2, 4,
+5, 9 and 10. The word on the wire keeps the range of P0-3.
+Door: two-way after P0-3 and D5. Effort: S.
 
 ### P1-2. The documentation speaks one kernel's vocabulary and never names it
 

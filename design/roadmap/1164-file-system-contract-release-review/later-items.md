@@ -13,7 +13,8 @@ A store of three attributes with one damaged kind counts 1. `store::set` on it t
 blob of 9 bytes where 27 went in, and the third attribute is gone. `fuser` reports
 `ShortRead` with both lengths, and `p9` returns `InvalidData`.
 Change: each iterator says whether it consumed its buffer, and `set` and `remove` refuse a blob
-their walk did not consume.
+their walk did not consume. Rule 6 of §329 (one error convention for the library crates)
+asks a parser of a variable-length structure for the byte offset of each refusal.
 Door: two-way to add; the refusal is a behavior a tag would bind. Effort: S.
 
 ### P1-2. Six examples for 66 public functions, and no `# Errors` section

@@ -37,7 +37,7 @@ Reuse: the crate's own tests, and one scratch crate.
 - P0-6, 35 of 36 public names carry no ruling: Open.
 - P0-7, the identity constants, `req` and `decode`: Waiting on the contract-layout decision of milestone 1129.
 - P0-8, `VERSION` does not say it covers the swap messages, and `QUIESCED` has two homes: Open.
-- P1-1, a refusal has no error type: Waiting on the errors decision of milestone 1129.
+- P1-1, `decode` owes an error type once it has a second cause: Open.
 - P1-2, the documentation speaks one kernel's vocabulary and never names it: Open.
 - P1-3, the crate page promises limits, and the crate states none: Open.
 - P1-4, one example for six functions, and none on the crate page: Open.
@@ -245,8 +245,10 @@ No finding follows.
 
 ## Evidence for the shared decisions
 
-- Errors. No error type. `decode` returns `Option`, and a refusal on the wire is the word
-  `BAD_REQUEST`. `termios` returns `std::io::Result`, and `rustix` its own `io::Result`.
+- Errors. §329 (one error convention for the library crates) is decided. Its rule 1 keeps
+  an `Option` whose `None` has one cause, which `decode` has today (P1-1). No error type
+  exists, and a refusal on the wire is the word `BAD_REQUEST`, a wire value the rules do not
+  reach. `termios` returns `std::io::Result`, and `rustix` its own `io::Result`.
   `redox_termios` has no fallible function. Fuchsia puts a `zx.Result` in each
   reply. The evidence repeats the case milestone 1160 (the release review of `clock_contract`)
   found: a refusal that is a wire word needs a type that keeps the word and implements the

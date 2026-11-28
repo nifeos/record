@@ -33,7 +33,7 @@ Reuse: the crate's own tests, and two scratch crates.
 - P0-2, a packer turns an operation past 255 into another verb: Open.
 - P0-3, the decoders refuse one field, and the rest of each word has no rule: Open.
 - P0-4, the verb table is an array of 23 open structs: Open.
-- P0-5, an error is a bare `i32` declared in four modules: Waiting on the errors decision of milestone 1129.
+- P0-5, an error is a bare `i32` declared in four modules: Open.
 - P0-6, the version text describes a check no verb carries: Open.
 - P0-7, the identity constants, the three `request` functions and the decoders: Waiting on the contract-layout decision of milestone 1129.
 - P0-8, one system's start conventions sit under no identity: Open.
@@ -169,7 +169,9 @@ literals 2, 9, 17 and 24. §326 (the names and numbers of the services' wire err
 replaces these numbers, and item 16 of milestone 1090 waits on it. `fuser` has
 `Errno(NonZeroI32)` with a constant for each code. `russh-sftp` has the enum `StatusCode`, with
 `Display`.
-Change: what the errors decision picks, over the codes of §326, declared once.
+Change: §329 (one error convention for the library crates) rules it. By rule 1 the `i32` and
+each `None` with several causes become a `Result` over an error type of the crate, shaped by
+rules 2, 4, 5, 9 and 10. The codes of §326 are declared once.
 Door: one-way. Effort: M.
 
 #### P0-6. The version text describes a check no verb carries
@@ -274,13 +276,11 @@ costs calls.
 
 ## Evidence for the shared decisions
 
-- Errors. Two functions return `Result<usize, i32>`, and twelve return `Option`, by the
-  census. The wire error is a negated code, bounded at 4095. `russh-sftp` has `StatusCode`, an
-  enum on the wire, and `Error`, five variants that each hold a `String`. `fuser` has `Errno`,
-  a newtype with `From<std::io::ErrorKind>`, and a private `RequestError` that carries the
-  lengths that failed. `p9` returns `std::io::Result`. The evidence points to a newtype over
-  the wire code that keeps an unknown code, with both traits, and to an enum of causes for a
-  decoder.
+- Errors. §329 is decided, and P0-5 follows it. Rule 1 reaches the two functions that return
+  `Result<usize, i32>` and the four encoders whose `None` has several causes. Rule 6 reaches
+  the four walkers (P1-1). The code on the wire is a wire value, and the contract-layout
+  decision shapes its type. `russh-sftp` has `StatusCode`, an enum on the wire, and `fuser`
+  has `Errno`, a newtype with `From<std::io::ErrorKind>`.
 - DMA regions, doorbells and tails, and register access do not touch this crate: not applicable.
 - Byte sinks and sources. The crate declares no trait. Every encoder writes into a `&mut [u8]`
   and returns the bytes used or `None`. The evidence points to plain slices in a contract, and
