@@ -34,11 +34,11 @@ questions here, and every step that needs a second boot says so.
 The run needs nobody at the firmware prompt and one power-on in all. Three pieces make that so:
 
 - **The card.** `script/board-image --tftp --server <host> --card <mounted card>` writes the card
-  once: its `boot.scr.uimg` asks the TFTP host for the served script first and boots the card's
+  once. Its `boot.scr.uimg` asks the TFTP host for the served script first, and boots the card's
   own kernel and archive only when the network gives nothing. The served script names the build,
-  so the card does not change between builds. Write the card's own pair from a build that does
-  not restart the board, so that a failed fetch cannot start a loop. `script/board-image` runs
-  `cargo xtask card-check` on the card after the copy; it must print `SEALED`.
+  so the card stays the same between builds. Write the card's own pair from a build that does not
+  restart the board, so that a failed fetch cannot start a loop. `script/board-image` runs `cargo
+  xtask card-check` on the card after the copy, and it must print `SEALED`.
 - **The first boot restarts the board itself.** A `script/board-image --tftp --soak --reboot`
   build runs the bring-up, prints every line in step 2, starts the soak (`soak-test: started`),
   and about 125 seconds later asks the board's power controller to reset it, through the PMIC
@@ -53,16 +53,15 @@ The run needs nobody at the firmware prompt and one power-on in all. Three piece
   ([board-console.md](board-console.md)). A watch that ends 2 or 3 is a hang, and the one remedy is
   to cut and restore the board's power; the card then boots whatever the host serves.
 
-The reset through the route was seen on this board when `reboot` was typed at the shell; the
-rebooting soak's own call of it is not yet in any bench log, so record which line the first boot
-printed last.
+This board has reset through the route when a person typed `reboot` at the shell. No bench log
+yet holds the rebooting soak's own call of it, so record which line the first boot printed last.
 
 ## Step 1: check that the tree names the port
 
 The kernel brings up port 1 only from its node in the tree U-Boot hands over. It has no constant
 fallback, because a guessed window is how a write lands on the wrong device. So the first question
-is what that tree says, and the kernel prints it before anything else in the bring-up. Nothing is
-typed at the firmware prompt. The boot in step 2 prints one line for every `pcie@` node in the
+is what that tree says, and the kernel prints it before anything else in the bring-up. Nobody types
+at the firmware prompt. The boot in step 2 prints one line for every `pcie@` node in the
 tree, then the port's verdict:
 
 ```
@@ -82,9 +81,9 @@ node lacks prints `absent`, and an absent `status` means `"okay"`. Record, for t
 - `linux,pci-domain`: `<0x1>`.
 - `status`: `"okay"` or absent.
 
-When the kernel accepts the node, the next line carries the two facts the tree lines do not: the
-32-bit window, which comes from `ranges` and should be at `0x38000000`, and the reset pin, which
-comes from `perst-gpios` and should be 28 (step 2's first example line).
+When the kernel accepts the node, the next line carries the two facts the tree lines leave out
+(step 2's first example line). The 32-bit window comes from `ranges` and should start at
+`0x38000000`. The reset pin comes from `perst-gpios` and should be 28.
 
 If the tree names the controller under other `reg-names` (StarFive's own kernel tree has used
 `"reg", "config"`), or has no `linux,pci-domain` of 1, the kernel prints `port One stays off` right
