@@ -168,12 +168,12 @@ recorded as such.
    every bus the runners attach, or a scope note says why not (DECISIONS §19).
 2. On xenon, a DHCP lease from the house router and a measured transfer from a local area network
    host, with the survey line naming the card, captured on the serial console and committed to
-   `bench/`; no photograph is needed (decided 2026-11-28 UTC). The runbook is
+   `bench/`. The log needs no photograph beside it (decided 2026-11-28 UTC). The runbook is
    [the I219 cabled run](../../notes/e1000e/the-i219-cabled-run.md). Met on 2026-11-28 (UTC) by nife
    `4c86f224b3` on xenon's I219-LM (survey line `00:1f.6 8086:15e3 class 020000`): a lease, then
-   100 MiB at 37.785 Mbit/s. The log is `bench/xenon-2026-11-28/i219-cabled-run.log`, unedited,
-   with a README giving its SHA-256, nifeos/nife@87068f6f285564d138d415d0fab00e7c5912418a.
-   nifeos/nife@0707b99 cites the run.
+   100 MiB at 37.785 Mbit/s. nife's `bench/xenon-2026-11-28/i219-cabled-run.log` holds the log
+   unedited, and its README gives the log's SHA-256
+   (nifeos/nife@87068f6f285564d138d415d0fab00e7c5912418a). nifeos/nife@0707b99 cites the run.
 
 ## Reuse
 
