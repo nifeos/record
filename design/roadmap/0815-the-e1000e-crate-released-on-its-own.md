@@ -214,8 +214,8 @@ links it carried, by milestone 857's provenance rule.
 
 - Steps 5 and 6 wait on milestone 887 (one CI template) and on 610's
   co-change column.
-- Milestone 494 is still PARTIAL, so the API may still move. Semver 0.x allows that; publishing
-  before 494 lands costs only version churn.
+- Milestone 494 is BUILT (2026-11-28, bench boot recorded at nifeos/nife@87068f6). The API may
+  still move, which semver 0.x allows at the cost of version churn.
 - `needs_person` is `yes` because the exit includes a publication only calef can approve. Everything
   before step 7 can start now.
 
