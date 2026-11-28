@@ -187,7 +187,8 @@ starts a driver itself only where the progenitor could not build it as well.
   pages and an eighteen-page DMA region the same way (`e1000e_service`'s header). It is also the
   wiring every `e1000e` gate already runs, so the booted system's stack is the tested one. An I219
   boot starts it too. With no cable the boot waits 10 s for link, starts no stack (its DHCP wait
-  would hold the prompt) and says `NONE`.
+  would hold the prompt, milestone 1180 (the boot takes its DHCP lease when it comes)) and says
+  `NONE`.
 - radon's Ethernet stack (milestone 53 (the board's own peripherals)) is the `e1000e` path's twin on riscv64. While
   `designware_ethernet_service::PROVEN_ON_SILICON` is `true`: radon's boot starts `net_stack` on
   it, and with no cable waits five seconds, then says `NONE`.

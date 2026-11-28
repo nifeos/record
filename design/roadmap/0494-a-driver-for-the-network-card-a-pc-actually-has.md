@@ -245,6 +245,8 @@ meet a known gap). Take no dependency; vendor nothing.
   the kernel builds `net_stack` on it when there is no virtio-net NIC and grants the progenitor its
   endpoint, and swish-check's x86_64 leg types the fetch lines. An I219 is brought up at boot too,
   and a boot with no cable costs the 10 s link wait. `notes/e1000e.md`'s BUGS.
+- **Milestone 1180.** A cabled port with no DHCP server answering holds the boot short of its
+  prompt. Milestone 1180 (the boot takes its DHCP lease when it comes).
 - **Recorded.** Polled with a 1 ms sleep, and one server at a time. `kernel/src/user/e1000e_service.rs`'s
   and `components/src/e1000e_transport.rs`'s BUGS.
 - **Recorded.** `find_e1000e_device` is a second copy of `find_nvme_device` with a different
