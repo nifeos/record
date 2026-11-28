@@ -11,9 +11,8 @@ needs_person: yes
 
 *(The number, the title and the slug are provisional.)*
 
-Raised 2026-11-28 (UTC) by lane `lane/radon-unexercised-hardware`. On that date calef asked for a
-milestone for every part of the VisionFive 2 that nife has not yet exercised on the board, and
-this is one of them.
+Raised 2026-11-28 (UTC) by lane `lane/radon-unexercised-hardware`. Milestone 1166 (an eMMC module in
+radon's socket) says why.
 
 ## What is unexercised
 

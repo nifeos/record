@@ -46,7 +46,7 @@ VisionFive 2's socket remains unverified: the VisionFive 2 datasheet promises on
 - The module, fitted by a person with the board powered off.
 - The eMMC half of the card protocol in `designware_mobile_storage`: `SEND_OP_COND` instead of the
   SD sequence, the extended CSD read, and the bus-width and timing switches.
-- 1.8 V signalling for HS200 and DDR, which means asking the PMIC for the `emmc_vdd` rail first.
+- 1.8 V signaling for HS200 and DDR, which means asking the PMIC for the `emmc_vdd` rail first.
   The kernel's AXP15060 path on I2C5 already talks to that PMIC.
 - DMA confinement. The JH7110 has no IOMMU (its datasheet lists none, and `notes/iommu.md` says the
   same), so the IDMAC can reach any physical address. The microSD path's answer carries over: one

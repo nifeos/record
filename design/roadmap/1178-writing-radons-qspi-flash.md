@@ -11,9 +11,8 @@ needs_person: yes
 
 *(The number, the title and the slug are provisional.)*
 
-Raised 2026-11-28 (UTC) by lane `lane/radon-unexercised-hardware`. On that date calef asked for a
-milestone for every part of the VisionFive 2 that nife has not yet exercised on the board, and
-this is one of them.
+Raised 2026-11-28 (UTC) by lane `lane/radon-unexercised-hardware`. Milestone 1166 (an eMMC module in
+radon's socket) says why.
 
 ## What is unexercised
 
@@ -63,7 +62,8 @@ unproven on radon (`notes/visionfive2.md`, "Boot-mode switches").
 ## What it needs
 
 - A Cadence QSPI crate for reads: the controller's indirect read and the JEDEC identity and SFDP
-  commands, through milestone 1175's (SPI on radon's header) way of holding a controller by grant.
+  commands. It holds the controller by grant, as milestone 1175 (SPI on radon's header: the PL022
+  controller, looped back) does.
 - A ruling from calef before any write. A write to this flash fails in a way that no commit
   reverts, and only a person at the board can undo it.
 - For any write: a person at radon, a host on the console with the recovery binary and both
