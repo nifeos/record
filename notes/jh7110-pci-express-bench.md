@@ -115,6 +115,10 @@ script/board-console --until none --for 5m --log target/board/disk-read-bench.lo
 The console has no stage word for this boot, so it watches for the whole five minutes; the boot
 halts long before that, after `disk-read-bench: done, halting.`
 
+The console's exit code does not judge this boot. The boot prints its stage lines before the bench
+starts, so a boot that hangs later still exits 0 when the five minutes run out. Only the
+`disk-read-bench:` lines decide checks 7 and 8, and a log with no verdict line is a FAIL.
+
 The bring-up lines of step 2 print again, and then every line starts `disk-read-bench:`. A good
 boot ends like this, where `<...>` stands for what the drive and the build give:
 
@@ -150,7 +154,7 @@ Fill one row per check. A check that did not run is UNRUN, never PASS.
 | 5 | root port | `00:00.0` class `060400`, `bridge to buses 01..=01` | |
 | 6 | drive | `01:00.0` class `010802`, and no other `01:` line | |
 | 7 | NVMe (step 3) | `controller nvme 01:00.0`, a `namespace` line, and `size ... agrees` | |
-| 8 | reads (step 3) | `landing ... both times` and `verdict READ-AT-RATE`; a `SKIPPED` or `FAILED` verdict is a FAIL | |
+| 8 | reads (step 3) | `landing ... both times` and `verdict READ-AT-RATE`; a `SKIPPED` or `FAILED` verdict, or no verdict line, is a FAIL | |
 | 9 | after a power cycle | checks 2 to 6 from a boot without the feature, then 7 and 8 from step 3, again | |
 
 ## What a failure looks like
