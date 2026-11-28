@@ -1,6 +1,5 @@
 ---
-status: BUILT
-built: 2026-11-28
+status: PARTIAL
 raised: 2026-11-26
 milestone_dependencies: 1111, 1129
 decision_dependencies: none
@@ -35,6 +34,7 @@ device-side crates a caller may already know the vocabulary from.
 - P1-2, no fallible function has an `# Errors` section: Done, partsfoundry/universal_serial_bus#6.
 - P1-3, two items have an example, and neither uses `?`: Done, partsfoundry/universal_serial_bus#6.
 - P1-4, the package ships the repository's machinery: Done, partsfoundry/universal_serial_bus#6.
+- P1-5, `Refusal` and its field `at` break decision 0329's names: Open.
 - P2-1, a general descriptor iterator: Done, partsfoundry/universal_serial_bus#6.
 - P2-2, the setup packet as bytes, and its parse: Done, partsfoundry/universal_serial_bus#6.
 - P2-3, the fields `DeviceDescriptor` and `ConfigurationHeader` leave out: Done,
@@ -91,16 +91,13 @@ that alone, so the review also reads OpenBSD and Linux, which do the same job in
   no HID keyboard layer. This crate has no dependencies, allocates nothing, forbids unsafe code and
   proves its walk and its report diff with five Kani harnesses.
 - Than `nusb`: `nusb`'s `descriptors` module is the best descriptor reader read, with a general
-  `DescriptorIter` and typed views, but it is a std crate whose module comes with the whole
-  user-space stack. Its walk stops quietly (with a log line) at a descriptor whose length is below
+  `DescriptorIter` and typed views, but it comes with a whole std user-space stack. Its walk stops quietly (with a log line) at a descriptor whose length is below
   2 or past the buffer, where this crate answers `Refusal::Malformed { at }` naming the offset. On
   the same 94 bytes this crate's walk to the keyboard's endpoint took 41.6 ns and `nusb`'s
   took 75.5 ns (Measured performance).
 - Than `usbh`: `usbh` 0.1.0's keyboard driver casts the report with `unsafe`, reports pressed keys
-  with no release events and no phantom check, and parses descriptors with `nom`. Its last release
-  is from 2023.
-- Than `usb-host`: `usb-host` 0.1.3 is a trait set with `repr(C)` descriptor structs and no walk;
-  its last release is from 2022.
+  with no release events and no phantom check, and parses descriptors with `nom`.
+- Than `usb-host`: `usb-host` 0.1.3 is a trait set with `repr(C)` descriptor structs and no walk.
 - Than `usbd-hid` and `keycode`: they build reports on the device side or map key names; neither
   reads a report from a device. Their `KeyboardReport` and `KeyMap` types are the vocabulary a
   caller may already know, and this crate's `BootReport` holds the same report in seven bytes,
@@ -202,6 +199,13 @@ The manifest has no `include`, so the package carries `CODEOWNERS`, `_typos.toml
 Change: an `include` list of `src/`, the licenses, the README and the changelog. Door: two-way.
 Effort: S.
 
+#### P1-5. `Refusal` and its field `at` break decision 0329's names
+
+Verified in source (C-WORD-ORDER).
+Decision 0329 names a position `offset` (rule 6) and ends an error type's name in `Error` (rule
+10). Change: `Malformed { offset }`, and `DescriptorError` (provisional), since only the descriptor
+parsers return it. Door: one-way at publish. Effort: S.
+
 ### P2: may follow
 
 #### P2-1. A general descriptor iterator
@@ -285,17 +289,14 @@ neither cost matters to a driver.
   impls.
 - **Direct memory access regions.** Not applicable. The crate reads and writes only slices the
   caller passes (`&[u8]` in, values out); it hands no buffer to a device and holds no address.
-- **Doorbells and tails.** Not applicable. There is no ring. The one place the crate meets a host
-  controller's queue is `SetupPacket::to_u64` (`src/request.rs`), the quadword an xHCI setup stage
-  carries; the caller's controller driver owns the ring and rings the doorbell.
+- **Doorbells and tails.** Not applicable. There is no ring. `SetupPacket::to_u64` builds the
+  quadword an xHCI setup stage carries; the caller's driver owns the ring.
 - **Register access.** Not applicable. The crate touches no hardware (`src/lib.rs` documents it as
   pure computation) and defines no register trait.
 - **Byte sinks.** Not applicable: `changes` reports events, not bytes (P0-3).
 - **Feature names and simulators.** Not applicable. The manifest declares no features and no
-  dependencies, and the crate exports no simulator. Its tests build configuration bytes inline,
-  and `fuzz/` has two targets, the configuration walk and the report diff.
-- **Memory regions.** Not applicable. The crate allocates nothing and reserves no memory; its
-  largest values are eight bytes.
+  dependencies, and the crate exports no simulator.
+- **Memory regions.** Not applicable. The crate allocates nothing.
 
 ## Follow-on
 
