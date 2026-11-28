@@ -1,8 +1,8 @@
 # Prior art for a direct virtio grant
 
 An appendix to [the milestone](../1062-the-device-control-planes-leave-the-kernel.md),
-the background to its step 7 design. It sits apart so the milestone stays within §212's 3,000
-words.
+the background to its step 7 design. It sits apart so the milestone stays within §212 (a prose budget)'s
+3,000 words.
 
 - nife's xHCI driver (milestone 242) holds its register file less the MSI-X pages, and a DMA region
   the kernel confined first. The kernel refuses to start it unconfined (`Absent::Unconfined` in
