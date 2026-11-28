@@ -71,8 +71,7 @@ The I219's PHY half; QEMU never takes the PCH path, so xenon is the test.
   so a PHY access without it does not compile. One falsifiable Kani harness; writing it found that
   FreeBSD truncates a page select above `0x7ff`, which this port refuses.
 - QEMU proves the MDIO read: the DHCP gate asserts the 82574L's PHY identifier, `0x01410cb0`.
-- The boot refusal's lift is one constant, `e1000e_service::PCH_PROVEN_ON_SILICON`, which is `true`
-  on the cabled run's evidence (nifeos/nife@0707b99).
+- The boot refusal's lift is one constant, `e1000e_service::PCH_PROVEN_ON_SILICON`, now `true`.
 
 ## Bench runbook: one boot on xenon (calef)
 
@@ -168,11 +167,9 @@ recorded as such.
    every bus the runners attach, or a scope note says why not (DECISIONS §19).
 2. On xenon, a DHCP lease from the house router and a measured transfer from a local area network
    host, photographed, with the survey line naming the card. The runbook is
-   [the I219 cabled run](../../notes/e1000e/the-i219-cabled-run.md). Met on 2026-11-28 (UTC): nife
-   `4c86f224b3` on xenon's I219-LM (`8086:15e3`, the survey's `00:1f.6 8086:15e3 class 020000`)
-   took a DHCP lease and received 104857600 bytes from a local area network peer in 22.200 s
-   (37.785 Mbit/s), ending `verdict LEASED-AND-MEASURED`; the serial console's transcript is the
-   record. `PCH_PROVEN_ON_SILICON` cites it, nifeos/nife@0707b99.
+   [the I219 cabled run](../../notes/e1000e/the-i219-cabled-run.md). Met on 2026-11-28 (UTC) by nife
+   `4c86f224b3` on xenon's I219-LM (survey line `00:1f.6 8086:15e3 class 020000`): a lease, then
+   100 MiB at 37.785 Mbit/s, recorded by the serial console. nifeos/nife@0707b99 cites it.
 
 ## Reuse
 
@@ -241,9 +238,9 @@ meet a known gap). Take no dependency; vendor nothing.
 
 - **Outstanding.** The cabled run's transcript is not yet in nife's `bench/` as
   `bench/xenon-2026-11-28/i219-cabled-run.log`, which the runbook's "Record the result" asks for
-  (checked: nife's `main` has no `bench/xenon-2026-11-28/`).
-- **Done.** The bench runbook on xenon (exit criterion 2), and `PCH_PROVEN_ON_SILICON` set `true`
-  in `kernel/src/user/e1000e_service.rs` on its evidence, nifeos/nife@0707b99.
+  (nife's `main` has no `bench/xenon-2026-11-28/`).
+- **Done.** The bench runbook on xenon (exit criterion 2), and `PCH_PROVEN_ON_SILICON` set `true`,
+  nifeos/nife@0707b99.
 - **Done.** The booted system uses this NIC since 2026-10-05 (milestone 198 (a package manager)):
   the kernel builds `net_stack` on it when there is no virtio-net NIC and grants the progenitor its
   endpoint, and swish-check's x86_64 leg types the fetch lines. An I219 is brought up at boot too,
