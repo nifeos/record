@@ -21,7 +21,8 @@ struck a bare-metal driver for it as the board's display path. It called that a 
 that proves nothing rung four does not, and milestone 157 (real display output on the board:
 U-Boot's `simple-framebuffer` handoff) took the display path instead. This block does not reopen
 that ruling for display. It records the GPU as unexercised hardware and asks what the smallest proof
-of life costs.
+of life costs. Whether the block stays on the roadmap at all is a question for calef, since rung
+five's reasons may cover a proof of life too.
 
 ## The hardware, from primary sources
 
