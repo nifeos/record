@@ -44,17 +44,23 @@ The run needs nobody at the firmware prompt and one power-on in all. Three piece
   and about 125 seconds later asks the board's power controller to reset it, through the PMIC
   route ([board-reboot.md](board-reboot.md)), before the firmware's own reset
 ([soak.md](soak.md#the-rebooting-soak-on-radon-which-is-milestone-249s-experiment)). The served set is
-  swapped for the second boot's while the first one soaks. If the swap cannot be made in time,
+  swapped for step 3's while the first one soaks, so the board comes back as the drive-reading
+  boot. If the swap cannot be made in time,
   `script/board-console --stop` sends the one byte that disarms the reset.
 - **The console decides when each boot is done.** `script/board-console --until soak` exits 0 on
-  the first boot's `soak-test: started`, and a second watch, started straight after, catches the
-  reset lines and the second boot up to the stage that boot prints last. Exit 1 is a failure the
-  board announced, 2 a board that went quiet, 3 a stage not reached in time
+  the first boot's `soak-test: started`. A second watch, started straight after, catches the reset
+  lines and step 3's boot. That boot prints no stage word, so the watch is `--until none`, as in
+  step 3, and runs ten minutes rather than five because it starts during the soak. Exit 1 is a
+  failure the board announced, 2 a board that went quiet, 3 a stage not reached in time
   ([board-console.md](board-console.md)). A watch that ends 2 or 3 is a hang, and the one remedy is
-  to cut and restore the board's power; the card then boots whatever the host serves.
+  to cut and restore the board's power; the card then boots whatever the host serves. The second
+  watch ends 0 whether step 3's boot halted or hung after its tour line, so its log decides checks
+  7 and 8.
 
 This board has reset through the route when a person typed `reboot` at the shell. No bench log
 yet holds the rebooting soak's own call of it, so record which line the first boot printed last.
+A reset is not a power cycle, so a run with no power cycle between the boots leaves check 9
+UNRUN.
 
 ## Step 1: check that the tree names the port
 
@@ -144,7 +150,7 @@ Fill one row per check. A check that did not run is UNRUN, never PASS.
 | 6 | drive | `01:00.0` class `010802`, and no other `01:` line | |
 | 7 | NVMe | no `controller present but failed bring-up` or `disk tree   : not started` line; `ls /disk/nvme0` lists `n1` (UNRUN on a network boot, step 2) | |
 | 8 | reads | ten `ioping -c 10 -s 4k n1` reads in `/disk/nvme0` complete with no error (UNRUN on a network boot, step 2) | |
-| 9 | second boot | checks 2 to 8 again after a restart: a power cycle, or a reset through the board's power controller (record which) | |
+| 9 | second boot | checks 2 to 8 again after a power cycle | |
 
 ## What a failure looks like
 
