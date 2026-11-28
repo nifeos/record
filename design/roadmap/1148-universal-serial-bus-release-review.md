@@ -23,23 +23,22 @@ device-side crates a caller may already know the vocabulary from.
 
 ## Finding status
 
-- P0-1, `Refusal` and `Speed` are exhaustive: Done in partsfoundry/universal_serial_bus#6.
-- P0-2, three public structs that will grow are exhaustive: Done in
+- P0-1, `Refusal` and `Speed` are exhaustive: Done, partsfoundry/universal_serial_bus#6.
+- P0-2, three public structs that will grow are exhaustive: Done,
   partsfoundry/universal_serial_bus#6.
-- P0-3, `changes` reports through a callback of a bare `u8` and `bool`: Done in
+- P0-3, `changes` reports through a callback of a bare `u8` and `bool`: Done,
   partsfoundry/universal_serial_bus#6.
-- P0-4, `SetupPacket::request_type` is a bare `u8`: Done in partsfoundry/universal_serial_bus#6.
+- P0-4, `SetupPacket::request_type` is a bare `u8`: Done, partsfoundry/universal_serial_bus#6.
 - P1-1, `Refusal` has no `Display` and no `core::error::Error`: Waiting on the errors decision of
   milestone 1129.
-- P1-2, no fallible function has an `# Errors` section: Done in partsfoundry/universal_serial_bus#6.
-- P1-3, two items have an example, and neither uses `?`: Done in
+- P1-2, no fallible function has an `# Errors` section: Done, partsfoundry/universal_serial_bus#6.
+- P1-3, two items have an example, and neither uses `?`: Done, partsfoundry/universal_serial_bus#6.
+- P1-4, the package ships the repository's machinery: Done, partsfoundry/universal_serial_bus#6.
+- P2-1, a general descriptor iterator: Done, partsfoundry/universal_serial_bus#6.
+- P2-2, the setup packet as bytes, and its parse: Done, partsfoundry/universal_serial_bus#6.
+- P2-3, the fields `DeviceDescriptor` and `ConfigurationHeader` leave out: Done,
   partsfoundry/universal_serial_bus#6.
-- P1-4, the package ships the repository's machinery: Done in partsfoundry/universal_serial_bus#6.
-- P2-1, a general descriptor iterator: Done in partsfoundry/universal_serial_bus#6.
-- P2-2, the setup packet as bytes, and its parse: Done in partsfoundry/universal_serial_bus#6.
-- P2-3, the fields `DeviceDescriptor` and `ConfigurationHeader` leave out: Done in
-  partsfoundry/universal_serial_bus#6.
-- P2-4, the manifest has no `documentation` key: Done in partsfoundry/universal_serial_bus#6.
+- P2-4, the manifest has no `documentation` key: Done, partsfoundry/universal_serial_bus#6.
 
 ## Open decisions
 
@@ -314,8 +313,8 @@ shows the block BUILT.
   `hut` and did not read them.
 - The report-diff comparison is against a port of Linux's loop written for the bench, since no
   crate on crates.io diffs two boot reports.
-- The review read the OpenBSD files from the GitHub mirror's main branch, which carries no release tags;
-  the revisions in the table are the files' own.
+- The review read the OpenBSD files from the GitHub mirror's untagged main branch; the table gives
+  each file's own revision.
 
 ## Index row
 
