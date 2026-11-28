@@ -170,7 +170,7 @@ Needs xenon, its monitor on the display port, a USB keyboard plugged into a rear
   real hardware, and the part that closes milestone 192. On 2026-10-21 (UTC) xenon's keyboard
   reached the shell with no monitor attached, and with pull request #2529's settle the step 2 line
   read `a keyboard on port 4 (low speed, c0f4:08f5)` (`bench/xenon-2026-10-21/README-242.md`).
-  The fixes for both faults that boot found are merged: pull request #2528 (the handover panic with
+  `main` carries the fixes for both faults that boot found: pull request #2528 (the handover panic with
   the monitor attached) and #2529 (the scan now waits for the ports to re-detect). Step 3 with the
   monitor needs only a bench run on xenon from `main`.
 - **Recorded.** Hubs: a keyboard behind a hub, or with one built in, is not found. In

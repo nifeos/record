@@ -49,8 +49,8 @@ Every register and every step is transcribed from mainline Linux at `torvalds/li
 
 OpenBSD (`sys/arch/riscv64/dev/stfpcie.c`) and FreeBSD (`sys/riscv/starfive/jh7110_pcie.c`) both
 drive this controller (`starfive,jh7110-pcie`). The spelled-out register names carry the Linux
-spelling as their `doc(alias)`; the naming rule puts OpenBSD's spelling first, so those aliases are
-rechecked against `stfpcie.c` (Follow-on).
+spelling as their `doc(alias)`. The naming rule puts OpenBSD's spelling first, so a follow-on
+checks those aliases against `stfpcie.c`.
 
 ## The bring-up, in order
 

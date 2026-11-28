@@ -288,10 +288,10 @@ The bench history, boot by boot, is in
 - An interrupt test fails on the board. `an_interrupt_that_arrives_before_the_wait_is_not_lost`
   never reaches the trap handler after the THRE fix. The PLIC/hart affinity path is the next place
   to look, not the UART; start by printing `crate::cpu::id()` and the assigned context inside
-  `arch::interrupt_controller::target_context` on the board. A candidate cause is the stuck PLIC
-  gateway milestone 890 found and fixed (nife's `bench/radon-2026-10-21/README-890.md`: the UART
-  raised its interrupt and the PLIC forwarded nothing until source 32 was completed); the test has
-  not been rerun on the board since that fix.
+  `arch::interrupt_controller::target_context` on the board. One candidate cause is the stuck PLIC
+  gateway that milestone 890 (riscv64 and x86_64 join the shared boot path) found and fixed. The
+  UART raised its interrupt, and the PLIC forwarded nothing until something completed source 32
+  (nife's `bench/radon-2026-10-21/README-890.md`). Nobody has rerun the test on the board since.
 - The `#[test_case]` suite assumes QEMU's synthetic devices. The `skip!()` of milestone 145 (a test that needs hardware the boot doesn't have can say so) covers the
   tests found so far; more may surface.
 - The `text_offset` in the Image header encodes one board's DRAM base; `boot.s` and the
