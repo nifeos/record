@@ -14,11 +14,10 @@ crate (queue mechanics, host-tested, 5 Kani harnesses), a rule-2 kernel driver c
 IOMMU before enable, class-code enumeration over §18 (the PCIe transport), and an end-to-end boot
 test on both ISAs. The network half is built to the bench (below, "The network half"), and so is the
 radon SD card and eMMC half (below, "The storage half on radon"). The network half has passed its
-radon bench boot, and the storage half its read and its scratch write; the IDMAC's bench run is
-outstanding. What else
-remains is two things. The board-side PLDA XpressRICH root
-complex that carries the NVMe driver to the real M.2 slot is milestone 163 (the JH7110's PCIe root
-complex), NOT-STARTED. And the EL0 NVMe driver that §86 (whether an NVMe driver can leave the
+radon bench boot, and the storage half its read, its scratch write and both through the IDMAC.
+What else remains is two things. The board-side PLDA XpressRICH root complex that carries the NVMe
+driver to the real M.2 slot is milestone 163 (the JH7110's PCIe root complex), PARTIAL: built, with
+its board steps outstanding. And the EL0 NVMe driver that §86 (whether an NVMe driver can leave the
 kernel) decides on is unbuilt. Scope and honest limits: notes/non-volatile-memory-express.md, BUGS
 included.
 
@@ -118,7 +117,8 @@ notes/designware-mobile-storage.md has the evidence, the safety argument and the
   `HostController::with_idmac`) hands each data phase to the controller's DMA engine over one region, a
   descriptor page and up to 256 data pages, and stops the engine before every return. It is
   built and tested against a `simulator` that walks the descriptor chain, with a Kani harness on the
-  chain; its bench run is outstanding. The storage bench times the same 8 MiB both ways, checks
+  chain. On radon it read at 10,740 KiB/s and passed the scratch write
+  (`bench/radon-2026-11-17/storage-bench-scratch-3695-fix.log`). The storage bench times the same 8 MiB both ways, checks
   the IDMAC's bytes against the polled read's, and in a write build runs the write test through
   it too.
 - Parity scope note (rule 5): the controller is the JH7110's, so the kernel half and the bench
@@ -162,7 +162,8 @@ and both trees are GPL and were read for hardware facts only.
 - **Milestone 940.** radon's second port, `gmac1`, which this driver does not bring up, is
   milestone 940 (radon's second Ethernet port): `design/roadmap/0940-second-jh7110-ethernet-port.md`.
 - **Milestone 163.** The board-side PLDA XpressRICH root complex that would carry the NVMe driver
-  to the real M.2 slot. NOT-STARTED on a HARDWARE gate.
+  to the real M.2 slot. PARTIAL: built, with its board steps waiting on a person and a fitted
+  drive.
 - **Decision.** Whether the NVMe driver can leave the kernel is answered:
   `design/decisions/0086-el0-nvme-driver.md` is DECIDED, option 2a now with option 4 addable without
   reshaping the EL0 driver, and the choice between them settled by measurement.
@@ -185,10 +186,14 @@ and both trees are GPL and were read for hardware facts only.
   bulk-only transport and SCSI, as a confined server), which joined this block's dependencies at
   its promotion. The microSD bench
   step above still proves the MSHC driver; it is no longer the block server's target.
-- **Outstanding.** The IDMAC data path, unblocked. Its gate was radon's DMA coherence, which the
-  network half's probe has read as `Coherent`, so it needs no cache maintenance (milestone 655
-  (DMA on a non-coherent RISC-V machine) is not on its path). The polled read it was waiting on
-  works, at 10,959 KiB/s. Then high speed and an 8-bit eMMC bus, measured against that rate.
+- **Done.** The IDMAC data path on radon, 2026-11-17 (UTC): `READ-OK 10603 KiB/s, WRITE-VERIFIED
+  sectors 2040..2048 (were zero), restored, IDMAC READ-OK 10740 KiB/s, IDMAC WRITE-VERIFIED, EL0
+  block server served` (`bench/radon-2026-11-17/storage-bench-scratch-3695-fix.log`). radon's DMA is
+  coherent, so it needs no cache maintenance, and milestone 655 (DMA on a non-coherent RISC-V
+  machine) is not on its path.
+- **Outstanding.** High speed on the microSD slot, measured against the 10,740 KiB/s IDMAC rate.
+- **Milestone 1166.** The 8-bit eMMC bus needs a module in radon's eMMC socket, which is empty:
+  milestone 1166 (an eMMC module in radon's socket).
 - **Done.** The rule-5 parity note this block says it must carry is carried, in `notes/non-volatile-memory-express.md`
   under a heading naming this milestone, stating what ships on all three architectures and what is
   board-specific.
