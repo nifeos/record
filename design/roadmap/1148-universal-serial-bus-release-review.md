@@ -1,5 +1,6 @@
 ---
-status: PARTIAL
+status: BUILT
+built: 2026-11-28
 raised: 2026-11-26
 milestone_dependencies: 1111, 1129
 decision_dependencies: none
@@ -34,7 +35,8 @@ device-side crates a caller may already know the vocabulary from.
 - P1-2, no fallible function has an `# Errors` section: Done, partsfoundry/universal_serial_bus#6.
 - P1-3, two items have an example, and neither uses `?`: Done, partsfoundry/universal_serial_bus#6.
 - P1-4, the package ships the repository's machinery: Done, partsfoundry/universal_serial_bus#6.
-- P1-5, `Refusal` and its field `at` break decision 0329's names: Open.
+- P1-5, `Refusal` and its field `at` break decision 0329's names: Done,
+  partsfoundry/universal_serial_bus#10.
 - P2-1, a general descriptor iterator: Done, partsfoundry/universal_serial_bus#6.
 - P2-2, the setup packet as bytes, and its parse: Done, partsfoundry/universal_serial_bus#6.
 - P2-3, the fields `DeviceDescriptor` and `ConfigurationHeader` leave out: Done,
