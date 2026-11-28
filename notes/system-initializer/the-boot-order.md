@@ -159,7 +159,7 @@ slot, because that is the endowment every network test proves. Its listen grant 
 `NO_LISTEN_GRANT`: nothing at this prompt has asked to listen, and a listen grant is a policy
 someone has to choose. The boot blocks until DHCP answers, because the lease is the stack's first
 message and it serves nobody before sending it. A NIC with no DHCP server therefore never reaches a
-prompt, which the crate's BUGS records. A stack the kernel built on an `e1000e` is taken the same
+prompt, which milestone 1180 (the boot takes its DHCP lease when it comes) removes. A stack the kernel built on an `e1000e` is taken the same
 way, lease and all. The name resolver asks the lease's name server, needs entropy for its query
 ids, and serves nobody until the spawn service grants a job a zone.
 
