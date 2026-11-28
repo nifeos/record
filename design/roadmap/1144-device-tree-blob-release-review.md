@@ -28,18 +28,18 @@ Reuse: the prior-art table weighs each device tree reader a caller could take in
 
 ## Finding status
 
-- P0-1, a blob's acceptance depends on the lookup: Open.
-- P0-2, two rules for a short output slice: Open.
+- P0-1, a blob's acceptance depends on the lookup: Done, partsfoundry/device_tree_blob#7.
+- P0-2, two rules for a short output slice: Done, partsfoundry/device_tree_blob#7.
 - P0-3, the errors carry no location: Waiting on the errors decision of milestone 1129.
-- P0-4, `Region` has public fields and is not `#[non_exhaustive]`: Open.
-- P0-5, the lookups match a name prefix: Open.
-- P1-1, no general traversal: Open.
-- P1-2, the common traits are missing: Open.
-- P1-3, four of seventeen functions have an example: Open.
-- P1-4, the `from_pointer` safety contract is incomplete: Open.
-- P2-1, `Debug` prints the blob twice: Open.
-- P2-2, the package ships the repository's tooling: Open.
-- P2-3, every walk reads every property name: Open.
+- P0-4, `Region` has public fields and is not `#[non_exhaustive]`: Done, partsfoundry/device_tree_blob#7.
+- P0-5, the lookups match a name prefix: Done, partsfoundry/device_tree_blob#7.
+- P1-1, no general traversal: Done, partsfoundry/device_tree_blob#7.
+- P1-2, the common traits are missing: Done, partsfoundry/device_tree_blob#7.
+- P1-3, four of seventeen functions have an example: Done, partsfoundry/device_tree_blob#7.
+- P1-4, the `from_pointer` safety contract is incomplete: Done, partsfoundry/device_tree_blob#7.
+- P2-1, `Debug` prints the blob twice: Done, partsfoundry/device_tree_blob#7.
+- P2-2, the package ships the repository's tooling: Done, partsfoundry/device_tree_blob#7.
+- P2-3, every walk reads every property name: Done, partsfoundry/device_tree_blob#7.
 
 ## Open decisions
 

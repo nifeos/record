@@ -22,13 +22,13 @@ Reuse: the prior-art table weighs each intrusive list a caller could take instea
 
 ## Finding status
 
-- P0-1, `set_next` takes the whole node by `&mut`: Open.
-- P1-1, `Iter` has no `Debug`, `Clone` or exact size: Open.
-- P2-1, the standard collection traits: Open.
-- P2-2, `front` and `append`: Open.
-- P2-3, `Sync` when `T: Sync`: Open.
-- P2-4, the examples unwrap: Open.
-- P2-5, the bound on the struct declarations: Open.
+- P0-1, `set_next` takes the whole node by `&mut`: Done, partsfoundry/intrusive_queue#9.
+- P1-1, `Iter` has no `Debug`, `Clone` or exact size: Done, partsfoundry/intrusive_queue#9.
+- P2-1, the standard collection traits: Done, partsfoundry/intrusive_queue#9.
+- P2-2, `front` and `append`: Done, partsfoundry/intrusive_queue#9.
+- P2-3, `Sync` when `T: Sync`: Done, partsfoundry/intrusive_queue#9.
+- P2-4, the examples unwrap: Done, partsfoundry/intrusive_queue#9.
+- P2-5, the bound on the struct declarations: Done, partsfoundry/intrusive_queue#9.
 - P2-6, removal in constant time: Open.
 
 ## Open decisions
