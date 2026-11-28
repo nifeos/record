@@ -1,5 +1,6 @@
 ---
 status: BUILT
+built: 2026-11-28
 raised: 2026-11-26
 milestone_dependencies: 1111, 1129
 decision_dependencies: none
@@ -298,7 +299,7 @@ neither cost matters to a driver.
 
 ## Follow-on
 
-- **Outstanding.** The errors decision of milestone 1129 takes D4. P0-3's two new type
+- **Recorded.** The errors decision of milestone 1129 takes D4. P0-3's two new type
   names go to a naming ruling before the change lands. No other shared decision applies.
 
 ## Done when
