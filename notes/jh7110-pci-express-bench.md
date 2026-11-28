@@ -15,9 +15,10 @@ questions here, and every step that needs a second boot says so.
   over anything here.
 - Power off before you touch the M.2 slot. Seat the drive and fit its screw with the board
   unpowered. The slot takes an M-key 2230, 2242, 2260 or 2280 drive.
-- Nothing on this page writes the drive. The kernel's disk tree mounts the drive read-only at
-  `/disk`, so a drive with data on it is safe. Still, use a drive whose contents you can lose,
-  because a fault in a new driver is exactly what this run looks for.
+- Nothing on this page writes the drive. The bring-up reads the drive's configuration space and
+  nothing else, and a board booted over the network starts no NVMe driver (step 2 says why).
+  Still, use a drive whose contents you can lose, because a fault in a new driver is exactly what
+  this run looks for.
 
 ## What the run needs
 
@@ -40,7 +41,8 @@ fdt list /soc
 ```
 
 Find the node whose `compatible` is `"starfive,jh7110-pcie"` and whose `linux,pci-domain` is 1 (in
-mainline's tree, `pcie@9c0000000`), and print it:
+mainline's tree, `pcie@9c0000000`), and print it. A tree that names its nodes another way still
+lists two PCIe controllers under `/soc`; port 1 is the one whose `reg` starts at `0x2c000000`.
 
 ```
 fdt print /soc/pcie@9c0000000
@@ -54,11 +56,12 @@ Record each of these in the results table:
 - `perst-gpios`: its second cell should be 28.
 - `status`: `"okay"`.
 
-If the board boots with the tree in `${fdt_addr_r}` instead (the extlinux path), use that address
-in `fdt addr`. Then `boot` (or power-cycle) to continue.
+nife's boot script hands the kernel the tree at `${fdtcontroladdr}`, the one U-Boot itself runs
+on, so that is the tree to read. Then continue the boot from the same prompt.
 
 If the tree names the controller under other `reg-names` (StarFive's own kernel tree has used
-`"reg", "config"`), the kernel prints `port One stays off` in step 2 and goes no further. Record
+`"reg", "config"`), or has no `linux,pci-domain` of 1, the kernel prints `port One stays off` in
+step 2 and goes no further. Record
 the names exactly. That answers the first board question in milestone 163, and the next change
 is in `machine_discovery::jh7110::pci_express`, not at the bench.
 
@@ -80,24 +83,23 @@ tree; counts vary):
                 2 function(s) over 2 bus(es) of the 2 described; mapping 2048 KiB of config space
 ```
 
-The link status word needs bit 5 (`DATA_LINK_ACTIVE`) set; other bits may differ. Then the NVMe
-path runs as it does on every machine. The admin process identifies the controller, and the disk
-tree starts only once the drive has answered with its size
-([block-devices.md](block-devices.md)). At the shell prompt:
+A clock line may end in ` (already up)`: firmware had left that domain running, and the bring-up
+found nothing to do. The link status word needs bit 5 (`DATA_LINK_ACTIVE`) set; other bits may
+differ. Later, the machine summary carries the window the bring-up recorded:
 
 ```
-ls /disk/nvme0
+  pcie             : ecam 0x00000009c0000000..0x9c0200000, bar window 0x38000000..0x40000000
 ```
 
-It lists `n1`, the whole namespace as one read-only file. If the image carries `ioping`, read the
-drive with it, which makes every request a device read:
+A port that stayed off prints `pcie             : none (this machine describes no host bridge)`
+there instead.
 
-```
-cd /disk/nvme0
-ioping -c 10 -s 4k n1
-```
-
-Record both outputs. Without `ioping`, check 8 is UNRUN.
+The NVMe path does not run on a board booted over the network. The kernel starts the NVMe server
+for a client only: the disk tree at `/disk`, which starts only beside a file service, or the file
+service itself, which takes an NVMe disk only on a machine that booted from one. A network boot of
+this board has neither, so no `non_volatile_memory_express` or `disk tree` line appears and
+`/disk/nvme0` does not exist. Checks 7 and 8 are UNRUN on such a build, for that reason, until the
+follow-on in milestone 163 lands.
 
 ## Step 3: judge the log
 
@@ -112,8 +114,8 @@ Fill one row per check. A check that did not run is UNRUN, never PASS.
 | 4 | link | `link up` | |
 | 5 | root port | `00:00.0` class `060400`, `bridge to buses 01..=01` | |
 | 6 | drive | `01:00.0` class `010802`, and no other `01:` line | |
-| 7 | NVMe | no `controller present but failed bring-up` or `disk tree : not started` line; `ls /disk/nvme0` lists `n1` | |
-| 8 | reads | ten `ioping` reads complete with no error | |
+| 7 | NVMe | no `controller present but failed bring-up` or `disk tree   : not started` line; `ls /disk/nvme0` lists `n1` (UNRUN on a network boot, step 2) | |
+| 8 | reads | ten `ioping -c 10 -s 4k n1` reads in `/disk/nvme0` complete with no error (UNRUN on a network boot, step 2) | |
 | 9 | second boot | checks 2 to 8 again after a power cycle | |
 
 ## What a failure looks like
@@ -128,7 +130,7 @@ Fill one row per check. A check that did not run is UNRUN, never PASS.
 | a trap or a hang right after `link up` | a configuration read faulted. See "Unsupported requests" below |
 | `01:01.0`, `01:02.0` and so on, all the same device | the root port does not filter device numbers on bus 1. See "Aliased devices" below |
 | `controller present but failed bring-up: ...` | the root complex worked and the NVMe driver refused the drive. That belongs to the NVMe path, not this milestone. Record the reason. |
-| `disk tree : not started` | the drive did not answer `SIZE`. The same holds as for the line above |
+| `disk tree   : not started: the NVMe disk did not answer SIZE` | the drive did not answer `SIZE`. The same holds as for the line above |
 
 ## What only the board can answer
 
@@ -145,7 +147,8 @@ The run above answers each one, so record what it shows:
   limit the walk.
 - **DMA coherence.** The Ethernet controller's DMA is measured coherent on this board
   ([designware-ethernet.md](designware-ethernet.md)). The PCI Express master sits on another port
-  of the interconnect, and nothing has measured it. The NVMe admin queue is itself a test: its
+  of the interconnect, and nothing has measured it. Once the NVMe path runs on this board, its
+admin queue is itself a test: its
   submission and completion rings are DMA, so an identify that times out or returns a zero size
   with the link up points here first. A byte-for-byte comparison of the drive's data against
   another machine's reading needs a dump tool the board image does not carry yet.
