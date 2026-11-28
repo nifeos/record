@@ -122,9 +122,8 @@ the policy is a loop over the ports in order.
 6. `network_bench` prints one block of lines per port (`nic`, `syscon`, `phy`, `link`), the
    syscon line naming the port it read, and runs the coherence probe on the port it hands out.
 7. **On radon, with a person moving the cable.** With the cable in `gmac1`'s jack, the bench
-   prints a `link` line and a `dhcp : leased` line for `0x16040000`. `verdict
-   LEASED-AND-MEASURED` waits on 53's receive stall. With the cable in `gmac0`'s jack, the run
-   matches 53's. With `gmac0` cabled to a switch that serves no DHCP and `gmac1` to the local area
+   prints a `link` line, a `dhcp : leased` line for `0x16040000` and `verdict
+   LEASED-AND-MEASURED`, as `gmac0` does. With the cable in `gmac0`'s jack, the run matches 53's. With `gmac0` cabled to a switch that serves no DHCP and `gmac1` to the local area
    network, the boot gives `gmac0` up after the bound and leases on `gmac1`. Both logs are committed
    under `bench/radon-<date>/`, each recording its port's PHY id, I/O voltage and settings source.
 8. `notes/designware-ethernet.md` says the cable may go in either jack, its runbook covers both,
@@ -132,9 +131,9 @@ the policy is a loop over the ports in order.
 
 ## BUGS
 
-- **The TCP transfer stall on radon's receive side is milestone 53's**, seen on `gmac0`. This
-  milestone does not fix it, and criterion 7 accepts a lease without a measured transfer for that
-  reason.
+- **The receive rate on radon is milestone 53's**, measured on `gmac0` at 14.3 Mbit/s on a gigabit
+  link. The transfer completes, so criterion 7 asks for a measured one; this milestone does not
+  raise the rate.
 - **A cable moved after boot is not followed.** The port is chosen once. Re-choosing on
   link loss needs the interrupt-driven link state that 53's polled driver does not have.
 - **`gmac1`'s interface select in the vendor U-Boot is unread.** The offset and shift come from

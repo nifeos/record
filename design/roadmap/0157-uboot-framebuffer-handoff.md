@@ -32,6 +32,19 @@ before nife's kernel ever runs. That is the same convention Linux's own `simplef
 every other bare-metal OS booted by U-Boot or UEFI GOP relies on. nife's job is to read where that
 buffer is and write pixels into it, not to program a display controller.
 
+## What the firmware is known to do
+
+Read from source, not yet seen on radon. StarFive's U-Boot (`starfive-tech/u-boot`
+`JH7110_VisionFive2_devel` at `c4c67bb66ae6`) enables HDMI output in
+`configs/starfive_visionfive2_defconfig` (`CONFIG_VIDEO_STARFIVE`, `CONFIG_DISPLAY_STARFIVE_HDMI`),
+and `board/starfive/visionfive2/starfive_visionfive2.c` draws a boot logo through the video class.
+So that U-Boot programs the display controller and the HDMI transmitter itself, before nife runs. The same defconfig
+does not set `CONFIG_VIDEO_DT_SIMPLEFB`, the option that writes a `simple-framebuffer` node into
+the tree it hands on, so the node this milestone reads may be absent. Whether it offers an EFI
+GOP instead, nobody has checked. Mainline U-Boot's `starfive_visionfive2_defconfig` (at
+`ece349ade297`) enables no video at all. Which U-Boot radon's flash carries, and what it hands on,
+is the first board step.
+
 ## What it needs
 
 - **Read the handoff, not assume it.** U-Boot advertises the framebuffer through a device-tree node

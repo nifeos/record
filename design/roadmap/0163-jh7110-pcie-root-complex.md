@@ -47,8 +47,10 @@ Every register and every step is transcribed from mainline Linux at `torvalds/li
 - `include/dt-bindings/clock/starfive,jh7110-crg.h` and `.../reset/starfive,jh7110-crg.h`: the STG
   clock and reset numbers.
 
-No BSD has a driver for this controller, so the spelled-out register names carry the Linux
-spelling as their `doc(alias)`.
+OpenBSD (`sys/arch/riscv64/dev/stfpcie.c`) and FreeBSD (`sys/riscv/starfive/jh7110_pcie.c`) both
+drive this controller (`starfive,jh7110-pcie`). The spelled-out register names carry the Linux
+spelling as their `doc(alias)`. The naming rule puts OpenBSD's spelling first, so a follow-on
+checks those aliases against `stfpcie.c`.
 
 ## The bring-up, in order
 
@@ -130,8 +132,11 @@ on it yet.
 ## Follow-on
 
 - **Outstanding.** Every item under "Steps that need the board", which needs a person at the board
-  with a drive fitted. `notes/jh7110-pci-express-bench.md` is the runbook.
+  with a drive fitted. An M.2 NVMe drive for radon is in hand and not yet fitted.
+  `notes/jh7110-pci-express-bench.md` is the runbook.
 - **Outstanding.** Port 0 and the VL805, which need `pci.rs` to carry two hosts.
+- **Outstanding.** Recheck each register name's `doc(alias)` against OpenBSD's `stfpcie.c`, which
+  the naming rule reads before Linux, and FreeBSD's `jh7110_pcie.c` after it.
 - **Outstanding.** The NVMe path on a board booted over the network. The NVMe server starts only
   for the disk tree, which starts only beside a file service, and the file service takes an NVMe
   disk only on a machine that booted from one (`memory::booted_from_nvme`, set on x86_64 only). A
