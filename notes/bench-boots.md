@@ -120,6 +120,45 @@ BUGS:
 - The eMMC socket is probed read-only, always. Whether radon has a module fitted is a bench fact the
   boot reports, and nothing writes to one.
 
+## `disk_read_bench`: an NVMe drive read through the disk tree's window
+
+`kernel/src/disk_read_bench.rs`, every architecture, for milestone 163 (the JH7110's PCIe root
+complex) on radon. The feature name is provisional. A board booted over the network starts no file
+service, so it never starts the NVMe server and never mounts `/disk/nvme0`. This boot starts the
+confined EL0 NVMe server itself, with the boot thread as the client the disk tree would be, and
+sends every request through the disk tree's window (`DISK_TREE_WINDOW`). The server refuses `WRITE`
+and `FLUSH` on that window's capability, and the boot sends neither, so nothing writes the drive. Every line starts `disk-read-bench:`.
+
+1. `measured`: the NVMe server's table entry, checked against the image the kernel vouches for.
+2. `controller nvme bb:dd.f (rid ...)`, and whether an IOMMU confines its DMA, with the scope
+   that says why. `controller none` if no function on the bus is NVMe class.
+3. `namespace`: the size in bytes, the LBA size and `blocks_per`.
+4. `size`: `GET_SIZE_BYTES` through the window, which must agree with the bring-up's figure.
+5. `landing`: blocks 0 to 16 read twice, the window filled with `0xaa` before the first read and
+   `0x55` before the second. The two digests must agree, so a read whose data never reached the CPU
+   fails instead of reporting one of the fills.
+6. `read`: up to 256 sequential 64 KiB reads from block 0, timed, with the rate and the time per
+   read.
+7. `verdict READ-AT-RATE | SKIPPED | FAILED`, then `done, halting.` and nothing after it.
+
+`SKIPPED` is no controller, or a namespace whose LBA size gives no `blocks_per` in `1..=8`; it is
+not a pass. `FAILED` names the step that failed, on the line above it. A figure is one request in
+flight, polled, plus two context switches per request: the driver's figure, not the drive's.
+
+`cargo xtask disk-read-bench` boots it under QEMU on all three architectures, with the suite's NVMe
+controller in front of a patterned image. It wants the `landing` digest the host computes from that
+image, and it fails if the image changed by a byte. A second case boots with
+no controller and wants `SKIPPED`. `script/board-image --tftp --extra-features disk_read_bench`
+builds it for the VisionFive 2, and [jh7110-pci-express-bench.md](jh7110-pci-express-bench.md) is
+the runbook that reads it.
+
+BUGS:
+
+- It reads the first 16 MiB of the namespace at most, so a fault further into the drive does not
+  show here.
+- The `landing` digest covers the first 64 KiB. Comparing it with another machine's reading of the
+  same drive is by hand.
+
 ## `xhci_port_probe`: what an xHCI's ports read, and when
 
 `kernel/src/xhci_port_probe.rs`, an instrument for one question about xenon: the driver's scan
