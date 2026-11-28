@@ -29,47 +29,81 @@ questions here. Checks 7 and 8 take a second boot, step 3.
 | A build of the commit under test | `git log -1` in your checkout names it; record the hash in the results table |
 | An NVMe drive in the M.2 slot | seen, with the board off |
 
+## Running it hands-free
+
+The run needs nobody at the firmware prompt and one power-on in all. Three pieces make that so:
+
+- **The card.** `script/board-image --tftp --server <host> --card <mounted card>` writes the card
+  once. Its `boot.scr.uimg` asks the TFTP host for the served script first, and boots the card's
+  own kernel and archive only when the network gives nothing. The served script names the build,
+  so the card stays the same between builds. Write the card's own pair from a build that does not
+  restart the board, so that a failed fetch cannot start a loop. `script/board-image` runs `cargo
+  xtask card-check` on the card after the copy, and it must print `SEALED`.
+- **The first boot restarts the board itself.** A `script/board-image --tftp --soak --reboot`
+  build runs the bring-up, prints every line in step 2, starts the soak (`soak-test: started`),
+  and about 125 seconds later asks the board's power controller to reset it, through the PMIC
+  route ([board-reboot.md](board-reboot.md)), before the firmware's own reset
+([soak.md](soak.md#the-rebooting-soak-on-radon-which-is-milestone-249s-experiment)). The served set is
+  swapped for step 3's while the first one soaks, so the board comes back as the drive-reading
+  boot. If the swap cannot be made in time,
+  `script/board-console --stop` sends the one byte that disarms the reset.
+- **The console decides when each boot is done.** `script/board-console --until soak` exits 0 on
+  the first boot's `soak-test: started`. A second watch, started straight after, catches the reset
+  lines and step 3's boot. That boot prints no stage word, so the watch is `--until none`, as in
+  step 3, and runs ten minutes rather than five because it starts during the soak. Exit 1 is a
+  failure the board announced, 2 a board that went quiet, 3 a stage not reached in time
+  ([board-console.md](board-console.md)). A watch that ends 2 or 3 is a hang, and the one remedy is
+  to cut and restore the board's power; the card then boots whatever the host serves. The second
+  watch ends 0 whether step 3's boot halted or hung after its tour line, so its log decides checks
+  7 and 8.
+
+This board has reset through the route when a person typed `reboot` at the shell. No bench log
+yet holds the rebooting soak's own call of it, so record which line the first boot printed last.
+A reset is not a power cycle, so a run with no power cycle between the boots leaves check 9
+UNRUN.
+
 ## Step 1: check that the tree names the port
 
 The kernel brings up port 1 only from its node in the tree U-Boot hands over. It has no constant
 fallback, because a guessed window is how a write lands on the wrong device. So the first question
-is what that tree says. Stop at the U-Boot prompt (any key during the countdown), then:
+is what that tree says, and the kernel prints it before anything else in the bring-up. Nobody types
+at the firmware prompt. The boot in step 2 prints one line for every `pcie@` node in the
+tree, then the port's verdict:
 
 ```
-fdt addr ${fdtcontroladdr}
-fdt list /soc
+  jh7110 pcie: tree: 2 pcie@ node(s)
+  jh7110 pcie: tree node 0: compatible "starfive,jh7110-pcie", reg <0x9 0x40000000 0x0 0x1000000 0x0 0x2b000000 0x0 0x100000>, reg-names "cfg","apb", linux,pci-domain <0x0>, status "disabled"
+  jh7110 pcie: tree node 1: compatible "starfive,jh7110-pcie", reg <0x9 0xc0000000 0x0 0x1000000 0x0 0x2c000000 0x0 0x100000>, reg-names "cfg","apb", linux,pci-domain <0x1>, status absent
 ```
 
-Find the node whose `compatible` is `"starfive,jh7110-pcie"` and whose `linux,pci-domain` is 1 (in
-mainline's tree, `pcie@9c0000000`), and print it. A tree that names its nodes another way still
-lists two PCIe controllers under `/soc`; port 1 is the one whose `reg` starts at `0x2c000000`.
+The example is mainline's shape; the order of the names and of the windows in `reg` may differ.
+Port 1 is the node whose `reg` holds the window at `0x2c000000` (`0x0 0x2c000000`). A property the
+node lacks prints `absent`, and an absent `status` means `"okay"`. Record, for that node:
 
-```
-fdt print /soc/pcie@9c0000000
-```
+- `compatible`: `"starfive,jh7110-pcie"`.
+- `reg-names`: the kernel needs `"apb"` and `"cfg"`. Mainline's tree uses those names.
+- `reg`: the `apb` window at `0x2c000000` and the `cfg` window at `0x9c0000000`, in the order
+  `reg-names` gives.
+- `linux,pci-domain`: `<0x1>`.
+- `status`: `"okay"` or absent.
 
-Record each of these in the results table:
-
-- `reg-names`: the kernel needs `"apb", "cfg"`. Mainline's tree uses those names.
-- `reg`: the `apb` window at `0x2c000000` and the `cfg` window at `0x9c0000000`.
-- `ranges`: a 32-bit range at `0x38000000` and a prefetchable one at `0x980000000`.
-- `perst-gpios`: its second cell should be 28.
-- `status`: `"okay"`.
-
-nife's boot script hands the kernel the tree at `${fdtcontroladdr}`, the one U-Boot itself runs
-on, so that is the tree to read. Then continue the boot from the same prompt.
+When the kernel accepts the node, the next line carries the two facts the tree lines leave out
+(step 2's first example line). The 32-bit window comes from `ranges` and should start at
+`0x38000000`. The reset pin comes from `perst-gpios` and should be 28.
 
 If the tree names the controller under other `reg-names` (StarFive's own kernel tree has used
-`"reg", "config"`), or has no `linux,pci-domain` of 1, the kernel prints `port One stays off` in
-step 2 and goes no further. Record
-the names exactly. That answers the first board question in milestone 163, and the next change
-is in `machine_discovery::jh7110::pci_express`, not at the bench.
+`"reg", "config"`), or has no `linux,pci-domain` of 1, the kernel prints `port One stays off` right
+after the tree lines and goes no further. The tree lines are the record of what the tree says
+instead. That answers the first board question in milestone 163, and the next change is in
+`machine_discovery::jh7110::pci_express`, not at the bench. A build older than the tree lines
+prints none of them; read the node at the U-Boot prompt then (`fdt addr ${fdtcontroladdr}`, `fdt
+list /soc`, `fdt print` on the node).
 
 ## Step 2: boot and read the lines
 
 Boot the build. Every line the bring-up prints starts with `  jh7110 pcie:`. They appear after the
-memory map and before the IOMMU lines. A good boot looks like this (addresses from mainline's
-tree; counts vary):
+memory map and before the IOMMU lines. After step 1's tree lines, a good boot looks like this
+(addresses from mainline's tree; counts vary):
 
 ```
   jh7110 pcie: port One: bridge 0x2c000000, cfg 0x9c0000000, 32-bit memory 0x38000000+0x8000000, PERST# pin Some(28)
@@ -147,7 +181,7 @@ Fill one row per check. A check that did not run is UNRUN, never PASS.
 | # | check | pass when | result |
 |---|---|---|---|
 | 0 | commit under test | recorded | |
-| 1 | tree node (step 1) | `reg-names` `apb`, `cfg`; `status` `okay`; `perst-gpios` pin 28 | |
+| 1 | tree node (step 1) | port 1's tree line shows `reg-names` `apb`, `cfg`, `linux,pci-domain` `<0x1>` and `status` `okay` or absent; the `port One:` line shows PERST# pin 28 | |
 | 2 | clocks | both clock lines show `0 step(s) rejected` and every reset released | |
 | 3 | no refused access | no `fell outside the mapped pages` line | |
 | 4 | link | `link up` | |
@@ -162,7 +196,7 @@ Fill one row per check. A check that did not run is UNRUN, never PASS.
 | line | most likely cause, in order |
 |---|---|
 | no `jh7110 pcie:` line at all | the build predates the bring-up; or the kernel did not take the machine for a JH7110 (no clock-and-reset node and no TRNG) |
-| `port One stays off: ...` | the reason is the tree's: step 1 records what it says instead |
+| `port One stays off: ...` | the reason is the tree's: the tree lines above it (step 1) say what it holds instead |
 | `bring-up stopped: ClocksAndResets` | a clock gate or reset did not take. The two clock lines above it say which domain. A reset that never releases usually means a clock it needs is still off. |
 | `bring-up stopped: Window(n)` | a window in the tree is not a power of two of at least 4 KiB. Record the `reg` and `ranges` |
 | `link down after 10 reads` | no drive, a drive not seated, or a drive that did not train. Reseat it with the board off and try a second drive before suspecting the sequence. Record the status word. |
