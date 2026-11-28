@@ -156,7 +156,7 @@ is refused for aarch64: its NIC is ENA and nife has no driver for it, while an A
 
 | leg | machine | state, 2026-10-24 | waits on | procedure |
 |---|---|---|---|---|
-| x86_64 | xenon's installed system | rehearsed under QEMU against the live host | 494's bench boot and a fresh install, both on the same evening | `notes/xenon-bench-2026-10-18.md`, steps 1, 2, 4 and 5 |
+| x86_64 | xenon's installed system | rehearsed under QEMU against the live host | a fresh install | `notes/xenon-bench-2026-10-18.md`, steps 1, 2, 4 and 5 |
 | riscv64 | radon, booted over the network | cannot pass: no entropy at the prompt, no file service, no wall clock | milestone 966 (radon's booted system runs `jig`), and the ruling in it on where the time comes from | `notes/packages/jig-on-radon.md` |
 | aarch64 | an Oracle Cloud Ampere A1 instance | cannot pass: the booted system reaches no PCIe device, and has no entropy, disk or clock | milestone 964 (an aarch64 cloud instance drives its PCIe devices), after milestone 578 (an ACPI discovery path for aarch64)'s item 7 boots the instance | `notes/rented-metal/oracle-a1.md`, section 5b |
 
@@ -175,8 +175,8 @@ is refused for aarch64: its NIC is ENA and nife has no driver for it, while an A
   ruled, with its path (Q4) and clauses 6 and 10 to 13. Q3 amends §220 (signed builds: a vendor
   signs, a developer self-signs, and trusting a key is scoped) and §195 (a reviewed recipe vouches
   for a package); that text is milestone 894's.
-- xenon's run waits on its I219, which the kernel refuses until milestone 494's bench boot proves
-  it, and on a fresh install (`bench/xenon-2026-10-21/README-801.md`). radon's and the A1's wait on
+- xenon's run waits on a fresh install (`bench/xenon-2026-10-21/README-801.md`). The kernel brings
+  up its I219, which milestone 494's bench boot proved (nifeos/nife@87068f6). radon's and the A1's wait on
   milestones 966 and 964.
 
 Reuse: the package client, digest check and installer of milestone 198 are this milestone's
@@ -235,7 +235,7 @@ real silicon)'s network half, which leases; aarch64's machine is a rented A1 ins
   read only the image's sources).
 - **Outstanding.** The x86_64 leg: on xenon, install, boot from the disk, `jig update`, `jig
   install ioping`, as steps 4 and 5 of `notes/xenon-bench-2026-10-18.md`, the evening that also
-  runs 494's bench boot and 260's network boot. Checked 2026-10-24: no xenon log under `bench/`
+  runs 260's network boot. Checked 2026-10-24: no xenon log under `bench/`
   runs `jig`, and the QEMU rehearsal passes.
 - **Outstanding.** The riscv64 leg on radon, `notes/packages/jig-on-radon.md`. It cannot pass until
   milestone 966 (radon's booted system runs `jig`) is built (checked 2026-10-24 against

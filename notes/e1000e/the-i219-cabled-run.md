@@ -213,9 +213,8 @@ with anything changed on xenon's firmware or the NIC.
 
 ## Record the result
 
-- Copy the log to `bench/xenon-<date>/i219-cabled-run.log` (UTC date) in a lane's pull request,
-  after removing any line that carries a machine-local value (a MAC or IP address). A lane fills
-  the table below in this page in the same pull request.
+- Copy the log, unedited, to `bench/xenon-<date>/i219-cabled-run.log` (UTC date) in a lane's pull
+  request. A lane fills the table below in this page in the same pull request.
 - The results then go to the crate: they update the cabled-run sentence in its README's BUGS and
   in `platform_controller_hub`'s BUGS, through the crate repository's own pull request, whichever
   way the run went.

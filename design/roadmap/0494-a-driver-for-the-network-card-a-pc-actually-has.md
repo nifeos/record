@@ -1,6 +1,7 @@
 ---
-status: PARTIAL
+status: BUILT
 raised: 2026-09-19
+built: 2026-11-28
 promoted_from: a-driver-for-the-network-card-a-pc-actually-has
 milestone_dependencies: none
 decision_dependencies: none
@@ -166,10 +167,13 @@ recorded as such.
    x86_64. aarch64 and riscv64 carry the driver too, since QEMU's `e1000e` is a PCIe device on
    every bus the runners attach, or a scope note says why not (DECISIONS §19).
 2. On xenon, a DHCP lease from the house router and a measured transfer from a local area network
-   host, photographed, with the survey line naming the card. The runbook is
+   host, with the survey line naming the card, captured on the serial console and committed to
+   `bench/`. The log needs no photograph beside it (decided 2026-11-28 UTC). The runbook is
    [the I219 cabled run](../../notes/e1000e/the-i219-cabled-run.md). Met on 2026-11-28 (UTC) by nife
    `4c86f224b3` on xenon's I219-LM (survey line `00:1f.6 8086:15e3 class 020000`): a lease, then
-   100 MiB at 37.785 Mbit/s, recorded by the serial console. nifeos/nife@0707b99 cites it.
+   100 MiB at 37.785 Mbit/s. nife's `bench/xenon-2026-11-28/i219-cabled-run.log` holds the log
+   unedited, and its README gives the log's SHA-256
+   (nifeos/nife@87068f6f285564d138d415d0fab00e7c5912418a). nifeos/nife@0707b99 cites the run.
 
 ## Reuse
 
@@ -236,9 +240,6 @@ meet a known gap). Take no dependency; vendor nothing.
 
 ## Follow-on
 
-- **Outstanding.** The cabled run's transcript is not yet in nife's `bench/` as
-  `bench/xenon-2026-11-28/i219-cabled-run.log`, which the runbook's "Record the result" asks for
-  (nife's `main` has no `bench/xenon-2026-11-28/`).
 - **Done.** The bench runbook on xenon (exit criterion 2), and `PCH_PROVEN_ON_SILICON` set `true`,
   nifeos/nife@0707b99.
 - **Done.** The booted system uses this NIC since 2026-10-05 (milestone 198 (a package manager)):

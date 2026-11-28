@@ -17,7 +17,7 @@ package manager, is complete. The rung table below maps every rung to its milest
 
 **Outstanding** (checked against the tree 2026-10-24 UTC): nothing inside this block's own rung.
 Two milestones keep it PARTIAL. Milestone 801 (packages over the internet) has one open criterion,
-the run on xenon's installed system, which waits on milestone 494's bench boot and a fresh install.
+the run on xenon's installed system, which waits on a fresh install.
 Milestone 802 (the trivial install) waits on milestones 242, 400, 515, 801 and 809 and on calef's
 act of publication. Through 802 it also waits on milestone 809 (`jig`). Its items 7 and 8 wait
 on milestone 849 (a package declares what it needs at run time), NOT-STARTED, and on an unproposed
@@ -79,7 +79,7 @@ claim about PCs, and each rung's last exit criterion is that second machine.
 | **2a. Installed onto a disk, under QEMU** | An installer; the boot mounting the nife partition off NVMe | OVMF boots the stick image with an empty NVMe attached; the installer names the disk, asks, partitions, formats and copies; the machine reboots **with the stick detached**, reaches `$`, and reads back a file written before the reboot. One `cargo xtask` gate | **BUILT 2026-09-21** (#1056, `notes/installing.md`; re-run green 2026-10-03); [milestone 515](0515-the-installer-a-stick-runs-to-put-itself-on-the-disk.md) is PARTIAL on the bench half |
 | **2b. Installed onto xenon's disk** | The bench half | The 2a sequence on xenon's Micron 2450, photographed, stick removed before the second boot | **BUILT 2026-10-04** (`bench/xenon-2026-10-04/`; needs #1636; [milestone 515](0515-the-installer-a-stick-runs-to-put-itself-on-the-disk.md) criterion 2 has the caveats) |
 | **3a. A package over the local area network, under QEMU** | The package client this milestone is; a host-side recipe that produces a package; a small HTTP client | A package absent from the image is fetched from a host on the same network over plain HTTP, verified by digest, installed onto the running system, run, still present after a reboot, and removed | this block; all three rulings it needed are in (§195, §197, §208). **Producer half BUILT 2026-09-23** (`crates/package_archive`, `cargo xtask package`, `packages/uptime.recipe.toml`, notes/packages.md). Fetch and verify built 2026-09-24 (`helpers/package-http-peer`, `crates/http_response`, a QEMU test on aarch64 and riscv64); **run by digest and the installer built 2026-09-26** on all three architectures; x86_64 fetches since 2026-10-05. No TLS, since §195's digest decides whether bytes may run |
-| **3b. The network card xenon has** | An Intel I219 (`e1000e` family) driver in 261's shape | Under QEMU `-device e1000e` behind `intel-iommu`, milestone 30 (the network stack as a confined component)'s DHCP and TCP gates pass through the new driver; on xenon, a lease from the house router and a measured transfer | [milestone 494](0494-a-driver-for-the-network-card-a-pc-actually-has.md) (PARTIAL: built under QEMU, xenon's bench boot outstanding) |
+| **3b. The network card xenon has** | An Intel I219 (`e1000e` family) driver in 261's shape | Under QEMU `-device e1000e` behind `intel-iommu`, milestone 30 (the network stack as a confined component)'s DHCP and TCP gates pass through the new driver; on xenon, a lease from the house router and a measured transfer | [milestone 494](0494-a-driver-for-the-network-card-a-pc-actually-has.md) (BUILT 2026-11-28, bench boot recorded at nifeos/nife@87068f6) |
 | **3c. Over the internet** | Name resolution; HTTPS; §250's index | From xenon's installed system, a package fetched through `basalt.nifeos.org`'s index by host name, verified and installed | [milestone 801](0801-packages-over-the-internet.md) |
 | **4. The web page** | A published release and a page | A stranger follows the page to rung 3c's result, as rung 4 of milestone 802 states it | [milestone 802](0802-the-trivial-install.md); calef's act |
 
@@ -139,10 +139,9 @@ and the rungs that are calef's acts are named there rather than here.
 - **Done.** §219 was ruled 2026-09-26 and its request, gate D2 and the unvouched-child
   confinement claim built (notes/packages/running-unvouched.md).
 - **Done.** x86_64 fetches (2026-10-05): the kernel builds `net_stack` on the `e1000e` when there is
-  no virtio-net NIC and grants the progenitor its endpoint (notes/packages/fetching.md). It leaves
-  a PCH part alone, so xenon's I219 has no network at boot until milestone 494 (a driver for the
-  network card a PC actually has)'s bench boot; lifting that is one predicate in
-  `e1000e_service::start_for_boot`.
+  no virtio-net NIC and grants the progenitor its endpoint (notes/packages/fetching.md). It brings
+  up a PCH part too, since milestone 494 (a driver for the network card a PC actually has)'s bench
+  boot set `PCH_PROVEN_ON_SILICON` (nifeos/nife@0707b99), so xenon's I219 has network at boot.
 - **Milestone 801.** Milestone 801 (packages over the internet). Rung 3c, split out 2026-10-06:
   the resolver, a TLS client and §250's index. Signed installs are milestone 666 (a signed build
   installs up to its key's ceiling).
