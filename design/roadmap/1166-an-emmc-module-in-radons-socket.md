@@ -77,12 +77,6 @@ Reuse: `designware_mobile_storage` (partsfoundry), the storage bench and the EL0
 milestone 53, and the kernel's PMIC path. A search of the roadmap for `eMMC` found only milestone
 53's line saying the socket is empty.
 
-## Follow-on
-
-- **Outstanding.** The module's delivery, then a person fitting it.
-- **Outstanding.** Whether this module's pinout matches the VisionFive 2's socket. The datasheet
-  does not name a compatible module.
-
 ## Index row
 
 radon's eMMC socket, the first of the JH7110's two DesignWare storage controllers, holds no module,
