@@ -60,7 +60,8 @@ Verified by building. `block::FLUSH` answers 95 when the device cannot flush, an
 the code reaches a file client through `SYNC`. `directory::explain(95)` is "this capability
 does not carry extended attributes". `explain(EPROTO)` and `explain(5)` are "the filesystem
 refused".
-Change: `explain` takes the verb, or the two meanings of 95 get two codes under §326.
+Change: `explain` takes the verb, or the two meanings of 95 get two codes under §326 (the
+names and numbers of the services' wire error codes).
 Door: two-way. Effort: S.
 
 ## P2: may follow
