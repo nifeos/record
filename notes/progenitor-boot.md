@@ -185,9 +185,9 @@ starts a driver itself only where the progenitor could not build it as well.
   progenitor, each page would be a capability in its table, and a `DeviceFrame` names one page.
 - The `e1000e` stack (milestone 198's rung 3a, on milestone 494 (a driver for the network card a PC actually has)'s driver) is handed BAR0's two queue
   pages and an eighteen-page DMA region the same way (`e1000e_service`'s header). It is also the
-  wiring every `e1000e` gate already runs, so the booted system's stack is the tested one. A part no
-  gate has driven is left alone, and so is a NIC with no link, since a stack waiting for DHCP would
-  hold the prompt back forever.
+  wiring every `e1000e` gate already runs, so the booted system's stack is the tested one. An I219
+  boot starts it too. With no cable the boot waits 10 s for link, starts no stack (its DHCP wait
+  would hold the prompt) and says `NONE`.
 - radon's Ethernet stack (milestone 53 (the board's own peripherals)) is the `e1000e` path's twin on riscv64. While
   `designware_ethernet_service::PROVEN_ON_SILICON` is `true`: radon's boot starts `net_stack` on
   it, and with no cable waits five seconds, then says `NONE`.

@@ -4,18 +4,19 @@
 The session that `partsfoundry/e1000e` issue 10 asks for, written so that a person at xenon, or an agent
 session on the build machine beside that person, can run it from this page alone.*
 
-**Nothing on this page has run on silicon with a cable.** The bench boot it uses has run under
-QEMU's 82574L only, which never takes the I219 path, and the I219 bring-up has run on xenon once,
-with no cable ([the note's BUGS](../e1000e.md#bugs)). The crate's README keeps its one-run
-sentence until this session has a result.
+This session has run on xenon with a cable once, on 2026-11-28 (UTC), and ended
+`verdict LEASED-AND-MEASURED`; its rows are [the Results table](#results). That boot is the
+evidence `PCH_PROVEN_ON_SILICON` cites (nifeos/nife@0707b99). Run it again to check a change to the
+I219 path on silicon.
 
 ## The prompt to start the session
 
-Paste this into a Claude session started in a checkout of nife on `main`, on the machine that has
+This page lives in nifeos/record, and every command on it runs in a checkout of nifeos/nife. Paste
+the prompt into a Claude session started in a checkout of nife on `main`, on the machine that has
 xenon's serial adapter and shares a local network with xenon:
 
-> You are running the I219 cabled run on xenon. Read `notes/e1000e/the-i219-cabled-run.md` in this
-> checkout and follow it step by step, from "Before anything else" to "Record the result". Read the
+> You are running the I219 cabled run on xenon. Read `notes/e1000e/the-i219-cabled-run.md` in
+> nifeos/record, and run every command it gives in this nife checkout. Follow it step by step, from "Before anything else" to "Record the result". Read the
 > off-tree bench README it names before you touch anything, and never switch an outlet or unplug a
 > USB hub: ask me for every power cycle and for anything physical. Ask before you open the serial
 > port or write the stick. Do not claim a pass that did not run. Stop and tell me at every stop
@@ -35,8 +36,8 @@ a switch, records the three things the issue asks for:
    the rings did.
 
 The boot also takes a DHCP lease and times one TCP transfer, which is milestone 494 (a driver for
-the network card a PC actually has)'s exit criterion 2 and the condition for setting
-`e1000e_service::PCH_PROVEN_ON_SILICON`. One boot does both; about twenty minutes.
+the network card a PC actually has)'s exit criterion 2 and the evidence
+`e1000e_service::PCH_PROVEN_ON_SILICON` rests on. One boot does both; about twenty minutes.
 
 It does not measure the I219's speed: the transfer rate is this stack's, as
 [notes/bench-boots.md](../bench-boots.md) says. It does not test the link-up half, which the crate
@@ -169,10 +170,10 @@ A refusal or a hang belongs to the last `pass N of 3` line above it.
 | 3, `initialize_hardware` | the hardware bits, the copper link setup | `the three passes returned` | `refused at bring-up` before it, or no line after `pass 3 of 3` |
 
 The observations come from `platform_controller_hub::sequence::BringUpObservation`, and each line
-is `e1000e: ` and the variant as Rust prints it. On xenon the one earlier run printed, during pass
-1, `cleared: true`, the PHY reached `Directly` with identifier `0x015400a0` (`I217_E_PHY_ID` in
-FreeBSD), and a configuration of 22 pairs
-(`nifeos/nife:bench/xenon-2026-10-21/README-494.md`). A different
+is `e1000e: ` and the variant as Rust prints it. On xenon the cabled boot printed, during pass 1,
+`ManagementEngineUltraLowPowerExit { cleared: true }` and the PHY reached `Directly` with
+identifier `0x015400a0` (`I217_E_PHY_ID` in FreeBSD), and during pass 2 a configuration of 22 pairs
+(`LocalAreaNetworkConnectedDeviceConfigured { pairs: 22 }`). A different
 identifier, access path or pair count is a value to record, not a failure. A line such as
 `LocalAreaNetworkInitializationTimeout` or `MasterRequestsPending` is an observation FreeBSD also
 carries on from; record it.
@@ -181,7 +182,7 @@ After the passes:
 
 | line | what it records | PASS | FAIL |
 |---|---|---|---|
-| `network-bench: nic : 8086:15e3 I219-LM5 (SPT), link up, ...` | the link state: `DEVICE_STATUS_LINK_UP` rose within 3 s (`LINK_WAIT_MILLISECONDS`) | `link up` | `link NOT UP` then `FAILED: no link` |
+| `network-bench: nic : 8086:15e3 I219-LM5 (SPT), link up, ...` | the link state: `DEVICE_STATUS_LINK_UP` rose within 10 s (`LINK_WAIT_MILLISECONDS`), or later during the `e1000e: link watch` lines this build prints when it did not | `link up` | `link NOT UP` then `FAILED: no link` |
 | `network-bench: phy : id 0x...` | the identifier pass 1 read | any value | none |
 | `network-bench: preflight dmar scope : PASS` | the IOMMU owns the NIC | `PASS` | `FAIL`: record it; the frame counts still stand |
 | `network-bench: dhcp : leased a.b.c.d` | frames both ways at the protocol level | a lease | `waiting for a lease` is the last line |
@@ -205,7 +206,7 @@ with anything changed on xenon's firmware or the NIC.
 | `FAILED: no NIC this driver claims is on the bus` | the card's id is not one `partsfoundry/e1000e` claims | record the PCI survey's class `020000` line |
 | `refused at bring-up: Pch(...)` | a pass stopped; the last `pass N` line names it | record the error and every `e1000e:` line; a lane reads them |
 | a hang after a `pass N of 3` line | that pass did not return | photograph the screen; the person power-cycles; a lane |
-| `link NOT UP` | no autonegotiation in 3 s | the cable, the switch port's light and the switch first; one more boot with another port is the person's call |
+| `link NOT UP` | no autonegotiation in the 10 s wait or the link watch after it | the cable, the switch port's light and the switch first; one more boot with another port is the person's call |
 | `waiting for a lease` last, after `link up` | the link came up and no lease came, so no `frames` line prints | the network's DHCP server; record the switch port's light; a lane |
 | `client stopped with code ...` | the stream did not complete | the peer loop and this machine's firewall; the `frames` line after it still records the counts |
 | any line that says the flash was written, or a reading of the code that finds a write | not expected from this code | stop at once and report; do not boot again |
@@ -215,11 +216,12 @@ with anything changed on xenon's firmware or the NIC.
 - Copy the log to `bench/xenon-<date>/i219-cabled-run.log` (UTC date) in a lane's pull request,
   after removing any line that carries a machine-local value (a MAC or IP address). A lane fills
   the table below in this page in the same pull request.
-- The results then go to the crate: they replace the one-run sentence in its README's BUGS and in
-  `platform_controller_hub`'s BUGS, through the crate repository's own pull request, whichever way
-  the run went.
-- A `LEASED-AND-MEASURED` verdict is what a lane cites to set `PCH_PROVEN_ON_SILICON`
-  (`kernel/src/user/e1000e_service.rs`), in its own pull request.
+- The results then go to the crate: they update the cabled-run sentence in its README's BUGS and
+  in `platform_controller_hub`'s BUGS, through the crate repository's own pull request, whichever
+  way the run went.
+- `PCH_PROVEN_ON_SILICON` (`kernel/src/user/e1000e_service.rs`) is `true` on the evidence of the
+  boot in the Results table. A run of a later I219 bring-up that ends in any other verdict sets it
+  back to `false`, in its own pull request.
 
 ### Results
 
@@ -227,18 +229,18 @@ Rows R1 to R4 are the run; the rest are what it printed. A row that did not run 
 
 | row | what | value | verdict |
 |---|---|---|---|
-| R1 | nife commit | | |
-| R2 | `partsfoundry/e1000e` revision | | |
-| R3 | image SHA-256 | | |
-| R4 | how xenon came up | | |
-| 1 | pass 1 observations (`e1000e:` lines) | | PASS / FAIL / UNRUN |
-| 2 | pass 2 observations | | PASS / FAIL / UNRUN |
-| 3 | pass 3 | | PASS / FAIL / UNRUN |
-| 4 | link (`DEVICE_STATUS_LINK_UP`) | | PASS / FAIL / UNRUN |
-| 5 | PHY identifier | | RECORDED |
-| 6 | DMAR preflight | | PASS / FAIL / UNRUN |
-| 7 | lease | | PASS / FAIL / UNRUN |
-| 8 | frames at the lease (received, transmitted, CRC errors, missed) | | PASS / FAIL / UNRUN |
-| 9 | transfer (bytes, seconds, Mbit/s) | | PASS / FAIL / UNRUN |
-| 10 | frames after the transfer (received, transmitted, CRC errors, missed) | | PASS / FAIL / UNRUN |
-| 11 | verdict | | |
+| R1 | nife commit | `4c86f224b39e1c36225aa04e8715b602ba2b49a0` | |
+| R2 | `partsfoundry/e1000e` revision | `a583ffe97e724086984de877c921f97e6105970d` | |
+| R3 | image SHA-256 | `812730dbe71d3569e5dcc7a24f40caa4c24060ebb2adbacfa27744775da16619` | |
+| R4 | how xenon came up | booted from the stick on 2026-11-28 (UTC), about 03:44; how it was powered on was not recorded | |
+| 1 | pass 1 observations (`e1000e:` lines) | `ManagementEngineUltraLowPowerExit { cleared: true }`, `PhysicalLayerDeviceReached { at: Directly, id: 0x015400a0 }` | PASS |
+| 2 | pass 2 observations | `LocalAreaNetworkConnectedDeviceConfigured { pairs: 22 }` | PASS |
+| 3 | pass 3 | `the three passes returned` | PASS |
+| 4 | link (`DEVICE_STATUS_LINK_UP`) | `8086:15e3 I219-LM5 (SPT), link up`, inside the 10 s wait, with no link watch lines | PASS |
+| 5 | PHY identifier | `0x015400a0` | RECORDED |
+| 6 | DMAR preflight | `PASS` | PASS |
+| 7 | lease | a lease from the network's DHCP server | PASS |
+| 8 | frames at the lease (received, transmitted, CRC errors, missed) | 8, 6, 0, 0 | PASS |
+| 9 | transfer (bytes, seconds, Mbit/s) | 104857600, 22.200, 37.785 | PASS |
+| 10 | frames after the transfer (received, transmitted, CRC errors, missed) | 71846, 35780, 0, 0 | PASS |
+| 11 | verdict | `LEASED-AND-MEASURED` | PASS |
