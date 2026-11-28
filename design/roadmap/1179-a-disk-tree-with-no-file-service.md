@@ -7,7 +7,7 @@ machine_requirements: a machine that boots over the network, with an NVMe drive 
 specific_machine: radon (a VisionFive 2 booted over the network, with a drive in its M.2 slot)
 needs_person: yes
 ---
-# 1167. A disk tree with no file service: `/disk/nvme0` on a board booted over the network
+# 1179. A disk tree with no file service: `/disk/nvme0` on a board booted over the network
 
 *(The number, title and slug are provisional.)*
 

@@ -138,8 +138,8 @@ on it yet.
   identify and read under "Steps that need the board" run from a second boot, a bench boot built
   with the `disk_read_bench` feature, which starts the NVMe server alone and reads through the
   disk tree's window ([bench-boots.md](../../notes/bench-boots.md)).
-- **Milestone 1167.** The way to `/disk/nvme0` at the prompt of a board booted over the network is
-  milestone 1167 (a disk tree with no file service). It needs an architect's ruling first.
+- **Milestone 1179.** The way to `/disk/nvme0` at the prompt of a board booted over the network is
+  milestone 1179 (a disk tree with no file service). It needs an architect's ruling first.
 
 ## Index row
 
