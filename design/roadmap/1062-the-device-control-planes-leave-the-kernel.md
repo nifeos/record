@@ -37,7 +37,9 @@ Ruled 2026-11-10 (UTC). The order follows the dependencies, and each step is one
    process. That process keeps BAR0's pages 0 and 5 (reset, MAC address, PHY, filters) and grants
    the queue pages to `net_stack`, the shape milestone 242 (xHCI) has for USB. `kernel/src/e1000e.rs` goes,
    and the kernel stops linking `crates/e1000e`. Waiting for 811's step 6 keeps the starter and the
-   control plane from moving twice.
+   control plane from moving twice. Ruled 2026-11-28 (UTC). The userspace control process reports
+   link asynchronously, as FreeBSD em does, and DHCP waits on that report rather than on a fixed
+   deadline.
 2. The JH7110 clock and reset server. A userspace server holds the shared clock and reset
    window, which serves USB, PCIe, DMA, the security block and Ethernet. It answers the
    device-level verbs of §320 (the JH7110 clock and reset wire): the badge is the device, and a
