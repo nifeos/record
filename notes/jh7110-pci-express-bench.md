@@ -6,7 +6,7 @@ This page takes a VisionFive 2 with an NVMe drive in its M.2 slot from a fresh b
 log. It holds the bench steps of milestone 163 (the JH7110's PCIe root complex), "Steps that need
 the board". [jh7110-pci-express.md](jh7110-pci-express.md) explains what the bring-up does, and
 [visionfive2.md](visionfive2.md) covers booting the board at all. One boot answers most of the
-questions here, and every step that needs a second boot says so.
+questions here. Checks 7 and 8 take a second boot, step 3.
 
 ## Before anything else
 
@@ -15,10 +15,10 @@ questions here, and every step that needs a second boot says so.
   over anything here.
 - Power off before you touch the M.2 slot. Seat the drive and fit its screw with the board
   unpowered. The slot takes an M-key 2230, 2242, 2260 or 2280 drive.
-- Nothing on this page writes the drive. The bring-up reads the drive's configuration space and
-  nothing else, and a board booted over the network starts no NVMe driver (step 2 says why).
-  Still, use a drive whose contents you can lose, because a fault in a new driver is exactly what
-  this run looks for.
+- Nothing on this page writes the drive. The first boot reads the drive's configuration space and
+  nothing else. The second boot (step 3) sends the drive reads only, through a window whose
+  capability the NVMe server refuses every write on. Still, use a drive whose contents you can
+  lose, because a fault in a new driver is exactly what this run looks for.
 
 ## What the run needs
 
@@ -94,14 +94,53 @@ differ. Later, the machine summary carries the window the bring-up recorded:
 A port that stayed off prints `pcie             : none (this machine describes no host bridge)`
 there instead.
 
-The NVMe path does not run on a board booted over the network. The kernel starts the NVMe server
-for a client only: the disk tree at `/disk`, which starts only beside a file service, or the file
-service itself, which takes an NVMe disk only on a machine that booted from one. A network boot of
-this board has neither, so no `non_volatile_memory_express` or `disk tree` line appears and
-`/disk/nvme0` does not exist. Checks 7 and 8 are UNRUN on such a build, for that reason, until the
-follow-on in milestone 163 lands.
+The NVMe path does not run on this boot. The kernel starts the NVMe server for a client only: the
+disk tree at `/disk`, which starts only beside a file service, or the file service itself, which
+takes an NVMe disk only on a machine that booted from one. A network boot of this board has
+neither, so no `non_volatile_memory_express` or `disk tree` line appears and `/disk/nvme0` does not
+exist. Step 3 reads the drive instead.
 
-## Step 3: judge the log
+## Step 3: boot again and read the drive
+
+The second boot is a bench boot: a kernel built with the `disk_read_bench` feature, which starts
+the NVMe server with the boot thread as its only client, reads the drive and halts. It never starts
+the progenitor, so there is no prompt. [bench-boots.md](bench-boots.md#disk_read_bench-an-nvme-drive-read-through-the-disk-trees-window)
+says what each of its lines prints. Build it and power-cycle the board:
+
+```
+script/board-image --tftp --extra-features disk_read_bench
+script/board-console --until none --for 5m --log target/board/disk-read-bench.log
+```
+
+The console has no stage word for this boot, so it watches for the whole five minutes; the boot
+halts long before that, after `disk-read-bench: done, halting.`
+
+The console's exit code does not judge this boot. The boot prints its stage lines before the bench
+starts, so a boot that hangs later still exits 0 when the five minutes run out. Only the
+`disk-read-bench:` lines decide checks 7 and 8, and a log with no verdict line is a FAIL.
+
+The bring-up lines of step 2 print again, and then every line starts `disk-read-bench:`. A good
+boot ends like this, where `<...>` stands for what the drive and the build give:
+
+```
+disk-read-bench: controller nvme 01:00.0 (rid 0x0100), DMA unconfined: no iommu is translating on this machine
+disk-read-bench: namespace  <bytes> bytes, <lba>-byte lbas, blocks_per <n>
+disk-read-bench: size       GET_SIZE_BYTES through the window answers <bytes>: agrees
+disk-read-bench: landing    blocks 0..16 read twice over 0xaa then 0x55: sha256 <digest>.. both times
+disk-read-bench: read       256 x 65536 B (blocks 0..4096) in <us> us = <rate> B/s (<ns> ns per read)
+disk-read-bench: verdict READ-AT-RATE: read <rate> B/s over 256 reads of 65536 B, EL0 driver, nothing written; DMA unconfined: no iommu is translating on this machine
+disk-read-bench: done, halting.
+```
+
+Expect `DMA unconfined` here: the kernel programs no IOMMU on this board, and with none nife
+trusts the driver, as §86 (whether an NVMe driver can leave the kernel) rules. Record the line as it reads. The figure
+is one 64 KiB read in flight at a time from a debug or release build, as its header line says, so
+it is the driver's figure and not the drive's.
+
+To bring the board back to a normal boot, build again without the feature (`script/board-image
+--tftp`) and power-cycle.
+
+## Step 4: judge the log
 
 Fill one row per check. A check that did not run is UNRUN, never PASS.
 
@@ -114,9 +153,9 @@ Fill one row per check. A check that did not run is UNRUN, never PASS.
 | 4 | link | `link up` | |
 | 5 | root port | `00:00.0` class `060400`, `bridge to buses 01..=01` | |
 | 6 | drive | `01:00.0` class `010802`, and no other `01:` line | |
-| 7 | NVMe | no `controller present but failed bring-up` or `disk tree   : not started` line; `ls /disk/nvme0` lists `n1` (UNRUN on a network boot, step 2) | |
-| 8 | reads | ten `ioping -c 10 -s 4k n1` reads in `/disk/nvme0` complete with no error (UNRUN on a network boot, step 2) | |
-| 9 | second boot | checks 2 to 8 again after a power cycle | |
+| 7 | NVMe (step 3) | `controller nvme 01:00.0`, a `namespace` line, and `size ... agrees` | |
+| 8 | reads (step 3) | `landing ... both times` and `verdict READ-AT-RATE`; a `SKIPPED` or `FAILED` verdict, or no verdict line, is a FAIL | |
+| 9 | after a power cycle | checks 2 to 6 from a boot without the feature, then 7 and 8 from step 3, again | |
 
 ## What a failure looks like
 
@@ -129,8 +168,11 @@ Fill one row per check. A check that did not run is UNRUN, never PASS.
 | `link down after 10 reads` | no drive, a drive not seated, or a drive that did not train. Reseat it with the board off and try a second drive before suspecting the sequence. Record the status word. |
 | a trap or a hang right after `link up` | a configuration read faulted. See "Unsupported requests" below |
 | `01:01.0`, `01:02.0` and so on, all the same device | the root port does not filter device numbers on bus 1. See "Aliased devices" below |
-| `controller present but failed bring-up: ...` | the root complex worked and the NVMe driver refused the drive. That belongs to the NVMe path, not this milestone. Record the reason. |
-| `disk tree   : not started: the NVMe disk did not answer SIZE` | the drive did not answer `SIZE`. The same holds as for the line above |
+| `verdict SKIPPED: no NVMe controller on the bus` | the walk found no class `010802` function: check 6 says why |
+| `verdict SKIPPED: the namespace's lba size gives no blocks_per in 1..=8` | the drive is formatted with a block size the server does not take. The `lba size` line above it gives the size. Record it. |
+| `controller ... failed bring-up: ...` or `the server did not come up: ...` | the root complex worked and the NVMe driver refused the drive. That belongs to the NVMe path, not this milestone. Record the reason. |
+| `landing ... DIFFERS` | two reads of the same blocks returned different bytes, so the data did not land where the CPU reads it. See "DMA coherence" below |
+| no line after `controller nvme` | the admin queue never completed. See "DMA coherence" below |
 
 ## What only the board can answer
 
@@ -147,11 +189,12 @@ The run above answers each one, so record what it shows:
   limit the walk.
 - **DMA coherence.** The Ethernet controller's DMA is measured coherent on this board
   ([designware-ethernet.md](designware-ethernet.md)). The PCI Express master sits on another port
-  of the interconnect, and nothing has measured it. Once the NVMe path runs on this board, its
-admin queue is itself a test: its
-  submission and completion rings are DMA, so an identify that times out or returns a zero size
-  with the link up points here first. A byte-for-byte comparison of the drive's data against
-  another machine's reading needs a dump tool the board image does not carry yet.
+  of the interconnect, and nothing has measured it. Step 3's boot is a first test of it. The admin
+  queue's submission and completion rings are DMA, so an identify that times out or returns a zero
+  size with the link up points here first. The `landing` line fails when a read's data does not
+  reach the CPU. A byte-for-byte comparison of the drive's data against another machine's reading
+  needs a dump tool the board image does not carry yet. The `landing` digest covers the first
+  64 KiB, so another machine's `sha256sum` of that range sits beside it.
 - **The `PCIE_SLV_MAIN` clock.** The STG generator has one, and neither plan turns it on; it stays
   as firmware left it. A link that trains with an endpoint that never answers points here.
 - **Who else writes the GPIO page.** The bring-up writes PERST# in the SYS GPIO controller's
