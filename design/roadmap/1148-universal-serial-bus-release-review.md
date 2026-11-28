@@ -1,5 +1,5 @@
 ---
-status: PARTIAL
+status: BUILT
 raised: 2026-11-26
 milestone_dependencies: 1111, 1129
 decision_dependencies: none
@@ -29,8 +29,8 @@ device-side crates a caller may already know the vocabulary from.
 - P0-3, `changes` reports through a callback of a bare `u8` and `bool`: Done,
   partsfoundry/universal_serial_bus#6.
 - P0-4, `SetupPacket::request_type` is a bare `u8`: Done, partsfoundry/universal_serial_bus#6.
-- P1-1, `Refusal` has no `Display` and no `core::error::Error`: Waiting on the errors decision of
-  milestone 1129.
+- P1-1, `Refusal` has no `Display` and no `core::error::Error`: Done,
+  partsfoundry/universal_serial_bus#8.
 - P1-2, no fallible function has an `# Errors` section: Done, partsfoundry/universal_serial_bus#6.
 - P1-3, two items have an example, and neither uses `?`: Done, partsfoundry/universal_serial_bus#6.
 - P1-4, the package ships the repository's machinery: Done, partsfoundry/universal_serial_bus#6.
@@ -298,7 +298,7 @@ neither cost matters to a driver.
 
 ## Follow-on
 
-- **Outstanding.** The errors decision of milestone 1129 takes P1-1 and D4. P0-3's two new type
+- **Outstanding.** The errors decision of milestone 1129 takes D4. P0-3's two new type
   names go to a naming ruling before the change lands. No other shared decision applies.
 
 ## Done when
