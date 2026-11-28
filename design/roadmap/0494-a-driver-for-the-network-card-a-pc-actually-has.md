@@ -25,9 +25,8 @@ milestone 261 needs.
 
 ## What was built, 2026-10-04
 
-Exit criterion 1 is met. Criterion 2 is open: QEMU rehearses the driver, but the cabled run on xenon
-needs a person and a cable, and its result goes in the Results table of
-[the I219 cabled-run runbook](../../notes/e1000e/the-i219-cabled-run.md). The confinement finding:
+Exit criterion 1 is met. Criterion 2 is met by the cabled run on xenon, whose rows are the Results
+table of [the I219 cabled-run runbook](../../notes/e1000e/the-i219-cabled-run.md#results). The confinement finding:
 [notes/e1000e.md](../../notes/e1000e.md).
 
 - The datasheet question, answered from the register map. Ring base and ring tail share a
@@ -72,7 +71,8 @@ The I219's PHY half; QEMU never takes the PCH path, so xenon is the test.
   so a PHY access without it does not compile. One falsifiable Kani harness; writing it found that
   FreeBSD truncates a page select above `0x7ff`, which this port refuses.
 - QEMU proves the MDIO read: the DHCP gate asserts the 82574L's PHY identifier, `0x01410cb0`.
-- The boot refusal's lift is one constant, `e1000e_service::PCH_PROVEN_ON_SILICON`, `false`.
+- The boot refusal's lift is one constant, `e1000e_service::PCH_PROVEN_ON_SILICON`, which is `true`
+  on the cabled run's evidence (nifeos/nife@0707b99).
 
 ## Bench runbook: one boot on xenon (calef)
 
@@ -168,7 +168,11 @@ recorded as such.
    every bus the runners attach, or a scope note says why not (DECISIONS §19).
 2. On xenon, a DHCP lease from the house router and a measured transfer from a local area network
    host, photographed, with the survey line naming the card. The runbook is
-   [the I219 cabled run](../../notes/e1000e/the-i219-cabled-run.md); no run has happened yet.
+   [the I219 cabled run](../../notes/e1000e/the-i219-cabled-run.md). Met on 2026-11-28 (UTC): nife
+   `4c86f224b3` on xenon's I219-LM (`8086:15e3`, the survey's `00:1f.6 8086:15e3 class 020000`)
+   took a DHCP lease and received 104857600 bytes from a local area network peer in 22.200 s
+   (37.785 Mbit/s), ending `verdict LEASED-AND-MEASURED`; the serial console's transcript is the
+   record. `PCH_PROVEN_ON_SILICON` cites it, nifeos/nife@0707b99.
 
 ## Reuse
 
@@ -224,26 +228,26 @@ meet a known gap). Take no dependency; vendor nothing.
 - Wi-Fi is out of scope, and on a laptop it is the only network there is. A stranger with a
   laptop and no USB Ethernet adapter cannot reach rung 3.
 - One family. `igc` and Realtek are follow-ons with no emulator for either.
-- xenon's DMAR scope for the NIC is inferred, not printed. xenon's DMAR has two units: one for
-  named devices only and a catch-all, and both translated on 2026-10-04 (UTC)
-  (`bench/xenon-2026-10-04/`). The NVMe ran confined at rate under the catch-all that evening.
-  The NIC at `00:1f.6` is presumably under the same catch-all, but no line names its unit. The
-  bench boot's preflight line answers it in print.
-- Nothing has touched an I219: the PCH path is tested only against a simulation, and the bench
-  runbook is its first run.
+- xenon's DMAR has two units: one for named devices only and a catch-all, and both translated on
+  2026-10-04 (UTC) (`bench/xenon-2026-10-04/`). The cabled run's preflight printed
+  `dmar scope : PASS`, so an IOMMU unit owns the NIC at `00:1f.6`; no line names which one.
+- One I219 has run the PCH path, xenon's I219-LM (the cabled run); every other I219 generation is
+  tested only against the simulation.
 - xenon's room has no Ethernet port (calef, 2026-10-04); the runbook in notes/e1000e.md gives
   the three ways round it.
 - The adapted files' BSD licenses ask a binary redistribution to reproduce their notices. The source carries them (`crates/e1000e/src/platform_controller_hub/`); no shipped image or package has a third-party notices file.
 
 ## Follow-on
 
-- **Outstanding.** The bench runbook on xenon (exit criterion 2), calef's, scheduled as step 1
-  of the xenon evening. Then `PCH_PROVEN_ON_SILICON` flips in `kernel/src/user/e1000e_service.rs`,
-  citing the Results row. The PCH bring-up has run there (`bench/xenon-2026-10-21/README-494.md`).
+- **Outstanding.** The cabled run's transcript is not yet in nife's `bench/` as
+  `bench/xenon-2026-11-28/i219-cabled-run.log`, which the runbook's "Record the result" asks for
+  (checked: nife's `main` has no `bench/xenon-2026-11-28/`).
+- **Done.** The bench runbook on xenon (exit criterion 2), and `PCH_PROVEN_ON_SILICON` set `true`
+  in `kernel/src/user/e1000e_service.rs` on its evidence, nifeos/nife@0707b99.
 - **Done.** The booted system uses this NIC since 2026-10-05 (milestone 198 (a package manager)):
   the kernel builds `net_stack` on it when there is no virtio-net NIC and grants the progenitor its
-  endpoint, and swish-check's x86_64 leg types the fetch lines. A PCH part is left alone at boot, so
-  xenon gets a network only after exit criterion 2. `notes/e1000e.md`'s BUGS.
+  endpoint, and swish-check's x86_64 leg types the fetch lines. An I219 is brought up at boot too,
+  and a boot with no cable costs the 10 s link wait. `notes/e1000e.md`'s BUGS.
 - **Recorded.** Polled with a 1 ms sleep, and one server at a time. `kernel/src/user/e1000e_service.rs`'s
   and `components/src/e1000e_transport.rs`'s BUGS.
 - **Recorded.** `find_e1000e_device` is a second copy of `find_nvme_device` with a different
