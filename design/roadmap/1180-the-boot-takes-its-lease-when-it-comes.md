@@ -12,8 +12,8 @@ needs_person: no
 *(The number, title and slug are provisional.)*
 
 Ruled 2026-11-28 (UTC). The boot's wait on the DHCP lease is its own milestone, not a step of
-milestone 1062 (the device control planes leave the kernel). So it is not held behind milestone
-811 (the boot services leave the kernel)'s step 6.
+milestone 1062 (the device control planes leave the kernel). So it is not held behind step 6 of
+milestone 811 (the boot services leave the kernel).
 
 Reuse: none exists. The change is to the progenitor's own boot order, so this lane searched only
 the tree. The shape is 1062 step 1's ruling one layer up: DHCP waits on the link report, not on a
@@ -89,7 +89,7 @@ needs xenon.
 
 ## Follow-on
 
-None yet.
+- **None.**
 
 ## Index row
 
