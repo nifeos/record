@@ -137,6 +137,11 @@ on it yet.
 - **Outstanding.** Port 0 and the VL805, which need `pci.rs` to carry two hosts.
 - **Outstanding.** Recheck each register name's `doc(alias)` against OpenBSD's `stfpcie.c`, which
   the naming rule reads before Linux, and FreeBSD's `jh7110_pcie.c` after it.
+- **Outstanding.** The NVMe path on a board booted over the network. The NVMe server starts only
+  for the disk tree, which starts only beside a file service, and the file service takes an NVMe
+  disk only on a machine that booted from one (`memory::booted_from_nvme`, set on x86_64 only). A
+  netbooted VisionFive 2 has no file service, so the identify and read under "Steps that need the
+  board" cannot run there until the disk tree, or the NVMe server alone, starts without one.
 
 ## Index row
 
